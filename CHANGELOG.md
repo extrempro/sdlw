@@ -17,11 +17,13 @@ Eine Startseite mit Haus-Knopf, ein Favicon und Verbesserungen für Handys und T
 ### Verbessert
 
 - Unter dem Logo „S.D.L.W.“ steht nicht mehr ausgeschrieben „Super Duper Lern Webseite“. Die Bedeutung erscheint weiterhin als Hinweis beim Darüberfahren mit der Maus, wird von Screenreadern vorgelesen und Gucki ruft sie beim Klick aufs Logo.
+- **Pfeile ‹ › in der Wegweiser-Leiste** sind jetzt gezeichnete SVG-Pfeile. Auf manchen Android-Handys fehlte das Zeichen in der Schrift und erschien als Anführungszeichen.
 - **Farbkreis auf dem Handy:** Der Kreis ist auf schmalen Bildschirmen kleiner, damit Kreis und Erklärung zusammen sichtbar sind. Ist die Erklärung nach dem Antippen nicht ganz zu sehen, scrollt die Seite ein Stück dorthin. Antippen reagiert sofort (`touch-action: manipulation`), ohne grauen Tipp-Rahmen von Chrome.
 - Die Wegweiser-Leiste zeigt auf Seiten ohne Abschnitte (Startseite) nur den Seitennamen, ohne Pfeile und leeren Zähler.
 
 ### Behoben
 
+- **Farbkreis in Chrome auf Android-Handys zerstückelt:** Beim Antippen wurden die übrigen Farbfelder mit einem `opacity`-Übergang abgedunkelt. Chrome auf Android hat diese SVG-Flächen dabei zerstückelt und mit Bildrauschen gezeichnet, der Farbkreis war nicht benutzbar. Das Abdunkeln läuft jetzt über `fill-opacity`, ebenso auf den Karten der Kapitel Kontinente und Meere.
 - **Gucki in Firefox auf Tablets/Android:** Firefox schiebt Elemente, die unten am Bildschirm kleben, beim Hochscrollen manchmal um die Höhe der Adressleiste nach oben (bekannter Firefox-Fehler, Mozilla-Bugs 1797964 und 2012733). Guckis Körper reicht jetzt unter den Bildschirmrand, sodass er dann höchstens etwas weiter herausschaut, statt in der Luft zu schweben.
 - Das ✦-Symbol für die Versionshinweise war kein runder Knopf mehr und der rote Punkt für ungesehene Versionen fehlte (Stile gingen verloren). Beides ist wieder da, gemeinsam mit dem Haus-Knopf in der Klasse `.iconbtn`.
 

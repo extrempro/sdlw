@@ -189,13 +189,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:620px){.wheelbox,.split{grid-template-columns:1fr}}
 svg.wheel{width:100%;max-width:360px;margin:0 auto;display:block}
 .wheel{touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
-.wheel .seg{cursor:pointer;stroke:var(--sheet);stroke-width:2;transition:opacity .2s;-webkit-tap-highlight-color:transparent}
+/* Abdunkeln über fill-opacity statt opacity: Chrome auf Android zeichnet SVG-Flächen mit opacity-Übergang sonst zerstückelt */
+.wheel .seg{cursor:pointer;stroke:var(--sheet);stroke-width:2;transition:fill-opacity .2s;-webkit-tap-highlight-color:transparent}
 /* Handy: Kreis kleiner, damit Kreis und Erklärung zusammen auf den Bildschirm passen */
 @media (max-width:620px){.wheelbox{gap:12px;padding:14px}svg.wheel{max-width:min(300px,46vh)}.wheelbox .info{gap:6px}.wheelbox .info .dot{width:34px;height:34px}.wheelbox .info .hint{font-size:.85rem;margin:0}}
 .wheel .seg:focus{outline:none}
 .wheel .seg:focus-visible{stroke:var(--ink);stroke-width:3}
-.wheel.dim .seg{opacity:.28}
-.wheel.dim .seg.on{opacity:1}
+.wheel.dim .seg{fill-opacity:.28}
+.wheel.dim .seg.on{fill-opacity:1}
 .wheel .pair{stroke:var(--ink);stroke-width:2.5;stroke-dasharray:6 5}
 .info{display:flex;flex-direction:column;gap:10px;min-width:0}
 .info .big{display:flex;align-items:center;gap:12px}
@@ -222,8 +223,8 @@ button.chip[aria-pressed="true"]{border-color:var(--ink);background:var(--sheet)
 
 /* Karten */
 svg.map{width:100%;height:auto;display:block;cursor:pointer;touch-action:manipulation;border-radius:8px}
-.map [data-o],.map [data-k]{transition:opacity .2s}
-.map.dim [data-o]:not(.on),.map.dim [data-k]:not(.on){opacity:.22}
+.map [data-o],.map [data-k]{transition:fill-opacity .2s,stroke-opacity .2s}
+.map.dim [data-o]:not(.on),.map.dim [data-k]:not(.on){fill-opacity:.22;stroke-opacity:.22}
 .map .ld{fill:var(--land);stroke:var(--landline);stroke-width:.5}
 .map .ck{stroke:var(--sheet);stroke-width:.5}
 .map circle.l{fill:var(--land)}
@@ -502,7 +503,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     "Neu: die Startseite! Dort siehst du alle Kapitel auf einen Blick – mit kurzer Beschreibung und wie viele Übungen du schon fehlerfrei geschafft hast.",
     "Neu: Mit dem kleinen Haus oben rechts kommst du von überall zurück zur Startseite.",
     "Neu: Im Browser-Tab guckt dich jetzt Gucki an. Speicherst du die Seite auf dem Startbildschirm deines Tablets oder Handys, ist Gucki das App-Symbol.",
-    "Der Farbkreis klappt auf dem Handy besser: Er ist etwas kleiner, damit du die Erklärung direkt darunter siehst, und reagiert sofort, wenn du eine Farbe antippst.",
+    "Der Farbkreis auf dem Handy ist repariert: In Chrome sah er beim Antippen manchmal zerstückelt und verrauscht aus. Jetzt bleibt er sauber, ist etwas kleiner, und die Erklärung steht direkt darunter.",
+    "Die Pfeile in der Leiste oben sind jetzt auf allen Handys richtige Pfeile.",
     "Gucki bleibt unten am Rand stehen, auch wenn du in Firefox auf dem Tablet nach oben scrollst.",
     "Oben links steht jetzt nur noch kurz und knackig „S.D.L.W.“ in Regenbogenfarben. Was das heißt? Fahr mit der Maus darüber oder tippe darauf!",
     "Das ✦ für die Neuigkeiten ist wieder ein kleiner runder Knopf, und der rote Punkt zeigt dir, wenn es etwas Neues gibt."
@@ -565,7 +567,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <span class="cr-ico" id="crIco" aria-hidden="true"></span>
     <nav class="cr-path" id="crPath" aria-label="Du bist hier"></nav>
     <span class="cr-count" id="crCount" aria-hidden="true"></span>
-    <span class="cr-step"><button class="cr-nb" id="crPrev" type="button" aria-label="Vorheriger Abschnitt" title="Vorheriger Abschnitt">‹</button><button class="cr-nb" id="crNext" type="button" aria-label="Nächster Abschnitt" title="Nächster Abschnitt">›</button></span>
+    <span class="cr-step"><button class="cr-nb" id="crPrev" type="button" aria-label="Vorheriger Abschnitt" title="Vorheriger Abschnitt"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="cr-nb" id="crNext" type="button" aria-label="Nächster Abschnitt" title="Nächster Abschnitt"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span>
     <button class="btn ghost" id="crBtn" type="button" aria-expanded="false" aria-controls="crList"><span aria-hidden="true">☰</span><span class="crb-l"> Abschnitte</span></button>
     <span class="cr-prog" aria-hidden="true"><i id="crProg"></i></span>
   </div>

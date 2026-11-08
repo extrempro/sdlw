@@ -4,6 +4,24 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.4.0] – 2026-11-08
+
+Übung „Tag oder Nacht?“ neu aufgebaut, Seite komplett ohne Internet nutzbar, Weltzeituhr aufgeräumt.
+
+### Verbessert
+
+- **Globus (Tag und Nacht, Meere):** Die grob als Rechtecke eingezeichneten Wüsten (gelblich: Sahara/Arabien, Mitte Australiens) sind entfernt. Sie waren nirgends erklärt und lenkten vom Thema ab. Land ist jetzt einheitlich grün, Eis weiß, Meer blau.
+- **Schriften ohne Internet:** Bricolage Grotesque (Stärke 600–800) und Atkinson Hyperlegible (400, 700) sind eingebettet statt von Google Fonts geladen, gekürzt auf die nötigen Zeichen (zusammen rund 140 KB). Damit lädt die Seite nichts mehr aus dem Internet. Neu im Repository: `fonts/` (WOFF-Dateien, Lizenztexte SIL OFL 1.1) und `scripts/make-fonts.py`.
+- **Weltkarte ohne Internet:** Die Kartendaten (Apache ECharts 4.9.0, `map/js/world.js`, Apache-Lizenz 2.0) sind jetzt direkt in die Seite eingebaut, statt beim Öffnen von jsdelivr geladen zu werden. Kontinente, Meere, Globen und Weltzeituhr zeigen auch offline die echte Karte. Die Datei wird dadurch etwa 100 KB größer.
+- **Aufgabe 1 „Tag oder Nacht?“ (n1, Kapitel Tag und Nacht):** Vorher kamen sechsmal dieselbe Frage, ob der Punkt auf der hellen Seite liegt; die Erklärung nannte nur die Uhrzeit. Jetzt gibt es drei Stufen:
+  - **Erkennen:** eine Frage am Globus-Bild, Tag oder Nacht, mit Begründung
+  - **Ablesen:** drei Fragen zur Ansicht von oben: Morgen, Mittag, Abend oder Mitternacht? Lösbar nur mit dem Drehpfeil; bei Fehlern gibt es einen Hinweis darauf.
+  - **Verstehen:** zwei von fünf Fragen, z. B. warum es Tag und Nacht gibt (mit dem häufigen Irrtum „Die Erde kreist um die Sonne“ als Falle), warum nur eine Hälfte hell ist, Neuseeland gegenüber, Sonnenaufgang im Osten, was beim Sonnenuntergang wirklich passiert
+
+### Behoben
+
+- **Weltzeituhr (Kapitel Tag und Nacht):** In den Stadt-Kärtchen ragten „Sonnenuntergang“, „Sonnenaufgang“ und „nächster Tag“ je nach Bildschirmbreite und Uhrzeit über den Rand hinaus. Die Kärtchen haben jetzt zwei Zeilen: oben Stadt und Uhrzeit, darunter Tag/Nacht und gegebenenfalls „nächster Tag“ oder „Vortag“. Geprüft für alle Uhrzeiten bei 360 bis 1300 px Breite.
+
 ## [1.3.1] – 2026-11-08
 
 Freundlichere Erklärung der Aufregung.

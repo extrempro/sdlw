@@ -4,9 +4,16 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
-## [1.3.2] – 2026-11-08
+## [1.4.0] – 2026-11-08
 
-Weltzeituhr: Beschriftungen bleiben im Rahmen.
+Übung „Tag oder Nacht?“ neu aufgebaut, Weltzeituhr aufgeräumt.
+
+### Verbessert
+
+- **Aufgabe 1 „Tag oder Nacht?“ (n1, Kapitel Tag und Nacht):** Vorher kamen sechsmal dieselbe Frage, ob der Punkt auf der hellen Seite liegt; die Erklärung nannte nur die Uhrzeit. Jetzt gibt es drei Stufen:
+  - **Erkennen:** eine Frage am Globus-Bild, Tag oder Nacht, mit Begründung
+  - **Ablesen:** drei Fragen zur Ansicht von oben: Morgen, Mittag, Abend oder Mitternacht? Lösbar nur mit dem Drehpfeil; bei Fehlern gibt es einen Hinweis darauf.
+  - **Verstehen:** zwei von fünf Fragen, z. B. warum es Tag und Nacht gibt (mit dem häufigen Irrtum „Die Erde kreist um die Sonne“ als Falle), warum nur eine Hälfte hell ist, Neuseeland gegenüber, Sonnenaufgang im Osten, was beim Sonnenuntergang wirklich passiert
 
 ### Behoben
 

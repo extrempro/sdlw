@@ -548,10 +548,11 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
-   "version": "1.3.2",
+   "version": "1.4.0",
    "date": "2026-11-08",
-   "title": "Weltzeituhr aufgeräumt",
+   "title": "Tag und Nacht: Übung zum Mitdenken",
    "items": [
+    "Die Übung „Tag oder Nacht?“ ist neu: Du liest auf der Erde von oben ab, ob in Hamburg gerade Morgen, Mittag, Abend oder Mitternacht ist – der Pfeil zeigt dir, wie sich die Erde dreht. Dazu kommen Fragen, warum es überhaupt Tag und Nacht gibt.",
     "Bei der Weltzeituhr passen jetzt alle Wörter in die Kästchen, auch „Sonnenuntergang“. Oben stehen Stadt und Uhrzeit, darunter, ob dort gerade Tag oder Nacht ist."
    ]
   },
@@ -970,7 +971,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </section>
 <section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
 <div class="task" id="n1"><div class="taskhead"><h3>Aufgabe 1 · Tag oder Nacht?</h3><span class="score" data-score></span></div>
-  <p class="hint">Schau, wo Hamburg (roter Punkt) gerade auf der Erde ist. Ist es dort hell oder dunkel?</p><div data-qs></div></div>
+  <p class="hint">Schau genau hin, wo Hamburg (roter Punkt) steht. Bei der Ansicht von oben zeigt der Pfeil, in welche Richtung sich die Erde dreht.</p><div data-qs></div></div>
 <div class="task" id="n2"><div class="taskhead"><h3>Aufgabe 2 · Lückentext</h3><span class="score" data-score></span></div>
   <p class="hint">Wähle in jeder Lücke das richtige Wort und tippe dann auf „Prüfen“.</p>
   <div data-gaps></div>
@@ -2070,9 +2071,27 @@ function cityPhase(c,t,decl){
 })();
 (function(){
   const snap=t=>{const c=document.createElement("canvas");renderGlobe(c,{w:360,h:300,r:118,cx:200,cy:160,t,lc:18,tilt:28,decl:0,cities:[TC[0]],axis:false,sun:true,dpr:2});return c.toDataURL("image/png")};
-  quiz($("#n1"),shuffle([2,9,14,21,7.5,16,23,11,4,19]).slice(0,6).map((t,i)=>({
-    q:(i%2===0?`<div class="qfig tnq"><img src="${snap(t)}" width="360" height="300" alt="Globus mit Tag- und Nachtseite, Hamburg ist rot markiert"></div>`:`<div class="qfig tnq">${tnSVG(t,[TC[0]])}</div>`)+`<span>Ist es in Hamburg gerade Tag oder Nacht?</span>`,
-    a:t>6&&t<18?"Tag":"Nacht",o:[{v:"Tag",label:"Tag"},{v:"Nacht",label:"Nacht"}],why:`In Hamburg ist es ${fmt(t)} Uhr.`})));
+  // 1) Erkennen: Globus, Tag oder Nacht – mit Begründung
+  const tg=shuffle([2,9,14,21,11,23])[0],day=tg>6&&tg<18;
+  const items=[{q:`<div class="qfig tnq"><img src="${snap(tg)}" width="360" height="300" alt="Globus mit Tag- und Nachtseite, Hamburg ist rot markiert"></div><span>Ist es in Hamburg gerade Tag oder Nacht?</span>`,
+    a:day?"Tag":"Nacht",o:[{v:"Tag",label:"Tag"},{v:"Nacht",label:"Nacht"}],
+    why:day?"Hamburg liegt auf der Seite der Erde, die gerade zur Sonne zeigt. Dort ist es hell.":"Hamburg liegt auf der Seite der Erde, die gerade von der Sonne weg zeigt. Dort ist es dunkel."}];
+  // 2) Uhrzeit ablesen: Ansicht von oben mit Drehpfeil
+  const PH={6:["Morgen (etwa 6 Uhr)","Hamburg dreht sich gerade aus der Nacht in den Tag hinein – die Sonne geht auf."],
+    12:["Mittag (etwa 12 Uhr)","Hamburg zeigt genau zur Sonne. Die Sonne steht jetzt am höchsten."],
+    18:["Abend (etwa 18 Uhr)","Hamburg dreht sich gerade aus dem Tag in die Nacht hinein – die Sonne geht unter."],
+    0:["Mitternacht (etwa 0 Uhr)","Hamburg liegt genau gegenüber der Sonne, mitten auf der Nachtseite."]};
+  shuffle([0,6,12,18]).slice(0,3).forEach(t=>items.push({q:`<div class="qfig tnq">${tnSVG(t,[TC[0]])}</div><span>Welche Tageszeit ist gerade in Hamburg?</span>`,
+    a:String(t),o:[6,12,18,0].map(v=>({v:String(v),label:PH[v][0]})),why:PH[t][1],hint:"Folge dem Pfeil: Dreht sich Hamburg gerade zur Sonne hin oder von ihr weg?"}));
+  // 3) Verstehen
+  const W=[
+    {q:"Warum gibt es Tag und Nacht?",a:"a",o:[{v:"a",label:"Die Erde dreht sich einmal am Tag um sich selbst."},{v:"b",label:"Die Erde kreist einmal am Tag um die Sonne."},{v:"c",label:"Die Sonne geht nachts hinter den Bergen schlafen."},{v:"d",label:"Nachts schieben sich Wolken vor die Sonne."}],why:"Die Erde dreht sich in 24 Stunden einmal um sich selbst. Für eine Runde um die Sonne braucht sie ein ganzes Jahr – daraus entstehen die Jahreszeiten."},
+    {q:"Warum ist immer nur eine Hälfte der Erde hell?",a:"a",o:[{v:"a",label:"Die Erde ist eine Kugel. Die Sonne beleuchtet nur die Seite, die zu ihr zeigt."},{v:"b",label:"Der Mond verdeckt die andere Hälfte."},{v:"c",label:"Die Sonne ist nur halb so groß wie die Erde."},{v:"d",label:"Die andere Hälfte hat keine Sonne."}],why:"Wie bei einem Ball, den du mit einer Taschenlampe anleuchtest: Die Rückseite bleibt dunkel."},
+    {q:"In Hamburg ist es 12 Uhr mittags. Wie ist es gleichzeitig in Neuseeland, auf der anderen Seite der Erde?",a:"a",o:[{v:"a",label:"Dort ist Nacht."},{v:"b",label:"Dort ist auch Mittag."},{v:"c",label:"Dort ist früher Morgen."},{v:"d",label:"Dort ist es immer dunkel."}],why:"Neuseeland liegt fast genau gegenüber. Wenn Hamburg zur Sonne zeigt, zeigt Neuseeland von ihr weg – dort ist es kurz vor Mitternacht."},
+    {q:"Die Erde dreht sich nach Osten. Wo geht die Sonne deshalb für uns auf?",a:"a",o:[{v:"a",label:"Im Osten"},{v:"b",label:"Im Westen"},{v:"c",label:"Im Norden"},{v:"d",label:"Im Süden"}],why:"Wir drehen uns morgens der Sonne entgegen, und zwar nach Osten. Darum taucht sie im Osten auf und geht im Westen unter."},
+    {q:"Am Abend geht in Hamburg die Sonne unter. Was passiert dabei wirklich?",a:"a",o:[{v:"a",label:"Hamburg dreht sich mit der Erde auf die Nachtseite."},{v:"b",label:"Die Sonne bewegt sich von der Erde weg."},{v:"c",label:"Es wird überall auf der Erde gleichzeitig dunkel."},{v:"d",label:"Die Sonne wird schwächer und geht aus."}],why:"Die Sonne bleibt, wo sie ist. Wir drehen uns von ihr weg – es sieht nur so aus, als ob sie untergeht."}];
+  shuffle(W).slice(0,2).forEach(w=>items.push({...w,o:shuffle(w.o)}));
+  quiz($("#n1"),items);
 })();
 (function(){
   const box=$("#n2"),wrapEl=$("[data-gaps]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box);

@@ -4,6 +4,29 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.2.0] – 2026-11-08
+
+Eine Startseite mit Haus-Knopf, ein Favicon und Verbesserungen für Handys und Tablets.
+
+### Neu
+
+- **Startseite** (`#start`, auch ohne Adresszusatz): Begrüßung, alle Kapitel als Karten mit Fach, Symbol, Kurzbeschreibung und Fortschritt („2 von 5 fehlerfrei“), dazu „So lernst du hier“ in drei Schritten. Die Karten entstehen automatisch aus der Navigation; die Kurzbeschreibung steht im Attribut `data-desc` des Navigationslinks. Gucki sagt beim ersten Öffnen „Hallo!“.
+- **Haus-Knopf** oben rechts neben dem ✦: führt von überall zur Startseite und ist dort hervorgehoben.
+- **Favicon:** Gucki mit Augen als SVG-Symbol im Browser-Tab und als App-Symbol (`apple-touch-icon`, 180 × 180 px) für den Startbildschirm von Tablets und Handys.
+
+### Verbessert
+
+- Unter dem Logo „S.D.L.W.“ steht nicht mehr ausgeschrieben „Super Duper Lern Webseite“. Die Bedeutung erscheint weiterhin als Hinweis beim Darüberfahren mit der Maus, wird von Screenreadern vorgelesen und Gucki ruft sie beim Klick aufs Logo.
+- **Pfeile ‹ › in der Wegweiser-Leiste** sind jetzt gezeichnete SVG-Pfeile. Auf manchen Android-Handys fehlte das Zeichen in der Schrift und erschien als Anführungszeichen.
+- **Farbkreis auf dem Handy:** Der Kreis ist auf schmalen Bildschirmen kleiner, damit Kreis und Erklärung zusammen sichtbar sind. Ist die Erklärung nach dem Antippen nicht ganz zu sehen, scrollt die Seite ein Stück dorthin. Antippen reagiert sofort (`touch-action: manipulation`), ohne grauen Tipp-Rahmen von Chrome.
+- Die Wegweiser-Leiste zeigt auf Seiten ohne Abschnitte (Startseite) nur den Seitennamen, ohne Pfeile und leeren Zähler.
+
+### Behoben
+
+- **Farbkreis in Chrome auf Android-Handys zerstückelt:** Beim Antippen wurden die übrigen Farbfelder mit einem `opacity`-Übergang abgedunkelt. Chrome auf Android hat diese SVG-Flächen dabei zerstückelt und mit Bildrauschen gezeichnet, der Farbkreis war nicht benutzbar. Das Abdunkeln läuft jetzt über `fill-opacity`, ebenso auf den Karten der Kapitel Kontinente und Meere.
+- **Gucki in Firefox auf Tablets/Android:** Firefox schiebt Elemente, die unten am Bildschirm kleben, beim Hochscrollen manchmal um die Höhe der Adressleiste nach oben (bekannter Firefox-Fehler, Mozilla-Bugs 1797964 und 2012733). Guckis Körper reicht jetzt unter den Bildschirmrand, sodass er dann höchstens etwas weiter herausschaut, statt in der Luft zu schweben.
+- Das ✦-Symbol für die Versionshinweise war kein runder Knopf mehr und der rote Punkt für ungesehene Versionen fehlte (Stile gingen verloren). Beides ist wieder da, gemeinsam mit dem Haus-Knopf in der Klasse `.iconbtn`.
+
 ## [1.1.0] – 2026-11-08
 
 Neuer Name und besser zurechtfinden.

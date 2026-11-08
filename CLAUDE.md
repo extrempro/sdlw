@@ -6,7 +6,8 @@ Bitte vor jeder Änderung lesen und bei größeren Änderungen mit aktualisieren
 ## Worum es geht
 
 Das Entdeckerheft ist eine interaktive Lernseite. Auf der Seite selbst heißt sie **S.D.L.W.** – eine lustige
-Abkürzung für „Super Duper Lern Webseite“ (Seitentitel, Logo oben links). Projekt und Repository heißen Entdeckerheft.
+Abkürzung für „Super Duper Lern Webseite“ (Seitentitel, Logo oben links). Ausgeschrieben steht der Name nicht sichtbar
+auf der Seite, sondern nur als Hinweis beim Darüberfahren, für Screenreader und in Guckis Ruf. Projekt und Repository heißen Entdeckerheft.
 Die Seite ist für die **5. Klasse eines Gymnasiums in Hamburg**.
 Jedes Thema ist ein **Kapitel** mit kurzer Erklärung, einem interaktiven Teil zum Ausprobieren und Übungsaufgaben,
 die sofort Rückmeldung geben. Ein kleines Maskottchen („Gucki“) reagiert auf richtige und falsche Antworten.
@@ -23,7 +24,8 @@ Aktuelle Kapitel (Jahrgang 5):
 | Erdkunde | Der Kompass | `kompass` | c1–c5 |
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
 
-Dazu kommt die Seite **Versionshinweise** (`#neuigkeiten`, Element-ID `neuigkeiten`), die kein Fach hat.
+Dazu kommen zwei Seiten ohne Fach: die **Startseite** (`#start`, Element-ID `start`; erscheint auch, wenn die Adresse
+keinen Zusatz hat) und die **Versionshinweise** (`#neuigkeiten`, Element-ID `neuigkeiten`).
 
 ## Zielgruppe, Sprache und Ton
 
@@ -57,24 +59,25 @@ Es gibt keine Abhängigkeiten und keinen Paketmanager. Node.js ab Version 18 rei
 
 Reihenfolge in der Datei:
 
-1. `<title>`, Google-Fonts-Link, `<style>` mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
-2. Kopfzeile (`.topbar`): Logo „S.D.L.W.“ (`#logo`, Regenbogen-Schrift; Klick lässt Gucki sich vorstellen), Jahrgang, kleines rundes ✦-Symbol (`#newsBtn`) als Link zur Seite `#neuigkeiten`
+1. `<title>`, Favicon (Gucki als SVG-Daten-URL) und `apple-touch-icon` (PNG, 180 px, als Daten-URL), Google-Fonts-Link, `<style>` mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
+2. Kopfzeile (`.topbar`): Logo „S.D.L.W.“ (`#logo`, Regenbogen-Schrift; Klick lässt Gucki sich vorstellen), Jahrgang, rechts runde Symbol-Knöpfe (`.iconbtn`): Haus (`#homeBtn`, Link zu `#start`) und ✦ (`#newsBtn`) als Link zur Seite `#neuigkeiten`
    mit rotem Punkt, solange die neueste Version noch nicht angesehen wurde (`localStorage` „seenVersion“), Hell/Dunkel-Knopf.
 3. JSON-Block `<script type="application/json" id="releaseData">` – die Versionshinweise der Webseite
    im Format `{"releases":[…neueste zuerst…],"summaries":[…]}`.
-4. Navigation (`nav.navx`): Fächer (`.fach`) mit Themen-Links (`a[data-topic]`).
+4. Navigation (`nav.navx`): Fächer (`.fach`) mit Themen-Links (`a[data-topic]`). Jeder Link hat `data-desc`
+   (ein Satz für die Kapitelkarte auf der Startseite).
 5. Wegweiser-Leiste (`#crumbs`, klebt beim Scrollen oben): Fach-Symbol, „Fach · Kapitel“, aktueller Abschnitt,
    Position („3/13“), Pfeile ‹ › zum vorherigen/nächsten Abschnitt, Knopf ☰ „Abschnitte“ mit Sprungliste und
    Fortschrittsbalken in der Fachfarbe (`--fc`). Daneben das Inhaltsverzeichnis `#toc` (nur ab 1240 px Breite).
-6. Ein `<div class="topic" id="…">` je Kapitel (nur eines ist sichtbar, gesteuert über den URL-Hash),
-   zuletzt die Versionsseite `#neuigkeiten` mit dem Container `#relPage`.
+6. Ein `<div class="topic" id="…">` je Seite (nur eines ist sichtbar, gesteuert über den URL-Hash): zuerst die
+   Startseite `#start`, dann die Kapitel, zuletzt die Versionsseite `#neuigkeiten` mit dem Container `#relPage`.
 7. Knopf „Nach oben“ (`#toTop`, unten links) und Gucki (`#gucki`, unten rechts).
 8. Externe Kartendaten (siehe unten) und ein großes `<script>` mit allen Funktionen, gegliedert durch Kommentare
    wie `/* ================= NOTEN ================= */`.
 
 ### Wichtige Bausteine im Skript
 
-- **Routing:** `TOPICS` (Liste der Kapitel-IDs plus `neuigkeiten`) und `route()`. Ein Kapitel ist über
+- **Routing:** `TOPICS` (`start`, die Kapitel-IDs und `neuigkeiten`) und `route()`. Ohne Hash erscheint `start`. Ein Kapitel ist über
   `#kapitelid` direkt verlinkbar. `route()` ruft am Ende `Wegweiser.update()` auf.
 - **Wegweiser:** sammelt beim Kapitelwechsel alle `section > h2` und die `h3` in `.task .taskhead` des Kapitels.
   Daraus entstehen Sprungliste, Inhaltsverzeichnis und die Anzeige des aktuellen Abschnitts (Scroll-Spy).
@@ -83,6 +86,9 @@ Reihenfolge in der Datei:
   `Wegweiser.refresh()` auf, damit die Haken aktuell bleiben. Fachfarbe und Symbol kommen aus der Navigation.
   Neue Kapitel müssen ihre Überschriften deshalb in dieser Struktur haben. Weil der URL-Hash das Kapitel
   bestimmt, springen die Einträge per Skript (`scrollTo`) statt über Anker-Links.
+- **Startseite:** `renderStart()` baut die Kapitelkarten bei jedem Aufruf neu aus der Navigation (Symbol, Name,
+  `data-desc`, Fachfarbe aus `.fdot`) und zählt fehlerfreie Übungen (`.task[data-score][data-perfect]`).
+  Ihre Überschriften stehen absichtlich nicht in `<section>`, damit der Wegweiser dort nur „Startseite“ zeigt.
 - **Versionsseite:** baut sich aus `releaseData`. Je zehn Versionen (vom ältesten an gezählt) bilden einen Block.
   Der Block mit der neuesten Version steht ausführlich da, alle älteren Blöcke werden mit ihrer Zusammenfassung
   aus `summaries` gezeigt, die Einzelversionen lassen sich aufklappen.
@@ -124,7 +130,8 @@ Reihenfolge in der Datei:
 
 1. `<div class="topic" id="neueid" hidden>` vor `#gucki` einfügen, Aufbau wie die anderen Kapitel
    (Header mit Eyebrow „Fach · Klasse 5 · Bereich“, Erklärungen, interaktiver Teil, „Übungsaufgaben“, Tasks, Footer).
-2. ID in `TOPICS` ergänzen und einen Link in der Navigation beim passenden Fach (`.fach`) einfügen.
+2. ID in `TOPICS` ergänzen und einen Link in der Navigation beim passenden Fach (`.fach`) einfügen,
+   mit `data-desc="…"` (ein kindgerechter Satz). Die Startseite übernimmt das Kapitel dann automatisch.
 3. Übungen mit `quiz()` oder eigener Logik bauen. Gucki-Schnittstelle und `box._reset` nicht vergessen.
 4. Merkkasten-Farbe: `#neueid .merk{--accent:…}`.
 5. Hell und dunkel sowie Handybreite prüfen.
@@ -132,10 +139,16 @@ Reihenfolge in der Datei:
 
 ## Release-Prozess (Pflicht bei jeder Änderung)
 
-Jede Änderung, die auf `main` landet, bekommt eine neue Version mit Versionshinweisen –
-**auf GitHub und auf der Webseite**.
+Jede Version, die auf `main` landet, bekommt Versionshinweise – **auf GitHub und auf der Webseite**.
 
-1. **Versionsnummer festlegen** (MAJOR.MINOR.PATCH):
+**Änderungen werden gesammelt.** Ein Pull Request wird **erst geöffnet, wenn die Lehrkraft es ausdrücklich sagt**.
+Bis dahin landen alle Änderungen als Commits auf dem Arbeitsbranch `naechste-version` (von `main` abgezweigt,
+gepusht, damit nichts verloren geht). Die kommende Version hat **einen** Eintrag in CHANGELOG.md und `releaseData`,
+der mit jeder Änderung ergänzt wird. Kommt etwas Größeres dazu, steigt die Versionsnummer dieses Eintrags mit
+(z. B. 1.1.1 → 1.2.0, sobald eine neue Funktion dabei ist). Die claude.ai-Vorschau wird trotzdem nach jeder
+Änderung aktualisiert, damit man alles vorab ansehen kann.
+
+1. **Versionsnummer festlegen** (MAJOR.MINOR.PATCH, nach der größten Änderung im Sammel-Eintrag):
    - PATCH (1.0.**1**): Fehlerkorrekturen, kleine Textänderungen.
    - MINOR (1.**1**.0): neues Kapitel, neue Übung, neue Funktion.
    - MAJOR (**2**.0.0): grundlegender Umbau, z. B. ein neuer Jahrgang mit eigener Struktur.
@@ -151,7 +164,9 @@ Jede Änderung, die auf `main` landet, bekommt eine neue Version mit Versionshin
    `check-release.mjs` meldet, welcher Block noch eine Zusammenfassung braucht. `CHANGELOG.md` bleibt vollständig.
 4. `node scripts/build.mjs` ausführen (baut `index.html`).
 5. `node scripts/check-release.mjs` ausführen – muss „Alles in Ordnung“ melden.
-6. Branch anlegen, committen, Pull Request gegen `main` öffnen. Die Release Notes in die PR-Beschreibung übernehmen.
+6. Auf `naechste-version` committen und pushen. **Erst auf Ansage** einen Pull Request gegen `main` öffnen;
+   die Release Notes in die PR-Beschreibung übernehmen. Nach dem Merge für die nächste Runde `naechste-version`
+   neu von `main` abzweigen.
 7. Nach dem Merge erstellt der Workflow `release.yml` automatisch das GitHub-Release `vx.y.z` mit den
    Notizen aus CHANGELOG.md und hängt `index.html` als Download an.
 
@@ -162,7 +177,7 @@ eine Zusammenfassung fehlt, `index.html` veraltet ist oder die Versionsnummer sc
 
 Die Seite ist zusätzlich als claude.ai-Artifact veröffentlicht (privat, über das Teilen-Menü freigebbar):
 https://claude.ai/artifact/R6pJni9HKDoiQHJXYtZUyB
-Veröffentlicht wird `src/entdeckerheft.html`. Nach einem Release dort ebenfalls aktualisieren.
+Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktualisieren (auch vor dem Pull Request).
 
 ## Getroffene Entscheidungen (nicht ohne Rückfrage ändern)
 
@@ -179,9 +194,16 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach einem Release dort ebenfalls
 - Name auf der Seite: „S.D.L.W.“ (Super Duper Lern Webseite) mit Regenbogen-Animation; Klick aufs Logo:
   Gucki macht Salto mit goldenem Leuchten, ruft „Super Duper Lern Webseite!“, etwas Konfetti.
 - Versionshinweise nur als kleines rundes ✦-Symbol oben rechts, roter Punkt bei ungesehener Version.
+- Haus-Knopf oben rechts neben dem ✦ führt zur Startseite. Das Logo bleibt der Gucki-Trick, kein Startseiten-Link.
+- Gucki ragt unter den Bildschirmrand (`--gx`, Körper über `box-shadow` der `.kopf` verlängert). Das fängt den
+  Firefox-Fehler ab (siehe „Bekannte Grenzen“). Bei Party, Aura und Crazy ist die Verlängerung aus.
 
 ## Bekannte Grenzen
 
 - Die echten Kartendaten lassen sich nur online testen; ohne Internet erscheint die Punktkarte.
 - Töne brauchen eingeschalteten Ton am Gerät (iPhone/iPad: Stummschalter aus).
+- Firefox auf Android/Tablets schiebt unten klebende Elemente beim Hochscrollen manchmal um die Höhe der
+  Adressleiste nach oben (Mozilla-Bugs 1797964 und 2012733; nur mit Adressleiste oben, schlimmer bei Zoom oder
+  großer Schrift). Gucki sieht dann nur größer aus; „Nach oben“ schwebt etwas höher. Abhilfe am Gerät:
+  Firefox-Symbolleiste nach unten stellen.
 - Beim lokalen Öffnen (`file://`) merken sich manche Browser (Safari) Hell/Dunkel und Sonnenbrille nicht.

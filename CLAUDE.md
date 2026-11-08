@@ -26,6 +26,7 @@ Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bere
 | Spiele | Fang die Farben (Spiel zum Farbkreis, keine zählenden Übungen; Übersicht `#spiele`) | `farbfang` | – |
 | Spiele | Guckis Weltreise (Himmelsrichtungen, Häfen, Erdkunde-Fragen) | `weltreise` | – |
 | Spiele | Gucki-Blitzrunde (60-Sekunden-Quiz aus allen Fächern) | `blitz` | – |
+| Spiele | Notenmemory (Note ↔ Name, Noten-/Pausenzeichen ↔ Bezeichnung) | `memory` | – |
 | Lernen | Fit für die Klassenarbeit (Lerntipps, Lernplan, Operatoren, starke Aufregung mit Thermometer und Atem-Kreis) | `klassenarbeit` | ka1–ka4, ka6, ka5 |
 
 Dazu kommen zwei Seiten ohne Fach: die **Startseite** (`#start`, Element-ID `start`; erscheint auch, wenn die Adresse
@@ -137,7 +138,7 @@ Reihenfolge in der Datei:
   `echarts@4.9.0/map/js/world.js` (rund 100 KB, Apache-Lizenz 2.0, Lizenzkopf bleibt stehen). Die Seite fängt den
   Aufruf `echarts.registerMap` mit einem kleinen Platzhalter ab und zeichnet die Karten selbst. Die Punktkarte
   (`GRID`) bleibt als Ersatz im Code, falls die Daten einmal fehlen. Die Kartendaten nicht von Hand bearbeiten.
-- `localStorage` nur für Komfort: Hell/Dunkel-Wahl, Gucki-Sonnenbrille und die Spiel-Rekorde („ffBest“, „blitzBest“). Alles funktioniert auch ohne.
+- `localStorage` nur für Komfort: Hell/Dunkel-Wahl, Gucki-Sonnenbrille und die Spiel-Rekorde („ffBest“, „blitzBest“, „memoBest“). Alles funktioniert auch ohne.
 
 ## Neues Kapitel hinzufügen – Checkliste
 

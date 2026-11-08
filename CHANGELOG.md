@@ -6,7 +6,7 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschn
 
 ## [1.5.0] – 2026-11-08
 
-Spiele-Bereich mit drei Spielen: „Fang die Farben“, „Guckis Weltreise“ und „Gucki-Blitzrunde“.
+Spiele-Bereich mit vier Spielen: „Fang die Farben“, „Guckis Weltreise“, „Gucki-Blitzrunde“ und „Notenmemory“.
 
 ### Neu
 
@@ -33,6 +33,12 @@ Spiele-Bereich mit drei Spielen: „Fang die Farben“, „Guckis Weltreise“ u
   - **Fragen:** Viele werden aus den Kapiteldaten erzeugt (Mischfarben und Gegenfarben aus `C`, Kontinent- und Ozeangrößen aus `CK`/`OK`, Uhrzeiten aus `TZC`, Himmelsrichtungen), dazu feste Fragen zu Groß-/Kleinschreibung, Arbeitswörtern, Notenwerten und Lerntipps. Innerhalb einer Runde wiederholt sich keine Frage.
   - **Punkte:** 10 Punkte je richtige Antwort, Serienbonus bis +20; Gucki ruft bei 5 und 10 in Folge.
   - **Auswertung:** Am Ende steht die Liste „Das übst du noch“ mit allen falsch beantworteten Fragen und ihrer Lösung. Rekord pro Gerät („blitzBest“). Tasten 1–4 funktionieren auch.
+- **Spiel „Notenmemory“** (`#memory`): 12 Karten, 6 Paare. Drei Kartensätze:
+  - **Notennamen:** Note im Notensystem ↔ Name, z. B. g'. Jeder Buchstabe kommt nur einmal vor, damit Paare eindeutig sind.
+  - **Noten & Pausen:** Noten- oder Pausenzeichen ↔ Bezeichnung
+  - **Gemischt**
+
+  Die Karten nutzen die Zeichenfunktionen des Noten-Kapitels (`staffSVG`, `nHead`, `nRest`, `VALS`). Beim Aufdecken erklingt die Note (abschaltbar). Gezählt werden die Züge, mit einem Rekord je Kartensatz pro Gerät („memoBest“). Die Kartenrückseite zeigt Guckis Augen. Das Noten-Kapitel verweist vor den Übungen auf das Spiel.
 - **Farbe der Spiele:** Pink/Magenta (`--spiel`: hell `#B01E78`, dunkel `#F27BC0`) statt Orange, damit sie sich klar von Deutsch (Rotorange) unterscheiden.
 - **Lesbarkeit geprüft** (alle Seiten und Spielzustände, Handy und PC, hell und dunkel; Prüfung auf Schrift unter 12 px, abgeschnittene Texte und Kontrast nach WCAG):
   - Fachname in der Wegweiser-Leiste in Textfarbe statt Fachfarbe; Farbe bleibt am Symbol und am Fortschrittsbalken.

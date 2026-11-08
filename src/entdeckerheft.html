@@ -262,6 +262,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .bl-review{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
 .bl-review b{color:var(--ok)}
 .bl-big{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1}
+/* Spiel „Notenmemory“ */
+#memory .merk{--accent:var(--spiel)}
+.mm-wrap{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.mm-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 14px;font-weight:700;font-variant-numeric:tabular-nums}
+.mm-bar label{display:flex;gap:6px;align-items:center}
+.mm-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:480px){.mm-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.mm-card{aspect-ratio:1}}
+.mm-card{position:relative;aspect-ratio:4/5;border:0;padding:0;background:none;cursor:pointer;perspective:700px;font:inherit;color:inherit}
+.mm-in{position:absolute;inset:0;transition:transform .35s;transform-style:preserve-3d}
+.mm-card.open .mm-in,.mm-card.done .mm-in{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.mm-in{transition:none}}
+.mm-back,.mm-face{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;border:2px solid var(--line)}
+.mm-back{background:var(--spiel);border-color:var(--spiel)}
+.mm-back i{display:flex;gap:6px}
+.mm-back i::before,.mm-back i::after{content:"";width:18px;height:18px;border-radius:50%;background:#FFFFFF;box-shadow:inset 3px -3px 0 4px #1C1F2E;border:2px solid #FFFFFF}
+.mm-face{background:var(--sheet);transform:rotateY(180deg);padding:6px;flex-direction:column;gap:4px;text-align:center}
+.mm-face .staff{width:100%;max-width:none}
+.mm-face b{font-family:var(--display);font-weight:800;font-size:1.15rem;line-height:1.2}
+.mm-face b.nm{font-size:1.9rem}
+.mm-card.done .mm-face{border-color:var(--ok);box-shadow:0 0 0 2px var(--ok) inset}
+.mm-card.miss .mm-face{border-color:var(--bad)}
+.mm-card:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
 /* Seite Versionshinweise */
 .relpage{display:flex;flex-direction:column;gap:28px}
 .relpage .rcards{display:flex;flex-direction:column;gap:12px}
@@ -620,11 +642,12 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   {
    "version": "1.5.0",
    "date": "2026-11-08",
-   "title": "Drei Spiele mit Gucki",
+   "title": "Vier Spiele mit Gucki",
    "items": [
     "Neu: das Spiel „Fang die Farben“! Gucki möchte Farben mischen. Fang mit seinem Eimer genau die zwei Farben, aus denen die Zielfarbe entsteht.",
     "Neu: „Guckis Weltreise“! Fahr mit Gucki und seinem Containerschiff von Hamburg einmal um die Welt. Finde für jede Etappe die richtige Himmelsrichtung und beantworte in jedem Hafen eine Frage.",
     "Neu: die „Gucki-Blitzrunde“! 60 Sekunden, schnelle Fragen aus allen Fächern. Wie viele schaffst du hintereinander? Am Ende siehst du, was du noch üben kannst.",
+    "Neu: das „Notenmemory“! Finde Note und Notenname oder Pause und Pausenname. Beim Aufdecken hörst du die Note.",
     "Alle Spiele findest du über den neuen 🎮-Knopf oben rechts und unten auf der Startseite.",
     "Die Zielfarbe steht groß oben im Spielfeld, und vor jeder neuen Farbe sagt das Spiel sie dir in Ruhe an. Gucki trägt den Eimer auf dem Kopf, damit du jeden Tropfen bis zum Schluss siehst.",
     "In Stufe 2 mischst du Mischfarben 2. Ordnung wie Blaugrün oder Rotorange – und die Tropfen fallen schneller.",
@@ -739,6 +762,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
       <a href="#farbfang" data-topic="farbfang" data-desc="Ein Spiel zum Farbkreis: Fang mit Gucki die Farben, aus denen die Zielfarbe gemischt wird."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#B01E78"/><path d="M16 6.5c3.6 4.6 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.4 6-11z" fill="#FFFFFF"/><circle cx="13.6" cy="18.4" r="1.6" fill="#B01E78"/></svg><span><b>Fang die Farben</b></span></a>
       <a href="#weltreise" data-topic="weltreise" data-desc="Fahr mit Gucki und seinem Schiff um die Welt: Himmelsrichtung finden, Hafen anlaufen, Frage beantworten."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#139DB3"/><path d="M7 18h18l-3 5H10z" fill="#FFFFFF"/><path d="M16 7v10M16 8l6 7h-6" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/></svg><span><b>Guckis Weltreise</b></span></a>
       <a href="#blitz" data-topic="blitz" data-desc="60 Sekunden, Fragen aus allen Kapiteln: Wie viele schaffst du hintereinander?"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#E2A12B"/><path d="M18 5 9 18h6l-2 9 10-14h-6z" fill="#FFFFFF"/></svg><span><b>Gucki-Blitzrunde</b></span></a>
+      <a href="#memory" data-topic="memory" data-desc="Ein Memory zum Notenlesen: Finde Note und Notenname, Pause und Pausenname. Mit Ton beim Aufdecken!"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#7A5BC4"/><rect x="6" y="8" width="9" height="13" rx="2" fill="#FFFFFF"/><rect x="17" y="11" width="9" height="13" rx="2" fill="#FFFFFF" fill-opacity=".75"/><ellipse cx="9.6" cy="17.5" rx="2" ry="1.5" fill="#7A5BC4"/><path d="M11.4 17.3V11.4" stroke="#7A5BC4" stroke-width="1.2"/></svg><span><b>Notenmemory</b></span></a>
     </div></div>
 </div>
 <div class="crumbs" id="crumbs">
@@ -1287,6 +1311,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <div class="row"><button class="btn" id="pPlay" type="button">▶ Anhören</button><button class="btn ghost" id="pBack" type="button">← Zurück</button><button class="btn ghost" id="pNew" type="button">Neuer Takt</button></div>
   </div>
 </section>
+<p class="hint ff-tip">🎮 Lust auf ein Spiel? Im <a href="#memory">Notenmemory</a> findest du Noten und ihre Namen – mit Ton!</p>
 <section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
 <div class="task" id="u1"><div class="taskhead"><h3>Aufgabe 1 · Notennamen lesen</h3><span class="score" data-score></span></div>
   <p class="hint">Wie heißt die rote Note? Denk an die Merksätze.</p><div data-qs></div></div>
@@ -1555,6 +1580,34 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <footer>Tipp: Die Übungen auf dieser Seite eignen sich prima zum Selbstabfragen. Mach sie vor einer Arbeit einfach mit „Neu beginnen“ noch einmal.</footer>
 </div>
 
+<!-- ============ SPIEL: NOTENMEMORY ============ -->
+<div class="topic" id="memory" hidden>
+<header>
+  <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Musik</p>
+  <h1>Notenmemory</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#7A5BC4,var(--spiel))"></div>
+</header>
+<section>
+  <p class="lead">Decke immer zwei Karten auf. Passen sie zusammen – zum Beispiel eine Note und ihr Name –, bleiben sie offen. Findest du alle Paare mit möglichst wenigen Zügen?</p>
+  <div class="mm-wrap" id="mmWrap">
+    <div class="bl-chips" id="mmMode" role="group" aria-label="Kartensatz"></div>
+    <div class="mm-bar"><span id="mmPairs"></span><span id="mmMoves"></span><label class="tog"><input type="checkbox" id="mmSound" checked> Ton beim Aufdecken</label></div>
+    <div class="mm-grid" id="mmGrid"></div>
+    <p class="wr-fb" id="mmFb" aria-live="polite"></p>
+  </div>
+</section>
+<section>
+  <h2>So spielst du</h2>
+  <ol class="steps">
+    <li>Wähle einen Kartensatz: Notennamen, Noten und Pausen oder gemischt.</li>
+    <li>Tippe zwei Karten an. Gehören sie zusammen, bleiben sie offen und werden grün.</li>
+    <li>Passen sie nicht, drehen sie sich wieder um. Merk dir, wo welche Karte liegt!</li>
+    <li>Ein Zug sind zwei aufgedeckte Karten. Bei 6 Paaren sind 6 Züge das Beste, was geht.</li>
+  </ol>
+  <div class="merk"><strong>Tipp:</strong> Die Notennamen und Pausen lernst du im Kapitel <a href="#noten">Noten lesen</a>. Die Merksätze helfen dir auch hier!</div>
+</section>
+</div>
+
 <!-- ============ SPIEL: GUCKI-BLITZRUNDE ============ -->
 <div class="topic" id="blitz" hidden>
 <header>
@@ -1741,7 +1794,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","weltreise","blitz","neuigkeiten"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -3330,6 +3383,40 @@ quiz($("#ka6"),shuffle([
   document.addEventListener("keydown",e=>{if(location.hash!=="#blitz"||!st||st.over)return;const n=+e.key;if(n>=1&&n<=st.q.o.length)answer(n-1)});
   window.addEventListener("hashchange",()=>{if(location.hash!=="#blitz"&&st&&!st.over){clearInterval(timer);st.over=true;menu()}});
   menu();
+})();
+/* ================= SPIEL: NOTENMEMORY ================= */
+(function(){
+  const grid=$("#mmGrid");if(!grid)return;
+  const modeEl=$("#mmMode"),fb=$("#mmFb"),snd=$("#mmSound");
+  const MODES={namen:"Notennamen",werte:"Noten & Pausen",mix:"Gemischt"};let mode="namen",best={};
+  try{best=JSON.parse(localStorage.getItem("memoBest")||"{}")||{}}catch(_){}
+  const save=()=>{try{localStorage.setItem("memoBest",JSON.stringify(best))}catch(_){}};
+  const noteCard=st=>staffSVG([{st,kind:"quarter"}],{w:150,start:108,label:"Eine Note im Notensystem"});
+  const symCard=(kind,rest)=>`<svg class="staff" viewBox="0 0 100 100" role="img" aria-label="${rest?"Pausenzeichen":"Notenzeichen"}">${[0,1,2,3,4].map(i=>`<line class="ln" x1="6" x2="94" y1="${30+i*10}" y2="${30+i*10}" style="stroke-opacity:.35"/>`).join("")}${rest?nRest(50,kind):nHead(50,4,kind)}</svg>`;
+  function pairsFor(m){const P=[];
+    const notes=()=>{const L=shuffle(NN.slice());return L.slice(0,m==="mix"?3:6).map(l=>{const opts=[...Array(14).keys()].filter(st=>NN[st%7]===l);const st=opts[Math.floor(Math.random()*opts.length)];
+      return{id:"n"+st,a:{html:noteCard(st),label:"Note im Notensystem",tone:st},b:{html:`<b class="nm">${nName(st)}</b>`,label:nName(st),tone:st}}})};
+    const vals=()=>{const all=[];VALS.forEach(v=>{all.push({id:"v"+v[0],a:{html:symCard(v[0],false),label:"Notenzeichen"},b:{html:`<b>${v[1]}</b>`,label:v[1]}});all.push({id:"r"+v[0],a:{html:symCard(v[0],true),label:"Pausenzeichen"},b:{html:`<b>${v[4]}</b>`,label:v[4]}})});return shuffle(all).slice(0,m==="mix"?3:6)};
+    if(m!=="werte")P.push(...notes());if(m!=="namen")P.push(...vals());return P}
+  let cards=[],open=[],found=0,moves=0,lock=false,P=[];
+  function bar(){$("#mmPairs").textContent=`${found} von ${P.length} Paaren`;$("#mmMoves").textContent=`${moves} ${moves===1?"Zug":"Züge"}${best[mode]?` · Rekord: ${best[mode]}`:""}`}
+  function start(){P=pairsFor(mode);cards=shuffle(P.flatMap(p=>[{p:p.id,...p.a},{p:p.id,...p.b}]));open=[];found=0;moves=0;lock=false;fb.textContent="";fb.className="wr-fb";
+    modeEl.innerHTML=Object.entries(MODES).map(([k,n])=>`<button type="button" data-m="${k}" aria-pressed="${k===mode}">${n}</button>`).join("")+`<button type="button" data-m="neu">↻ Neu mischen</button>`;
+    grid.innerHTML=cards.map((c,i)=>`<button type="button" class="mm-card" data-i="${i}" aria-label="Karte ${i+1}, verdeckt"><span class="mm-in"><span class="mm-back"><i></i></span><span class="mm-face">${c.html}</span></span></button>`).join("");bar()}
+  function flip(i){if(lock)return;const el=grid.children[i],c=cards[i];if(el.classList.contains("open")||el.classList.contains("done"))return;
+    el.classList.add("open");el.setAttribute("aria-label",`Karte ${i+1}: ${c.label}`);if(snd.checked&&c.tone!=null)nTone(nFreq(c.tone),.6);open.push(i);
+    if(open.length<2)return;moves++;const[a,b]=open;open=[];
+    if(cards[a].p===cards[b].p&&a!==b){[a,b].forEach(k=>{grid.children[k].classList.remove("open");grid.children[k].classList.add("done")});found++;guckiCheer();
+      if(found===P.length)finish();else{fb.className="wr-fb ok";fb.textContent="Ein Paar! 🎵"}}
+    else{lock=true;[a,b].forEach(k=>grid.children[k].classList.add("miss"));fb.className="wr-fb";fb.textContent="Passt nicht – merk dir die Karten!";
+      setTimeout(()=>{[a,b].forEach(k=>{const e=grid.children[k];e.classList.remove("open","miss");e.setAttribute("aria-label",`Karte ${k+1}, verdeckt`)});lock=false},1000)}
+    bar()}
+  function finish(){const rec=!best[mode]||moves<best[mode];if(rec){best[mode]=moves;save()}bar();
+    fb.className="wr-fb ok";fb.innerHTML=`Alle Paare gefunden – in ${moves} Zügen!${rec?" 🏆 Neuer Rekord!":""} <button class="btn" type="button" id="mmAgain">Nochmal</button>`;$("#mmAgain").onclick=start;
+    if(moves<=P.length+2)guckiParty();else guckiSay(rec?"Neuer Rekord!":"Alle Paare!",2000)}
+  grid.addEventListener("click",e=>{const b=e.target.closest(".mm-card");if(b)flip(+b.dataset.i)});
+  modeEl.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.m!=="neu")mode=b.dataset.m;start()});
+  start();
 })();
 /* --- Neu beginnen --- */
 (function(){

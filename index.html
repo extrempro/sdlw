@@ -344,6 +344,12 @@ svg.tzmap{cursor:default;min-width:560px}
 .tzmap text.hr{font-family:var(--display);font-size:13px}
 .tzmap text.dl{font-size:10px;fill:var(--muted)}
 .clock .dt{font-size:.78rem;color:var(--muted);font-weight:700}
+/* Weltzeituhr: oben Stadt und Uhrzeit, darunter Tag/Nacht – so bleibt „Sonnenuntergang“ im Rahmen */
+#tzClocks .clock{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}
+#tzClocks .clock b{min-width:0;overflow-wrap:anywhere}
+#tzClocks .clock .t{white-space:nowrap}
+#tzClocks .clock .cl2{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+#tzClocks .clock .pill{white-space:nowrap}
 
 /* Kompass */
 svg.compass{width:100%;max-width:300px;height:auto;display:block;margin:0 auto}
@@ -541,6 +547,14 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.3.2",
+   "date": "2026-11-08",
+   "title": "Weltzeituhr aufgeräumt",
+   "items": [
+    "Bei der Weltzeituhr passen jetzt alle Wörter in die Kästchen, auch „Sonnenuntergang“. Oben stehen Stadt und Uhrzeit, darunter, ob dort gerade Tag oder Nacht ist."
+   ]
+  },
   {
    "version": "1.3.1",
    "date": "2026-11-08",
@@ -2278,7 +2292,7 @@ const tzT=(t,off)=>wrap24(t-1+off);
       s+=`<text x="${P[0]}" y="${P[1]}" style="text-anchor:${P[2]}">${lab}</text>`});
     svg.innerHTML=s;
     clocks.innerHTML=TZC.map(c=>{const[ph,cl]=cityPhase(c,t,0),dd=tzDay(t,c.off)-Math.floor((t-1+1)/24);
-      return`<div class="clock"><b>${c.n}</b><span class="t">${fmt(tzT(t,c.off))}${dd?` <span class="dt">${dd>0?"nächster Tag":"Vortag"}</span>`:""}</span><span class="pill ${cl}">${ph}</span></div>`}).join("");
+      return`<div class="clock"><b>${c.n}</b><span class="t">${fmt(tzT(t,c.off))}</span><span class="cl2"><span class="pill ${cl}">${ph}</span>${dd?`<span class="dt">${dd>0?"nächster Tag":"Vortag"}</span>`:""}</span></div>`}).join("");
   }
   rng.addEventListener("input",draw);draw();
 })();

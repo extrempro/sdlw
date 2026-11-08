@@ -4,6 +4,14 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.3.2] – 2026-11-08
+
+Weltzeituhr: Beschriftungen bleiben im Rahmen.
+
+### Behoben
+
+- **Weltzeituhr (Kapitel Tag und Nacht):** In den Stadt-Kärtchen ragten „Sonnenuntergang“, „Sonnenaufgang“ und „nächster Tag“ je nach Bildschirmbreite und Uhrzeit über den Rand hinaus. Die Kärtchen haben jetzt zwei Zeilen: oben Stadt und Uhrzeit, darunter Tag/Nacht und gegebenenfalls „nächster Tag“ oder „Vortag“. Geprüft für alle Uhrzeiten bei 360 bis 1300 px Breite.
+
 ## [1.3.1] – 2026-11-08
 
 Freundlichere Erklärung der Aufregung.

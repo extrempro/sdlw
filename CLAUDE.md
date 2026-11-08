@@ -12,7 +12,7 @@ Die Seite ist für die **5. Klasse eines Gymnasiums in Hamburg**.
 Jedes Thema ist ein **Kapitel** mit kurzer Erklärung, einem interaktiven Teil zum Ausprobieren und Übungsaufgaben,
 die sofort Rückmeldung geben. Ein kleines Maskottchen („Gucki“) reagiert auf richtige und falsche Antworten.
 
-Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bereich für Lern- und Arbeitstechniken; „Spielen“ enthält Lernspiele:
+Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bereich für Lern- und Arbeitstechniken; „Spiele“ sind Lernspiele außerhalb der Hauptnavigation:
 
 | Fach | Kapitel | Element-ID | Übungen (IDs) |
 |---|---|---|---|
@@ -23,7 +23,7 @@ Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bere
 | Erdkunde | Tag und Nacht (mit Zeitzonen) | `tagnacht` | n1, n2, n3, n5, n6, n4 |
 | Erdkunde | Der Kompass | `kompass` | c1–c5 |
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
-| Spielen | Fang die Farben (Spiel zum Farbkreis, keine zählenden Übungen) | `farbfang` | – |
+| Spiele | Fang die Farben (Spiel zum Farbkreis, keine zählenden Übungen; Übersicht `#spiele`) | `farbfang` | – |
 | Lernen | Fit für die Klassenarbeit (Lerntipps, Lernplan, Operatoren, starke Aufregung mit Thermometer und Atem-Kreis) | `klassenarbeit` | ka1–ka4, ka6, ka5 |
 
 Dazu kommen zwei Seiten ohne Fach: die **Startseite** (`#start`, Element-ID `start`; erscheint auch, wenn die Adresse
@@ -62,12 +62,13 @@ Es gibt keine Abhängigkeiten und keinen Paketmanager. Node.js ab Version 18 rei
 Reihenfolge in der Datei:
 
 1. `<title>`, Favicon (Gucki als SVG-Daten-URL) und `apple-touch-icon` (PNG, 180 px, als Daten-URL), `<style>` (beginnt mit den eingebetteten Schriften) mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
-2. Kopfzeile (`.topbar`): Logo „S.D.L.W.“ (`#logo`, Regenbogen-Schrift; Klick lässt Gucki sich vorstellen), Jahrgang, rechts runde Symbol-Knöpfe (`.iconbtn`): Haus (`#homeBtn`, Link zu `#start`) und ✦ (`#newsBtn`) als Link zur Seite `#neuigkeiten`
+2. Kopfzeile (`.topbar`): Logo „S.D.L.W.“ (`#logo`, Regenbogen-Schrift; Klick lässt Gucki sich vorstellen), Jahrgang, rechts runde Symbol-Knöpfe (`.iconbtn`): Haus (`#homeBtn`, Link zu `#start`), 🎮 (`#gameBtn`, Link zu `#spiele`) und ✦ (`#newsBtn`) als Link zur Seite `#neuigkeiten`
    mit rotem Punkt, solange die neueste Version noch nicht angesehen wurde (`localStorage` „seenVersion“), Hell/Dunkel-Knopf.
 3. JSON-Block `<script type="application/json" id="releaseData">` – die Versionshinweise der Webseite
    im Format `{"releases":[…neueste zuerst…],"summaries":[…]}`.
 4. Navigation (`nav.navx`): Fächer (`.fach`) mit Themen-Links (`a[data-topic]`). Jeder Link hat `data-desc`
-   (ein Satz für die Kapitelkarte auf der Startseite).
+   (ein Satz für die Kapitelkarte auf der Startseite). Direkt nach der Navigation steht das versteckte
+   Spiele-Verzeichnis `#gameReg` (gleicher Aufbau wie ein `.fach`, Name „Spiele“): Spiele stehen **nicht** in der Hauptnavigation.
 5. Wegweiser-Leiste (`#crumbs`, klebt beim Scrollen oben): Fach-Symbol, „Fach · Kapitel“, aktueller Abschnitt,
    Position („3/13“), Pfeile ‹ › zum vorherigen/nächsten Abschnitt, Knopf ☰ „Abschnitte“ mit Sprungliste und
    Fortschrittsbalken in der Fachfarbe (`--fc`). Daneben das Inhaltsverzeichnis `#toc` (nur ab 1240 px Breite).
@@ -204,7 +205,9 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
 - Versionshinweise nur als kleines rundes ✦-Symbol oben rechts, roter Punkt bei ungesehener Version.
 - Bereich „Lernen“ (grün, `--lern`) steht als eigener Navigationsbereich nach den Fächern. Lernplan und Packliste
   speichern nichts (Haken gehen beim Neuladen verloren); das ist Absicht, weil Klassengeräte geteilt werden.
-- Bereich „Spielen“ (orange, `--spiel`) steht in der Navigation nach „Lernen“. Spiele nutzen die Daten der
+- Spiele (orange, `--spiel`) stehen nicht in der Hauptnavigation, sondern sind über den 🎮-Knopf oben rechts
+  (Seite `#spiele`) und den Abschnitt „Spiele“ auf der Startseite erreichbar. Neues Spiel: Link mit `data-topic`,
+  `data-desc` und `.ico` in `#gameReg` eintragen, ID in `TOPICS` ergänzen. Spiele nutzen die Daten der
   Kapitel (z. B. `C` aus dem Farbkreis), melden Mischungen an Gucki (`guckiCheer`), zählen aber nicht für die
   Kapitel-Party. „Fang die Farben“ zeichnet auf einem Canvas (560 × 560, skaliert) und pausiert beim Seitenwechsel.
 - Haus-Knopf oben rechts neben dem ✦ führt zur Startseite. Das Logo bleibt der Gucki-Trick, kein Startseiten-Link.

@@ -125,6 +125,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .iconbtn{position:relative;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0!important;border-radius:50%;text-decoration:none;font-size:1rem;line-height:1;align-self:center}
 .iconbtn svg{width:19px;height:19px;display:block}
 .iconbtn:hover{border-color:var(--muted)}
+.topbar .iconbtn{border-radius:50%;padding:0}
+@media (max-width:400px){.topbar .jg{display:none}.topbar .iconbtn{width:34px;height:34px}.tb-r{gap:5px}}
 .btn.iconbtn[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
 .iconbtn:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .iconbtn .ndot{position:absolute;top:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:var(--bad);border:2px solid var(--paper)}
@@ -573,7 +575,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </head>
 <body>
 <div class="wrap">
-<div class="topbar"><div class="tb-l"><button class="logo" id="logo" type="button" title="Super Duper Lern Webseite" aria-label="S.D.L.W. – Super Duper Lern Webseite. Antippen für eine Überraschung."><span class="logo-t" aria-hidden="true">S.D.L.W.</span></button><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><a class="btn ghost iconbtn" id="homeBtn" href="#start" title="Startseite" aria-label="Startseite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg></a><a class="btn ghost iconbtn" id="newsBtn" href="#neuigkeiten"></a><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
+<div class="topbar"><div class="tb-l"><button class="logo" id="logo" type="button" title="Super Duper Lern Webseite" aria-label="S.D.L.W. – Super Duper Lern Webseite. Antippen für eine Überraschung."><span class="logo-t" aria-hidden="true">S.D.L.W.</span></button><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><a class="btn ghost iconbtn" id="homeBtn" href="#start" title="Startseite" aria-label="Startseite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg></a><a class="btn ghost iconbtn" id="gameBtn" href="#spiele" title="Spiele" aria-label="Spiele"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7.5h10a4.5 4.5 0 0 1 4.4 5.4l-.8 4a2.7 2.7 0 0 1-4.6 1.3L13.8 16h-3.6L8 18.2a2.7 2.7 0 0 1-4.6-1.3l-.8-4A4.5 4.5 0 0 1 7 7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10.5v3M6.5 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="15.6" cy="11" r="1.1" fill="currentColor"/><circle cx="17.6" cy="13.2" r="1.1" fill="currentColor"/></svg></a><a class="btn ghost iconbtn" id="newsBtn" href="#neuigkeiten"></a><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
 <script type="application/json" id="releaseData">
 {
  "releases": [
@@ -582,7 +584,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "date": "2026-11-08",
    "title": "Das erste Spiel: Fang die Farben",
    "items": [
-    "Neu: der Bereich „Spielen“ mit dem Spiel „Fang die Farben“! Gucki möchte Farben mischen. Fang mit seinem Eimer genau die zwei Farben, aus denen die Zielfarbe entsteht.",
+    "Neu: das Spiel „Fang die Farben“! Gucki möchte Farben mischen. Fang mit seinem Eimer genau die zwei Farben, aus denen die Zielfarbe entsteht.",
+    "Alle Spiele findest du über den neuen 🎮-Knopf oben rechts und unten auf der Startseite.",
     "Die Zielfarbe steht groß oben im Spielfeld, und vor jeder neuen Farbe sagt das Spiel sie dir in Ruhe an. Gucki trägt den Eimer auf dem Kopf, damit du jeden Tropfen bis zum Schluss siehst.",
     "In Stufe 2 mischst du Mischfarben 2. Ordnung wie Blaugrün oder Rotorange – und die Tropfen fallen schneller.",
     "Du steuerst mit dem Finger, der Maus, den Pfeiltasten oder den Knöpfen. Dein Rekord wird auf deinem Gerät gespeichert."
@@ -687,11 +690,14 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <div class="fach"><p class="fachname"><span class="fdot" style="background:#2E9447"></span>Lernen</p><div class="topics">
       <a href="#klassenarbeit" data-topic="klassenarbeit" data-desc="Wie du dich gut vorbereitest und in der Arbeit ruhig und Schritt für Schritt vorgehst."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#2E9447"/><rect x="9" y="7" width="14" height="18" rx="2.5" fill="#FFFFFF"/><path d="M11.6 13.2l1.7 1.7 3-3.2M11.6 19.2l1.7 1.7 3-3.2" fill="none" stroke="#2E9447" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2 13.6h2.6M18.2 19.6h2.6" stroke="#2E9447" stroke-width="1.9" stroke-linecap="round"/></svg><span><b>Klassenarbeit</b></span></a>
     </div></div>
-    <div class="fach"><p class="fachname"><span class="fdot" style="background:#D96F0B"></span>Spielen</p><div class="topics">
-      <a href="#farbfang" data-topic="farbfang" data-desc="Ein Spiel zum Farbkreis: Fang mit Gucki die Farben, aus denen die Zielfarbe gemischt wird."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D96F0B"/><path d="M16 6.5c3.6 4.6 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.4 6-11z" fill="#FFFFFF"/><circle cx="13.6" cy="18.4" r="1.6" fill="#D96F0B"/></svg><span><b>Fang die Farben</b></span></a>
-    </div></div>
   </div>
 </nav>
+<!-- Spiele-Verzeichnis: nicht in der Hauptnavigation; Quelle für Spiele-Seite, Startseite und Wegweiser -->
+<div class="gamereg" id="gameReg" hidden>
+  <div class="fach"><p class="fachname"><span class="fdot" style="background:#D96F0B"></span>Spiele</p><div class="topics">
+      <a href="#farbfang" data-topic="farbfang" data-desc="Ein Spiel zum Farbkreis: Fang mit Gucki die Farben, aus denen die Zielfarbe gemischt wird."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D96F0B"/><path d="M16 6.5c3.6 4.6 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.4 6-11z" fill="#FFFFFF"/><circle cx="13.6" cy="18.4" r="1.6" fill="#D96F0B"/></svg><span><b>Fang die Farben</b></span></a>
+    </div></div>
+</div>
 <div class="crumbs" id="crumbs">
   <div class="crumbs-in" id="crIn">
     <span class="cr-ico" id="crIco" aria-hidden="true"></span>
@@ -713,11 +719,15 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4)"></div>
 </header>
 <div class="sblock">
-  <p class="lead">Hier lernst du Deutsch, Kunst, Erdkunde und Musik – mit Erklärungen, Dingen zum Ausprobieren und Übungen. Unter „Lernen“ findest du Tipps für die nächste Klassenarbeit und unter „Spielen“ ein Farbenspiel mit Gucki. Such dir ein Kapitel aus!</p>
+  <p class="lead">Hier lernst du Deutsch, Kunst, Erdkunde und Musik – mit Erklärungen, Dingen zum Ausprobieren und Übungen. Unter „Lernen“ findest du Tipps für die nächste Klassenarbeit. Und weiter unten warten Spiele mit Gucki. Such dir ein Kapitel aus!</p>
 </div>
 <div class="sblock">
   <h2>Alle Kapitel</h2>
   <div id="startList"></div>
+</div>
+<div class="sblock">
+  <h2>Spiele</h2>
+  <div id="startGames"></div>
 </div>
 <div class="sblock">
   <h2>So lernst du hier</h2>
@@ -768,6 +778,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <h2>Warme und kalte Farben</h2>
   <p class="prose">Gelb, Orange und Rot erinnern an Sonne und Feuer: Das sind <strong>warme Farben</strong>. Blau, Blaugrün und Blauviolett erinnern an Wasser und Eis: Das sind <strong>kalte Farben</strong>. Laut Itten ist <strong>Rotorange</strong> die wärmste und <strong>Blaugrün</strong> die kälteste Farbe – und die beiden liegen sich genau gegenüber.</p>
 </section>
+<p class="hint ff-tip">🎮 Lust auf ein Spiel? Bei <a href="#farbfang">Fang die Farben</a> mischst du mit Gucki Farben – mit genau diesen Regeln.</p>
 <section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
 <div class="task" id="t1"><div class="taskhead"><h3>Aufgabe 1 · Mischmaschine</h3><span class="score" data-score></span></div>
   <p class="hint">Welche Farbe entsteht, wenn du die beiden Farben mischst?</p><div data-qs></div></div>
@@ -1500,10 +1511,23 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <footer>Tipp: Die Übungen auf dieser Seite eignen sich prima zum Selbstabfragen. Mach sie vor einer Arbeit einfach mit „Neu beginnen“ noch einmal.</footer>
 </div>
 
+<!-- ============ SPIELE (Übersicht) ============ -->
+<div class="topic" id="spiele" hidden>
+<header>
+  <p class="eyebrow">S.D.L.W. · Klasse 5 · Spiele</p>
+  <h1>Spiele</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--spiel),#FFE000)"></div>
+</header>
+<div class="sblock">
+  <p class="lead">Hier kannst du mit Gucki spielen und dabei wiederholen, was du in den Kapiteln gelernt hast.</p>
+  <div id="gameList"></div>
+</div>
+</div>
+
 <!-- ============ SPIEL: FANG DIE FARBEN ============ -->
 <div class="topic" id="farbfang" hidden>
 <header>
-  <p class="eyebrow">Spielen · Klasse 5 · Kunst</p>
+  <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Kunst</p>
   <h1>Fang die Farben</h1>
   <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#FFE000,#F28A1E,#E3202A,#6C2C8E,#1E5AAA,#3DA647)"></div>
 </header>
@@ -1622,17 +1646,23 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","farbfang","neuigkeiten"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","neuigkeiten"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
   document.querySelectorAll(".topics a").forEach(a=>{if(a.dataset.topic===t)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   const nb=$("#newsBtn");if(nb){if(t==="neuigkeiten"){nb.setAttribute("aria-current","page");if(window.markReleaseSeen)markReleaseSeen()}else nb.removeAttribute("aria-current")}
   const hb=$("#homeBtn");if(hb){if(t==="start")hb.setAttribute("aria-current","page");else hb.removeAttribute("aria-current")}
-  if(t==="start")renderStart();
+  const gb=$("#gameBtn"),isGame=t==="spiele"||!!document.querySelector(`#gameReg a[data-topic="${t}"]`);if(gb){if(isGame)gb.setAttribute("aria-current","page");else gb.removeAttribute("aria-current")}
+  if(t==="start"){renderStart();renderGames($("#startGames"))}
+  if(t==="spiele")renderGames($("#gameList"));
   if(scroll)window.scrollTo(0,0);
   if(typeof Wegweiser==="object")Wegweiser.update(t);
 }
+/* ---------- Spielekarten aus dem Spiele-Verzeichnis #gameReg ---------- */
+function renderGames(box){if(!box)return;const reg=$("#gameReg"),dot=reg.querySelector(".fdot"),col=dot?dot.style.background:"var(--ink)";
+  box.innerHTML=`<div class="scards">${[...reg.querySelectorAll("a[data-topic]")].map(a=>{const ic=a.querySelector(".ico"),name=a.querySelector("b").textContent.trim();
+    return`<a class="scard" href="#${a.dataset.topic}" style="--sc:${col}">${ic?ic.outerHTML:""}<span class="st-t"><span class="st-f"><span class="fdot" style="background:${col}"></span>Spiel</span><b>${name}</b><span class="st-d">${a.dataset.desc||""}</span></span></a>`}).join("")}</div>`}
 /* ---------- Startseite: Kapitelkarten aus der Navigation (Symbol, Name, data-desc, Fachfarbe) ---------- */
 let startGreeted=false;
 function renderStart(){
@@ -1680,7 +1710,7 @@ const Wegweiser=(function(){
     if(a){const fn=a.closest(".fach").querySelector(".fachname");fach=fn.textContent.trim();const d=fn.querySelector(".fdot");color=d?d.style.background:"";
       const ic=a.querySelector(".ico");ico.innerHTML=ic?ic.outerHTML:""}
     else{fach="S.D.L.W.";color="#7A5BC4";
-      const sym=topic==="start"?`<svg viewBox="0 0 24 24" width="60%" height="60%" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`:"✦";
+      const sym=topic==="start"?`<svg viewBox="0 0 24 24" width="60%" height="60%" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`:topic==="spiele"?"🎮":"✦";
       if(topic==="start")title="Startseite";
       ico.innerHTML=`<span class="ico" style="background:conic-gradient(#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4,#E3202A);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-weight:800">${sym}</span>`}
     document.documentElement.style.setProperty("--fc",color||"var(--ink)")}
@@ -2971,7 +3001,7 @@ quiz($("#ka6"),shuffle([
 /* ================= SPIEL: FANG DIE FARBEN ================= */
 (function(){
   const cv=$("#ffCv");if(!cv)return;
-  const g=cv.getContext("2d"),over=$("#ffOver"),live=$("#ffLive"),W=560,H=560,BY=H-118;
+  const g=cv.getContext("2d"),over=$("#ffOver"),live=$("#ffLive"),W=560,H=560,BY=H-150;
   const T1=C.map((c,i)=>i).filter(i=>C[i].t===1),T2=C.map((c,i)=>i).filter(i=>C[i].t===2);
   // Mischregeln zum Nachlesen
   $("#ffRules").innerHTML=[...T1,...T2].map(i=>{const[a,b]=C[i].m;const d=k=>`<span class="d" style="background:${C[k].h}"></span>${C[k].n}`;return`<div class="ff-rule">${d(a)} + ${d(b)} = ${d(i)}</div>`}).join("");
@@ -3010,11 +3040,11 @@ quiz($("#ka6"),shuffle([
     else{st.hearts--;st.streak=0;st.shake=.35;fx(d.x,d.y,"#E3202A",`${C[d.c].n} passt nicht`);say(`${C[d.c].n} gehört nicht zu ${C[st.goal].n}.`);hud();if(st.hearts<=0)setTimeout(end,350)}}
   const fx=(x,y,col,txt)=>st.fx.push({x,y,col,txt,t:0});
   function loop(ts){if(!running)return;const dt=last?Math.min(.05,(ts-last)/1000):0;last=ts;
-    const sp=430*dt;if(keys.l)st.x-=sp;if(keys.r)st.x+=sp;st.x=Math.max(46,Math.min(W-46,st.x));
+    const sp=430*dt;if(keys.l)st.x-=sp;if(keys.r)st.x+=sp;st.x=Math.max(58,Math.min(W-58,st.x));
     st.intro=Math.max(0,st.intro-dt);
     if(!st.intro){st.spawn-=dt;if(st.spawn<=0&&st.have.length<2){spawn();st.spawn=Math.max(.6,(lvl()===1?1.3:1)-st.mixes*.02)}}
     const by=BY;
-    st.drops.forEach(d=>{d.y+=d.v*dt;if(!d.gone&&d.y>by-6&&d.y<by+18&&Math.abs(d.x-st.x)<44){d.gone=true;if(st.hearts>0)catchDrop(d)}});
+    st.drops.forEach(d=>{d.y+=d.v*dt;if(!d.gone&&d.y>by-6&&d.y<by+18&&Math.abs(d.x-st.x)<56){d.gone=true;if(st.hearts>0)catchDrop(d)}});
     st.drops=st.drops.filter(d=>!d.gone&&d.y<H+30);
     st.fx.forEach(f=>f.t+=dt);st.fx=st.fx.filter(f=>f.t<1);st.shake=Math.max(0,st.shake-dt);st.mixShow=Math.max(0,st.mixShow-dt);
     draw();if(st.hearts>0)raf=requestAnimationFrame(loop)}
@@ -3025,16 +3055,16 @@ quiz($("#ka6"),shuffle([
     st.drops.forEach(d=>{const c=C[d.c];g.save();g.translate(d.x,d.y);g.beginPath();g.moveTo(0,-26);g.bezierCurveTo(10,-12,18,-2,18,8);g.arc(0,8,18,0,Math.PI);g.bezierCurveTo(-18,-2,-10,-12,0,-26);
       g.fillStyle=c.h;g.fill();g.lineWidth=2;g.strokeStyle="rgba(0,0,0,.25)";g.stroke();g.fillStyle="rgba(255,255,255,.55)";g.beginPath();g.ellipse(-6,2,4,7,-.4,0,7);g.fill();
       g.font="700 13px 'Atkinson Hyperlegible',sans-serif";g.textAlign="center";g.lineWidth=4;g.strokeStyle=paper;g.strokeText(c.n,0,44);g.fillStyle=ink;g.fillText(c.n,0,44);g.restore()});
-    // Gucki trägt den Eimer auf dem Kopf (nichts verdeckt die Tropfen über dem Eimer)
+    // Gucki trägt den Eimer auf dem Kopf (so groß wie Gucki am Bildschirmrand)
     const sx=st.shake?Math.sin(st.shake*60)*5:0,x=st.x+sx,by=BY;
-    g.fillStyle="#139DB3";g.beginPath();g.roundRect?g.roundRect(x-32,by+44,64,H-by-44,[30,30,0,0]):g.rect(x-32,by+44,64,H-by-44);g.fill();
-    g.fillStyle="#0E8496";[[-46,by+40],[34,by+40]].forEach(([hx,hy])=>{g.beginPath();g.roundRect?g.roundRect(x+hx,hy,12,22,6):g.rect(x+hx,hy,12,22);g.fill()});
-    const near=st.drops.reduce((a,d)=>!a||d.y>a.y?d:a,null),lx=near?Math.max(-3,Math.min(3,(near.x-x)/40)):0;
-    [[-13,by+72],[13,by+72]].forEach(([ex,ey])=>{g.fillStyle="#FFFFFF";g.strokeStyle="#0E6F7E";g.lineWidth=2;g.beginPath();g.arc(x+ex,ey,9.5,0,7);g.fill();g.stroke();
-      g.fillStyle="#1C1F2E";g.beginPath();g.arc(x+ex+lx,ey-3.5,4.4,0,7);g.fill()});
-    g.beginPath();g.moveTo(x-46,by);g.lineTo(x+46,by);g.lineTo(x+36,by+48);g.lineTo(x-36,by+48);g.closePath();g.fillStyle="#9AA5B8";g.fill();g.lineWidth=2;g.strokeStyle="#5B6475";g.stroke();
-    g.beginPath();g.ellipse(x,by,46,8,0,0,7);g.fillStyle=st.mixShow?st.mixCol:"#5B6475";g.fill();
-    st.have.forEach((k,n)=>{g.beginPath();g.arc(x-12+n*24,by+26,9,0,7);g.fillStyle=C[k].h;g.fill();g.strokeStyle="#FFFFFF";g.lineWidth=2;g.stroke()});
+    g.fillStyle="#139DB3";g.beginPath();g.roundRect?g.roundRect(x-52,by+50,104,H-by-50,[50,50,0,0]):g.rect(x-52,by+50,104,H-by-50);g.fill();
+    g.fillStyle="#0E8496";[[-70,by+44],[52,by+44]].forEach(([hx,hy])=>{g.beginPath();g.roundRect?g.roundRect(x+hx,hy,18,32,9):g.rect(x+hx,hy,18,32);g.fill()});
+    const near=st.drops.reduce((a,d)=>!a||d.y>a.y?d:a,null),lx=near?Math.max(-5,Math.min(5,(near.x-x)/30)):0;
+    [[-21,by+92],[21,by+92]].forEach(([ex,ey])=>{g.fillStyle="#FFFFFF";g.strokeStyle="#0E6F7E";g.lineWidth=3;g.beginPath();g.arc(x+ex,ey,15,0,7);g.fill();g.stroke();
+      g.fillStyle="#1C1F2E";g.beginPath();g.arc(x+ex+lx,ey-6,7,0,7);g.fill();g.fillStyle="#FFFFFF";g.beginPath();g.arc(x+ex+lx-2,ey-8,2,0,7);g.fill()});
+    g.beginPath();g.moveTo(x-58,by);g.lineTo(x+58,by);g.lineTo(x+46,by+54);g.lineTo(x-46,by+54);g.closePath();g.fillStyle="#9AA5B8";g.fill();g.lineWidth=2.5;g.strokeStyle="#5B6475";g.stroke();
+    g.beginPath();g.ellipse(x,by,58,10,0,0,7);g.fillStyle=st.mixShow?st.mixCol:"#5B6475";g.fill();
+    st.have.forEach((k,n)=>{g.beginPath();g.arc(x-15+n*30,by+28,11,0,7);g.fillStyle=C[k].h;g.fill();g.strokeStyle="#FFFFFF";g.lineWidth=2;g.stroke()});
     // Ziel-Banner oben im Spielfeld
     if(st.goal>=0){const gc=C[st.goal],sheet=cssv("--sheet")||"#FFFFFF";g.fillStyle=sheet;g.strokeStyle=line;g.lineWidth=1.5;g.beginPath();g.roundRect?g.roundRect(10,8,W-20,50,14):g.rect(10,8,W-20,50);g.fill();g.stroke();
       g.beginPath();g.arc(38,33,16,0,7);g.fillStyle=gc.h;g.fill();g.strokeStyle="rgba(0,0,0,.25)";g.lineWidth=2;g.stroke();

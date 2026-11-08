@@ -24,7 +24,8 @@ Aktuelle Kapitel (Jahrgang 5):
 | Erdkunde | Der Kompass | `kompass` | c1–c5 |
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
 
-Dazu kommt die Seite **Versionshinweise** (`#neuigkeiten`, Element-ID `neuigkeiten`), die kein Fach hat.
+Dazu kommen zwei Seiten ohne Fach: die **Startseite** (`#start`, Element-ID `start`; erscheint auch, wenn die Adresse
+keinen Zusatz hat) und die **Versionshinweise** (`#neuigkeiten`, Element-ID `neuigkeiten`).
 
 ## Zielgruppe, Sprache und Ton
 
@@ -58,24 +59,25 @@ Es gibt keine Abhängigkeiten und keinen Paketmanager. Node.js ab Version 18 rei
 
 Reihenfolge in der Datei:
 
-1. `<title>`, Google-Fonts-Link, `<style>` mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
-2. Kopfzeile (`.topbar`): Logo „S.D.L.W.“ (`#logo`, Regenbogen-Schrift; Klick lässt Gucki sich vorstellen), Jahrgang, kleines rundes ✦-Symbol (`#newsBtn`) als Link zur Seite `#neuigkeiten`
+1. `<title>`, Favicon (Gucki als SVG-Daten-URL) und `apple-touch-icon` (PNG, 180 px, als Daten-URL), Google-Fonts-Link, `<style>` mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
+2. Kopfzeile (`.topbar`): Logo „S.D.L.W.“ (`#logo`, Regenbogen-Schrift; Klick lässt Gucki sich vorstellen), Jahrgang, rechts runde Symbol-Knöpfe (`.iconbtn`): Haus (`#homeBtn`, Link zu `#start`) und ✦ (`#newsBtn`) als Link zur Seite `#neuigkeiten`
    mit rotem Punkt, solange die neueste Version noch nicht angesehen wurde (`localStorage` „seenVersion“), Hell/Dunkel-Knopf.
 3. JSON-Block `<script type="application/json" id="releaseData">` – die Versionshinweise der Webseite
    im Format `{"releases":[…neueste zuerst…],"summaries":[…]}`.
-4. Navigation (`nav.navx`): Fächer (`.fach`) mit Themen-Links (`a[data-topic]`).
+4. Navigation (`nav.navx`): Fächer (`.fach`) mit Themen-Links (`a[data-topic]`). Jeder Link hat `data-desc`
+   (ein Satz für die Kapitelkarte auf der Startseite).
 5. Wegweiser-Leiste (`#crumbs`, klebt beim Scrollen oben): Fach-Symbol, „Fach · Kapitel“, aktueller Abschnitt,
    Position („3/13“), Pfeile ‹ › zum vorherigen/nächsten Abschnitt, Knopf ☰ „Abschnitte“ mit Sprungliste und
    Fortschrittsbalken in der Fachfarbe (`--fc`). Daneben das Inhaltsverzeichnis `#toc` (nur ab 1240 px Breite).
-6. Ein `<div class="topic" id="…">` je Kapitel (nur eines ist sichtbar, gesteuert über den URL-Hash),
-   zuletzt die Versionsseite `#neuigkeiten` mit dem Container `#relPage`.
+6. Ein `<div class="topic" id="…">` je Seite (nur eines ist sichtbar, gesteuert über den URL-Hash): zuerst die
+   Startseite `#start`, dann die Kapitel, zuletzt die Versionsseite `#neuigkeiten` mit dem Container `#relPage`.
 7. Knopf „Nach oben“ (`#toTop`, unten links) und Gucki (`#gucki`, unten rechts).
 8. Externe Kartendaten (siehe unten) und ein großes `<script>` mit allen Funktionen, gegliedert durch Kommentare
    wie `/* ================= NOTEN ================= */`.
 
 ### Wichtige Bausteine im Skript
 
-- **Routing:** `TOPICS` (Liste der Kapitel-IDs plus `neuigkeiten`) und `route()`. Ein Kapitel ist über
+- **Routing:** `TOPICS` (`start`, die Kapitel-IDs und `neuigkeiten`) und `route()`. Ohne Hash erscheint `start`. Ein Kapitel ist über
   `#kapitelid` direkt verlinkbar. `route()` ruft am Ende `Wegweiser.update()` auf.
 - **Wegweiser:** sammelt beim Kapitelwechsel alle `section > h2` und die `h3` in `.task .taskhead` des Kapitels.
   Daraus entstehen Sprungliste, Inhaltsverzeichnis und die Anzeige des aktuellen Abschnitts (Scroll-Spy).
@@ -84,6 +86,9 @@ Reihenfolge in der Datei:
   `Wegweiser.refresh()` auf, damit die Haken aktuell bleiben. Fachfarbe und Symbol kommen aus der Navigation.
   Neue Kapitel müssen ihre Überschriften deshalb in dieser Struktur haben. Weil der URL-Hash das Kapitel
   bestimmt, springen die Einträge per Skript (`scrollTo`) statt über Anker-Links.
+- **Startseite:** `renderStart()` baut die Kapitelkarten bei jedem Aufruf neu aus der Navigation (Symbol, Name,
+  `data-desc`, Fachfarbe aus `.fdot`) und zählt fehlerfreie Übungen (`.task[data-score][data-perfect]`).
+  Ihre Überschriften stehen absichtlich nicht in `<section>`, damit der Wegweiser dort nur „Startseite“ zeigt.
 - **Versionsseite:** baut sich aus `releaseData`. Je zehn Versionen (vom ältesten an gezählt) bilden einen Block.
   Der Block mit der neuesten Version steht ausführlich da, alle älteren Blöcke werden mit ihrer Zusammenfassung
   aus `summaries` gezeigt, die Einzelversionen lassen sich aufklappen.
@@ -125,7 +130,8 @@ Reihenfolge in der Datei:
 
 1. `<div class="topic" id="neueid" hidden>` vor `#gucki` einfügen, Aufbau wie die anderen Kapitel
    (Header mit Eyebrow „Fach · Klasse 5 · Bereich“, Erklärungen, interaktiver Teil, „Übungsaufgaben“, Tasks, Footer).
-2. ID in `TOPICS` ergänzen und einen Link in der Navigation beim passenden Fach (`.fach`) einfügen.
+2. ID in `TOPICS` ergänzen und einen Link in der Navigation beim passenden Fach (`.fach`) einfügen,
+   mit `data-desc="…"` (ein kindgerechter Satz). Die Startseite übernimmt das Kapitel dann automatisch.
 3. Übungen mit `quiz()` oder eigener Logik bauen. Gucki-Schnittstelle und `box._reset` nicht vergessen.
 4. Merkkasten-Farbe: `#neueid .merk{--accent:…}`.
 5. Hell und dunkel sowie Handybreite prüfen.
@@ -188,9 +194,16 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
 - Name auf der Seite: „S.D.L.W.“ (Super Duper Lern Webseite) mit Regenbogen-Animation; Klick aufs Logo:
   Gucki macht Salto mit goldenem Leuchten, ruft „Super Duper Lern Webseite!“, etwas Konfetti.
 - Versionshinweise nur als kleines rundes ✦-Symbol oben rechts, roter Punkt bei ungesehener Version.
+- Haus-Knopf oben rechts neben dem ✦ führt zur Startseite. Das Logo bleibt der Gucki-Trick, kein Startseiten-Link.
+- Gucki ragt unter den Bildschirmrand (`--gx`, Körper über `box-shadow` der `.kopf` verlängert). Das fängt den
+  Firefox-Fehler ab (siehe „Bekannte Grenzen“). Bei Party, Aura und Crazy ist die Verlängerung aus.
 
 ## Bekannte Grenzen
 
 - Die echten Kartendaten lassen sich nur online testen; ohne Internet erscheint die Punktkarte.
 - Töne brauchen eingeschalteten Ton am Gerät (iPhone/iPad: Stummschalter aus).
+- Firefox auf Android/Tablets schiebt unten klebende Elemente beim Hochscrollen manchmal um die Höhe der
+  Adressleiste nach oben (Mozilla-Bugs 1797964 und 2012733; nur mit Adressleiste oben, schlimmer bei Zoom oder
+  großer Schrift). Gucki sieht dann nur größer aus; „Nach oben“ schwebt etwas höher. Abhilfe am Gerät:
+  Firefox-Symbolleiste nach unten stellen.
 - Beim lokalen Öffnen (`file://`) merken sich manche Browser (Safari) Hell/Dunkel und Sonnenbrille nicht.

@@ -13,7 +13,7 @@ Für die echte Weltkarte und die Schriften wird eine Internetverbindung genutzt;
 einfache Ersatzkarte.
 
 Ein Kapitel direkt öffnen: `index.html#deutsch`, `#farbkreis`, `#kontinente`, `#meere`, `#tagnacht`,
-`#kompass`, `#noten`.
+`#kompass`, `#noten`. Die Versionshinweise stehen unter `index.html#neuigkeiten`.
 
 Die fertige Datei hängt außerdem an jedem [GitHub-Release](../../releases) als Download.
 

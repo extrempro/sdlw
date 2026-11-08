@@ -21,6 +21,8 @@ Aktuelle Kapitel (Jahrgang 5):
 | Erdkunde | Der Kompass | `kompass` | c1–c5 |
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
 
+Dazu kommt die Seite **Versionshinweise** (`#neuigkeiten`, Element-ID `neuigkeiten`), die kein Fach hat.
+
 ## Zielgruppe, Sprache und Ton
 
 - Kinder von etwa 10–11 Jahren. Lehrkräfte setzen die Seite im Unterricht und für Hausaufgaben ein.
@@ -54,17 +56,29 @@ Es gibt keine Abhängigkeiten und keinen Paketmanager. Node.js ab Version 18 rei
 Reihenfolge in der Datei:
 
 1. `<title>`, Google-Fonts-Link, `<style>` mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
-2. Kopfzeile (`.topbar`): Jahrgang, Knopf „✦ Neu in vX“ (Versionshinweise), Hell/Dunkel-Knopf.
-3. JSON-Block `<script type="application/json" id="releaseData">` – die Versionshinweise der Webseite.
+2. Kopfzeile (`.topbar`): Jahrgang, Link „✦ Neu in vX“ zur Seite `#neuigkeiten`, Hell/Dunkel-Knopf.
+3. JSON-Block `<script type="application/json" id="releaseData">` – die Versionshinweise der Webseite
+   im Format `{"releases":[…neueste zuerst…],"summaries":[…]}`.
 4. Navigation (`nav.navx`): Fächer (`.fach`) mit Themen-Links (`a[data-topic]`).
-5. Ein `<div class="topic" id="…">` je Kapitel (nur eines ist sichtbar, gesteuert über den URL-Hash).
-6. Gucki (`#gucki`).
-7. Externe Kartendaten (siehe unten) und ein großes `<script>` mit allen Funktionen, gegliedert durch Kommentare
+5. Wegweiser-Leiste (`#crumbs`, klebt beim Scrollen oben): „Fach › Kapitel › Abschnitt“ und Knopf „Abschnitte“
+   mit Sprungliste. Daneben das Inhaltsverzeichnis `#toc`, das nur auf breiten Bildschirmen (ab 1240 px) erscheint.
+6. Ein `<div class="topic" id="…">` je Kapitel (nur eines ist sichtbar, gesteuert über den URL-Hash),
+   zuletzt die Versionsseite `#neuigkeiten` mit dem Container `#relPage`.
+7. Knopf „Nach oben“ (`#toTop`, unten links) und Gucki (`#gucki`, unten rechts).
+8. Externe Kartendaten (siehe unten) und ein großes `<script>` mit allen Funktionen, gegliedert durch Kommentare
    wie `/* ================= NOTEN ================= */`.
 
 ### Wichtige Bausteine im Skript
 
-- **Routing:** `TOPICS` (Liste der Kapitel-IDs) und `route()`. Ein Kapitel ist über `#kapitelid` direkt verlinkbar.
+- **Routing:** `TOPICS` (Liste der Kapitel-IDs plus `neuigkeiten`) und `route()`. Ein Kapitel ist über
+  `#kapitelid` direkt verlinkbar. `route()` ruft am Ende `Wegweiser.update()` auf.
+- **Wegweiser:** sammelt beim Kapitelwechsel alle `section > h2` und die `h3` in `.task .taskhead` des Kapitels.
+  Daraus entstehen Sprungliste, Inhaltsverzeichnis und die Anzeige des aktuellen Abschnitts (Scroll-Spy).
+  Neue Kapitel müssen ihre Überschriften deshalb in dieser Struktur haben. Weil der URL-Hash das Kapitel
+  bestimmt, springen die Einträge per Skript (`scrollTo`) statt über Anker-Links.
+- **Versionsseite:** baut sich aus `releaseData`. Je zehn Versionen (vom ältesten an gezählt) bilden einen Block.
+  Der Block mit der neuesten Version steht ausführlich da, alle älteren Blöcke werden mit ihrer Zusammenfassung
+  aus `summaries` gezeigt, die Einzelversionen lassen sich aufklappen.
 - **`quiz(box, items)`:** Multiple-Choice-Übung. `items` = `[{q, o:[{v,label}], a, why, hint?}]`.
   Zählt Punkte, meldet an Gucki, setzt `box._reset`.
 - **`rankTask`, `mapQuiz`, Takt-/Klaviatur-/Detektiv-Übungen:** eigene Übungsarten. Jede setzt `box._reset`.
@@ -120,9 +134,14 @@ Jede Änderung, die auf `main` landet, bekommt eine neue Version mit Versionshin
    - MAJOR (**2**.0.0): grundlegender Umbau, z. B. ein neuer Jahrgang mit eigener Struktur.
 2. **CHANGELOG.md:** oben einen neuen Abschnitt `## [x.y.z] – JJJJ-MM-TT` mit `### Neu`, `### Verbessert`
    oder `### Behoben` einfügen.
-3. **Webseite:** im JSON-Block `releaseData` in `src/entdeckerheft.html` **oben** einen Eintrag
-   `{"version":"x.y.z","date":"JJJJ-MM-TT","title":"…","items":["…"]}` ergänzen. Kindgerecht formulieren –
-   die Kinder lesen das.
+3. **Webseite:** im JSON-Block `releaseData` in `src/entdeckerheft.html` in der Liste `releases` **ganz oben**
+   einen Eintrag `{"version":"x.y.z","date":"JJJJ-MM-TT","title":"…","items":["…"]}` ergänzen.
+   Kindgerecht formulieren – die Kinder lesen das.
+   **Nach zehn Änderungen zusammenfassen:** Sobald eine neue Version einen neuen Zehnerblock beginnt
+   (die 11., 21., 31. … Version), braucht der gerade abgeschlossene Block eine Zusammenfassung in `summaries`:
+   `{"from":"älteste Version des Blocks","to":"neueste Version des Blocks","title":"…","items":["…"]}`.
+   Die Zusammenfassung nennt in 3–6 kindgerechten Punkten, was sich in diesen zehn Versionen insgesamt getan hat.
+   `check-release.mjs` meldet, welcher Block noch eine Zusammenfassung braucht. `CHANGELOG.md` bleibt vollständig.
 4. `node scripts/build.mjs` ausführen (baut `index.html`).
 5. `node scripts/check-release.mjs` ausführen – muss „Alles in Ordnung“ melden.
 6. Branch anlegen, committen, Pull Request gegen `main` öffnen. Die Release Notes in die PR-Beschreibung übernehmen.
@@ -130,7 +149,7 @@ Jede Änderung, die auf `main` landet, bekommt eine neue Version mit Versionshin
    Notizen aus CHANGELOG.md und hängt `index.html` als Download an.
 
 Der Workflow `check.yml` lässt einen Pull Request scheitern, wenn die Versionshinweise nicht zusammenpassen,
-`index.html` veraltet ist oder die Versionsnummer schon veröffentlicht wurde.
+eine Zusammenfassung fehlt, `index.html` veraltet ist oder die Versionsnummer schon veröffentlicht wurde.
 
 ## Vorschau auf claude.ai
 
@@ -148,6 +167,8 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach einem Release dort ebenfalls
 - Zeitzonen und Uhrzeiten rechnen ohne Sommerzeit; das steht auf der Seite.
 - Gucki-Jugendwörter: „Aura“ (3 fehlerfreie Übungen in Folge), „Cringe“ (3 Fehler in Folge), Banner „DAS CRAZY!“.
 - Fünfmal schnell auf Gucki tippen startet die große Party (Vorführ-Trick für Lehrkräfte).
+- Versionshinweise stehen auf einer eigenen Seite (`#neuigkeiten`) und werden je zehn Versionen zusammengefasst.
+- „Nach oben“ unten links, Gucki unten rechts – die beiden Ecken nicht anders belegen.
 
 ## Bekannte Grenzen
 

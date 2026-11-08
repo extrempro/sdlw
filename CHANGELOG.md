@@ -4,6 +4,22 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.1.0] – 2026-11-08
+
+Besser zurechtfinden.
+
+### Neu
+
+- **Wegweiser-Leiste:** Eine Leiste unter der Navigation bleibt beim Scrollen oben stehen und zeigt Fach, Kapitel und den aktuellen Abschnitt („Du bist hier“). Über „Abschnitte“ springt man direkt zu jeder Erklärung und jeder Aufgabe des Kapitels.
+- **Inhaltsverzeichnis:** Auf breiten Bildschirmen (ab 1240 px) steht rechts neben dem Inhalt ein Inhaltsverzeichnis, das den aktuellen Abschnitt markiert.
+- **Nach oben:** Ein Knopf unten links bringt zurück an den Seitenanfang, sobald man etwas gescrollt hat.
+- **Eigene Seite für Versionshinweise:** Der Knopf „✦ Neu in …“ öffnet jetzt die Seite `#neuigkeiten`. Die neuesten Versionen stehen dort ausführlich. Je zehn ältere Versionen werden zu einem Block zusammengefasst, die Einzelheiten lassen sich aufklappen.
+
+### Verbessert
+
+- Versionshinweise der Webseite (`releaseData`) haben jetzt die Form `{"releases": […], "summaries": […]}`. `scripts/check-release.mjs` verlangt für jeden abgeschlossenen Zehnerblock eine Zusammenfassung.
+- Der mitlaufende Lageplan im Kompass-Kapitel bleibt unter der neuen Leiste sichtbar.
+
 ## [1.0.0] – 2026-11-08
 
 Die erste Version des Entdeckerhefts für Klasse 5.

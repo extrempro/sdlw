@@ -50,6 +50,40 @@ section{display:flex;flex-direction:column;gap:14px}
 /* Kapitel-Umschalter */
 .tb-l{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .tb-r{display:flex;gap:8px;flex-wrap:wrap}
+/* Brotkrumen-Leiste, Inhaltsverzeichnis, Nach oben */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:16;background:var(--paper)}
+.crumbs{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;padding-block:6px;background:var(--paper)}
+.crumbs-in{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:5px 6px 5px 14px;box-shadow:0 6px 16px -12px rgba(0,0,0,.45)}
+.cr-path{display:flex;align-items:center;gap:6px;min-width:0;font-size:.88rem;color:var(--muted);white-space:nowrap;overflow:hidden}
+.cr-path .sep{opacity:.6}
+.cr-path .fdot{flex:none}
+.cr-path .cr-t{overflow:hidden;text-overflow:ellipsis}
+.cr-path b{color:var(--ink);font-weight:700;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:560px){.cr-path{display:block;white-space:normal;line-height:1.25}.cr-path .cr-f,.cr-path .sep{display:none}.cr-path .cr-t{font-size:.76rem}.cr-path .fdot{display:inline-block;margin-right:5px;vertical-align:1px}.cr-path b{display:block;white-space:nowrap}}
+a.btn{text-decoration:none;display:inline-flex;align-items:center;gap:2px}
+#crBtn{padding:5px 12px;font-size:.85rem;flex:none}
+.cr-list{position:absolute;left:0;right:0;top:calc(100% - 2px);background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:6px;max-height:60vh;overflow:auto;box-shadow:0 14px 30px -14px rgba(0,0,0,.45)}
+.cr-list button,.toc button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:6px 10px;color:var(--ink);font:inherit;font-size:.92rem;font-weight:700;cursor:pointer}
+.cr-list button.l2,.toc button.l2{padding-left:24px;font-weight:400;font-size:.88rem;color:var(--muted)}
+.cr-list button:hover,.toc button:hover{background:var(--paper)}
+.cr-list button.on,.toc button.on{background:var(--paper);color:var(--ink);box-shadow:inset 3px 0 0 var(--pin)}
+.cr-list button:focus-visible,.toc button:focus-visible,.totop:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+.toc{display:none}
+@media (min-width:1240px){.toc{display:block;position:fixed;top:120px;left:calc(50% + 410px);width:230px;max-height:calc(100vh - 160px);overflow:auto;padding:4px}
+  .toc p{margin:0 0 6px 10px;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}}
+.topic h2,.topic .task{scroll-margin-top:calc(var(--crumbs-h,60px) + 14px)}
+.totop{position:fixed;left:max(16px,calc(env(safe-area-inset-left,0px) + 16px));bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:20;display:inline-flex;align-items:center;gap:4px;padding:9px 16px;border-radius:999px;border:0;background:var(--ink);color:var(--sheet);font:700 .9rem var(--body);cursor:pointer;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+@media (max-width:480px){.totop .ttl{display:none}.totop{padding:10px 14px}}
+/* Seite Versionshinweise */
+.relpage{display:flex;flex-direction:column;gap:28px}
+.relpage .rcards{display:flex;flex-direction:column;gap:12px}
+.relpage .rcard{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.relpage .rhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.relpage .rhead h3{font-size:1.2rem}
+.relpage .rdate{color:var(--muted);font-size:.9rem}
+.relpage .rnew{background:var(--pin);color:#FFFFFF;border-radius:999px;padding:1px 10px;font-size:.75rem;font-weight:700}
+.relpage ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.relpage details ul{margin-top:8px}
 .relnotes{display:flex;flex-direction:column;gap:14px}
 .relnotes .rel{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px dashed var(--line)}
 .relnotes .rel:first-of-type{border-top:0;padding-top:0}
@@ -177,7 +211,7 @@ canvas.globe:active{cursor:grabbing}
 .qfig.tnq svg{width:380px}
 .qtext .turnrow{flex-basis:100%;align-items:center}
 .c2grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
-.c2plan{position:sticky;top:env(safe-area-inset-top,0px);display:flex;flex-direction:column;gap:8px;background:var(--sheet);z-index:2;padding-block:12px 6px}
+.c2plan{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--crumbs-h,60px));display:flex;flex-direction:column;gap:8px;background:var(--sheet);z-index:2;padding-block:12px 6px}
 @media (max-width:640px){.c2grid{grid-template-columns:1fr;gap:12px}.c2plan{border-bottom:1px solid var(--line)}.c2plan svg{max-height:34vh;width:auto;max-width:100%;margin:0 auto}.c2plan .btn{align-self:center}}
 .turnrow .btn{padding:6px 12px;font-size:.9rem}
 .turnok{font-weight:700;color:var(--ok)}
@@ -379,27 +413,41 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </style>
 
 <div class="wrap">
-<div class="topbar"><div class="tb-l"><span class="eyebrow">Entdeckerheft</span><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><button class="btn ghost" id="newsBtn" type="button" aria-expanded="false" aria-controls="news"></button><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
+<div class="topbar"><div class="tb-l"><span class="eyebrow">Entdeckerheft</span><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><a class="btn ghost" id="newsBtn" href="#neuigkeiten"></a><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
 <script type="application/json" id="releaseData">
-[
- {
-  "version": "1.0.0",
-  "date": "2026-11-08",
-  "title": "Die erste Version des Entdeckerhefts",
-  "items": [
-   "Deutsch: Groß- und Kleinschreibung mit Wort-Lupe, Fehlerdetektiv und vier Übungen",
-   "Kunst: Farbkreis nach Itten mit Mischmaschine, Gegenfarben und warm/kalt",
-   "Erdkunde: Kontinente und Meere mit Weltkarte, 3D-Globus und Kartenrätseln",
-   "Erdkunde: Tag und Nacht mit 3D-Globus, Jahreszeiten und Weltzeituhr",
-   "Erdkunde: Kompass mit Windrose, Lageplan und Karte einnorden",
-   "Musik: Noten lesen mit klingender Klaviatur, Notenwerten, Pausen und Takt-Baukasten",
-   "Der kleine Gucki feiert mit: Applaus, Tränen, Sonnenbrille, Aura, Cringe und großer Konfetti-Party",
-   "Navigation nach Jahrgang und Fach, helle und dunkle Ansicht, Aufgaben neu beginnen"
-  ]
- }
-]
+{
+ "releases": [
+  {
+   "version": "1.1.0",
+   "date": "2026-11-08",
+   "title": "Besser zurechtfinden",
+   "items": [
+    "Eine Leiste oben zeigt dir immer, in welchem Fach, Kapitel und Abschnitt du gerade bist.",
+    "Mit „Abschnitte“ springst du direkt zu einer Erklärung oder Aufgabe im Kapitel.",
+    "Auf großen Bildschirmen steht rechts ein Inhaltsverzeichnis, das beim Scrollen mitläuft.",
+    "Mit dem Knopf „Nach oben“ kommst du schnell zurück an den Anfang.",
+    "Die Versionshinweise haben jetzt eine eigene Seite. Nach zehn Änderungen werden sie zusammengefasst."
+   ]
+  },
+  {
+   "version": "1.0.0",
+   "date": "2026-11-08",
+   "title": "Die erste Version des Entdeckerhefts",
+   "items": [
+    "Deutsch: Groß- und Kleinschreibung mit Wort-Lupe, Fehlerdetektiv und vier Übungen",
+    "Kunst: Farbkreis nach Itten mit Mischmaschine, Gegenfarben und warm/kalt",
+    "Erdkunde: Kontinente und Meere mit Weltkarte, 3D-Globus und Kartenrätseln",
+    "Erdkunde: Tag und Nacht mit 3D-Globus, Jahreszeiten und Weltzeituhr",
+    "Erdkunde: Kompass mit Windrose, Lageplan und Karte einnorden",
+    "Musik: Noten lesen mit klingender Klaviatur, Notenwerten, Pausen und Takt-Baukasten",
+    "Der kleine Gucki feiert mit: Applaus, Tränen, Sonnenbrille, Aura, Cringe und großer Konfetti-Party",
+    "Navigation nach Jahrgang und Fach, helle und dunkle Ansicht, Aufgaben neu beginnen"
+   ]
+  }
+ ],
+ "summaries": []
+}
 </script>
-<section class="sheet relnotes" id="news" hidden aria-label="Versionshinweise"></section>
 <nav class="navx" aria-label="Themen">
   <div class="faecher">
     <div class="fach"><p class="fachname"><span class="fdot" style="background:#D2553A"></span>Deutsch</p><div class="topics">
@@ -419,6 +467,14 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     </div></div>
   </div>
 </nav>
+<div class="crumbs" id="crumbs">
+  <div class="crumbs-in">
+    <nav class="cr-path" id="crPath" aria-label="Du bist hier"></nav>
+    <button class="btn ghost" id="crBtn" type="button" aria-expanded="false" aria-controls="crList">Abschnitte <span aria-hidden="true">▾</span></button>
+  </div>
+  <div class="cr-list" id="crList" hidden></div>
+</div>
+<aside class="toc" id="toc" aria-label="Inhalt dieser Seite"></aside>
 
 <!-- ============ FARBKREIS ============ -->
 <div class="topic" id="farbkreis">
@@ -1030,8 +1086,23 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   </ol></div>
 <footer>Die Beispiele richten sich nach den amtlichen Regeln der deutschen Rechtschreibung.</footer>
 </div>
+
+<!-- ============ VERSIONSHINWEISE (eigene Seite) ============ -->
+<div class="topic" id="neuigkeiten" hidden>
+<header>
+  <p class="eyebrow">Entdeckerheft · Versionshinweise</p>
+  <h1>Was ist neu?</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4)"></div>
+</header>
+<section>
+  <p class="lead">Hier steht, was sich im Entdeckerheft verändert hat. Die neueste Version steht ganz oben. Nach zehn Änderungen fassen wir die Hinweise zusammen, damit diese Seite übersichtlich bleibt.</p>
+</section>
+<div id="relPage" class="relpage"></div>
+<footer>Die ausführlichen Versionshinweise für Lehrkräfte stehen im Projekt auf GitHub in der Datei CHANGELOG.md.</footer>
+</div>
 </div>
 
+<button class="totop" id="toTop" type="button" hidden aria-label="Nach oben zum Seitenanfang"><span aria-hidden="true">↑</span><span class="ttl"> Nach oben</span></button>
 <div class="gucki" id="gucki" aria-hidden="true" title="Hallo!">
   <div class="kopf"><div class="auge l"><div class="pupille"></div><div class="lid"></div></div><div class="auge r"><div class="pupille"></div><div class="lid"></div></div><div class="traene l"></div><div class="traene r"></div><div class="brille"><span class="glas l"></span><span class="steg"></span><span class="glas r"></span></div></div>
   <div class="hand l"></div><div class="hand r"></div>
@@ -1055,24 +1126,72 @@ const f1=n=>(Math.round(n*10)/10).toString();
   mq.addEventListener&&mq.addEventListener("change",label);
   label();
 })();
-/* ---------- Versionshinweise ---------- */
+/* ---------- Versionshinweise (eigene Seite #neuigkeiten) ---------- */
+// releaseData = {releases:[neueste zuerst], summaries:[{from,to,title,items}]}
+// Je zehn Versionen bilden einen Block (vom ältesten an gezählt). Alle Blöcke außer dem neuesten werden zusammengefasst.
 (function(){
-  let rel=[];try{rel=JSON.parse(document.getElementById("releaseData").textContent)}catch(_){}
-  const btn=$("#newsBtn"),box=$("#news");if(!rel.length){btn.hidden=true;return}
+  let RD={releases:[],summaries:[]};try{RD=JSON.parse(document.getElementById("releaseData").textContent)}catch(_){}
+  const rel=RD.releases||[],btn=$("#newsBtn"),page=$("#relPage");if(!rel.length){btn.hidden=true;return}
   const de=d=>{const[y,m,t]=d.split("-");return`${+t}.${+m}.${y}`};
-  btn.innerHTML=`<span aria-hidden="true">✦</span><span class="nlbl"> Neu in v${rel[0].version}</span>`;btn.setAttribute("aria-label",`Was ist neu in Version ${rel[0].version}?`);
-  box.innerHTML=`<h2>Was ist neu?</h2>`+rel.map(r=>`<div class="rel"><p class="ver">Version ${r.version}<span>${de(r.date)}</span></p>${r.title?`<p><strong>${r.title}</strong></p>`:""}<ul>${r.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("");
-  btn.onclick=()=>{box.hidden=!box.hidden;btn.setAttribute("aria-expanded",!box.hidden)};
+  btn.innerHTML=`<span aria-hidden="true">✦</span><span class="nlbl"> Neu in v${rel[0].version}</span>`;btn.setAttribute("aria-label",`Versionshinweise: Was ist neu in Version ${rel[0].version}?`);
+  const asc=rel.slice().reverse(),blocks=[];for(let i=0;i<asc.length;i+=10)blocks.push(asc.slice(i,i+10));
+  const current=(blocks.pop()||[]).reverse(),older=blocks.reverse();
+  const card=(r,first)=>`<div class="rcard"><div class="rhead"><h3>Version ${r.version}</h3><span class="rdate">${de(r.date)}</span>${first?`<span class="rnew">neu</span>`:""}</div>${r.title?`<p><strong>${r.title}</strong></p>`:""}<ul>${r.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
+  let h=`<section><h2>Die neuesten Änderungen</h2><div class="rcards">${current.map((r,i)=>card(r,i===0)).join("")}</div></section>`;
+  if(older.length){h+=`<section><h2>Ältere Versionen – zusammengefasst</h2><div class="rcards">`+older.map(bl=>{const from=bl[0],to=bl[bl.length-1];
+      const sum=(RD.summaries||[]).find(x=>x.from===from.version&&x.to===to.version);
+      return`<div class="rcard"><div class="rhead"><h3>Versionen ${from.version} bis ${to.version}</h3><span class="rdate">${de(from.date)} – ${de(to.date)}</span></div>
+        ${sum&&sum.title?`<p><strong>${sum.title}</strong></p>`:""}<ul>${(sum?sum.items:bl.map(r=>r.title||r.items[0]).reverse()).map(i=>`<li>${i}</li>`).join("")}</ul>
+        <details><summary>Alle ${bl.length} Versionen einzeln anzeigen</summary><ul>${bl.slice().reverse().map(r=>`<li><strong>${r.version}</strong> (${de(r.date)}): ${r.title||""}${r.title?" – ":""}${r.items.join(" ")}</li>`).join("")}</ul></details></div>`}).join("")+`</div></section>`}
+  page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch"];
+const TOPICS=["farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","neuigkeiten"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"farbkreis";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
   document.querySelectorAll(".topics a").forEach(a=>{if(a.dataset.topic===t)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  const nb=$("#newsBtn");if(nb){if(t==="neuigkeiten")nb.setAttribute("aria-current","page");else nb.removeAttribute("aria-current")}
   if(scroll)window.scrollTo(0,0);
+  if(typeof Wegweiser==="object")Wegweiser.update(t);
 }
 window.addEventListener("hashchange",()=>route(true));
+/* ---------- Wegweiser: Brotkrumen-Leiste, Inhaltsverzeichnis, Nach oben ---------- */
+const Wegweiser=(function(){
+  const crumbs=$("#crumbs"),path=$("#crPath"),btn=$("#crBtn"),list=$("#crList"),toc=$("#toc"),top=$("#toTop");
+  let items=[],topic=null,cur=-1,ticking=false;
+  const offset=()=>(crumbs.offsetHeight||56)+16;
+  const setH=()=>document.documentElement.style.setProperty("--crumbs-h",(crumbs.offsetHeight||56)+"px");
+  function collect(t){const el=document.getElementById(t),out=[];
+    el.querySelectorAll("section > h2, .task .taskhead h3").forEach(h=>{const task=h.closest(".task");out.push({el:task||h,label:h.textContent.trim(),lvl:task?2:1})});
+    return out}
+  function render(){const btns=items.map((it,i)=>`<button type="button" class="l${it.lvl}" data-i="${i}">${it.label}</button>`).join("");
+    list.innerHTML=btns;toc.innerHTML=items.length?`<p>Auf dieser Seite</p>${btns}`:"";btn.hidden=!items.length}
+  function label(){const el=document.getElementById(topic),h1=el.querySelector("h1"),title=h1?h1.textContent.trim():"";
+    let fach="",dot="";const a=document.querySelector(`.topics a[data-topic="${topic}"]`);
+    if(a){const fn=a.closest(".fach").querySelector(".fachname");fach=fn.textContent.trim();const d=fn.querySelector(".fdot");dot=d?d.outerHTML:""}
+    else if(topic==="neuigkeiten")fach="Entdeckerheft";
+    const sec=cur>=0?items[cur].label:"Einleitung";
+    path.innerHTML=`${dot}<span class="cr-f">${fach}</span><span class="sep s1" aria-hidden="true">›</span><span class="cr-t">${title}</span><span class="sep" aria-hidden="true">›</span><b aria-current="location">${sec}</b>`;
+    [list,toc].forEach(c=>c.querySelectorAll("button").forEach(b=>b.classList.toggle("on",+b.dataset.i===cur)))}
+  function spy(){ticking=false;const lim=offset()+70;let c=-1;
+    for(let i=0;i<items.length;i++){if(items[i].el.getBoundingClientRect().top<=lim)c=i;else break}
+    if(c!==cur){cur=c;label()}
+    top.hidden=window.scrollY<500}
+  function go(i){const it=items[i];if(!it)return;const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({top:it.el.getBoundingClientRect().top+window.scrollY-offset()+2,behavior:reduce?"auto":"smooth"});closeList()}
+  function closeList(){list.hidden=true;btn.setAttribute("aria-expanded","false")}
+  btn.onclick=e=>{e.stopPropagation();list.hidden=!list.hidden;btn.setAttribute("aria-expanded",String(!list.hidden));
+    if(!list.hidden){const on=list.querySelector(".on");if(on)on.scrollIntoView({block:"nearest"})}};
+  [list,toc].forEach(c=>c.addEventListener("click",e=>{const b=e.target.closest("button[data-i]");if(b)go(+b.dataset.i)}));
+  document.addEventListener("click",e=>{if(!list.hidden&&!e.target.closest("#crumbs"))closeList()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!list.hidden){closeList();btn.focus()}});
+  window.addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(spy)}},{passive:true});
+  window.addEventListener("resize",()=>{setH();spy()});
+  top.onclick=()=>{const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});
+    const f=document.querySelector(".topics a[aria-current]")||$("#newsBtn");if(f)f.focus({preventScroll:true})};
+  return{update(t){topic=t;items=collect(t);cur=-1;render();closeList();setH();spy();label()}};
+})();
 route(false);
 
 /* ---------- gemeinsame Bausteine ---------- */

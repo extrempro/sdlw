@@ -6,12 +6,13 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschn
 
 ## [1.1.0] – 2026-11-08
 
-Besser zurechtfinden.
+Neuer Name und besser zurechtfinden.
 
 ### Neu
 
-- **Wegweiser-Leiste:** Eine Leiste unter der Navigation bleibt beim Scrollen oben stehen und zeigt Fach, Kapitel und den aktuellen Abschnitt („Du bist hier“). Über „Abschnitte“ springt man direkt zu jeder Erklärung und jeder Aufgabe des Kapitels.
-- **Inhaltsverzeichnis:** Auf breiten Bildschirmen (ab 1240 px) steht rechts neben dem Inhalt ein Inhaltsverzeichnis, das den aktuellen Abschnitt markiert.
+- **Neuer Name: S.D.L.W. – Super Duper Lern Webseite.** Der Name steht als Logo oben links, die Schrift läuft in Regenbogenfarben. Ein Klick auf das Logo lässt es hüpfen, Gucki macht einen Salto, leuchtet golden, ruft „Super Duper Lern Webseite!“ und es regnet ein wenig Konfetti. Auch der Seitentitel heißt jetzt „S.D.L.W.“. Das Projekt und das Repository heißen weiterhin Entdeckerheft.
+- **Wegweiser-Leiste:** Eine Leiste unter der Navigation bleibt beim Scrollen oben stehen. Sie zeigt das Symbol und die Farbe des Fachs, „Fach · Kapitel“ und groß den aktuellen Abschnitt, dazu „3/13“ als Position und unten einen Fortschrittsbalken durch das Kapitel. Mit ‹ › geht es zum vorherigen oder nächsten Abschnitt, mit ☰ öffnet sich die Liste aller Abschnitte, getrennt nach „Erklärungen“ und „Übungen“, nummeriert, mit grünem Haken für fehlerfrei geschaffte Übungen und ✎ für Aufträge fürs Heft.
+- **Inhaltsverzeichnis:** Auf breiten Bildschirmen (ab 1240 px) steht rechts neben dem Inhalt dieselbe Liste mit Fortschrittsbalken; der aktuelle Abschnitt ist markiert.
 - **Nach oben:** Ein Knopf unten links bringt zurück an den Seitenanfang, sobald man etwas gescrollt hat.
 - **Eigene Seite für Versionshinweise:** Ein kleines ✦-Symbol oben rechts öffnet die Seite `#neuigkeiten`. Ein roter Punkt am Symbol zeigt, dass es eine Version gibt, die man sich noch nicht angesehen hat. Die neuesten Versionen stehen dort ausführlich. Je zehn ältere Versionen werden zu einem Block zusammengefasst, die Einzelheiten lassen sich aufklappen.
 

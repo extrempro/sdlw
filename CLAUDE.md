@@ -5,7 +5,9 @@ Bitte vor jeder Änderung lesen und bei größeren Änderungen mit aktualisieren
 
 ## Worum es geht
 
-Das Entdeckerheft ist eine interaktive Lernseite für die **5. Klasse eines Gymnasiums in Hamburg**.
+Das Entdeckerheft ist eine interaktive Lernseite. Auf der Seite selbst heißt sie **S.D.L.W.** – eine lustige
+Abkürzung für „Super Duper Lern Webseite“ (Seitentitel, Logo oben links). Projekt und Repository heißen Entdeckerheft.
+Die Seite ist für die **5. Klasse eines Gymnasiums in Hamburg**.
 Jedes Thema ist ein **Kapitel** mit kurzer Erklärung, einem interaktiven Teil zum Ausprobieren und Übungsaufgaben,
 die sofort Rückmeldung geben. Ein kleines Maskottchen („Gucki“) reagiert auf richtige und falsche Antworten.
 
@@ -56,13 +58,14 @@ Es gibt keine Abhängigkeiten und keinen Paketmanager. Node.js ab Version 18 rei
 Reihenfolge in der Datei:
 
 1. `<title>`, Google-Fonts-Link, `<style>` mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
-2. Kopfzeile (`.topbar`): Jahrgang, kleines rundes ✦-Symbol (`#newsBtn`) als Link zur Seite `#neuigkeiten`
+2. Kopfzeile (`.topbar`): Logo „S.D.L.W.“ (`#logo`, Regenbogen-Schrift; Klick lässt Gucki sich vorstellen), Jahrgang, kleines rundes ✦-Symbol (`#newsBtn`) als Link zur Seite `#neuigkeiten`
    mit rotem Punkt, solange die neueste Version noch nicht angesehen wurde (`localStorage` „seenVersion“), Hell/Dunkel-Knopf.
 3. JSON-Block `<script type="application/json" id="releaseData">` – die Versionshinweise der Webseite
    im Format `{"releases":[…neueste zuerst…],"summaries":[…]}`.
 4. Navigation (`nav.navx`): Fächer (`.fach`) mit Themen-Links (`a[data-topic]`).
-5. Wegweiser-Leiste (`#crumbs`, klebt beim Scrollen oben): „Fach › Kapitel › Abschnitt“ und Knopf „Abschnitte“
-   mit Sprungliste. Daneben das Inhaltsverzeichnis `#toc`, das nur auf breiten Bildschirmen (ab 1240 px) erscheint.
+5. Wegweiser-Leiste (`#crumbs`, klebt beim Scrollen oben): Fach-Symbol, „Fach · Kapitel“, aktueller Abschnitt,
+   Position („3/13“), Pfeile ‹ › zum vorherigen/nächsten Abschnitt, Knopf ☰ „Abschnitte“ mit Sprungliste und
+   Fortschrittsbalken in der Fachfarbe (`--fc`). Daneben das Inhaltsverzeichnis `#toc` (nur ab 1240 px Breite).
 6. Ein `<div class="topic" id="…">` je Kapitel (nur eines ist sichtbar, gesteuert über den URL-Hash),
    zuletzt die Versionsseite `#neuigkeiten` mit dem Container `#relPage`.
 7. Knopf „Nach oben“ (`#toTop`, unten links) und Gucki (`#gucki`, unten rechts).
@@ -75,6 +78,9 @@ Reihenfolge in der Datei:
   `#kapitelid` direkt verlinkbar. `route()` ruft am Ende `Wegweiser.update()` auf.
 - **Wegweiser:** sammelt beim Kapitelwechsel alle `section > h2` und die `h3` in `.task .taskhead` des Kapitels.
   Daraus entstehen Sprungliste, Inhaltsverzeichnis und die Anzeige des aktuellen Abschnitts (Scroll-Spy).
+  Die Liste ist in „Erklärungen“ und „Übungen“ (ab der Überschrift „Übungsaufgaben“) geteilt und zeigt ✓ für
+  fehlerfreie Übungen und ✎ für Aufträge ohne `[data-score]`. `guckiDone` und „Neu beginnen“ rufen
+  `Wegweiser.refresh()` auf, damit die Haken aktuell bleiben. Fachfarbe und Symbol kommen aus der Navigation.
   Neue Kapitel müssen ihre Überschriften deshalb in dieser Struktur haben. Weil der URL-Hash das Kapitel
   bestimmt, springen die Einträge per Skript (`scrollTo`) statt über Anker-Links.
 - **Versionsseite:** baut sich aus `releaseData`. Je zehn Versionen (vom ältesten an gezählt) bilden einen Block.
@@ -170,6 +176,9 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach einem Release dort ebenfalls
 - Fünfmal schnell auf Gucki tippen startet die große Party (Vorführ-Trick für Lehrkräfte).
 - Versionshinweise stehen auf einer eigenen Seite (`#neuigkeiten`) und werden je zehn Versionen zusammengefasst.
 - „Nach oben“ unten links, Gucki unten rechts – die beiden Ecken nicht anders belegen.
+- Name auf der Seite: „S.D.L.W.“ (Super Duper Lern Webseite) mit Regenbogen-Animation; Klick aufs Logo:
+  Gucki macht Salto mit goldenem Leuchten, ruft „Super Duper Lern Webseite!“, etwas Konfetti.
+- Versionshinweise nur als kleines rundes ✦-Symbol oben rechts, roter Punkt bei ungesehener Version.
 
 ## Bekannte Grenzen
 

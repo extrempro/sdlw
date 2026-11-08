@@ -2989,7 +2989,7 @@ quiz($("#ka6"),shuffle([
 /* ================= SPIEL: FANG DIE FARBEN ================= */
 (function(){
   const cv=$("#ffCv");if(!cv)return;
-  const g=cv.getContext("2d"),over=$("#ffOver"),live=$("#ffLive"),W=560,H=560,BY=H-100;
+  const g=cv.getContext("2d"),over=$("#ffOver"),live=$("#ffLive"),W=560,H=560,BY=H-78;
   const T1=C.map((c,i)=>i).filter(i=>C[i].t===1),T2=C.map((c,i)=>i).filter(i=>C[i].t===2);
   // Mischregeln zum Nachlesen
   $("#ffRules").innerHTML=[...T1,...T2].map(i=>{const[a,b]=C[i].m;const d=k=>`<span class="d" style="background:${C[k].h}"></span>${C[k].n}`;return`<div class="ff-rule">${d(a)} + ${d(b)} = ${d(i)}</div>`}).join("");
@@ -3036,7 +3036,10 @@ quiz($("#ka6"),shuffle([
     st.drops=st.drops.filter(d=>!d.gone&&d.y<H+30);
     st.fx.forEach(f=>f.t+=dt);st.fx=st.fx.filter(f=>f.t<1);st.shake=Math.max(0,st.shake-dt);st.mixShow=Math.max(0,st.mixShow-dt);
     draw();if(st.hearts>0)raf=requestAnimationFrame(loop)}
-  function draw(){const paper=cssv("--paper")||"#F6F7FA",ink=cssv("--ink")||"#1C1F2E",line=cssv("--line")||"#DDE";
+  function fit(){const r=cv.getBoundingClientRect().width||W,d=Math.min(3,window.devicePixelRatio||1),px=Math.round(r*d);
+    if(cv.width!==px){cv.width=px;cv.height=px}g.setTransform(cv.width/W,0,0,cv.height/H,0,0)}
+  window.addEventListener("resize",()=>{fit();if(st&&!running)draw()});
+  function draw(){fit();const paper=cssv("--paper")||"#F6F7FA",ink=cssv("--ink")||"#1C1F2E",line=cssv("--line")||"#DDE";
     g.fillStyle=paper;g.fillRect(0,0,W,H);
     g.strokeStyle=line;g.lineWidth=1;for(let y=60;y<H;y+=60){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke()}
     // Tropfen mit Namen
@@ -3045,10 +3048,10 @@ quiz($("#ka6"),shuffle([
       g.font="700 13px 'Atkinson Hyperlegible',sans-serif";g.textAlign="center";g.lineWidth=4;g.strokeStyle=paper;g.strokeText(c.n,0,44);g.fillStyle=ink;g.fillText(c.n,0,44);g.restore()});
     // Gucki trägt den Eimer auf dem Kopf und schaut nur ein Stück aus dem Boden (wie am Bildschirmrand)
     const sx=st.shake?Math.sin(st.shake*60)*5:0,x=st.x+sx,by=BY;
-    g.fillStyle="#139DB3";g.beginPath();g.roundRect?g.roundRect(x-32,by+44,64,H-by-44,[30,30,0,0]):g.rect(x-32,by+44,64,H-by-44);g.fill();
-    g.fillStyle="#0E8496";[[-46,by+40],[34,by+40]].forEach(([hx,hy])=>{g.beginPath();g.roundRect?g.roundRect(x+hx,hy,12,20,6):g.rect(x+hx,hy,12,20);g.fill()});
+    g.fillStyle="#139DB3";g.beginPath();g.roundRect?g.roundRect(x-32,by+40,64,H-by-40,[30,30,0,0]):g.rect(x-32,by+40,64,H-by-40);g.fill();
+    g.fillStyle="#0E8496";[[-46,by+38],[34,by+38]].forEach(([hx,hy])=>{g.beginPath();g.roundRect?g.roundRect(x+hx,hy,12,18,6):g.rect(x+hx,hy,12,18);g.fill()});
     const near=st.drops.reduce((a,d)=>!a||d.y>a.y?d:a,null),lx=near?Math.max(-3,Math.min(3,(near.x-x)/40)):0;
-    [[-13,by+68],[13,by+68]].forEach(([ex,ey])=>{g.fillStyle="#FFFFFF";g.strokeStyle="#0E6F7E";g.lineWidth=2;g.beginPath();g.arc(x+ex,ey,9.5,0,7);g.fill();g.stroke();
+    [[-13,by+60],[13,by+60]].forEach(([ex,ey])=>{g.fillStyle="#FFFFFF";g.strokeStyle="#0E6F7E";g.lineWidth=2;g.beginPath();g.arc(x+ex,ey,9.5,0,7);g.fill();g.stroke();
       g.fillStyle="#1C1F2E";g.beginPath();g.arc(x+ex+lx,ey-3.5,4.4,0,7);g.fill()});
     g.beginPath();g.moveTo(x-46,by);g.lineTo(x+46,by);g.lineTo(x+36,by+48);g.lineTo(x-36,by+48);g.closePath();g.fillStyle="#9AA5B8";g.fill();g.lineWidth=2;g.strokeStyle="#5B6475";g.stroke();
     g.beginPath();g.ellipse(x,by,46,8,0,0,7);g.fillStyle=st.mixShow?st.mixCol:"#5B6475";g.fill();

@@ -6,7 +6,8 @@ Bitte vor jeder Änderung lesen und bei größeren Änderungen mit aktualisieren
 ## Worum es geht
 
 Das Entdeckerheft ist eine interaktive Lernseite. Auf der Seite selbst heißt sie **S.D.L.W.** – eine lustige
-Abkürzung für „Super Duper Lern Webseite“ (Seitentitel, Logo oben links). Projekt und Repository heißen Entdeckerheft.
+Abkürzung für „Super Duper Lern Webseite“ (Seitentitel, Logo oben links). Ausgeschrieben steht der Name nicht sichtbar
+auf der Seite, sondern nur als Hinweis beim Darüberfahren, für Screenreader und in Guckis Ruf. Projekt und Repository heißen Entdeckerheft.
 Die Seite ist für die **5. Klasse eines Gymnasiums in Hamburg**.
 Jedes Thema ist ein **Kapitel** mit kurzer Erklärung, einem interaktiven Teil zum Ausprobieren und Übungsaufgaben,
 die sofort Rückmeldung geben. Ein kleines Maskottchen („Gucki“) reagiert auf richtige und falsche Antworten.

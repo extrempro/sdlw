@@ -4,6 +4,14 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.1.1] – 2026-11-08
+
+Aufgeräumt.
+
+### Verbessert
+
+- Unter dem Logo „S.D.L.W.“ steht nicht mehr ausgeschrieben „Super Duper Lern Webseite“. Die Bedeutung erscheint weiterhin als Hinweis beim Darüberfahren mit der Maus, wird von Screenreadern vorgelesen und Gucki ruft sie beim Klick aufs Logo.
+
 ## [1.1.0] – 2026-11-08
 
 Neuer Name und besser zurechtfinden.

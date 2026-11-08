@@ -4,6 +4,14 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.3.1] – 2026-11-08
+
+Freundlichere Erklärung der Aufregung.
+
+### Verbessert
+
+- **„Woran merkst du starke Aufregung?“** (Kapitel Klassenarbeit) ist positiver formuliert. Aufregung wird als Zeichen erklärt, dass einem die Arbeit wichtig ist, und Stresshormone als Energie, wie bei Sport oder einem Auftritt. Die Anzeichen heißen jetzt „Signale“ und sind sanfter beschrieben. Jede Karte nennt gleich, was hilft. Ein Merkkasten sagt, dass die Signale ungefährlich sind, vorbeigehen und jeder sie kennt.
+
 ## [1.3.0] – 2026-11-08
 
 Neuer Bereich „Lernen“ mit dem Kapitel „Fit für die Klassenarbeit“.

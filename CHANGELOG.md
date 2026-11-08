@@ -4,6 +4,41 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.3.0] – 2026-11-08
+
+Neuer Bereich „Lernen“ mit dem Kapitel „Fit für die Klassenarbeit“.
+
+### Neu
+
+- **Kapitel „Fit für die Klassenarbeit“** (`#klassenarbeit`) im neuen Navigationsbereich **Lernen** (Farbe `--lern`). Inhalte:
+  - rechtzeitig anfangen und verteilt lernen
+  - Lernmethoden: selbst abfragen, Karteikarten, Lernzettel, jemandem erklären, Aufgaben üben, Lernplatz, Pausen
+  - Tag vorher und Morgen der Arbeit
+  - acht Schritte in der Arbeit
+  - Arbeitsanweisungen (Operatoren: nennen, beschreiben, erklären, begründen, vergleichen, zuordnen)
+  - Tipps gegen Aufregung
+  - Berichtigung nach der Arbeit
+- **Starke Aufregung:** Ein Teil erklärt Anzeichen in Körper, Kopf und Verhalten (mit kindgerechter Erklärung von Stresshormonen). Dazu kommen:
+  - **Aufregungs-Thermometer** mit fünf Stufen, die je passende Tipps zeigen; bei „Panik“ der Rat, der Lehrkraft Bescheid zu sagen
+  - **Atem-Kreis** zum Mitatmen: 4 s ein, 2 s halten, 6 s aus, 5 Runden
+  - leise Tricks für die Arbeit: Fäuste-Trick, 5-4-3-2-1, Stopp und Mut-Satz, lockern und trinken
+  - Vorbeugen: vorbereitet, ausgeschlafen und satt in die Arbeit, Bewegung am Tag vorher
+- **Lernplan zum Ausprobieren:** Schieberegler für 3 bis 10 Tage bis zur Arbeit. Daraus entsteht ein Tagesplan mit echten Daten zum Abhaken. Fällt die Arbeit aufs Wochenende, erscheint ein Hinweis.
+- **Packliste** zum Abhaken. Gucki freut sich, wenn alles erledigt ist.
+- **Übungen:**
+  - ka1: Was ist schlau? (6 Situationen)
+  - ka2: Was sollst du tun? (Operatoren)
+  - ka3: Schritt für Schritt (Reihenfolge in der Arbeit)
+  - ka4: Stimmt das? (richtig/falsch)
+  - ka6: Was hilft jetzt? (Anzeichen und Hilfen bei Aufregung)
+  - ka5: Auftrag „Mein Lernplan“
+
+  ka1 bis ka4 und ka6 zählen für Guckis Kapitel-Party.
+
+### Verbessert
+
+- Die Startseite erwähnt den neuen Bereich und zeigt das Kapitel automatisch als Karte.
+
 ## [1.2.0] – 2026-11-08
 
 Eine Startseite mit Haus-Knopf, ein Favicon und Verbesserungen für Handys und Tablets.

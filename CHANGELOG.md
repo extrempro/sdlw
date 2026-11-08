@@ -6,7 +6,7 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschn
 
 ## [1.5.0] – 2026-11-08
 
-Spiele-Bereich mit dem ersten Spiel „Fang die Farben“.
+Spiele-Bereich mit den Spielen „Fang die Farben“ und „Guckis Weltreise“.
 
 ### Neu
 
@@ -19,6 +19,16 @@ Spiele-Bereich mit dem ersten Spiel „Fang die Farben“.
   - **Daten aus dem Farbkreis:** Farben, Namen und Mischregeln kommen aus dem Farbkreis-Kapitel (`C`). Die Seite zeigt alle Mischregeln zum Nachlesen.
   - **Steuerung:** Finger/Maus (ziehen), Pfeiltasten, Knöpfe ◀ ▶. Pause per Knopf; das Spiel pausiert auch beim Seitenwechsel oder wenn der Tab im Hintergrund ist.
   - **Rekord** pro Gerät in `localStorage` („ffBest“). Gucki jubelt bei einem neuen Rekord.
+- **Spiel „Guckis Weltreise“** (`#weltreise`): Gucki fährt mit einem Containerschiff von Hamburg um die Welt, auf zwei Touren mit je fünf Etappen:
+  - **Atlantik-Runde:** Hamburg → Lissabon → New York → Buenos Aires → Kapstadt → Hamburg
+  - **Asien-Runde:** Hamburg → Kapstadt → Mumbai → Sydney → Tokio → Hamburg (Rückweg durch den Suezkanal)
+
+  Ablauf je Etappe:
+  - **Richtung:** Die Kinder bestimmen auf einer Kompassrose (N, NO, O, SO, S, SW, W, NW), in welcher Himmelsrichtung das Ziel auf der Karte liegt. Die Etappen sind so gewählt, dass die Richtung auf der Karte höchstens 11° von der Hauptrichtung abweicht.
+  - **Fahrt:** Das Schiff fährt animiert über Seewege; die Karte zoomt auf die Etappe.
+  - **Hafen:** Im Hafen gibt es einen kurzen Steckbrief und eine Frage zu Kontinent, Ozean, Land oder Uhrzeit (ohne Sommerzeit). Richtige Antwort = ein Container.
+
+  Eine ganze Reise ohne Fehler startet Guckis große Party. Das Kompass-Kapitel verweist vor den Übungen auf das Spiel.
 - Kopfzeile: Symbol-Knöpfe sind rund. Unter 400 px Breite werden sie kleiner und das Schild „Klasse 5“ entfällt, damit das Logo ganz sichtbar bleibt.
 
 ## [1.4.0] – 2026-11-08

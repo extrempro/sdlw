@@ -223,6 +223,31 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ff-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
 .ff-rule{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--sheet);font-weight:700;font-size:.92rem}
 .ff-rule span.d{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:none}
+/* Spiel „Guckis Weltreise“ */
+#weltreise .merk{--accent:var(--spiel)}
+.wr-wrap{display:flex;flex-direction:column;gap:12px}
+.wr-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 14px;font-weight:700}
+.wr-top .cargo{font-variant-numeric:tabular-nums}
+.wr-mapbox{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--sea)}
+.wr-mapbox svg{display:block;width:100%;height:auto;aspect-ratio:16/10}
+.wr-port text{font-family:var(--display);font-weight:800;paint-order:stroke;stroke:var(--sheet);stroke-linejoin:round}
+.wr-panel{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.wr-panel h3{margin:0;font-size:1.15rem}
+.wr-panel p{margin:0}
+.wr-rose{display:grid;grid-template-columns:repeat(3,64px);grid-template-rows:repeat(3,52px);gap:6px;justify-content:center}
+.wr-rose button{font:800 1.05rem var(--display);border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.wr-rose button:hover{border-color:var(--muted)}
+.wr-rose button.wrong{border-color:var(--bad);color:var(--bad)}
+.wr-rose button.right{border-color:var(--ok);background:var(--ok);color:#FFFFFF}
+.wr-rose .mid{display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.wr-fb{font-weight:700;min-height:1.4em}
+.wr-fb.ok{color:var(--ok)}.wr-fb.no{color:var(--bad)}
+.wr-opts{display:flex;flex-wrap:wrap;gap:8px}
+.wr-fact{color:var(--muted);font-size:.95rem}
+.wr-stops{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.wr-stops li{padding:3px 10px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;font-weight:700;background:var(--paper)}
+.wr-stops li.done{background:var(--ok);border-color:var(--ok);color:#FFFFFF}
+.wr-stops li.now{border-color:var(--spiel);color:var(--spiel)}
 /* Seite Versionshinweise */
 .relpage{display:flex;flex-direction:column;gap:28px}
 .relpage .rcards{display:flex;flex-direction:column;gap:12px}
@@ -582,9 +607,10 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   {
    "version": "1.5.0",
    "date": "2026-11-08",
-   "title": "Das erste Spiel: Fang die Farben",
+   "title": "Zwei Spiele: Fang die Farben und Guckis Weltreise",
    "items": [
     "Neu: das Spiel „Fang die Farben“! Gucki möchte Farben mischen. Fang mit seinem Eimer genau die zwei Farben, aus denen die Zielfarbe entsteht.",
+    "Neu: „Guckis Weltreise“! Fahr mit Gucki und seinem Containerschiff von Hamburg einmal um die Welt. Finde für jede Etappe die richtige Himmelsrichtung und beantworte in jedem Hafen eine Frage.",
     "Alle Spiele findest du über den neuen 🎮-Knopf oben rechts und unten auf der Startseite.",
     "Die Zielfarbe steht groß oben im Spielfeld, und vor jeder neuen Farbe sagt das Spiel sie dir in Ruhe an. Gucki trägt den Eimer auf dem Kopf, damit du jeden Tropfen bis zum Schluss siehst.",
     "In Stufe 2 mischst du Mischfarben 2. Ordnung wie Blaugrün oder Rotorange – und die Tropfen fallen schneller.",
@@ -696,6 +722,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <div class="gamereg" id="gameReg" hidden>
   <div class="fach"><p class="fachname"><span class="fdot" style="background:#D96F0B"></span>Spiele</p><div class="topics">
       <a href="#farbfang" data-topic="farbfang" data-desc="Ein Spiel zum Farbkreis: Fang mit Gucki die Farben, aus denen die Zielfarbe gemischt wird."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D96F0B"/><path d="M16 6.5c3.6 4.6 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.4 6-11z" fill="#FFFFFF"/><circle cx="13.6" cy="18.4" r="1.6" fill="#D96F0B"/></svg><span><b>Fang die Farben</b></span></a>
+      <a href="#weltreise" data-topic="weltreise" data-desc="Fahr mit Gucki und seinem Schiff um die Welt: Himmelsrichtung finden, Hafen anlaufen, Frage beantworten."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#139DB3"/><path d="M7 18h18l-3 5H10z" fill="#FFFFFF"/><path d="M16 7v10M16 8l6 7h-6" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/></svg><span><b>Guckis Weltreise</b></span></a>
     </div></div>
 </div>
 <div class="crumbs" id="crumbs">
@@ -1140,6 +1167,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     </div>
   </div>
 </section>
+<p class="hint ff-tip">🎮 Lust auf ein Spiel? Bei <a href="#weltreise">Guckis Weltreise</a> findest du mit Himmelsrichtungen den Weg um die Welt.</p>
 <section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
 <div class="task" id="c1"><div class="taskhead"><h3>Aufgabe 1 · Kompass ablesen</h3><span class="score" data-score></span></div>
   <p class="hint">Der Kompass ist eingenordet. In welche Richtung zeigt der schwarze Richtungspfeil?</p><div data-qs></div></div>
@@ -1511,6 +1539,34 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <footer>Tipp: Die Übungen auf dieser Seite eignen sich prima zum Selbstabfragen. Mach sie vor einer Arbeit einfach mit „Neu beginnen“ noch einmal.</footer>
 </div>
 
+<!-- ============ SPIEL: GUCKIS WELTREISE ============ -->
+<div class="topic" id="weltreise" hidden>
+<header>
+  <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Erdkunde</p>
+  <h1>Guckis Weltreise</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#139DB3,#1E5AAA,#3DA647)"></div>
+</header>
+<section>
+  <p class="lead">Gucki fährt mit seinem Containerschiff vom Hamburger Hafen einmal um die Welt. Finde für jede Etappe die richtige Himmelsrichtung und beantworte in jedem Hafen eine Frage. Für jede richtige Antwort lädt Gucki einen Container ein.</p>
+  <div class="wr-wrap" id="wrWrap">
+    <div class="wr-top"><span id="wrTour"></span><span class="cargo" id="wrCargo"></span></div>
+    <ol class="wr-stops" id="wrStops"></ol>
+    <div class="wr-mapbox"><svg class="map" id="wrMap" role="img" aria-label="Weltkarte mit Guckis Schiff und der Reiseroute" preserveAspectRatio="xMidYMid meet"></svg></div>
+    <div class="wr-panel" id="wrPanel" aria-live="polite"></div>
+  </div>
+</section>
+<section>
+  <h2>So spielst du</h2>
+  <ol class="steps">
+    <li>Auf der Karte siehst du Guckis Schiff und das nächste Ziel mit einer Fahne. Norden ist oben.</li>
+    <li>Tippe auf der Kompassrose an, in welcher Himmelsrichtung das Ziel liegt. Dann fährt Gucki los.</li>
+    <li>Im Hafen bekommst du eine Frage. Richtige Antwort – ein Container mehr!</li>
+    <li>Am Ende kommt Gucki zurück nach Hamburg. Schaffst du die ganze Reise ohne Fehler?</li>
+  </ol>
+  <div class="merk"><strong>Tipp:</strong> Die Himmelsrichtungen und die Abkürzungen N, NO, O, SO, S, SW, W und NW lernst du im Kapitel <a href="#kompass">Der Kompass</a>. Die Uhrzeiten anderer Städte findest du bei <a href="#tagnacht">Tag und Nacht</a>.</div>
+</section>
+</div>
+
 <!-- ============ SPIELE (Übersicht) ============ -->
 <div class="topic" id="spiele" hidden>
 <header>
@@ -1646,7 +1702,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","neuigkeiten"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","weltreise","neuigkeiten"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -3098,6 +3154,90 @@ quiz($("#ka6"),shuffle([
   // Startbildschirm
   st={x:W/2,drops:[],fx:[],pts:0,hearts:0,mixes:0,have:[],goal:10,shake:0,mixShow:0,intro:0};hud();draw();$("#ffHearts").textContent="♥♥♥";
   over.innerHTML=`<h3>Bereit?</h3><p>Fang die zwei Farben, aus denen Guckis Zielfarbe gemischt wird. Du hast drei Herzen.</p><p>Rekord auf diesem Gerät: ${best} Punkte</p><button class="btn" type="button" data-go>Los geht's</button>`;
+})();
+/* ================= SPIEL: GUCKIS WELTREISE ================= */
+(function(){
+  const svg=$("#wrMap");if(!svg||!WORLD)return;
+  const panel=$("#wrPanel"),cargoEl=$("#wrCargo"),stopsEl=$("#wrStops"),tourEl=$("#wrTour");
+  const D={N:"Norden",NO:"Nordosten",O:"Osten",SO:"Südosten",S:"Süden",SW:"Südwesten",W:"Westen",NW:"Nordwesten"};
+  const PORT={
+    HH:{n:"Hamburg",p:[10,53.55]},LIS:{n:"Lissabon",p:[-9.1,38.7]},NY:{n:"New York",p:[-74,40.7]},BA:{n:"Buenos Aires",p:[-58.4,-34.6]},
+    CPT:{n:"Kapstadt",p:[18.4,-33.9]},BOM:{n:"Mumbai",p:[72.8,19]},SYD:{n:"Sydney",p:[151.2,-33.9]},TYO:{n:"Tokio",p:[139.7,35.7]}};
+  const ROT=(o,a,w)=>({q:o,a,o:shuffle([a,...w]),});
+  const Q={
+    LIS:{f:"Lissabon ist die Hauptstadt von Portugal und liegt am Atlantik.",q:[ROT("Auf welchem Kontinent liegt Lissabon?","Europa",["Afrika","Südamerika","Asien"]),ROT("Lissabon ist die Hauptstadt von …","Portugal",["Spanien","Italien","Frankreich"])]},
+    NY:{f:"New York ist die größte Stadt der USA. Vor dem Hafen steht die Freiheitsstatue.",q:[ROT("Welchen Ozean hast du gerade überquert?","Atlantik",["Pazifik","Indischer Ozean","Arktischer Ozean"]),ROT("In Hamburg ist es 12 Uhr. Wie spät ist es in New York (ohne Sommerzeit)?","6 Uhr",["18 Uhr","12 Uhr","9 Uhr"]),ROT("Auf welchem Kontinent liegt New York?","Nordamerika",["Südamerika","Europa","Australien"])]},
+    BA:{f:"Buenos Aires ist die Hauptstadt von Argentinien. Hier ist Sommer, wenn bei uns Winter ist.",q:[ROT("Auf welchem Kontinent liegt Buenos Aires?","Südamerika",["Nordamerika","Afrika","Europa"]),ROT("Auf welcher Hälfte der Erde liegt Buenos Aires?","Südhalbkugel",["Nordhalbkugel","genau auf dem Äquator","am Nordpol"])]},
+    CPT:{f:"Kapstadt liegt an der Südspitze Afrikas, unter dem Tafelberg. Südlich davon treffen sich zwei Ozeane.",q:[ROT("Auf welchem Kontinent liegt Kapstadt?","Afrika",["Südamerika","Australien","Asien"]),ROT("Welche zwei Ozeane treffen sich südlich von Kapstadt?","Atlantik und Indischer Ozean",["Pazifik und Atlantik","Arktischer und Südlicher Ozean","Pazifik und Indischer Ozean"])]},
+    BOM:{f:"Mumbai ist eine der größten Städte Indiens und hat einen riesigen Hafen.",q:[ROT("An welchem Ozean liegt Mumbai?","Indischer Ozean",["Pazifik","Atlantik","Arktischer Ozean"]),ROT("Auf welchem Kontinent liegt Mumbai?","Asien",["Afrika","Australien","Europa"])]},
+    SYD:{f:"Sydney ist bekannt für sein Opernhaus mit dem Dach wie Segel.",q:[ROT("Auf welchem Kontinent liegt Sydney?","Australien",["Asien","Südamerika","Afrika"]),ROT("In Hamburg ist es 12 Uhr. Wie spät ist es in Sydney (ohne Sommerzeit)?","21 Uhr",["3 Uhr","12 Uhr","15 Uhr"])]},
+    TYO:{f:"Tokio ist die Hauptstadt von Japan und eine der größten Städte der Welt.",q:[ROT("An welchem Ozean liegt Tokio?","Pazifik",["Atlantik","Indischer Ozean","Südlicher Ozean"]),ROT("Auf welchem Kontinent liegt Tokio?","Asien",["Australien","Europa","Nordamerika"]),ROT("In Hamburg ist es 12 Uhr. Wie spät ist es in Tokio (ohne Sommerzeit)?","20 Uhr",["4 Uhr","12 Uhr","16 Uhr"])]},
+    HH:{f:"Willkommen zurück im Hamburger Hafen!",q:[ROT("Über welchen Fluss fahren die Schiffe in den Hamburger Hafen?","Elbe",["Alster","Rhein","Donau"]),ROT("In welches Meer fließt die Elbe?","Nordsee",["Ostsee","Mittelmeer","Schwarzes Meer"])]}};
+  const N_EU=[[-10,44],[-5,48.5],[1.5,51],[4,53],[8,54.2],[10,53.55]];
+  const TOURS=[
+    {n:"Atlantik-Runde",legs:[
+      ["HH","LIS","SW",[[10,53.55],[8,54.2],[3,53],[1.5,51],[-5,49.3],[-9.8,44],[-9.6,38.7],[-9.1,38.7]]],
+      ["LIS","NY","W",[[-9.1,38.7],[-20,40],[-50,41],[-70,40.2],[-74,40.7]]],
+      ["NY","BA","S",[[-74,40.7],[-65,30],[-40,2],[-34,-8],[-40,-23],[-52,-35.5],[-58.4,-34.6]]],
+      ["BA","CPT","O",[[-58.4,-34.6],[-50,-37],[0,-37],[18.4,-33.9]]],
+      ["CPT","HH","N",[[18.4,-33.9],[10,-30],[0,-10],[-18,10],[-19,25],[-12,38],...N_EU]]]},
+    {n:"Asien-Runde",legs:[
+      ["HH","CPT","S",[[10,53.55],[8,54.2],[4,53],[1.5,51],[-5,48.5],[-10,44],[-12,38],[-19,25],[-18,10],[0,-10],[10,-30],[18.4,-33.9]]],
+      ["CPT","BOM","NO",[[18.4,-33.9],[30,-37],[45,-30],[55,-10],[65,5],[72.8,19]]],
+      ["BOM","SYD","SO",[[72.8,19],[77,5],[95,-8],[112,-36],[130,-38],[148,-40],[151.2,-33.9]]],
+      ["SYD","TYO","N",[[151.2,-33.9],[160,-20],[158,0],[148,18],[141,32],[139.7,35.7]]],
+      ["TYO","HH","W",[[139.7,35.7],[130,26],[117,12],[104,1.6],[94,6],[80,5],[60,13],[45,12],[38,20],[33.5,28],[32.4,31.5],[20,34],[10,37.6],[-6,36],[-10,40],...N_EU]]]}];
+  const pt=(lon,lat)=>proj(lon,lat);
+  // Größe der Zeichen unabhängig von der Bildschirmbreite: k = Karteneinheiten pro 2,5 Bildpunkte
+  const unit=w=>.4*w/(svg.getBoundingClientRect().width||400);
+  const LAND=`<path d="${OUTLINE}" fill="var(--sea)"/><path class="ld" d="${ANT_D}${WORLD.filter(f=>!(f.name==="Antarctica"||f.clat<-60)).map(f=>f.d).join("")}"/>`;
+  let T=null,tourIx=Math.floor(Math.random()*TOURS.length),leg=0,cargo=0,errs=0,shipPos=null,vb=[0,0,MW,MH],vbT=[0,0,MW,MH],anim=0,vbAnim=0;
+  function setVB(t,instant){cancelAnimationFrame(vbAnim);vbT=t.slice();const f=vb.slice();if(instant){vb=t;svg.setAttribute("viewBox",t.join(" "));return}
+    const t0=performance.now(),step=now=>{const k=Math.min(1,(now-t0)/700),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;vb=f.map((v,i)=>v+(t[i]-v)*e);svg.setAttribute("viewBox",vb.join(" "));if(k<1)vbAnim=requestAnimationFrame(step)};vbAnim=requestAnimationFrame(step)}
+  function fitTo(pts){let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;pts.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
+    const m=60;x0-=m;x1+=m;y0-=m;y1+=m;let w=Math.max(x1-x0,420),h=Math.max(y1-y0,w/1.6);w=Math.max(w,h*1.6);h=w/1.6;
+    const cx=(x0+x1)/2,cy=(y0+y1)/2;let X=cx-w/2,Y=cy-h/2;if(w>MW){w=MW;h=w/1.6;X=0}X=Math.max(0,Math.min(MW-w,X));Y=Math.max(-20,Math.min(MH-h+20,Y));return[X,Y,w,h]}
+  const legPts=l=>dens(l[3]).map(q=>pt(q[0],q[1]));
+  function ship(x,y,k){return`<g transform="translate(${x} ${y}) scale(${k})"><path d="M-22 -2h44l-8 12h-28z" fill="#1E5AAA" stroke="#FFFFFF" stroke-width="2"/><rect x="-14" y="-10" width="9" height="8" fill="#E3202A"/><rect x="-4" y="-10" width="9" height="8" fill="#FFE000"/><rect x="6" y="-10" width="9" height="8" fill="#3DA647"/><path d="M-4 -26q6 -6 12 0v15h-12z" fill="#139DB3"/><circle cx="-0.5" cy="-20" r="2.6" fill="#FFFFFF"/><circle cx="4.5" cy="-20" r="2.6" fill="#FFFFFF"/><circle cx="0" cy="-20.5" r="1.2" fill="#1C1F2E"/><circle cx="5" cy="-20.5" r="1.2" fill="#1C1F2E"/></g>`}
+  function draw(target){const k=unit(vbT[2]),fs=46*k;
+    let s=LAND;
+    T.legs.slice(0,leg).forEach(x=>{s+=`<polyline points="${legPts(x).map(p=>p.join(",")).join(" ")}" fill="none" stroke="var(--spiel)" stroke-width="${5*k}" stroke-dasharray="${12*k} ${9*k}"/>`});
+    const shown=new Set(T.legs.slice(0,leg+1).map(x=>x[0]));if(target)shown.add(target);
+    shown.forEach(id=>{const[x,y]=pt(...PORT[id].p),isT=id===target;
+      s+=`<g class="wr-port"><circle cx="${x}" cy="${y}" r="${(isT?11:8)*k}" fill="${isT?"var(--pin)":"var(--ink)"}" stroke="#FFFFFF" stroke-width="${2*k}"/>`;
+      if(isT)s+=`<path d="M${x} ${y}v${-52*k}l${28*k} ${9*k}l${-28*k} ${9*k}" fill="var(--pin)" stroke="var(--pin)" stroke-width="${3*k}"/>`;
+      s+=`<text x="${x+(isT?14:56)*k}" y="${y+(isT?-56:34)*k}" style="font-size:${fs}px;stroke-width:${8*k}px;fill:var(--ink);text-anchor:start">${PORT[id].n}</text></g>`});
+    s+=`<g id="wrShip">${ship(shipPos[0],shipPos[1],2.2*k)}</g>`;svg.innerHTML=s}
+  function hud(){cargoEl.textContent=`📦 ${cargo} Container`;tourEl.textContent=T.n;
+    stopsEl.innerHTML=["HH",...T.legs.map(l=>l[1])].map((id,i)=>`<li class="${i<=leg&&i>0||i===0?"done":""}${i===leg+1?" now":""}">${PORT[id].n}</li>`).join("")}
+  function start(newTour){if(newTour)tourIx=(tourIx+1)%TOURS.length;T=TOURS[tourIx];leg=0;cargo=0;errs=0;shipPos=pt(...PORT.HH.p);askDir()}
+  function askDir(){const l=T.legs[leg],[a,b]=[PORT[l[0]],PORT[l[1]]];hud();
+    setVB(fitTo([pt(...a.p),pt(...b.p),...legPts(l)]));setTimeout(()=>draw(l[1]),20);
+    const R=["NW","N","NO","W",null,"O","SW","S","SO"];
+    panel.innerHTML=`<h3>Etappe ${leg+1} von ${T.legs.length}: nach ${b.n}</h3><p>In welcher Himmelsrichtung liegt <strong>${b.n}</strong> von ${a.n} aus? Schau auf die Karte – Norden ist oben.</p>
+      <div class="wr-rose" role="group" aria-label="Kompassrose">${R.map(r=>r?`<button type="button" data-d="${r}" aria-label="${D[r]}">${r}</button>`:`<span class="mid" aria-hidden="true">🧭</span>`).join("")}</div><p class="wr-fb" id="wrFb"></p>`;
+    let tried=false;
+    panel.querySelector(".wr-rose").addEventListener("click",e=>{const btn=e.target.closest("button[data-d]");if(!btn||btn.disabled)return;const fb=$("#wrFb");
+      if(btn.dataset.d===l[2]){btn.classList.add("right");panel.querySelectorAll(".wr-rose button").forEach(x=>x.disabled=true);fb.className="wr-fb ok";fb.textContent=`Richtig! ${b.n} liegt im ${D[l[2]]}. Leinen los!`;guckiCheer();setTimeout(()=>sail(l),700)}
+      else{btn.classList.add("wrong");btn.disabled=true;if(!tried){errs++;tried=true}fb.className="wr-fb no";fb.textContent=`${D[btn.dataset.d]} stimmt nicht. Tipp: Liegt ${b.n} auf der Karte weiter oben oder unten, weiter links oder rechts?`;guckiCry()}})}
+  function sail(l){const P=legPts(l);let L=[0];for(let i=1;i<P.length;i++)L.push(L[i-1]+Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]));
+    const tot=L[L.length-1],dur=Math.min(4200,1600+tot*3.2),t0=performance.now(),k=unit(vbT[2]);panel.innerHTML=`<h3>Gucki fährt nach ${PORT[l[1]].n} …</h3><p class="wr-fact">⚓ Unterwegs auf dem Meer</p>`;
+    const step=now=>{const q=Math.min(1,(now-t0)/dur),d=q*tot;let i=1;while(i<L.length-1&&L[i]<d)i++;const f=(d-L[i-1])/((L[i]-L[i-1])||1);
+      shipPos=[P[i-1][0]+(P[i][0]-P[i-1][0])*f,P[i-1][1]+(P[i][1]-P[i-1][1])*f];const g=$("#wrShip");if(g)g.innerHTML=ship(shipPos[0],shipPos[1],2.2*k);
+      if(q<1)anim=requestAnimationFrame(step);else{anim=0;leg++;draw(null);port(l[1])}};anim=requestAnimationFrame(step)}
+  function port(id){hud();const P=Q[id],q=P.q[Math.floor(Math.random()*P.q.length)];
+    panel.innerHTML=`<h3>⚓ Angekommen in ${PORT[id].n}!</h3><p class="wr-fact">${P.f}</p><p><strong>${q.q}</strong></p><div class="wr-opts">${q.o.map(o=>`<button type="button" class="btn ghost" data-o="${o}">${o}</button>`).join("")}</div><p class="wr-fb" id="wrFb"></p>`;
+    panel.querySelector(".wr-opts").addEventListener("click",e=>{const btn=e.target.closest("button[data-o]");if(!btn)return;panel.querySelectorAll(".wr-opts button").forEach(x=>x.disabled=true);const fb=$("#wrFb"),ok=btn.dataset.o===q.a;
+      if(ok){cargo++;fb.className="wr-fb ok";fb.textContent="Richtig! Ein Container wird eingeladen. 📦";guckiCheer()}else{errs++;fb.className="wr-fb no";fb.textContent=`Leider nicht. Richtig ist: ${q.a}.`;guckiCry()}
+      hud();const nx=document.createElement("button");nx.className="btn";nx.type="button";nx.textContent=leg<T.legs.length?"Weiterfahren":"Zum Ziel";nx.onclick=()=>leg<T.legs.length?askDir():finish();panel.appendChild(nx);nx.focus({preventScroll:true})})}
+  function finish(){setVB([0,0,MW,MH]);setTimeout(()=>draw(null),20);const perfect=errs===0;
+    panel.innerHTML=`<h3>${perfect?"🎉 Perfekte Weltreise!":"Weltreise geschafft!"}</h3><p>Gucki ist zurück in Hamburg und hat <strong>${cargo} von ${T.legs.length} Containern</strong> geladen.${perfect?" Ohne einen einzigen Fehler – DAS CRAZY!":` Du hattest ${errs} ${errs===1?"Fehler":"Fehler"}. Probier es gleich noch einmal!`}</p>
+      <div class="row"><button class="btn" type="button" id="wrNew">Neue Reise: ${TOURS[(tourIx+1)%TOURS.length].n}</button><button class="btn ghost" type="button" id="wrAgain">${T.n} nochmal</button></div>`;
+    $("#wrNew").onclick=()=>start(true);$("#wrAgain").onclick=()=>start(false);
+    if(perfect)guckiParty();else guckiSay("Ahoi! Zurück in Hamburg!",2200)}
+  window.addEventListener("resize",()=>{if(T&&location.hash==="#weltreise"&&!anim)draw(leg<T.legs.length?T.legs[leg][1]:null)});
+  window.addEventListener("hashchange",()=>{if(location.hash==="#weltreise"&&T){setVB(vbT,true);draw(leg<T.legs.length?T.legs[leg][1]:null)}});
+  start(false);setVB(fitTo([pt(...PORT.HH.p),...legPts(T.legs[0])]),true);draw(T.legs[0][1]);
 })();
 /* --- Neu beginnen --- */
 (function(){

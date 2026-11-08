@@ -24,6 +24,7 @@ Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bere
 | Erdkunde | Der Kompass | `kompass` | c1–c5 |
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
 | Spiele | Fang die Farben (Spiel zum Farbkreis, keine zählenden Übungen; Übersicht `#spiele`) | `farbfang` | – |
+| Spiele | Guckis Weltreise (Himmelsrichtungen, Häfen, Erdkunde-Fragen) | `weltreise` | – |
 | Lernen | Fit für die Klassenarbeit (Lerntipps, Lernplan, Operatoren, starke Aufregung mit Thermometer und Atem-Kreis) | `klassenarbeit` | ka1–ka4, ka6, ka5 |
 
 Dazu kommen zwei Seiten ohne Fach: die **Startseite** (`#start`, Element-ID `start`; erscheint auch, wenn die Adresse
@@ -209,7 +210,10 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
   (Seite `#spiele`) und den Abschnitt „Spiele“ auf der Startseite erreichbar. Neues Spiel: Link mit `data-topic`,
   `data-desc` und `.ico` in `#gameReg` eintragen, ID in `TOPICS` ergänzen. Spiele nutzen die Daten der
   Kapitel (z. B. `C` aus dem Farbkreis), melden Mischungen an Gucki (`guckiCheer`), zählen aber nicht für die
-  Kapitel-Party. „Fang die Farben“ zeichnet auf einem Canvas (560 × 560, skaliert) und pausiert beim Seitenwechsel.
+  Kapitel-Party. „Fang die Farben“ zeichnet auf einem Canvas (560 × 560 logisch, in Geräteauflösung) und pausiert beim
+  Seitenwechsel. „Guckis Weltreise“ nutzt die Weltkarte (`proj`, `OUTLINE`, `WORLD`) als SVG mit Zoom per viewBox;
+  Touren stehen in `TOURS` (Etappe = Start, Ziel, Richtung, Seeweg-Punkte), Hafenfragen in `Q`. Neue Etappen nur mit
+  eindeutiger Kartenrichtung (Abweichung ≤ 11° von N/NO/O/…), Seewege so legen, dass sie nicht über Land führen.
 - Haus-Knopf oben rechts neben dem ✦ führt zur Startseite. Das Logo bleibt der Gucki-Trick, kein Startseiten-Link.
 - Gucki ragt unter den Bildschirmrand (`--gx`, Körper über `box-shadow` der `.kopf` verlängert). Das fängt den
   Firefox-Fehler ab (siehe „Bekannte Grenzen“). Bei Party, Aura und Crazy ist die Verlängerung aus.

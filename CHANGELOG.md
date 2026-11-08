@@ -4,6 +4,51 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.5.0] – 2026-11-08
+
+Spiele-Bereich mit vier Spielen: „Fang die Farben“, „Guckis Weltreise“, „Gucki-Blitzrunde“ und „Notenmemory“.
+
+### Neu
+
+- **Spiele-Seite** (`#spiele`): erreichbar über den neuen runden 🎮-Knopf oben rechts (`#gameBtn`) und über den Abschnitt „Spiele“ auf der Startseite. Spiele stehen bewusst **nicht** in der Hauptnavigation; sie sind im versteckten Spiele-Verzeichnis `#gameReg` eingetragen, aus dem Spiele-Seite, Startseite und Wegweiser lesen. Das Farbkreis-Kapitel verweist vor den Übungen auf das Spiel.
+- **Spiel „Fang die Farben“** (`#farbfang`, Farbe `--spiel`). Gucki fängt mit einem Eimer fallende Farbtropfen. Gesucht sind genau die zwei Farben, aus denen die angezeigte Zielfarbe gemischt wird.
+  - **Stufen:** Stufe 1 hat Mischfarben 1. Ordnung (es fallen nur Grundfarben). Ab sechs gemischten Farben folgt Stufe 2 mit Mischfarben 2. Ordnung (es fallen Grundfarben und Mischfarben 1. Ordnung), mit wachsendem Tempo.
+  - **Punkte und Herzen:** 10 Punkte je Mischung plus Serienbonus. Eine falsche Farbe kostet ein Herz, nach drei Herzen ist das Spiel vorbei.
+  - **Gut sichtbar:** Die Zielfarbe steht als Banner oben im Spielfeld, mit zwei Fangplätzen. Vor jeder neuen Zielfarbe gibt es eine Ansage von 1,6 s, in der keine Tropfen fallen. Gucki trägt den Eimer auf dem Kopf, damit kein Tropfen vor dem Fangen verdeckt wird, und schaut wie am Bildschirmrand nur ein Stück aus dem Boden. Das Spielfeld wird in der Auflösung des Geräts gezeichnet und ist dadurch auch auf Handys und Tablets scharf. Stufe 1 startet langsam.
+  - **Rückmeldung:** Jede Mischung erscheint als „Blau + Gelb = Grün!“. Am Ende stehen alle gemischten Farben als Übersicht da.
+  - **Daten aus dem Farbkreis:** Farben, Namen und Mischregeln kommen aus dem Farbkreis-Kapitel (`C`). Die Seite zeigt alle Mischregeln zum Nachlesen.
+  - **Steuerung:** Finger/Maus (ziehen), Pfeiltasten, Knöpfe ◀ ▶. Pause per Knopf; das Spiel pausiert auch beim Seitenwechsel oder wenn der Tab im Hintergrund ist.
+  - **Rekord** pro Gerät in `localStorage` („ffBest“). Gucki jubelt bei einem neuen Rekord.
+- **Spiel „Guckis Weltreise“** (`#weltreise`): Gucki fährt mit einem Containerschiff von Hamburg um die Welt, auf zwei Touren mit je fünf Etappen:
+  - **Atlantik-Runde:** Hamburg → Lissabon → New York → Buenos Aires → Kapstadt → Hamburg
+  - **Asien-Runde:** Hamburg → Kapstadt → Mumbai → Sydney → Tokio → Hamburg (Rückweg durch den Suezkanal)
+
+  Ablauf je Etappe:
+  - **Richtung:** Die Kinder bestimmen auf einer Kompassrose (N, NO, O, SO, S, SW, W, NW), in welcher Himmelsrichtung das Ziel auf der Karte liegt. Die Etappen sind so gewählt, dass die Richtung auf der Karte höchstens 11° von der Hauptrichtung abweicht.
+  - **Fahrt:** Das Schiff fährt animiert über Seewege; die Karte zoomt auf die Etappe.
+  - **Hafen:** Im Hafen gibt es einen kurzen Steckbrief und eine Frage zu Kontinent, Ozean, Land oder Uhrzeit (ohne Sommerzeit). Richtige Antwort = ein Container.
+
+  Eine ganze Reise ohne Fehler startet Guckis große Party. Das Kompass-Kapitel verweist vor den Übungen auf das Spiel.
+- **Spiel „Gucki-Blitzrunde“** (`#blitz`): 60 Sekunden, schnelle Fragen mit 2–4 Antworten aus Deutsch, Kunst, Erdkunde, Musik und Lernen; Fächer vorher wählbar.
+  - **Fragen:** Viele werden aus den Kapiteldaten erzeugt (Mischfarben und Gegenfarben aus `C`, Kontinent- und Ozeangrößen aus `CK`/`OK`, Uhrzeiten aus `TZC`, Himmelsrichtungen), dazu feste Fragen zu Groß-/Kleinschreibung, Arbeitswörtern, Notenwerten und Lerntipps. Innerhalb einer Runde wiederholt sich keine Frage.
+  - **Punkte:** 10 Punkte je richtige Antwort, Serienbonus bis +20; Gucki ruft bei 5 und 10 in Folge.
+  - **Auswertung:** Am Ende steht die Liste „Das übst du noch“ mit allen falsch beantworteten Fragen und ihrer Lösung. Rekord pro Gerät („blitzBest“). Tasten 1–4 funktionieren auch.
+- **Spiel „Notenmemory“** (`#memory`): 12 Karten, 6 Paare. Drei Kartensätze:
+  - **Notennamen:** Note im Notensystem ↔ Name, z. B. g'. Jeder Buchstabe kommt nur einmal vor, damit Paare eindeutig sind.
+  - **Noten & Pausen:** Noten- oder Pausenzeichen ↔ Bezeichnung
+  - **Gemischt**
+
+  Die Karten nutzen die Zeichenfunktionen des Noten-Kapitels (`staffSVG`, `nHead`, `nRest`, `VALS`). Beim Aufdecken erklingt die Note (abschaltbar). Gezählt werden die Züge, mit einem Rekord je Kartensatz pro Gerät („memoBest“). Die Kartenrückseite zeigt Guckis Augen. Das Noten-Kapitel verweist vor den Übungen auf das Spiel.
+- **Farbe der Spiele:** Pink/Magenta (`--spiel`: hell `#B01E78`, dunkel `#F27BC0`) statt Orange, damit sie sich klar von Deutsch (Rotorange) unterscheiden.
+- **Lesbarkeit geprüft** (alle Seiten und Spielzustände, Handy und PC, hell und dunkel; Prüfung auf Schrift unter 12 px, abgeschnittene Texte und Kontrast nach WCAG):
+  - Fachname in der Wegweiser-Leiste in Textfarbe statt Fachfarbe; Farbe bleibt am Symbol und am Fortschrittsbalken.
+  - Größer: Fach-Etiketten der Startseiten-Karten, „Erklärungen/Übungen“ in der Sprungliste, Tastennamen der Klaviatur auf dem Handy (12 px).
+  - Aufregungs-Thermometer auf dem Handy als Liste statt fünf schmaler Spalten.
+  - `--lern` hell dunkler (`#237A3A`), damit grüne Schrift genug Kontrast hat.
+  - Weiße Schrift auf Grün/Rot/Pink (Spiel-Antworten, Weltreise-Häfen, „neu“ bei den Versionshinweisen) jetzt in `--sheet`, damit sie auch in der dunklen Ansicht lesbar ist.
+  - Blitzrunde: Fragen mit Zusatz (z. B. „Ohne Sommerzeit gerechnet“) stehen sauber untereinander; Lücken in Groß/klein-Sätzen als Unterstrich.
+- Kopfzeile: Symbol-Knöpfe sind rund. Unter 400 px Breite werden sie kleiner und das Schild „Klasse 5“ entfällt, damit das Logo ganz sichtbar bleibt.
+
 ## [1.4.0] – 2026-11-08
 
 Übung „Tag oder Nacht?“ neu aufgebaut, Seite komplett ohne Internet nutzbar, Weltzeituhr aufgeräumt.

@@ -24,7 +24,7 @@ Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bere
 | Erdkunde | Der Kompass | `kompass` | c1–c5 |
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
 | Spiele | Fang die Farben (Spiel zum Farbkreis, keine zählenden Übungen; Übersicht `#spiele`) | `farbfang` | – |
-| Spiele | Guckis Weltreise (Himmelsrichtungen, Häfen, Erdkunde-Fragen) | `weltreise` | – |
+| Spiele | Guckis Weltreise (Himmelsrichtungen, Häfen, Erdkunde-Fragen; 4 Touren: Atlantik, Asien, Mittelmeer, Amerika) | `weltreise` | – |
 | Spiele | Gucki-Blitzrunde (60-Sekunden-Quiz aus allen Fächern) | `blitz` | – |
 | Spiele | Notenmemory (Note ↔ Name, Noten-/Pausenzeichen ↔ Bezeichnung) | `memory` | – |
 | Lernen | Fit für die Klassenarbeit (Lerntipps, Lernplan, Operatoren, starke Aufregung mit Thermometer und Atem-Kreis) | `klassenarbeit` | ka1–ka4, ka6, ka5 |

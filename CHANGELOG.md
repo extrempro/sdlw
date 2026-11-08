@@ -4,6 +4,17 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.6.0] – 2026-11-08
+
+Zwei neue Touren für Guckis Weltreise.
+
+### Neu
+
+- **Mittelmeer-Runde** (6 Etappen): Hamburg → Lissabon (SW) → Valencia (O) → Marseille (NO) → Istanbul (O) → Alexandria (S) → Hamburg (NW). Seewege durch die Straße von Gibraltar, an Sardinien und Sizilien vorbei, durch die Dardanellen.
+- **Amerika-Runde** (6 Etappen): Hamburg → Halifax (W) → Miami (SW) → Panama (S) → Los Angeles (NW) → Lissabon (O) → Hamburg (NO). Seewege um Kuba herum und durch den Panamakanal.
+- Neue Hafenfragen zu Valencia, Marseille, Istanbul (zwei Kontinente), Alexandria (Nil), Halifax, Miami, Panama (Panamakanal verbindet Atlantik und Pazifik) und Los Angeles (Uhrzeit ohne Sommerzeit).
+- Alle Etappenrichtungen weichen auf der Karte höchstens 9° von der Hauptrichtung ab. Mit „Neue Reise“ geht es reihum durch alle vier Touren.
+
 ## [1.5.0] – 2026-11-08
 
 Spiele-Bereich mit vier Spielen: „Fang die Farben“, „Guckis Weltreise“, „Gucki-Blitzrunde“ und „Notenmemory“.

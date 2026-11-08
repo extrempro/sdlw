@@ -133,10 +133,16 @@ Reihenfolge in der Datei:
 
 ## Release-Prozess (Pflicht bei jeder Änderung)
 
-Jede Änderung, die auf `main` landet, bekommt eine neue Version mit Versionshinweisen –
-**auf GitHub und auf der Webseite**.
+Jede Version, die auf `main` landet, bekommt Versionshinweise – **auf GitHub und auf der Webseite**.
 
-1. **Versionsnummer festlegen** (MAJOR.MINOR.PATCH):
+**Änderungen werden gesammelt.** Ein Pull Request wird **erst geöffnet, wenn die Lehrkraft es ausdrücklich sagt**.
+Bis dahin landen alle Änderungen als Commits auf dem Arbeitsbranch `naechste-version` (von `main` abgezweigt,
+gepusht, damit nichts verloren geht). Die kommende Version hat **einen** Eintrag in CHANGELOG.md und `releaseData`,
+der mit jeder Änderung ergänzt wird. Kommt etwas Größeres dazu, steigt die Versionsnummer dieses Eintrags mit
+(z. B. 1.1.1 → 1.2.0, sobald eine neue Funktion dabei ist). Die claude.ai-Vorschau wird trotzdem nach jeder
+Änderung aktualisiert, damit man alles vorab ansehen kann.
+
+1. **Versionsnummer festlegen** (MAJOR.MINOR.PATCH, nach der größten Änderung im Sammel-Eintrag):
    - PATCH (1.0.**1**): Fehlerkorrekturen, kleine Textänderungen.
    - MINOR (1.**1**.0): neues Kapitel, neue Übung, neue Funktion.
    - MAJOR (**2**.0.0): grundlegender Umbau, z. B. ein neuer Jahrgang mit eigener Struktur.
@@ -152,7 +158,9 @@ Jede Änderung, die auf `main` landet, bekommt eine neue Version mit Versionshin
    `check-release.mjs` meldet, welcher Block noch eine Zusammenfassung braucht. `CHANGELOG.md` bleibt vollständig.
 4. `node scripts/build.mjs` ausführen (baut `index.html`).
 5. `node scripts/check-release.mjs` ausführen – muss „Alles in Ordnung“ melden.
-6. Branch anlegen, committen, Pull Request gegen `main` öffnen. Die Release Notes in die PR-Beschreibung übernehmen.
+6. Auf `naechste-version` committen und pushen. **Erst auf Ansage** einen Pull Request gegen `main` öffnen;
+   die Release Notes in die PR-Beschreibung übernehmen. Nach dem Merge für die nächste Runde `naechste-version`
+   neu von `main` abzweigen.
 7. Nach dem Merge erstellt der Workflow `release.yml` automatisch das GitHub-Release `vx.y.z` mit den
    Notizen aus CHANGELOG.md und hängt `index.html` als Download an.
 
@@ -163,7 +171,7 @@ eine Zusammenfassung fehlt, `index.html` veraltet ist oder die Versionsnummer sc
 
 Die Seite ist zusätzlich als claude.ai-Artifact veröffentlicht (privat, über das Teilen-Menü freigebbar):
 https://claude.ai/artifact/R6pJni9HKDoiQHJXYtZUyB
-Veröffentlicht wird `src/entdeckerheft.html`. Nach einem Release dort ebenfalls aktualisieren.
+Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktualisieren (auch vor dem Pull Request).
 
 ## Getroffene Entscheidungen (nicht ohne Rückfrage ändern)
 

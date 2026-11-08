@@ -1396,7 +1396,6 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <div class="card"><h3>Lockern und trinken</h3><p>Drück die Füße fest auf den Boden, zieh die Schultern hoch und lass sie fallen. Ein Schluck Wasser hilft auch.</p></div>
   </div>
   <div class="merk"><strong>Vorbeugen hilft am meisten:</strong> Gut vorbereitet zu sein, ausgeschlafen und satt in die Arbeit zu gehen, macht die Aufregung kleiner. Bewegung am Tag vorher (Fahrrad, Toben, Sport) baut Stress ab.</div>
-  <div class="merk"><strong>Du bist nicht allein:</strong> Bist du vor Arbeiten oft so aufgeregt, dass du nicht schlafen kannst, Bauchweh hast oder gar nicht in die Schule willst? Dann sprich mit deinen Eltern, deiner Klassenlehrerin oder deinem Klassenlehrer. An vielen Schulen gibt es auch Beratungslehrkräfte. Du kannst auch die <strong>Nummer gegen Kummer</strong> anrufen: <strong>116 111</strong>. Das ist kostenlos, und du musst deinen Namen nicht sagen. Die Zeiten stehen auf nummergegenkummer.de.</div>
 </section>
 <section>
   <h2>Nach der Arbeit</h2>
@@ -2789,7 +2788,7 @@ quiz($("#ka4"),shuffle([
     {n:"Etwas kribbelig",c:"#C7E36B",h:"Ein bisschen Aufregung ist normal.",t:["Atme zwei-, dreimal langsam aus, länger als ein.","Sag dir deinen Mut-Satz: „Ich habe geübt.“"]},
     {n:"Ziemlich aufgeregt",c:"#FFD54A",h:"Zeit für eine kurze Pause im Kopf.",t:["Mach den Atem-Kreis oder zähle: einatmen bis vier, ausatmen bis sechs.","Fäuste-Trick: fünf Sekunden fest drücken, dann locker lassen.","Fang mit einer Aufgabe an, die du sicher kannst."]},
     {n:"Sehr aufgeregt",c:"#FFA552",h:"Dein Körper ist im Alarm. Hol ihn zurück.",t:["Zuerst atmen: fünf Runden mit langem Ausatmen.","5-4-3-2-1: Was siehst, fühlst und hörst du gerade?","Trink einen Schluck Wasser und drück die Füße auf den Boden.","Kopf leer? Überspring die Aufgabe und komm später zurück."]},
-    {n:"Panik",c:"#FF7A70",h:"Das fühlt sich schlimm an, geht aber vorbei.",t:["Atme langsam aus – das ist jetzt das Wichtigste.","Sag deiner Lehrerin oder deinem Lehrer Bescheid. Du darfst sagen, dass es dir nicht gut geht.","Sprich nach der Arbeit mit deinen Eltern oder einer Lehrkraft. Gemeinsam findet ihr Hilfe."]}];
+    {n:"Panik",c:"#FF7A70",h:"Das fühlt sich schlimm an, geht aber vorbei.",t:["Atme langsam aus – das ist jetzt das Wichtigste.","Sag deiner Lehrerin oder deinem Lehrer Bescheid. Du darfst sagen, dass es dir nicht gut geht."]}];
   const th=$("#thermo"),out=$("#aufOut");if(!th)return;
   th.innerHTML=T.map((x,i)=>`<button type="button" role="radio" aria-checked="false" data-i="${i}" style="--c:${x.c}"><span class="lv">${i+1}</span>${x.n}</button>`).join("");
   const pick=i=>{th.querySelectorAll("button").forEach(b=>b.setAttribute("aria-checked",String(+b.dataset.i===i)));const x=T[i];
@@ -2815,7 +2814,7 @@ quiz($("#ka6"),shuffle([
   {q:"Mitten in der Arbeit ist dein Kopf plötzlich leer.",a:"a",o:[{v:"a",label:"Aufgabe überspringen, Stichwörter notieren, später zurückkommen"},{v:"b",label:"Auf das Blatt starren, bis es wieder einfällt"},{v:"c",label:"Die Arbeit abgeben"},{v:"d",label:"Beim Nachbarn abschreiben"}],why:"Mit einer leichteren Aufgabe beruhigst du dich, und das Wissen kommt oft zurück."},
   {q:"Du denkst: „Das schaffe ich nie!“ Was machst du?",a:"a",o:[{v:"a",label:"„Stopp!“ denken und den Mut-Satz sagen"},{v:"b",label:"Den Gedanken immer wieder denken"},{v:"c",label:"Aufgeben"},{v:"d",label:"Laut in der Klasse schimpfen"}],why:"Ein Mut-Satz wie „Ich habe geübt“ hilft gegen Sorgen-Gedanken."},
   {q:"Deine Hände zittern. Welcher leise Trick hilft?",a:"a",o:[{v:"a",label:"Fäuste fest ballen, bis fünf zählen, locker lassen"},{v:"b",label:"Mit dem Stift auf den Tisch trommeln"},{v:"c",label:"Aufstehen und herumlaufen"},{v:"d",label:"Die Hände unter den Tisch klemmen und warten"}],why:"Erst anspannen, dann loslassen – so entspannen sich die Muskeln."},
-  {q:"Du bist vor jeder Arbeit so aufgeregt, dass du nachts nicht schlafen kannst. Was ist richtig?",a:"a",o:[{v:"a",label:"Mit Eltern oder einer Lehrkraft darüber sprechen"},{v:"b",label:"Es niemandem sagen"},{v:"c",label:"Einfach weniger lernen"},{v:"d",label:"Bis morgens wach bleiben und lernen"}],why:"Du musst das nicht allein schaffen. Es gibt Hilfe."}
+  {q:"Was macht die Aufregung schon vorher kleiner?",a:"a",o:[{v:"a",label:"Gut vorbereitet, ausgeschlafen und satt in die Arbeit gehen"},{v:"b",label:"Am Abend vorher lange aufbleiben"},{v:"c",label:"Ohne Frühstück losgehen"},{v:"d",label:"Erst am Morgen anfangen zu lernen"}],why:"Wer vorbereitet, ausgeschlafen und satt ist, bleibt ruhiger."}
 ]).map(it=>({...it,o:shuffle(it.o)})));
 /* --- Neu beginnen --- */
 (function(){

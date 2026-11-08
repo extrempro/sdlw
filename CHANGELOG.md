@@ -16,13 +16,13 @@ Neuer Bereich „Lernen“ mit dem Kapitel „Fit für die Klassenarbeit“.
   - Tag vorher und Morgen der Arbeit
   - acht Schritte in der Arbeit
   - Arbeitsanweisungen (Operatoren: nennen, beschreiben, erklären, begründen, vergleichen, zuordnen)
-  - Tipps gegen Aufregung, mit Hinweis, sich bei großer Angst Hilfe bei Eltern oder Lehrkräften zu holen
+  - Tipps gegen Aufregung
   - Berichtigung nach der Arbeit
 - **Starke Aufregung:** Ein Teil erklärt Anzeichen in Körper, Kopf und Verhalten (mit kindgerechter Erklärung von Stresshormonen). Dazu kommen:
   - **Aufregungs-Thermometer** mit fünf Stufen, die je passende Tipps zeigen; bei „Panik“ der Rat, der Lehrkraft Bescheid zu sagen
   - **Atem-Kreis** zum Mitatmen: 4 s ein, 2 s halten, 6 s aus, 5 Runden
   - leise Tricks für die Arbeit: Fäuste-Trick, 5-4-3-2-1, Stopp und Mut-Satz, lockern und trinken
-  - Vorbeugen sowie Hilfe bei Eltern, Lehrkräften, Beratungslehrkräften und bei der Nummer gegen Kummer (116 111)
+  - Vorbeugen: vorbereitet, ausgeschlafen und satt in die Arbeit, Bewegung am Tag vorher
 - **Lernplan zum Ausprobieren:** Schieberegler für 3 bis 10 Tage bis zur Arbeit. Daraus entsteht ein Tagesplan mit echten Daten zum Abhaken. Fällt die Arbeit aufs Wochenende, erscheint ein Hinweis.
 - **Packliste** zum Abhaken. Gucki freut sich, wenn alles erledigt ist.
 - **Übungen:**

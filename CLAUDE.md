@@ -25,6 +25,7 @@ Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bere
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
 | Spiele | Fang die Farben (Spiel zum Farbkreis, keine zählenden Übungen; Übersicht `#spiele`) | `farbfang` | – |
 | Spiele | Guckis Weltreise (Himmelsrichtungen, Häfen, Erdkunde-Fragen) | `weltreise` | – |
+| Spiele | Gucki-Blitzrunde (60-Sekunden-Quiz aus allen Fächern) | `blitz` | – |
 | Lernen | Fit für die Klassenarbeit (Lerntipps, Lernplan, Operatoren, starke Aufregung mit Thermometer und Atem-Kreis) | `klassenarbeit` | ka1–ka4, ka6, ka5 |
 
 Dazu kommen zwei Seiten ohne Fach: die **Startseite** (`#start`, Element-ID `start`; erscheint auch, wenn die Adresse
@@ -134,7 +135,7 @@ Reihenfolge in der Datei:
   `echarts@4.9.0/map/js/world.js` (rund 100 KB, Apache-Lizenz 2.0, Lizenzkopf bleibt stehen). Die Seite fängt den
   Aufruf `echarts.registerMap` mit einem kleinen Platzhalter ab und zeichnet die Karten selbst. Die Punktkarte
   (`GRID`) bleibt als Ersatz im Code, falls die Daten einmal fehlen. Die Kartendaten nicht von Hand bearbeiten.
-- `localStorage` nur für Komfort: Hell/Dunkel-Wahl, Gucki-Sonnenbrille und der Spiel-Rekord („ffBest“). Alles funktioniert auch ohne.
+- `localStorage` nur für Komfort: Hell/Dunkel-Wahl, Gucki-Sonnenbrille und die Spiel-Rekorde („ffBest“, „blitzBest“). Alles funktioniert auch ohne.
 
 ## Neues Kapitel hinzufügen – Checkliste
 
@@ -214,6 +215,8 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
   Seitenwechsel. „Guckis Weltreise“ nutzt die Weltkarte (`proj`, `OUTLINE`, `WORLD`) als SVG mit Zoom per viewBox;
   Touren stehen in `TOURS` (Etappe = Start, Ziel, Richtung, Seeweg-Punkte), Hafenfragen in `Q`. Neue Etappen nur mit
   eindeutiger Kartenrichtung (Abweichung ≤ 11° von N/NO/O/…), Seewege so legen, dass sie nicht über Land führen.
+  Die „Gucki-Blitzrunde“ holt ihre Fragen aus Generatoren je Fach (Objekt `G` im Block BLITZRUNDE); neue Kapitel
+  dort mit einem eigenen Generator ergänzen. Jede Frage hat einen Schlüssel `k` gegen Wiederholungen und optional `r` für die Übungsliste.
 - Haus-Knopf oben rechts neben dem ✦ führt zur Startseite. Das Logo bleibt der Gucki-Trick, kein Startseiten-Link.
 - Gucki ragt unter den Bildschirmrand (`--gx`, Körper über `box-shadow` der `.kopf` verlängert). Das fängt den
   Firefox-Fehler ab (siehe „Bekannte Grenzen“). Bei Party, Aura und Crazy ist die Verlängerung aus.

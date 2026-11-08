@@ -237,6 +237,29 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .wr-stops li{padding:3px 10px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;font-weight:700;background:var(--paper)}
 .wr-stops li.done{background:var(--ok);border-color:var(--ok);color:#FFFFFF}
 .wr-stops li.now{border-color:var(--spiel);color:var(--spiel)}
+/* Spiel „Gucki-Blitzrunde“ */
+#blitz .merk{--accent:var(--spiel)}
+.bl-wrap{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.bl-card{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.bl-card h3{margin:0}
+.bl-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bl-chips button{font:700 .95rem var(--body,inherit);padding:6px 14px;border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.bl-chips button[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--sheet)}
+.bl-hud{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.bl-time{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bl-time i{display:block;height:100%;background:var(--spiel);transition:width .25s linear}
+.bl-time.low i{background:var(--bad)}
+.bl-fach{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.bl-q{font-family:var(--display);font-weight:800;font-size:1.35rem;line-height:1.3;min-height:3.4em;display:flex;align-items:center}
+.bl-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bl-opts button{min-height:56px;padding:10px;border-radius:14px;border:2px solid var(--line);background:var(--paper);color:var(--ink);font:800 1.05rem var(--display);cursor:pointer;overflow-wrap:anywhere}
+.bl-opts button:hover{border-color:var(--muted)}
+.bl-opts button.right{background:var(--ok);border-color:var(--ok);color:#FFFFFF}
+.bl-opts button.wrong{background:var(--bad);border-color:var(--bad);color:#FFFFFF}
+.bl-streak{color:var(--spiel)}
+.bl-review{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.bl-review b{color:var(--ok)}
+.bl-big{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1}
 /* Seite Versionshinweise */
 .relpage{display:flex;flex-direction:column;gap:28px}
 .relpage .rcards{display:flex;flex-direction:column;gap:12px}
@@ -595,10 +618,11 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   {
    "version": "1.5.0",
    "date": "2026-11-08",
-   "title": "Zwei Spiele: Fang die Farben und Guckis Weltreise",
+   "title": "Drei Spiele mit Gucki",
    "items": [
     "Neu: das Spiel „Fang die Farben“! Gucki möchte Farben mischen. Fang mit seinem Eimer genau die zwei Farben, aus denen die Zielfarbe entsteht.",
     "Neu: „Guckis Weltreise“! Fahr mit Gucki und seinem Containerschiff von Hamburg einmal um die Welt. Finde für jede Etappe die richtige Himmelsrichtung und beantworte in jedem Hafen eine Frage.",
+    "Neu: die „Gucki-Blitzrunde“! 60 Sekunden, schnelle Fragen aus allen Fächern. Wie viele schaffst du hintereinander? Am Ende siehst du, was du noch üben kannst.",
     "Alle Spiele findest du über den neuen 🎮-Knopf oben rechts und unten auf der Startseite.",
     "Die Zielfarbe steht groß oben im Spielfeld, und vor jeder neuen Farbe sagt das Spiel sie dir in Ruhe an. Gucki trägt den Eimer auf dem Kopf, damit du jeden Tropfen bis zum Schluss siehst.",
     "In Stufe 2 mischst du Mischfarben 2. Ordnung wie Blaugrün oder Rotorange – und die Tropfen fallen schneller.",
@@ -711,6 +735,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="fach"><p class="fachname"><span class="fdot" style="background:#D96F0B"></span>Spiele</p><div class="topics">
       <a href="#farbfang" data-topic="farbfang" data-desc="Ein Spiel zum Farbkreis: Fang mit Gucki die Farben, aus denen die Zielfarbe gemischt wird."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D96F0B"/><path d="M16 6.5c3.6 4.6 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.4 6-11z" fill="#FFFFFF"/><circle cx="13.6" cy="18.4" r="1.6" fill="#D96F0B"/></svg><span><b>Fang die Farben</b></span></a>
       <a href="#weltreise" data-topic="weltreise" data-desc="Fahr mit Gucki und seinem Schiff um die Welt: Himmelsrichtung finden, Hafen anlaufen, Frage beantworten."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#139DB3"/><path d="M7 18h18l-3 5H10z" fill="#FFFFFF"/><path d="M16 7v10M16 8l6 7h-6" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/></svg><span><b>Guckis Weltreise</b></span></a>
+      <a href="#blitz" data-topic="blitz" data-desc="60 Sekunden, Fragen aus allen Kapiteln: Wie viele schaffst du hintereinander?"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#E2A12B"/><path d="M18 5 9 18h6l-2 9 10-14h-6z" fill="#FFFFFF"/></svg><span><b>Gucki-Blitzrunde</b></span></a>
     </div></div>
 </div>
 <div class="crumbs" id="crumbs">
@@ -1527,6 +1552,29 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <footer>Tipp: Die Übungen auf dieser Seite eignen sich prima zum Selbstabfragen. Mach sie vor einer Arbeit einfach mit „Neu beginnen“ noch einmal.</footer>
 </div>
 
+<!-- ============ SPIEL: GUCKI-BLITZRUNDE ============ -->
+<div class="topic" id="blitz" hidden>
+<header>
+  <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Alle Fächer</p>
+  <h1>Gucki-Blitzrunde</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E2A12B,#FFE000,#D96F0B)"></div>
+</header>
+<section>
+  <p class="lead">60 Sekunden, viele schnelle Fragen aus allen Kapiteln. Jede richtige Antwort bringt Punkte – und wer mehrere hintereinander richtig hat, bekommt einen Bonus!</p>
+  <div class="bl-wrap" id="blWrap"><div class="bl-card" id="blCard" aria-live="polite"></div></div>
+</section>
+<section>
+  <h2>So spielst du</h2>
+  <ol class="steps">
+    <li>Wähle die Fächer aus, aus denen die Fragen kommen sollen.</li>
+    <li>Tippe so schnell wie möglich auf die richtige Antwort. Auf der Tastatur gehen auch die Tasten 1 bis 4.</li>
+    <li>Richtig: 10 Punkte, plus Bonus für jede Antwort in Folge. Falsch: Die Serie ist weg, und du siehst kurz die Lösung.</li>
+    <li>Am Ende zeigt dir Gucki, was du noch üben kannst.</li>
+  </ol>
+  <div class="merk"><strong>Tipp für die Klasse:</strong> Spielt die Blitzrunde zu Beginn der Stunde am Whiteboard – alle rufen die Antwort, eine Person tippt.</div>
+</section>
+</div>
+
 <!-- ============ SPIEL: GUCKIS WELTREISE ============ -->
 <div class="topic" id="weltreise" hidden>
 <header>
@@ -1690,7 +1738,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","weltreise","neuigkeiten"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","weltreise","blitz","neuigkeiten"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -3226,6 +3274,59 @@ quiz($("#ka6"),shuffle([
   window.addEventListener("resize",()=>{if(T&&location.hash==="#weltreise"&&!anim)draw(leg<T.legs.length?T.legs[leg][1]:null)});
   window.addEventListener("hashchange",()=>{if(location.hash==="#weltreise"&&T){setVB(vbT,true);draw(leg<T.legs.length?T.legs[leg][1]:null)}});
   start(false);setVB(fitTo([pt(...PORT.HH.p),...legPts(T.legs[0])]),true);draw(T.legs[0][1]);
+})();
+/* ================= SPIEL: GUCKI-BLITZRUNDE ================= */
+(function(){
+  const card=$("#blCard");if(!card)return;
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  const opts=(a,wrong,n=4)=>shuffle([a,...shuffle(wrong.filter(w=>w!==a)).slice(0,n-1)]);
+  const DIRS=["Norden","Nordosten","Osten","Südosten","Süden","Südwesten","Westen","Nordwesten"];
+  const GK=[["Wir gehen heute ins ___.","Kino","kino"],["Beim ___ bin ich schnell.","Laufen","laufen"],["Der Hund ist sehr ___.","schnell","Schnell"],["Am ___ lese ich ein Buch.","Abend","abend"],["Ich ___ gern Fußball.","spiele","Spiele"],["Das ___ macht Spaß.","Malen","malen"],["Wir treffen uns ___.","morgen","Morgen"],["Mein ___ heißt Max.","Freund","freund"],["Sie hat etwas ___ erlebt.","Tolles","tolles"],["Die Elbe ist ___.","breit","Breit"],["Viel ___ zum Geburtstag!","Glück","glück"],["Beim ___ vergesse ich die Zeit.","Lesen","lesen"]];
+  const OPS=[["Nenne","kurz aufzählen"],["Beschreibe","genau sagen, wie etwas ist"],["Erkläre","sagen, warum etwas so ist"],["Begründe","Gründe angeben"],["Vergleiche","Gemeinsamkeiten und Unterschiede suchen"]];
+  const NOTE=[["Wie viele Viertelnoten passen in eine ganze Note?","4",["2","3","8"]],["Wie viele Viertelnoten dauert eine halbe Note?","2",["1","4","3"]],["Wie viele Achtelnoten passen in eine Viertelnote?","2",["4","1","8"]],["Welcher Ton kommt nach C?","D",["E","H","B"]],["Welcher Ton kommt vor C?","H",["B","A","D"]],["Wie heißt das Zeichen für eine Stille in der Musik?","Pause",["Note","Takt","Schlüssel"]],["Wie viele Linien hat ein Notensystem?","5",["4","6","3"]],["Wie heißt der Schlüssel am Anfang der meisten Notenzeilen?","Violinschlüssel",["Hausschlüssel","Taktschlüssel","Pausenschlüssel"]]];
+  const G={
+    Deutsch:[()=>{const[sen,a,w]=pick(GK);return{q:`Groß oder klein?<br>${sen.replace("___","<u>&nbsp;?&nbsp;</u>")}`,r:`Groß oder klein: ${sen}`,a,o:shuffle([a,w]),k:"gk"+sen}},
+             ()=>{const[op,m]=pick(OPS);return{q:`Was bedeutet das Arbeitswort „${op}“?`,a:m,o:opts(m,OPS.map(x=>x[1]),3),k:"op"+op}}],
+    Kunst:[()=>{const i=pick(C.map((c,i)=>i).filter(i=>C[i].t===1)),[a,b]=C[i].m;return{q:`${C[a].n} + ${C[b].n} = ?`,a:C[i].n,o:opts(C[i].n,C.filter(c=>c.t===1||c.t===2).map(c=>c.n)),k:"mix"+i}},
+           ()=>{const i=pick(C.map((c,i)=>i)),g=C[(i+6)%12].n;return{q:`Was ist die Gegenfarbe (Komplementärfarbe) von ${C[i].n}?`,a:g,o:opts(g,C.map(c=>c.n)),k:"kp"+i}},
+           ()=>{const i=pick(C.map((c,i)=>i)),a=C[i].t===0?"Grundfarbe":"Mischfarbe";return{q:`Ist ${C[i].n} eine Grundfarbe oder eine Mischfarbe?`,a,o:["Grundfarbe","Mischfarbe"],k:"gm"+i}}],
+    Erdkunde:[()=>{const k=pick(CK),r=CK.indexOf(k)+1;const q=r===1?"Welcher Kontinent ist der größte?":r===7?"Welcher Kontinent ist der kleinste?":null;if(!q)return null;return{q,a:CN[k].n,o:opts(CN[k].n,CK.map(x=>CN[x].n)),k:"kr"+k}},
+              ()=>{const k=pick(OK),r=OK.indexOf(k);const q=["Welcher Ozean ist der größte?","Welcher Ozean ist der zweitgrößte?",null,null,"Welcher Ozean ist der kleinste?"][r];if(!q)return null;return{q,a:O[k].n,o:opts(O[k].n,OK.map(x=>O[x].n)),k:"or"+k}},
+              ()=>{const c=pick(TZC.filter(c=>!c.me&&Number.isInteger(c.off))),a=fmt(12-1+c.off)+" Uhr";const w=[-6,-4,-2,2,4,6].map(d=>fmt(12-1+c.off+d)+" Uhr");return{q:`In Hamburg ist es 12:00 Uhr. Wie spät ist es in ${c.n}?<br><small>(ohne Sommerzeit)</small>`,a,o:opts(a,w),k:"tz"+c.n}},
+              ()=>{const i=Math.floor(Math.random()*8),a=DIRS[(i+4)%8];return{q:`Was ist die Gegenrichtung von ${DIRS[i]}?`,a,o:opts(a,DIRS),k:"gr"+i}},
+              ()=>{const i=Math.floor(Math.random()*4)*2,a=DIRS[i+1];return{q:`Welche Himmelsrichtung liegt genau zwischen ${DIRS[i]} und ${DIRS[(i+2)%8]}?`,a,o:opts(a,DIRS),k:"zw"+i}},
+              ()=>{const t=pick([["Wo geht die Sonne auf?","im Osten"],["Wo geht die Sonne unter?","im Westen"],["Wo steht die Sonne bei uns mittags?","im Süden"]]);return{q:t[0],a:t[1],o:opts(t[1],["im Osten","im Westen","im Süden","im Norden"]),k:"so"+t[0]}}],
+    Musik:[()=>{const[q,a,w]=pick(NOTE);return{q,a,o:opts(a,w),k:"mu"+q}}],
+    Lernen:[()=>{const t=pick([["Was hilft beim Lernen am meisten?","sich selbst abfragen",["nur durchlesen","Musik laut hören","alles am Abend vorher"]],["Was machst du in der Arbeit zuerst?","alle Aufgaben durchlesen",["sofort losschreiben","die schwerste Aufgabe","aus dem Fenster schauen"]],["Was hilft bei Aufregung?","langsam ausatmen",["schnell atmen","Luft anhalten","weglaufen"]],["Wann gehst du vor einer Arbeit ins Bett?","früh",["sehr spät","gar nicht","egal"]]]);return{q:t[0],a:t[1],o:opts(t[1],t[2]),k:"le"+t[0]}}]};
+  const FACH=Object.keys(G);let sel=new Set(FACH),st=null,timer=0,best=0;
+  try{best=+localStorage.getItem("blitzBest")||0}catch(_){}
+  function menu(){card.innerHTML=`<h3>Aus welchen Fächern sollen die Fragen kommen?</h3><div class="bl-chips" role="group" aria-label="Fächer">${FACH.map(f=>`<button type="button" data-f="${f}" aria-pressed="${sel.has(f)}">${f}</button>`).join("")}</div>
+      <p class="hint">Rekord auf diesem Gerät: ${best} Punkte</p><div class="row"><button class="btn" type="button" id="blGo">Los geht's – 60 Sekunden!</button></div>`;
+    card.querySelector(".bl-chips").onclick=e=>{const b=e.target.closest("button");if(!b)return;const f=b.dataset.f;if(sel.has(f)&&sel.size>1)sel.delete(f);else sel.add(f);b.setAttribute("aria-pressed",sel.has(f));menu()};
+    $("#blGo").onclick=start}
+  function next(){let q=null,f,tries=0;while(!q&&tries++<40){f=pick([...sel]);const cand=pick(G[f])();if(cand&&!st.used.has(cand.k))q={...cand,f}}
+    if(!q){st.used.clear();return next()}st.used.add(q.k);st.q=q;st.lock=false;
+    card.innerHTML=`<div class="bl-hud"><span>⏱ <span id="blT">${Math.ceil(st.left)}</span> s</span><span class="bl-streak" id="blS">${st.streak>1?`🔥 ${st.streak} in Folge`:""}</span><span>${st.pts} Punkte</span></div>
+      <div class="bl-time${st.left<10?" low":""}"><i id="blBar" style="width:${st.left/60*100}%"></i></div><span class="bl-fach">${q.f}</span><div class="bl-q">${q.q}</div>
+      <div class="bl-opts">${q.o.map((o,i)=>`<button type="button" data-o="${i}"><span class="sr-only">${i+1}: </span>${o}</button>`).join("")}</div>`;
+    card.querySelector(".bl-opts").onclick=e=>{const b=e.target.closest("button");if(b)answer(+b.dataset.o)}}
+  function answer(i){if(!st||st.lock||st.over)return;st.lock=true;const q=st.q,ok=q.o[i]===q.a,bs=card.querySelectorAll(".bl-opts button");
+    bs[i].classList.add(ok?"right":"wrong");if(!ok)bs[q.o.indexOf(q.a)].classList.add("right");
+    if(ok){st.ok++;st.streak++;st.pts+=10+Math.min(st.streak-1,10)*2;guckiCheer();if(st.streak===5||st.streak===10)guckiSay(st.streak===10?"Aura! 10 in Folge!":"5 in Folge!",1600)}
+    else{st.no++;st.streak=0;st.miss.push(q)}
+    setTimeout(()=>{if(!st.over)next()},ok?350:1100)}
+  function start(){st={pts:0,ok:0,no:0,streak:0,left:60,used:new Set(),miss:[],over:false};clearInterval(timer);next();
+    const t0=Date.now();timer=setInterval(()=>{st.left=Math.max(0,60-(Date.now()-t0)/1000);const t=$("#blT"),bar=$("#blBar");if(t)t.textContent=Math.ceil(st.left);if(bar){bar.style.width=st.left/60*100+"%";bar.parentElement.classList.toggle("low",st.left<10)}if(st.left<=0)end()},200)}
+  function end(){clearInterval(timer);st.over=true;const rec=st.pts>best&&st.pts>0;if(rec){best=st.pts;try{localStorage.setItem("blitzBest",String(best))}catch(_){}}
+    const miss=[...new Map(st.miss.map(m=>[m.k,m])).values()];
+    card.innerHTML=`<h3>${rec?"🏆 Neuer Rekord!":"Zeit um!"}</h3><div class="bl-big">${st.pts} Punkte</div><p>${st.ok} richtig · ${st.no} falsch · Rekord: ${best}</p>
+      ${miss.length?`<p><strong>Das übst du noch:</strong></p><ol class="bl-review">${miss.map(m=>`<li>${m.r||m.q.replace(/<br>.*$/,"")} → <b>${m.a}</b></li>`).join("")}</ol>`:st.ok?`<p>Kein einziger Fehler – DAS CRAZY!</p>`:""}
+      <div class="row"><button class="btn" type="button" id="blAgain">Nochmal!</button><button class="btn ghost" type="button" id="blMenu">Fächer ändern</button></div>`;
+    $("#blAgain").onclick=start;$("#blMenu").onclick=menu;
+    if(rec){guckiSay("Neuer Rekord!",2200);const r=card.getBoundingClientRect();Konfetti.burst(r.left+r.width/2,r.top+40,70,90,50,900)}else if(!st.no&&st.ok)guckiParty()}
+  document.addEventListener("keydown",e=>{if(location.hash!=="#blitz"||!st||st.over)return;const n=+e.key;if(n>=1&&n<=st.q.o.length)answer(n-1)});
+  window.addEventListener("hashchange",()=>{if(location.hash!=="#blitz"&&st&&!st.over){clearInterval(timer);st.over=true;menu()}});
+  menu();
 })();
 /* --- Neu beginnen --- */
 (function(){

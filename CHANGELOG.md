@@ -6,7 +6,7 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschn
 
 ## [1.5.0] – 2026-11-08
 
-Spiele-Bereich mit den Spielen „Fang die Farben“ und „Guckis Weltreise“.
+Spiele-Bereich mit drei Spielen: „Fang die Farben“, „Guckis Weltreise“ und „Gucki-Blitzrunde“.
 
 ### Neu
 
@@ -29,6 +29,10 @@ Spiele-Bereich mit den Spielen „Fang die Farben“ und „Guckis Weltreise“.
   - **Hafen:** Im Hafen gibt es einen kurzen Steckbrief und eine Frage zu Kontinent, Ozean, Land oder Uhrzeit (ohne Sommerzeit). Richtige Antwort = ein Container.
 
   Eine ganze Reise ohne Fehler startet Guckis große Party. Das Kompass-Kapitel verweist vor den Übungen auf das Spiel.
+- **Spiel „Gucki-Blitzrunde“** (`#blitz`): 60 Sekunden, schnelle Fragen mit 2–4 Antworten aus Deutsch, Kunst, Erdkunde, Musik und Lernen; Fächer vorher wählbar.
+  - **Fragen:** Viele werden aus den Kapiteldaten erzeugt (Mischfarben und Gegenfarben aus `C`, Kontinent- und Ozeangrößen aus `CK`/`OK`, Uhrzeiten aus `TZC`, Himmelsrichtungen), dazu feste Fragen zu Groß-/Kleinschreibung, Arbeitswörtern, Notenwerten und Lerntipps. Innerhalb einer Runde wiederholt sich keine Frage.
+  - **Punkte:** 10 Punkte je richtige Antwort, Serienbonus bis +20; Gucki ruft bei 5 und 10 in Folge.
+  - **Auswertung:** Am Ende steht die Liste „Das übst du noch“ mit allen falsch beantworteten Fragen und ihrer Lösung. Rekord pro Gerät („blitzBest“). Tasten 1–4 funktionieren auch.
 - Kopfzeile: Symbol-Knöpfe sind rund. Unter 400 px Breite werden sie kleiner und das Schild „Klasse 5“ entfällt, damit das Logo ganz sichtbar bleibt.
 
 ## [1.4.0] – 2026-11-08

@@ -35,10 +35,28 @@ if (arg === "--notes") {
 
 const errors = [];
 const m = src.match(/<script type="application\/json" id="releaseData">([\s\S]*?)<\/script>/);
-let rel = [];
+let rel = [], summaries = [];
 if (!m) errors.push('In src/entdeckerheft.html fehlt der Block <script type="application/json" id="releaseData">.');
 else {
-  try { rel = JSON.parse(m[1]); } catch (e) { errors.push("releaseData ist kein gültiges JSON: " + e.message); }
+  try {
+    const data = JSON.parse(m[1]);
+    if (!data || !Array.isArray(data.releases)) errors.push('releaseData muss ein Objekt {"releases":[…],"summaries":[…]} sein.');
+    else { rel = data.releases; summaries = Array.isArray(data.summaries) ? data.summaries : []; }
+  } catch (e) { errors.push("releaseData ist kein gültiges JSON: " + e.message); }
+}
+// Je zehn Versionen (vom ältesten an gezählt) bilden einen Block. Jeder Block außer dem neuesten
+// braucht eine Zusammenfassung {from, to, title, items} in releaseData.summaries.
+if (rel.length) {
+  const asc = rel.slice().reverse();
+  const blocks = [];
+  for (let i = 0; i < asc.length; i += 10) blocks.push(asc.slice(i, i + 10));
+  blocks.pop();
+  blocks.forEach(b => {
+    const from = b[0].version, to = b[b.length - 1].version;
+    const sum = summaries.find(x => x.from === from && x.to === to);
+    if (!sum) errors.push(`Zusammenfassung fehlt: Für die Versionen ${from} bis ${to} braucht releaseData.summaries einen Eintrag {"from":"${from}","to":"${to}","title":"…","items":["…"]}.`);
+    else if (!Array.isArray(sum.items) || !sum.items.length) errors.push(`Zusammenfassung ${from} bis ${to} hat keine Einträge.`);
+  });
 }
 if (rel.length) {
   const w = rel[0];

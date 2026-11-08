@@ -1,6 +1,6 @@
-# Entdeckerheft
+# Entdeckerheft (S.D.L.W.)
 
-Interaktive Lernseite für die 5. Klasse (Gymnasium, Hamburg) mit Erklärungen, Ausprobier-Teilen und Übungen,
+Auf der Seite heißt sie **S.D.L.W.** – die *Super Duper Lern Webseite*. Interaktive Lernseite für die 5. Klasse (Gymnasium, Hamburg) mit Erklärungen, Ausprobier-Teilen und Übungen,
 die sofort Rückmeldung geben.
 
 **Kapitel:** Groß- und Kleinschreibung (Deutsch) · Farbkreis nach Itten (Kunst) · Die sieben Kontinente,
@@ -13,7 +13,7 @@ Für die echte Weltkarte und die Schriften wird eine Internetverbindung genutzt;
 einfache Ersatzkarte.
 
 Ein Kapitel direkt öffnen: `index.html#deutsch`, `#farbkreis`, `#kontinente`, `#meere`, `#tagnacht`,
-`#kompass`, `#noten`.
+`#kompass`, `#noten`. Die Versionshinweise stehen unter `index.html#neuigkeiten`.
 
 Die fertige Datei hängt außerdem an jedem [GitHub-Release](../../releases) als Download.
 

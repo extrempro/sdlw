@@ -1,4 +1,4 @@
-<title>Entdeckerheft Klasse 5</title>
+<title>S.D.L.W.</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
@@ -50,6 +50,69 @@ section{display:flex;flex-direction:column;gap:14px}
 /* Kapitel-Umschalter */
 .tb-l{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .tb-r{display:flex;gap:8px;flex-wrap:wrap}
+/* Logo S.D.L.W. */
+.logo{display:flex;flex-direction:column;align-items:flex-start;background:none;border:0;padding:0;cursor:pointer;line-height:1}
+.logo-t{font-family:var(--display);font-weight:800;font-size:1.75rem;letter-spacing:.03em;background:linear-gradient(90deg,#E3202A,#F28A1E,#F4B41A,#3DA647,#139DB3,#2B5BAA,#7A5BC4,#E3202A);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:rainbow 4s linear infinite}
+.logo-s{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700;margin-top:3px}
+.logo:hover .logo-t{animation-duration:1.2s}
+.logo.boing{animation:boing .7s cubic-bezier(.3,1.6,.5,1)}
+.logo:focus-visible{outline:3px solid var(--focus);outline-offset:4px;border-radius:6px}
+@keyframes rainbow{to{background-position:200% 0}}
+@keyframes boing{0%{transform:scale(1)}30%{transform:scale(1.18) rotate(-4deg)}60%{transform:scale(.94) rotate(3deg)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.logo-t{animation:none}.logo.boing{animation:none}}
+@media (max-width:480px){.topbar{flex-wrap:nowrap;gap:8px}.tb-l{flex-wrap:nowrap;gap:8px;min-width:0}.tb-r{flex:none;gap:6px}.logo{min-width:0}.logo-t{font-size:1.4rem}.logo-s{font-size:.56rem;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.seg.jg{flex:none}.seg.jg button{padding:3px 8px;font-size:.78rem}#themeBtn{padding:6px 11px}}
+/* Brotkrumen-Leiste, Inhaltsverzeichnis, Nach oben */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:16;background:var(--paper)}
+.crumbs{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;padding-block:6px;background:var(--paper)}
+.crumbs-in{position:relative;display:flex;align-items:center;gap:10px;background:var(--sheet);border:1px solid var(--line);border-left:5px solid var(--fc,var(--ink));border-radius:14px;padding:7px 8px 9px 10px;box-shadow:0 8px 20px -14px rgba(0,0,0,.5);overflow:hidden}
+.cr-ico{flex:none;display:flex}
+.cr-ico .ico{width:32px;height:32px}
+.cr-path{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.2}
+.cr-top{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cr-top .cr-f{color:var(--fc,var(--muted))}
+.cr-path b{font-family:var(--display);font-weight:800;font-size:1rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cr-count{flex:none;font-variant-numeric:tabular-nums;font-size:.8rem;font-weight:700;color:var(--muted);background:var(--paper);border-radius:999px;padding:2px 9px}
+.cr-step{flex:none;display:flex;gap:4px}
+.cr-nb{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);font:800 1.1rem/1 var(--display);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 2px}
+.cr-nb:hover{border-color:var(--muted)}
+.cr-nb:disabled{opacity:.35;cursor:default}
+.cr-nb:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+#crBtn{padding:6px 12px;font-size:.88rem;flex:none}
+.cr-prog{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--paper)}
+.cr-prog i{display:block;height:100%;width:0;background:var(--fc,var(--ink));transition:width .15s linear}
+@media (max-width:520px){.cr-count,.crb-l{display:none}.cr-ico .ico{width:26px;height:26px}.crumbs-in{gap:7px}.cr-nb{width:30px;height:30px}}
+.cr-list{position:absolute;left:0;right:0;top:calc(100% - 2px);background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:8px;max-height:62vh;overflow:auto;box-shadow:0 14px 30px -14px rgba(0,0,0,.45)}
+.cr-list .grp,.toc .grp{margin:10px 10px 4px;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.cr-list .grp:first-child{margin-top:2px}
+.cr-list button,.toc button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-radius:9px;padding:7px 10px;color:var(--ink);font:inherit;font-size:.92rem;font-weight:700;cursor:pointer}
+.cr-list button .no,.toc button .no{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;background:var(--paper);color:var(--muted);font-variant-numeric:tabular-nums}
+.cr-list button.l2,.toc button.l2{font-weight:600;font-size:.88rem}
+.cr-list button .st,.toc button .st{margin-left:auto;flex:none;font-size:.8rem;font-weight:800}
+.st.ok{color:var(--ok)}.st.part{color:var(--muted)}
+.cr-list button:hover,.toc button:hover{background:var(--paper)}
+.cr-list button.on,.toc button.on{background:var(--paper);box-shadow:inset 4px 0 0 var(--fc,var(--pin))}
+.cr-list button.on .no,.toc button.on .no{background:var(--fc,var(--ink));color:#FFFFFF}
+.cr-list button.done .no,.toc button.done .no{background:var(--okbg);color:var(--ok)}
+.cr-list button:focus-visible,.toc button:focus-visible,.totop:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+.toc{display:none}
+@media (min-width:1240px){.toc{display:block;position:fixed;top:120px;left:calc(50% + 410px);width:230px;max-height:calc(100vh - 160px);overflow:auto;padding:4px}
+  .toc .toc-h{margin:0 10px 8px;display:flex;flex-direction:column;gap:6px}
+  .toc .toc-h b{font-family:var(--display);font-size:1rem}
+  .toc .toc-bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+  .toc .toc-bar i{display:block;height:100%;width:0;background:var(--fc,var(--ink))}}
+.topic h2,.topic .task{scroll-margin-top:calc(var(--crumbs-h,60px) + 14px)}
+.totop{position:fixed;left:max(16px,calc(env(safe-area-inset-left,0px) + 16px));bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:20;display:inline-flex;align-items:center;gap:4px;padding:9px 16px;border-radius:999px;border:0;background:var(--ink);color:var(--sheet);font:700 .9rem var(--body);cursor:pointer;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+@media (max-width:480px){.totop .ttl{display:none}.totop{padding:10px 14px}}
+/* Seite Versionshinweise */
+.relpage{display:flex;flex-direction:column;gap:28px}
+.relpage .rcards{display:flex;flex-direction:column;gap:12px}
+.relpage .rcard{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.relpage .rhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.relpage .rhead h3{font-size:1.2rem}
+.relpage .rdate{color:var(--muted);font-size:.9rem}
+.relpage .rnew{background:var(--pin);color:#FFFFFF;border-radius:999px;padding:1px 10px;font-size:.75rem;font-weight:700}
+.relpage ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.relpage details ul{margin-top:8px}
 .relnotes{display:flex;flex-direction:column;gap:14px}
 .relnotes .rel{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px dashed var(--line)}
 .relnotes .rel:first-of-type{border-top:0;padding-top:0}
@@ -177,7 +240,7 @@ canvas.globe:active{cursor:grabbing}
 .qfig.tnq svg{width:380px}
 .qtext .turnrow{flex-basis:100%;align-items:center}
 .c2grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
-.c2plan{position:sticky;top:env(safe-area-inset-top,0px);display:flex;flex-direction:column;gap:8px;background:var(--sheet);z-index:2;padding-block:12px 6px}
+.c2plan{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--crumbs-h,60px));display:flex;flex-direction:column;gap:8px;background:var(--sheet);z-index:2;padding-block:12px 6px}
 @media (max-width:640px){.c2grid{grid-template-columns:1fr;gap:12px}.c2plan{border-bottom:1px solid var(--line)}.c2plan svg{max-height:34vh;width:auto;max-width:100%;margin:0 auto}.c2plan .btn{align-self:center}}
 .turnrow .btn{padding:6px 12px;font-size:.9rem}
 .turnok{font-weight:700;color:var(--ok)}
@@ -379,27 +442,43 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </style>
 
 <div class="wrap">
-<div class="topbar"><div class="tb-l"><span class="eyebrow">Entdeckerheft</span><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><button class="btn ghost" id="newsBtn" type="button" aria-expanded="false" aria-controls="news"></button><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
+<div class="topbar"><div class="tb-l"><button class="logo" id="logo" type="button" title="Super Duper Lern Webseite" aria-label="S.D.L.W. – Super Duper Lern Webseite. Antippen für eine Überraschung."><span class="logo-t" aria-hidden="true">S.D.L.W.</span><span class="logo-s" aria-hidden="true">Super Duper Lern Webseite</span></button><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><a class="btn ghost iconbtn" id="newsBtn" href="#neuigkeiten"></a><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
 <script type="application/json" id="releaseData">
-[
- {
-  "version": "1.0.0",
-  "date": "2026-11-08",
-  "title": "Die erste Version des Entdeckerhefts",
-  "items": [
-   "Deutsch: Groß- und Kleinschreibung mit Wort-Lupe, Fehlerdetektiv und vier Übungen",
-   "Kunst: Farbkreis nach Itten mit Mischmaschine, Gegenfarben und warm/kalt",
-   "Erdkunde: Kontinente und Meere mit Weltkarte, 3D-Globus und Kartenrätseln",
-   "Erdkunde: Tag und Nacht mit 3D-Globus, Jahreszeiten und Weltzeituhr",
-   "Erdkunde: Kompass mit Windrose, Lageplan und Karte einnorden",
-   "Musik: Noten lesen mit klingender Klaviatur, Notenwerten, Pausen und Takt-Baukasten",
-   "Der kleine Gucki feiert mit: Applaus, Tränen, Sonnenbrille, Aura, Cringe und großer Konfetti-Party",
-   "Navigation nach Jahrgang und Fach, helle und dunkle Ansicht, Aufgaben neu beginnen"
-  ]
- }
-]
+{
+ "releases": [
+  {
+   "version": "1.1.0",
+   "date": "2026-11-08",
+   "title": "Neuer Name und besser zurechtfinden",
+   "items": [
+    "Die Seite hat einen neuen Namen: S.D.L.W. – die Super Duper Lern Webseite! Der Name leuchtet in Regenbogenfarben. Tippe ihn mal an …",
+    "Eine Leiste oben zeigt dir immer, in welchem Fach, Kapitel und Abschnitt du bist. Ein Balken zeigt, wie weit du im Kapitel schon bist.",
+    "Mit den Pfeilen ‹ › springst du zum vorherigen oder nächsten Abschnitt. Mit ☰ siehst du alle Abschnitte. Fehlerfrei geschaffte Übungen bekommen einen grünen Haken.",
+    "Auf großen Bildschirmen steht rechts ein Inhaltsverzeichnis, das beim Scrollen mitläuft.",
+    "Mit dem Knopf „Nach oben“ kommst du schnell zurück an den Anfang.",
+    "Die Versionshinweise haben eine eigene Seite. Du findest sie über das kleine ✦ oben rechts. Ein roter Punkt zeigt, dass es etwas Neues gibt.",
+    "Nach zehn Änderungen werden die Versionshinweise zusammengefasst, damit es übersichtlich bleibt."
+   ]
+  },
+  {
+   "version": "1.0.0",
+   "date": "2026-11-08",
+   "title": "Die erste Version des Entdeckerhefts",
+   "items": [
+    "Deutsch: Groß- und Kleinschreibung mit Wort-Lupe, Fehlerdetektiv und vier Übungen",
+    "Kunst: Farbkreis nach Itten mit Mischmaschine, Gegenfarben und warm/kalt",
+    "Erdkunde: Kontinente und Meere mit Weltkarte, 3D-Globus und Kartenrätseln",
+    "Erdkunde: Tag und Nacht mit 3D-Globus, Jahreszeiten und Weltzeituhr",
+    "Erdkunde: Kompass mit Windrose, Lageplan und Karte einnorden",
+    "Musik: Noten lesen mit klingender Klaviatur, Notenwerten, Pausen und Takt-Baukasten",
+    "Der kleine Gucki feiert mit: Applaus, Tränen, Sonnenbrille, Aura, Cringe und großer Konfetti-Party",
+    "Navigation nach Jahrgang und Fach, helle und dunkle Ansicht, Aufgaben neu beginnen"
+   ]
+  }
+ ],
+ "summaries": []
+}
 </script>
-<section class="sheet relnotes" id="news" hidden aria-label="Versionshinweise"></section>
 <nav class="navx" aria-label="Themen">
   <div class="faecher">
     <div class="fach"><p class="fachname"><span class="fdot" style="background:#D2553A"></span>Deutsch</p><div class="topics">
@@ -419,6 +498,18 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     </div></div>
   </div>
 </nav>
+<div class="crumbs" id="crumbs">
+  <div class="crumbs-in" id="crIn">
+    <span class="cr-ico" id="crIco" aria-hidden="true"></span>
+    <nav class="cr-path" id="crPath" aria-label="Du bist hier"></nav>
+    <span class="cr-count" id="crCount" aria-hidden="true"></span>
+    <span class="cr-step"><button class="cr-nb" id="crPrev" type="button" aria-label="Vorheriger Abschnitt" title="Vorheriger Abschnitt">‹</button><button class="cr-nb" id="crNext" type="button" aria-label="Nächster Abschnitt" title="Nächster Abschnitt">›</button></span>
+    <button class="btn ghost" id="crBtn" type="button" aria-expanded="false" aria-controls="crList"><span aria-hidden="true">☰</span><span class="crb-l"> Abschnitte</span></button>
+    <span class="cr-prog" aria-hidden="true"><i id="crProg"></i></span>
+  </div>
+  <div class="cr-list" id="crList" hidden></div>
+</div>
+<aside class="toc" id="toc" aria-label="Inhalt dieser Seite"></aside>
 
 <!-- ============ FARBKREIS ============ -->
 <div class="topic" id="farbkreis">
@@ -1030,8 +1121,23 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   </ol></div>
 <footer>Die Beispiele richten sich nach den amtlichen Regeln der deutschen Rechtschreibung.</footer>
 </div>
+
+<!-- ============ VERSIONSHINWEISE (eigene Seite) ============ -->
+<div class="topic" id="neuigkeiten" hidden>
+<header>
+  <p class="eyebrow">S.D.L.W. · Versionshinweise</p>
+  <h1>Was ist neu?</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4)"></div>
+</header>
+<section>
+  <p class="lead">Hier steht, was sich auf der S.D.L.W., der Super Duper Lern Webseite, verändert hat. Die neueste Version steht ganz oben. Nach zehn Änderungen fassen wir die Hinweise zusammen, damit diese Seite übersichtlich bleibt.</p>
+</section>
+<div id="relPage" class="relpage"></div>
+<footer>Die ausführlichen Versionshinweise für Lehrkräfte stehen im Projekt auf GitHub in der Datei CHANGELOG.md.</footer>
+</div>
 </div>
 
+<button class="totop" id="toTop" type="button" hidden aria-label="Nach oben zum Seitenanfang"><span aria-hidden="true">↑</span><span class="ttl"> Nach oben</span></button>
 <div class="gucki" id="gucki" aria-hidden="true" title="Hallo!">
   <div class="kopf"><div class="auge l"><div class="pupille"></div><div class="lid"></div></div><div class="auge r"><div class="pupille"></div><div class="lid"></div></div><div class="traene l"></div><div class="traene r"></div><div class="brille"><span class="glas l"></span><span class="steg"></span><span class="glas r"></span></div></div>
   <div class="hand l"></div><div class="hand r"></div>
@@ -1055,24 +1161,98 @@ const f1=n=>(Math.round(n*10)/10).toString();
   mq.addEventListener&&mq.addEventListener("change",label);
   label();
 })();
-/* ---------- Versionshinweise ---------- */
+/* ---------- Versionshinweise (eigene Seite #neuigkeiten) ---------- */
+// releaseData = {releases:[neueste zuerst], summaries:[{from,to,title,items}]}
+// Je zehn Versionen bilden einen Block (vom ältesten an gezählt). Alle Blöcke außer dem neuesten werden zusammengefasst.
 (function(){
-  let rel=[];try{rel=JSON.parse(document.getElementById("releaseData").textContent)}catch(_){}
-  const btn=$("#newsBtn"),box=$("#news");if(!rel.length){btn.hidden=true;return}
+  let RD={releases:[],summaries:[]};try{RD=JSON.parse(document.getElementById("releaseData").textContent)}catch(_){}
+  const rel=RD.releases||[],btn=$("#newsBtn"),page=$("#relPage");if(!rel.length){btn.hidden=true;return}
   const de=d=>{const[y,m,t]=d.split("-");return`${+t}.${+m}.${y}`};
-  btn.innerHTML=`<span aria-hidden="true">✦</span><span class="nlbl"> Neu in v${rel[0].version}</span>`;btn.setAttribute("aria-label",`Was ist neu in Version ${rel[0].version}?`);
-  box.innerHTML=`<h2>Was ist neu?</h2>`+rel.map(r=>`<div class="rel"><p class="ver">Version ${r.version}<span>${de(r.date)}</span></p>${r.title?`<p><strong>${r.title}</strong></p>`:""}<ul>${r.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("");
-  btn.onclick=()=>{box.hidden=!box.hidden;btn.setAttribute("aria-expanded",!box.hidden)};
+  const latest=rel[0].version;let seen="";try{seen=localStorage.getItem("seenVersion")||""}catch(_){}
+  btn.innerHTML=`<span aria-hidden="true">✦</span>${seen!==latest?`<span class="ndot" aria-hidden="true"></span>`:""}`;
+  btn.title=`Was ist neu? (Version ${latest})`;btn.setAttribute("aria-label",`Versionshinweise: Was ist neu in Version ${latest}?${seen!==latest?" Es gibt Neues.":""}`);
+  window.markReleaseSeen=()=>{try{localStorage.setItem("seenVersion",latest)}catch(_){}const d=btn.querySelector(".ndot");if(d)d.remove();btn.setAttribute("aria-label",`Versionshinweise: Was ist neu in Version ${latest}?`)};
+  const asc=rel.slice().reverse(),blocks=[];for(let i=0;i<asc.length;i+=10)blocks.push(asc.slice(i,i+10));
+  const current=(blocks.pop()||[]).reverse(),older=blocks.reverse();
+  const card=(r,first)=>`<div class="rcard"><div class="rhead"><h3>Version ${r.version}</h3><span class="rdate">${de(r.date)}</span>${first?`<span class="rnew">neu</span>`:""}</div>${r.title?`<p><strong>${r.title}</strong></p>`:""}<ul>${r.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
+  let h=`<section><h2>Die neuesten Änderungen</h2><div class="rcards">${current.map((r,i)=>card(r,i===0)).join("")}</div></section>`;
+  if(older.length){h+=`<section><h2>Ältere Versionen – zusammengefasst</h2><div class="rcards">`+older.map(bl=>{const from=bl[0],to=bl[bl.length-1];
+      const sum=(RD.summaries||[]).find(x=>x.from===from.version&&x.to===to.version);
+      return`<div class="rcard"><div class="rhead"><h3>Versionen ${from.version} bis ${to.version}</h3><span class="rdate">${de(from.date)} – ${de(to.date)}</span></div>
+        ${sum&&sum.title?`<p><strong>${sum.title}</strong></p>`:""}<ul>${(sum?sum.items:bl.map(r=>r.title||r.items[0]).reverse()).map(i=>`<li>${i}</li>`).join("")}</ul>
+        <details><summary>Alle ${bl.length} Versionen einzeln anzeigen</summary><ul>${bl.slice().reverse().map(r=>`<li><strong>${r.version}</strong> (${de(r.date)}): ${r.title||""}${r.title?" – ":""}${r.items.join(" ")}</li>`).join("")}</ul></details></div>`}).join("")+`</div></section>`}
+  page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch"];
+const TOPICS=["farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","neuigkeiten"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"farbkreis";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
   document.querySelectorAll(".topics a").forEach(a=>{if(a.dataset.topic===t)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  const nb=$("#newsBtn");if(nb){if(t==="neuigkeiten"){nb.setAttribute("aria-current","page");if(window.markReleaseSeen)markReleaseSeen()}else nb.removeAttribute("aria-current")}
   if(scroll)window.scrollTo(0,0);
+  if(typeof Wegweiser==="object")Wegweiser.update(t);
 }
 window.addEventListener("hashchange",()=>route(true));
+/* ---------- Wegweiser: Leiste „Du bist hier“, Sprungliste, Inhaltsverzeichnis, Nach oben ---------- */
+const Wegweiser=(function(){
+  const crumbs=$("#crumbs"),ico=$("#crIco"),path=$("#crPath"),count=$("#crCount"),prev=$("#crPrev"),next=$("#crNext"),btn=$("#crBtn"),list=$("#crList"),toc=$("#toc"),top=$("#toTop"),prog=$("#crProg");
+  let items=[],topic=null,cur=-1,ticking=false,fach="",title="";
+  const isUeb=it=>it.lvl===1&&/^Übungsaufgaben$/.test(it.label);
+  const offset=()=>(crumbs.offsetHeight||60)+16;
+  const setH=()=>document.documentElement.style.setProperty("--crumbs-h",(crumbs.offsetHeight||60)+"px");
+  // Abschnitte = alle h2 in einer <section> und alle Aufgaben-Überschriften des Kapitels
+  function collect(t){const el=document.getElementById(t),out=[];
+    el.querySelectorAll("section > h2, .task .taskhead h3").forEach(h=>{const task=h.closest(".task");out.push({el:task||h,label:h.textContent.trim(),lvl:task?2:1,task})});
+    return out}
+  function status(it){if(!it.task)return"";
+    if(!it.task.querySelector("[data-score]"))return`<span class="st part" title="Auftrag für Heft oder Klasse">✎</span>`;
+    return it.task.dataset.perfect?`<span class="st ok" title="Fehlerfrei geschafft">✓</span>`:""}
+  function listHTML(){let h="",n=0,grp="";
+    items.forEach((it,i)=>{const g=it.lvl===2||isUeb(it)?"Übungen":"Erklärungen";
+      if(g!==grp){grp=g;h+=`<p class="grp">${g}</p>`}
+      if(isUeb(it))return;
+      n++;const done=it.task&&it.task.dataset.perfect;
+      h+=`<button type="button" class="l${it.lvl}${done?" done":""}" data-i="${i}"><span class="no">${done?"✓":n}</span><span>${it.label.replace(/^Aufgabe \d+ · /,"")}</span>${status(it)}</button>`});
+    return h}
+  function render(){const h=listHTML();list.innerHTML=h;
+    toc.innerHTML=items.length?`<div class="toc-h"><b>${title}</b><span class="toc-bar"><i id="tocProg"></i></span></div>${h}`:"";
+    btn.hidden=!items.length;mark();progress()}
+  function mark(){[list,toc].forEach(c=>c.querySelectorAll("button[data-i]").forEach(b=>b.classList.toggle("on",+b.dataset.i===cur)))}
+  function head(){const el=document.getElementById(topic),h1=el.querySelector("h1");title=h1?h1.textContent.trim():"";
+    const a=document.querySelector(`.topics a[data-topic="${topic}"]`);let color="";
+    if(a){const fn=a.closest(".fach").querySelector(".fachname");fach=fn.textContent.trim();const d=fn.querySelector(".fdot");color=d?d.style.background:"";
+      const ic=a.querySelector(".ico");ico.innerHTML=ic?ic.outerHTML:""}
+    else{fach="S.D.L.W.";color="#7A5BC4";
+      ico.innerHTML=`<span class="ico" style="background:conic-gradient(#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4,#E3202A);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-weight:800">✦</span>`}
+    document.documentElement.style.setProperty("--fc",color||"var(--ink)")}
+  function label(){const sec=cur>=0?items[cur].label:"Einleitung";
+    path.innerHTML=`<span class="cr-top"><span class="cr-f">${fach}</span> · ${title}</span><b aria-current="location">${sec}</b>`;
+    count.textContent=items.length?`${Math.max(cur+1,0)}/${items.length}`:"";
+    prev.disabled=cur<0;next.disabled=cur>=items.length-1;mark()}
+  function progress(){const el=document.getElementById(topic);if(!el)return;const r=el.getBoundingClientRect(),total=el.offsetHeight-window.innerHeight+offset();
+    const w=(Math.max(0,Math.min(1,(offset()-r.top)/Math.max(1,total)))*100).toFixed(1)+"%";prog.style.width=w;const tp=$("#tocProg");if(tp)tp.style.width=w}
+  function spy(){ticking=false;const lim=offset()+70;let c=-1;
+    for(let i=0;i<items.length;i++){if(items[i].el.getBoundingClientRect().top<=lim)c=i;else break}
+    if(c!==cur){cur=c;label()}
+    progress();top.hidden=window.scrollY<500}
+  const smooth=()=>matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth";
+  function go(i){closeList();if(i<0){window.scrollTo({top:0,behavior:smooth()});return}
+    const it=items[i];if(!it)return;window.scrollTo({top:it.el.getBoundingClientRect().top+window.scrollY-offset()+2,behavior:smooth()})}
+  function closeList(){list.hidden=true;btn.setAttribute("aria-expanded","false")}
+  btn.onclick=e=>{e.stopPropagation();if(list.hidden)render();list.hidden=!list.hidden;btn.setAttribute("aria-expanded",String(!list.hidden));
+    if(!list.hidden){const on=list.querySelector(".on");if(on)on.scrollIntoView({block:"nearest"})}};
+  // Pfeile überspringen die Zwischenüberschrift „Übungsaufgaben“
+  const step=d=>{let i=cur+d;while(items[i]&&isUeb(items[i]))i+=d;go(i)};
+  prev.onclick=()=>step(-1);next.onclick=()=>step(1);
+  [list,toc].forEach(c=>c.addEventListener("click",e=>{const b=e.target.closest("button[data-i]");if(b)go(+b.dataset.i)}));
+  document.addEventListener("click",e=>{if(!list.hidden&&!e.target.closest("#crumbs"))closeList()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!list.hidden){closeList();btn.focus()}});
+  window.addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(spy)}},{passive:true});
+  window.addEventListener("resize",()=>{setH();spy()});
+  top.onclick=()=>{window.scrollTo({top:0,behavior:smooth()});const f=document.querySelector(".topics a[aria-current]")||$("#newsBtn");if(f)f.focus({preventScroll:true})};
+  return{update(t){topic=t;items=collect(t);cur=-1;head();render();closeList();setH();label();spy()},refresh(){if(topic)render()}};
+})();
 route(false);
 
 /* ---------- gemeinsame Bausteine ---------- */
@@ -1796,7 +1976,7 @@ quiz($("#n6"),[
 function guckiCheer(){guckiWrongRow=0;const g=document.getElementById("gucki");if(!g||g.classList.contains("party"))return;
   g.classList.remove("duck","clap","cry");void g.offsetWidth;g.classList.add("clap");clearTimeout(g._ct);g._ct=setTimeout(()=>g.classList.remove("clap"),1450)}
 let guckiStreak=0;
-function guckiDone(perfect,box){const g=document.getElementById("gucki");let mega=false;
+function guckiDone(perfect,box){const g=document.getElementById("gucki");let mega=false;setTimeout(()=>{if(typeof Wegweiser==="object")Wegweiser.refresh()},0);
   if(box){if(perfect)box.dataset.perfect=1;else delete box.dataset.perfect;
     const topic=box.closest(".topic");
     if(perfect&&topic&&!topic.dataset.mega){const tasks=[...topic.querySelectorAll(".task")].filter(t=>t.querySelector("[data-score]"));
@@ -2207,9 +2387,21 @@ quiz($("#d3"),shuffle([
   quiz($("#d4"),shuffle(W).slice(0,6).map(([q,a,w])=>({q:`<span>${q}</span>`,a,o:shuffle([a,...shuffle(RS.filter(x=>x!==a)).slice(0,3)]).map(v=>({v,label:v})),why:w})));
 })();
 
+
+/* --- Logo S.D.L.W.: Gucki stellt sich vor --- */
+(function(){const logo=$("#logo");if(!logo)return;let busy=false;
+  logo.addEventListener("click",()=>{logo.classList.remove("boing");void logo.offsetWidth;logo.classList.add("boing");setTimeout(()=>logo.classList.remove("boing"),750);
+    if(busy||guckiMegaOn)return;busy=true;const g=document.getElementById("gucki");
+    g.classList.remove("duck","cry","clap","party","aura");void g.offsetWidth;g.classList.add("party","aura");
+    guckiSay("Super Duper Lern Webseite!",2600);
+    if(!matchMedia("(prefers-reduced-motion: reduce)").matches){const r=g.getBoundingClientRect();Konfetti.burst(r.left+r.width/2,r.top+10,60,105,70,1100);
+      const lr=logo.getBoundingClientRect();Konfetti.burst(lr.left+lr.width/2,lr.bottom,40,90,160,500)}
+    setTimeout(()=>g.classList.remove("party"),1700);setTimeout(()=>{g.classList.remove("aura");busy=false},2300)});
+})();
+
 /* --- Neu beginnen --- */
 (function(){
-  function resetTask(box){if(!box._reset)return;box._reset();delete box.dataset.perfect;delete box.dataset.fails;const t=box.closest(".topic");if(t)delete t.dataset.mega}
+  function resetTask(box){if(!box._reset)return;box._reset();delete box.dataset.perfect;delete box.dataset.fails;const t=box.closest(".topic");if(t)delete t.dataset.mega;if(typeof Wegweiser==="object")Wegweiser.refresh()}
   document.querySelectorAll(".task").forEach(box=>{if(!box._reset)return;const head=$(".taskhead",box);
     const b=document.createElement("button");b.type="button";b.className="btn ghost resetbtn";b.textContent="↺ Neu beginnen";b.setAttribute("aria-label","Diese Aufgabe neu beginnen");
     b.onclick=()=>resetTask(box);head.appendChild(b)});

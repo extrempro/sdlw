@@ -1,0 +1,36 @@
+name: Release
+
+# Nach jedem Merge auf main: Versionshinweise prüfen und, falls die Version neu ist,
+# ein GitHub-Release mit Tag vX.Y.Z, den Notizen aus CHANGELOG.md und index.html als Download erstellen.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Versionshinweise prüfen
+        run: node scripts/check-release.mjs
+      - name: GitHub-Release erstellen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(node scripts/check-release.mjs --version)
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "Release v$VERSION gibt es schon – nichts zu tun."
+          else
+            node scripts/check-release.mjs --notes > notes.md
+            gh release create "v$VERSION" \
+              --title "Entdeckerheft v$VERSION" \
+              --notes-file notes.md \
+              --target "$GITHUB_SHA" \
+              index.html
+          fi

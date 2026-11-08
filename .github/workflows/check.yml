@@ -1,0 +1,30 @@
+name: Prüfung
+
+# Bei jedem Pull Request: Versionshinweise müssen zusammenpassen, index.html muss aktuell sein
+# und die Versionsnummer darf noch nicht veröffentlicht sein.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Versionshinweise und Build prüfen
+        run: node scripts/check-release.mjs
+      - name: Version muss neu sein
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(node scripts/check-release.mjs --version)
+          if gh release view "v$VERSION" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::Version v$VERSION ist schon veröffentlicht. Bitte die Version erhöhen und neue Versionshinweise in CHANGELOG.md und auf der Webseite ergänzen."
+            exit 1
+          fi
+          echo "Version v$VERSION ist neu."

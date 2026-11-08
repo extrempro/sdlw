@@ -1,0 +1,2222 @@
+<title>Entdeckerheft Klasse 5</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: ein Arbeitsheft mit fünf Kapiteln (Umschalter oben), je eine Lernspalte – Erklärung, interaktives Herzstück, dann Aufgaben */
+:root{
+  --paper:#F6F7FA; --sheet:#FFFFFF; --ink:#1C1F2E; --muted:#5B6075; --line:#DDE0EA;
+  --ok:#1E7B45; --okbg:#E3F4EA; --bad:#B3261E; --badbg:#FBE6E4; --focus:#1E5AAA;
+  --land:#DCD3C2; --landline:#C2B7A2; --sea:#DCE8F2; --pin:#D2232A;
+  --pac:#2B5BAA; --atl:#139DB3; --ind:#7A5BC4; --sud:#22A57C; --ark:#8CC3E6;
+  --as:#E2A12B; --af:#D2553A; --na:#6FA845; --sa:#1F8E6E; --eu:#5A63D6; --au:#C2549B; --an:#8FA6C0;
+  --sun:#F4B41A; --earth:#4A93D0; --night:#0B1230; --daybg:#FFF0C2; --dayfg:#6B4E00; --nightpill:#26305A; --nightfg:#FFFFFF;
+  --park:#E5EFDA; --road:#FFFFFF; --plate:#E9EEF6; --plateline:#B5C1D4;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#14161F; --sheet:#1D2030; --ink:#ECEDF4; --muted:#A3A8BE; --line:#33384D;
+  --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
+  --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
+  --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#14161F; --sheet:#1D2030; --ink:#ECEDF4; --muted:#A3A8BE; --line:#33384D;
+  --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
+  --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
+  --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; color-scheme:dark}
+
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px;display:flex;flex-direction:column;gap:28px}
+.topic{display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2.1rem,7vw,3.2rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700}
+.stripe{display:flex;height:10px;border-radius:5px;overflow:hidden;margin-top:14px}
+.stripe span{flex:1}
+section{display:flex;flex-direction:column;gap:14px}
+.lead{font-size:1.1rem;max-width:62ch}
+.prose{max-width:62ch}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:20px}
+
+/* Kopfzeile mit Hell/Dunkel-Knopf */
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar .btn{padding:6px 14px;font-size:.9rem}
+/* Kapitel-Umschalter */
+.tb-l{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tb-r{display:flex;gap:8px;flex-wrap:wrap}
+.relnotes{display:flex;flex-direction:column;gap:14px}
+.relnotes .rel{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px dashed var(--line)}
+.relnotes .rel:first-of-type{border-top:0;padding-top:0}
+.relnotes ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.relnotes .ver{font-family:var(--display);font-weight:800}
+.relnotes .ver span{color:var(--muted);font-weight:600;font-family:var(--body);font-size:.9rem;margin-left:6px}
+@media (max-width:480px){.nlbl{display:none}}
+.seg.jg{padding:3px}
+.seg.jg button{padding:4px 12px;font-size:.85rem}
+.navx{display:block}
+.faecher{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 14px;align-items:center}
+.fach{display:contents}
+@media (max-width:480px){.faecher{grid-template-columns:1fr;gap:4px}.fach .topics{margin-bottom:6px}}
+@media (max-width:480px){.tlbl{display:none}}
+.fachname{margin:0;display:flex;align-items:center;gap:6px;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.fdot{width:9px;height:9px;border-radius:50%;flex:none}
+.topics{display:flex;flex-wrap:wrap;gap:6px}
+.topics a{display:inline-flex;align-items:center;gap:7px;padding:4px 13px 4px 4px;border-radius:999px;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);text-decoration:none;transition:border-color .15s}
+.topics a:hover{border-color:var(--muted)}
+.topics a[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+.topics a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.topics b{font-family:var(--body);font-weight:700;font-size:.92rem;line-height:1.2;white-space:nowrap}
+.ico{width:26px;height:26px;border-radius:50%;flex:none}
+.ico-farb{background:conic-gradient(#FFE000,#F28A1E,#E3202A,#6C2C8E,#1E5AAA,#3DA647,#FFE000)}
+.ico-meer{background:radial-gradient(circle at 35% 35%,#8CC3E6 0 18%,transparent 19%),linear-gradient(160deg,#139DB3,#2B5BAA 60%,#1B3B73)}
+.ico-kont{background:radial-gradient(circle at 32% 38%,#6FA845 0 24%,transparent 25%),radial-gradient(circle at 68% 62%,#E2A12B 0 26%,transparent 27%),#9CC7E4}
+.ico-tag{background:linear-gradient(90deg,#F4B41A 50%,#26305A 50%)}
+.ico-komp{background:#E9EEF6;display:block}
+
+/* Farbkreis */
+.wheelbox,.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:center}
+@media (max-width:620px){.wheelbox,.split{grid-template-columns:1fr}}
+svg.wheel{width:100%;max-width:360px;margin:0 auto;display:block}
+.wheel .seg{cursor:pointer;stroke:var(--sheet);stroke-width:2;transition:opacity .2s}
+.wheel .seg:focus{outline:none}
+.wheel .seg:focus-visible{stroke:var(--ink);stroke-width:3}
+.wheel.dim .seg{opacity:.28}
+.wheel.dim .seg.on{opacity:1}
+.wheel .pair{stroke:var(--ink);stroke-width:2.5;stroke-dasharray:6 5}
+.info{display:flex;flex-direction:column;gap:10px;min-width:0}
+.info .big{display:flex;align-items:center;gap:12px}
+.info .dot{width:46px;height:46px;border-radius:50%;flex:none;border:1px solid var(--line)}
+.info dl,.ofacts dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:0}
+.info dt,.ofacts dt{color:var(--muted);font-size:.9rem}
+.info dd,.ofacts dd{margin:0;font-weight:700;min-width:0}
+.hint{color:var(--muted);font-size:.92rem}
+
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:620px){.trio,.duo{grid-template-columns:1fr}}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;font-weight:700;padding:3px 10px 3px 4px;border-radius:999px;background:var(--paper);border:1px solid var(--line);color:var(--ink)}
+.chip i{width:16px;height:16px;border-radius:50%;display:inline-block}
+button.chip{cursor:pointer}
+button.chip[aria-pressed="true"]{border-color:var(--ink);background:var(--sheet)}
+.eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-weight:700}
+.merk{border-left:6px solid var(--accent,#E3202A);background:var(--sheet);border-radius:0 12px 12px 0;padding:14px 16px}
+.merk strong{font-family:var(--display)}
+#meere .merk{--accent:var(--pac)} #kontinente .merk{--accent:var(--na)} #tagnacht .merk{--accent:var(--sun)} #kompass .merk{--accent:var(--pin)} #noten .merk{--accent:var(--ind)}
+
+/* Karten */
+svg.map{width:100%;height:auto;display:block;cursor:pointer;touch-action:manipulation;border-radius:8px}
+.map [data-o],.map [data-k]{transition:opacity .2s}
+.map.dim [data-o]:not(.on),.map.dim [data-k]:not(.on){opacity:.22}
+.map .ld{fill:var(--land);stroke:var(--landline);stroke-width:.5}
+.map .ck{stroke:var(--sheet);stroke-width:.5}
+.map circle.l{fill:var(--land)}
+.map text{font-family:var(--display);font-weight:600;font-size:8.5px;fill:var(--ink);stroke:var(--sheet);stroke-width:2.6px;paint-order:stroke;pointer-events:none;text-anchor:middle}
+.map.world text{font-size:19px;stroke-width:5px}
+.map .hh{fill:none;stroke:var(--pin);stroke-width:1.6}
+.map.world .hh{stroke-width:2.5}
+.map .hhdot{fill:var(--pin)}
+.map text.hht{font-size:7px;text-anchor:start;font-family:var(--body);font-weight:700}
+.map.world text.hht{font-size:14px;stroke-width:4px}
+.mapwrap{display:flex;flex-direction:column;gap:14px}
+.ofacts{display:flex;flex-direction:column;gap:10px}
+.ofacts .big{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ofacts .dot{width:22px;height:22px;border-radius:50%}
+
+/* Balken */
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:9.5em minmax(0,1fr);gap:10px;align-items:center}
+@media (max-width:480px){.bar{grid-template-columns:1fr;gap:4px}}
+.bar .lbl{font-weight:700;font-size:.95rem}
+.track{display:flex;align-items:center;gap:8px;min-width:0}
+.fill{height:22px;border-radius:5px;flex:none}
+.fill.landfill{background:repeating-linear-gradient(45deg,var(--landline) 0 6px,transparent 6px 10px);border:1.5px solid var(--landline)}
+.val{font-variant-numeric:tabular-nums;font-size:.88rem;color:var(--muted);white-space:nowrap}
+
+/* Tag und Nacht */
+svg.tn{width:100%;height:auto;display:block}
+.tn text{font-family:var(--body);font-weight:700;font-size:12px;fill:var(--ink);stroke:var(--sheet);stroke-width:3px;paint-order:stroke}
+.tn text.cap{font-family:var(--display);font-size:15px;text-anchor:middle}
+.ctrl{display:flex;flex-direction:column;gap:8px}
+.ctrl label{font-weight:700}
+input[type=range]{width:100%;accent-color:var(--ink)}
+.clocks{display:flex;flex-direction:column;gap:8px}
+.clock{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:8px 12px;border-radius:10px;border:1px solid var(--line)}
+.clock b{flex:1}
+.clock .t{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.05rem}
+.pill{padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:700;white-space:nowrap}
+.pill.day{background:var(--daybg);color:var(--dayfg)}
+.pill.night{background:var(--nightpill);color:var(--nightfg)}
+.gapline{line-height:2.4}
+.gapline select{font:inherit;font-weight:700;padding:3px 6px;border-radius:8px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
+.gapline select.right{border-color:var(--ok);background:var(--okbg)}
+.gapline select.wrong{border-color:var(--bad);background:var(--badbg)}
+.gapline select:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.tnbox{display:flex;flex-direction:column;gap:16px}
+.seg{display:inline-flex;gap:4px;padding:4px;border-radius:12px;background:var(--paper);border:1px solid var(--line);flex-wrap:wrap;align-self:flex-start}
+.seg button{border:0;background:transparent;color:var(--ink);font-weight:700;padding:8px 14px;border-radius:9px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
+.seg button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+canvas.globe{width:100%;max-width:560px;height:auto;display:block;margin:0 auto;touch-action:pan-y;cursor:grab}
+canvas.globe:active{cursor:grabbing}
+#view2d svg.tn{max-width:520px;margin:0 auto}
+.tnctrl{display:flex;flex-direction:column;gap:12px}
+.tnctrl .row{align-items:center}
+.tnctrl select{font:inherit;font-weight:700;padding:8px 10px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
+.tnctrl select:disabled{opacity:.5}
+.clocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.qfig img{width:360px;max-width:100%;height:auto;display:block;border-radius:10px}
+.qfig.tnq svg{width:380px}
+.qtext .turnrow{flex-basis:100%;align-items:center}
+.c2grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
+.c2plan{position:sticky;top:env(safe-area-inset-top,0px);display:flex;flex-direction:column;gap:8px;background:var(--sheet);z-index:2;padding-block:12px 6px}
+@media (max-width:640px){.c2grid{grid-template-columns:1fr;gap:12px}.c2plan{border-bottom:1px solid var(--line)}.c2plan svg{max-height:34vh;width:auto;max-width:100%;margin:0 auto}.c2plan .btn{align-self:center}}
+.turnrow .btn{padding:6px 12px;font-size:.9rem}
+.turnok{font-weight:700;color:var(--ok)}
+.taskhead .resetbtn{padding:4px 10px;font-size:.82rem;margin-left:auto}
+.taskhead .score{order:2}
+.allreset{align-self:flex-start}
+svg.tzmap{cursor:default;min-width:560px}
+.tzmap text{font-size:11px;stroke-width:3px;font-family:var(--body);font-weight:700}
+.tzmap text.hr{font-family:var(--display);font-size:13px}
+.tzmap text.dl{font-size:10px;fill:var(--muted)}
+.clock .dt{font-size:.78rem;color:var(--muted);font-weight:700}
+
+/* Kompass */
+svg.compass{width:100%;max-width:300px;height:auto;display:block;margin:0 auto}
+.compass text{font-family:var(--display);font-weight:800;fill:#1C1F2E;text-anchor:middle;dominant-baseline:central}
+svg.rose{width:100%;max-width:200px;height:auto;display:block;margin:0 auto}
+.rose text{font-family:var(--display);font-weight:800;fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+svg.plan{width:100%;height:auto;display:block;max-width:520px}
+.plan text{font-family:var(--body);font-weight:700;font-size:11px;fill:var(--ink);text-anchor:middle}
+.readout{font-family:var(--display);font-size:1.5rem;font-weight:800}
+.readout span{font-variant-numeric:tabular-nums;color:var(--muted);font-size:1.1rem;font-weight:600}
+
+/* Aufgaben */
+.task{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.taskhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.score{font-variant-numeric:tabular-nums;font-weight:700;color:var(--muted);font-size:.95rem}
+.q{display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px dashed var(--line)}
+.q:first-of-type{border-top:0;padding-top:0}
+.qtext{font-weight:700;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.qfig{flex-basis:100%}
+.qfig svg{width:190px;max-width:100%;height:auto;display:block;margin:0}
+.qfig.wide svg{width:340px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;cursor:pointer}
+.opt{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font-weight:700;font-size:.95rem}
+.opt:has(i){padding-left:8px}
+.opt i{width:22px;height:22px;border-radius:6px;display:inline-block}
+.opt:hover{border-color:var(--muted)}
+.opt:focus-visible,.btn:focus-visible,.sort button:focus-visible,.mv:focus-visible,button.chip:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.opt.right{border-color:var(--ok);background:var(--okbg)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.opt:disabled{cursor:default}
+.fb{font-size:.92rem;font-weight:700;min-height:1.3em}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.btn{align-self:flex-start;padding:10px 18px;border-radius:10px;border:0;background:var(--ink);color:var(--sheet);font-weight:700}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.target{font-family:var(--display);font-size:1.25rem;font-weight:600}
+
+.sortlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:560px){.sortlist{grid-template-columns:1fr}}
+.sortitem{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;border:2px solid var(--line)}
+.sortitem.right{border-color:var(--ok);background:var(--okbg)}
+.sortitem.wrong{border-color:var(--bad);background:var(--badbg)}
+.sw{width:40px;height:40px;border-radius:8px;flex:none}
+.sortitem .nm{font-weight:700;flex:1;min-width:0}
+.sort{display:flex;gap:4px;flex-wrap:wrap}
+.sort button{padding:5px 9px;border-radius:7px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font-size:.82rem;font-weight:700}
+.sort button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+
+ol.rank{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+ol.rank li{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;border:2px solid var(--line)}
+ol.rank li.right{border-color:var(--ok);background:var(--okbg)}
+ol.rank li.wrong{border-color:var(--bad);background:var(--badbg)}
+.pos{font-variant-numeric:tabular-nums;font-weight:700;color:var(--muted);width:1.6em}
+ol.rank .nm{flex:1;font-weight:700;min-width:0}
+.mv{width:38px;height:38px;border-radius:8px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font-weight:700}
+.mv:disabled{opacity:.35;cursor:default}
+
+ol.steps{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
+details{border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px}
+summary{cursor:pointer;font-weight:700}
+details p{margin-top:8px}
+footer{color:var(--muted);font-size:.85rem}
+/* Deutsch */
+#deutsch .merk{--accent:var(--af)}
+.lupe{display:flex;flex-direction:column;gap:10px;font-size:1.15rem}
+.lupe p{margin:0;line-height:2}
+.lupe button,.dtext .tok{font:inherit;background:transparent;border:0;padding:1px 2px;margin:0;border-radius:5px;color:var(--ink);cursor:pointer}
+.lupe button{border-bottom:2px dotted var(--line)}
+.lupe button:hover,.dtext .tok:hover{background:var(--paper)}
+.lupe button.on{background:var(--ink);color:var(--sheet);border-bottom-color:var(--ink)}
+.lupe .cap{color:var(--af);font-weight:800}
+.lupe button.on .cap{color:#FFB199}
+.lupe button:focus-visible,.dtext .tok:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+.dtext{font-size:1.15rem;line-height:2.2;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.dtext .tok.up{background:#FFE9A8;color:#1C1F2E;font-weight:700}
+.dtext .tok.ok{background:var(--okbg);color:var(--ok);font-weight:700}
+.dtext .tok.miss{outline:2px dashed var(--bad);color:var(--bad);font-weight:700}
+.dtext .tok.bad{background:var(--badbg);color:var(--bad);text-decoration:line-through}
+.qtext mark{background:#FFE9A8;color:#1C1F2E;padding:0 3px;border-radius:4px}
+.gap{display:inline-block;min-width:4.5em;border-bottom:2px solid var(--ink);margin:0 4px}
+/* Noten */
+svg.staff{width:100%;height:auto;display:block;max-width:560px}
+.staff .ln{stroke:var(--ink);stroke-opacity:.75;stroke-width:1.2}
+.staff .clef{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.staff .nt{fill:var(--ink);stroke:var(--ink)}
+.staff .nt.hl{fill:var(--pin);stroke:var(--pin)}
+.staff text{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.staff.click{cursor:pointer}
+.kbd{position:relative;height:150px;width:100%;max-width:640px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.kbd button{position:absolute;top:0;border:1.5px solid #1C1F2E;padding:0;display:flex;align-items:flex-end;justify-content:center;font:700 .8rem var(--body);cursor:pointer}
+.kbd .w{height:100%;background:#FFFFFF;color:#1C1F2E;border-radius:0 0 7px 7px;padding-bottom:8px}
+.kbd .b{height:60%;background:#1C1F2E;color:#FFFFFF;border-radius:0 0 5px 5px;z-index:2;font-size:.6rem;padding-bottom:5px}
+.kbd .w.down{background:#FFE9A8}.kbd .b.down{background:#5A63D6}
+.kbd .w.ok{background:#BFEBCF}.kbd .w.no,.kbd .b.no{background:#F6C3BE}
+.kbd button:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
+.kbd.nolabels .w span{visibility:hidden}
+@media (max-width:480px){.kbd{height:120px}.kbd .w{font-size:.62rem}}
+.vals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:620px){.vals{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.val{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;min-width:0}
+.val svg{width:100%;max-width:130px;height:auto}
+.val b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
+.vals .val{white-space:normal;font-size:1rem;color:var(--ink);font-variant-numeric:normal}
+.val>*{max-width:100%;overflow-wrap:break-word}
+#u1 .opt,#u4 .opt{min-width:56px;justify-content:center;font-size:1.05rem}
+#pBtns .btn{padding:6px 10px;font-size:.88rem;display:inline-flex;align-items:center;gap:4px}
+#pBtns svg{width:24px;height:auto}
+svg.meter{width:100%;max-width:520px;height:auto;display:block}
+.opt.svgopt{padding:6px 10px}
+.opt svg.staff{width:190px;max-width:100%}
+.opt svg.staff.ricon{width:26px;height:auto;flex:none}
+.val .btn{padding:6px 12px;font-size:.85rem;align-self:center}
+.qfig.staffq svg{width:300px}
+.notefig{font-family:var(--display);font-size:1.3rem;font-weight:800}
+/* Gucki: kleine Figur, die über den unteren Rand lugt */
+.gucki{position:fixed;right:max(18px,calc(env(safe-area-inset-right,0px) + 18px));bottom:0;width:78px;height:calc(50px + env(safe-area-inset-bottom,0px));overflow:hidden;z-index:20;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gucki .kopf{position:absolute;left:5px;top:6px;width:68px;height:80px;border-radius:34px 34px 0 0;background:#139DB3;transition:transform .35s cubic-bezier(.5,-.4,.5,1.4)}
+.gucki .auge{position:absolute;top:13px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;overflow:hidden;border:2px solid #0E6F7E}
+.gucki .auge.l{left:9px}.gucki .auge.r{left:35px}
+.gucki .pupille{position:absolute;left:6px;top:6px;width:10px;height:10px;border-radius:50%;background:#1C1F2E;transition:transform .08s linear}
+.gucki .pupille::after{content:"";position:absolute;left:2px;top:2px;width:3px;height:3px;border-radius:50%;background:#FFFFFF}
+.gucki .lid{position:absolute;inset:0;background:#139DB3;transform:translateY(-100%);transition:transform .09s}
+.gucki.blink .lid{transform:translateY(0)}
+.gucki .hand{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) - 6px);width:20px;height:13px;border-radius:10px;background:#0E8496;transition:transform .35s}
+.gucki .hand.l{left:0}.gucki .hand.r{right:0}
+.gucki.duck .kopf,.gucki.duck .hand{transform:translateY(110%)}
+.gucki .huch{position:absolute;right:0;bottom:calc(54px + env(safe-area-inset-bottom,0px));font-family:var(--display);font-weight:800;font-size:.85rem;color:var(--ink);opacity:0}
+.gucki.clap .hand.l{animation:clapL 1.4s ease-in-out}
+.gucki.clap .hand.r{animation:clapR 1.4s ease-in-out}
+.gucki.clap .kopf{animation:hop 1.4s ease-in-out}
+@keyframes clapL{0%,100%{transform:none}12%,36%,60%,84%{transform:translate(19px,-12px) rotate(-25deg)}24%,48%,72%{transform:translate(26px,-14px) rotate(-10deg)}}
+@keyframes clapR{0%,100%{transform:none}12%,36%,60%,84%{transform:translate(-19px,-12px) rotate(25deg)}24%,48%,72%{transform:translate(-26px,-14px) rotate(10deg)}}
+@keyframes hop{0%,100%{transform:none}20%,44%,68%{transform:translateY(-4px)}32%,56%,80%{transform:translateY(-1px)}}
+.gucki.party{overflow:visible}
+.gucki.party .kopf{animation:salto 1.6s cubic-bezier(.4,0,.3,1)}
+.gucki.party .hand.l{animation:winkL .4s ease-in-out 4}
+.gucki.party .hand.r{animation:winkR .4s ease-in-out 4}
+@keyframes salto{0%{transform:none}25%{transform:translateY(-80px)}60%{transform:translateY(-80px) rotate(360deg)}85%{transform:translateY(4px) rotate(360deg)}100%{transform:rotate(360deg)}}
+@keyframes winkL{50%{transform:translate(-4px,-22px) rotate(-30deg)}}
+@keyframes winkR{50%{transform:translate(4px,-22px) rotate(30deg)}}
+.gucki .lid{z-index:1}
+.gucki.aura{overflow:visible}
+.gucki.aura .kopf{animation:aura 2.2s ease-in-out}
+@keyframes aura{0%{box-shadow:0 0 0 0 rgba(255,214,0,0);transform:none}20%{transform:translateY(-14px)}30%,80%{box-shadow:0 0 18px 8px rgba(255,214,0,.85),0 0 46px 20px rgba(255,170,0,.45);transform:translateY(-14px)}100%{box-shadow:0 0 0 0 rgba(255,214,0,0);transform:none}}
+.gucki.facepalm .hand.r{animation:facepalm 2s ease-in-out}
+.gucki.facepalm .kopf{animation:kopfweg 2s ease-in-out}
+@keyframes facepalm{15%,80%{transform:translate(-20px,-24px) rotate(25deg) scale(1.15)}100%{transform:none}}
+@keyframes kopfweg{15%,80%{transform:rotate(-8deg)}100%{transform:none}}
+canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+.gucki.crazy{overflow:visible}
+.gucki.crazy .kopf{animation:crazy .6s ease-in-out infinite}
+@keyframes crazy{0%{transform:translateY(0) rotate(0)}25%{transform:translateY(-40px) rotate(-25deg)}50%{transform:translateY(-10px) rotate(200deg)}75%{transform:translateY(-55px) rotate(340deg)}100%{transform:translateY(0) rotate(360deg)}}
+.gucki.crazy .hand.l{animation:winkL .25s ease-in-out infinite}
+.gucki.crazy .hand.r{animation:winkR .25s ease-in-out infinite}
+.gucki.throw .hand.r{animation:throwR .55s ease-out}
+.gucki.throw2 .hand.l{animation:throwL .55s ease-out}
+@keyframes throwR{40%{transform:translate(-4px,-18px) rotate(30deg)}70%{transform:translate(-10px,-40px) rotate(-20deg)}}
+@keyframes throwL{40%{transform:translate(4px,-18px) rotate(-30deg)}70%{transform:translate(10px,-40px) rotate(20deg)}}
+.gucki .traene{position:absolute;top:28px;width:8px;height:11px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:#9FD4F5;border:1px solid #4A93D0;opacity:0;z-index:2}
+.gucki .traene.l{left:13px}.gucki .traene.r{left:47px}
+.gucki.cry .traene{animation:traene .55s ease-in 3}
+.gucki.cry .traene.r{animation-delay:.25s}
+@keyframes traene{0%{opacity:1;transform:translateY(0) scale(.7)}80%{opacity:1}100%{opacity:0;transform:translateY(13px) scale(1)}}
+.gucki.cry .lid{transform:translateY(-58%)!important;transition:transform .2s}
+.gucki.cry .pupille{transform:translate(0,4px)!important}
+.gucki.cry .kopf{animation:schluchz .3s ease-in-out 5}
+@keyframes schluchz{50%{transform:translateY(2px)}}
+.gucki .brille{position:absolute;inset:0;display:none;z-index:3;pointer-events:none}
+.gucki .glas{position:absolute;top:10px;width:30px;height:30px;box-sizing:border-box;border-radius:7px 7px 14px 14px;background:linear-gradient(135deg,#3A3F55 0 28%,#14161F 29%);border:2.5px solid #0B0C12}
+.gucki .glas.l{left:5px}.gucki .glas.r{left:34px}
+.gucki .steg{position:absolute;left:30px;top:17px;width:9px;height:4px;background:#0B0C12;border-radius:2px;z-index:1}
+.gucki .brille::before,.gucki .brille::after{content:"";position:absolute;top:16px;width:6px;height:3px;background:#0B0C12}
+.gucki .brille::before{left:0}.gucki .brille::after{right:0}
+.gucki.cool .brille{display:block;animation:brilleAuf .7s cubic-bezier(.3,1.25,.5,1) both}
+@keyframes brilleAuf{0%{transform:translateY(-34px);opacity:0}30%{opacity:1}100%{transform:none;opacity:1}}
+.gucki.nofx .brille{animation:none}
+.gucki.puton .hand.l{animation:putL .8s ease-in-out}
+.gucki.puton .hand.r{animation:putR .8s ease-in-out}
+@keyframes putL{0%,100%{transform:none}35%,70%{transform:translate(2px,-30px) rotate(-35deg)}}
+@keyframes putR{0%,100%{transform:none}35%,70%{transform:translate(-2px,-30px) rotate(35deg)}}
+.gucki-bubble{position:fixed;right:max(104px,calc(env(safe-area-inset-right,0px) + 104px));bottom:calc(env(safe-area-inset-bottom,0px) + 40px);z-index:21;background:var(--sheet);color:var(--ink);border:2px solid var(--ink);border-radius:14px 14px 4px 14px;padding:8px 14px;font-family:var(--display);font-weight:800;font-size:1rem;pointer-events:none;animation:bubble 2.8s ease forwards;max-width:60vw}
+@keyframes bubble{0%{opacity:0;transform:scale(.6) translateY(10px)}10%,85%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+.konfetti{position:fixed;width:8px;height:12px;border-radius:2px;z-index:19;pointer-events:none;animation:konf 1.8s cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes konf{0%{transform:translate(0,0) rotate(0)}45%{transform:translate(calc(var(--dx) * .7),var(--dy)) rotate(calc(var(--rot) * .5))}100%{transform:translate(var(--dx),calc(var(--dy) + 220px)) rotate(var(--rot));opacity:0}}
+@media (prefers-reduced-motion:reduce){.gucki .kopf,.gucki .hand{transition:none}.gucki.clap .hand,.gucki.clap .kopf,.gucki.party .kopf,.gucki.party .hand,.gucki.cry .kopf{animation:none}.gucki.aura .kopf,.gucki.facepalm .kopf,.gucki.facepalm .hand.r{animation:none}.gucki.cry .traene{animation-duration:1.2s;animation-iteration-count:1}.gucki .brille{animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<div class="topbar"><div class="tb-l"><span class="eyebrow">Entdeckerheft</span><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><button class="btn ghost" id="newsBtn" type="button" aria-expanded="false" aria-controls="news"></button><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
+<script type="application/json" id="releaseData">
+[
+ {
+  "version": "1.0.0",
+  "date": "2026-11-08",
+  "title": "Die erste Version des Entdeckerhefts",
+  "items": [
+   "Deutsch: Groß- und Kleinschreibung mit Wort-Lupe, Fehlerdetektiv und vier Übungen",
+   "Kunst: Farbkreis nach Itten mit Mischmaschine, Gegenfarben und warm/kalt",
+   "Erdkunde: Kontinente und Meere mit Weltkarte, 3D-Globus und Kartenrätseln",
+   "Erdkunde: Tag und Nacht mit 3D-Globus, Jahreszeiten und Weltzeituhr",
+   "Erdkunde: Kompass mit Windrose, Lageplan und Karte einnorden",
+   "Musik: Noten lesen mit klingender Klaviatur, Notenwerten, Pausen und Takt-Baukasten",
+   "Der kleine Gucki feiert mit: Applaus, Tränen, Sonnenbrille, Aura, Cringe und großer Konfetti-Party",
+   "Navigation nach Jahrgang und Fach, helle und dunkle Ansicht, Aufgaben neu beginnen"
+  ]
+ }
+]
+</script>
+<section class="sheet relnotes" id="news" hidden aria-label="Versionshinweise"></section>
+<nav class="navx" aria-label="Themen">
+  <div class="faecher">
+    <div class="fach"><p class="fachname"><span class="fdot" style="background:#D2553A"></span>Deutsch</p><div class="topics">
+      <a href="#deutsch" data-topic="deutsch"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D2553A"/><text x="16" y="21.5" text-anchor="middle" style="font:800 14px 'Bricolage Grotesque','Trebuchet MS',sans-serif;fill:#FFFFFF">Aa</text></svg><span><b>Groß und klein</b></span></a>
+    </div></div>
+    <div class="fach"><p class="fachname"><span class="fdot" style="background:#E3202A"></span>Kunst</p><div class="topics">
+      <a href="#farbkreis" data-topic="farbkreis"><span class="ico ico-farb" aria-hidden="true"></span><span><b>Farbkreis</b></span></a>
+    </div></div>
+    <div class="fach"><p class="fachname"><span class="fdot" style="background:#139DB3"></span>Erdkunde</p><div class="topics">
+      <a href="#kontinente" data-topic="kontinente"><span class="ico ico-kont" aria-hidden="true"></span><span><b>Kontinente</b></span></a>
+      <a href="#meere" data-topic="meere"><span class="ico ico-meer" aria-hidden="true"></span><span><b>Meere</b></span></a>
+      <a href="#tagnacht" data-topic="tagnacht"><span class="ico ico-tag" aria-hidden="true"></span><span><b>Tag und Nacht</b></span></a>
+      <a href="#kompass" data-topic="kompass"><svg class="ico ico-komp" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#FFFFFF" stroke="#1C1F2E" stroke-width="2"/><path d="M16 5 L19.5 16 L12.5 16 Z" fill="#D2232A"/><path d="M16 27 L19.5 16 L12.5 16 Z" fill="#5B6075"/></svg><span><b>Kompass</b></span></a>
+    </div></div>
+    <div class="fach"><p class="fachname"><span class="fdot" style="background:#7A5BC4"></span>Musik</p><div class="topics">
+      <a href="#noten" data-topic="noten"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#7A5BC4"/><ellipse cx="12.5" cy="21.5" rx="4.6" ry="3.4" transform="rotate(-20 12.5 21.5)" fill="#FFFFFF"/><path d="M16.6 20.5V7.5c2.5 1.6 5.6 2.6 5.6 6.4" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Noten lesen</b></span></a>
+    </div></div>
+  </div>
+</nav>
+
+<!-- ============ FARBKREIS ============ -->
+<div class="topic" id="farbkreis">
+<header>
+  <p class="eyebrow">Kunst · Klasse 5 · Farbenlehre</p>
+  <h1>Der Farbkreis nach Johannes Itten</h1>
+  <div class="stripe" id="stripe" aria-hidden="true"></div>
+</header>
+<section>
+  <p class="lead">Der Maler und Kunstlehrer Johannes Itten hat 1961 einen Farbkreis mit <strong>12 Farben</strong> veröffentlicht. Er zeigt dir, welche Farben du aus nur drei Farben mischen kannst – und welche Farben besonders stark miteinander leuchten.</p>
+</section>
+<section>
+  <h2>Entdecke den Farbkreis</h2>
+  <div class="sheet wheelbox">
+    <svg class="wheel" id="wheel" viewBox="-170 -170 340 340" role="group" aria-label="Farbkreis nach Itten mit 12 Farben"></svg>
+    <div class="info" id="info" aria-live="polite"></div>
+  </div>
+</section>
+<section>
+  <h2>So ist der Farbkreis aufgebaut</h2>
+  <div class="trio">
+    <div class="card"><h3>Grundfarben</h3><p class="hint">auch Primärfarben</p>
+      <p>Gelb, Rot und Blau. Man kann sie <strong>nicht</strong> aus anderen Farben mischen. Im Kreis bilden sie ein Dreieck.</p><div class="chips" data-chips="0"></div></div>
+    <div class="card"><h3>Mischfarben 1. Ordnung</h3><p class="hint">auch Sekundärfarben</p>
+      <p>Mische <strong>zwei Grundfarben</strong> zu gleichen Teilen.</p><div class="eq" data-eq="1"></div></div>
+    <div class="card"><h3>Mischfarben 2. Ordnung</h3><p class="hint">auch Tertiärfarben</p>
+      <p>Mische eine <strong>Grundfarbe</strong> mit der <strong>Mischfarbe daneben</strong>. So entstehen sechs weitere Farben.</p><div class="chips" data-chips="2"></div></div>
+  </div>
+  <div class="merk"><strong>Rechne mit:</strong> 3 Grundfarben + 3 Mischfarben 1. Ordnung + 6 Mischfarben 2. Ordnung = 12 Farben im Kreis.</div>
+</section>
+<section>
+  <h2>Komplementärfarben</h2>
+  <p class="prose">Zwei Farben, die sich im Farbkreis <strong>genau gegenüberliegen</strong>, heißen Komplementärfarben (Gegenfarben). Nebeneinander lassen sie sich gegenseitig besonders stark leuchten. Ein Trick: Die Gegenfarbe einer Grundfarbe ist immer die Mischung der <strong>beiden anderen</strong> Grundfarben.</p>
+  <div class="chips" id="pairs"></div>
+</section>
+<section>
+  <h2>Warme und kalte Farben</h2>
+  <p class="prose">Gelb, Orange und Rot erinnern an Sonne und Feuer: Das sind <strong>warme Farben</strong>. Blau, Blaugrün und Blauviolett erinnern an Wasser und Eis: Das sind <strong>kalte Farben</strong>. Laut Itten ist <strong>Rotorange</strong> die wärmste und <strong>Blaugrün</strong> die kälteste Farbe – und die beiden liegen sich genau gegenüber.</p>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="t1"><div class="taskhead"><h3>Aufgabe 1 · Mischmaschine</h3><span class="score" data-score></span></div>
+  <p class="hint">Welche Farbe entsteht, wenn du die beiden Farben mischst?</p><div data-qs></div></div>
+<div class="task" id="t2"><div class="taskhead"><h3>Aufgabe 2 · Ordne zu</h3><span class="score" data-score></span></div>
+  <p class="hint">Ist das eine Grundfarbe (G), eine Mischfarbe 1. Ordnung (M1) oder eine Mischfarbe 2. Ordnung (M2)? Wähle für jede Farbe und tippe dann auf „Prüfen“.</p>
+  <div class="sortlist" data-list></div>
+  <div class="row"><button class="btn" data-check>Prüfen</button><button class="btn ghost" data-reset>Neu mischen</button></div>
+  <p class="fb" data-fb aria-live="polite"></p></div>
+<div class="task" id="t3"><div class="taskhead"><h3>Aufgabe 3 · Finde die Gegenfarbe</h3><span class="score" data-score></span></div>
+  <p class="hint">Welche Farbe liegt im Farbkreis genau gegenüber? Du darfst oben im Kreis nachschauen.</p><div data-qs></div></div>
+<div class="task" id="t4"><div class="taskhead"><h3>Aufgabe 4 · Warm oder kalt?</h3><span class="score" data-score></span></div>
+  <p class="hint">Entscheide für jede Farbe.</p><div data-qs></div></div>
+<div class="task" id="t5"><div class="taskhead"><h3>Aufgabe 5 · Male deinen eigenen Farbkreis</h3></div>
+  <p class="hint">Für den Kunstraum: Du brauchst deinen Tuschkasten, einen Pinsel, Wasser und ein Blatt mit einem vorgezeichneten Kreis in 12 Feldern.</p>
+  <ol class="steps">
+    <li>Male Gelb ganz oben. Lass dann drei Felder frei und male Rot. Wieder drei Felder weiter kommt Blau.</li>
+    <li>Mische genau in die Mitte zwischen zwei Grundfarben die Mischfarbe 1. Ordnung: Orange, Violett und Grün.</li>
+    <li>Fülle die sechs leeren Felder mit den Mischfarben 2. Ordnung.</li>
+    <li>Wasche den Pinsel vor jeder neuen Farbe gut aus, damit die Farben sauber bleiben.</li>
+    <li>Vergleiche zum Schluss mit dem Farbkreis auf dieser Seite. Welche Mischung war am schwierigsten?</li>
+  </ol></div>
+<footer>Tipp: Gelbe Tuschfarbe ist schwach – nimm beim Mischen lieber mehr Gelb und gib das Rot oder Blau nur in kleinen Tupfern dazu.</footer>
+</div>
+
+<!-- ============ KONTINENTE ============ -->
+<div class="topic" id="kontinente" hidden>
+<header>
+  <p class="eyebrow">Erdkunde · Klasse 5 · Unsere Erde</p>
+  <h1>Die sieben Kontinente</h1>
+  <div class="stripe" aria-hidden="true"><span style="background:var(--as);flex:44.6"></span><span style="background:var(--af);flex:30.3"></span><span style="background:var(--na);flex:24.7"></span><span style="background:var(--sa);flex:17.8"></span><span style="background:var(--an);flex:14.2"></span><span style="background:var(--eu);flex:10.5"></span><span style="background:var(--au);flex:8.5"></span></div>
+</header>
+<section>
+  <p class="lead">Das Land auf der Erde ist auf sieben große Erdteile verteilt: die <strong>Kontinente</strong>. Zusammen sind sie etwa 150 Millionen km² groß. Das ist nicht einmal ein Drittel der Erdoberfläche – der Rest ist Wasser.</p>
+</section>
+<section>
+  <h2>Was ist ein Kontinent?</h2>
+  <div class="trio">
+    <div class="card"><h3>Große Landmassen</h3><p>Ein Kontinent ist eine sehr große, zusammenhängende Landfläche. Inseln in der Nähe zählen meist dazu. Großbritannien gehört zum Beispiel zu Europa, Grönland zu Nordamerika.</p></div>
+    <div class="card"><h3>Europa und Asien</h3><p>Europa und Asien hängen zusammen. Man nennt sie gemeinsam <strong>Eurasien</strong>. Die Grenze ist nur gedacht: Sie verläuft am Uralgebirge, am Kaspischen Meer, am Kaukasus und am Bosporus in Istanbul.</p></div>
+    <div class="card"><h3>Australien und Ozeanien</h3><p>Zum kleinsten Kontinent gehören neben Australien auch Neuseeland und viele Inseln im Pazifik. Darum heißt er oft <strong>Australien und Ozeanien</strong>.</p></div>
+  </div>
+</section>
+<section>
+  <h2>Entdecke die Kontinente</h2>
+  <div class="sheet mapwrap">
+    <svg class="map" id="contmap" role="img" aria-label="Weltkarte, die Kontinente sind in verschiedenen Farben gefärbt. Hamburg ist rot markiert."></svg>
+    <div class="chips" id="clegend" role="group" aria-label="Kontinent auswählen"></div>
+    <div class="ofacts" id="cinfo" aria-live="polite"></div>
+  </div>
+  <p class="hint">Tippe auf einen Kontinent in der Karte oder auf einen Namen. Der rote Ring zeigt, wo Hamburg liegt.</p>
+</section>
+<section>
+  <h2>Wie groß sind die Kontinente?</h2>
+  <p class="prose">Die Balken sind maßstabsgetreu. Asien ist mehr als fünfmal so groß wie Australien.</p>
+  <div class="sheet bars" id="cbars"></div>
+  <div class="merk"><strong>Eselsbrücke:</strong> <em>„<b>A</b>lle <b>A</b>ffen <b>N</b>aschen <b>S</b>aftige <b>A</b>nanas <b>E</b>rst <b>A</b>bends.“</em> So merkst du dir die Kontinente von groß nach klein: Asien, Afrika, Nordamerika, Südamerika, Antarktika, Europa, Australien.</div>
+  <p class="hint">Achtung, zwei ähnliche Wörter: <strong>Antarktika</strong> ist der Kontinent am Südpol. <strong>Antarktis</strong> nennt man das ganze Gebiet um den Südpol, also den Kontinent zusammen mit dem Meer und den Inseln drumherum. Im Alltag und in manchen Büchern wird auch der Kontinent „Antarktis“ genannt.</p>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="k1"><div class="taskhead"><h3>Aufgabe 1 · Kartenrätsel</h3><span class="score" data-score></span></div>
+  <p class="hint">Tippe in der Karte auf den gesuchten Kontinent.</p>
+  <p class="target" data-target aria-live="polite"></p>
+  <svg class="map" data-map role="img" aria-label="Weltkarte ohne Beschriftung"></svg>
+  <p class="fb" data-fb aria-live="polite"></p>
+  <button class="btn ghost" data-restart hidden>Nochmal spielen</button></div>
+<div class="task" id="k2"><div class="taskhead"><h3>Aufgabe 2 · Von groß nach klein</h3><span class="score" data-score></span></div>
+  <p class="hint">Bringe die Kontinente in die richtige Reihenfolge. Der größte kommt nach oben.</p>
+  <ol class="rank" data-rank></ol>
+  <div class="row"><button class="btn" data-check>Prüfen</button><button class="btn ghost" data-reset>Neu mischen</button></div>
+  <p class="fb" data-fb aria-live="polite"></p></div>
+<div class="task" id="k3"><div class="taskhead"><h3>Aufgabe 3 · Kontinente-Quiz</h3><span class="score" data-score></span></div>
+  <p class="hint">Wähle die richtige Antwort. Die Karte oben hilft dir.</p><div data-qs></div></div>
+<div class="task" id="k4"><div class="taskhead"><h3>Aufgabe 4 · Steckbrief</h3></div>
+  <p class="hint">Für dein Heft: Wähle einen Kontinent außer Europa und schreibe einen Steckbrief. Nutze deinen Atlas.</p>
+  <ol class="steps">
+    <li>Name des Kontinents und seine Größe in Millionen km²</li>
+    <li>An welche Ozeane grenzt er?</li>
+    <li>Nenne drei Länder, die dort liegen.</li>
+    <li>Wie heißt der höchste Berg? Wie heißt ein großer Fluss?</li>
+    <li>Ein Tier, das dort lebt, und eine Sache, die du besonders spannend findest</li>
+    <li>Zeichne die Umrisse des Kontinents ab und markiere die Hauptstadt eines Landes.</li>
+  </ol></div>
+<footer>Die Flächen sind gerundet. In Büchern findest du manchmal leicht andere Zahlen, je nachdem, welche Inseln mitgezählt werden.</footer>
+</div>
+
+<!-- ============ MEERE ============ -->
+<div class="topic" id="meere" hidden>
+<header>
+  <p class="eyebrow">Erdkunde · Klasse 5 · Unsere Erde</p>
+  <h1>Die Meere der Welt</h1>
+  <div class="stripe" aria-hidden="true"><span style="background:var(--pac);flex:166"></span><span style="background:var(--atl);flex:106"></span><span style="background:var(--ind);flex:70"></span><span style="background:var(--sud);flex:22"></span><span style="background:var(--ark);flex:14"></span></div>
+</header>
+<section>
+  <p class="lead">Wenn Astronauten die Erde aus dem Weltall sehen, ist sie vor allem blau. Etwa <strong>70 von 100 Teilen</strong> der Erdoberfläche sind mit Wasser bedeckt. Deshalb nennt man die Erde auch den <strong>Blauen Planeten</strong>.</p>
+</section>
+<section>
+  <h2>Ozeane und Meere</h2>
+  <div class="duo">
+    <div class="card"><h3>Ozeane</h3><p>Die riesigen Wasserflächen zwischen den Kontinenten heißen <strong>Ozeane</strong>. Es gibt fünf davon. Sie hängen alle miteinander zusammen und bilden gemeinsam das <strong>Weltmeer</strong>.</p></div>
+    <div class="card"><h3>Nebenmeere</h3><p>Kleinere Teile eines Ozeans, die zum Teil von Land umschlossen sind, heißen <strong>Nebenmeere</strong>. Nordsee, Ostsee und Mittelmeer sind Nebenmeere des <strong>Atlantiks</strong>.</p></div>
+  </div>
+</section>
+<section>
+  <h2>Entdecke die fünf Ozeane</h2>
+  <div class="sheet mapwrap">
+    <div class="seg" role="group" aria-label="Ansicht wählen"><button id="oMapBtn" aria-pressed="true">Weltkarte</button><button id="oGlobeBtn" aria-pressed="false">3D-Globus</button></div>
+    <svg class="map" id="worldmap" role="img" aria-label="Weltkarte: die fünf Ozeane in verschiedenen Farben. Hamburg ist rot markiert."></svg>
+    <div id="oGlobeWrap" class="tnctrl" hidden>
+      <canvas class="globe" id="oGlobe" width="560" height="460" role="img" aria-label="Drehbarer Globus mit den fünf Ozeanen"></canvas>
+      <div class="ctrl"><label for="oTilt">Blickwinkel: links von unten (Südpol), rechts von oben (Nordpol)</label><input type="range" id="oTilt" min="-75" max="75" step="1" value="15"></div>
+      <p class="hint">Ziehe den Globus zur Seite, um ihn zu drehen. Tippe auf einen Ozean, um mehr über ihn zu erfahren.</p>
+    </div>
+    <div class="chips" id="olegend" role="group" aria-label="Ozean auswählen"></div>
+    <div class="ofacts" id="oinfo" aria-live="polite"></div>
+  </div>
+  <p class="hint">Tippe auf einen Ozean in der Karte oder auf einen Namen. Der rote Ring zeigt, wo Hamburg liegt. Die Grenzen zwischen den Ozeanen sind vereinfacht.</p>
+</section>
+<section>
+  <h2>Wie groß sind die Ozeane?</h2>
+  <p class="prose">Die Balken sind maßstabsgetreu. Der gestreifte Balken zeigt zum Vergleich die Fläche <strong>aller Kontinente zusammen</strong>. Der Pazifik allein ist größer!</p>
+  <div class="sheet bars" id="bars"></div>
+  <div class="merk"><strong>Eselsbrücke:</strong> <em>„<b>P</b>apa <b>A</b>ngelt <b>I</b>m <b>S</b>ommer <b>A</b>ale.“</em> So merkst du dir die Ozeane von groß nach klein: Pazifik, Atlantik, Indischer Ozean, Südlicher Ozean, Arktischer Ozean.</div>
+  <p class="hint">Hinweis: In manchen Atlanten stehen nur drei Ozeane (Pazifik, Atlantik, Indischer Ozean). Das Nordpolarmeer und das Südpolarmeer werden dort als Teile dieser Ozeane gezählt.</p>
+</section>
+<section>
+  <h2>Unsere Meere vor der Haustür</h2>
+  <p class="prose">Von Hamburg fließt die Elbe gut 100 Kilometer bis zur Nordsee. Bei Cuxhaven mündet sie ins Meer. Die Ostsee erreichst du von Hamburg in etwa einer Stunde, zum Beispiel in Travemünde. Die beiden Meere sind ganz verschieden:</p>
+  <div class="duo">
+    <div class="card"><h3>Nordsee</h3><ul>
+      <li>ist ein <strong>Randmeer</strong> und zum Atlantik weit offen</li>
+      <li>hat starke <strong>Gezeiten</strong>: Etwa alle sechs Stunden wechseln Ebbe und Flut</li>
+      <li>an der Küste liegt das <strong>Wattenmeer</strong>, ein UNESCO-Weltnaturerbe</li>
+      <li>salzig wie der Ozean: etwa 35 g Salz pro Liter</li></ul></div>
+    <div class="card"><h3>Ostsee</h3><ul>
+      <li>ist ein <strong>Binnenmeer</strong>, fast ganz von Land umgeben</li>
+      <li>nur durch schmale Meerengen bei Dänemark mit der Nordsee verbunden</li>
+      <li>hat <strong>kaum</strong> Ebbe und Flut</li>
+      <li>wenig Salz (<strong>Brackwasser</strong>): bei Kiel etwa 15 g pro Liter, weiter im Osten unter 5 g</li></ul></div>
+  </div>
+  <div class="merk"><strong>Wusstest du?</strong> Die Flut der Nordsee drückt das Wasser die Elbe hinauf bis nach Hamburg. An den Landungsbrücken steigt und fällt der Wasserstand deshalb zweimal am Tag um mehr als 3 Meter.</div>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="m1"><div class="taskhead"><h3>Aufgabe 1 · Kartenrätsel</h3><span class="score" data-score></span></div>
+  <p class="hint">Tippe in der Karte auf den gesuchten Ozean.</p>
+  <p class="target" data-target aria-live="polite"></p>
+  <svg class="map" data-map role="img" aria-label="Weltkarte ohne Beschriftung"></svg>
+  <p class="fb" data-fb aria-live="polite"></p>
+  <button class="btn ghost" data-restart hidden>Nochmal spielen</button></div>
+<div class="task" id="m2"><div class="taskhead"><h3>Aufgabe 2 · Von groß nach klein</h3><span class="score" data-score></span></div>
+  <p class="hint">Bringe die Ozeane in die richtige Reihenfolge. Der größte kommt nach oben. Benutze die Pfeile.</p>
+  <ol class="rank" data-rank></ol>
+  <div class="row"><button class="btn" data-check>Prüfen</button><button class="btn ghost" data-reset>Neu mischen</button></div>
+  <p class="fb" data-fb aria-live="polite"></p></div>
+<div class="task" id="m3"><div class="taskhead"><h3>Aufgabe 3 · Richtig oder falsch?</h3><span class="score" data-score></span></div>
+  <p class="hint">Lies jeden Satz genau.</p><div data-qs></div></div>
+<div class="task" id="m4"><div class="taskhead"><h3>Aufgabe 4 · Meeres-Quiz</h3><span class="score" data-score></span></div>
+  <p class="hint">Wähle die richtige Antwort.</p><div data-qs></div></div>
+<div class="task" id="m5"><div class="taskhead"><h3>Aufgabe 5 · Atlas-Auftrag: Ein Containerschiff reist nach China</h3></div>
+  <p class="hint">Für dein Heft: Du brauchst deinen Atlas und eine Weltkarte.</p>
+  <p class="prose">Ein Containerschiff fährt vom Hamburger Hafen nach Shanghai in China. Es nimmt den kürzesten Weg durch den Suezkanal.</p>
+  <ol class="steps">
+    <li>Suche Hamburg und Shanghai im Atlas.</li>
+    <li>Verfolge den Weg mit dem Finger. Schreibe alle Flüsse, Meere, Kanäle und Ozeane in der richtigen Reihenfolge auf.</li>
+    <li>Zeichne den Weg mit Farbstift auf einer Weltkarte ein.</li>
+    <li>Welche Kontinente siehst du unterwegs? Notiere sie.</li>
+  </ol>
+  <details><summary>Lösung anzeigen</summary>
+    <p>Elbe → Nordsee → Ärmelkanal → Atlantik → Straße von Gibraltar → Mittelmeer → Suezkanal → Rotes Meer → Indischer Ozean → Pazifik (Südchinesisches Meer und Ostchinesisches Meer) → Shanghai.</p>
+    <p>Kontinente unterwegs: Europa, Afrika, Asien.</p></details></div>
+<footer>Die Flächen sind gerundet. Je nachdem, wo man die Grenzen zieht, findest du in Büchern leicht andere Zahlen.</footer>
+</div>
+
+<!-- ============ TAG UND NACHT ============ -->
+<div class="topic" id="tagnacht" hidden>
+<header>
+  <p class="eyebrow">Erdkunde · Klasse 5 · Die Erde im Weltall</p>
+  <h1>Wie entstehen Tag und Nacht?</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#F4B41A,#F6D77A 35%,#4A93D0 55%,#26305A 75%,#0B1230)"></div>
+</header>
+<section>
+  <p class="lead">Jeden Morgen geht die Sonne auf, und jeden Abend wird es dunkel. Aber warum eigentlich? Die Sonne wandert nicht um die Erde herum. Es ist die <strong>Erde, die sich dreht</strong>.</p>
+</section>
+<section>
+  <h2>Die Erde dreht sich</h2>
+  <div class="trio">
+    <div class="card"><h3>Wie ein Kreisel</h3><p>Die Erde dreht sich um eine gedachte Linie durch Nordpol und Südpol. Diese Linie heißt <strong>Erdachse</strong>. Für eine ganze Umdrehung braucht die Erde <strong>24 Stunden</strong>, also einen Tag.</p></div>
+    <div class="card"><h3>Eine Hälfte ist hell</h3><p>Die Sonne beleuchtet immer nur die Hälfte der Erde, die ihr zugewandt ist. Dort ist <strong>Tag</strong>. Auf der anderen Hälfte ist <strong>Nacht</strong>. Durch die Drehung wandert jeder Ort einmal am Tag durch Licht und Schatten.</p></div>
+    <div class="card"><h3>Von Westen nach Osten</h3><p>Die Erde dreht sich von <strong>Westen nach Osten</strong>. Darum sehen wir die Sonne im Osten aufgehen und im Westen untergehen. Es sieht nur so aus, als würde die Sonne wandern.</p></div>
+  </div>
+  <div class="merk"><strong>Merkspruch:</strong> <em>Im Osten geht die Sonne auf, im Süden nimmt sie ihren Lauf, im Westen will sie untergehn, im Norden ist sie nie zu sehn.</em></div>
+</section>
+<section>
+  <h2>Dreh die Erde selbst</h2>
+  <div class="sheet tnbox">
+    <div class="seg" role="group" aria-label="Ansicht wählen">
+      <button id="v3d" aria-pressed="true">3D-Globus</button><button id="v2d" aria-pressed="false">Von oben auf den Nordpol</button>
+    </div>
+    <div id="view3d">
+      <canvas class="globe" id="tnGlobe" width="560" height="430" role="img" aria-label="Globus mit Tag- und Nachtseite. Hamburg, New York und Tokio sind markiert."></canvas>
+      <p class="hint">Ziehe den Globus mit der Maus oder dem Finger zur Seite, um ihn von einer anderen Seite anzusehen.</p>
+    </div>
+    <div id="view2d" hidden>
+      <div id="tnStage"></div>
+      <p class="hint">Du schaust von oben auf den Nordpol. Der Pfeil zeigt, wie sich die Erde dreht: gegen den Uhrzeigersinn.</p>
+    </div>
+    <div class="tnctrl">
+      <div class="ctrl">
+        <label for="tnTime">Uhrzeit in Hamburg: <span id="tnTimeOut"></span></label>
+        <input type="range" id="tnTime" min="0" max="24" step="0.25" value="9">
+      </div>
+      <div class="row">
+        <button class="btn" id="tnPlay">Erde drehen</button>
+        <select id="tnSeason" aria-label="Jahreszeit">
+          <option value="0">Frühling oder Herbst</option>
+          <option value="23.44">Sommer (21. Juni)</option>
+          <option value="-23.44">Winter (21. Dezember)</option>
+        </select>
+      </div>
+      <div class="clocks" id="tnClocks" aria-live="polite"></div>
+    </div>
+  </div>
+  <p class="hint">Das Modell ist vereinfacht und rechnet ohne Sommerzeit. Probiere die Jahreszeiten aus: Im Sommer bleibt es in Hamburg viel länger hell, und am Nordpol geht die Sonne gar nicht unter.</p>
+</section>
+<section>
+  <h2>Zeitzonen: Nicht überall ist die gleiche Uhrzeit</h2>
+  <p class="prose">Weil immer nur eine Hälfte der Erde hell ist, ist nicht überall gleichzeitig Mittag. Wenn in Hamburg die Sonne am höchsten steht, ist es in New York noch früh am Morgen und in Tokio schon Abend. Deshalb ist die Erde in <strong>Zeitzonen</strong> eingeteilt. In jeder Zeitzone gilt eine eigene Uhrzeit.</p>
+  <div class="trio">
+    <div class="card"><h3>24 Zonen, je 15 Grad</h3><p>Die Erde dreht sich in 24 Stunden einmal ganz herum, also um 360 Grad. In einer Stunde sind das 360 : 24 = <strong>15 Grad</strong>. Darum ist eine Zeitzone ungefähr 15 Längengrade breit.</p></div>
+    <div class="card"><h3>Im Osten ist es später</h3><p>Im Osten geht die Sonne zuerst auf. Je weiter östlich ein Ort liegt, desto <strong>später</strong> ist es dort. Fliegst du nach Osten, stellst du die Uhr vor. Fliegst du nach Westen, stellst du sie zurück.</p></div>
+    <div class="card"><h3>Die Weltzeit</h3><p>Gezählt wird ab dem <strong>Nullmeridian</strong>, der durch Greenwich in London läuft. Die Uhrzeit dort heißt Weltzeit (UTC). In Deutschland gilt im Winter die <strong>Mitteleuropäische Zeit</strong> (MEZ): Weltzeit plus 1 Stunde.</p></div>
+  </div>
+</section>
+<section>
+  <h2>Die Weltzeituhr</h2>
+  <div class="sheet tnbox">
+    <div style="overflow-x:auto"><svg class="map tzmap" id="tzMap" viewBox="0 0 720 392" role="img" aria-label="Weltkarte mit 24 Zeitzonen-Streifen, Tag- und Nachtseite und den Uhrzeiten wichtiger Städte"></svg></div>
+    <div class="ctrl"><label for="tzTime">Uhrzeit in Hamburg: <span id="tzOut"></span></label><input type="range" id="tzTime" min="0" max="23.75" step="0.25" value="12"></div>
+    <div class="clocks" id="tzClocks"></div>
+  </div>
+  <p class="hint">Die Zahlen am oberen Rand zeigen, wie spät es in jedem Streifen ist. Der rot markierte Streifen ist unsere Zeitzone. Der dunkle Bereich hat gerade Nacht. Die Karte rechnet ohne Sommerzeit.</p>
+  <div class="duo">
+    <div class="card"><h3>Zeitzonen folgen Grenzen</h3><p>Die Grenzen der Zeitzonen sind nicht ganz gerade. Sie richten sich oft nach Ländergrenzen. China ist so breit wie fünf Zeitzonen, hat aber nur <strong>eine</strong> Uhrzeit. Russland hat dagegen <strong>11</strong> Zeitzonen. In Indien geht die Uhr sogar um eine halbe Stunde anders.</p></div>
+    <div class="card"><h3>Die Datumsgrenze</h3><p>Mitten im Pazifik, ungefähr bei 180 Grad, verläuft die <strong>Datumsgrenze</strong>. Westlich von ihr ist schon der nächste Tag. Wer sie nach Westen überquert, springt einen Tag vor. Wer nach Osten fliegt, erlebt denselben Tag zweimal.</p></div>
+  </div>
+  <div class="merk"><strong>Sommerzeit:</strong> Ende März stellen wir in Deutschland die Uhren eine Stunde vor. Dann gilt die Mitteleuropäische Sommerzeit (MESZ), also Weltzeit plus 2 Stunden. Ende Oktober werden die Uhren wieder zurückgestellt.</div>
+  <div class="merk"><strong>Wusstest du?</strong> Im Juni ist es in Hamburg über 17 Stunden lang hell, im Dezember nur etwa 7,5 Stunden. Das liegt daran, dass die Erdachse schräg steht. Mehr dazu lernst du beim Thema Jahreszeiten.</div>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="n1"><div class="taskhead"><h3>Aufgabe 1 · Tag oder Nacht?</h3><span class="score" data-score></span></div>
+  <p class="hint">Schau, wo Hamburg (roter Punkt) gerade auf der Erde ist. Ist es dort hell oder dunkel?</p><div data-qs></div></div>
+<div class="task" id="n2"><div class="taskhead"><h3>Aufgabe 2 · Lückentext</h3><span class="score" data-score></span></div>
+  <p class="hint">Wähle in jeder Lücke das richtige Wort und tippe dann auf „Prüfen“.</p>
+  <div data-gaps></div>
+  <div class="row"><button class="btn" data-check>Prüfen</button></div>
+  <p class="fb" data-fb aria-live="polite"></p></div>
+<div class="task" id="n3"><div class="taskhead"><h3>Aufgabe 3 · Wissens-Quiz</h3><span class="score" data-score></span></div>
+  <p class="hint">Wähle die richtige Antwort.</p><div data-qs></div></div>
+<div class="task" id="n5"><div class="taskhead"><h3>Aufgabe 4 · Zeitzonen-Rechnen</h3><span class="score" data-score></span></div>
+  <p class="hint">Rechne die Uhrzeit aus. Denk daran: Nach 24 Uhr beginnt ein neuer Tag.</p><div data-qs></div></div>
+<div class="task" id="n6"><div class="taskhead"><h3>Aufgabe 5 · Zeitzonen-Quiz</h3><span class="score" data-score></span></div>
+  <p class="hint">Wähle die richtige Antwort. Die Weltzeituhr oben hilft dir.</p><div data-qs></div></div>
+<div class="task" id="n4"><div class="taskhead"><h3>Aufgabe 6 · Experiment: Tag und Nacht im Klassenraum</h3></div>
+  <p class="hint">Ihr braucht: eine Taschenlampe (die Sonne), einen Globus oder eine Orange mit einem Holzspieß als Erdachse, eine kleine Stecknadel und einen abgedunkelten Raum.</p>
+  <ol class="steps">
+    <li>Steckt die Nadel dort in den Globus oder die Orange, wo ungefähr Hamburg liegt.</li>
+    <li>Eine Person leuchtet mit der Taschenlampe von der Seite auf die Erde.</li>
+    <li>Dreht die Erde langsam. Von oben auf den Nordpol geschaut dreht ihr gegen den Uhrzeigersinn.</li>
+    <li>Beobachtet: Wann kommt die Nadel ins Licht? Das ist der Sonnenaufgang. Wann verschwindet sie im Schatten?</li>
+    <li>Schreibt in euer Heft: Warum gibt es Tag und Nacht? Benutzt die Wörter Erdachse, Drehung, Sonne und Hälfte.</li>
+  </ol></div>
+<footer>Die Uhrzeiten von New York und Tokio gelten für die Winterzeit. Im Modell steht die Sonne um 12 Uhr genau im Süden, in Wirklichkeit weicht das je nach Ort etwas ab.</footer>
+</div>
+
+<!-- ============ KOMPASS ============ -->
+<div class="topic" id="kompass" hidden>
+<header>
+  <p class="eyebrow">Erdkunde · Klasse 5 · Orientierung</p>
+  <h1>Der Kompass: Wo ist Norden?</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--pin) 0 25%,var(--ink) 25% 50%,var(--muted) 50% 75%,var(--plateline) 75%)"></div>
+</header>
+<section>
+  <p class="lead">Mit einem Kompass findest du überall heraus, wo Norden ist: im Wald, in den Bergen oder auf dem Meer. Und mit Kompass und Karte findest du dich auch in einer fremden Gegend zurecht.</p>
+</section>
+<section>
+  <h2>Die Himmelsrichtungen</h2>
+  <div class="split sheet">
+    <div id="roseFig"></div>
+    <div class="info">
+      <p>Es gibt vier <strong>Haupthimmelsrichtungen</strong>: Norden (N), Osten (O), Süden (S) und Westen (W).</p>
+      <p>Dazwischen liegen die <strong>Nebenhimmelsrichtungen</strong>: Nordosten (NO), Südosten (SO), Südwesten (SW) und Nordwesten (NW).</p>
+      <p>Diese Zeichnung heißt <strong>Windrose</strong>.</p>
+    </div>
+  </div>
+  <div class="merk"><strong>Merksatz:</strong> <em>„<b>N</b>ie <b>O</b>hne <b>S</b>eife <b>W</b>aschen.“</em> So kommen die Himmelsrichtungen im Uhrzeigersinn: Norden, Osten, Süden, Westen.</div>
+</section>
+<section>
+  <h2>So funktioniert ein Kompass</h2>
+  <p class="prose">In einem Kompass steckt eine kleine, leichte <strong>Magnetnadel</strong>. Die Erde ist selbst wie ein riesiger Magnet. Darum dreht sich die Nadel immer so, dass ihre <strong>rote Spitze nach Norden</strong> zeigt.</p>
+  <div class="sheet split">
+    <div id="kStage"></div>
+    <div class="ctrl">
+      <label for="kDeg">Drehe den Kompass in deine Gehrichtung</label>
+      <input type="range" id="kDeg" min="0" max="359" step="1" value="45">
+      <p class="readout" id="kOut" aria-live="polite"></p>
+      <dl class="info" style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px">
+        <dt class="hint">Kompassnadel</dt><dd style="margin:0">rote Spitze zeigt immer nach Norden</dd>
+        <dt class="hint">Windrose</dt><dd style="margin:0">Ring mit den Himmelsrichtungen, man kann ihn drehen</dd>
+        <dt class="hint">Richtungspfeil</dt><dd style="margin:0">zeigt, wohin du gehst</dd>
+        <dt class="hint">Grundplatte</dt><dd style="margin:0">durchsichtige Platte, die man auf die Karte legt</dd>
+      </dl>
+    </div>
+  </div>
+  <p class="hint">Profis rechnen in Grad: Norden ist 0°, Osten 90°, Süden 180° und Westen 270°.</p>
+</section>
+<section>
+  <h2>So liest du den Kompass ab</h2>
+  <ol class="steps">
+    <li>Halte den Kompass waagerecht vor deinen Bauch. Der Richtungspfeil zeigt von dir weg.</li>
+    <li>Halte Abstand zu Metall, Magneten und Handys. Sie lenken die Nadel ab.</li>
+    <li>Warte, bis die Nadel ruhig steht. Die rote Spitze zeigt nach Norden.</li>
+    <li>Drehe den Ring, bis das N der Windrose genau unter der roten Nadelspitze liegt. Jetzt ist der Kompass <strong>eingenordet</strong>.</li>
+    <li>Lies am Richtungspfeil ab, in welche Himmelsrichtung du schaust.</li>
+  </ol>
+</section>
+<section>
+  <h2>Karte lesen mit dem Kompass</h2>
+  <h3>Schritt 1: Oben ist Norden</h3>
+  <p class="prose">Fast alle Karten sind <strong>genordet</strong>. Das heißt: Oben auf der Karte ist Norden, unten Süden, rechts Osten und links Westen. Ein roter <strong>Nordpfeil</strong> zeigt dir, wo auf der Karte Norden ist.</p>
+  <h3>Schritt 2: Eine Richtung auf der Karte finden</h3>
+  <ol class="steps">
+    <li>Suche auf der Karte, wo du stehst. In unserem Beispiel stehst du an der <strong>Schule</strong>.</li>
+    <li>Stell dir vor, du legst eine Windrose auf deinen Standort. Ihr N zeigt in dieselbe Richtung wie der Nordpfeil.</li>
+    <li>Schau, in welcher Richtung das Ziel liegt, und lies die Himmelsrichtung an der Windrose ab.</li>
+  </ol>
+  <div class="sheet tnbox">
+    <p class="eyebrow">Beispiel</p>
+    <p class="prose">Dieser Lageplan ist <strong>ausgedacht</strong>. Er zeigt eine Schule und acht Orte drumherum. Jeder Ort liegt in einer anderen Himmelsrichtung. Die kleinen Kreise mit N, NO, O und so weiter um die Schule sind die <strong>gedachte Windrose</strong>. Auf echten Karten ist sie nicht eingezeichnet. Du stellst sie dir an deinem Standort vor.</p>
+    <div id="planExplore"></div>
+    <p class="readout" id="planOut" aria-live="polite" style="font-size:1.15rem"></p>
+    <p class="hint">Tippe auf einen Ort im Plan. Die rote Linie zeigt den Weg von der Schule dorthin.</p>
+  </div>
+  <h3>Schritt 3: Die Karte einnorden</h3>
+  <p class="prose">Draußen hältst du die Karte oft schief in der Hand. Dann stimmen links und rechts auf der Karte nicht mit der Landschaft überein. Mit dem Kompass kannst du die Karte richtig hinlegen. Das nennt man <strong>einnorden</strong>:</p>
+  <ol class="steps">
+    <li>Lege die Karte flach vor dich hin.</li>
+    <li>Lege den Kompass daneben oder darauf und warte, bis die Nadel ruhig ist. Die rote Spitze zeigt nach Norden.</li>
+    <li>Drehe die Karte, bis ihr <strong>Nordpfeil in dieselbe Richtung zeigt wie die rote Nadelspitze</strong>.</li>
+    <li>Fertig! Jetzt liegt die Karte so wie die Landschaft. Was auf der Karte vor dir liegt, liegt auch in Wirklichkeit vor dir.</li>
+  </ol>
+  <div class="sheet tnbox">
+    <p><strong>Probiere es aus:</strong> Die Karte liegt verdreht. Die Kompassnadel zeigt nach oben, dort ist Norden. Drehe die Karte, bis ihr roter Nordpfeil auch nach oben zeigt.</p>
+    <div class="split">
+      <div id="nordMap"></div>
+      <div class="ctrl" style="align-items:center">
+        <div style="width:150px" id="nordCompass"></div>
+        <div class="row"><button class="btn ghost" id="nordL" aria-label="Karte nach links drehen">↺ links drehen</button><button class="btn ghost" id="nordR" aria-label="Karte nach rechts drehen">↻ rechts drehen</button></div>
+        <p class="fb" id="nordOut" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="c1"><div class="taskhead"><h3>Aufgabe 1 · Kompass ablesen</h3><span class="score" data-score></span></div>
+  <p class="hint">Der Kompass ist eingenordet. In welche Richtung zeigt der schwarze Richtungspfeil?</p><div data-qs></div></div>
+<div class="task" id="c2"><div class="taskhead"><h3>Aufgabe 2 · Lageplan lesen</h3><span class="score" data-score></span></div>
+  <p class="hint">Du benutzt wieder den Beispiel-Lageplan von oben. Du stehst an der Schule. Die Karte ist genordet: Oben ist Norden. Der Plan bleibt beim Scrollen sichtbar.</p>
+  <div class="c2grid">
+    <div class="c2plan"><div id="c2plan"></div><button class="btn ghost" id="c2rose" aria-pressed="false">Hilfe: Windrose einblenden</button></div>
+    <div data-qs></div>
+  </div></div>
+<div class="task" id="c3"><div class="taskhead"><h3>Aufgabe 3 · Für Profis: Die Karte ist verdreht</h3><span class="score" data-score></span></div>
+  <p class="hint">Das ist wieder der Beispiel-Lageplan, aber er liegt verdreht: Der rote Nordpfeil zeigt nicht nach oben. Drehe die Karte mit den Knöpfen, bis der Nordpfeil nach oben zeigt. Dann kannst du die Richtung wie in Aufgabe 2 ablesen.</p><div data-qs></div></div>
+<div class="task" id="c4"><div class="taskhead"><h3>Aufgabe 4 · Kompass-Quiz</h3><span class="score" data-score></span></div>
+  <p class="hint">Wähle die richtige Antwort.</p><div data-qs></div></div>
+<div class="task" id="c5"><div class="taskhead"><h3>Aufgabe 5 · Kompass-Rallye auf dem Schulhof</h3></div>
+  <p class="hint">Für draußen: Ihr braucht einen Kompass, Stift und Heft. Arbeitet zu zweit.</p>
+  <ol class="steps">
+    <li>Stellt euch in die Mitte des Schulhofs und nordet den Kompass ein.</li>
+    <li>Schaut nach Norden, Osten, Süden und Westen. Schreibt auf, was ihr in jeder Richtung seht.</li>
+    <li>Zeichnet eine einfache Karte vom Schulhof mit Nordpfeil.</li>
+    <li>Versteckt einen Gegenstand und schreibt eine Wegbeschreibung, zum Beispiel: „10 Schritte nach Osten, dann 5 Schritte nach Süden.“</li>
+    <li>Tauscht die Wegbeschreibung mit einem anderen Team. Findet ihr den Gegenstand?</li>
+  </ol></div>
+<footer>Die Kompassnadel zeigt genau genommen zum magnetischen Nordpol. Der liegt etwas neben dem geografischen Nordpol. In Hamburg ist der Unterschied so klein, dass du ihn nicht beachten musst.</footer>
+</div>
+<!-- ============ NOTEN ============ -->
+<div class="topic" id="noten" hidden>
+<header>
+  <p class="eyebrow">Musik · Klasse 5 · Notenlehre</p>
+  <h1>Noten lesen</h1>
+  <div class="stripe" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--ind) 0 22px,var(--sheet) 22px 26px)"></div>
+</header>
+<section>
+  <p class="lead">Noten sind die <strong>Schrift der Musik</strong>. Sie zeigen, welcher Ton gespielt wird und wie lange er klingt. Wer Noten lesen kann, kann Lieder spielen, die er noch nie gehört hat – genau wie man mit Buchstaben eine fremde Geschichte lesen kann.</p>
+</section>
+<section>
+  <h2>Das Notensystem</h2>
+  <div class="trio">
+    <div class="card"><h3>Fünf Linien</h3><p>Noten stehen auf <strong>fünf Linien</strong>. Dazwischen liegen <strong>vier Zwischenräume</strong>. Linien und Zwischenräume zählt man immer <strong>von unten</strong>.</p></div>
+    <div class="card"><h3>Oben klingt hoch</h3><p>Je höher eine Note im Notensystem steht, desto <strong>höher</strong> klingt der Ton. Je tiefer sie steht, desto <strong>tiefer</strong> klingt er.</p></div>
+    <div class="card"><h3>Der Violinschlüssel</h3><p>Am Anfang steht der <strong>Violinschlüssel</strong>. Seine Schnecke kringelt sich um die <strong>2. Linie</strong>. Dort liegt der Ton g'. Darum heißt er auch <strong>G-Schlüssel</strong>.</p></div>
+  </div>
+  <p class="prose">Für Töne, die über oder unter die fünf Linien hinausgehen, zeichnet man kurze <strong>Hilfslinien</strong>. Das c' zum Beispiel liegt auf der ersten Hilfslinie unter dem Notensystem.</p>
+</section>
+<section>
+  <h2>Spiel und entdecke</h2>
+  <div class="sheet tnbox">
+    <div id="nStaff"></div>
+    <p class="readout" id="nOut" aria-live="polite" style="font-size:1.15rem"></p>
+    <div class="kbd" id="nKbd"></div>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" id="nLabels" checked> Tastennamen anzeigen</label>
+  </div>
+  <p class="hint">Tippe auf eine Taste oder direkt ins Notensystem. Dann siehst du die Note und hörst den Ton. Mach den Ton am Gerät an!</p>
+</section>
+<section>
+  <h2>Die Notennamen</h2>
+  <p class="prose">Die sieben Stammtöne heißen <strong>c – d – e – f – g – a – h</strong>. Danach geht es wieder mit c los, nur eine Stufe höher. Die Töne vom c' bis zum h' heißen <strong>eingestrichen</strong> (mit einem Strich: c'), die nächsten <strong>zweigestrichen</strong> (c'').</p>
+  <div class="duo">
+    <div class="card"><h3>Merksatz für die Linien</h3><p>Von unten nach oben liegen auf den Linien <strong>e – g – h – d – f</strong>:</p><p class="notefig">„<b>E</b>s <b>G</b>eht <b>H</b>urtig <b>D</b>urch <b>F</b>leiß.“</p></div>
+    <div class="card"><h3>Merksatz für die Zwischenräume</h3><p>Von unten nach oben liegen in den Zwischenräumen <strong>f – a – c – e</strong>:</p><p class="notefig">Das ergibt das englische Wort „FACE“ (Gesicht).</p></div>
+  </div>
+  <div class="merk"><strong>Achtung:</strong> Im Deutschen heißt der siebte Ton <strong>h</strong>. Im Englischen heißt er <strong>B</strong>. Deshalb steht in englischen Liederbüchern manchmal B, wo wir h sagen.</div>
+</section>
+<section>
+  <h2>Notenwerte: Wie lange klingt ein Ton?</h2>
+  <p class="prose">Die Form der Note zeigt, wie lange ein Ton klingt. Wir zählen dabei in <strong>Schlägen</strong>. Ein Schlag ist so lang wie eine Viertelnote. Zu jeder Note gibt es eine <strong>Pause</strong>, die genauso lang ist: Dann ist es still.</p>
+  <div class="vals" id="nVals"></div>
+  <div class="sheet"><div id="nTree"></div></div>
+  <p class="hint">Der Notenbaum zeigt: 1 ganze Note = 2 halbe Noten = 4 Viertelnoten = 8 Achtelnoten.</p>
+  <div class="merk"><strong>Ganze oder halbe Pause?</strong> Die beiden sehen fast gleich aus. Die <strong>ganze Pause</strong> ist schwer wie ein voller Koffer: Sie <strong>hängt</strong> unter der 4. Linie. Die <strong>halbe Pause</strong> ist leichter: Sie <strong>sitzt</strong> wie ein Hut auf der 3. Linie.</div>
+</section>
+<section>
+  <h2>Der Takt</h2>
+  <p class="prose">Musik wird in <strong>Takte</strong> eingeteilt. Ein senkrechter <strong>Taktstrich</strong> trennt die Takte. Die Zahlen am Anfang heißen <strong>Taktart</strong>: Beim <strong>4/4-Takt</strong> passen genau vier Viertel in jeden Takt. Beim <strong>3/4-Takt</strong> sind es drei Viertel, so klingt zum Beispiel ein Walzer. Am Ende eines Stücks steht ein <strong>Schlussstrich</strong>.</p>
+  <div class="sheet"><div id="nTakt"></div></div>
+  <div class="row"><button class="btn ghost" id="nTaktPlay">▶ Anhören</button></div>
+</section>
+<section>
+  <h2>Pausen im Takt</h2>
+  <p class="prose">Eine Pause bedeutet: <strong>Hier ist es still.</strong> Die Zeit läuft aber weiter, und du zählst die Schläge im Kopf mit. Darum zählt eine Pause im Takt genauso viele Schläge wie die Note mit demselben Namen.</p>
+  <div class="vals" id="pVals"></div>
+  <h3>So findest du die fehlende Pause</h3>
+  <ol class="steps">
+    <li><strong>Schau auf die Taktart.</strong> Beim 4/4-Takt müssen in jeden Takt genau <strong>4 Schläge</strong>.</li>
+    <li><strong>Zähle die Noten zusammen.</strong> Ganze = 4, halbe = 2, Viertel = 1, Achtel = ½.</li>
+    <li><strong>Rechne aus, was fehlt:</strong> 4 minus deine Summe.</li>
+    <li><strong>Wähle die Pause mit genau dieser Länge:</strong> 4 Schläge = ganze Pause, 2 = halbe Pause, 1 = Viertelpause, ½ = Achtelpause.</li>
+  </ol>
+  <div class="sheet tnbox">
+    <p class="eyebrow">Beispiel</p>
+    <div id="pEx1"></div>
+    <p class="prose"><strong>Rechnung:</strong> Viertelnote (1) + Viertelnote (1) = 2 Schläge. Es fehlen 4 − 2 = <strong>2 Schläge</strong>. Die passende Pause ist die <strong>halbe Pause</strong>.</p>
+    <details><summary>Lösung im Takt zeigen</summary><div id="pEx1sol"></div></details>
+  </div>
+  <div class="sheet tnbox">
+    <p class="eyebrow">Probiere es aus: Der Takt-Baukasten</p>
+    <p class="prose">Baue einen 4/4-Takt aus Noten und Pausen. Der Balken darunter zeigt, wie viele Schläge schon belegt sind. Die Pausen sind grau gestreift.</p>
+    <div id="pBau"></div>
+    <div id="pMeter"></div>
+    <p class="fb" id="pOut" aria-live="polite"></p>
+    <div class="row" id="pBtns"></div>
+    <div class="row"><button class="btn" id="pPlay" type="button">▶ Anhören</button><button class="btn ghost" id="pBack" type="button">← Zurück</button><button class="btn ghost" id="pNew" type="button">Neuer Takt</button></div>
+  </div>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="u1"><div class="taskhead"><h3>Aufgabe 1 · Notennamen lesen</h3><span class="score" data-score></span></div>
+  <p class="hint">Wie heißt die rote Note? Denk an die Merksätze.</p><div data-qs></div></div>
+<div class="task" id="u2"><div class="taskhead"><h3>Aufgabe 2 · Finde die Taste</h3><span class="score" data-score></span></div>
+  <p class="hint">Welche Taste gehört zu der Note? Tippe sie auf der Klaviatur an. Achte auch darauf, ob der Ton eingestrichen oder zweigestrichen ist.</p>
+  <p class="target" data-target aria-live="polite"></p>
+  <div data-staff style="max-width:420px"></div>
+  <div class="kbd nolabels" data-kbd></div>
+  <div class="row"><label style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" data-labels> Hilfe: Tastennamen anzeigen</label></div>
+  <p class="fb" data-fb aria-live="polite"></p>
+  <button class="btn ghost" data-restart hidden>Nochmal spielen</button></div>
+<div class="task" id="u3"><div class="taskhead"><h3>Aufgabe 3 · Notenwerte und Takt</h3><span class="score" data-score></span></div>
+  <p class="hint">Wähle die richtige Antwort.</p><div data-qs></div></div>
+<div class="task" id="u6"><div class="taskhead"><h3>Aufgabe 4 · Pausen</h3><span class="score" data-score></span></div>
+  <p class="hint">Erkenne die Pausen, fülle Lücken im Takt und hör genau hin. Bei den Hörfragen: Erst auf „Rhythmus anhören“ tippen, dann den passenden Takt wählen.</p><div data-qs></div></div>
+<div class="task" id="u4"><div class="taskhead"><h3>Aufgabe 5 · Notenwörter</h3><span class="score" data-score></span></div>
+  <p class="hint">Die Noten ergeben ein Wort. Lies die Notennamen von links nach rechts.</p><div data-qs></div></div>
+<div class="task" id="u5"><div class="taskhead"><h3>Aufgabe 6 · Komponiere deine eigene Melodie</h3></div>
+  <p class="hint">Für dein Heft oder Notenblatt.</p>
+  <ol class="steps">
+    <li>Zeichne fünf Linien und einen Violinschlüssel. Schreibe 4/4 dahinter.</li>
+    <li>Schreibe zwei Takte. Benutze nur die Töne c', d', e', f' und g' und fülle jeden Takt mit genau vier Schlägen.</li>
+    <li>Prüfe: Hat jeder Takt vier Schläge? Steht am Ende ein Schlussstrich?</li>
+    <li>Spiele deine Melodie oben auf der Klaviatur. Gefällt sie dir? Dann gib ihr einen Namen.</li>
+    <li>Tausche mit deinem Nachbarn: Kann er oder sie deine Melodie lesen und spielen?</li>
+  </ol></div>
+<footer>Die Töne werden mit einem einfachen Klang im Browser erzeugt. Damit du etwas hörst, muss der Ton am Gerät eingeschaltet sein.</footer>
+</div>
+<!-- ============ DEUTSCH ============ -->
+<div class="topic" id="deutsch" hidden>
+<header>
+  <p class="eyebrow">Deutsch · Klasse 5 · Rechtschreibung</p>
+  <h1>Groß- und Kleinschreibung</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--af) 0 30%,var(--line) 30% 32%,var(--af) 32% 55%,var(--line) 55% 57%,var(--af) 57% 80%,var(--line) 80% 82%,var(--af) 82%)"></div>
+</header>
+<section>
+  <p class="lead">Im Deutschen schreiben wir manche Wörter mit einem <strong>großen Anfangsbuchstaben</strong>. Das hilft beim Lesen: Man erkennt sofort, wo ein Satz anfängt und welche Wörter Dinge, Lebewesen oder Gedanken bezeichnen. Die meisten Wörter schreibt man aber <strong>klein</strong>.</p>
+</section>
+<section>
+  <h2>Die vier Grundregeln: Das schreibt man groß</h2>
+  <div class="duo">
+    <div class="card"><h3>1. Das erste Wort im Satz</h3><p><strong>D</strong>er Hund schläft. <strong>H</strong>eute regnet es. Nach einem Punkt, Ausrufezeichen oder Fragezeichen geht es groß weiter.</p></div>
+    <div class="card"><h3>2. Nomen</h3><p>Wörter für Lebewesen, Dinge, Gefühle und Gedanken: der <strong>H</strong>und, die <strong>S</strong>chule, die <strong>F</strong>reude, die <strong>I</strong>dee.</p></div>
+    <div class="card"><h3>3. Eigennamen</h3><p>Namen von Personen, Orten, Flüssen und Ländern: <strong>L</strong>ena, <strong>H</strong>amburg, die <strong>E</strong>lbe, <strong>D</strong>eutschland.</p></div>
+    <div class="card"><h3>4. Die höfliche Anrede</h3><p>Wenn du jemanden siezt: Können <strong>S</strong>ie mir helfen? Ich danke <strong>I</strong>hnen. Aber: <strong>du</strong> und <strong>dein</strong> schreibt man meistens klein.</p></div>
+  </div>
+  <div class="merk"><strong>Alles andere schreibt man klein:</strong> Verben (laufen, lesen), Adjektive (schnell, schön), Pronomen (ich, wir, mein), Präpositionen (mit, auf, nach) und Bindewörter (und, aber, weil).</div>
+</section>
+<section>
+  <h2>Wort-Lupe: Warum groß, warum klein?</h2>
+  <div class="sheet tnbox">
+    <div class="lupe" id="dLupe"></div>
+    <div class="ofacts" id="dLupeOut" aria-live="polite"></div>
+  </div>
+  <p class="hint">Tippe auf ein Wort. Dann siehst du, warum es groß oder klein geschrieben wird.</p>
+</section>
+<section>
+  <h2>So erkennst du Nomen</h2>
+  <div class="trio">
+    <div class="card"><h3>Artikelprobe</h3><p>Kannst du <strong>der, die, das</strong> oder <strong>ein, eine</strong> davorsetzen? Dann ist es ein Nomen: <em>der Baum, die Angst, das Glück</em>.</p></div>
+    <div class="card"><h3>Begleiterprobe</h3><p>Nomen haben oft Begleiter: <em><strong>mein</strong> Fahrrad, <strong>dieser</strong> Tag, <strong>zwei</strong> Katzen, <strong>viele</strong> Kinder</em>.</p></div>
+    <div class="card"><h3>Endungen</h3><p>Wörter mit diesen Endungen sind immer Nomen: <strong>-ung, -heit, -keit, -nis, -schaft, -tum</strong>. Zum Beispiel: Hoffn<strong>ung</strong>, Frei<strong>heit</strong>, Freundlich<strong>keit</strong>, Erleb<strong>nis</strong>.</p></div>
+  </div>
+</section>
+<section>
+  <h2>Wenn Verben und Adjektive zu Nomen werden</h2>
+  <p class="prose">Auch Verben und Adjektive können wie Nomen gebraucht werden. Dann schreibt man sie groß. Das erkennst du an einem <strong>Signalwort</strong> davor:</p>
+  <div class="duo">
+    <div class="card"><h3>Verben werden zu Nomen</h3><ul>
+      <li>mit Artikel: <em><strong>das</strong> Lesen, <strong>ein</strong> Lachen</em></li>
+      <li>mit <strong>beim, zum, im, vom</strong>: <em>beim Schwimmen, zum Malen</em></li>
+      <li>mit Begleiter: <em><strong>mein</strong> Singen, <strong>lautes</strong> Rufen</em></li></ul></div>
+    <div class="card"><h3>Adjektive werden zu Nomen</h3><ul>
+      <li>nach <strong>etwas, nichts, viel, wenig, alles</strong>: <em>etwas Schönes, nichts Neues, alles Gute</em></li>
+      <li>mit Artikel: <em><strong>das</strong> Beste, <strong>der</strong> Kleine</em></li></ul></div>
+  </div>
+  <div class="merk"><strong>Vergleiche:</strong> Ich <strong>l</strong>ese gern. (Verb, klein) – Das <strong>L</strong>esen macht Spaß. (Nomen, groß)<br>Das Buch ist <strong>s</strong>pannend. (Adjektiv, klein) – Ich habe etwas <strong>S</strong>pannendes erlebt. (Nomen, groß)</div>
+</section>
+<section>
+  <h2>Tageszeiten</h2>
+  <div class="duo">
+    <div class="card"><h3>Groß</h3><p>Nach <strong>heute, gestern, morgen</strong> oder einem Artikel ist die Tageszeit ein Nomen: heute <strong>A</strong>bend, gestern <strong>M</strong>orgen, am <strong>M</strong>ittag.</p></div>
+    <div class="card"><h3>Klein</h3><p>Endet die Tageszeit auf <strong>-s</strong>, schreibt man sie klein: <strong>a</strong>bends, <strong>m</strong>orgens, <strong>m</strong>ittags, <strong>n</strong>achts.</p></div>
+  </div>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="d1"><div class="taskhead"><h3>Aufgabe 1 · Groß oder klein?</h3><span class="score" data-score></span></div>
+  <p class="hint">Welche Schreibweise passt in die Lücke?</p><div data-qs></div></div>
+<div class="task" id="d2"><div class="taskhead"><h3>Aufgabe 2 · Fehlerdetektiv</h3><span class="score" data-score></span></div>
+  <p class="hint">In diesem Text ist alles kleingeschrieben. Tippe auf jedes Wort, das großgeschrieben werden muss. Tippst du noch einmal, wird es wieder klein. Dann tippe auf „Prüfen“.</p>
+  <div class="dtext" data-text></div>
+  <div class="row"><button class="btn" data-check type="button">Prüfen</button><button class="btn ghost" data-new type="button">Neuer Text</button></div>
+  <p class="fb" data-fb aria-live="polite"></p>
+  <div class="hint" data-list></div></div>
+<div class="task" id="d3"><div class="taskhead"><h3>Aufgabe 3 · Finde das Nomen</h3><span class="score" data-score></span></div>
+  <p class="hint">Alle Wörter sind hier kleingeschrieben. Welches davon ist ein Nomen? Achte auf die Endungen.</p><div data-qs></div></div>
+<div class="task" id="d4"><div class="taskhead"><h3>Aufgabe 4 · Warum groß?</h3><span class="score" data-score></span></div>
+  <p class="hint">Warum wird das markierte Wort großgeschrieben?</p><div data-qs></div></div>
+<div class="task" id="d5"><div class="taskhead"><h3>Aufgabe 5 · Schreibauftrag mit Signalwörtern</h3></div>
+  <p class="hint">Für dein Heft.</p>
+  <ol class="steps">
+    <li>Schreibe drei Sätze, in denen ein Verb zum Nomen wird. Benutze <em>beim, zum</em> oder <em>das</em>. Beispiel: Beim Radfahren trage ich einen Helm.</li>
+    <li>Schreibe drei Sätze mit <em>etwas, nichts</em> oder <em>alles</em> und einem Adjektiv. Beispiel: Ich wünsche dir alles Gute.</li>
+    <li>Unterstreiche in jedem Satz das Signalwort und kreise das großgeschriebene Wort ein.</li>
+    <li>Partnerarbeit: Diktiere deinem Nachbarn einen Satz. Kontrolliert gemeinsam die Groß- und Kleinschreibung.</li>
+  </ol></div>
+<footer>Die Beispiele richten sich nach den amtlichen Regeln der deutschen Rechtschreibung.</footer>
+</div>
+</div>
+
+<div class="gucki" id="gucki" aria-hidden="true" title="Hallo!">
+  <div class="kopf"><div class="auge l"><div class="pupille"></div><div class="lid"></div></div><div class="auge r"><div class="pupille"></div><div class="lid"></div></div><div class="traene l"></div><div class="traene r"></div><div class="brille"><span class="glas l"></span><span class="steg"></span><span class="glas r"></span></div></div>
+  <div class="hand l"></div><div class="hand r"></div>
+</div>
+<script>window.echarts={registerMap:function(n,g){if(!window.__WORLD&&/world/i.test(n))window.__WORLD=g}};</script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const NS="http://www.w3.org/2000/svg";
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const f1=n=>(Math.round(n*10)/10).toString();
+
+/* ---------- Hell/Dunkel ---------- */
+(function(){
+  const btn=$("#themeBtn"),root=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)");
+  try{const v=localStorage.getItem("theme");if(v==="dark"||v==="light")root.setAttribute("data-theme",v)}catch(_){}
+  const isDark=()=>root.getAttribute("data-theme")?root.getAttribute("data-theme")==="dark":mq.matches;
+  const label=()=>{btn.innerHTML=isDark()?'<span aria-hidden="true">☀</span><span class="tlbl"> Helle Ansicht</span>':'<span aria-hidden="true">☾</span><span class="tlbl"> Dunkle Ansicht</span>';btn.setAttribute("aria-label",isDark()?"Zur hellen Ansicht wechseln":"Zur dunklen Ansicht wechseln")};
+  btn.onclick=()=>{const v=isDark()?"light":"dark";root.setAttribute("data-theme",v);try{localStorage.setItem("theme",v)}catch(_){}label();
+    ["#tnTime","#oTilt","#tzTime"].forEach(id=>{const el=$(id);if(el)el.dispatchEvent(new Event("input"))})};
+  mq.addEventListener&&mq.addEventListener("change",label);
+  label();
+})();
+/* ---------- Versionshinweise ---------- */
+(function(){
+  let rel=[];try{rel=JSON.parse(document.getElementById("releaseData").textContent)}catch(_){}
+  const btn=$("#newsBtn"),box=$("#news");if(!rel.length){btn.hidden=true;return}
+  const de=d=>{const[y,m,t]=d.split("-");return`${+t}.${+m}.${y}`};
+  btn.innerHTML=`<span aria-hidden="true">✦</span><span class="nlbl"> Neu in v${rel[0].version}</span>`;btn.setAttribute("aria-label",`Was ist neu in Version ${rel[0].version}?`);
+  box.innerHTML=`<h2>Was ist neu?</h2>`+rel.map(r=>`<div class="rel"><p class="ver">Version ${r.version}<span>${de(r.date)}</span></p>${r.title?`<p><strong>${r.title}</strong></p>`:""}<ul>${r.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("");
+  btn.onclick=()=>{box.hidden=!box.hidden;btn.setAttribute("aria-expanded",!box.hidden)};
+})();
+/* ---------- Kapitel-Umschalter ---------- */
+const TOPICS=["farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch"];
+function route(scroll){
+  const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"farbkreis";
+  TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
+  document.querySelectorAll(".topics a").forEach(a=>{if(a.dataset.topic===t)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  if(scroll)window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",()=>route(true));
+route(false);
+
+/* ---------- gemeinsame Bausteine ---------- */
+function quiz(box,items){
+  const qs=$("[data-qs]",box),sc=$("[data-score]",box);let right=0,done=0;
+  const upd=()=>sc.textContent=`${right} von ${items.length} richtig`;
+  function render(first){qs.innerHTML="";right=0;done=0;upd();
+  items.forEach(it=>{
+    const q=document.createElement("div");q.className="q";
+    q.innerHTML=`<div class="qtext">${it.q}</div><div class="opts"></div><p class="fb" aria-live="polite"></p>`;
+    const opts=$(".opts",q),fb=$(".fb",q);
+    (first?it.o:shuffle(it.o)).forEach(o=>{
+      const b=document.createElement("button");b.className="opt";b.innerHTML=o.label;
+      b.onclick=()=>{
+        if(o.v===it.a){b.classList.add("right");fb.className="fb ok";fb.textContent="Richtig! "+(it.why||"");
+          opts.querySelectorAll("button").forEach(x=>x.disabled=true);
+          if(!q.dataset.miss)right++;upd();done++;if(done===items.length)guckiDone(right===items.length,box);else guckiCheer();}
+        else{b.classList.add("wrong");b.disabled=true;q.dataset.miss=1;guckiCry();fb.className="fb no";fb.textContent=it.hint||"Noch nicht – versuch es nochmal.";}
+      };
+      opts.appendChild(b);
+    });
+    qs.appendChild(q);
+  });
+  qs.querySelectorAll(".opt").forEach(b=>{if(b.querySelector("svg.staff:not(.ricon)"))b.classList.add("svgopt")})}
+  render(true);box._reset=()=>render(false);
+}
+const txtOpts=arr=>shuffle(arr).map(s=>({v:s,label:s}));
+
+function rankTask(box,correct,info,okMsg,noMsg){
+  const list=$("[data-rank]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box);let cur;
+  function render(){
+    list.innerHTML="";
+    cur.forEach((k,i)=>{
+      const li=document.createElement("li"),n=info(k).n;
+      li.innerHTML=`<span class="pos">${i+1}.</span><span class="sw" style="background:${info(k).c};width:28px;height:28px"></span><span class="nm">${n}</span>
+        <button class="mv" data-d="-1" aria-label="${n} nach oben" ${i===0?"disabled":""}>↑</button>
+        <button class="mv" data-d="1" aria-label="${n} nach unten" ${i===cur.length-1?"disabled":""}>↓</button>`;
+      li.querySelectorAll(".mv").forEach(b=>b.onclick=()=>{const j=i+ +b.dataset.d;[cur[i],cur[j]]=[cur[j],cur[i]];fb.textContent="";sc.textContent="";render();(list.children[j].querySelector(`.mv[data-d="${b.dataset.d}"]:not(:disabled)`)||list.children[j].querySelector(".mv:not(:disabled)")).focus()});
+      list.appendChild(li);
+    });
+  }
+  function reset(){delete box.dataset.fails;do{cur=shuffle(correct)}while(cur.join()===correct.join());fb.textContent="";sc.textContent="";render()}
+  $("[data-check]",box).onclick=()=>{
+    let r=0;[...list.children].forEach((li,i)=>{const ok=cur[i]===correct[i];li.classList.toggle("right",ok);li.classList.toggle("wrong",!ok);if(ok)r++});
+    sc.textContent=`${r} von ${correct.length} richtig`;
+    if(r===correct.length){fb.className="fb ok";fb.textContent=okMsg;guckiDone(!box.dataset.fails,box)}else{fb.className="fb no";fb.textContent=noMsg;box.dataset.fails=1;guckiCry()}
+  };
+  $("[data-reset]",box).onclick=reset;reset();box._reset=reset;
+}
+function barsHTML(keys,info,max,extra){
+  const row=(lbl,fill,val)=>`<div class="bar"><span class="lbl">${lbl}</span><span class="track">${fill}<span class="val">${val} Mio. km²</span></span></div>`;
+  return keys.map(k=>row(info(k).n,`<span class="fill" style="background:${info(k).c};width:calc((100% - 7.5em) * ${info(k).a/max})"></span>`,String(info(k).a).replace(".",","))).join("")
+    +(extra?row(extra.n,`<span class="fill landfill" style="width:calc((100% - 7.5em) * ${extra.a/max})"></span>`,extra.a):"");
+}
+function mapQuiz(box,{mode,keys,name,emptyMsg,highlight}){
+  const svg=$("[data-map]",box),tg=$("[data-target]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box),again=$("[data-restart]",box);
+  drawWorld(svg,mode,false);
+  const attr=mode==="ocean"?"o":"k";
+  let order,idx,right,miss,locked;
+  function next(){sc.textContent=`${right} von ${keys.length} richtig`;tg.textContent=`Wo liegt ${name(order[idx])}?`;miss=false;locked=false}
+  function start(){order=shuffle(keys);idx=0;right=0;again.hidden=true;fb.textContent="";highlight(svg,null);next()}
+  svg.addEventListener("click",e=>{
+    if(locked||idx>=keys.length)return;
+    const el=e.target.closest(`[data-${attr}]`),k=el?el.dataset[attr]:null,want=order[idx];
+    if(k===want){
+      if(!miss)right++;highlight(svg,k);guckiCheer();fb.className="fb ok";fb.textContent=`Richtig, das ist ${name(k)}!`;locked=true;
+      setTimeout(()=>{idx++;highlight(svg,null);
+        if(idx<keys.length){fb.textContent="";next()}
+        else{sc.textContent=`${right} von ${keys.length} richtig`;tg.textContent=right===keys.length?"Geschafft – alle beim ersten Versuch!":"Geschafft!";again.hidden=false;guckiDone(right===keys.length,box)}
+      },1200);
+    }else{miss=true;guckiCry();fb.className="fb no";fb.textContent=k?`Das ist ${name(k)}. Versuch es nochmal.`:emptyMsg}
+  });
+  again.onclick=start;start();box._reset=start;
+}
+
+/* ================= FARBKREIS ================= */
+const C=[
+ {n:"Gelb",h:"#FFE000",t:0},{n:"Gelborange",h:"#FBB515",t:2,m:[0,2]},{n:"Orange",h:"#F28A1E",t:1,m:[0,4]},
+ {n:"Rotorange",h:"#EA5A22",t:2,m:[2,4]},{n:"Rot",h:"#E3202A",t:0},{n:"Rotviolett",h:"#B3236F",t:2,m:[4,6]},
+ {n:"Violett",h:"#6C2C8E",t:1,m:[4,8]},{n:"Blauviolett",h:"#3F3C95",t:2,m:[6,8]},{n:"Blau",h:"#1E5AAA",t:0},
+ {n:"Blaugrün",h:"#178C86",t:2,m:[8,10]},{n:"Grün",h:"#3DA647",t:1,m:[8,0]},{n:"Gelbgrün",h:"#A6CE39",t:2,m:[10,0]}];
+const TYP=["Grundfarbe","Mischfarbe 1. Ordnung","Mischfarbe 2. Ordnung"];
+const KURZ=["G","M1","M2"];
+const sw=i=>`<i style="background:${C[i].h}"></i>`;
+const chip=i=>`<span class="chip">${sw(i)}${C[i].n}</span>`;
+$("#stripe").innerHTML=C.map(c=>`<span style="background:${c.h}"></span>`).join("");
+$('[data-chips="0"]').innerHTML=[0,4,8].map(chip).join("");
+$('[data-chips="2"]').innerHTML=[1,3,5,7,9,11].map(chip).join("");
+$('[data-eq="1"]').innerHTML=[2,6,10].map(i=>`<span>${chip(C[i].m[0])} + ${chip(C[i].m[1])} = ${chip(i)}</span>`).join("");
+$("#pairs").innerHTML=[0,1,2,3,4,5].map(i=>`<span class="chip">${sw(i)}${C[i].n} ↔ ${sw(i+6)}${C[i+6].n}</span>`).join("");
+const W=$("#wheel");
+const pt=(deg,r)=>{const a=deg*Math.PI/180;return[(r*Math.cos(a)).toFixed(2),(r*Math.sin(a)).toFixed(2)]};
+function addShape(d,i){
+  const p=document.createElementNS(NS,"path");p.setAttribute("d",d);p.setAttribute("fill",C[i].h);
+  p.setAttribute("class","seg");p.setAttribute("tabindex","0");p.setAttribute("role","button");p.setAttribute("aria-label",C[i].n);
+  p.dataset.i=i;W.appendChild(p);
+}
+C.forEach((c,i)=>{const mid=-90+i*30,a0=mid-15,a1=mid+15,R=162,r=110;
+  const [x0,y0]=pt(a0,R),[x1,y1]=pt(a1,R),[x2,y2]=pt(a1,r),[x3,y3]=pt(a0,r);
+  addShape(`M${x0} ${y0}A${R} ${R} 0 0 1 ${x1} ${y1}L${x2} ${y2}A${r} ${r} 0 0 0 ${x3} ${y3}Z`,i)});
+const V=[-90,-30,30,90,150,210].map(a=>pt(a,94));const T=[V[0],V[2],V[4]];
+const mid=(a,b)=>[((+a[0]+ +b[0])/2).toFixed(2),((+a[1]+ +b[1])/2).toFixed(2)];
+const M01=mid(T[0],T[1]),M12=mid(T[1],T[2]),M20=mid(T[2],T[0]);
+const Pp=a=>"M"+a.map(p=>p.join(" ")).join("L")+"Z";
+addShape(Pp([T[0],M01,["0","0"],M20]),0);addShape(Pp([T[1],M12,["0","0"],M01]),4);addShape(Pp([T[2],M20,["0","0"],M12]),8);
+addShape(Pp([V[0],V[1],V[2]]),2);addShape(Pp([V[2],V[3],V[4]]),6);addShape(Pp([V[4],V[5],V[0]]),10);
+const line=document.createElementNS(NS,"line");line.setAttribute("class","pair");line.style.display="none";W.appendChild(line);
+function select(i){
+  const g=(i+6)%12;W.classList.add("dim");
+  W.querySelectorAll(".seg").forEach(s=>s.classList.toggle("on",+s.dataset.i===i||+s.dataset.i===g));
+  const [ax,ay]=pt(-90+i*30,136),[bx,by]=pt(-90+g*30,136);
+  line.setAttribute("x1",ax);line.setAttribute("y1",ay);line.setAttribute("x2",bx);line.setAttribute("y2",by);line.style.display="";
+  const c=C[i],mix=c.t===0?"kann man nicht mischen":`${C[c.m[0]].n} + ${C[c.m[1]].n}`;
+  $("#info").innerHTML=`<div class="big"><span class="dot" style="background:${c.h}"></span><h3>${c.n}</h3></div>
+   <dl><dt>Art</dt><dd>${TYP[c.t]}</dd><dt>Mischung</dt><dd>${mix}</dd><dt>Gegenfarbe</dt><dd><span class="chip">${sw(g)}${C[g].n}</span></dd></dl>
+   <p class="hint">Die gestrichelte Linie verbindet die beiden Komplementärfarben. Tippe auf eine andere Farbe im Kreis.</p>`;
+}
+W.addEventListener("click",e=>{const s=e.target.closest(".seg");if(s)select(+s.dataset.i)});
+W.addEventListener("keydown",e=>{const s=e.target.closest(".seg");if(s&&(e.key==="Enter"||e.key===" ")){e.preventDefault();select(+s.dataset.i)}});
+select(0);
+const colorOpt=i=>({v:i,label:`${sw(i)}${C[i].n}`});
+const pickOpts=(a,pool)=>shuffle([a,...shuffle(pool.filter(x=>x!==a)).slice(0,3)]).map(colorOpt);
+quiz($("#t1"),shuffle([2,6,10,1,9,5]).map(i=>({q:`${chip(C[i].m[0])} + ${chip(C[i].m[1])} = ?`,a:i,
+  o:pickOpts(i,C[i].t===1?[2,6,10,1,3,9,11]:[1,3,5,7,9,11,2,6]),why:`${C[i].n} ist eine ${TYP[C[i].t]}.`})));
+quiz($("#t3"),shuffle([0,4,8,2,3,11]).map(i=>{const g=(i+6)%12;return{q:`Gegenfarbe von ${chip(i)}?`,a:g,
+  o:pickOpts(g,[...Array(12).keys()].filter(x=>x!==i)),why:`${C[i].n} und ${C[g].n} liegen sich gegenüber.`}}));
+quiz($("#t4"),shuffle([[3,"w"],[9,"k"],[0,"w"],[8,"k"],[2,"w"],[7,"k"],[4,"w"],[10,"k"]]).map(([i,a])=>({q:chip(i),a,
+  o:[{v:"w",label:"warm"},{v:"k",label:"kalt"}],why:i===3?"Rotorange ist die wärmste Farbe.":i===9?"Blaugrün ist die kälteste Farbe.":""})));
+(function(){
+  const box=$("#t2"),list=$("[data-list]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box);let ans={};
+  function build(){delete box.dataset.fails;ans={};list.innerHTML="";fb.textContent="";sc.textContent="";
+    shuffle([...Array(12).keys()]).forEach(i=>{
+      const d=document.createElement("div");d.className="sortitem";d.dataset.i=i;
+      d.innerHTML=`<span class="sw" style="background:${C[i].h}"></span><span class="nm">${C[i].n}</span><span class="sort" role="group" aria-label="Art von ${C[i].n}"></span>`;
+      KURZ.forEach((k,t)=>{const b=document.createElement("button");b.textContent=k;b.title=TYP[t];b.setAttribute("aria-pressed","false");
+        b.onclick=()=>{ans[i]=t;d.classList.remove("right","wrong");$(".sort",d).querySelectorAll("button").forEach((x,j)=>x.setAttribute("aria-pressed",j===t))};
+        $(".sort",d).appendChild(b)});
+      list.appendChild(d)})}
+  $("[data-check]",box).onclick=()=>{let r=0,open=0;
+    list.querySelectorAll(".sortitem").forEach(d=>{const i=+d.dataset.i;
+      if(ans[i]===undefined){open++;d.classList.remove("right","wrong");return}
+      const ok=ans[i]===C[i].t;d.classList.toggle("right",ok);d.classList.toggle("wrong",!ok);if(ok)r++});
+    sc.textContent=`${r} von 12 richtig`;
+    if(open){fb.className="fb no";fb.textContent=`Du hast noch ${open} Farbe${open>1?"n":""} nicht zugeordnet.`}
+    else if(r===12){fb.className="fb ok";fb.textContent="Super, alles richtig!";guckiDone(!box.dataset.fails,box)}
+    else{fb.className="fb no";fb.textContent="Die rot umrandeten Farben stimmen noch nicht. Schau im Farbkreis nach.";box.dataset.fails=1;guckiCry()}};
+  $("[data-reset]",box).onclick=build;build();box._reset=build;
+})();
+
+/* ================= WELTKARTE ================= */
+const O={
+  P:{n:"Pazifik",nom:"der Pazifik",alt:"Pazifischer oder Stiller Ozean",c:"var(--pac)",a:166,tief:"Marianengraben, rund 11 000 m – die tiefste Stelle der Erde",k:"Asien, Australien, Nordamerika, Südamerika, Antarktika",f:"Der größte und tiefste Ozean. Er ist größer als alle Kontinente zusammen."},
+  A:{n:"Atlantik",nom:"der Atlantik",alt:"Atlantischer Ozean",c:"var(--atl)",a:106,tief:"Puerto-Rico-Graben, rund 8 400 m",k:"Europa, Afrika, Nordamerika, Südamerika, Antarktika",f:"Nordsee, Ostsee und Mittelmeer gehören zu ihm. Schiffe aus Hamburg fahren über Elbe und Nordsee in den Atlantik."},
+  I:{n:"Indischer Ozean",nom:"der Indische Ozean",alt:"auch Indik",c:"var(--ind)",a:70,tief:"Sundagraben, über 7 000 m",k:"Afrika, Asien, Australien, Antarktika",f:"Der wärmste Ozean. Er liegt fast ganz auf der Südhalbkugel."},
+  S:{n:"Südlicher Ozean",nom:"der Südliche Ozean",alt:"auch Südpolarmeer",c:"var(--sud)",a:22,tief:"Südsandwichgraben, über 7 000 m",k:"Antarktika",f:"Er umschließt den Kontinent Antarktika wie ein Ring. Hier wehen starke Winde und treiben riesige Eisberge."},
+  N:{n:"Arktischer Ozean",nom:"der Arktische Ozean",alt:"auch Nordpolarmeer",c:"var(--ark)",a:14,tief:"Molloytief, über 5 000 m",k:"Europa, Asien, Nordamerika",f:"Der kleinste Ozean. Im Winter ist er fast ganz mit Meereis bedeckt. In seiner Mitte liegt der Nordpol."}
+};
+const OK=["P","A","I","S","N"];
+const CN={
+  AS:{n:"Asien",c:"var(--as)",a:44.6,ew:"rund 4,8 Milliarden – mehr als die Hälfte aller Menschen",berg:"Mount Everest, 8 849 m – der höchste Berg der Erde",f:"Der größte Kontinent. Hier liegen China und Indien, die Länder mit den meisten Einwohnern."},
+  AF:{n:"Afrika",c:"var(--af)",a:30.3,ew:"rund 1,5 Milliarden",berg:"Kilimandscharo, 5 895 m",f:"Hier liegen die Sahara, die größte Hitzewüste der Erde, und der Nil, einer der längsten Flüsse."},
+  NA:{n:"Nordamerika",c:"var(--na)",a:24.7,ew:"rund 600 Millionen",berg:"Denali, 6 190 m",f:"Dazu gehören auch Mittelamerika, die Karibik und Grönland, die größte Insel der Erde."},
+  SA:{n:"Südamerika",c:"var(--sa)",a:17.8,ew:"rund 440 Millionen",berg:"Aconcagua, 6 961 m",f:"Hier fließt der Amazonas durch den größten Regenwald der Erde."},
+  AN:{n:"Antarktika",c:"var(--an)",a:14.2,ew:"niemand dauerhaft – nur Forschende für einige Monate",berg:"Mount Vinson, 4 892 m",f:"Der kälteste Kontinent. Fast alles ist von einer dicken Eisschicht bedeckt. Hier liegt der Südpol."},
+  EU:{n:"Europa",c:"var(--eu)",a:10.5,ew:"rund 745 Millionen",berg:"Elbrus, 5 642 m, im Kaukasus. Der höchste Berg der Alpen ist der Mont Blanc mit 4 806 m.",f:"Unser Kontinent. Hamburg liegt im Norden Europas, nicht weit von Nordsee und Ostsee."},
+  AU:{n:"Australien und Ozeanien",c:"var(--au)",a:8.5,ew:"rund 46 Millionen",berg:"Mount Kosciuszko, 2 228 m (auf dem Festland)",f:"Der kleinste Kontinent. Hier leben Tiere, die es sonst nirgends gibt, zum Beispiel Kängurus und Koalas."}
+};
+const CK=["AS","AF","NA","SA","AN","EU","AU"];
+
+// Natural-Earth-Projektion
+function ne(lon,lat){const l=lon*Math.PI/180,p=lat*Math.PI/180,p2=p*p,p4=p2*p2;
+  return[l*(0.8707-0.131979*p2+p4*(-0.013791+p4*(0.003971*p2-0.001529*p4))),p*(1.007226+p2*(0.015085+p4*(-0.044475+0.028874*p2-0.005916*p4)))]}
+const XM=ne(180,0)[0],YM=ne(0,90)[1],MW=1000,MS=MW/2/XM,MH=Math.round(2*YM*MS);
+const proj=(lon,lat)=>{const[x,y]=ne(lon,lat);return[+(MW/2+x*MS).toFixed(1),+(MH/2-y*MS).toFixed(1)]};
+const dens=pts=>{const out=[];for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],n=Math.max(1,Math.ceil(Math.max(Math.abs(b[0]-a[0]),Math.abs(b[1]-a[1]))/2));
+  for(let j=0;j<n;j++)out.push([a[0]+(b[0]-a[0])*j/n,a[1]+(b[1]-a[1])*j/n])}out.push(pts[pts.length-1]);return out};
+const polyD=pts=>"M"+dens([...pts,pts[0]]).map(p=>proj(p[0],p[1]).join(" ")).join("L")+"Z";
+
+// Kartendaten entpacken
+const WORLD=(function(){
+  const g=window.__WORLD;if(!g||!g.features)return null;
+  try{
+    const sc=g.UTF8Scale||1024;
+    const dec=(s,off)=>{const r=[];let px=off[0],py=off[1];for(let i=0;i<s.length;i+=2){let x=s.charCodeAt(i)-64,y=s.charCodeAt(i+1)-64;x=(x>>1)^(-(x&1));y=(y>>1)^(-(y&1));x+=px;y+=py;px=x;py=y;r.push([x/sc,y/sc])}return r};
+    const feats=[];
+    g.features.forEach(ft=>{
+      const geo=ft.geometry;if(!geo)return;let polys;
+      if(geo.type==="Polygon")polys=[geo.coordinates.map((ring,c)=>typeof ring==="string"?dec(ring,geo.encodeOffsets[c]):ring)];
+      else if(geo.type==="MultiPolygon")polys=geo.coordinates.map((poly,c)=>poly.map((ring,c2)=>typeof ring==="string"?dec(ring,geo.encodeOffsets[c][c2]):ring));
+      else return;
+      let d="",big=null;const rs=[];
+      polys.forEach(poly=>poly.forEach(ring=>{
+        rs.push(ring);if(!big||ring.length>big.length)big=ring;
+        let prev=null;ring.forEach((p,i)=>{const[x,y]=proj(Math.max(-180,Math.min(180,p[0])),p[1]);d+=(i===0||(prev&&Math.abs(p[0]-prev[0])>180)?"M":"L")+x+" "+y;prev=p});d+="Z";
+      }));
+      const cx=big.reduce((s,p)=>s+p[0],0)/big.length,cy=big.reduce((s,p)=>s+p[1],0)/big.length;
+      feats.push({rings:rs,clat:cy,name:(ft.properties&&ft.properties.name)||"",d,k:contOf((ft.properties&&ft.properties.name)||"",cx,cy)});
+    });
+    return feats.length>50?feats:null;
+  }catch(e){return null}
+})();
+function contOf(name,lon,lat){
+  const OV={Russia:"RU",Eritrea:"AF",Egypt:"AF",Madagascar:"AF",Cyprus:"EU","N. Cyprus":"EU","Northern Cyprus":"EU",Malta:"EU",Iceland:"EU",Turkey:"AS",Georgia:"AS",Armenia:"AS",Azerbaijan:"AS",Kazakhstan:"AS",Indonesia:"AS","Timor-Leste":"AS","East Timor":"AS",Greenland:"NA",Panama:"NA","Papua New Guinea":"AU","New Zealand":"AU",Fiji:"AU","Solomon Is.":"AU","Solomon Islands":"AU",Vanuatu:"AU","New Caledonia":"AU",Antarctica:"AN","Fr. S. Antarctic Lands":"AF","French Southern and Antarctic Lands":"AF","Falkland Is.":"SA","Falkland Islands":"SA","Fr. Guiana":"SA","French Guiana":"SA"};
+  if(OV[name])return OV[name];
+  if(lat<-60)return"AN";
+  if(lon<-25)return lat>=7.5?"NA":"SA";
+  if((lon>=129&&lat<0)||(lat<-10&&lon>=112))return"AU";
+  if(lat<-35&&lon>40&&lon<110)return"AF";
+  if(lat<0&&lon<65)return"AF";
+  if(lat<37.5&&lon<52&&!(lat>12&&lon>34.5))return"AF";
+  if(lat>=37.5&&lon<45)return"EU";
+  return"AS";
+}
+// Ozeane (vereinfachte Grenzen, Land wird darübergelegt)
+const ASIA_PAC=[[180,66],[170,66],[160,62],[140,60],[130,45],[118,40],[110,25],[100,20]];
+const PIB=[[100,20],[99,10],[101,5],[104,0],[105,-6],[115,-8.5],[125,-9.5],[131,-12],[135,-20],[147,-38],[147,-60]];
+const AMB=[[-67,-60],[-68,-56],[-69,-18],[-78,-5],[-79,8],[-84,10],[-92,15],[-100,18],[-106,23],[-112,30],[-118,34],[-120,36],[-123,42],[-122,48],[-128,55],[-138,61],[-150,63],[-160,64],[-165,66]];
+const ATLN=[[-165,66],[20,66],[26,66],[32,60],[41,47],[42.5,42],[37,36],[35.5,31]];
+const AIB=[[35.5,31],[32.6,30],[25,0],[20,-35],[20,-60]];
+const INDN=[[35.5,31],[45,33],[55,35],[70,30],[90,27],[100,20]];
+const OPOLY=[
+  ["N",[[-180,90],[180,90],[180,66],[-180,66]]],
+  ["S",[[-180,-60],[180,-60],[180,-90],[-180,-90]]],
+  ["A",[...AMB,...ATLN.slice(1),...AIB.slice(1)]],
+  ["I",[...INDN,...PIB.slice(1),[20,-60],...AIB.slice().reverse().slice(1,-1)]],
+  ["P",[...ASIA_PAC,...PIB.slice(1),[180,-60]]],
+  ["P",[[-180,66],...AMB.slice().reverse(),[-180,-60]]]
+];
+const OUTLINE=polyD([[-180,90],[180,90],[180,-90],[-180,-90]]);
+const EUCLIP=polyD([[15,85],[66,85],[66,69],[60,68],[59,52],[52,50],[48,42],[15,42]]);
+let OCEAN_D=null,uid=0;
+// Vereinfachter Umriss von Antarktika (Küste inkl. Schelfeis), am Südpol geschlossen – nur für die Kontinente-Karte
+const ANT_PTS=[[-180,-78],[-170,-78],[-160,-78],[-150,-76.5],[-140,-75],[-130,-74],[-120,-73.5],[-110,-74],[-100,-73],[-90,-72.5],[-80,-73],[-75,-71],[-68,-68],[-65,-65.5],[-60,-63.5],[-57,-63.3],[-60,-66],[-62,-70],[-60,-74],[-50,-77.5],[-40,-78],[-30,-76],[-20,-73],[-10,-71],[0,-70],[20,-69.5],[40,-69],[55,-66.5],[65,-67.5],[70,-69.5],[75,-69],[80,-67],[90,-66.5],[100,-66],[110,-66],[120,-66.5],[130,-66.2],[140,-66.6],[150,-68.5],[160,-70],[165,-71],[170,-72],[175,-76],[180,-78],[180,-90],[-180,-90]];
+const ANT_D=polyD(ANT_PTS);
+const HH=proj(10,53.55);
+const LBL_O=[["Pazifik",-148,8],["Pazifik",160,14],["Atlantik",-38,26],["Indischer Ozean",78,-24],["Südlicher Ozean",-110,-63],["Arktischer Ozean",-150,79]];
+const LBL_C=[["Nordamerika",-102,47],["Südamerika",-60,-12],["Europa",28,50],["Afrika",20,6],["Asien",92,47],["Australien",134,-25],["Antarktika",30,-80]];
+
+function worldMarkup(mode,labels){
+  const id="w"+(++uid);
+  let s=`<path d="${OUTLINE}" fill="var(--sea)"/>`;
+  if(mode==="ocean"){
+    if(!OCEAN_D)OCEAN_D=OPOLY.map(([k,p])=>[k,polyD(p)]);
+    s+=OCEAN_D.map(([k,d])=>`<path data-o="${k}" d="${d}" fill="${O[k].c}"/>`).join("");
+    s+=`<path class="ld" d="${ANT_D}${WORLD.filter(f=>!(f.name==="Antarctica"||f.clat<-60)).map(f=>f.d).join("")}"/>`;
+  }else{
+    s+=`<defs><clipPath id="${id}e"><path d="${EUCLIP}"/></clipPath><clipPath id="${id}a"><path clip-rule="evenodd" d="${OUTLINE}${EUCLIP}"/></clipPath></defs>`;
+    const groups={AN:[ANT_D]};
+    WORLD.forEach(f=>{if(f.k==="RU"||(f.k==="AN"&&(f.name==="Antarctica"||f.clat<-60)))return;(groups[f.k]=groups[f.k]||[]).push(f.d)});
+    CK.forEach(k=>{if(groups[k])s+=`<path class="ck" data-k="${k}" d="${groups[k].join("")}" fill="${CN[k].c}"/>`});
+    const ru=WORLD.find(f=>f.k==="RU");
+    if(ru)s+=`<path class="ck" data-k="EU" d="${ru.d}" fill="${CN.EU.c}" clip-path="url(#${id}e)"/><path class="ck" data-k="AS" d="${ru.d}" fill="${CN.AS.c}" clip-path="url(#${id}a)"/>`;
+  }
+  s+=`<circle class="hh" cx="${HH[0]}" cy="${HH[1]}" r="8"/><circle class="hhdot" cx="${HH[0]}" cy="${HH[1]}" r="2.6"/>`;
+  if(labels){
+    (mode==="ocean"?LBL_O:LBL_C).forEach(([t,lo,la])=>{const[x,y]=proj(lo,la);s+=`<text x="${x}" y="${y}">${t}</text>`});
+    if(mode==="ocean")s+=`<text class="hht" x="${HH[0]+11}" y="${HH[1]+16}">Hamburg</text>`;
+  }
+  return s;
+}
+// Ersatz, falls die Kartendaten nicht laden: Punktkarte
+const RLE=["13N3L20N","2N3L3N9L2N1L3N2L2N4L3N2L","8L2N1L1A5L2A17L","5P7L5A14L3P1L1P","5P7L5A15L4P",
+ "6P5L6A1L2A10L1P1L4P","7P2L8A7L1I5L6P","9P1L7A6L2I1L2I1L7P","10P3L4A6L5I2L6P","10P5L4A3L6I2L1P2L3P",
+ "10P4L5A4L7I3L3P","11P3L5A3L7I4L3P","11P3L5A2L8I1L1I2L2P1L","11P1L8A12I1L2P1L","11P1L8A12I4P",
+ "11S1L24S","2S10L4S18L2S","36L"];
+const GRID=RLE.map(r=>r.replace(/(\d+)([A-Z])/g,(_,n,ch)=>ch.repeat(+n)));
+function dotCont(r,c){
+  if(r>=15)return"AN";if(r===2&&c===0)return"AS";if(r===2&&c===16)return"EU";
+  if(c<=16)return r>=8?"SA":"NA";
+  if(r<=4)return(c<=22||(c===23&&r<4))?"EU":"AS";
+  if((r>=10&&c>=29)||(r===9&&c>=31))return"AU";
+  if(c>=23)return"AS";if(c===22)return r>=8?"AF":"AS";if(r===5&&c===21)return"AS";return"AF";
+}
+function dotMarkup(mode,labels){
+  let s="";
+  GRID.forEach((row,r)=>[...row].forEach((ch,c)=>{const x=c*10+5,y=r*10+5;
+    if(mode==="ocean")s+=ch==="L"?`<circle class="l" cx="${x}" cy="${y}" r="3.6"/>`:`<circle data-o="${ch}" cx="${x}" cy="${y}" r="4.8" fill="${O[ch].c}"/>`;
+    else s+=ch==="L"?(k=>`<circle data-k="${k}" cx="${x}" cy="${y}" r="4.8" fill="${CN[k].c}"/>`)(dotCont(r,c)):`<circle cx="${x}" cy="${y}" r="3" fill="var(--sea)"/>`;
+  }));
+  s+=`<circle class="hh" cx="190" cy="36.5" r="5"/><circle class="hhdot" cx="190" cy="36.5" r="1.6"/>`;
+  if(labels&&mode==="ocean")s+=`<text x="60" y="108">Pazifik</text><text x="335" y="78">Pazifik</text><text x="150" y="78">Atlantik</text><text x="255" y="138">Indischer Ozean</text><text x="280" y="158">Südlicher Ozean</text><text x="270" y="8">Arktischer Ozean</text><text class="hht" x="197" y="47">Hamburg</text>`;
+  if(labels&&mode==="cont")s+=`<text x="85" y="48">Nordamerika</text><text x="122" y="108">Südamerika</text><text x="215" y="28">Europa</text><text x="195" y="88">Afrika</text><text x="290" y="45">Asien</text><text x="312" y="118">Australien</text><text x="180" y="168">Antarktika</text>`;
+  return s;
+}
+function drawWorld(svg,mode,labels){
+  if(WORLD){svg.setAttribute("viewBox",`0 0 ${MW} ${MH}`);svg.classList.add("world");svg.innerHTML=worldMarkup(mode,labels)}
+  else{svg.setAttribute("viewBox","0 0 360 180");svg.innerHTML=dotMarkup(mode,labels)}
+}
+function hl(attr){return(svg,k)=>{svg.classList.toggle("dim",!!k);svg.querySelectorAll(`[data-${attr}]`).forEach(el=>el.classList.toggle("on",el.dataset[attr]===k))}}
+const hlO=hl("o"),hlK=hl("k");
+
+function explorer(svg,legend,infoBox,mode,keys,data,render,hlf,cb){
+  drawWorld(svg,mode,true);
+  const attr=mode==="ocean"?"o":"k";
+  legend.innerHTML=keys.map(k=>`<button class="chip" data-v="${k}" aria-pressed="false"><i style="background:${data[k].c}"></i>${data[k].n}</button>`).join("");
+  const show=k=>{hlf(svg,k);legend.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===k));infoBox.innerHTML=render(k);if(cb)cb(k)};
+  svg.addEventListener("click",e=>{const el=e.target.closest(`[data-${attr}]`);if(el)show(el.dataset[attr])});
+  legend.addEventListener("click",e=>{const b=e.target.closest("button");if(b)show(b.dataset.v)});
+  return show;
+}
+
+/* ================= KONTINENTE ================= */
+explorer($("#contmap"),$("#clegend"),$("#cinfo"),"cont",CK,CN,k=>{const c=CN[k];return`<div class="big"><span class="dot" style="background:${c.c}"></span><h3>${c.n}</h3></div>
+  <dl><dt>Fläche</dt><dd>rund ${String(c.a).replace(".",",")} Mio. km² · Platz ${CK.indexOf(k)+1} von 7</dd><dt>Einwohner</dt><dd>${c.ew}</dd>
+  <dt>Höchster Berg</dt><dd>${c.berg}</dd><dt>Besonders</dt><dd>${c.f}</dd></dl>`},hlK)("EU");
+$("#cbars").innerHTML=barsHTML(CK,k=>CN[k],44.6);
+mapQuiz($("#k1"),{mode:"cont",keys:CK,name:k=>CN[k].n,emptyMsg:"Das ist Wasser. Tippe auf Land.",highlight:hlK});
+rankTask($("#k2"),CK,k=>CN[k],"Perfekt! Alle Affen Naschen Saftige Ananas Erst Abends.","Noch nicht ganz. Denk an die Eselsbrücke oder schau dir die Balken an.");
+quiz($("#k3"),[
+  {q:"Auf welchem Kontinent liegt Hamburg?",a:"Europa",o:txtOpts(["Europa","Asien","Afrika","Nordamerika"]),why:"Hamburg liegt im Norden Europas."},
+  {q:"Wo leben Kängurus in freier Natur?",a:"Australien",o:txtOpts(["Australien","Afrika","Südamerika","Asien"]),why:"Kängurus gibt es nur in Australien und auf Neuguinea."},
+  {q:"Auf welchem Kontinent steht der Mount Everest?",a:"Asien",o:txtOpts(["Asien","Europa","Nordamerika","Antarktika"]),why:"Er liegt im Himalaya zwischen Nepal und China."},
+  {q:"Durch welchen Kontinent fließt der Amazonas?",a:"Südamerika",o:txtOpts(["Südamerika","Afrika","Asien","Nordamerika"]),why:"Er fließt durch den größten Regenwald der Erde."},
+  {q:"Auf welchem Kontinent wohnt niemand dauerhaft?",a:"Antarktika",o:txtOpts(["Antarktika","Australien","Europa","Afrika"]),why:"Dort leben nur Forschende für einige Monate."},
+  {q:"Welches Gebirge bildet einen Teil der Grenze zwischen Europa und Asien?",a:"Ural",o:txtOpts(["Ural","Alpen","Anden","Rocky Mountains"]),why:"Das Uralgebirge liegt in Russland."},
+  {q:"Zu welchem Kontinent gehört Grönland?",a:"Nordamerika",o:txtOpts(["Nordamerika","Europa","Asien","Antarktika"]),why:"Grönland liegt auf der Nordamerikanischen Platte, auch wenn es zu Dänemark gehört."}
+]);
+
+/* ================= MEERE ================= */
+let oceanGlobeHook=null;
+explorer($("#worldmap"),$("#olegend"),$("#oinfo"),"ocean",OK,O,k=>{const o=O[k];return`<div class="big"><span class="dot" style="background:${o.c}"></span><h3>${o.n}</h3><span class="hint">${o.alt}</span></div>
+  <dl><dt>Fläche</dt><dd>rund ${o.a} Mio. km² · Platz ${OK.indexOf(k)+1} von 5</dd><dt>Tiefste Stelle</dt><dd>${o.tief}</dd>
+  <dt>Kontinente am Ufer</dt><dd>${o.k}</dd><dt>Besonders</dt><dd>${o.f}</dd></dl>`},hlO,k=>{if(oceanGlobeHook)oceanGlobeHook(k)})("A");
+$("#bars").innerHTML=barsHTML(OK,k=>O[k],166,{n:"alle Kontinente",a:150});
+mapQuiz($("#m1"),{mode:"ocean",keys:OK,name:k=>O[k].nom,emptyMsg:"Das ist Land. Tippe auf das Meer.",highlight:hlO});
+rankTask($("#m2"),OK,k=>O[k],"Perfekt! Papa Angelt Im Sommer Aale.","Noch nicht ganz. Denk an die Eselsbrücke oder schau dir die Balken an.");
+const RF=[{v:"r",label:"richtig"},{v:"f",label:"falsch"}];
+quiz($("#m3"),shuffle([
+  {q:"Alle Ozeane hängen miteinander zusammen.",a:"r",why:"Zusammen bilden sie das Weltmeer."},
+  {q:"Die Ostsee gehört zum Pazifik.",a:"f",why:"Sie ist ein Nebenmeer des Atlantiks."},
+  {q:"Der Pazifik ist größer als alle Kontinente zusammen.",a:"r",why:"166 Mio. km² gegen 150 Mio. km²."},
+  {q:"In der Ostsee gibt es starke Ebbe und Flut.",a:"f",why:"Starke Gezeiten hat die Nordsee, die Ostsee kaum."},
+  {q:"Der Arktische Ozean ist der kleinste Ozean.",a:"r",why:"Er ist nur etwa 14 Mio. km² groß."},
+  {q:"Die tiefste Stelle der Erde liegt im Atlantik.",a:"f",why:"Sie liegt im Pazifik: der Marianengraben."},
+  {q:"Etwa die Hälfte der Erdoberfläche ist mit Wasser bedeckt.",a:"f",why:"Es sind etwa 70 von 100 Teilen."}
+]).map(x=>({...x,o:RF})));
+quiz($("#m4"),[
+  {q:"In welches Meer fließt die Elbe?",a:"Nordsee",o:txtOpts(["Nordsee","Ostsee","Mittelmeer","Schwarzes Meer"]),why:"Sie mündet bei Cuxhaven in die Nordsee."},
+  {q:"Wie heißt die tiefste Stelle des Weltmeers?",a:"Marianengraben",o:txtOpts(["Marianengraben","Puerto-Rico-Graben","Wattenmeer","Ärmelkanal"]),why:"Er ist rund 11 000 m tief."},
+  {q:"Welcher Ozean umgibt den Kontinent Antarktika?",a:"Südlicher Ozean",o:txtOpts(["Südlicher Ozean","Arktischer Ozean","Indischer Ozean","Atlantik"]),why:"Er liegt wie ein Ring um den Kontinent."},
+  {q:"Wie nennt man Wasser mit wenig Salz, wie in der Ostsee?",a:"Brackwasser",o:txtOpts(["Brackwasser","Süßwasser","Grundwasser","Regenwasser"]),why:"Brackwasser ist eine Mischung aus Süß- und Salzwasser."},
+  {q:"Welcher Kontinent liegt NICHT am Atlantik?",a:"Australien",o:txtOpts(["Australien","Afrika","Europa","Südamerika"]),why:"Australien liegt zwischen Indischem Ozean und Pazifik."},
+  {q:"Wie heißt das Küstengebiet der Nordsee, das bei Ebbe trockenfällt?",a:"Wattenmeer",o:txtOpts(["Wattenmeer","Bodden","Fjord","Lagune"]),why:"Das Wattenmeer ist UNESCO-Weltnaturerbe."}
+]);
+
+/* ================= TAG UND NACHT ================= */
+const TC=[{n:"Hamburg",off:0,r:.4,me:true,lat:53.55,lon:10},{n:"New York",off:-6,r:.62,lat:40.7,lon:-74},{n:"Tokio",off:8,r:.74,lat:35.7,lon:139.7}];
+const wrap24=t=>((t%24)+24)%24;
+const fmt=t=>{t=wrap24(t);let h=Math.floor(t),m=Math.round((t-h)*60);if(m===60){h=(h+1)%24;m=0}return`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`};
+const phase=t=>{t=wrap24(t);if(t>=5.5&&t<6.5)return["Sonnenaufgang","day"];if(t>=17.5&&t<18.5)return["Sonnenuntergang","day"];return t>6&&t<18?["Tag","day"]:["Nacht","night"]};
+function tnSVG(t,cities){
+  const cx=262,cy=122,R=92,P=(a,r)=>[cx+r*Math.cos(a*Math.PI/180),cy-r*Math.sin(a*Math.PI/180)];
+  let s=`<svg class="tn" viewBox="0 0 400 260" role="img" aria-label="Die Erde von oben über dem Nordpol gesehen, links die Sonne">`;
+  for(let i=0;i<12;i++){const a=i*30*Math.PI/180;s+=`<line x1="${48+34*Math.cos(a)}" y1="${122+34*Math.sin(a)}" x2="${48+44*Math.cos(a)}" y2="${122+44*Math.sin(a)}" stroke="var(--sun)" stroke-width="3" stroke-linecap="round"/>`}
+  s+=`<circle cx="48" cy="122" r="27" fill="var(--sun)"/><text x="48" y="190" class="cap">Sonne</text>`;
+  [62,92,122,152,182].forEach(y=>s+=`<line x1="104" y1="${y}" x2="158" y2="${y}" stroke="var(--sun)" stroke-width="2" stroke-dasharray="5 5"/>`);
+  s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="var(--earth)"/>`;
+  cities.forEach(c=>s+=`<circle cx="${cx}" cy="${cy}" r="${c.r*R}" fill="none" stroke="#FFFFFF" stroke-opacity=".45" stroke-dasharray="3 4"/>`);
+  s+=`<path d="M${cx} ${cy-R}A${R} ${R} 0 0 1 ${cx} ${cy+R}Z" fill="var(--night)" fill-opacity=".8"/>`;
+  s+=`<circle cx="${cx}" cy="${cy}" r="3" fill="#FFFFFF"/>`;
+  const ar=R+13,[x1,y1]=P(55,ar),[x2,y2]=P(122,ar),a=122*Math.PI/180,dx=-Math.sin(a),dy=-Math.cos(a);
+  s+=`<path d="M${x1} ${y1}A${ar} ${ar} 0 0 0 ${x2} ${y2}" fill="none" stroke="var(--ink)" stroke-width="2"/>`;
+  s+=`<path d="M${x2+dx*9} ${y2+dy*9}L${x2-dy*5} ${y2+dx*5}L${x2+dy*5} ${y2-dx*5}Z" fill="var(--ink)"/>`;
+  cities.forEach(c=>{const th=180+(t+c.off-12)*15,[x,y]=P(th,c.r*R),cs=Math.cos(th*Math.PI/180),sn=Math.sin(th*Math.PI/180);
+    s+=`<circle cx="${x}" cy="${y}" r="${c.me?6:5}" fill="${c.me?"var(--pin)":"#FFFFFF"}" stroke="var(--ink)" stroke-width="1.5"/>`;
+    if(cities.length>1||c.me)s+=`<text x="${x+cs*11}" y="${y-sn*11+4}" text-anchor="${cs>.3?"start":cs<-.3?"end":"middle"}">${c.n}</text>`});
+  s+=`<text x="${cx-R/2}" y="${cy+R+28}" class="cap">Tag</text><text x="${cx+R/2}" y="${cy+R+28}" class="cap">Nacht</text></svg>`;
+  return s;
+}
+/* --- 3D-Globus (eigene Kugel-Projektion auf Canvas) --- */
+const D=Math.PI/180,TW=1024,TH=512;
+const TEX=(function(){
+  const c=document.createElement("canvas");c.width=TW;c.height=TH;const g=c.getContext("2d");
+  g.fillStyle="#000";g.fillRect(0,0,TW,TH);g.fillStyle="#fff";
+  const X=lon=>(lon+180)/360*TW,Y=lat=>(90-lat)/180*TH;
+  if(WORLD){
+    WORLD.forEach(f=>{if(f.name==="Antarctica"||f.clat<-60)return;f.rings.forEach(ring=>{g.beginPath();let prev=null;
+      ring.forEach((p,i)=>{const x=X(p[0]),y=Y(p[1]);if(i===0||Math.abs(p[0]-prev[0])>180)g.moveTo(x,y);else g.lineTo(x,y);prev=p});
+      g.closePath();g.fill()})});
+    g.beginPath();ANT_PTS.forEach((p,i)=>i?g.lineTo(X(p[0]),Y(p[1])):g.moveTo(X(p[0]),Y(p[1])));g.closePath();g.fill();
+  }else GRID.forEach((row,r)=>[...row].forEach((ch,cc)=>{if(ch==="L")g.fillRect(cc*TW/36,r*TH/18,TW/36+1,TH/18+1)}));
+  const d=g.getImageData(0,0,TW,TH).data,t=new Uint8Array(TW*TH*3);
+  for(let v=0;v<TH;v++){const lat=90-(v+.5)/TH*180;for(let u=0;u<TW;u++){const lon=(u+.5)/TW*360-180,i=v*TW+u;let col;
+    if(d[i*4]<128)col=[34,98,170];
+    else if(lat<-60||(lat>59&&lon>-74&&lon<-12))col=[236,241,246];
+    else if((lat>14&&lat<32&&lon>-17&&lon<58)||(lat>-31&&lat<-19&&lon>117&&lon<142))col=[200,172,112];
+    else col=[98,148,76];
+    t[i*3]=col[0];t[i*3+1]=col[1];t[i*3+2]=col[2]}}
+  return t;
+})();
+const GCACHE=new Map();
+function geom(R,tilt){
+  const key=R+"|"+tilt;let G=GCACHE.get(key);if(G)return G;
+  const N=2*R,sT=Math.sin(tilt*D),cT=Math.cos(tilt*D),n=N*N;
+  G={N,ins:new Uint8Array(n),sl:new Float32Array(n),cl:new Float32Array(n),dl:new Float32Array(n),zz:new Float32Array(n),v:new Int16Array(n)};
+  for(let j=0;j<N;j++){const y=(R-j-.5)/R;for(let i=0;i<N;i++){const x=(i+.5-R)/R,rr=x*x+y*y;if(rr>1)continue;
+    const z=Math.sqrt(1-rr),yp=y*cT+z*sT,zp=-y*sT+z*cT,k=j*N+i;
+    G.ins[k]=1;G.sl[k]=yp;G.cl[k]=Math.sqrt(Math.max(0,1-yp*yp));G.dl[k]=Math.atan2(x,zp);G.zz[k]=z;
+    G.v[k]=Math.min(TH-1,Math.max(0,Math.floor((90-Math.asin(yp)/D)/180*TH)))}}
+  if(GCACHE.size>10)GCACHE.clear();GCACHE.set(key,G);return G;
+}
+const cam=(la,lo,lc,tilt)=>{const p=la*D,l=(lo-lc)*D,xp=Math.cos(p)*Math.sin(l),yp=Math.sin(p),zp=Math.cos(p)*Math.cos(l),sT=Math.sin(tilt*D),cT=Math.cos(tilt*D);return[xp,yp*cT-zp*sT,yp*sT+zp*cT]};
+const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function renderGlobe(cv,o){
+  const dpr=o.dpr||Math.min(2,window.devicePixelRatio||1),W=o.w,H=o.h,tilt=Math.round(o.tilt);
+  if(cv.width!==Math.round(W*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+  const g=cv.getContext("2d");g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,cv.width,cv.height);
+  const R=Math.round(o.r*dpr),G=geom(R,tilt),N=G.N,img=g.createImageData(N,N),px=img.data;
+  const ls=10-(o.t-12)*15,off=(o.lc-ls)*D,sd=Math.sin(o.decl*D),cd=Math.cos(o.decl*D),uB=(o.lc+180)/360*TW,uk=TW/(2*Math.PI);
+  for(let k=0;k<N*N;k++){if(!G.ins[k])continue;
+    const s=G.sl[k]*sd+G.cl[k]*cd*Math.cos(G.dl[k]+off);
+    let u=Math.floor(uB+G.dl[k]*uk)%TW;if(u<0)u+=TW;
+    const ti=(G.v[k]*TW+u)*3,q=Math.min(1,Math.max(0,(s+.07)/.14)),sm=q*q*(3-2*q),lit=.42+.58*Math.max(0,s),lb=.7+.3*G.zz[k],p=k*4;
+    const r0=TEX[ti],g0=TEX[ti+1],b0=TEX[ti+2];
+    const nr=r0*.12+6,ng=g0*.12+10,nb=b0*.14+32;
+    px[p]=(nr+(r0*lit-nr)*sm)*lb;px[p+1]=(ng+(g0*lit-ng)*sm)*lb;px[p+2]=(nb+(b0*lit-nb)*sm)*lb;px[p+3]=255}
+  g.putImageData(img,Math.round(o.cx*dpr)-R,Math.round(o.cy*dpr)-R);
+  g.setTransform(dpr,0,0,dpr,0,0);
+  const cx=o.cx,cy=o.cy,r=R/dpr,ink=cssv("--ink"),sheet=cssv("--sheet"),pin=cssv("--pin"),sun=cssv("--sun");
+  g.beginPath();g.arc(cx,cy,r,0,2*Math.PI);g.strokeStyle="rgba(150,200,255,.6)";g.lineWidth=2.5;g.stroke();
+  const label=(txt,x,y,align)=>{g.font="700 13px 'Atkinson Hyperlegible','Segoe UI',sans-serif";g.textAlign=align||"left";g.lineWidth=4;g.strokeStyle=sheet;g.strokeText(txt,x,y);g.fillStyle=ink;g.fillText(txt,x,y)};
+  if(o.axis){const cT=Math.cos(tilt*D);g.strokeStyle=ink;g.lineWidth=2;g.setLineDash([]);
+    g.beginPath();g.moveTo(cx,cy-r*cT);g.lineTo(cx,cy-r-30);g.moveTo(cx,cy+r);g.lineTo(cx,cy+r+22);g.stroke();
+    g.beginPath();g.arc(cx,cy-r*cT,3,0,2*Math.PI);g.fillStyle=ink;g.fill();
+    label("Erdachse",cx+8,cy-r-18);label("Nordpol",cx+8,cy-r*cT+4)}
+  // Sonne
+  const[sx,sy,sz]=cam(o.decl,ls,o.lc,tilt),len=Math.hypot(sx,sy);
+  if(o.sun&&len>.25){const ux=sx/len,uy=-sy/len,X=Math.max(30,Math.min(W-30,cx+ux*(r+48))),Y=Math.max(30,Math.min(H-30,cy+uy*(r+48)));
+    g.globalAlpha=sz<0?.35:1;g.strokeStyle=sun;g.lineWidth=3;g.lineCap="round";
+    for(let i=0;i<12;i++){const a=i*Math.PI/6;g.beginPath();g.moveTo(X+Math.cos(a)*23,Y+Math.sin(a)*23);g.lineTo(X+Math.cos(a)*30,Y+Math.sin(a)*30);g.stroke()}
+    g.beginPath();g.arc(X,Y,18,0,2*Math.PI);g.fillStyle=sun;g.fill();g.globalAlpha=1;label(sz<0?"Sonne (hinten)":"Sonne",X,Y+48,"center")}
+  // Städte
+  o.cities.forEach(c=>{const[x,y,z]=cam(c.lat,c.lon,o.lc,tilt);if(z<.03)return;const X=cx+x*r,Y=cy-y*r;
+    g.beginPath();g.arc(X,Y,c.me?6.5:5,0,2*Math.PI);g.fillStyle=c.me?pin:"#FFFFFF";g.fill();g.lineWidth=1.8;g.strokeStyle="#1C1F2E";g.stroke();
+    label(c.n,X+10,Y+4)});
+}
+function cityPhase(c,t,decl){
+  const ls=10-(t-12)*15,dl=((c.lon-ls)%360+540)%360-180,p=c.lat*D,s=Math.sin(p)*Math.sin(decl*D)+Math.cos(p)*Math.cos(decl*D)*Math.cos(dl*D);
+  if(Math.abs(s)<.045)return[dl>0?"Sonnenuntergang":"Sonnenaufgang","day"];
+  return s>0?["Tag","day"]:["Nacht","night"];
+}
+(function(){
+  const rng=$("#tnTime"),out=$("#tnClocks"),btn=$("#tnPlay"),tOut=$("#tnTimeOut"),sea=$("#tnSeason"),cv=$("#tnGlobe"),b3=$("#v3d"),b2=$("#v2d");
+  let t=+rng.value,raf=0,last=0,co=55,tilt=24,mode3=true,drag=null;
+  function draw(){
+    const decl=mode3?+sea.value:0;
+    tOut.textContent=fmt(t)+" Uhr";
+    if(mode3)renderGlobe(cv,{w:560,h:430,r:165,cx:290,cy:222,t,lc:10-(t-12)*15+co,tilt,decl,cities:TC,axis:true,sun:true});
+    else $("#tnStage").innerHTML=tnSVG(t,TC);
+    out.innerHTML=TC.map(c=>{const[ph,cl]=cityPhase(c,t,decl);return`<div class="clock"><b>${c.n}</b><span class="t">${fmt(t+c.off)} Uhr</span><span class="pill ${cl}">${ph}</span></div>`}).join("");
+  }
+  function setMode(m){mode3=m;b3.setAttribute("aria-pressed",m);b2.setAttribute("aria-pressed",!m);$("#view3d").hidden=!m;$("#view2d").hidden=m;sea.disabled=!m;draw()}
+  b3.onclick=()=>setMode(true);b2.onclick=()=>setMode(false);
+  rng.addEventListener("input",()=>{t=+rng.value;draw()});
+  sea.addEventListener("change",draw);
+  cv.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY,co,tilt,m:e.pointerType==="mouse"};try{cv.setPointerCapture(e.pointerId)}catch(_){}});
+  cv.addEventListener("pointermove",e=>{if(!drag)return;const s=560/cv.getBoundingClientRect().width;
+    co=drag.co-(e.clientX-drag.x)*s*.45;if(drag.m)tilt=Math.max(0,Math.min(60,drag.tilt+(e.clientY-drag.y)*s*.3));draw()});
+  ["pointerup","pointercancel"].forEach(ev=>cv.addEventListener(ev,()=>{drag=null}));
+  function step(ts){if(!last)last=ts;t=wrap24(t+(ts-last)/1000*2);last=ts;rng.value=t;draw();raf=requestAnimationFrame(step)}
+  btn.onclick=()=>{if(raf){cancelAnimationFrame(raf);raf=0;btn.textContent="Erde drehen"}else{last=0;raf=requestAnimationFrame(step);btn.textContent="Anhalten"}};
+  draw();
+})();
+(function(){
+  const snap=t=>{const c=document.createElement("canvas");renderGlobe(c,{w:360,h:300,r:118,cx:200,cy:160,t,lc:18,tilt:28,decl:0,cities:[TC[0]],axis:false,sun:true,dpr:2});return c.toDataURL("image/png")};
+  quiz($("#n1"),shuffle([2,9,14,21,7.5,16,23,11,4,19]).slice(0,6).map((t,i)=>({
+    q:(i%2===0?`<div class="qfig tnq"><img src="${snap(t)}" width="360" height="300" alt="Globus mit Tag- und Nachtseite, Hamburg ist rot markiert"></div>`:`<div class="qfig tnq">${tnSVG(t,[TC[0]])}</div>`)+`<span>Ist es in Hamburg gerade Tag oder Nacht?</span>`,
+    a:t>6&&t<18?"Tag":"Nacht",o:[{v:"Tag",label:"Tag"},{v:"Nacht",label:"Nacht"}],why:`In Hamburg ist es ${fmt(t)} Uhr.`})));
+})();
+(function(){
+  const box=$("#n2"),wrapEl=$("[data-gaps]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box);
+  box._reset=()=>{wrapEl.querySelectorAll("select").forEach(x=>{x.value="";x.classList.remove("right","wrong")});fb.textContent="";sc.textContent=""};
+  const GAPS=[
+    ["Die Erde dreht sich in ",["24 Stunden","einem Monat","einem Jahr"]," einmal um sich selbst."],
+    ["Die gedachte Linie durch Nordpol und Südpol heißt ",["Erdachse","Äquator","Nullmeridian"],"."],
+    ["Auf der Seite der Erde, die zur Sonne zeigt, ist ",["Tag","Nacht"],"."],
+    ["Die Erde dreht sich von ",["Westen nach Osten","Osten nach Westen"],"."],
+    ["Deshalb geht die Sonne im ",["Osten","Westen","Norden"]," auf und im ",["Westen","Osten","Süden"]," unter."],
+    ["Mittags steht die Sonne bei uns im ",["Süden","Norden","Osten"],"."]];
+  let n=0;
+  wrapEl.innerHTML=GAPS.map(parts=>`<p class="gapline">${parts.map(p=>Array.isArray(p)?`<select id="gap${n++}" data-a="${p[0]}" aria-label="Lücke"><option value="">…</option>${shuffle(p).map(o=>`<option>${o}</option>`).join("")}</select>`:p).join("")}</p>`).join("");
+  $("[data-check]",box).onclick=()=>{
+    const sel=[...wrapEl.querySelectorAll("select")];let r=0,open=0;
+    sel.forEach(s=>{s.classList.remove("right","wrong");if(!s.value){open++;return}const ok=s.value===s.dataset.a;s.classList.add(ok?"right":"wrong");if(ok)r++});
+    sc.textContent=`${r} von ${sel.length} richtig`;
+    if(open){fb.className="fb no";fb.textContent=`Es sind noch ${open} Lücken frei.`}
+    else if(r===sel.length){fb.className="fb ok";fb.textContent="Super, alles richtig!";guckiDone(!box.dataset.fails,box)}
+    else{fb.className="fb no";fb.textContent="Die rot umrandeten Lücken stimmen noch nicht.";box.dataset.fails=1;guckiCry()}
+  };
+})();
+quiz($("#n3"),[
+  {q:"Warum gibt es Tag und Nacht?",a:"Die Erde dreht sich um sich selbst.",o:txtOpts(["Die Erde dreht sich um sich selbst.","Die Sonne kreist um die Erde.","Der Mond verdeckt nachts die Sonne.","Die Sonne geht nachts aus."]),why:"Dabei wandert jeder Ort durch Licht und Schatten."},
+  {q:"Wie lange dauert eine Umdrehung der Erde?",a:"24 Stunden",o:txtOpts(["24 Stunden","12 Stunden","eine Woche","365 Tage"]),why:"Das ist ein Tag."},
+  {q:"In welcher Himmelsrichtung geht die Sonne auf?",a:"Osten",o:txtOpts(["Osten","Westen","Norden","Süden"]),why:"Im Osten geht die Sonne auf."},
+  {q:"In Hamburg ist es 12 Uhr mittags. Wie spät ist es ungefähr auf der anderen Seite der Erde?",a:"Mitternacht",o:txtOpts(["Mitternacht","auch 12 Uhr mittags","6 Uhr morgens","18 Uhr abends"]),why:"Die andere Seite liegt genau im Schatten."},
+  {q:"Was dauert 365 Tage?",a:"Ein Umlauf der Erde um die Sonne",o:txtOpts(["Ein Umlauf der Erde um die Sonne","Eine Drehung der Erde um sich selbst","Ein Umlauf des Mondes um die Erde","Eine Drehung der Sonne"]),why:"Das ist ein Jahr."}
+]);
+
+/* ================= KOMPASS ================= */
+const DIRN=["Norden","Nordosten","Osten","Südosten","Süden","Südwesten","Westen","Nordwesten"];
+const DIRK=["N","NO","O","SO","S","SW","W","NW"];
+const sinD=d=>Math.sin(d*Math.PI/180),cosD=d=>Math.cos(d*Math.PI/180);
+function compassSVG(deg){
+  let s=`<svg class="compass" viewBox="-142 -142 284 284" role="img" aria-label="Kompass, Richtungspfeil zeigt nach ${DIRN[Math.round(deg/45)%8]}">`;
+  s+=`<g transform="rotate(${deg})"><rect x="-74" y="-120" width="148" height="240" rx="16" fill="#E9EEF6" stroke="#B5C1D4" stroke-width="1.5"/>
+    <path d="M0 -117L13 -94L4.5 -94L4.5 -80L-4.5 -80L-4.5 -94L-13 -94Z" fill="#1C1F2E"/>
+    <line x1="0" y1="80" x2="0" y2="112" stroke="#B5C1D4" stroke-width="2"/></g>`;
+  s+=`<circle r="74" fill="#FFFFFF" stroke="#1C1F2E" stroke-width="2.5"/>`;
+  for(let a=0;a<360;a+=10){const L=a%90===0?12:a%45===0?9:5;s+=`<line x1="${70*sinD(a)}" y1="${-70*cosD(a)}" x2="${(70-L)*sinD(a)}" y2="${-(70-L)*cosD(a)}" stroke="#1C1F2E" stroke-width="${a%45===0?2:1}"/>`}
+  DIRK.forEach((k,i)=>{const a=i*45,r=i%2?50:48;s+=`<text x="${r*sinD(a)}" y="${-r*cosD(a)}" font-size="${i%2?10:19}" ${i===0?'fill="#D2232A"':""}>${k}</text>`});
+  s+=`<path d="M0 -42L7 0L-7 0Z" fill="#D2232A"/><path d="M0 42L7 0L-7 0Z" fill="#5B6075"/><circle r="4" fill="#1C1F2E"/></svg>`;
+  return s;
+}
+function roseSVG(){
+  let s=`<svg class="rose" viewBox="-100 -100 200 200" role="img" aria-label="Windrose mit acht Himmelsrichtungen">`;
+  [1,3,5,7,0,2,4,6].forEach(i=>{const a=i*45,L=i%2?46:70,w=i%2?9:12,tip=[L*sinD(a),-L*cosD(a)],l=[w*sinD(a-90),-w*cosD(a-90)],r=[w*sinD(a+90),-w*cosD(a+90)];
+    s+=`<path d="M0 0L${l[0]} ${l[1]}L${tip[0]} ${tip[1]}Z" fill="${i%2?"var(--muted)":"var(--ink)"}"/><path d="M0 0L${r[0]} ${r[1]}L${tip[0]} ${tip[1]}Z" fill="${i%2?"var(--line)":"var(--muted)"}"/>`});
+  DIRK.forEach((k,i)=>{const a=i*45,r=i%2?62:86;s+=`<text x="${r*sinD(a)}" y="${-r*cosD(a)}" font-size="${i%2?12:17}" ${i===0?'fill="var(--pin)"':""}>${k}</text>`});
+  return s+`</svg>`;
+}
+$("#roseFig").innerHTML=roseSVG();
+(function(){
+  const stage=$("#kStage"),rng=$("#kDeg"),out=$("#kOut");
+  const draw=()=>{const d=+rng.value;stage.innerHTML=compassSVG(d);out.innerHTML=`${DIRN[Math.round(d/45)%8]} <span>${d}°</span>`};
+  rng.addEventListener("input",draw);draw();
+})();
+const PL=[["Kirche","die Kirche"],["Sportplatz","der Sportplatz"],["Bahnhof","der Bahnhof"],["Badesee","der Badesee"],["Spielplatz","der Spielplatz"],["Bäckerei","die Bäckerei"],["Bücherei","die Bücherei"],["Schwimmhalle","die Schwimmhalle"]];
+const SCREEN=["oben","oben rechts","rechts","unten rechts","unten","unten links","links","oben links"];
+function planSVG(rot,o={}){
+  const cx=170,cy=130,R=95,pos=(i,r=R)=>[cx+r*sinD(i*45+rot),cy-r*cosD(i*45+rot)];
+  let s=`<svg class="plan" viewBox="0 0 340 260" role="img" aria-label="Lageplan rund um die Schule mit Nordpfeil"><rect width="340" height="260" rx="12" fill="var(--park)"/>`;
+  const[lx,ly]=pos(3);s+=`<ellipse cx="${lx}" cy="${ly}" rx="44" ry="26" fill="var(--sea)"/>`;
+  s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--road)" stroke-width="7"/>`;
+  PL.forEach((p,i)=>{const[x,y]=pos(i);s+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--road)" stroke-width="6"/>`});
+  if(o.hi!=null){const[x,y]=pos(o.hi,R-16);s+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--pin)" stroke-width="4" stroke-linecap="round"/>`}
+  if(o.rose)DIRK.forEach((k,i)=>{const[x,y]=pos(i,i%2?54:50);s+=`<circle cx="${x}" cy="${y}" r="${i%2?10:11}" fill="var(--sheet)" stroke="${i===0?"var(--pin)":"var(--line)"}" stroke-width="1.5"/><text x="${x}" y="${y+3.5}" style="font-size:${i%2?8:10}px;${i===0?"fill:var(--pin)":""}">${k}</text>`});
+  PL.forEach((p,i)=>{const[x,y]=pos(i),w=p[0].length*6.6+16,h=o.hi===i;s+=`<g ${o.click?`data-pl="${i}" style="cursor:pointer"`:""}><rect x="${x-w/2}" y="${y-12}" width="${w}" height="24" rx="6" fill="var(--sheet)" stroke="${h?"var(--pin)":"var(--line)"}" stroke-width="${h?2.5:1}"/><text x="${x}" y="${y+4}">${p[0]}</text></g>`});
+  s+=`<rect x="${cx-37}" y="${cy-14}" width="74" height="28" rx="7" fill="var(--ink)"/><text x="${cx}" y="${cy+4}" style="fill:var(--sheet)">Schule</text>`;
+  if(o.edges)s+=`<g style="font-family:var(--display);font-size:13px;fill:var(--muted)"><text x="170" y="15">N</text><text x="170" y="254">S</text><text x="12" y="134">W</text><text x="329" y="134">O</text></g>`;
+  s+=`<circle cx="310" cy="38" r="20" fill="var(--sheet)" stroke="var(--line)"/><g transform="translate(310 38) rotate(${rot})"><path d="M0 -14L7 8L0 3L-7 8Z" fill="var(--pin)"/></g>`;
+  s+=`<text x="${310+30*sinD(rot)}" y="${38-30*cosD(rot)+4}" style="font-family:var(--display);font-size:14px;fill:var(--pin)">N</text></svg>`;
+  return s;
+}
+// Schritt 2: Ort antippen
+(function(){
+  const box=$("#planExplore"),out=$("#planOut");let hi=2;
+  const draw=()=>{box.innerHTML=planSVG(0,{rose:true,edges:true,hi,click:true});
+    out.innerHTML=`Von der Schule aus liegt ${PL[hi][1]} im <span style="color:var(--pin)">${DIRN[hi]}</span>. Auf der Karte ist das ${SCREEN[hi]}.`};
+  box.addEventListener("click",e=>{const g=e.target.closest("[data-pl]");if(g){hi=+g.dataset.pl;draw()}});
+  draw();
+})();
+// Schritt 3: Karte einnorden
+(function(){
+  const map=$("#nordMap"),out=$("#nordOut");let rot=135;
+  $("#nordCompass").innerHTML=compassSVG(0);
+  const draw=()=>{const r=((rot%360)+360)%360;map.innerHTML=planSVG(r,{edges:r===0});
+    if(r===0){out.className="fb ok";out.textContent="Geschafft! Der Nordpfeil der Karte zeigt jetzt wie die Kompassnadel nach oben. Die Karte ist eingenordet."}
+    else{out.className="fb";out.style.color="var(--muted)";out.textContent=`Der Nordpfeil der Karte zeigt noch nach ${SCREEN[r/45].replace("oben","oben").replace("unten","unten")}. Dreh weiter.`}
+    if(r===0)out.style.color=""};
+  $("#nordL").onclick=()=>{rot-=45;draw()};$("#nordR").onclick=()=>{rot+=45;draw()};
+  draw();
+})();
+const dirOpts=(a,must)=>{const pool=shuffle([...Array(8).keys()].filter(x=>x!==a&&x!==must));const pick=must!=null&&must!==a?[must,...pool.slice(0,2)]:pool.slice(0,3);return shuffle([a,...pick]).map(i=>({v:i,label:DIRN[i]}))};
+quiz($("#c1"),shuffle([...Array(8).keys()]).slice(0,5).map(d=>({
+  q:`<div class="qfig">${compassSVG(d*45)}</div><span>In welche Richtung zeigt der Richtungspfeil?</span>`,a:d,o:dirOpts(d),why:`Der Pfeil zeigt nach ${DIRN[d]} (${d*45}°).`})));
+(function(){
+  const dq=shuffle([...Array(8).keys()]).slice(0,4).map(i=>({q:`In welcher Himmelsrichtung liegt ${PL[i][1]} von der Schule aus?`,a:i,o:dirOpts(i),why:`${PL[i][0]} liegt im ${DIRN[i]}.`}));
+  const pq=shuffle([...Array(8).keys()]).slice(0,2).map(i=>({q:`Was liegt im ${DIRN[i]} der Schule?`,a:i,o:shuffle([i,...shuffle([...Array(8).keys()].filter(x=>x!==i)).slice(0,3)]).map(j=>({v:j,label:PL[j][0]})),why:`Im ${DIRN[i]} liegt ${PL[i][1]}.`}));
+  quiz($("#c2"),[...dq,...pq]);
+  const plan=$("#c2plan"),rb=$("#c2rose");let rose=false;
+  const draw=()=>{plan.innerHTML=planSVG(0,{rose});rb.setAttribute("aria-pressed",rose);rb.textContent=rose?"Windrose ausblenden":"Hilfe: Windrose einblenden"};
+  rb.onclick=()=>{rose=!rose;draw()};draw();
+})();
+quiz($("#c3"),shuffle([...Array(8).keys()]).slice(0,4).map((i,n)=>{const rot=[90,180,270,135][n],naive=(i+rot/45)%8;return{
+  q:`<div class="qfig wide" data-rot="${rot}">${planSVG(rot)}</div><div class="row turnrow"><button class="btn ghost" data-turn="-45">↺ links drehen</button><button class="btn ghost" data-turn="45">↻ rechts drehen</button><span class="turnok hint"></span></div><span>In welcher Himmelsrichtung liegt ${PL[i][1]} von der Schule aus?</span>`,a:i,o:dirOpts(i,naive),
+  why:`${PL[i][0]} liegt im ${DIRN[i]}.`,hint:"Noch nicht. Dreh die Karte, bis der rote Nordpfeil nach oben zeigt, und schau dann noch einmal."}}));
+$("#c3").addEventListener("click",e=>{const b=e.target.closest("[data-turn]");if(!b)return;const q=b.closest(".q"),fig=$(".qfig",q);
+  const r=((+fig.dataset.rot+ +b.dataset.turn)%360+360)%360;fig.dataset.rot=r;fig.innerHTML=planSVG(r);
+  $(".turnok",q).textContent=r===0?"✓ Eingenordet: Der Nordpfeil zeigt nach oben.":""});
+quiz($("#c4"),[
+  {q:"Wohin zeigt die rote Spitze der Kompassnadel?",a:"nach Norden",o:txtOpts(["nach Norden","nach Süden","nach Osten","in meine Gehrichtung"]),why:"Die Magnetnadel richtet sich nach Norden aus."},
+  {q:"Was kann einen Kompass stören?",a:"ein Handy",o:txtOpts(["ein Handy","ein Holzstift","ein Blatt Papier","ein Apfel"]),why:"Handys, Magnete und Metall lenken die Nadel ab."},
+  {q:"Welche Himmelsrichtung liegt gegenüber von Südwesten?",a:"Nordosten",o:txtOpts(["Nordosten","Nordwesten","Südosten","Norden"]),why:"Gegenüber von Südwesten liegt Nordosten."},
+  {q:"Wie viel Grad hat die Himmelsrichtung Osten?",a:"90°",o:txtOpts(["90°","0°","180°","270°"]),why:"Norden 0°, Osten 90°, Süden 180°, Westen 270°."},
+  {q:"Was ist auf einer genordeten Karte oben?",a:"Norden",o:txtOpts(["Norden","Süden","Osten","Westen"]),why:"Oben ist Norden, rechts Osten."},
+  {q:"Was bedeutet „den Kompass einnorden“?",a:"Das N der Windrose unter die rote Nadel drehen",o:txtOpts(["Das N der Windrose unter die rote Nadel drehen","Den Kompass nach Norden werfen","Die Nadel festhalten","Den Kompass schütteln"]),why:"Dann zeigt die Windrose die echten Himmelsrichtungen."}
+]);
+/* --- Ozean-Globus --- */
+(function(){
+  const cv=$("#oGlobe"),tiltR=$("#oTilt"),wrap=$("#oGlobeWrap"),svg=$("#worldmap"),bM=$("#oMapBtn"),bG=$("#oGlobeBtn"),KEYS=["P","A","I","S","N"];
+  const isSea=i=>TEX[i*3]===34&&TEX[i*3+1]===98&&TEX[i*3+2]===170;
+  const c=document.createElement("canvas");c.width=TW;c.height=TH;const g=c.getContext("2d");
+  g.fillStyle="#000";g.fillRect(0,0,TW,TH);
+  const X=lon=>(lon+180)/360*TW,Y=lat=>(90-lat)/180*TH;
+  OPOLY.forEach(([k,p])=>{g.beginPath();dens([...p,p[0]]).forEach((q,i)=>i?g.lineTo(X(q[0]),Y(q[1])):g.moveTo(X(q[0]),Y(q[1])));g.closePath();g.fillStyle=`rgb(${(KEYS.indexOf(k)+1)*40},0,0)`;g.fill()});
+  const dd=g.getImageData(0,0,TW,TH).data,REG=new Uint8Array(TW*TH);
+  for(let i=0;i<REG.length;i++){if(!isSea(i))continue;const v=Math.round(dd[i*4]/40);REG[i]=v>=1&&v<=5?v:0}
+  const hex=h=>{h=h.replace("#","");if(h.length===3)h=h.split("").map(x=>x+x).join("");return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]};
+  const W=560,H=460,r0=200,cx0=280,cy0=230;
+  let lc=-25,tilt=15,sel="A",drag=null,on=false;
+  function draw(){
+    if(!on)return;
+    const dpr=Math.min(2,window.devicePixelRatio||1);
+    if(cv.width!==Math.round(W*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+    const ctx=cv.getContext("2d");ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,cv.width,cv.height);
+    const R=Math.round(r0*dpr),T=Math.round(tilt),G=geom(R,T),N=G.N,img=ctx.createImageData(N,N),px=img.data;
+    const grey=hex(cssv("--sea")),cols=[grey,...KEYS.map(k=>hex(cssv(O[k].c.slice(4,-1))))],land=hex(cssv("--land"));
+    const selI=sel?KEYS.indexOf(sel)+1:0,uB=(lc+180)/360*TW,uk=TW/(2*Math.PI);
+    for(let k=0;k<N*N;k++){if(!G.ins[k])continue;
+      let u=Math.floor(uB+G.dl[k]*uk)%TW;if(u<0)u+=TW;const i=G.v[k]*TW+u,sea=isSea(i),rg=REG[i];
+      let cc=sea?cols[rg]:land;
+      if(sea&&selI&&rg!==selI)cc=[cc[0]*.3+grey[0]*.7,cc[1]*.3+grey[1]*.7,cc[2]*.3+grey[2]*.7];
+      const sh=.6+.4*G.zz[k],p=k*4;px[p]=cc[0]*sh;px[p+1]=cc[1]*sh;px[p+2]=cc[2]*sh;px[p+3]=255}
+    ctx.putImageData(img,Math.round(cx0*dpr)-R,Math.round(cy0*dpr)-R);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const ink=cssv("--ink"),sheet=cssv("--sheet"),pin=cssv("--pin");
+    ctx.beginPath();ctx.arc(cx0,cy0,r0,0,2*Math.PI);ctx.strokeStyle=cssv("--line");ctx.lineWidth=2;ctx.stroke();
+    const label=(t,x,y,sz)=>{ctx.font=`700 ${sz}px 'Bricolage Grotesque','Trebuchet MS',sans-serif`;ctx.textAlign="center";ctx.lineWidth=4;ctx.strokeStyle=sheet;ctx.strokeText(t,x,y);ctx.fillStyle=ink;ctx.fillText(t,x,y)};
+    const at=(la,lo)=>{const[x,y,z]=cam(la,lo,lc,T);return[cx0+x*r0,cy0-y*r0,z]};
+    const best=(cands)=>cands.map(([la,lo])=>at(la,lo)).sort((a,b)=>b[2]-a[2])[0];
+    const LB={P:[[0,-150],[5,170],[-30,-120],[30,-160]],A:[[15,-35],[-25,-15]],I:[[-25,75],[-10,90]],S:[[-64,lc],[-64,lc+60],[-64,lc-60]],N:[[82,lc],[82,lc+90]]};
+    KEYS.forEach(k=>{const[x,y,z]=best(LB[k]);if(z>.2)label(O[k].n,x,y+5,16)});
+    const[hx,hy,hz]=at(53.55,10);
+    if(hz>.05){ctx.beginPath();ctx.arc(hx,hy,7,0,2*Math.PI);ctx.strokeStyle=pin;ctx.lineWidth=2.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,2.5,0,2*Math.PI);ctx.fillStyle=pin;ctx.fill();
+      ctx.font="700 13px 'Atkinson Hyperlegible','Segoe UI',sans-serif";ctx.textAlign="left";ctx.lineWidth=4;ctx.strokeStyle=sheet;ctx.strokeText("Hamburg",hx+10,hy+4);ctx.fillStyle=ink;ctx.fillText("Hamburg",hx+10,hy+4)}
+    [[90,"Nordpol"],[-90,"Südpol"]].forEach(([la,t])=>{const[x,y,z]=at(la,0);if(z>.1){ctx.beginPath();ctx.arc(x,y,3.5,0,2*Math.PI);ctx.fillStyle=ink;ctx.fill();ctx.font="700 12px 'Atkinson Hyperlegible','Segoe UI',sans-serif";ctx.textAlign="left";ctx.lineWidth=3;ctx.strokeStyle=sheet;ctx.strokeText(t,x+7,y+4);ctx.fillStyle=ink;ctx.fillText(t,x+7,y+4)}});
+  }
+  oceanGlobeHook=k=>{sel=k;draw()};
+  function setView(globe){on=globe;bG.setAttribute("aria-pressed",globe);bM.setAttribute("aria-pressed",!globe);wrap.hidden=!globe;svg.toggleAttribute("hidden",globe);draw()}
+  bG.onclick=()=>setView(true);bM.onclick=()=>setView(false);
+  tiltR.addEventListener("input",()=>{tilt=+tiltR.value;draw()});
+  const pick=e=>{const rc=cv.getBoundingClientRect(),sx=(e.clientX-rc.left)*W/rc.width,sy=(e.clientY-rc.top)*H/rc.height,x=(sx-cx0)/r0,y=(cy0-sy)/r0,rr=x*x+y*y;if(rr>1)return null;
+    const z=Math.sqrt(1-rr),T=Math.round(tilt)*D,yp=y*Math.cos(T)+z*Math.sin(T),zp=-y*Math.sin(T)+z*Math.cos(T),lat=Math.asin(yp)/D,lon=lc+Math.atan2(x,zp)/D;
+    let u=Math.floor((lon+180)/360*TW)%TW;if(u<0)u+=TW;const v=Math.min(TH-1,Math.max(0,Math.floor((90-lat)/180*TH))),i=v*TW+u;
+    return isSea(i)&&REG[i]?KEYS[REG[i]-1]:null};
+  cv.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY,lc,tilt,m:e.pointerType==="mouse",moved:false};try{cv.setPointerCapture(e.pointerId)}catch(_){}});
+  cv.addEventListener("pointermove",e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.abs(dx)+Math.abs(dy)>5)drag.moved=true;if(!drag.moved)return;
+    const s=W/cv.getBoundingClientRect().width;lc=drag.lc-dx*s*.45;if(drag.m){tilt=Math.max(-75,Math.min(75,drag.tilt+dy*s*.3));tiltR.value=tilt}draw()});
+  cv.addEventListener("pointerup",e=>{if(drag&&!drag.moved){const k=pick(e);if(k)$("#olegend").querySelector(`[data-v="${k}"]`).click()}drag=null});
+  cv.addEventListener("pointercancel",()=>{drag=null});
+})();
+/* --- Weltzeituhr --- */
+const TZC=[
+  {n:"Honolulu",off:-10,lat:21.3,lon:-157.9,a:"start"},{n:"Los Angeles",off:-8,lat:34,lon:-118.2,a:"below"},
+  {n:"New York",off:-5,lat:40.7,lon:-74,a:"start"},{n:"Rio de Janeiro",off:-3,lat:-22.9,lon:-43.2,a:"start"},
+  {n:"London",off:0,lat:51.5,lon:-.1,a:"end"},{n:"Hamburg",off:1,lat:53.55,lon:10,a:"above",me:true},
+  {n:"Moskau",off:3,lat:55.75,lon:37.6,a:"start"},{n:"Dubai",off:4,lat:25.2,lon:55.3,a:"end"},
+  {n:"Neu-Delhi",off:5.5,lat:28.6,lon:77.2,a:"start"},{n:"Peking",off:8,lat:39.9,lon:116.4,a:"above"},
+  {n:"Tokio",off:9,lat:35.7,lon:139.7,a:"start"},{n:"Sydney",off:10,lat:-33.9,lon:151.2,a:"end"},{n:"Auckland",off:12,lat:-36.85,lon:174.8,a:"endbelow"}];
+const tzDay=(t,off)=>Math.floor((t-1+off)/24);
+const tzT=(t,off)=>wrap24(t-1+off);
+(function(){
+  const svg=$("#tzMap"),rng=$("#tzTime"),out=$("#tzOut"),clocks=$("#tzClocks"),Y0=26;
+  const X=lon=>(lon+180)*2,Y=lat=>Y0+(90-lat)*2;
+  // Land in Plattkarten-Projektion
+  let land="";
+  const ringD=pts=>"M"+pts.map(p=>X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)).join("L")+"Z";
+  if(WORLD){
+    WORLD.forEach(f=>{if(f.name==="Antarctica"||f.clat<-60)return;f.rings.forEach(ring=>{
+      const u=[[ring[0][0],ring[0][1]]];let sh=0;
+      for(let i=1;i<ring.length;i++){const dl=ring[i][0]-ring[i-1][0];if(dl>180)sh-=360;else if(dl<-180)sh+=360;u.push([ring[i][0]+sh,ring[i][1]])}
+      let mn=Infinity,mx=-Infinity;u.forEach(p=>{mn=Math.min(mn,p[0]);mx=Math.max(mx,p[0])});
+      [-360,0,360].forEach(o=>{if(mx+o>-180&&mn+o<180)land+=ringD(o?u.map(p=>[p[0]+o,p[1]]):u)})})});
+    land+=ringD(ANT_PTS);
+  }else GRID.forEach((row,r)=>[...row].forEach((ch,c)=>{if(ch==="L")land+=`M${c*20} ${Y0+r*20}h20v20h-20Z`}));
+  function draw(){
+    const t=+rng.value,ls=10-(t-12)*15;
+    out.textContent=fmt(t)+" Uhr";
+    let s=`<defs><clipPath id="tzc"><rect x="0" y="${Y0}" width="720" height="360"/></clipPath></defs>`;
+    s+=`<rect x="0" y="${Y0}" width="720" height="360" fill="var(--sea)"/>`;
+    for(let i=-12;i<=12;i++){const a=Math.max(-180,i*15-7.5),b=Math.min(180,i*15+7.5);
+      s+=`<rect x="${X(a)}" y="${Y0}" width="${X(b)-X(a)}" height="360" fill="${i===1?"var(--pin)":"var(--ink)"}" fill-opacity="${i===1?.14:(i%2?.05:0)}"/>`}
+    s+=`<g clip-path="url(#tzc)"><path d="${land}" fill="var(--land)" stroke="var(--landline)" stroke-width=".4"/>`;
+    // Nacht: alles, was mehr als 90° vom Sonnenstand entfernt ist
+    const d0=((ls+90+180)%360+360)%360-180;
+    [-360,0,360].forEach(o=>s+=`<rect x="${X(d0+o)}" y="${Y0}" width="360" height="360" fill="var(--night)" fill-opacity=".38"/>`);
+    s+=`</g>`;
+    for(let i=-12;i<=12;i++){const a=Math.max(-180,i*15-7.5),b=Math.min(180,i*15+7.5),h=Math.floor(wrap24(t-1+i));
+      if(i>-12)s+=`<line x1="${X(a)}" y1="${Y0}" x2="${X(a)}" y2="${Y0+360}" stroke="var(--ink)" stroke-opacity=".18" stroke-width=".8"/>`;
+      s+=`<text class="hr" x="${(X(a)+X(b))/2}" y="18" ${i===1?'style="fill:var(--pin)"':""}>${h}</text>`}
+    s+=`<text class="dl" x="10" y="${Y0+200}" transform="rotate(-90 10 ${Y0+200})">Datumsgrenze</text><text class="dl" x="712" y="${Y0+200}" transform="rotate(90 712 ${Y0+200})">Datumsgrenze</text>`;
+    TZC.forEach(c=>{const x=X(c.lon),y=Y(c.lat),lab=`${c.n} ${fmt(tzT(t,c.off))}`;
+      s+=`<circle cx="${x}" cy="${y}" r="${c.me?5:4}" fill="${c.me?"var(--pin)":"#FFFFFF"}" stroke="#1C1F2E" stroke-width="1.4"/>`;
+      const P={start:[x+8,y+4,"start"],end:[x-8,y+4,"end"],above:[x,y-9,"middle"],below:[x,y+16,"middle"],endbelow:[x-6,y+17,"end"]}[c.a];
+      s+=`<text x="${P[0]}" y="${P[1]}" style="text-anchor:${P[2]}">${lab}</text>`});
+    svg.innerHTML=s;
+    clocks.innerHTML=TZC.map(c=>{const[ph,cl]=cityPhase(c,t,0),dd=tzDay(t,c.off)-Math.floor((t-1+1)/24);
+      return`<div class="clock"><b>${c.n}</b><span class="t">${fmt(tzT(t,c.off))}${dd?` <span class="dt">${dd>0?"nächster Tag":"Vortag"}</span>`:""}</span><span class="pill ${cl}">${ph}</span></div>`}).join("");
+  }
+  rng.addEventListener("input",draw);draw();
+})();
+(function(){
+  const names=["London","New York","Moskau","Dubai","Peking","Tokio","Los Angeles","Rio de Janeiro","Sydney"];
+  quiz($("#n5"),shuffle(names).slice(0,5).map(name=>{
+    const c=TZC.find(x=>x.n===name),h=6+Math.floor(Math.random()*15),d=c.off-1,ans=wrap24(h+d),wrong=wrap24(h-d);
+    const set=[ans];[wrong,wrap24(ans+1),wrap24(ans-1),h,wrap24(ans+2)].forEach(v=>{if(set.length<4&&!set.includes(v))set.push(v)});
+    const day=h+d>=24?" am nächsten Tag":h+d<0?" am Vortag":"";
+    return{q:`In Hamburg ist es ${h} Uhr. Wie spät ist es in ${name}? <span class="hint">In ${name} ist es ${Math.abs(d)} Stunden ${d>0?"später":"früher"} als in Hamburg.</span>`,
+      a:ans,o:shuffle(set).map(v=>({v,label:`${v} Uhr`})),why:`${h} ${d>0?"+":"−"} ${Math.abs(d)} = ${ans} Uhr${day}.`}}));
+})();
+quiz($("#n6"),[
+  {q:"Wie viele Längengrade ist eine Zeitzone ungefähr breit?",a:"15",o:txtOpts(["15","24","10","30"]),why:"360 Grad : 24 Stunden = 15 Grad."},
+  {q:"Du fliegst von Hamburg nach Tokio. Was machst du mit deiner Uhr?",a:"vorstellen",o:txtOpts(["vorstellen","zurückstellen","nichts"]),why:"Tokio liegt im Osten. Dort ist es später."},
+  {q:"Durch welche Stadt verläuft der Nullmeridian?",a:"London",o:txtOpts(["London","Hamburg","Paris","New York"]),why:"Er läuft durch Greenwich, einen Stadtteil von London."},
+  {q:"Wie viele Zeitzonen hat China?",a:"eine",o:txtOpts(["eine","fünf","elf","24"]),why:"Ganz China hat dieselbe Uhrzeit."},
+  {q:"In welchem Ozean verläuft die Datumsgrenze?",a:"Pazifik",o:txtOpts(["Pazifik","Atlantik","Indischer Ozean","Arktischer Ozean"]),why:"Sie liegt ungefähr bei 180 Grad Länge."},
+  {q:"In New York ist es 6 Stunden früher als in Hamburg. Du rufst um 14 Uhr deine Tante dort an. Wie spät ist es bei ihr?",a:"8 Uhr morgens",o:txtOpts(["8 Uhr morgens","20 Uhr abends","14 Uhr","2 Uhr nachts"]),why:"14 − 6 = 8."},
+  {q:"Was passiert Ende März in Deutschland?",a:"Die Uhren werden eine Stunde vorgestellt.",o:txtOpts(["Die Uhren werden eine Stunde vorgestellt.","Die Uhren werden eine Stunde zurückgestellt.","Wir wechseln in eine andere Zeitzone in Asien."]),why:"Dann beginnt die Sommerzeit (MESZ)."}
+]);
+/* --- Gucki --- */
+(function(){
+  const g=$("#gucki");if(!g)return;try{if(localStorage.getItem("gucki-cool")==="1")g.classList.add("nofx","cool")}catch(_){}const pups=g.querySelectorAll(".pupille"),reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function look(x,y){pups.forEach(p=>{const r=p.parentElement.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,dx=x-cx,dy=y-cy,d=Math.hypot(dx,dy)||1,m=Math.min(5,d/25);
+    p.style.transform=`translate(${dx/d*m}px,${dy/d*m}px)`})}
+  window.addEventListener("pointermove",e=>look(e.clientX,e.clientY),{passive:true});
+  window.addEventListener("pointerdown",e=>look(e.clientX,e.clientY),{passive:true});
+  if(!reduce){const blink=()=>{g.classList.add("blink");setTimeout(()=>g.classList.remove("blink"),140);setTimeout(blink,2500+Math.random()*4000)};setTimeout(blink,2000)}
+  g.addEventListener("click",()=>{if(g.classList.contains("duck"))return;g.classList.add("duck");setTimeout(()=>g.classList.remove("duck"),2200)});
+})();
+/* --- Gucki feiert mit --- */
+function guckiCheer(){guckiWrongRow=0;const g=document.getElementById("gucki");if(!g||g.classList.contains("party"))return;
+  g.classList.remove("duck","clap","cry");void g.offsetWidth;g.classList.add("clap");clearTimeout(g._ct);g._ct=setTimeout(()=>g.classList.remove("clap"),1450)}
+let guckiStreak=0;
+function guckiDone(perfect,box){const g=document.getElementById("gucki");let mega=false;
+  if(box){if(perfect)box.dataset.perfect=1;else delete box.dataset.perfect;
+    const topic=box.closest(".topic");
+    if(perfect&&topic&&!topic.dataset.mega){const tasks=[...topic.querySelectorAll(".task")].filter(t=>t.querySelector("[data-score]"));
+      if(tasks.length&&tasks.every(t=>t.dataset.perfect)){topic.dataset.mega=1;mega=true;setTimeout(guckiMega,2200)}}}
+  if(perfect){guckiStreak++;guckiWrongRow=0;guckiParty();if(guckiStreak%3===0&&!mega)setTimeout(guckiAura,2900);if(guckiStreak>=2&&g&&!guckiCoolOn){clearTimeout(g._cool);g._cool=setTimeout(()=>guckiSetCool(true,true),1750)}}
+  else{guckiStreak=0;guckiCheer()}}
+let guckiWrongRow=0;
+function guckiAura(){const g=document.getElementById("gucki");if(!g||guckiMegaOn)return;g.classList.remove("aura");void g.offsetWidth;g.classList.add("aura");guckiSay("Aura!",2200);setTimeout(()=>g.classList.remove("aura"),2300)}
+function guckiCringe(){const g=document.getElementById("gucki");if(!g||guckiMegaOn)return;g.classList.remove("facepalm");void g.offsetWidth;g.classList.add("facepalm");guckiSay("Cringe!",2000);setTimeout(()=>g.classList.remove("facepalm"),2100)}
+let guckiCoolOn=false;try{guckiCoolOn=localStorage.getItem("gucki-cool")==="1"}catch(_){}
+function guckiSetCool(v,anim){const g=document.getElementById("gucki");guckiCoolOn=v;try{localStorage.setItem("gucki-cool",v?"1":"0")}catch(_){}
+  if(!g)return;if(anim)g.classList.remove("nofx");g.classList.toggle("cool",v);
+  if(v&&anim){g.classList.remove("puton");void g.offsetWidth;g.classList.add("puton");setTimeout(()=>g.classList.remove("puton"),850)}}
+function guckiCry(){const g=document.getElementById("gucki");if(!g)return;guckiStreak=0;guckiWrongRow++;if(guckiWrongRow%3===0)setTimeout(guckiCringe,1500);clearTimeout(g._cool);if(guckiCoolOn)guckiSetCool(false);
+  g.classList.remove("duck","clap","party","cry");void g.offsetWidth;g.classList.add("cry");clearTimeout(g._cr);g._cr=setTimeout(()=>g.classList.remove("cry"),1700)}
+function guckiParty(){const g=document.getElementById("gucki");if(!g)return;g.classList.remove("cry");
+  g.classList.remove("duck","clap");void g.offsetWidth;g.classList.add("party");clearTimeout(g._pt);g._pt=setTimeout(()=>g.classList.remove("party"),1700);
+  const msgs=["Fehlerfrei! Spitze!","Wow, alles richtig!","Du bist ein Profi!","Null Fehler – super!"];
+  const b=document.createElement("div");b.className="gucki-bubble";b.textContent=msgs[Math.floor(Math.random()*msgs.length)];document.body.appendChild(b);setTimeout(()=>b.remove(),2900);
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const r=g.getBoundingClientRect(),cols=["#FFE000","#F28A1E","#E3202A","#6C2C8E","#1E5AAA","#3DA647","#139DB3"];
+  for(let i=0;i<34;i++){const c=document.createElement("div");c.className="konfetti";
+    c.style.left=(r.left+r.width/2-4)+"px";c.style.top=(r.top+10)+"px";c.style.background=cols[i%cols.length];
+    c.style.setProperty("--dx",(Math.random()*-260+40)+"px");c.style.setProperty("--dy",(-120-Math.random()*200)+"px");c.style.setProperty("--rot",(Math.random()*900-450)+"deg");
+    c.style.animationDelay=(Math.random()*.15)+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),2200)}
+}
+/* --- Großer Auftritt: ganzes Thema fehlerfrei --- */
+const Konfetti=(function(){
+  let cv=null,ctx=null,parts=[],raf=0,planes=[],emitters=[],W=0,H=0,dpr=1,last=0,pileOn=false,pileCv=null,pctx=null,heights=null,pileAlpha=1,fading=false;
+  const COLS=["#FFE000","#FBB515","#F28A1E","#EA5A22","#E3202A","#B3236F","#6C2C8E","#3F3C95","#1E5AAA","#178C86","#3DA647","#A6CE39"];
+  const COL=6;
+  function resize(){if(!cv)return;dpr=Math.min(2,window.devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;if(pileCv){pileCv.width=W*dpr;pileCv.height=H*dpr;heights=new Float32Array(Math.ceil(W/COL)+1)}}
+  function ensure(){if(cv)return;cv=document.createElement("canvas");cv.className="mega";document.body.appendChild(cv);ctx=cv.getContext("2d");resize();addEventListener("resize",resize)}
+  function add(x,y,vx,vy){if(parts.length>4000)return;const k=Math.random();
+    parts.push({x,y,vx,vy,rot:Math.random()*6.28,vr:(Math.random()-.5)*14,w:6+Math.random()*7,h:8+Math.random()*9,c:COLS[Math.random()*COLS.length|0],ph:Math.random()*6.28,fl:3+Math.random()*5,term:100+Math.random()*140,shape:k<.62?0:k<.85?1:2})}
+  function start(){ensure();if(!raf){last=0;raf=requestAnimationFrame(tick)}}
+  function burst(x,y,n,ang,spread,speed){ensure();for(let i=0;i<n;i++){const a=(ang+(Math.random()-.5)*spread)*Math.PI/180,s=speed*(.45+Math.random()*.75);add(x,y,Math.cos(a)*s,-Math.sin(a)*s)}start()}
+  function emit(o){ensure();emitters.push({...o,acc:0,t:0});start()}
+  function fly(dir,y,l1,l2,speedSec){ensure();ctx.font="800 22px 'Bricolage Grotesque','Trebuchet MS',sans-serif";let bw=ctx.measureText(l1).width;
+    if(l2){ctx.font="700 14px 'Atkinson Hyperlegible','Segoe UI',sans-serif";bw=Math.max(bw,ctx.measureText(l2).width)}bw+=70;
+    planes.push({dir,x:dir>0?-bw-180:W+bw+180,y,v:(W+2*bw+400)/speedSec,l1,l2,bw,bh:l2?62:46,acc:0,mid:false});start()}
+  function pile(on){ensure();pileOn=on;if(on&&!pileCv){pileCv=document.createElement("canvas");pctx=pileCv.getContext("2d");pileAlpha=1;fading=false;resize()}}
+  function clearPile(){if(!pileCv)return;fading=true;start()}
+  function drawBanner(p,t){
+    const len=p.bw,h=p.bh,dir=p.dir,startX=p.x-dir*82,y0=p.y+6,N=28,wave=i=>Math.sin(t*7-i*.55)*4+Math.sin(t*3.1-i*.3)*2;
+    // Seile vom Heck zum Banner
+    ctx.strokeStyle="#5B6075";ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(p.x-dir*46,p.y+2);ctx.lineTo(startX,y0-h/2+wave(0));ctx.moveTo(p.x-dir*46,p.y+2);ctx.lineTo(startX,y0+h/2+wave(0));ctx.stroke();
+    const X=i=>startX-dir*len*i/N;
+    const top=[],bot=[];for(let i=0;i<=N;i++){const w=wave(i);top.push([X(i),y0-h/2+w]);bot.push([X(i),y0+h/2+w])}
+    const notch=[X(N)+dir*16,y0+wave(N)];
+    const shape=()=>{ctx.beginPath();top.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.lineTo(notch[0],notch[1]);for(let i=N;i>=0;i--)ctx.lineTo(bot[i][0],bot[i][1]);ctx.closePath()};
+    ctx.save();ctx.shadowColor="rgba(0,0,0,.25)";ctx.shadowBlur=8;ctx.shadowOffsetY=4;shape();ctx.fillStyle="#FFFDF5";ctx.fill();ctx.restore();
+    ctx.save();shape();ctx.clip();
+    for(let i=0;i<N;i++){const c=COLS[i%COLS.length],x1=Math.min(X(i),X(i+1)),wd=Math.abs(X(i+1)-X(i))+1;
+      ctx.fillStyle=c;ctx.fillRect(x1,top[i][1]-2,wd,9);ctx.fillRect(x1,bot[i][1]-7,wd,9);
+      ctx.fillStyle="rgba(0,0,0,"+(.05+.05*Math.sin(t*7-i*.55))+")";ctx.fillRect(x1,top[i][1],wd,h)}
+    ctx.restore();
+    ctx.lineWidth=2;ctx.strokeStyle="#1C1F2E";shape();ctx.stroke();
+    // wellige Schrift
+    const line=(txt,font,yy,fill)=>{ctx.font=font;const tw=ctx.measureText(txt).width;let xx=startX-dir*(len/2)-tw/2;ctx.textBaseline="middle";ctx.textAlign="left";
+      for(const ch of txt){const cw=ctx.measureText(ch).width,i=Math.abs(xx+cw/2-startX)/len*N;
+        ctx.lineWidth=4;ctx.strokeStyle="#FFFDF5";ctx.strokeText(ch,xx,yy+wave(i));ctx.fillStyle=fill;ctx.fillText(ch,xx,yy+wave(i));xx+=cw}};
+    if(p.l2){line(p.l1,"800 22px 'Bricolage Grotesque','Trebuchet MS',sans-serif",y0-8,"#E3202A");line(p.l2,"700 14px 'Atkinson Hyperlegible','Segoe UI',sans-serif",y0+15,"#1C1F2E")}
+    else line(p.l1,"800 22px 'Bricolage Grotesque','Trebuchet MS',sans-serif",y0+1,"#E3202A");
+  }
+  function drawPlane(p,t){
+    ctx.save();ctx.translate(p.x,p.y+Math.sin(t*3+p.dir)*4);ctx.scale(p.dir,1);
+    ctx.fillStyle="#B71C1C";ctx.beginPath();ctx.moveTo(-10,0);ctx.lineTo(8,0);ctx.lineTo(-6,28);ctx.lineTo(-22,28);ctx.closePath();ctx.fill();
+    const gb=ctx.createLinearGradient(0,-12,0,12);gb.addColorStop(0,"#FF5A4F");gb.addColorStop(1,"#C4161C");ctx.fillStyle=gb;ctx.beginPath();ctx.ellipse(0,0,48,13,0,0,6.283);ctx.fill();
+    ctx.fillStyle="#FFFFFF";ctx.fillRect(-18,-2,30,4);
+    ctx.fillStyle="#C4161C";ctx.beginPath();ctx.moveTo(-40,-4);ctx.lineTo(-54,-26);ctx.lineTo(-40,-26);ctx.lineTo(-26,-6);ctx.closePath();ctx.fill();
+    ctx.fillStyle="#9FD4F5";ctx.beginPath();ctx.ellipse(16,-7,11,7,0,3.14,6.283);ctx.fill();
+    ctx.fillStyle="#139DB3";ctx.beginPath();ctx.arc(16,-9,4,3.14,6.283);ctx.fill();
+    ctx.fillStyle="#8E1015";ctx.beginPath();ctx.moveTo(-6,-2);ctx.lineTo(12,-2);ctx.lineTo(-2,-28);ctx.lineTo(-18,-28);ctx.closePath();ctx.fill();
+    ctx.fillStyle="#1C1F2E";ctx.beginPath();ctx.arc(48,0,4.5,0,6.283);ctx.fill();
+    ctx.strokeStyle="rgba(28,31,46,.75)";ctx.lineWidth=3;const pr=Math.sin(t*60)*17;ctx.beginPath();ctx.moveTo(50,-pr);ctx.lineTo(50,pr);ctx.stroke();
+    ctx.restore();
+  }
+  function settle(p){const c=Math.max(0,Math.min(heights.length-1,Math.floor(p.x/COL)));const y=H-heights[c];
+    pctx.setTransform(dpr,0,0,dpr,0,0);pctx.save();pctx.translate(p.x,y-3);pctx.rotate(Math.random()*6.28);pctx.fillStyle=p.c;
+    if(p.shape===1){pctx.beginPath();pctx.arc(0,0,p.w/2,0,6.283);pctx.fill()}else pctx.fillRect(-p.w/2,-p.h/3,p.w,p.h*.66);pctx.restore();
+    const add=2.4+Math.random()*1.2;for(let k=-1;k<=1;k++){const cc=c+k;if(cc>=0&&cc<heights.length)heights[cc]=Math.min(H*.45,heights[cc]+(k?add*.45:add))}}
+  function tick(ts){const dt=Math.min(.05,last?(ts-last)/1000:.016),t=ts/1000;last=ts;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    if(pileCv){if(fading){pileAlpha-=dt/1.6;if(pileAlpha<=0){pileCv=null;pctx=null;heights=null;fading=false}}
+      if(pileCv){ctx.save();ctx.globalAlpha=Math.max(0,pileAlpha);ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(pileCv,0,0);ctx.restore();ctx.setTransform(dpr,0,0,dpr,0,0)}}
+    for(let i=emitters.length-1;i>=0;i--){const e=emitters[i];e.t+=dt;e.acc+=dt*e.rate;
+      while(e.acc>=1){e.acc--;if(e.type==="rain")add(Math.random()*W,-12,(Math.random()-.5)*60,60+Math.random()*120);
+        else{const[x,y]=e.pos(),a=(e.ang+(Math.random()-.5)*e.spread)*Math.PI/180,sp=e.speed*(.5+Math.random()*.7);add(x,y,Math.cos(a)*sp,-Math.sin(a)*sp)}}
+      if(e.t>=e.dur)emitters.splice(i,1)}
+    for(let i=planes.length-1;i>=0;i--){const p=planes[i];p.x+=p.dir*p.v*dt;p.acc+=dt*260;
+      while(p.acc>=1){p.acc--;add(p.x-p.dir*30+Math.random()*30,p.y+12,p.dir*p.v*.12+(Math.random()-.5)*140,40+Math.random()*140)}
+      if(!p.mid&&(p.dir>0?p.x>W/2:p.x<W/2)){p.mid=true;for(let k=0;k<320;k++)add(p.x-p.dir*20,p.y+14,(Math.random()-.5)*900,Math.random()*360)}
+      drawBanner(p,t);drawPlane(p,t);
+      if(p.dir>0?p.x-p.bw-220>W:p.x+p.bw+220<0)planes.splice(i,1)}
+    for(let i=parts.length-1;i>=0;i--){const p=parts[i];
+      p.vx*=Math.pow(.25,dt);p.vy+=1300*dt;if(p.vy>p.term)p.vy=p.term;
+      p.x+=(p.vx+Math.sin(t*p.fl+p.ph)*45)*dt;p.y+=p.vy*dt;p.rot+=p.vr*dt;
+      if(pileOn&&heights&&p.vy>0&&p.x>0&&p.x<W&&p.y>=H-heights[Math.floor(p.x/COL)]){settle(p);parts.splice(i,1);continue}
+      if(p.y>H+30){parts.splice(i,1);continue}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.c;
+      if(p.shape===1){ctx.beginPath();ctx.arc(0,0,p.w/2,0,6.283);ctx.fill()}
+      else if(p.shape===2){ctx.scale(1,Math.cos(t*p.fl*1.4+p.ph));ctx.fillRect(-1.6,-p.h,3.2,p.h*2)}
+      else{ctx.scale(1,Math.cos(t*p.fl*1.4+p.ph));ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h)}
+      ctx.restore()}
+    if(parts.length||planes.length||emitters.length||pileCv)raf=requestAnimationFrame(tick);else{raf=0;ctx.clearRect(0,0,W,H)}
+  }
+  return{burst,fly,emit,pile,clearPile};
+})();
+function guckiSay(text,ms){const b=document.createElement("div");b.className="gucki-bubble";b.textContent=text;b.style.animationDuration=ms+"ms";document.body.appendChild(b);setTimeout(()=>b.remove(),ms+100)}
+let guckiMegaOn=false;
+function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn)return;guckiMegaOn=true;
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){guckiSay("Das ganze Thema fehlerfrei! Du bist ein Superstar!",4000);setTimeout(()=>guckiMegaOn=false,4000);return}
+  g.classList.remove("duck","cry","party","clap");
+  const hand=side=>{const r=g.getBoundingClientRect();return side==="r"?[r.right-10,r.bottom-16]:[r.left+10,r.bottom-16]};
+  const head=()=>{const r=g.getBoundingClientRect();return[r.left+r.width/2,r.top+10]};
+  const at=(ms,f)=>setTimeout(f,ms);
+  const toss=(side,n,speed)=>{const c=side==="r"?"throw":"throw2";g.classList.remove(c);void g.offsetWidth;g.classList.add(c);
+    setTimeout(()=>{const[x,y]=hand(side);Konfetti.burst(x,y,n,side==="r"?112:100,32,speed)},220);setTimeout(()=>g.classList.remove(c),600)};
+  Konfetti.pile(true);
+  at(0,()=>guckiSay("Moment mal … alles fehlerfrei?!",1900));
+  at(700,()=>toss("r",15,700));
+  at(1900,()=>guckiSay("Das muss gefeiert werden!",1700));
+  at(2100,()=>toss("l",35,850));
+  at(2450,()=>toss("r",60,950));
+  at(2800,()=>toss("l",90,1050));
+  at(3150,()=>{toss("r",130,1150);toss("l",130,1150)});
+  at(3700,()=>{g.classList.add("crazy");guckiSay("JUHUUUUU!",1500);Konfetti.emit({pos:head,rate:160,ang:95,spread:50,speed:1200,dur:6})});
+  [3900,4400,4900,5400,5900].forEach((ms,i)=>at(ms,()=>{Konfetti.burst(0,innerHeight,180+i*30,58,24,1600);Konfetti.burst(innerWidth,innerHeight,180+i*30,122,24,1600)}));
+  at(5200,()=>{Konfetti.fly(1,Math.max(70,innerHeight*.14),"THEMA GESCHAFFT!","100 % fehlerfrei",5.5);guckiSay("Achtung, Luftpost!",1600)});
+  at(7400,()=>Konfetti.fly(-1,Math.max(170,innerHeight*.36),"DAS CRAZY!","Du bist ein Superstar!",5));
+  at(9200,()=>{Konfetti.emit({type:"rain",rate:420,dur:3.5});guckiSay("Mehr Konfetti!!!",1500)});
+  at(12600,()=>{g.classList.remove("crazy");guckiSay("Puh … das war eine Party!",2600)});
+  at(15400,()=>Konfetti.clearPile());
+  at(17000,()=>{Konfetti.pile(false);guckiMegaOn=false});
+}
+// Kleiner Trick zum Vorführen: Gucki fünfmal schnell antippen
+(function(){const g=document.getElementById("gucki");if(!g)return;let n=0,tm=0;
+  g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n>=5){n=0;setTimeout(guckiMega,300)}})})();
+/* ================= NOTEN ================= */
+const NN=["c","d","e","f","g","a","h"];
+const nName=st=>NN[st%7]+(st<7?"'":"''");
+const nSpoken=st=>`${st<7?"eingestrichenes":"zweigestrichenes"} ${NN[st%7]}`;
+function nPos(st){if(st===0)return"auf der ersten Hilfslinie unter dem Notensystem";if(st===1)return"direkt unter der 1. Linie";
+  if(st===11)return"direkt über der 5. Linie";if(st===12)return"auf der ersten Hilfslinie über dem Notensystem";if(st===13)return"über der ersten Hilfslinie oben";
+  return st%2===0?`auf der ${(st-2)/2+1}. Linie`:`im ${(st-1)/2}. Zwischenraum`}
+const nFreq=st=>261.63*Math.pow(2,([0,2,4,5,7,9,11][st%7]+12*Math.floor(st/7))/12);
+let AC=null;
+function nAudio(){if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume();return AC}
+function nTone(freq,dur=.7,when=0,vol=.22){try{const A=nAudio(),t0=A.currentTime+when,g=A.createGain(),o=A.createOscillator(),o2=A.createOscillator(),g2=A.createGain();
+  o.type="triangle";o.frequency.value=freq;o2.type="sine";o2.frequency.value=freq*2;g2.gain.value=.25;
+  o.connect(g);o2.connect(g2);g2.connect(g);g.connect(A.destination);
+  g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+.012);g.gain.setValueAtTime(vol,t0+Math.max(.02,dur-.12));g.gain.exponentialRampToValueAtTime(.001,t0+dur);
+  o.start(t0);o2.start(t0);o.stop(t0+dur+.05);o2.stop(t0+dur+.05)}catch(_){}}
+function nTick(when,accent){try{const A=nAudio(),t0=A.currentTime+when,o=A.createOscillator(),g=A.createGain();
+  o.type="square";o.frequency.value=accent?1600:1100;o.connect(g);g.connect(A.destination);g.gain.setValueAtTime(.06,t0);g.gain.exponentialRampToValueAtTime(.001,t0+.05);o.start(t0);o.stop(t0+.06)}catch(_){}}
+const NB=70,ny=st=>NB-(st-2)*5;
+const CLEF="M27 94 C21 97 15 92 19 87 C23 83 28 88 25 91 M24 92 C27 70 23 40 27 18 C29 8 36 5 35 15 C34 25 24 32 18 42 C11 52 12 66 22 68 C32 70 36 58 28 54 C21 51 16 58 21 62";
+function nHead(x,st,kind,cls){const y=ny(st),hollow=kind==="whole"||kind==="half";cls=cls||"";let s="";
+  if(st<=0)for(let l=0;l>=st;l-=2)s+=`<line class="ln" x1="${x-11}" x2="${x+11}" y1="${ny(l)}" y2="${ny(l)}"/>`;
+  if(st>=12)for(let l=12;l<=st;l+=2)s+=`<line class="ln" x1="${x-11}" x2="${x+11}" y1="${ny(l)}" y2="${ny(l)}"/>`;
+  s+=`<ellipse class="nt ${cls}" cx="${x}" cy="${y}" rx="6.6" ry="4.6" transform="rotate(-20 ${x} ${y})" style="${hollow?"fill:var(--sheet);stroke-width:2.2":""}"/>`;
+  if(kind!=="whole"){const up=st<6,sx=up?x+5.8:x-5.8,ey=up?y-32:y+32;
+    s+=`<line class="nt ${cls}" x1="${sx}" y1="${y}" x2="${sx}" y2="${ey}" style="stroke-width:1.8"/>`;
+    if(kind==="eighth")s+=up?`<path class="nt ${cls}" d="M${sx} ${ey} c2 8 12 10 9 22 c4-12-3-14-9-16Z"/>`:`<path class="nt ${cls}" d="M${sx} ${ey} c2-8 12-10 9-22 c4 12-3 14-9 16Z"/>`}
+  return s}
+function nRest(x,kind){if(kind==="whole")return`<rect class="nt" x="${x-7}" y="40" width="14" height="5"/>`;
+  if(kind==="half")return`<rect class="nt" x="${x-7}" y="45" width="14" height="5"/>`;
+  if(kind==="quarter")return`<path class="nt" d="M${x-3} 32 l7 9 l-6 7 l7 9 c-7-3-11 2-5 9 c-9-4-8-12 0-11 l-6-7 l5-7 Z" style="stroke-width:1.2;stroke-linejoin:round"/>`;
+  return`<circle class="nt" cx="${x-3}" cy="44" r="3.2"/><path class="nt" d="M${x-5} 46 c4 2 8 0 10-4 l-6 20" style="fill:none;stroke-width:2"/>`}
+function staffSVG(items,o={}){const gap=o.gap||36,start=o.start||80;
+  let W=o.w;if(!W){W=start+30;items.forEach(it=>{W+=it.bar?(it.end?0:10):(it.gap||gap)})}
+  let s=`<svg class="staff ${o.click?"click":""}" viewBox="0 0 ${W} 110" role="img" aria-label="${o.label||"Notensystem"}">`;
+  for(let i=0;i<5;i++)s+=`<line class="ln" x1="6" x2="${W-6}" y1="${30+i*10}" y2="${30+i*10}"/>`;
+  s+=`<path class="clef" d="${CLEF}"/>`;
+  if(o.time)s+=`<text x="56" y="49" style="font-size:22px" text-anchor="middle">${o.time[0]}</text><text x="56" y="69" style="font-size:22px" text-anchor="middle">${o.time[1]}</text>`;
+  let x=start;
+  items.forEach(it=>{if(it.bar){s+=`<line class="ln" x1="${x-14}" x2="${x-14}" y1="30" y2="70" style="stroke-opacity:1;stroke-width:1.4"/>`;if(it.end)s+=`<rect class="nt" x="${x-11}" y="30" width="4" height="40"/>`;x+=it.end?0:10;return}
+    if(it.q){s+=`<rect x="${x-13}" y="33" width="26" height="34" rx="5" fill="none" stroke="var(--pin)" stroke-width="1.6" stroke-dasharray="4 3"/><text x="${x}" y="57" text-anchor="middle" style="font-size:20px;fill:var(--pin)">?</text>`;x+=it.gap||gap;return}
+    s+=it.rest?nRest(x,it.rest):nHead(x,it.st,it.kind||"quarter",it.hl?"hl":"");x+=it.gap||gap});
+  return s+`</svg>`}
+function makeKbd(el,onPress){const whites=14;let h="";
+  for(let i=0;i<whites;i++)h+=`<button class="w" data-st="${i}" style="left:${i*100/whites}%;width:${100/whites}%" aria-label="${nName(i)}"><span>${nName(i)}</span></button>`;
+  [0,1,3,4,5,7,8,10,11,12].forEach(i=>{const nm=["cis","dis","","fis","gis","ais"][i%7];h+=`<button class="b" data-semi="${i}" style="left:${(i+1)*100/whites-100/whites*.31}%;width:${100/whites*.62}%" aria-label="${nm}"></button>`});
+  el.innerHTML=h;
+  const press=b=>{b.classList.add("down");setTimeout(()=>b.classList.remove("down"),220);
+    if(b.dataset.st!=null){const st=+b.dataset.st;nTone(nFreq(st));onPress(st,b)}
+    else{const i=+b.dataset.semi,semi=[0,2,4,5,7,9,11][i%7]+12*Math.floor(i/7)+1;nTone(261.63*Math.pow(2,semi/12));onPress(null,b,["cis","dis","","fis","gis","ais"][i%7])}};
+  el.addEventListener("pointerdown",e=>{const b=e.target.closest("button");if(!b)return;e.preventDefault();press(b)});
+  el.addEventListener("keydown",e=>{const b=e.target.closest("button");if(b&&(e.key==="Enter"||e.key===" ")){e.preventDefault();press(b)}});
+}
+(function(){const st0=$("#nStaff"),out=$("#nOut"),kb=$("#nKbd");let cur=4;
+  const draw=()=>{st0.innerHTML=staffSVG([{st:cur,kind:"quarter",hl:true}],{w:300,start:170,click:true,label:"Notensystem mit der Note "+nName(cur)});
+    out.innerHTML=`Das ist das <span style="color:var(--pin)">${nName(cur)}</span> (${nSpoken(cur)}). Es liegt ${nPos(cur)}.`};
+  makeKbd(kb,(st,b,bn)=>{if(st==null){out.innerHTML=`Schwarze Taste: <span style="color:var(--ind)">${bn}</span>. Töne mit ♯ und ♭ lernst du später kennen.`;return}cur=st;draw()});
+  st0.addEventListener("click",e=>{const svg=st0.querySelector("svg"),r=svg.getBoundingClientRect(),y=(e.clientY-r.top)*110/r.height;
+    cur=Math.max(0,Math.min(13,Math.round((NB-y)/5)+2));nTone(nFreq(cur));draw()});
+  $("#nLabels").addEventListener("change",e=>kb.classList.toggle("nolabels",!e.target.checked));
+  draw();
+})();
+const VALS=[["whole","Ganze Note","4 Schläge",4,"Ganze Pause"],["half","Halbe Note","2 Schläge",2,"Halbe Pause"],["quarter","Viertelnote","1 Schlag",1,"Viertelpause"],["eighth","Achtelnote","½ Schlag",.5,"Achtelpause"]];
+const symSVG=kind=>`<svg class="staff" viewBox="0 0 120 100" role="img" aria-label="Note und Pause">${[0,1,2,3,4].map(i=>`<line class="ln" x1="4" x2="116" y1="${30+i*10}" y2="${30+i*10}" style="stroke-opacity:.35"/>`).join("")}${nHead(38,4,kind)}${nRest(86,kind)}</svg>`;
+$("#nVals").innerHTML=VALS.map(v=>`<div class="val">${symSVG(v[0])}<b>${v[1]}</b><span>${v[2]}</span><span class="hint">rechts: ${v[4]}</span><button class="btn ghost" data-play="${v[3]}">▶ Anhören</button></div>`).join("");
+$("#nVals").addEventListener("click",e=>{const b=e.target.closest("[data-play]");if(!b)return;const d=+b.dataset.play,beat=.6;
+  for(let i=0;i<4;i++)nTick(i*beat,i===0);
+  if(d<1){nTone(nFreq(4),beat/2-.03,0);nTone(nFreq(4),beat/2-.03,beat/2)}else nTone(nFreq(4),d*beat-.05,0)});
+(function(){const rows=[["whole",1],["half",2],["quarter",4],["eighth",8]];let s=`<svg class="staff" viewBox="0 0 560 196" role="img" aria-label="Notenbaum: eine ganze Note ist so lang wie zwei halbe, vier Viertel oder acht Achtel" style="max-width:none">`;
+  rows.forEach(([k,n],r)=>{const y0=r*46;for(let i=0;i<n;i++){const w=480/n,x=60+w*i+w/2;s+=`<g transform="translate(0 ${y0-24})">${nHead(x,4,k)}</g>`}
+    s+=`<text x="4" y="${y0+41}" style="font-size:13px">${n}×</text>`});
+  $("#nTree").innerHTML=s+`</svg>`})();
+const TAKT=[{st:2,kind:"quarter"},{st:3,kind:"quarter"},{st:4,kind:"half",gap:52},{bar:1},{st:5,kind:"eighth",gap:26},{st:4,kind:"eighth",gap:26},{st:3,kind:"quarter"},{st:2,kind:"half",gap:46},{bar:1,end:1}];
+$("#nTakt").innerHTML=staffSVG(TAKT,{time:[4,4],start:94,label:"Zwei Takte im 4/4-Takt"});
+$("#nTaktPlay").onclick=()=>{const beat=.5;let t=0;const dur={quarter:1,half:2,eighth:.5,whole:4};
+  for(let i=0;i<8;i++)nTick(i*beat,i%4===0);
+  TAKT.forEach(it=>{if(it.bar)return;const d=dur[it.kind]*beat;nTone(nFreq(it.st),d-.05,t);t+=d})};
+quiz($("#u1"),shuffle([...Array(13).keys()]).slice(0,8).map(st=>{const L=NN[st%7],others=shuffle(NN.filter(x=>x!==L)).slice(0,3);
+  return{q:`<div class="qfig staffq">${staffSVG([{st,kind:"quarter",hl:true}],{w:220,start:130,label:"Eine Note im Notensystem"})}</div><span>Wie heißt diese Note?</span>`,
+    a:L,o:shuffle([L,...others]).map(v=>({v,label:v})),why:`Das ist das ${nName(st)}. Es liegt ${nPos(st)}.`}}));
+(function(){const box=$("#u2"),stEl=$("[data-staff]",box),kb=$("[data-kbd]",box),tg=$("[data-target]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box),again=$("[data-restart]",box);
+  let order,idx,right,miss,anyMiss,lock;
+  function show(){const st=order[idx];stEl.innerHTML=staffSVG([{st,kind:"quarter",hl:true}],{w:220,start:130,label:"Gesuchte Note"});tg.textContent=`Note ${idx+1} von ${order.length}`;sc.textContent=`${right} von ${order.length} richtig`;miss=false;lock=false}
+  function start(){order=shuffle([...Array(14).keys()]).slice(0,6);idx=0;right=0;anyMiss=false;again.hidden=true;fb.textContent="";delete box.dataset.perfect;show()}
+  makeKbd(kb,(st,b)=>{if(lock||idx>=order.length)return;const want=order[idx];
+    if(st===want){if(!miss)right++;b.classList.add("ok");setTimeout(()=>b.classList.remove("ok"),800);fb.className="fb ok";fb.textContent=`Richtig, das ist das ${nName(want)}!`;lock=true;guckiCheer();
+      setTimeout(()=>{idx++;fb.textContent="";if(idx<order.length)show();else{sc.textContent=`${right} von ${order.length} richtig`;tg.textContent=anyMiss?"Geschafft!":"Geschafft – alle beim ersten Versuch!";again.hidden=false;guckiDone(!anyMiss,box)}},900)}
+    else{miss=true;anyMiss=true;b.classList.add("no");setTimeout(()=>b.classList.remove("no"),600);fb.className="fb no";
+      fb.textContent=st==null?"Das ist eine schwarze Taste. Die Note gehört zu einer weißen Taste.":(NN[st%7]===NN[want%7]?`Der Name stimmt, aber das ist das ${nName(st)}. Achte auf die Höhe!`:`Das ist das ${nName(st)}. Versuch es nochmal.`);guckiCry()}});
+  $("[data-labels]",box).addEventListener("change",e=>kb.classList.toggle("nolabels",!e.target.checked));
+  again.onclick=start;start();box._reset=start;
+})();
+quiz($("#u3"),[
+  {q:`<div class="qfig">${symSVG("half")}</div><span>Wie viele Schläge dauert die linke Note?</span>`,a:"2",o:txtOpts(["1","2","3","4"]),why:"Eine halbe Note dauert 2 Schläge."},
+  {q:`<div class="qfig">${symSVG("whole")}</div><span>Wie heißt die linke Note?</span>`,a:"Ganze Note",o:txtOpts(["Ganze Note","Halbe Note","Viertelnote","Achtelnote"]),why:"Sie hat keinen Hals und dauert 4 Schläge."},
+  {q:`<div class="qfig">${symSVG("eighth")}</div><span>Wie lange dauert die linke Note?</span>`,a:"½ Schlag",o:txtOpts(["½ Schlag","1 Schlag","2 Schläge","4 Schläge"]),why:"Eine Achtelnote hat ein Fähnchen und dauert einen halben Schlag."},
+  {q:`<div class="qfig">${symSVG("quarter")}</div><span>Wie heißt das rechte Zeichen?</span>`,a:"Viertelpause",o:txtOpts(["Viertelpause","Halbe Pause","Ganze Pause","Achtelpause"]),why:"Die Viertelpause ist so lang wie eine Viertelnote."},
+  {q:`<div class="qfig staffq">${staffSVG([{st:4,kind:"half",gap:52},{st:5,kind:"quarter",gap:42},{q:1,gap:44},{bar:1,end:1}],{time:[4,4],start:94,label:"Ein 4/4-Takt mit halber Note und Viertelnote, ein Schlag fehlt"})}</div><span>In diesem 4/4-Takt fehlt noch etwas. Welche Note passt in die Lücke?</span>`,a:"eine Viertelnote",o:txtOpts(["eine Viertelnote","eine halbe Note","eine ganze Note","zwei Viertelnoten"]),why:"2 + 1 + 1 = 4 Schläge."},
+  {q:"Wie viele Achtelnoten passen in einen 4/4-Takt?",a:"8",o:txtOpts(["8","4","6","16"]),why:"Ein Schlag hat 2 Achtel, also 4 × 2 = 8."},
+  {q:"Wie viele Viertelnoten passen in einen 3/4-Takt?",a:"3",o:txtOpts(["3","4","2","6"]),why:"Die obere Zahl sagt: 3 Schläge pro Takt."}
+]);
+(function(){const W=["AFFE","DACH","CHEF","HEFE","FEE","CAFE","GAG"];
+  const stepsFor=word=>[...word.toLowerCase()].map(ch=>{const i=NN.indexOf(ch);return Math.random()<.35&&i+7<=12?i+7:i});
+  quiz($("#u4"),shuffle(W).slice(0,5).map(w=>{const sts=stepsFor(w);
+    return{q:`<div class="qfig staffq">${staffSVG(sts.map(st=>({st,kind:"quarter"})),{start:80,gap:40,label:"Mehrere Noten, die ein Wort ergeben"})}</div><span>Welches Wort ergeben die Noten?</span>`,
+      a:w,o:shuffle([w,...shuffle(W.filter(x=>x!==w)).slice(0,3)]).map(v=>({v,label:v})),why:`Die Noten heißen ${sts.map(nName).join(" – ")}.`}}));
+})();
+
+// Aufgabe 4: Pausen
+(function(){
+  const RN={whole:"Ganze Pause",half:"Halbe Pause",quarter:"Viertelpause",eighth:"Achtelpause"};
+  const WHY={whole:"Die ganze Pause hängt unter der 4. Linie und dauert 4 Schläge.",half:"Die halbe Pause sitzt auf der 3. Linie und dauert 2 Schläge.",quarter:"Die Viertelpause sieht aus wie ein Zickzack und dauert 1 Schlag.",eighth:"Die Achtelpause hat ein Köpfchen mit Schwänzchen und dauert einen halben Schlag."};
+  const ricon=k=>`<svg class="staff ricon" viewBox="0 0 40 100" aria-hidden="true">${[0,1,2,3,4].map(i=>`<line class="ln" x1="2" x2="38" y1="${30+i*10}" y2="${30+i*10}" style="stroke-opacity:.35"/>`).join("")}${nRest(20,k)}</svg>`;
+  const rOpts=(a,pool)=>shuffle([a,...shuffle(pool.filter(x=>x!==a)).slice(0,3)]).map(k=>({v:k,label:RN[k]}));
+  const ALL=["whole","half","quarter","eighth"];
+  // a) Pausen erkennen
+  const erk=shuffle(ALL).map(k=>({q:`<div class="qfig staffq">${staffSVG([{rest:k}],{w:200,start:120,label:"Eine Pause im Notensystem"})}</div><span>Wie heißt diese Pause?</span>`,a:k,o:rOpts(k,ALL),why:WHY[k]}));
+  // b) Lücke im 4/4-Takt
+  const LUECKE=[
+    {items:[{st:4,kind:"quarter"},{st:5,kind:"quarter"},{q:1,gap:52}],a:"half",why:"1 + 1 + 2 = 4 Schläge. Es fehlen 2 Schläge: eine halbe Pause."},
+    {items:[{st:4,kind:"half",gap:52},{st:3,kind:"quarter",gap:42},{q:1,gap:42}],a:"quarter",why:"2 + 1 + 1 = 4 Schläge. Es fehlt 1 Schlag: eine Viertelpause."},
+    {items:[{q:1,gap:62},{st:2,kind:"quarter"},{st:4,kind:"quarter",gap:44}],a:"half",why:"2 + 1 + 1 = 4 Schläge. Am Anfang fehlen 2 Schläge: eine halbe Pause."},
+    {items:[{st:4,kind:"quarter"},{st:4,kind:"quarter"},{st:5,kind:"quarter"},{st:6,kind:"eighth",gap:30},{q:1,gap:40}],a:"eighth",why:"1 + 1 + 1 + ½ = 3½ Schläge. Es fehlt ein halber Schlag: eine Achtelpause."}];
+  const lue=shuffle(LUECKE).slice(0,3).map(L=>({hint:"Noch nicht. Zähle die Schläge der Noten zusammen und rechne 4 minus deine Summe. Die Pause muss genau so lang sein wie das, was fehlt.",q:`<div class="qfig staffq">${staffSVG([...L.items,{bar:1,end:1}],{time:[4,4],start:94,label:"Ein 4/4-Takt mit einer Lücke"})}</div><span>Welche Pause passt in die Lücke?</span>`,a:L.a,o:rOpts(L.a,ALL),why:L.why}));
+  // c) Hörübung
+  const PAT={A:["q","q","rq","q"],B:["q","rq","q","q"],C:["rq","q","q","q"],D:["h","rh"],E:["rh","h"],F:["q","q","h"],G:["h","q","rq"]};
+  const toItems=pt=>pt.map(t=>({q:{st:4,kind:"quarter",gap:34},h:{st:4,kind:"half",gap:52},rq:{rest:"quarter",gap:34},rh:{rest:"half",gap:52}}[t]));
+  const measure=k=>staffSVG([...toItems(PAT[k]),{bar:1,end:1}],{time:[4,4],start:92,label:"Takt"});
+  const HOER=[["A",["B","C"]],["B",["A","F"]],["E",["D","F"]],["G",["A","F"]],["C",["B","E"]]];
+  const hoer=shuffle(HOER).slice(0,2).map(([k,d])=>({q:`<div class="row" style="flex-basis:100%"><button class="btn" data-rh="${k}" type="button">▶ Rhythmus anhören</button></div><span>Welcher Takt klingt so? Pausen hörst du als Stille.</span>`,
+    a:k,o:shuffle([k,...d]).map(v=>({v,label:measure(v)})),why:"Achte darauf, an welcher Stelle es still ist."}));
+  const extra=[{q:"Wie viele Schläge dauert eine halbe Pause?",a:"2",o:txtOpts(["2","1","4","½"]),why:"Eine Pause ist genauso lang wie die Note mit demselben Namen."}];
+  quiz($("#u6"),[...erk,...lue,...hoer,...extra]);
+  $("#u6").querySelectorAll(".opt").forEach(b=>{if(b.querySelector("svg.staff:not(.ricon)"))b.classList.add("svgopt")});
+  $("#u6").addEventListener("click",e=>{const b=e.target.closest("[data-rh]");if(!b)return;const pt=PAT[b.dataset.rh],beat=.55,len={q:1,h:2,rq:1,rh:2};let t=0;
+    for(let i=0;i<4;i++)nTick(i*beat,i===0);
+    pt.forEach(tk=>{const d=len[tk]*beat;if(tk[0]!=="r")nTone(nFreq(4),d-.06,t);t+=d})});
+})();
+
+// Pausen im Takt: Übersicht, Beispiel, Baukasten
+(function(){
+  const RV=[["whole","Ganze Pause","4 Schläge","so lang wie eine ganze Note","hängt unter der 4. Linie"],["half","Halbe Pause","2 Schläge","so lang wie eine halbe Note","sitzt auf der 3. Linie"],["quarter","Viertelpause","1 Schlag","so lang wie eine Viertelnote","sieht aus wie ein Zickzack"],["eighth","Achtelpause","½ Schlag","so lang wie eine Achtelnote","Köpfchen mit Schwänzchen"]];
+  const rSym=k=>`<svg class="staff" viewBox="0 0 120 100" aria-hidden="true">${[0,1,2,3,4].map(i=>`<line class="ln" x1="10" x2="110" y1="${30+i*10}" y2="${30+i*10}" style="stroke-opacity:.35"/>`).join("")}${nRest(60,k)}</svg>`;
+  $("#pVals").innerHTML=RV.map(v=>`<div class="val">${rSym(v[0])}<b>${v[1]}</b><span>${v[2]}</span><span class="hint">${v[3]}</span><span class="hint">${v[4]}</span></div>`).join("");
+  $("#pEx1").innerHTML=staffSVG([{st:4,kind:"quarter"},{st:5,kind:"quarter"},{q:1,gap:52},{bar:1,end:1}],{time:[4,4],start:94,label:"Beispieltakt mit Lücke"});
+  $("#pEx1sol").innerHTML=staffSVG([{st:4,kind:"quarter"},{st:5,kind:"quarter"},{rest:"half",gap:52},{bar:1,end:1}],{time:[4,4],start:94,label:"Beispieltakt mit halber Pause"});
+  // Baukasten
+  const DUR={whole:4,half:2,quarter:1,eighth:.5},GAP={whole:70,half:52,quarter:36,eighth:30};
+  const NAME={whole:"Ganze",half:"Halbe",quarter:"Viertel",eighth:"Achtel"},NOTE={whole:"Ganze Note",half:"Halbe Note",quarter:"Viertelnote",eighth:"Achtelnote"},REST={whole:"Ganze Pause",half:"Halbe Pause",quarter:"Viertelpause",eighth:"Achtelpause"};
+  const ICON=(k,r)=>`<svg viewBox="${r?"40 20 40 60":"20 20 40 60"}" aria-hidden="true" class="staff">${r?nRest(60,k):nHead(36,4,k)}</svg>`;
+  let toks=[];
+  const btns=[];["whole","half","quarter","eighth"].forEach(k=>btns.push(`<button class="btn ghost" data-k="${k}" type="button">${ICON(k,false)}${NOTE[k]}</button>`));
+  ["whole","half","quarter","eighth"].forEach(k=>btns.push(`<button class="btn ghost" data-k="${k}" data-r="1" type="button">${ICON(k,true)}${REST[k]}</button>`));
+  $("#pBtns").innerHTML=btns.join("");
+  const sum=()=>toks.reduce((a,t)=>a+DUR[t.k],0);
+  const fmtB=n=>n===.5?"½":String(n).replace(".5","½").replace(/^0½$/,"½");
+  function meter(){const W=480,cw=W/8;let s=`<svg class="meter" viewBox="0 0 ${W+20} 64" role="img" aria-label="Schlag-Anzeige"><defs><pattern id="pStr" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="var(--line)"/><rect width="4" height="8" fill="var(--muted)" opacity=".45"/></pattern></defs>`;
+    for(let b=0;b<4;b++){s+=`<rect x="${10+b*2*cw}" y="6" width="${2*cw}" height="32" fill="none" stroke="var(--line)" stroke-width="1.5"/><text x="${10+b*2*cw+cw}" y="56" text-anchor="middle" style="font-size:13px;fill:var(--muted);font-family:var(--display);font-weight:800">${b+1}</text>`}
+    let pos=0;toks.forEach(t=>{const w=DUR[t.k]*2*cw;s+=`<rect x="${10+pos*2*cw+1.5}" y="7" width="${w-3}" height="30" rx="5" fill="${t.r?"url(#pStr)":"var(--ind)"}"/><text x="${10+pos*2*cw+w/2}" y="27" text-anchor="middle" style="font-size:11px;fill:${t.r?"var(--ink)":"#FFFFFF"};font-family:var(--body);font-weight:700;paint-order:stroke;stroke:${t.r?"var(--sheet)":"none"};stroke-width:3px">${t.r?"Pause":NAME[t.k]}</text>`;pos+=DUR[t.k]});
+    return s+`</svg>`}
+  function draw(){const it=toks.map(t=>t.r?{rest:t.k,gap:GAP[t.k]}:{st:4,kind:t.k,gap:GAP[t.k]});
+    $("#pBau").innerHTML=staffSVG([...it,...(sum()<4?[{q:1,gap:44}]:[]),{bar:1,end:1}],{time:[4,4],start:94,label:"Dein Takt"});
+    $("#pMeter").innerHTML=meter();const left=4-sum(),o=$("#pOut");
+    if(left===0){o.className="fb ok";o.textContent="Super, der Takt ist voll: genau 4 Schläge!";}
+    else{o.className="fb";o.style.color="var(--muted)";o.textContent=`Belegt: ${fmtB(sum())} von 4 Schlägen. Noch frei: ${fmtB(left)} ${left===1||left===.5?"Schlag":"Schläge"}.`}
+    if(left===0)o.style.color="";
+    $("#pBtns").querySelectorAll("button").forEach(b=>b.disabled=DUR[b.dataset.k]>left)}
+  $("#pBtns").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const k=b.dataset.k;
+    if(DUR[k]>4-sum()){$("#pOut").className="fb no";$("#pOut").textContent="Das passt nicht mehr in den Takt.";return}
+    toks.push({k,r:!!b.dataset.r});if(!b.dataset.r)nTone(nFreq(4),Math.min(.5,DUR[k]*.45));draw()});
+  $("#pBack").onclick=()=>{toks.pop();draw()};$("#pNew").onclick=()=>{toks=[];draw()};
+  $("#pPlay").onclick=()=>{const beat=.55;let t=0;for(let i=0;i<4;i++)nTick(i*beat,i===0);toks.forEach(tk=>{const d=DUR[tk.k]*beat;if(!tk.r)nTone(nFreq(4),d-.06,t);t+=d})};
+  toks=[{k:"quarter",r:false},{k:"quarter",r:true}];draw();
+})();
+
+/* ================= DEUTSCH ================= */
+(function(){
+  const R={S:"Satzanfang: Das erste Wort im Satz schreibt man groß.",E:"Eigenname: Namen von Personen, Orten, Flüssen und Ländern schreibt man groß.",
+    H:"Höfliche Anrede: Sie und Ihnen schreibt man groß, wenn man jemanden siezt.",
+    v:"Verb: Es sagt, was jemand tut. Verben schreibt man klein.",a:"Adjektiv: Es sagt, wie etwas ist. Adjektive schreibt man klein.",
+    p:"Pronomen: Es steht für ein Nomen oder begleitet es. Pronomen schreibt man klein.",pr:"Präposition: ein Verhältniswort wie mit, in, nach. Klein.",
+    ar:"Artikel: der, die, das, ein, eine. Artikel schreibt man klein, sind aber ein Signal für ein Nomen.",ad:"Adverb: Es sagt, wann, wo oder wie. Klein.",
+    z:"Mengenwort: Es selbst bleibt klein – aber danach kann ein Adjektiv großgeschrieben werden!",k:"Bindewort: verbindet Sätze oder Wörter. Klein."};
+  const why=t=>{const[w,c,x]=t;
+    if(c==="N")return`Nomen: Die Artikelprobe klappt – ${x} ${w}.`;
+    if(c==="V")return`Ein Verb wird zum Nomen. Das Signalwort davor ist „${x}“.`;
+    if(c==="A")return`Ein Adjektiv wird zum Nomen. Das Signalwort davor ist „${x}“.`;
+    if(c==="NE")return`Nomen mit typischer Endung: ${x}. Artikelprobe: die ${w}.`;
+    return R[c]};
+  const SENT=[
+    [["Am","S"],["Montag","N","der"],["fahren","v"],["wir","p"],["mit","pr"],["dem","ar"],["Bus","N","der"],["nach","pr"],["Hamburg.","E"]],
+    [["Beim","S"],["Schwimmen","V","beim"],["in","pr"],["der","ar"],["Alster","E"],["haben","v"],["wir","p"],["viel","z"],["Spaß.","N","der"]],
+    [["Lena","E"],["hat","v"],["etwas","z"],["Spannendes","A","etwas"],["erlebt.","v"]],
+    [["Die","S"],["Freundlichkeit","NE","-keit"],["unserer","p"],["Lehrerin","N","die"],["ist","v"],["toll.","a"]],
+    [["Können","S"],["Sie","H"],["mir","p"],["bitte","ad"],["helfen?","v"]]];
+  const box=$("#dLupe"),out=$("#dLupeOut");let sel=null;
+  box.innerHTML=SENT.map((s,i)=>`<p>${s.map((t,j)=>{const w=t[0],up=w[0]!==w[0].toLowerCase();return`<button type="button" data-s="${i}" data-w="${j}">${up?`<span class="cap">${w[0]}</span>${w.slice(1)}`:w}</button>`}).join(" ")}</p>`).join("");
+  function show(i,j){const t=SENT[i][j],w=t[0].replace(/[.,!?]/g,""),up=w[0]!==w[0].toLowerCase();
+    box.querySelectorAll("button").forEach(b=>b.classList.toggle("on",+b.dataset.s===i&&+b.dataset.w===j));
+    out.innerHTML=`<div class="big"><h3>${w}</h3><span class="pill ${up?"day":"night"}">${up?"groß":"klein"}</span></div><p>${why([w,t[1],t[2]])}</p>`}
+  box.addEventListener("click",e=>{const b=e.target.closest("button");if(b)show(+b.dataset.s,+b.dataset.w)});
+  show(1,1);
+})();
+// Aufgabe 1: Groß oder klein?
+(function(){
+  const G=[
+    ["Das","fällt mir schwer.","rechnen","Rechnen","Das Signalwort „das“ macht das Verb zum Nomen."],
+    ["Wir wollen heute","gehen.","schwimmen","schwimmen","Hier ist es ein Verb ohne Signalwort. Also klein."],
+    ["Ich wünsche dir alles","!","gute","Gute","Nach „alles“ wird das Adjektiv zum Nomen."],
+    ["Das ist ein","Buch.","spannendes","spannendes","Das Adjektiv beschreibt das Nomen „Buch“. Also klein."],
+    ["Beim","habe ich mir wehgetan.","fußballspielen","Fußballspielen","Nach „beim“ wird das Verb zum Nomen."],
+    ["Mein Bruder ist sehr",".","groß","groß","„groß“ ist hier ein Adjektiv. Also klein."],
+    ["Kannst du mir etwas","erzählen?","lustiges","Lustiges","Nach „etwas“ wird das Adjektiv zum Nomen."],
+    ["Herr Meier, haben","heute Zeit?","sie","Sie","Höfliche Anrede: Sie schreibt man groß."],
+    ["Lisa, hast","deine Hausaufgaben?","du","du","„du“ schreibt man klein."],
+    ["Wir treffen uns heute",".","abend","Abend","Nach „heute“ ist die Tageszeit ein Nomen: heute Abend."],
+    ["Ich gehe immer","joggen.","abends","abends","Tageszeiten mit -s am Ende schreibt man klein."],
+    ["Meine Oma wohnt in",".","berlin","Berlin","Städtenamen sind Eigennamen. Also groß."]];
+  quiz($("#d1"),shuffle(G).slice(0,8).map(([a,b,lo,right,w])=>{const up=lo[0].toUpperCase()+lo.slice(1);
+    return{q:`<span>${a}<span class="gap"></span>${b}</span>`,a:right,o:shuffle([up,lo]).map(v=>({v,label:v})),why:w}}));
+})();
+// Aufgabe 2: Fehlerdetektiv
+(function(){
+  const TEXTS=["Am Wochenende war ich mit meiner Familie im Zoo. Dort haben wir viele lustige Affen gesehen. Beim Füttern* der Giraffen mussten alle lachen. Am Abend waren wir sehr müde, aber es war ein toller Tag.",
+    "In Hamburg# gibt es einen großen Hafen. Viele Schiffe bringen Waren aus der ganzen Welt. Beim Spazierengehen* an der Elbe# kann man sie gut beobachten. Das Schönste* ist der Blick vom Wasser.",
+    "Meine Freundin Lea# liest gern. Das Lesen* macht ihr großen Spaß. Heute hat sie etwas Neues* entdeckt: ein Buch über Pferde. Können Sie! mir sagen, wo es das gibt?"];
+  const box=$("#d2"),txt=$("[data-text]",box),fb=$("[data-fb]",box),list=$("[data-list]",box),sc=$("[data-score]",box);
+  let toks=[],last=-1;
+  const capF=w=>w[0].toUpperCase()+w.slice(1);
+  function load(){let i;do{i=Math.floor(Math.random()*TEXTS.length)}while(i===last&&TEXTS.length>1);last=i;
+    toks=[];let start=true,prev="";
+    TEXTS[i].split(" ").forEach(raw=>{const m=raw.match(/^([„"(]*)(.*?)([*#!]?)([.,:;!?"“)]*)$/),core=m[2],mark=m[3],tail=m[4];
+      const need=core[0]!==core[0].toLowerCase();let reason="";
+      if(need)reason=start?"Satzanfang":mark==="#"?"Eigenname":mark==="!"?"höfliche Anrede":mark==="*"?`wird durch „${prev}“ zum Nomen`:"Nomen";
+      toks.push({pre:m[1],core:core.toLowerCase(),word:core,tail,need,reason,up:false});
+      start=/[.!?]$/.test(tail);prev=core.toLowerCase()});
+    render();fb.textContent="";list.innerHTML="";sc.textContent="";delete box.dataset.fails}
+  function render(marks){txt.innerHTML=toks.map((t,i)=>`${t.pre}<button type="button" class="tok${t.up?" up":""}${marks?" "+(marks[i]||""):""}" data-i="${i}">${t.up||(marks&&marks[i]==="miss")?capF(t.core):t.core}</button>${t.tail}`).join(" ")}
+  txt.addEventListener("click",e=>{const b=e.target.closest(".tok");if(!b)return;const t=toks[+b.dataset.i];t.up=!t.up;render();fb.textContent="";list.innerHTML=""});
+  $("[data-check]",box).onclick=()=>{const marks={};let found=0,need=0,wrong=0;const missed=[],bad=[];
+    toks.forEach((t,i)=>{if(t.need){need++;if(t.up){found++;marks[i]="ok"}else{marks[i]="miss";missed.push(t)}}else if(t.up){wrong++;marks[i]="bad";bad.push(t)}});
+    render(marks);sc.textContent=`${found} von ${need} gefunden`;
+    if(found===need&&!wrong){fb.className="fb ok";fb.textContent="Super, alles richtig!";list.innerHTML="";guckiDone(!box.dataset.fails,box)}
+    else{fb.className="fb no";fb.textContent=`Du hast ${found} von ${need} Wörtern richtig großgeschrieben${wrong?` und ${wrong} Wort${wrong>1?"e":""} zu Unrecht`:""}.`;
+      list.innerHTML=(missed.length?`<p><strong>Übersehen (rot umrandet):</strong> ${missed.map(t=>`${t.word} – ${t.reason}`).join("; ")}</p>`:"")+(bad.length?`<p><strong>Muss klein bleiben (durchgestrichen):</strong> ${bad.map(t=>t.core).join(", ")}</p>`:"")+`<p>Tippe die Wörter an, um sie zu korrigieren, und prüfe noch einmal.</p>`;
+      box.dataset.fails=1;guckiCry()}};
+  $("[data-new]",box).onclick=load;box._reset=load;load();
+})();
+// Aufgabe 3: Finde das Nomen
+quiz($("#d3"),shuffle([
+  ["freiheit",["frei","befreien","freiwillig"],"Endung -heit: die Freiheit."],
+  ["ergebnis",["ergeben","ergiebig","ergibt"],"Endung -nis: das Ergebnis."],
+  ["freundschaft",["freundlich","befreundet","freundschaftlich"],"Endung -schaft: die Freundschaft."],
+  ["übung",["üben","geübt","übt"],"Endung -ung: die Übung."],
+  ["möglichkeit",["möglich","ermöglichen","möglicherweise"],"Endung -keit: die Möglichkeit."],
+  ["reichtum",["reich","bereichern","reichlich"],"Endung -tum: der Reichtum."],
+  ["hoffnung",["hoffen","hoffentlich","hoffnungsvoll"],"Endung -ung: die Hoffnung."]]).slice(0,5).map(([a,o,w])=>({q:"Welches Wort ist ein Nomen?",a,o:shuffle([a,...o]).map(v=>({v,label:v})),why:w})));
+// Aufgabe 4: Warum groß?
+(function(){
+  const RS=["Satzanfang","Nomen","Eigenname","Verb wird zum Nomen","Adjektiv wird zum Nomen","Höfliche Anrede"];
+  const W=[["<mark>Morgen</mark> gehen wir ins Kino.","Satzanfang","„morgen“ ist hier ein Zeitwort. Es steht aber am Satzanfang."],
+    ["Ich wohne in <mark>Hamburg</mark>.","Eigenname","Hamburg ist der Name einer Stadt."],
+    ["Das <mark>Malen</mark> macht mir Spaß.","Verb wird zum Nomen","„malen“ ist ein Verb. Das Signalwort „das“ macht es zum Nomen."],
+    ["Wir haben viel <mark>Neues</mark> gelernt.","Adjektiv wird zum Nomen","„neu“ ist ein Adjektiv. Nach „viel“ wird es zum Nomen."],
+    ["Darf ich <mark>Ihnen</mark> helfen?","Höfliche Anrede","So spricht man jemanden höflich an."],
+    ["Der <mark>Hund</mark> bellt laut.","Nomen","Artikelprobe: der Hund."],
+    ["Beim <mark>Lesen</mark> vergesse ich die Zeit.","Verb wird zum Nomen","Nach „beim“ wird das Verb zum Nomen."],
+    ["Im <mark>Sommer</mark> fahren wir an die Ostsee.","Nomen","Artikelprobe: der Sommer."],
+    ["Mein Hund heißt <mark>Bello</mark>.","Eigenname","Bello ist ein Name."]];
+  quiz($("#d4"),shuffle(W).slice(0,6).map(([q,a,w])=>({q:`<span>${q}</span>`,a,o:shuffle([a,...shuffle(RS.filter(x=>x!==a)).slice(0,3)]).map(v=>({v,label:v})),why:w})));
+})();
+
+/* --- Neu beginnen --- */
+(function(){
+  function resetTask(box){if(!box._reset)return;box._reset();delete box.dataset.perfect;delete box.dataset.fails;const t=box.closest(".topic");if(t)delete t.dataset.mega}
+  document.querySelectorAll(".task").forEach(box=>{if(!box._reset)return;const head=$(".taskhead",box);
+    const b=document.createElement("button");b.type="button";b.className="btn ghost resetbtn";b.textContent="↺ Neu beginnen";b.setAttribute("aria-label","Diese Aufgabe neu beginnen");
+    b.onclick=()=>resetTask(box);head.appendChild(b)});
+  document.querySelectorAll(".topic").forEach(topic=>{const sec=[...topic.querySelectorAll("section")].find(x=>{const h=x.querySelector("h2");return h&&h.textContent.trim()==="Übungsaufgaben"});
+    if(!sec||!topic.querySelector(".task [data-score]"))return;
+    const b=document.createElement("button");b.type="button";b.className="btn ghost allreset";b.textContent="↺ Alle Aufgaben neu beginnen";
+    b.onclick=()=>{topic.querySelectorAll(".task").forEach(resetTask);b.textContent="✓ Alle Aufgaben sind zurückgesetzt";setTimeout(()=>b.textContent="↺ Alle Aufgaben neu beginnen",2000)};
+    sec.appendChild(b)});
+})();
+</script>

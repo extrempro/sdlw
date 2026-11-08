@@ -1,0 +1,66 @@
+// Prüft, ob die Versionshinweise zusammenpassen:
+//   1. Die neueste Version in CHANGELOG.md und in den Versionshinweisen der Webseite
+//      (JSON-Block id="releaseData" in src/entdeckerheft.html) ist gleich – Nummer und Datum.
+//   2. Die Versionen auf der Webseite sind absteigend sortiert und haben Einträge.
+//   3. index.html ist aktuell (entspricht dem Build aus src/entdeckerheft.html).
+//
+// Aufrufe:
+//   node scripts/check-release.mjs            → prüft alles (Exit-Code 1 bei Fehlern)
+//   node scripts/check-release.mjs --version  → gibt nur die aktuelle Versionsnummer aus
+//   node scripts/check-release.mjs --notes    → gibt die Release Notes der aktuellen Version (Markdown) aus
+import { readFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
+import { build, root } from "./build.mjs";
+
+const changelog = readFileSync(join(root, "CHANGELOG.md"), "utf8");
+const src = readFileSync(join(root, "src/entdeckerheft.html"), "utf8");
+
+const HEAD_RE = /^## \[(\d+\.\d+\.\d+)\] [–-] (\d{4}-\d{2}-\d{2})\s*$/m;
+const top = changelog.match(HEAD_RE);
+if (!top) fail("In CHANGELOG.md fehlt eine Überschrift wie: ## [1.2.0] – 2026-11-08");
+const [, version, date] = top;
+
+const arg = process.argv[2];
+if (arg === "--version") {
+  console.log(version);
+  process.exit(0);
+}
+if (arg === "--notes") {
+  const start = top.index + top[0].length;
+  const rest = changelog.slice(start);
+  const next = rest.search(/^## \[/m);
+  console.log((next === -1 ? rest : rest.slice(0, next)).trim());
+  process.exit(0);
+}
+
+const errors = [];
+const m = src.match(/<script type="application\/json" id="releaseData">([\s\S]*?)<\/script>/);
+let rel = [];
+if (!m) errors.push('In src/entdeckerheft.html fehlt der Block <script type="application/json" id="releaseData">.');
+else {
+  try { rel = JSON.parse(m[1]); } catch (e) { errors.push("releaseData ist kein gültiges JSON: " + e.message); }
+}
+if (rel.length) {
+  const w = rel[0];
+  if (w.version !== version) errors.push(`Versionsnummer passt nicht: CHANGELOG.md ${version}, Webseite ${w.version}.`);
+  if (w.date !== date) errors.push(`Datum passt nicht: CHANGELOG.md ${date}, Webseite ${w.date}.`);
+  const num = v => v.split(".").map(Number);
+  const gt = (a, b) => { const x = num(a), y = num(b); for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] > y[i]; return false; };
+  rel.forEach((r, i) => {
+    if (!/^\d+\.\d+\.\d+$/.test(r.version || "")) errors.push(`Webseite: Version „${r.version}“ ist keine gültige Nummer (z. B. 1.2.0).`);
+    if (!Array.isArray(r.items) || !r.items.length) errors.push(`Webseite: Version ${r.version} hat keine Einträge.`);
+    if (i > 0 && !gt(rel[i - 1].version, r.version)) errors.push(`Webseite: Versionen sind nicht absteigend sortiert (${rel[i - 1].version} vor ${r.version}).`);
+  });
+} else if (m) errors.push("Die Versionshinweise der Webseite sind leer.");
+
+const idx = join(root, "index.html");
+if (!existsSync(idx)) errors.push("index.html fehlt. Bitte `node scripts/build.mjs` ausführen.");
+else if (readFileSync(idx, "utf8") !== build()) errors.push("index.html ist nicht aktuell. Bitte `node scripts/build.mjs` ausführen.");
+
+if (errors.length) fail(errors.join("\n"));
+console.log(`Alles in Ordnung: Version ${version} vom ${date}, CHANGELOG.md und Webseite stimmen überein, index.html ist aktuell.`);
+
+function fail(msg) {
+  console.error("Fehler bei den Versionshinweisen:\n" + msg);
+  process.exit(1);
+}

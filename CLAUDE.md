@@ -12,7 +12,7 @@ Die Seite ist für die **5. Klasse eines Gymnasiums in Hamburg**.
 Jedes Thema ist ein **Kapitel** mit kurzer Erklärung, einem interaktiven Teil zum Ausprobieren und Übungsaufgaben,
 die sofort Rückmeldung geben. Ein kleines Maskottchen („Gucki“) reagiert auf richtige und falsche Antworten.
 
-Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bereich für Lern- und Arbeitstechniken:
+Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bereich für Lern- und Arbeitstechniken; „Spielen“ enthält Lernspiele:
 
 | Fach | Kapitel | Element-ID | Übungen (IDs) |
 |---|---|---|---|
@@ -23,6 +23,7 @@ Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bere
 | Erdkunde | Tag und Nacht (mit Zeitzonen) | `tagnacht` | n1, n2, n3, n5, n6, n4 |
 | Erdkunde | Der Kompass | `kompass` | c1–c5 |
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
+| Spielen | Fang die Farben (Spiel zum Farbkreis, keine zählenden Übungen) | `farbfang` | – |
 | Lernen | Fit für die Klassenarbeit (Lerntipps, Lernplan, Operatoren, starke Aufregung mit Thermometer und Atem-Kreis) | `klassenarbeit` | ka1–ka4, ka6, ka5 |
 
 Dazu kommen zwei Seiten ohne Fach: die **Startseite** (`#start`, Element-ID `start`; erscheint auch, wenn die Adresse
@@ -131,7 +132,7 @@ Reihenfolge in der Datei:
   `echarts@4.9.0/map/js/world.js` (rund 100 KB, Apache-Lizenz 2.0, Lizenzkopf bleibt stehen). Die Seite fängt den
   Aufruf `echarts.registerMap` mit einem kleinen Platzhalter ab und zeichnet die Karten selbst. Die Punktkarte
   (`GRID`) bleibt als Ersatz im Code, falls die Daten einmal fehlen. Die Kartendaten nicht von Hand bearbeiten.
-- `localStorage` nur für Komfort: Hell/Dunkel-Wahl und Gucki-Sonnenbrille. Alles funktioniert auch ohne.
+- `localStorage` nur für Komfort: Hell/Dunkel-Wahl, Gucki-Sonnenbrille und der Spiel-Rekord („ffBest“). Alles funktioniert auch ohne.
 
 ## Neues Kapitel hinzufügen – Checkliste
 
@@ -203,6 +204,9 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
 - Versionshinweise nur als kleines rundes ✦-Symbol oben rechts, roter Punkt bei ungesehener Version.
 - Bereich „Lernen“ (grün, `--lern`) steht als eigener Navigationsbereich nach den Fächern. Lernplan und Packliste
   speichern nichts (Haken gehen beim Neuladen verloren); das ist Absicht, weil Klassengeräte geteilt werden.
+- Bereich „Spielen“ (orange, `--spiel`) steht in der Navigation nach „Lernen“. Spiele nutzen die Daten der
+  Kapitel (z. B. `C` aus dem Farbkreis), melden Mischungen an Gucki (`guckiCheer`), zählen aber nicht für die
+  Kapitel-Party. „Fang die Farben“ zeichnet auf einem Canvas (560 × 560, skaliert) und pausiert beim Seitenwechsel.
 - Haus-Knopf oben rechts neben dem ✦ führt zur Startseite. Das Logo bleibt der Gucki-Trick, kein Startseiten-Link.
 - Gucki ragt unter den Bildschirmrand (`--gx`, Körper über `box-shadow` der `.kopf` verlängert). Das fängt den
   Firefox-Fehler ab (siehe „Bekannte Grenzen“). Bei Party, Aura und Crazy ist die Verlängerung aus.

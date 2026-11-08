@@ -25,7 +25,7 @@ img{max-width:100%}
   --ok:#1E7B45; --okbg:#E3F4EA; --bad:#B3261E; --badbg:#FBE6E4; --focus:#1E5AAA;
   --land:#DCD3C2; --landline:#C2B7A2; --sea:#DCE8F2; --pin:#D2232A;
   --pac:#2B5BAA; --atl:#139DB3; --ind:#7A5BC4; --sud:#22A57C; --ark:#8CC3E6;
-  --lern:#2E9447;
+  --lern:#2E9447; --spiel:#D96F0B;
   --as:#E2A12B; --af:#D2553A; --na:#6FA845; --sa:#1F8E6E; --eu:#5A63D6; --au:#C2549B; --an:#8FA6C0;
   --sun:#F4B41A; --earth:#4A93D0; --night:#0B1230; --daybg:#FFF0C2; --dayfg:#6B4E00; --nightpill:#26305A; --nightfg:#FFFFFF;
   --park:#E5EFDA; --road:#FFFFFF; --plate:#E9EEF6; --plateline:#B5C1D4;
@@ -37,13 +37,13 @@ img{max-width:100%}
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; color-scheme:dark}}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F5A04A; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#14161F; --sheet:#1D2030; --ink:#ECEDF4; --muted:#A3A8BE; --line:#33384D;
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; color-scheme:dark}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F5A04A; color-scheme:dark}
 
 [hidden]{display:none!important}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
@@ -195,6 +195,32 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .opgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
 .opgrid .card h3{color:var(--lern)}
 .opgrid .card em{color:var(--muted)}
+/* Spiel „Fang die Farben“ */
+#farbfang .merk{--accent:var(--spiel)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ff-wrap{display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;width:100%}
+.ff-hud{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;justify-content:space-between}
+.ff-goal{display:flex;align-items:center;gap:10px;font-weight:700}
+.ff-goal .sw{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);flex:none}
+.ff-goal b{font-family:var(--display);font-size:1.15rem}
+.ff-slots{display:flex;gap:6px;align-items:center}
+.ff-slots i{width:22px;height:22px;border-radius:50%;border:2px dashed var(--muted);display:block}
+.ff-slots i.full{border-style:solid;border-color:var(--ink)}
+.ff-stats{display:flex;gap:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.ff-hearts{color:var(--bad);letter-spacing:2px}
+.ff-stage{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);touch-action:none;-webkit-user-select:none;user-select:none}
+.ff-stage canvas{display:block;width:100%;height:auto}
+.ff-over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center;background:color-mix(in srgb,var(--sheet) 88%,transparent)}
+.ff-over h3{margin:0;font-size:1.4rem}
+.ff-over .btn{align-self:center}
+.ff-over p{margin:0;max-width:26em}
+.ff-over ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.ff-over li{font-size:.85rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
+.ff-ctrl{display:flex;gap:10px;justify-content:center}
+.ff-ctrl .btn{min-width:72px;font-size:1.2rem}
+.ff-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.ff-rule{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--sheet);font-weight:700;font-size:.92rem}
+.ff-rule span.d{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:none}
 /* Seite Versionshinweise */
 .relpage{display:flex;flex-direction:column;gap:28px}
 .relpage .rcards{display:flex;flex-direction:column;gap:12px}
@@ -552,6 +578,16 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
+   "version": "1.5.0",
+   "date": "2026-11-08",
+   "title": "Das erste Spiel: Fang die Farben",
+   "items": [
+    "Neu: der Bereich „Spielen“ mit dem Spiel „Fang die Farben“! Gucki möchte Farben mischen. Fang mit seinem Eimer genau die zwei Farben, aus denen die Zielfarbe entsteht.",
+    "In Stufe 2 mischst du Mischfarben 2. Ordnung wie Blaugrün oder Rotorange – und die Tropfen fallen schneller.",
+    "Du steuerst mit dem Finger, der Maus, den Pfeiltasten oder den Knöpfen. Dein Rekord wird auf deinem Gerät gespeichert."
+   ]
+  },
+  {
    "version": "1.4.0",
    "date": "2026-11-08",
    "title": "Tag und Nacht zum Mitdenken, alles ohne Internet",
@@ -650,6 +686,9 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <div class="fach"><p class="fachname"><span class="fdot" style="background:#2E9447"></span>Lernen</p><div class="topics">
       <a href="#klassenarbeit" data-topic="klassenarbeit" data-desc="Wie du dich gut vorbereitest und in der Arbeit ruhig und Schritt für Schritt vorgehst."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#2E9447"/><rect x="9" y="7" width="14" height="18" rx="2.5" fill="#FFFFFF"/><path d="M11.6 13.2l1.7 1.7 3-3.2M11.6 19.2l1.7 1.7 3-3.2" fill="none" stroke="#2E9447" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2 13.6h2.6M18.2 19.6h2.6" stroke="#2E9447" stroke-width="1.9" stroke-linecap="round"/></svg><span><b>Klassenarbeit</b></span></a>
     </div></div>
+    <div class="fach"><p class="fachname"><span class="fdot" style="background:#D96F0B"></span>Spielen</p><div class="topics">
+      <a href="#farbfang" data-topic="farbfang" data-desc="Ein Spiel zum Farbkreis: Fang mit Gucki die Farben, aus denen die Zielfarbe gemischt wird."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D96F0B"/><path d="M16 6.5c3.6 4.6 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.4 6-11z" fill="#FFFFFF"/><circle cx="13.6" cy="18.4" r="1.6" fill="#D96F0B"/></svg><span><b>Fang die Farben</b></span></a>
+    </div></div>
   </div>
 </nav>
 <div class="crumbs" id="crumbs">
@@ -673,7 +712,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4)"></div>
 </header>
 <div class="sblock">
-  <p class="lead">Hier lernst du Deutsch, Kunst, Erdkunde und Musik – mit Erklärungen, Dingen zum Ausprobieren und Übungen. Unter „Lernen“ findest du Tipps für die nächste Klassenarbeit. Such dir ein Kapitel aus!</p>
+  <p class="lead">Hier lernst du Deutsch, Kunst, Erdkunde und Musik – mit Erklärungen, Dingen zum Ausprobieren und Übungen. Unter „Lernen“ findest du Tipps für die nächste Klassenarbeit und unter „Spielen“ ein Farbenspiel mit Gucki. Such dir ein Kapitel aus!</p>
 </div>
 <div class="sblock">
   <h2>Alle Kapitel</h2>
@@ -1460,6 +1499,45 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <footer>Tipp: Die Übungen auf dieser Seite eignen sich prima zum Selbstabfragen. Mach sie vor einer Arbeit einfach mit „Neu beginnen“ noch einmal.</footer>
 </div>
 
+<!-- ============ SPIEL: FANG DIE FARBEN ============ -->
+<div class="topic" id="farbfang" hidden>
+<header>
+  <p class="eyebrow">Spielen · Klasse 5 · Kunst</p>
+  <h1>Fang die Farben</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#FFE000,#F28A1E,#E3202A,#6C2C8E,#1E5AAA,#3DA647)"></div>
+</header>
+<section>
+  <p class="lead">Gucki möchte Farben mischen! Oben steht, welche Farbe er braucht. Fang mit seinem Eimer genau die zwei Farben, aus denen sie gemischt wird. Falsche Farben kosten ein Herz.</p>
+  <div class="ff-wrap" id="ffWrap">
+    <div class="ff-hud">
+      <div class="ff-goal"><span class="sw" id="ffSw"></span><span>Mische <b id="ffGoal">…</b></span><span class="ff-slots" id="ffSlots" aria-hidden="true"><i></i><i></i></span></div>
+      <div class="ff-stats"><span id="ffLvl">Stufe 1</span><span id="ffPts">0 Punkte</span><span class="ff-hearts" id="ffHearts" aria-label="3 Herzen">♥♥♥</span></div>
+    </div>
+    <div class="ff-stage" id="ffStage">
+      <canvas id="ffCv" width="560" height="560" role="img" aria-label="Spielfeld: Farbtropfen fallen von oben, Gucki fängt sie unten mit einem Eimer"></canvas>
+      <div class="ff-over" id="ffOver"></div>
+    </div>
+    <div class="ff-ctrl"><button class="btn ghost" type="button" id="ffL" aria-label="Nach links">◀</button><button class="btn ghost" type="button" id="ffP">Pause</button><button class="btn ghost" type="button" id="ffR" aria-label="Nach rechts">▶</button></div>
+    <p class="sr-only" id="ffLive" aria-live="polite"></p>
+  </div>
+</section>
+<section>
+  <h2>So spielst du</h2>
+  <ol class="steps">
+    <li>Schau oben, welche Farbe Gucki mischen möchte.</li>
+    <li>Bewege Gucki mit dem Finger, der Maus, den Pfeiltasten oder den Knöpfen ◀ ▶.</li>
+    <li>Fang die <strong>zwei</strong> Farben, aus denen die Zielfarbe entsteht. Lass alle anderen Tropfen fallen.</li>
+    <li>Nach sechs gemischten Farben kommt Stufe 2: Jetzt mischst du Mischfarben 2. Ordnung – und es wird schneller!</li>
+  </ol>
+</section>
+<section>
+  <h2>Die Mischregeln</h2>
+  <p class="prose">Diese Regeln kennst du aus dem Kapitel <a href="#farbkreis">Farbkreis nach Itten</a>. Schau sie dir vor dem Spiel noch einmal an.</p>
+  <div class="ff-rules" id="ffRules"></div>
+  <div class="merk"><strong>Tipp:</strong> Eine Mischfarbe 2. Ordnung liegt im Farbkreis immer zwischen ihren beiden Zutaten. Blaugrün liegt zwischen Blau und Grün.</div>
+</section>
+</div>
+
 <div class="topic" id="neuigkeiten" hidden>
 <header>
   <p class="eyebrow">S.D.L.W. · Versionshinweise</p>
@@ -1543,7 +1621,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","neuigkeiten"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","farbfang","neuigkeiten"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -2889,6 +2967,93 @@ quiz($("#ka6"),shuffle([
   {q:"Deine Hände zittern. Welcher leise Trick hilft?",a:"a",o:[{v:"a",label:"Fäuste fest ballen, bis fünf zählen, locker lassen"},{v:"b",label:"Mit dem Stift auf den Tisch trommeln"},{v:"c",label:"Aufstehen und herumlaufen"},{v:"d",label:"Die Hände unter den Tisch klemmen und warten"}],why:"Erst anspannen, dann loslassen – so entspannen sich die Muskeln."},
   {q:"Was macht die Aufregung schon vorher kleiner?",a:"a",o:[{v:"a",label:"Gut vorbereitet, ausgeschlafen und satt in die Arbeit gehen"},{v:"b",label:"Am Abend vorher lange aufbleiben"},{v:"c",label:"Ohne Frühstück losgehen"},{v:"d",label:"Erst am Morgen anfangen zu lernen"}],why:"Wer vorbereitet, ausgeschlafen und satt ist, bleibt ruhiger."}
 ]).map(it=>({...it,o:shuffle(it.o)})));
+/* ================= SPIEL: FANG DIE FARBEN ================= */
+(function(){
+  const cv=$("#ffCv");if(!cv)return;
+  const g=cv.getContext("2d"),over=$("#ffOver"),live=$("#ffLive"),W=560,H=560;
+  const T1=C.map((c,i)=>i).filter(i=>C[i].t===1),T2=C.map((c,i)=>i).filter(i=>C[i].t===2);
+  // Mischregeln zum Nachlesen
+  $("#ffRules").innerHTML=[...T1,...T2].map(i=>{const[a,b]=C[i].m;const d=k=>`<span class="d" style="background:${C[k].h}"></span>${C[k].n}`;return`<div class="ff-rule">${d(a)} + ${d(b)} = ${d(i)}</div>`}).join("");
+  let st=null,raf=0,last=0,running=false,keys={},best=0;
+  try{best=+localStorage.getItem("ffBest")||0}catch(_){}
+  const lvl=()=>st.mixes>=6?2:1;
+  function newGoal(){const pool=lvl()===1?T1:T2;let i;do{i=pool[Math.floor(Math.random()*pool.length)]}while(i===st.goal&&pool.length>1);
+    st.goal=i;st.have=[];st.flash=0;hud();say(`Mische ${C[i].n}!`)}
+  function hud(){const c=C[st.goal];$("#ffSw").style.background=c.h;$("#ffGoal").textContent=c.n;$("#ffLvl").textContent=`Stufe ${lvl()}`;
+    $("#ffPts").textContent=`${st.pts} Punkte`;const h=$("#ffHearts");h.textContent="♥".repeat(st.hearts)+"♡".repeat(3-st.hearts);h.setAttribute("aria-label",`${st.hearts} Herzen`);
+    [...$("#ffSlots").children].forEach((el,k)=>{const v=st.have[k];el.className=v!=null?"full":"";el.style.background=v!=null?C[v].h:""})}
+  const say=t=>{live.textContent=t};
+  function start(){st={x:W/2,drops:[],fx:[],pts:0,hearts:3,mixes:0,streak:0,spawn:0,goal:-1,have:[],done:[],shake:0,mixShow:0};newGoal();
+    over.hidden=true;running=true;last=0;cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);cv.focus&&cv.focus()}
+  function pause(p){if(!st||!st.hearts)return;running=!p;$("#ffP").textContent=p?"Weiter":"Pause";
+    if(p){cancelAnimationFrame(raf);over.hidden=false;over.innerHTML=`<h3>Pause</h3><button class="btn" type="button" data-go>Weiter</button>`}
+    else{over.hidden=true;last=0;raf=requestAnimationFrame(loop)}}
+  function end(){running=false;cancelAnimationFrame(raf);const rec=st.pts>best;if(rec){best=st.pts;try{localStorage.setItem("ffBest",String(best))}catch(_){}}
+    const learned=[...new Set(st.done)].map(i=>`<li>${C[C[i].m[0]].n} + ${C[C[i].m[1]].n} = ${C[i].n}</li>`).join("");
+    over.hidden=false;over.innerHTML=`<h3>${rec&&st.pts?"Neuer Rekord!":"Spiel vorbei"}</h3><p><strong>${st.pts} Punkte</strong> · ${st.mixes} Farben gemischt · Rekord: ${best}</p>${learned?`<p>Das hast du gemischt:</p><ul>${learned}</ul>`:""}<button class="btn" type="button" data-go>Nochmal spielen</button>`;
+    say(`Spiel vorbei. ${st.pts} Punkte.`);
+    if(rec&&st.pts){guckiCheer();guckiSay("Neuer Rekord!",2200);const r=cv.getBoundingClientRect();Konfetti.burst(r.left+r.width/2,r.top+r.height*.6,80,90,50,900)}
+    else guckiSay(st.mixes?`${st.mixes} Farben gemischt!`:"Probier's nochmal!",2000)}
+  function spawn(){const pool=lvl()===1?C.map((c,i)=>i).filter(i=>C[i].t===0):C.map((c,i)=>i).filter(i=>C[i].t<2);
+    const need=C[st.goal].m.filter(k=>!st.have.includes(k));
+    const c=need.length&&Math.random()<.5?need[Math.floor(Math.random()*need.length)]:pool[Math.floor(Math.random()*pool.length)];
+    const sp=(lvl()===1?120:175)+st.mixes*5;
+    st.drops.push({c,x:40+Math.random()*(W-80),y:-24,v:sp*(.85+Math.random()*.3)})}
+  function catchDrop(d){const ok=C[st.goal].m.includes(d.c);
+    if(ok&&!st.have.includes(d.c)){st.have.push(d.c);fx(d.x,d.y,C[d.c].h,`${C[d.c].n} ✓`);
+      if(st.have.length===2){st.mixes++;st.streak++;const bonus=Math.min(st.streak-1,5)*5;st.pts+=10+bonus;st.done.push(st.goal);
+        const[a,b]=C[st.goal].m;st.mixShow=1.4;st.mixTxt=`${C[a].n} + ${C[b].n} = ${C[st.goal].n}!`;st.mixCol=C[st.goal].h;say(st.mixTxt);guckiCheer();
+        const lv=lvl();setTimeout(()=>{if(!st||!st.hearts)return;if(st.mixes===6&&lv===2){guckiSay("Stufe 2!",1800)}newGoal()},700)}
+      hud()}
+    else if(ok){fx(d.x,d.y,C[d.c].h,"hast du schon")}
+    else{st.hearts--;st.streak=0;st.shake=.35;fx(d.x,d.y,"#E3202A",`${C[d.c].n} passt nicht`);say(`${C[d.c].n} gehört nicht zu ${C[st.goal].n}.`);hud();if(st.hearts<=0)setTimeout(end,350)}}
+  const fx=(x,y,col,txt)=>st.fx.push({x,y,col,txt,t:0});
+  function loop(ts){if(!running)return;const dt=last?Math.min(.05,(ts-last)/1000):0;last=ts;
+    const sp=430*dt;if(keys.l)st.x-=sp;if(keys.r)st.x+=sp;st.x=Math.max(46,Math.min(W-46,st.x));
+    st.spawn-=dt;if(st.spawn<=0&&st.have.length<2){spawn();st.spawn=Math.max(.5,(lvl()===1?1.05:.85)-st.mixes*.02)}
+    const by=H-62;
+    st.drops.forEach(d=>{d.y+=d.v*dt;if(!d.gone&&d.y>by-6&&d.y<by+18&&Math.abs(d.x-st.x)<44){d.gone=true;if(st.hearts>0)catchDrop(d)}});
+    st.drops=st.drops.filter(d=>!d.gone&&d.y<H+30);
+    st.fx.forEach(f=>f.t+=dt);st.fx=st.fx.filter(f=>f.t<1);st.shake=Math.max(0,st.shake-dt);st.mixShow=Math.max(0,st.mixShow-dt);
+    draw();if(st.hearts>0)raf=requestAnimationFrame(loop)}
+  function draw(){const paper=cssv("--paper")||"#F6F7FA",ink=cssv("--ink")||"#1C1F2E",line=cssv("--line")||"#DDE";
+    g.fillStyle=paper;g.fillRect(0,0,W,H);
+    g.strokeStyle=line;g.lineWidth=1;for(let y=60;y<H;y+=60){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke()}
+    // Tropfen mit Namen
+    st.drops.forEach(d=>{const c=C[d.c];g.save();g.translate(d.x,d.y);g.beginPath();g.moveTo(0,-26);g.bezierCurveTo(10,-12,18,-2,18,8);g.arc(0,8,18,0,Math.PI);g.bezierCurveTo(-18,-2,-10,-12,0,-26);
+      g.fillStyle=c.h;g.fill();g.lineWidth=2;g.strokeStyle="rgba(0,0,0,.25)";g.stroke();g.fillStyle="rgba(255,255,255,.55)";g.beginPath();g.ellipse(-6,2,4,7,-.4,0,7);g.fill();
+      g.font="700 13px 'Atkinson Hyperlegible',sans-serif";g.textAlign="center";g.lineWidth=4;g.strokeStyle=paper;g.strokeText(c.n,0,44);g.fillStyle=ink;g.fillText(c.n,0,44);g.restore()});
+    // Gucki mit Eimer
+    const sx=st.shake?Math.sin(st.shake*60)*5:0,x=st.x+sx,by=H-62;
+    g.fillStyle="#139DB3";g.beginPath();g.roundRect?g.roundRect(x-30,by-48,60,80,[28,28,0,0]):g.rect(x-30,by-48,60,80);g.fill();
+    const near=st.drops.reduce((a,d)=>!a||d.y>a.y?d:a,null),lx=near?Math.max(-3,Math.min(3,(near.x-x)/40)):0,ly=near?-2:1;
+    [[-12,-30],[12,-30]].forEach(([ex,ey])=>{g.fillStyle="#FFFFFF";g.strokeStyle="#0E6F7E";g.lineWidth=2;g.beginPath();g.arc(x+ex,by+ey,9,0,7);g.fill();g.stroke();
+      g.fillStyle="#1C1F2E";g.beginPath();g.arc(x+ex+lx,by+ey+ly,4.2,0,7);g.fill()});
+    // Eimer
+    g.beginPath();g.moveTo(x-44,by);g.lineTo(x+44,by);g.lineTo(x+34,by+52);g.lineTo(x-34,by+52);g.closePath();g.fillStyle="#9AA5B8";g.fill();g.lineWidth=2;g.strokeStyle="#5B6475";g.stroke();
+    g.beginPath();g.ellipse(x,by,44,8,0,0,7);g.fillStyle=st.mixShow?st.mixCol:"#5B6475";g.fill();
+    st.have.forEach((k,n)=>{g.beginPath();g.arc(x-12+n*24,by+26,9,0,7);g.fillStyle=C[k].h;g.fill();g.strokeStyle="#FFFFFF";g.lineWidth=2;g.stroke()});
+    // Texte
+    st.fx.forEach(f=>{g.globalAlpha=1-f.t;g.font="800 16px 'Bricolage Grotesque',sans-serif";g.textAlign="center";g.lineWidth=4;g.strokeStyle=paper;const y=f.y-30-f.t*40;g.strokeText(f.txt,f.x,y);g.fillStyle=f.col==="#E3202A"?"#C4161C":ink;g.fillText(f.txt,f.x,y);g.globalAlpha=1});
+    if(st.mixShow){g.globalAlpha=Math.min(1,st.mixShow*2);g.font="800 24px 'Bricolage Grotesque',sans-serif";g.textAlign="center";g.lineWidth=6;g.strokeStyle=paper;g.strokeText(st.mixTxt,W/2,H/2-40);g.fillStyle=ink;g.fillText(st.mixTxt,W/2,H/2-40);
+      g.beginPath();g.arc(W/2,H/2+10,26,0,7);g.fillStyle=st.mixCol;g.fill();g.globalAlpha=1}}
+  // Steuerung
+  const stage=$("#ffStage"),toX=e=>{const r=cv.getBoundingClientRect();return(e.clientX-r.left)/r.width*W};
+  stage.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;if(running){st.x=toX(e);stage._drag=true;try{stage.setPointerCapture(e.pointerId)}catch(_){}}});
+  stage.addEventListener("pointermove",e=>{if(running&&(stage._drag||e.pointerType==="mouse"))st.x=toX(e)});
+  ["pointerup","pointercancel"].forEach(ev=>stage.addEventListener(ev,()=>{stage._drag=false}));
+  over.addEventListener("click",e=>{if(e.target.closest("[data-go]")){if(st&&st.hearts>0&&!running)pause(false);else start()}});
+  const hold=(btn,k)=>{const on=e=>{e.preventDefault();keys[k]=true},off=()=>{keys[k]=false};btn.addEventListener("pointerdown",on);["pointerup","pointerleave","pointercancel"].forEach(v=>btn.addEventListener(v,off))};
+  hold($("#ffL"),"l");hold($("#ffR"),"r");
+  $("#ffP").onclick=()=>{if(st&&st.hearts>0)pause(running)};
+  document.addEventListener("keydown",e=>{if(location.hash!=="#farbfang"||!running)return;if(e.key==="ArrowLeft"){keys.l=true;e.preventDefault()}if(e.key==="ArrowRight"){keys.r=true;e.preventDefault()}});
+  document.addEventListener("keyup",e=>{if(e.key==="ArrowLeft")keys.l=false;if(e.key==="ArrowRight")keys.r=false});
+  window.addEventListener("hashchange",()=>{if(running&&location.hash!=="#farbfang")pause(true)});
+  document.addEventListener("visibilitychange",()=>{if(document.hidden&&running)pause(true)});
+  // Startbildschirm
+  st={x:W/2,drops:[],fx:[],pts:0,hearts:0,mixes:0,have:[],goal:10,shake:0,mixShow:0};hud();draw();$("#ffHearts").textContent="♥♥♥";
+  over.innerHTML=`<h3>Bereit?</h3><p>Fang die zwei Farben, aus denen Guckis Zielfarbe gemischt wird. Du hast drei Herzen.</p><p>Rekord auf diesem Gerät: ${best} Punkte</p><button class="btn" type="button" data-go>Los geht's</button>`;
+})();
 /* --- Neu beginnen --- */
 (function(){
   function resetTask(box){if(!box._reset)return;box._reset();delete box.dataset.perfect;delete box.dataset.fails;const t=box.closest(".topic");if(t)delete t.dataset.mega;if(typeof Wegweiser==="object")Wegweiser.refresh()}

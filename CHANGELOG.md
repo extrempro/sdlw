@@ -4,6 +4,21 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.5.0] – 2026-11-08
+
+Neuer Bereich „Spielen“ mit dem Spiel „Fang die Farben“.
+
+### Neu
+
+- **Spiel „Fang die Farben“** (`#farbfang`) im neuen Navigationsbereich **Spielen** (Farbe `--spiel`). Gucki fängt mit einem Eimer fallende Farbtropfen. Gesucht sind genau die zwei Farben, aus denen die angezeigte Zielfarbe gemischt wird.
+  - **Stufen:** Stufe 1 hat Mischfarben 1. Ordnung (es fallen nur Grundfarben). Ab sechs gemischten Farben folgt Stufe 2 mit Mischfarben 2. Ordnung (es fallen Grundfarben und Mischfarben 1. Ordnung), mit wachsendem Tempo.
+  - **Punkte und Herzen:** 10 Punkte je Mischung plus Serienbonus. Eine falsche Farbe kostet ein Herz, nach drei Herzen ist das Spiel vorbei.
+  - **Rückmeldung:** Jede Mischung erscheint als „Blau + Gelb = Grün!“. Am Ende stehen alle gemischten Farben als Übersicht da.
+  - **Daten aus dem Farbkreis:** Farben, Namen und Mischregeln kommen aus dem Farbkreis-Kapitel (`C`). Die Seite zeigt alle Mischregeln zum Nachlesen.
+  - **Steuerung:** Finger/Maus (ziehen), Pfeiltasten, Knöpfe ◀ ▶. Pause per Knopf; das Spiel pausiert auch beim Seitenwechsel oder wenn der Tab im Hintergrund ist.
+  - **Rekord** pro Gerät in `localStorage` („ffBest“). Gucki jubelt bei einem neuen Rekord.
+- Die Startseite zeigt das Spiel automatisch als Karte.
+
 ## [1.4.0] – 2026-11-08
 
 Übung „Tag oder Nacht?“ neu aufgebaut, Seite komplett ohne Internet nutzbar, Weltzeituhr aufgeräumt.

@@ -9,10 +9,11 @@ Die Meere der Welt, Tag und Nacht, Der Kompass (Erdkunde) · Noten lesen (Musik)
 ## Benutzen
 
 `index.html` herunterladen und im Browser öffnen – fertig. Es braucht keinen Server und keine Installation.
-Die Seite funktioniert auch ohne Internet, die Weltkarten-Daten sind eingebaut. Nur die Schriften kommen von
-Google Fonts; ohne Internet nimmt der Browser seine eigene Schrift.
+Die Seite funktioniert komplett **ohne Internet**: Weltkarten-Daten und Schriften sind eingebaut.
 
-Die eingebauten Kartendaten stammen aus Apache ECharts 4.9.0 (`map/js/world.js`, Apache-Lizenz 2.0).
+Eingebaute Fremddaten:
+- Kartendaten aus Apache ECharts 4.9.0 (`map/js/world.js`, Apache-Lizenz 2.0)
+- Schriften Bricolage Grotesque und Atkinson Hyperlegible (SIL Open Font License 1.1, Lizenztexte im Ordner `fonts/`)
 
 Ein Kapitel direkt öffnen: `index.html#deutsch`, `#farbkreis`, `#kontinente`, `#meere`, `#tagnacht`,
 `#kompass`, `#noten`. Die Versionshinweise stehen unter `index.html#neuigkeiten`.

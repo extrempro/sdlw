@@ -60,7 +60,7 @@ Es gibt keine Abhängigkeiten und keinen Paketmanager. Node.js ab Version 18 rei
 
 Reihenfolge in der Datei:
 
-1. `<title>`, Favicon (Gucki als SVG-Daten-URL) und `apple-touch-icon` (PNG, 180 px, als Daten-URL), Google-Fonts-Link, `<style>` mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
+1. `<title>`, Favicon (Gucki als SVG-Daten-URL) und `apple-touch-icon` (PNG, 180 px, als Daten-URL), `<style>` (beginnt mit den eingebetteten Schriften) mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
 2. Kopfzeile (`.topbar`): Logo „S.D.L.W.“ (`#logo`, Regenbogen-Schrift; Klick lässt Gucki sich vorstellen), Jahrgang, rechts runde Symbol-Knöpfe (`.iconbtn`): Haus (`#homeBtn`, Link zu `#start`) und ✦ (`#newsBtn`) als Link zur Seite `#neuigkeiten`
    mit rotem Punkt, solange die neueste Version noch nicht angesehen wurde (`localStorage` „seenVersion“), Hell/Dunkel-Knopf.
 3. JSON-Block `<script type="application/json" id="releaseData">` – die Versionshinweise der Webseite
@@ -113,7 +113,7 @@ Reihenfolge in der Datei:
 
 - Alle Farben als Tokens in `:root`, dunkle Werte in beiden Dark-Mode-Blöcken
   (`@media (prefers-color-scheme: dark)` und `:root[data-theme="dark"]`). Keine Farbe nur in einem Theme definieren.
-- Schriften: Bricolage Grotesque (Überschriften), Atkinson Hyperlegible (Text) über Google Fonts, mit Ersatzschriften.
+- Schriften: Bricolage Grotesque (Überschriften, Stärke 600–800), Atkinson Hyperlegible (Text, 400/700), eingebettet, mit Ersatzschriften.
 - Muss auf Handybreite (~390 px) funktionieren, ohne seitliches Scrollen.
 - Kein `alert()`, `confirm()`, `prompt()`, `window.print()`. Externe Skripte nur von erlaubten CDNs
   (cdnjs, jsdelivr, unpkg) mit fester Versionsnummer.
@@ -121,7 +121,12 @@ Reihenfolge in der Datei:
 
 ### Externe Abhängigkeiten
 
-- Google Fonts (Schriften). Die einzige Abhängigkeit aus dem Internet; ohne Internet greifen die Ersatzschriften.
+- **Keine Abhängigkeit aus dem Internet mehr** – die Seite läuft komplett offline.
+- Schriften: **eingebettet** als `@font-face` mit Base64-Daten am Anfang des `<style>` (Block `/* FONTS */`).
+  Bricolage Grotesque (variabel, nur Breite 100, Stärke 600–800) und Atkinson Hyperlegible (400, 700), jeweils auf
+  Latein, Latin-1 und typografische Zeichen gekürzt, als WOFF. Erzeugt mit `scripts/make-fonts.py` aus dem
+  Google-Fonts-Download; die fertigen Dateien und die Lizenztexte (SIL OFL 1.1) liegen in `fonts/`. Werden andere
+  Stärken oder Zeichen gebraucht, das Skript anpassen und den Block neu erzeugen.
 - Weltkarten-Daten: **eingebettet** als `<script>` in `src/entdeckerheft.html`. Es ist die unveränderte Datei
   `echarts@4.9.0/map/js/world.js` (rund 100 KB, Apache-Lizenz 2.0, Lizenzkopf bleibt stehen). Die Seite fängt den
   Aufruf `echarts.registerMap` mit einem kleinen Platzhalter ab und zeichnet die Karten selbst. Die Punktkarte

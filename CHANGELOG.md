@@ -6,12 +6,13 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschn
 
 ## [1.4.0] – 2026-11-08
 
-Übung „Tag oder Nacht?“ neu aufgebaut, Weltkarte ohne Internet, Weltzeituhr aufgeräumt.
+Übung „Tag oder Nacht?“ neu aufgebaut, Seite komplett ohne Internet nutzbar, Weltzeituhr aufgeräumt.
 
 ### Verbessert
 
 - **Globus (Tag und Nacht, Meere):** Die grob als Rechtecke eingezeichneten Wüsten (gelblich: Sahara/Arabien, Mitte Australiens) sind entfernt. Sie waren nirgends erklärt und lenkten vom Thema ab. Land ist jetzt einheitlich grün, Eis weiß, Meer blau.
-- **Weltkarte ohne Internet:** Die Kartendaten (Apache ECharts 4.9.0, `map/js/world.js`, Apache-Lizenz 2.0) sind jetzt direkt in die Seite eingebaut, statt beim Öffnen von jsdelivr geladen zu werden. Kontinente, Meere, Globen und Weltzeituhr zeigen auch offline die echte Karte. Die Datei wird dadurch etwa 100 KB größer. Nur die Schriften kommen noch von Google Fonts; offline greifen Ersatzschriften.
+- **Schriften ohne Internet:** Bricolage Grotesque (Stärke 600–800) und Atkinson Hyperlegible (400, 700) sind eingebettet statt von Google Fonts geladen, gekürzt auf die nötigen Zeichen (zusammen rund 140 KB). Damit lädt die Seite nichts mehr aus dem Internet. Neu im Repository: `fonts/` (WOFF-Dateien, Lizenztexte SIL OFL 1.1) und `scripts/make-fonts.py`.
+- **Weltkarte ohne Internet:** Die Kartendaten (Apache ECharts 4.9.0, `map/js/world.js`, Apache-Lizenz 2.0) sind jetzt direkt in die Seite eingebaut, statt beim Öffnen von jsdelivr geladen zu werden. Kontinente, Meere, Globen und Weltzeituhr zeigen auch offline die echte Karte. Die Datei wird dadurch etwa 100 KB größer.
 - **Aufgabe 1 „Tag oder Nacht?“ (n1, Kapitel Tag und Nacht):** Vorher kamen sechsmal dieselbe Frage, ob der Punkt auf der hellen Seite liegt; die Erklärung nannte nur die Uhrzeit. Jetzt gibt es drei Stufen:
   - **Erkennen:** eine Frage am Globus-Bild, Tag oder Nacht, mit Begründung
   - **Ablesen:** drei Fragen zur Ansicht von oben: Morgen, Mittag, Abend oder Mitternacht? Lösbar nur mit dem Drehpfeil; bei Fehlern gibt es einen Hinweis darauf.

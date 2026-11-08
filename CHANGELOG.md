@@ -18,6 +18,11 @@ Neuer Bereich „Lernen“ mit dem Kapitel „Fit für die Klassenarbeit“.
   - Arbeitsanweisungen (Operatoren: nennen, beschreiben, erklären, begründen, vergleichen, zuordnen)
   - Tipps gegen Aufregung, mit Hinweis, sich bei großer Angst Hilfe bei Eltern oder Lehrkräften zu holen
   - Berichtigung nach der Arbeit
+- **Starke Aufregung:** Ein Teil erklärt Anzeichen in Körper, Kopf und Verhalten (mit kindgerechter Erklärung von Stresshormonen). Dazu kommen:
+  - **Aufregungs-Thermometer** mit fünf Stufen, die je passende Tipps zeigen; bei „Panik“ der Rat, der Lehrkraft Bescheid zu sagen
+  - **Atem-Kreis** zum Mitatmen: 4 s ein, 2 s halten, 6 s aus, 5 Runden
+  - leise Tricks für die Arbeit: Fäuste-Trick, 5-4-3-2-1, Stopp und Mut-Satz, lockern und trinken
+  - Vorbeugen sowie Hilfe bei Eltern, Lehrkräften, Beratungslehrkräften und bei der Nummer gegen Kummer (116 111)
 - **Lernplan zum Ausprobieren:** Schieberegler für 3 bis 10 Tage bis zur Arbeit. Daraus entsteht ein Tagesplan mit echten Daten zum Abhaken. Fällt die Arbeit aufs Wochenende, erscheint ein Hinweis.
 - **Packliste** zum Abhaken. Gucki freut sich, wenn alles erledigt ist.
 - **Übungen:**
@@ -25,9 +30,10 @@ Neuer Bereich „Lernen“ mit dem Kapitel „Fit für die Klassenarbeit“.
   - ka2: Was sollst du tun? (Operatoren)
   - ka3: Schritt für Schritt (Reihenfolge in der Arbeit)
   - ka4: Stimmt das? (richtig/falsch)
+  - ka6: Was hilft jetzt? (Anzeichen und Hilfen bei Aufregung)
   - ka5: Auftrag „Mein Lernplan“
 
-  ka1 bis ka4 zählen für Guckis Kapitel-Party.
+  ka1 bis ka4 und ka6 zählen für Guckis Kapitel-Party.
 
 ### Verbessert
 

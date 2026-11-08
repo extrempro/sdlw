@@ -23,7 +23,7 @@ Aktuelle Kapitel (Jahrgang 5). „Lernen“ ist kein Schulfach, sondern ein Bere
 | Erdkunde | Tag und Nacht (mit Zeitzonen) | `tagnacht` | n1, n2, n3, n5, n6, n4 |
 | Erdkunde | Der Kompass | `kompass` | c1–c5 |
 | Musik | Noten lesen (mit Pausen) | `noten` | u1, u2, u3, u6, u4, u5 |
-| Lernen | Fit für die Klassenarbeit (Lerntipps, Lernplan, Operatoren) | `klassenarbeit` | ka1–ka5 |
+| Lernen | Fit für die Klassenarbeit (Lerntipps, Lernplan, Operatoren, starke Aufregung mit Thermometer und Atem-Kreis) | `klassenarbeit` | ka1–ka4, ka6, ka5 |
 
 Dazu kommen zwei Seiten ohne Fach: die **Startseite** (`#start`, Element-ID `start`; erscheint auch, wenn die Adresse
 keinen Zusatz hat) und die **Versionshinweise** (`#neuigkeiten`, Element-ID `neuigkeiten`).

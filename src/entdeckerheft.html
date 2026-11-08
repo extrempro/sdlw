@@ -2989,7 +2989,7 @@ quiz($("#ka6"),shuffle([
 /* ================= SPIEL: FANG DIE FARBEN ================= */
 (function(){
   const cv=$("#ffCv");if(!cv)return;
-  const g=cv.getContext("2d"),over=$("#ffOver"),live=$("#ffLive"),W=560,H=560,BY=H-150;
+  const g=cv.getContext("2d"),over=$("#ffOver"),live=$("#ffLive"),W=560,H=560,BY=H-100;
   const T1=C.map((c,i)=>i).filter(i=>C[i].t===1),T2=C.map((c,i)=>i).filter(i=>C[i].t===2);
   // Mischregeln zum Nachlesen
   $("#ffRules").innerHTML=[...T1,...T2].map(i=>{const[a,b]=C[i].m;const d=k=>`<span class="d" style="background:${C[k].h}"></span>${C[k].n}`;return`<div class="ff-rule">${d(a)} + ${d(b)} = ${d(i)}</div>`}).join("");
@@ -3028,11 +3028,11 @@ quiz($("#ka6"),shuffle([
     else{st.hearts--;st.streak=0;st.shake=.35;fx(d.x,d.y,"#E3202A",`${C[d.c].n} passt nicht`);say(`${C[d.c].n} gehört nicht zu ${C[st.goal].n}.`);hud();if(st.hearts<=0)setTimeout(end,350)}}
   const fx=(x,y,col,txt)=>st.fx.push({x,y,col,txt,t:0});
   function loop(ts){if(!running)return;const dt=last?Math.min(.05,(ts-last)/1000):0;last=ts;
-    const sp=430*dt;if(keys.l)st.x-=sp;if(keys.r)st.x+=sp;st.x=Math.max(58,Math.min(W-58,st.x));
+    const sp=430*dt;if(keys.l)st.x-=sp;if(keys.r)st.x+=sp;st.x=Math.max(46,Math.min(W-46,st.x));
     st.intro=Math.max(0,st.intro-dt);
     if(!st.intro){st.spawn-=dt;if(st.spawn<=0&&st.have.length<2){spawn();st.spawn=Math.max(.6,(lvl()===1?1.3:1)-st.mixes*.02)}}
     const by=BY;
-    st.drops.forEach(d=>{d.y+=d.v*dt;if(!d.gone&&d.y>by-6&&d.y<by+18&&Math.abs(d.x-st.x)<56){d.gone=true;if(st.hearts>0)catchDrop(d)}});
+    st.drops.forEach(d=>{d.y+=d.v*dt;if(!d.gone&&d.y>by-6&&d.y<by+18&&Math.abs(d.x-st.x)<44){d.gone=true;if(st.hearts>0)catchDrop(d)}});
     st.drops=st.drops.filter(d=>!d.gone&&d.y<H+30);
     st.fx.forEach(f=>f.t+=dt);st.fx=st.fx.filter(f=>f.t<1);st.shake=Math.max(0,st.shake-dt);st.mixShow=Math.max(0,st.mixShow-dt);
     draw();if(st.hearts>0)raf=requestAnimationFrame(loop)}
@@ -3043,16 +3043,16 @@ quiz($("#ka6"),shuffle([
     st.drops.forEach(d=>{const c=C[d.c];g.save();g.translate(d.x,d.y);g.beginPath();g.moveTo(0,-26);g.bezierCurveTo(10,-12,18,-2,18,8);g.arc(0,8,18,0,Math.PI);g.bezierCurveTo(-18,-2,-10,-12,0,-26);
       g.fillStyle=c.h;g.fill();g.lineWidth=2;g.strokeStyle="rgba(0,0,0,.25)";g.stroke();g.fillStyle="rgba(255,255,255,.55)";g.beginPath();g.ellipse(-6,2,4,7,-.4,0,7);g.fill();
       g.font="700 13px 'Atkinson Hyperlegible',sans-serif";g.textAlign="center";g.lineWidth=4;g.strokeStyle=paper;g.strokeText(c.n,0,44);g.fillStyle=ink;g.fillText(c.n,0,44);g.restore()});
-    // Gucki trägt den Eimer auf dem Kopf (so groß wie Gucki am Bildschirmrand)
+    // Gucki trägt den Eimer auf dem Kopf und schaut nur ein Stück aus dem Boden (wie am Bildschirmrand)
     const sx=st.shake?Math.sin(st.shake*60)*5:0,x=st.x+sx,by=BY;
-    g.fillStyle="#139DB3";g.beginPath();g.roundRect?g.roundRect(x-52,by+50,104,H-by-50,[50,50,0,0]):g.rect(x-52,by+50,104,H-by-50);g.fill();
-    g.fillStyle="#0E8496";[[-70,by+44],[52,by+44]].forEach(([hx,hy])=>{g.beginPath();g.roundRect?g.roundRect(x+hx,hy,18,32,9):g.rect(x+hx,hy,18,32);g.fill()});
-    const near=st.drops.reduce((a,d)=>!a||d.y>a.y?d:a,null),lx=near?Math.max(-5,Math.min(5,(near.x-x)/30)):0;
-    [[-21,by+92],[21,by+92]].forEach(([ex,ey])=>{g.fillStyle="#FFFFFF";g.strokeStyle="#0E6F7E";g.lineWidth=3;g.beginPath();g.arc(x+ex,ey,15,0,7);g.fill();g.stroke();
-      g.fillStyle="#1C1F2E";g.beginPath();g.arc(x+ex+lx,ey-6,7,0,7);g.fill();g.fillStyle="#FFFFFF";g.beginPath();g.arc(x+ex+lx-2,ey-8,2,0,7);g.fill()});
-    g.beginPath();g.moveTo(x-58,by);g.lineTo(x+58,by);g.lineTo(x+46,by+54);g.lineTo(x-46,by+54);g.closePath();g.fillStyle="#9AA5B8";g.fill();g.lineWidth=2.5;g.strokeStyle="#5B6475";g.stroke();
-    g.beginPath();g.ellipse(x,by,58,10,0,0,7);g.fillStyle=st.mixShow?st.mixCol:"#5B6475";g.fill();
-    st.have.forEach((k,n)=>{g.beginPath();g.arc(x-15+n*30,by+28,11,0,7);g.fillStyle=C[k].h;g.fill();g.strokeStyle="#FFFFFF";g.lineWidth=2;g.stroke()});
+    g.fillStyle="#139DB3";g.beginPath();g.roundRect?g.roundRect(x-32,by+44,64,H-by-44,[30,30,0,0]):g.rect(x-32,by+44,64,H-by-44);g.fill();
+    g.fillStyle="#0E8496";[[-46,by+40],[34,by+40]].forEach(([hx,hy])=>{g.beginPath();g.roundRect?g.roundRect(x+hx,hy,12,20,6):g.rect(x+hx,hy,12,20);g.fill()});
+    const near=st.drops.reduce((a,d)=>!a||d.y>a.y?d:a,null),lx=near?Math.max(-3,Math.min(3,(near.x-x)/40)):0;
+    [[-13,by+68],[13,by+68]].forEach(([ex,ey])=>{g.fillStyle="#FFFFFF";g.strokeStyle="#0E6F7E";g.lineWidth=2;g.beginPath();g.arc(x+ex,ey,9.5,0,7);g.fill();g.stroke();
+      g.fillStyle="#1C1F2E";g.beginPath();g.arc(x+ex+lx,ey-3.5,4.4,0,7);g.fill()});
+    g.beginPath();g.moveTo(x-46,by);g.lineTo(x+46,by);g.lineTo(x+36,by+48);g.lineTo(x-36,by+48);g.closePath();g.fillStyle="#9AA5B8";g.fill();g.lineWidth=2;g.strokeStyle="#5B6475";g.stroke();
+    g.beginPath();g.ellipse(x,by,46,8,0,0,7);g.fillStyle=st.mixShow?st.mixCol:"#5B6475";g.fill();
+    st.have.forEach((k,n)=>{g.beginPath();g.arc(x-12+n*24,by+26,9,0,7);g.fillStyle=C[k].h;g.fill();g.strokeStyle="#FFFFFF";g.lineWidth=2;g.stroke()});
     // Ziel-Banner oben im Spielfeld
     if(st.goal>=0){const gc=C[st.goal],sheet=cssv("--sheet")||"#FFFFFF";g.fillStyle=sheet;g.strokeStyle=line;g.lineWidth=1.5;g.beginPath();g.roundRect?g.roundRect(10,8,W-20,50,14):g.rect(10,8,W-20,50);g.fill();g.stroke();
       g.beginPath();g.arc(38,33,16,0,7);g.fillStyle=gc.h;g.fill();g.strokeStyle="rgba(0,0,0,.25)";g.lineWidth=2;g.stroke();

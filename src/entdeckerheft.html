@@ -640,6 +640,15 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
+   "version": "1.6.0",
+   "date": "2026-11-08",
+   "title": "Neue Reisen für Gucki",
+   "items": [
+    "Guckis Weltreise hat zwei neue Touren: die Mittelmeer-Runde nach Valencia, Marseille, Istanbul und Alexandria und die Amerika-Runde nach Halifax, Miami und durch den Panamakanal nach Los Angeles.",
+    "Jetzt gibt es vier Reisen. Nach jeder Reise geht es mit „Neue Reise“ zur nächsten."
+   ]
+  },
+  {
    "version": "1.5.0",
    "date": "2026-11-08",
    "title": "Vier Spiele mit Gucki",
@@ -1639,7 +1648,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#139DB3,#1E5AAA,#3DA647)"></div>
 </header>
 <section>
-  <p class="lead">Gucki fährt mit seinem Containerschiff vom Hamburger Hafen einmal um die Welt. Finde für jede Etappe die richtige Himmelsrichtung und beantworte in jedem Hafen eine Frage. Für jede richtige Antwort lädt Gucki einen Container ein.</p>
+  <p class="lead">Gucki fährt mit seinem Containerschiff vom Hamburger Hafen auf große Reise – über den Atlantik, nach Asien, durchs Mittelmeer oder durch den Panamakanal. Finde für jede Etappe die richtige Himmelsrichtung und beantworte in jedem Hafen eine Frage. Für jede richtige Antwort lädt Gucki einen Container ein.</p>
   <div class="wr-wrap" id="wrWrap">
     <div class="wr-top"><span id="wrTour"></span><span class="cargo" id="wrCargo"></span></div>
     <ol class="wr-stops" id="wrStops"></ol>
@@ -3254,7 +3263,9 @@ quiz($("#ka6"),shuffle([
   const D={N:"Norden",NO:"Nordosten",O:"Osten",SO:"Südosten",S:"Süden",SW:"Südwesten",W:"Westen",NW:"Nordwesten"};
   const PORT={
     HH:{n:"Hamburg",p:[10,53.55]},LIS:{n:"Lissabon",p:[-9.1,38.7]},NY:{n:"New York",p:[-74,40.7]},BA:{n:"Buenos Aires",p:[-58.4,-34.6]},
-    CPT:{n:"Kapstadt",p:[18.4,-33.9]},BOM:{n:"Mumbai",p:[72.8,19]},SYD:{n:"Sydney",p:[151.2,-33.9]},TYO:{n:"Tokio",p:[139.7,35.7]}};
+    CPT:{n:"Kapstadt",p:[18.4,-33.9]},BOM:{n:"Mumbai",p:[72.8,19]},SYD:{n:"Sydney",p:[151.2,-33.9]},TYO:{n:"Tokio",p:[139.7,35.7]},
+    VLC:{n:"Valencia",p:[-0.33,39.45]},MRS:{n:"Marseille",p:[5.37,43.3]},IST:{n:"Istanbul",p:[28.98,41.01]},ALX:{n:"Alexandria",p:[29.9,31.2]},
+    HAL:{n:"Halifax",p:[-63.6,44.6]},MIA:{n:"Miami",p:[-80.2,25.8]},PAN:{n:"Panama",p:[-79.6,9]},LAX:{n:"Los Angeles",p:[-118.25,33.75]}};
   const ROT=(o,a,w)=>({q:o,a,o:shuffle([a,...w]),});
   const Q={
     LIS:{f:"Lissabon ist die Hauptstadt von Portugal und liegt am Atlantik.",q:[ROT("Auf welchem Kontinent liegt Lissabon?","Europa",["Afrika","Südamerika","Asien"]),ROT("Lissabon ist die Hauptstadt von …","Portugal",["Spanien","Italien","Frankreich"])]},
@@ -3264,6 +3275,14 @@ quiz($("#ka6"),shuffle([
     BOM:{f:"Mumbai ist eine der größten Städte Indiens und hat einen riesigen Hafen.",q:[ROT("An welchem Ozean liegt Mumbai?","Indischer Ozean",["Pazifik","Atlantik","Arktischer Ozean"]),ROT("Auf welchem Kontinent liegt Mumbai?","Asien",["Afrika","Australien","Europa"])]},
     SYD:{f:"Sydney ist bekannt für sein Opernhaus mit dem Dach wie Segel.",q:[ROT("Auf welchem Kontinent liegt Sydney?","Australien",["Asien","Südamerika","Afrika"]),ROT("In Hamburg ist es 12 Uhr. Wie spät ist es in Sydney (ohne Sommerzeit)?","21 Uhr",["3 Uhr","12 Uhr","15 Uhr"])]},
     TYO:{f:"Tokio ist die Hauptstadt von Japan und eine der größten Städte der Welt.",q:[ROT("An welchem Ozean liegt Tokio?","Pazifik",["Atlantik","Indischer Ozean","Südlicher Ozean"]),ROT("Auf welchem Kontinent liegt Tokio?","Asien",["Australien","Europa","Nordamerika"]),ROT("In Hamburg ist es 12 Uhr. Wie spät ist es in Tokio (ohne Sommerzeit)?","20 Uhr",["4 Uhr","12 Uhr","16 Uhr"])]},
+    VLC:{f:"Valencia liegt in Spanien am Mittelmeer. Von hier kommt die Paella, ein bekanntes Reisgericht.",q:[ROT("In welchem Land liegt Valencia?","Spanien",["Italien","Portugal","Frankreich"]),ROT("An welchem Meer liegt Valencia?","Mittelmeer",["Nordsee","Ostsee","Schwarzes Meer"])]},
+    MRS:{f:"Marseille hat den größten Hafen Frankreichs.",q:[ROT("In welchem Land liegt Marseille?","Frankreich",["Spanien","Italien","Griechenland"]),ROT("An welchem Meer liegt Marseille?","Mittelmeer",["Atlantik","Nordsee","Rotes Meer"])]},
+    IST:{f:"Istanbul liegt in der Türkei an einer Meerenge, dem Bosporus. Ein Teil der Stadt liegt in Europa, der andere in Asien.",q:[ROT("Auf welchen zwei Kontinenten liegt Istanbul?","Europa und Asien",["Europa und Afrika","Asien und Afrika","Asien und Australien"]),ROT("In welchem Land liegt Istanbul?","Türkei",["Griechenland","Ägypten","Italien"])]},
+    ALX:{f:"Alexandria liegt in Ägypten, nicht weit von der Stelle, an der der Nil ins Mittelmeer fließt.",q:[ROT("Auf welchem Kontinent liegt Alexandria?","Afrika",["Asien","Europa","Australien"]),ROT("Welcher lange Fluss mündet in der Nähe von Alexandria ins Mittelmeer?","Nil",["Donau","Elbe","Amazonas"])]},
+    HAL:{f:"Halifax ist eine Hafenstadt an der Ostküste von Kanada.",q:[ROT("In welchem Land liegt Halifax?","Kanada",["USA","Mexiko","Grönland"]),ROT("Welchen Ozean hast du gerade überquert?","Atlantik",["Pazifik","Indischer Ozean","Südlicher Ozean"])]},
+    MIA:{f:"Miami liegt ganz im Süden der USA, in Florida. Hier ist es fast das ganze Jahr warm.",q:[ROT("Auf welchem Kontinent liegt Miami?","Nordamerika",["Südamerika","Afrika","Europa"]),ROT("In welchem Land liegt Miami?","USA",["Kanada","Mexiko","Kuba"])]},
+    PAN:{f:"Der Panamakanal ist eine künstliche Wasserstraße. Durch ihn sparen Schiffe den langen Weg um Südamerika herum.",q:[ROT("Welche zwei Ozeane verbindet der Panamakanal?","Atlantik und Pazifik",["Atlantik und Indischer Ozean","Pazifik und Indischer Ozean","Arktischer und Atlantik"])]},
+    LAX:{f:"Los Angeles liegt an der Westküste der USA. Hier steht Hollywood.",q:[ROT("An welchem Ozean liegt Los Angeles?","Pazifik",["Atlantik","Indischer Ozean","Arktischer Ozean"]),ROT("In Hamburg ist es 12 Uhr. Wie spät ist es in Los Angeles (ohne Sommerzeit)?","3 Uhr",["21 Uhr","12 Uhr","9 Uhr"])]},
     HH:{f:"Willkommen zurück im Hamburger Hafen!",q:[ROT("Über welchen Fluss fahren die Schiffe in den Hamburger Hafen?","Elbe",["Alster","Rhein","Donau"]),ROT("In welches Meer fließt die Elbe?","Nordsee",["Ostsee","Mittelmeer","Schwarzes Meer"])]}};
   const N_EU=[[-10,44],[-5,48.5],[1.5,51],[4,53],[8,54.2],[10,53.55]];
   const TOURS=[
@@ -3278,7 +3297,21 @@ quiz($("#ka6"),shuffle([
       ["CPT","BOM","NO",[[18.4,-33.9],[30,-37],[45,-30],[55,-10],[65,5],[72.8,19]]],
       ["BOM","SYD","SO",[[72.8,19],[77,5],[95,-8],[112,-36],[130,-38],[148,-40],[151.2,-33.9]]],
       ["SYD","TYO","N",[[151.2,-33.9],[160,-20],[158,0],[148,18],[141,32],[139.7,35.7]]],
-      ["TYO","HH","W",[[139.7,35.7],[130,26],[117,12],[104,1.6],[94,6],[80,5],[60,13],[45,12],[38,20],[33.5,28],[32.4,31.5],[20,34],[10,37.6],[-6,36],[-10,40],...N_EU]]]}];
+      ["TYO","HH","W",[[139.7,35.7],[130,26],[117,12],[104,1.6],[94,6],[80,5],[60,13],[45,12],[38,20],[33.5,28],[32.4,31.5],[20,34],[10,37.6],[-6,36],[-10,40],...N_EU]]]},
+    {n:"Mittelmeer-Runde",legs:[
+      ["HH","LIS","SW",[[10,53.55],[8,54.2],[3,53],[1.5,51],[-5,49.3],[-9.8,44],[-9.6,38.7],[-9.1,38.7]]],
+      ["LIS","VLC","O",[[-9.1,38.7],[-9.6,37],[-8.9,36.2],[-5.6,35.95],[-2,36.4],[0.5,38.2],[0.1,39.3],[-0.33,39.45]]],
+      ["VLC","MRS","NO",[[-0.33,39.45],[1.5,40.3],[3.5,41.5],[4.5,42.8],[5.37,43.3]]],
+      ["MRS","IST","O",[[5.37,43.3],[7,41.5],[8.2,38.6],[12.3,38.6],[15.6,38.25],[17,37.5],[22.5,35.9],[24,36.5],[25,38],[25.8,39.8],[26.3,40.2],[27.5,40.65],[28.98,41.01]]],
+      ["IST","ALX","S",[[28.98,41.01],[27.5,40.65],[26.3,40.2],[25.8,39.8],[25.3,38],[26,36],[28,33.5],[29.9,31.4],[29.9,31.2]]],
+      ["ALX","HH","NW",[[29.9,31.2],[26,33],[20,35],[11.5,37.3],[10,37.6],[5,37.5],[-2,36.4],[-5.6,35.95],[-9,36.5],[-10,40],...N_EU]]]},
+    {n:"Amerika-Runde",legs:[
+      ["HH","HAL","W",[[10,53.55],[8,54.2],[4,53],[1.5,51],[-5,49.5],[-20,48],[-40,46],[-55,44],[-63.6,44.6]]],
+      ["HAL","MIA","SW",[[-63.6,44.6],[-65,40],[-73,33],[-79,27],[-80.2,25.8]]],
+      ["MIA","PAN","S",[[-80.2,25.8],[-81,24.3],[-85,23.2],[-86.3,21.3],[-82,15],[-79.9,9.6],[-79.6,9]]],
+      ["PAN","LAX","NW",[[-79.6,9],[-79.5,8.5],[-80,7],[-87,10],[-95,14.5],[-106,19],[-110,22],[-116.5,29],[-118.25,33.75]]],
+      ["LAX","LIS","O",[[-118.25,33.75],[-116.5,29],[-110,22],[-106,19],[-95,14.5],[-87,10],[-80,7],[-79.5,8.5],[-79.6,9],[-79.9,9.6],[-78,12],[-72,17],[-67.8,18.4],[-60,25],[-35,35],[-20,37.5],[-9.1,38.7]]],
+      ["LIS","HH","NO",[[-9.1,38.7],[-9.8,41],...N_EU]]]}];
   const pt=(lon,lat)=>proj(lon,lat);
   // Größe der Zeichen unabhängig von der Bildschirmbreite: k = Karteneinheiten pro 2,5 Bildpunkte
   const unit=w=>.4*w/(svg.getBoundingClientRect().width||400);

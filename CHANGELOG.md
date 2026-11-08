@@ -33,6 +33,14 @@ Spiele-Bereich mit drei Spielen: „Fang die Farben“, „Guckis Weltreise“ u
   - **Fragen:** Viele werden aus den Kapiteldaten erzeugt (Mischfarben und Gegenfarben aus `C`, Kontinent- und Ozeangrößen aus `CK`/`OK`, Uhrzeiten aus `TZC`, Himmelsrichtungen), dazu feste Fragen zu Groß-/Kleinschreibung, Arbeitswörtern, Notenwerten und Lerntipps. Innerhalb einer Runde wiederholt sich keine Frage.
   - **Punkte:** 10 Punkte je richtige Antwort, Serienbonus bis +20; Gucki ruft bei 5 und 10 in Folge.
   - **Auswertung:** Am Ende steht die Liste „Das übst du noch“ mit allen falsch beantworteten Fragen und ihrer Lösung. Rekord pro Gerät („blitzBest“). Tasten 1–4 funktionieren auch.
+- **Farbe der Spiele:** Pink/Magenta (`--spiel`: hell `#B01E78`, dunkel `#F27BC0`) statt Orange, damit sie sich klar von Deutsch (Rotorange) unterscheiden.
+- **Lesbarkeit geprüft** (alle Seiten und Spielzustände, Handy und PC, hell und dunkel; Prüfung auf Schrift unter 12 px, abgeschnittene Texte und Kontrast nach WCAG):
+  - Fachname in der Wegweiser-Leiste in Textfarbe statt Fachfarbe; Farbe bleibt am Symbol und am Fortschrittsbalken.
+  - Größer: Fach-Etiketten der Startseiten-Karten, „Erklärungen/Übungen“ in der Sprungliste, Tastennamen der Klaviatur auf dem Handy (12 px).
+  - Aufregungs-Thermometer auf dem Handy als Liste statt fünf schmaler Spalten.
+  - `--lern` hell dunkler (`#237A3A`), damit grüne Schrift genug Kontrast hat.
+  - Weiße Schrift auf Grün/Rot/Pink (Spiel-Antworten, Weltreise-Häfen, „neu“ bei den Versionshinweisen) jetzt in `--sheet`, damit sie auch in der dunklen Ansicht lesbar ist.
+  - Blitzrunde: Fragen mit Zusatz (z. B. „Ohne Sommerzeit gerechnet“) stehen sauber untereinander; Lücken in Groß/klein-Sätzen als Unterstrich.
 - Kopfzeile: Symbol-Knöpfe sind rund. Unter 400 px Breite werden sie kleiner und das Schild „Klasse 5“ entfällt, damit das Logo ganz sichtbar bleibt.
 
 ## [1.4.0] – 2026-11-08

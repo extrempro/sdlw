@@ -14,7 +14,7 @@
   --ok:#1E7B45; --okbg:#E3F4EA; --bad:#B3261E; --badbg:#FBE6E4; --focus:#1E5AAA;
   --land:#DCD3C2; --landline:#C2B7A2; --sea:#DCE8F2; --pin:#D2232A;
   --pac:#2B5BAA; --atl:#139DB3; --ind:#7A5BC4; --sud:#22A57C; --ark:#8CC3E6;
-  --lern:#2E9447; --spiel:#D96F0B;
+  --lern:#237A3A; --spiel:#B01E78;
   --as:#E2A12B; --af:#D2553A; --na:#6FA845; --sa:#1F8E6E; --eu:#5A63D6; --au:#C2549B; --an:#8FA6C0;
   --sun:#F4B41A; --earth:#4A93D0; --night:#0B1230; --daybg:#FFF0C2; --dayfg:#6B4E00; --nightpill:#26305A; --nightfg:#FFFFFF;
   --park:#E5EFDA; --road:#FFFFFF; --plate:#E9EEF6; --plateline:#B5C1D4;
@@ -26,13 +26,13 @@
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F5A04A; color-scheme:dark}}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#14161F; --sheet:#1D2030; --ink:#ECEDF4; --muted:#A3A8BE; --line:#33384D;
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F5A04A; color-scheme:dark}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; color-scheme:dark}
 
 [hidden]{display:none!important}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
@@ -76,7 +76,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cr-ico .ico{width:32px;height:32px}
 .cr-path{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.2}
 .cr-top{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cr-top .cr-f{color:var(--fc,var(--muted))}
+.cr-top .cr-f{color:var(--ink)}
 .cr-path b{font-family:var(--display);font-weight:800;font-size:1rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cr-count{flex:none;font-variant-numeric:tabular-nums;font-size:.8rem;font-weight:700;color:var(--muted);background:var(--paper);border-radius:999px;padding:2px 9px}
 .cr-step{flex:none;display:flex;gap:4px}
@@ -89,7 +89,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cr-prog i{display:block;height:100%;width:0;background:var(--fc,var(--ink));transition:width .15s linear}
 @media (max-width:520px){.cr-count,.crb-l{display:none}.cr-ico .ico{width:26px;height:26px}.crumbs-in{gap:7px}.cr-nb{width:30px;height:30px}}
 .cr-list{position:absolute;left:0;right:0;top:calc(100% - 2px);background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:8px;max-height:62vh;overflow:auto;box-shadow:0 14px 30px -14px rgba(0,0,0,.45)}
-.cr-list .grp,.toc .grp{margin:10px 10px 4px;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.cr-list .grp,.toc .grp{margin:10px 10px 4px;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
 .cr-list .grp:first-child{margin-top:2px}
 .cr-list button,.toc button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-radius:9px;padding:7px 10px;color:var(--ink);font:inherit;font-size:.92rem;font-weight:700;cursor:pointer}
 .cr-list button .no,.toc button .no{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;background:var(--paper);color:var(--muted);font-variant-numeric:tabular-nums}
@@ -121,7 +121,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .iconbtn .ndot{position:absolute;top:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:var(--bad);border:2px solid var(--paper)}
 /* Startseite */
 .sblock{display:flex;flex-direction:column;gap:14px}
-.st-f{display:flex;align-items:center;gap:5px;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--muted)}
+.st-f{display:flex;align-items:center;gap:5px;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--muted)}
 .st-f .fdot{width:8px;height:8px;border-radius:50%;flex:none}
 .cr-count:empty{display:none}
 .scards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
@@ -161,7 +161,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .atem span{position:relative;font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--ink)}
 .atem.on span{color:#FFFFFF;text-shadow:0 1px 3px rgba(0,0,0,.35)}
 .atemsub{margin:0;max-width:34em}
-@media (max-width:480px){.thermo{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.thermo button{font-size:.7rem;padding:8px 2px}}
+@media (max-width:480px){.thermo{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.thermo{grid-template-columns:1fr}.thermo button{flex-direction:row;justify-content:flex-start;gap:12px;font-size:1rem;padding:8px 12px;text-align:left}}
 .lp-warn{margin:0;color:var(--bad);font-weight:700}
 .lplan{display:flex;flex-direction:column;gap:14px}
 .lp-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
@@ -227,7 +227,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .wr-rose button{font:800 1.05rem var(--display);border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
 .wr-rose button:hover{border-color:var(--muted)}
 .wr-rose button.wrong{border-color:var(--bad);color:var(--bad)}
-.wr-rose button.right{border-color:var(--ok);background:var(--ok);color:#FFFFFF}
+.wr-rose button.right{border-color:var(--ok);background:var(--ok);color:var(--sheet)}
 .wr-rose .mid{display:flex;align-items:center;justify-content:center;font-size:1.6rem}
 .wr-fb{font-weight:700;min-height:1.4em}
 .wr-fb.ok{color:var(--ok)}.wr-fb.no{color:var(--bad)}
@@ -235,7 +235,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .wr-fact{color:var(--muted);font-size:.95rem}
 .wr-stops{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
 .wr-stops li{padding:3px 10px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;font-weight:700;background:var(--paper)}
-.wr-stops li.done{background:var(--ok);border-color:var(--ok);color:#FFFFFF}
+.wr-stops li.done{background:var(--ok);border-color:var(--ok);color:var(--sheet)}
 .wr-stops li.now{border-color:var(--spiel);color:var(--spiel)}
 /* Spiel „Gucki-Blitzrunde“ */
 #blitz .merk{--accent:var(--spiel)}
@@ -254,9 +254,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .bl-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .bl-opts button{min-height:56px;padding:10px;border-radius:14px;border:2px solid var(--line);background:var(--paper);color:var(--ink);font:800 1.05rem var(--display);cursor:pointer;overflow-wrap:anywhere}
 .bl-opts button:hover{border-color:var(--muted)}
-.bl-opts button.right{background:var(--ok);border-color:var(--ok);color:#FFFFFF}
-.bl-opts button.wrong{background:var(--bad);border-color:var(--bad);color:#FFFFFF}
+.bl-opts button.right{background:var(--ok);border-color:var(--ok);color:var(--sheet)}
+.bl-opts button.wrong{background:var(--bad);border-color:var(--bad);color:var(--sheet)}
 .bl-streak{color:var(--spiel)}
+.bl-q small{display:block;margin-top:4px;font-family:var(--body,inherit);font-weight:700;font-size:.95rem;color:var(--muted)}
+.bl-q u{text-decoration:none;display:inline-block;min-width:2.6em;border-bottom:3px solid var(--spiel);text-align:center}
 .bl-review{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
 .bl-review b{color:var(--ok)}
 .bl-big{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1}
@@ -267,7 +269,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .relpage .rhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .relpage .rhead h3{font-size:1.2rem}
 .relpage .rdate{color:var(--muted);font-size:.9rem}
-.relpage .rnew{background:var(--pin);color:#FFFFFF;border-radius:999px;padding:1px 10px;font-size:.75rem;font-weight:700}
+.relpage .rnew{background:var(--pin);color:var(--sheet);border-radius:999px;padding:1px 10px;font-size:.75rem;font-weight:700}
 .relpage ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
 .relpage details ul{margin-top:8px}
 .relnotes{display:flex;flex-direction:column;gap:14px}
@@ -516,7 +518,7 @@ svg.staff{width:100%;height:auto;display:block;max-width:560px}
 .kbd .w.ok{background:#BFEBCF}.kbd .w.no,.kbd .b.no{background:#F6C3BE}
 .kbd button:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
 .kbd.nolabels .w span{visibility:hidden}
-@media (max-width:480px){.kbd{height:120px}.kbd .w{font-size:.62rem}}
+@media (max-width:480px){.kbd{height:120px}.kbd .w{font-size:.75rem}}
 .vals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 @media (max-width:620px){.vals{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .val{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;min-width:0}
@@ -626,7 +628,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     "Alle Spiele findest du über den neuen 🎮-Knopf oben rechts und unten auf der Startseite.",
     "Die Zielfarbe steht groß oben im Spielfeld, und vor jeder neuen Farbe sagt das Spiel sie dir in Ruhe an. Gucki trägt den Eimer auf dem Kopf, damit du jeden Tropfen bis zum Schluss siehst.",
     "In Stufe 2 mischst du Mischfarben 2. Ordnung wie Blaugrün oder Rotorange – und die Tropfen fallen schneller.",
-    "Du steuerst mit dem Finger, der Maus, den Pfeiltasten oder den Knöpfen. Dein Rekord wird auf deinem Gerät gespeichert."
+    "Du steuerst mit dem Finger, der Maus, den Pfeiltasten oder den Knöpfen. Dein Rekord wird auf deinem Gerät gespeichert.",
+    "Alles ist besser lesbar: Kleine Schriften sind größer, und Farben haben mehr Kontrast – auch in der dunklen Ansicht."
    ]
   },
   {
@@ -732,8 +735,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </nav>
 <!-- Spiele-Verzeichnis: nicht in der Hauptnavigation; Quelle für Spiele-Seite, Startseite und Wegweiser -->
 <div class="gamereg" id="gameReg" hidden>
-  <div class="fach"><p class="fachname"><span class="fdot" style="background:#D96F0B"></span>Spiele</p><div class="topics">
-      <a href="#farbfang" data-topic="farbfang" data-desc="Ein Spiel zum Farbkreis: Fang mit Gucki die Farben, aus denen die Zielfarbe gemischt wird."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D96F0B"/><path d="M16 6.5c3.6 4.6 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.4 6-11z" fill="#FFFFFF"/><circle cx="13.6" cy="18.4" r="1.6" fill="#D96F0B"/></svg><span><b>Fang die Farben</b></span></a>
+  <div class="fach"><p class="fachname"><span class="fdot" style="background:#B01E78"></span>Spiele</p><div class="topics">
+      <a href="#farbfang" data-topic="farbfang" data-desc="Ein Spiel zum Farbkreis: Fang mit Gucki die Farben, aus denen die Zielfarbe gemischt wird."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#B01E78"/><path d="M16 6.5c3.6 4.6 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.4 6-11z" fill="#FFFFFF"/><circle cx="13.6" cy="18.4" r="1.6" fill="#B01E78"/></svg><span><b>Fang die Farben</b></span></a>
       <a href="#weltreise" data-topic="weltreise" data-desc="Fahr mit Gucki und seinem Schiff um die Welt: Himmelsrichtung finden, Hafen anlaufen, Frage beantworten."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#139DB3"/><path d="M7 18h18l-3 5H10z" fill="#FFFFFF"/><path d="M16 7v10M16 8l6 7h-6" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/></svg><span><b>Guckis Weltreise</b></span></a>
       <a href="#blitz" data-topic="blitz" data-desc="60 Sekunden, Fragen aus allen Kapiteln: Wie viele schaffst du hintereinander?"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#E2A12B"/><path d="M18 5 9 18h6l-2 9 10-14h-6z" fill="#FFFFFF"/></svg><span><b>Gucki-Blitzrunde</b></span></a>
     </div></div>
@@ -1557,7 +1560,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <header>
   <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Alle Fächer</p>
   <h1>Gucki-Blitzrunde</h1>
-  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E2A12B,#FFE000,#D96F0B)"></div>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E2A12B,#FFE000,var(--spiel))"></div>
 </header>
 <section>
   <p class="lead">60 Sekunden, viele schnelle Fragen aus allen Kapiteln. Jede richtige Antwort bringt Punkte – und wer mehrere hintereinander richtig hat, bekommt einen Bonus!</p>
@@ -1608,7 +1611,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <header>
   <p class="eyebrow">S.D.L.W. · Klasse 5 · Spiele</p>
   <h1>Spiele</h1>
-  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--spiel),#FFE000)"></div>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--spiel),#F27BC0)"></div>
 </header>
 <div class="sblock">
   <p class="lead">Hier kannst du mit Gucki spielen und dabei wiederholen, was du in den Kapiteln gelernt hast.</p>
@@ -3285,14 +3288,14 @@ quiz($("#ka6"),shuffle([
   const OPS=[["Nenne","kurz aufzählen"],["Beschreibe","genau sagen, wie etwas ist"],["Erkläre","sagen, warum etwas so ist"],["Begründe","Gründe angeben"],["Vergleiche","Gemeinsamkeiten und Unterschiede suchen"]];
   const NOTE=[["Wie viele Viertelnoten passen in eine ganze Note?","4",["2","3","8"]],["Wie viele Viertelnoten dauert eine halbe Note?","2",["1","4","3"]],["Wie viele Achtelnoten passen in eine Viertelnote?","2",["4","1","8"]],["Welcher Ton kommt nach C?","D",["E","H","B"]],["Welcher Ton kommt vor C?","H",["B","A","D"]],["Wie heißt das Zeichen für eine Stille in der Musik?","Pause",["Note","Takt","Schlüssel"]],["Wie viele Linien hat ein Notensystem?","5",["4","6","3"]],["Wie heißt der Schlüssel am Anfang der meisten Notenzeilen?","Violinschlüssel",["Hausschlüssel","Taktschlüssel","Pausenschlüssel"]]];
   const G={
-    Deutsch:[()=>{const[sen,a,w]=pick(GK);return{q:`Groß oder klein?<br>${sen.replace("___","<u>&nbsp;?&nbsp;</u>")}`,r:`Groß oder klein: ${sen}`,a,o:shuffle([a,w]),k:"gk"+sen}},
+    Deutsch:[()=>{const[sen,a,w]=pick(GK);return{q:`Groß oder klein?<br>${sen.replace("___","<u>?</u>")}`,r:`Groß oder klein: ${sen}`,a,o:shuffle([a,w]),k:"gk"+sen}},
              ()=>{const[op,m]=pick(OPS);return{q:`Was bedeutet das Arbeitswort „${op}“?`,a:m,o:opts(m,OPS.map(x=>x[1]),3),k:"op"+op}}],
     Kunst:[()=>{const i=pick(C.map((c,i)=>i).filter(i=>C[i].t===1)),[a,b]=C[i].m;return{q:`${C[a].n} + ${C[b].n} = ?`,a:C[i].n,o:opts(C[i].n,C.filter(c=>c.t===1||c.t===2).map(c=>c.n)),k:"mix"+i}},
            ()=>{const i=pick(C.map((c,i)=>i)),g=C[(i+6)%12].n;return{q:`Was ist die Gegenfarbe (Komplementärfarbe) von ${C[i].n}?`,a:g,o:opts(g,C.map(c=>c.n)),k:"kp"+i}},
            ()=>{const i=pick(C.map((c,i)=>i)),a=C[i].t===0?"Grundfarbe":"Mischfarbe";return{q:`Ist ${C[i].n} eine Grundfarbe oder eine Mischfarbe?`,a,o:["Grundfarbe","Mischfarbe"],k:"gm"+i}}],
     Erdkunde:[()=>{const k=pick(CK),r=CK.indexOf(k)+1;const q=r===1?"Welcher Kontinent ist der größte?":r===7?"Welcher Kontinent ist der kleinste?":null;if(!q)return null;return{q,a:CN[k].n,o:opts(CN[k].n,CK.map(x=>CN[x].n)),k:"kr"+k}},
               ()=>{const k=pick(OK),r=OK.indexOf(k);const q=["Welcher Ozean ist der größte?","Welcher Ozean ist der zweitgrößte?",null,null,"Welcher Ozean ist der kleinste?"][r];if(!q)return null;return{q,a:O[k].n,o:opts(O[k].n,OK.map(x=>O[x].n)),k:"or"+k}},
-              ()=>{const c=pick(TZC.filter(c=>!c.me&&Number.isInteger(c.off))),a=fmt(12-1+c.off)+" Uhr";const w=[-6,-4,-2,2,4,6].map(d=>fmt(12-1+c.off+d)+" Uhr");return{q:`In Hamburg ist es 12:00 Uhr. Wie spät ist es in ${c.n}?<br><small>(ohne Sommerzeit)</small>`,a,o:opts(a,w),k:"tz"+c.n}},
+              ()=>{const c=pick(TZC.filter(c=>!c.me&&Number.isInteger(c.off))),a=fmt(12-1+c.off)+" Uhr";const w=[-6,-4,-2,2,4,6].map(d=>fmt(12-1+c.off+d)+" Uhr");return{q:`In Hamburg ist es 12:00 Uhr. Wie spät ist es in ${c.n}?<small>Ohne Sommerzeit gerechnet</small>`,a,o:opts(a,w),k:"tz"+c.n}},
               ()=>{const i=Math.floor(Math.random()*8),a=DIRS[(i+4)%8];return{q:`Was ist die Gegenrichtung von ${DIRS[i]}?`,a,o:opts(a,DIRS),k:"gr"+i}},
               ()=>{const i=Math.floor(Math.random()*4)*2,a=DIRS[i+1];return{q:`Welche Himmelsrichtung liegt genau zwischen ${DIRS[i]} und ${DIRS[(i+2)%8]}?`,a,o:opts(a,DIRS),k:"zw"+i}},
               ()=>{const t=pick([["Wo geht die Sonne auf?","im Osten"],["Wo geht die Sonne unter?","im Westen"],["Wo steht die Sonne bei uns mittags?","im Süden"]]);return{q:t[0],a:t[1],o:opts(t[1],["im Osten","im Westen","im Süden","im Norden"]),k:"so"+t[0]}}],
@@ -3307,7 +3310,7 @@ quiz($("#ka6"),shuffle([
   function next(){let q=null,f,tries=0;while(!q&&tries++<40){f=pick([...sel]);const cand=pick(G[f])();if(cand&&!st.used.has(cand.k))q={...cand,f}}
     if(!q){st.used.clear();return next()}st.used.add(q.k);st.q=q;st.lock=false;
     card.innerHTML=`<div class="bl-hud"><span>⏱ <span id="blT">${Math.ceil(st.left)}</span> s</span><span class="bl-streak" id="blS">${st.streak>1?`🔥 ${st.streak} in Folge`:""}</span><span>${st.pts} Punkte</span></div>
-      <div class="bl-time${st.left<10?" low":""}"><i id="blBar" style="width:${st.left/60*100}%"></i></div><span class="bl-fach">${q.f}</span><div class="bl-q">${q.q}</div>
+      <div class="bl-time${st.left<10?" low":""}"><i id="blBar" style="width:${st.left/60*100}%"></i></div><span class="bl-fach">${q.f}</span><div class="bl-q"><span>${q.q}</span></div>
       <div class="bl-opts">${q.o.map((o,i)=>`<button type="button" data-o="${i}"><span class="sr-only">${i+1}: </span>${o}</button>`).join("")}</div>`;
     card.querySelector(".bl-opts").onclick=e=>{const b=e.target.closest("button");if(b)answer(+b.dataset.o)}}
   function answer(i){if(!st||st.lock||st.over)return;st.lock=true;const q=st.q,ok=q.o[i]===q.a,bs=card.querySelectorAll(".bl-opts button");
@@ -3320,7 +3323,7 @@ quiz($("#ka6"),shuffle([
   function end(){clearInterval(timer);st.over=true;const rec=st.pts>best&&st.pts>0;if(rec){best=st.pts;try{localStorage.setItem("blitzBest",String(best))}catch(_){}}
     const miss=[...new Map(st.miss.map(m=>[m.k,m])).values()];
     card.innerHTML=`<h3>${rec?"🏆 Neuer Rekord!":"Zeit um!"}</h3><div class="bl-big">${st.pts} Punkte</div><p>${st.ok} richtig · ${st.no} falsch · Rekord: ${best}</p>
-      ${miss.length?`<p><strong>Das übst du noch:</strong></p><ol class="bl-review">${miss.map(m=>`<li>${m.r||m.q.replace(/<br>.*$/,"")} → <b>${m.a}</b></li>`).join("")}</ol>`:st.ok?`<p>Kein einziger Fehler – DAS CRAZY!</p>`:""}
+      ${miss.length?`<p><strong>Das übst du noch:</strong></p><ol class="bl-review">${miss.map(m=>`<li>${m.r||m.q.replace(/<small>.*?<\/small>/g,"").replace(/<br>.*$/,"")} → <b>${m.a}</b></li>`).join("")}</ol>`:st.ok?`<p>Kein einziger Fehler – DAS CRAZY!</p>`:""}
       <div class="row"><button class="btn" type="button" id="blAgain">Nochmal!</button><button class="btn ghost" type="button" id="blMenu">Fächer ändern</button></div>`;
     $("#blAgain").onclick=start;$("#blMenu").onclick=menu;
     if(rec){guckiSay("Neuer Rekord!",2200);const r=card.getBoundingClientRect();Konfetti.burst(r.left+r.width/2,r.top+40,70,90,50,900)}else if(!st.no&&st.ok)guckiParty()}

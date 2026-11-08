@@ -119,6 +119,8 @@ Reihenfolge in der Datei:
   (`@media (prefers-color-scheme: dark)` und `:root[data-theme="dark"]`). Keine Farbe nur in einem Theme definieren.
 - Schriften: Bricolage Grotesque (Überschriften, Stärke 600–800), Atkinson Hyperlegible (Text, 400/700), eingebettet, mit Ersatzschriften.
 - Muss auf Handybreite (~390 px) funktionieren, ohne seitliches Scrollen.
+- Lesbarkeit: keine Schrift unter 12 px auf dem Handy, Textkontrast mindestens 4,5:1 (große Schrift 3:1) in hell und dunkel.
+  Fachfarben nur für Flächen, Symbole und Balken, nicht als Schriftfarbe auf Weiß. Auf farbigen Flächen Schrift in `--sheet`.
 - Kein `alert()`, `confirm()`, `prompt()`, `window.print()`. Externe Skripte nur von erlaubten CDNs
   (cdnjs, jsdelivr, unpkg) mit fester Versionsnummer.
 - Dinge, die Lösungen verraten, nicht in Antwortmöglichkeiten einbauen (z. B. keine Pausenzeichen neben Pausennamen).
@@ -207,7 +209,7 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
 - Versionshinweise nur als kleines rundes ✦-Symbol oben rechts, roter Punkt bei ungesehener Version.
 - Bereich „Lernen“ (grün, `--lern`) steht als eigener Navigationsbereich nach den Fächern. Lernplan und Packliste
   speichern nichts (Haken gehen beim Neuladen verloren); das ist Absicht, weil Klassengeräte geteilt werden.
-- Spiele (orange, `--spiel`) stehen nicht in der Hauptnavigation, sondern sind über den 🎮-Knopf oben rechts
+- Spiele (pink/magenta, `--spiel`) stehen nicht in der Hauptnavigation, sondern sind über den 🎮-Knopf oben rechts
   (Seite `#spiele`) und den Abschnitt „Spiele“ auf der Startseite erreichbar. Neues Spiel: Link mit `data-topic`,
   `data-desc` und `.ico` in `#gameReg` eintragen, ID in `TOPICS` ergänzen. Spiele nutzen die Daten der
   Kapitel (z. B. `C` aus dem Farbkreis), melden Mischungen an Gucki (`guckiCheer`), zählen aber nicht für die

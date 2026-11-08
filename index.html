@@ -21,6 +21,7 @@ img{max-width:100%}
   --ok:#1E7B45; --okbg:#E3F4EA; --bad:#B3261E; --badbg:#FBE6E4; --focus:#1E5AAA;
   --land:#DCD3C2; --landline:#C2B7A2; --sea:#DCE8F2; --pin:#D2232A;
   --pac:#2B5BAA; --atl:#139DB3; --ind:#7A5BC4; --sud:#22A57C; --ark:#8CC3E6;
+  --lern:#2E9447;
   --as:#E2A12B; --af:#D2553A; --na:#6FA845; --sa:#1F8E6E; --eu:#5A63D6; --au:#C2549B; --an:#8FA6C0;
   --sun:#F4B41A; --earth:#4A93D0; --night:#0B1230; --daybg:#FFF0C2; --dayfg:#6B4E00; --nightpill:#26305A; --nightfg:#FFFFFF;
   --park:#E5EFDA; --road:#FFFFFF; --plate:#E9EEF6; --plateline:#B5C1D4;
@@ -32,13 +33,13 @@ img{max-width:100%}
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; color-scheme:dark}}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#14161F; --sheet:#1D2030; --ink:#ECEDF4; --muted:#A3A8BE; --line:#33384D;
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; color-scheme:dark}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; color-scheme:dark}
 
 [hidden]{display:none!important}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
@@ -145,6 +146,33 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sstep b{font-family:var(--display);font-size:1.05rem;display:flex;align-items:center;gap:8px}
 .sstep .n{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;background:var(--ink);color:var(--sheet);font-weight:800;font-size:.9rem;flex:none}
 .sstep p{margin:0;font-size:.95rem}
+/* Kapitel Klassenarbeit (Bereich Lernen) */
+#klassenarbeit .merk{--accent:var(--lern)}
+#ka3 .sw{display:none}
+.lp-warn{margin:0;color:var(--bad);font-weight:700}
+.lplan{display:flex;flex-direction:column;gap:14px}
+.lp-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.lp-ctrl label{font-weight:700}
+.lp-ctrl input[type=range]{flex:1;min-width:170px;width:auto;accent-color:var(--lern)}
+.lp-ctrl output{font-family:var(--display);font-weight:800;font-size:1.3rem;min-width:5.5em}
+.lp-days{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.lp-day{border:1px solid var(--line);border-left:5px solid var(--lern);border-radius:0 12px 12px 0;padding:10px 14px;background:var(--paper)}
+.lp-day.ex{border-left-color:var(--ink)}
+.lp-day h3{margin:0 0 4px;font-size:1rem;display:flex;gap:4px 10px;align-items:baseline;flex-wrap:wrap}
+.lp-day h3 small{color:var(--muted);font-weight:700;font-size:.82rem}
+.check{display:flex;gap:10px;align-items:flex-start;padding:4px 0;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--lern);flex:none;margin:2px 0 0}
+.check input:checked+span{text-decoration:line-through;color:var(--muted)}
+.lp-state{margin:0;font-weight:700;color:var(--muted)}
+.lp-state.done{color:var(--ok)}
+.packlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0 18px}
+.ka-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin:0;padding:0;list-style:none;counter-reset:ka}
+.ka-steps li{counter-increment:ka;background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 52px;position:relative}
+.ka-steps li::before{content:counter(ka);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--lern);color:#FFFFFF;font:800 .9rem/28px var(--display);text-align:center}
+.ka-steps b{display:block;font-family:var(--display);margin-bottom:2px}
+.opgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.opgrid .card h3{color:var(--lern)}
+.opgrid .card em{color:var(--muted)}
 /* Seite Versionshinweise */
 .relpage{display:flex;flex-direction:column;gap:28px}
 .relpage .rcards{display:flex;flex-direction:column;gap:12px}
@@ -496,6 +524,17 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
+   "version": "1.3.0",
+   "date": "2026-11-08",
+   "title": "Fit für die Klassenarbeit",
+   "items": [
+    "Neu: der Bereich „Lernen“ mit dem Kapitel „Fit für die Klassenarbeit“. Dort steht, wie du gut lernst, was du am Tag vorher machst und wie du in der Arbeit Schritt für Schritt vorgehst.",
+    "Mit dem Lernplan stellst du ein, in wie vielen Tagen die Arbeit ist. Dann bekommst du einen Plan für jeden Tag zum Abhaken – und eine Packliste für die Tasche.",
+    "Du lernst die wichtigsten Arbeitswörter wie „nenne“, „erkläre“ und „begründe“ kennen und erfährst, was du bei Aufregung tun kannst.",
+    "Vier neue Übungen – schaffst du alle fehlerfrei, feiert Gucki mit dir!"
+   ]
+  },
+  {
    "version": "1.2.0",
    "date": "2026-11-08",
    "title": "Eine Startseite mit Haus",
@@ -560,6 +599,9 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <div class="fach"><p class="fachname"><span class="fdot" style="background:#7A5BC4"></span>Musik</p><div class="topics">
       <a href="#noten" data-topic="noten" data-desc="Notennamen, Notenwerte und Pausen – mit einer Klaviatur zum Anhören."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#7A5BC4"/><ellipse cx="12.5" cy="21.5" rx="4.6" ry="3.4" transform="rotate(-20 12.5 21.5)" fill="#FFFFFF"/><path d="M16.6 20.5V7.5c2.5 1.6 5.6 2.6 5.6 6.4" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Noten lesen</b></span></a>
     </div></div>
+    <div class="fach"><p class="fachname"><span class="fdot" style="background:#2E9447"></span>Lernen</p><div class="topics">
+      <a href="#klassenarbeit" data-topic="klassenarbeit" data-desc="Wie du dich gut vorbereitest und in der Arbeit ruhig und Schritt für Schritt vorgehst."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#2E9447"/><rect x="9" y="7" width="14" height="18" rx="2.5" fill="#FFFFFF"/><path d="M11.6 13.2l1.7 1.7 3-3.2M11.6 19.2l1.7 1.7 3-3.2" fill="none" stroke="#2E9447" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2 13.6h2.6M18.2 19.6h2.6" stroke="#2E9447" stroke-width="1.9" stroke-linecap="round"/></svg><span><b>Klassenarbeit</b></span></a>
+    </div></div>
   </div>
 </nav>
 <div class="crumbs" id="crumbs">
@@ -583,7 +625,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4)"></div>
 </header>
 <div class="sblock">
-  <p class="lead">Hier lernst du Deutsch, Kunst, Erdkunde und Musik – mit Erklärungen, Dingen zum Ausprobieren und Übungen. Such dir ein Kapitel aus!</p>
+  <p class="lead">Hier lernst du Deutsch, Kunst, Erdkunde und Musik – mit Erklärungen, Dingen zum Ausprobieren und Übungen. Unter „Lernen“ findest du Tipps für die nächste Klassenarbeit. Such dir ein Kapitel aus!</p>
 </div>
 <div class="sblock">
   <h2>Alle Kapitel</h2>
@@ -1212,6 +1254,126 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </div>
 
 <!-- ============ VERSIONSHINWEISE (eigene Seite) ============ -->
+<!-- ============ KLASSENARBEIT (Bereich Lernen) ============ -->
+<div class="topic" id="klassenarbeit" hidden>
+<header>
+  <p class="eyebrow">Lernen · Klasse 5 · Lerntipps</p>
+  <h1>Fit für die Klassenarbeit</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--lern),#A6CE39)"></div>
+</header>
+<section>
+  <p class="lead">Eine Klassenarbeit zeigt, was du schon kannst. Mit einem guten Plan bist du gut vorbereitet und gehst ruhiger hinein. Hier erfährst du, wie du lernst, was du am Tag vorher machst und wie du in der Arbeit Schritt für Schritt vorgehst.</p>
+</section>
+<section>
+  <h2>Rechtzeitig anfangen</h2>
+  <p class="prose">Fang etwa <strong>eine Woche vorher</strong> an. Wenn du an mehreren Tagen ein bisschen lernst, merkt sich dein Gehirn mehr, als wenn du am letzten Abend alles auf einmal paukst. Zwischen den Lernzeiten sortiert dein Gehirn das Gelernte – sogar im Schlaf.</p>
+  <div class="trio">
+    <div class="card"><h3>1. Was kommt dran?</h3><p>Schreib auf, welche Themen in der Arbeit vorkommen. Bist du unsicher, frag deine Lehrerin oder deinen Lehrer.</p></div>
+    <div class="card"><h3>2. Material sortieren</h3><p>Ist dein Heft vollständig? Fehlt ein Arbeitsblatt, frag jemanden aus der Klasse und schreib es ab.</p></div>
+    <div class="card"><h3>3. Kleine Portionen</h3><p>Lerne lieber jeden Tag 20 bis 30 Minuten als einmal drei Stunden am Stück.</p></div>
+  </div>
+  <div class="merk"><strong>Faustregel:</strong> Einmal lernen reicht nicht. Wiederhole den Stoff an verschiedenen Tagen – dann bleibt er im Kopf.</div>
+</section>
+<section>
+  <h2>Dein Lernplan</h2>
+  <div class="sheet lplan">
+    <div class="lp-ctrl"><label for="lpDays">Die Arbeit ist in</label><input type="range" id="lpDays" min="3" max="10" step="1" value="7"><output id="lpOut" for="lpDays">7 Tagen</output></div>
+    <p class="lp-warn" id="lpWarn" hidden></p>
+    <ol class="lp-days" id="lpList"></ol>
+    <p class="lp-state" id="lpState" aria-live="polite"></p>
+  </div>
+  <p class="hint">Stell ein, in wie vielen Tagen du die Arbeit schreibst. Hake ab, was du geschafft hast, und schreib dir den Plan auch ins Hausaufgabenheft.</p>
+</section>
+<section>
+  <h2>So lernst du richtig</h2>
+  <div class="trio">
+    <div class="card"><h3>Selbst abfragen</h3><p>Nur durchlesen fühlt sich gut an, bringt aber wenig. Deck die Lösung ab, frag dich selbst und prüf dann nach. So merkst du, was du wirklich kannst.</p></div>
+    <div class="card"><h3>Karteikarten</h3><p>Vorne steht die Frage, hinten die Antwort. Karten, die du kannst, legst du zur Seite. Die anderen übst du öfter.</p></div>
+    <div class="card"><h3>Lernzettel</h3><p>Schreib das Wichtigste eines Themas auf eine Seite: Merksätze, Beispiele und kleine Skizzen. Schon beim Schreiben lernst du.</p></div>
+    <div class="card"><h3>Erklär es jemandem</h3><p>Erkläre deinen Eltern, deinen Geschwistern oder deinem Kuscheltier das Thema. Wo du ins Stocken kommst, musst du noch üben.</p></div>
+    <div class="card"><h3>Aufgaben üben</h3><p>Löse Aufgaben wie in der Arbeit, zum Beispiel die Übungen auf dieser Seite. Vergleiche danach mit der Lösung.</p></div>
+    <div class="card"><h3>Ein guter Lernplatz</h3><p>Ein aufgeräumter Tisch, genug Licht und etwas zu trinken. Das Handy liegt in einem anderen Zimmer, sonst lenkt es dich ab.</p></div>
+  </div>
+  <div class="merk"><strong>Pausen gehören dazu:</strong> Lerne etwa 25 Minuten, dann mach 5 Minuten Pause – trinken, bewegen, aus dem Fenster schauen. Nach drei bis vier Runden machst du eine längere Pause.</div>
+</section>
+<section>
+  <h2>Der Tag vorher und der Morgen</h2>
+  <p class="prose">Am Abend vor der Arbeit lernst du <strong>nichts Neues</strong> mehr. Schau nur noch einmal in Ruhe über deinen Lernzettel und deine Karteikarten.</p>
+  <div class="trio">
+    <div class="card"><h3>Früh schlafen</h3><p>Im Schlaf speichert dein Gehirn, was du gelernt hast. Ausgeschlafen denkst du schneller.</p></div>
+    <div class="card"><h3>Frühstücken</h3><p>Iss etwas und trink ein Glas Wasser. Mit leerem Bauch kann man schlecht denken.</p></div>
+    <div class="card"><h3>Pünktlich sein</h3><p>Sei ein paar Minuten früher in der Schule. Dann musst du nicht hetzen und kommst ruhig an.</p></div>
+  </div>
+  <div class="sheet">
+    <h3 style="margin-top:0">Packliste für die Tasche</h3>
+    <div class="packlist" id="packList"></div>
+    <p class="lp-state" id="packState" aria-live="polite"></p>
+  </div>
+</section>
+<section>
+  <h2>In der Arbeit: Schritt für Schritt</h2>
+  <ol class="ka-steps">
+    <li><b>Ankommen und durchatmen</b>Atme ein paar Mal tief ein und langsam aus. Zähle dabei jeweils bis vier.</li>
+    <li><b>Name und Datum</b>Schreib zuerst deinen Namen und das Datum auf jedes Blatt.</li>
+    <li><b>Alles durchlesen</b>Lies alle Aufgaben einmal durch. So weißt du, was kommt, und siehst, wie viele Punkte es gibt.</li>
+    <li><b>Mit dem Leichten anfangen</b>Beginne mit einer Aufgabe, die du gut kannst. Das gibt dir Sicherheit.</li>
+    <li><b>Aufgabe genau lesen</b>Unterstreiche das Arbeitswort (zum Beispiel „nenne“ oder „begründe“) und wie viele Dinge gefragt sind.</li>
+    <li><b>Zeit im Blick</b>Schau ab und zu auf die Uhr. Hängst du fest, mach ein Zeichen an den Rand und geh weiter. Später kommst du zurück.</li>
+    <li><b>Ordentlich schreiben</b>Schreib leserlich. Streiche Fehler mit einem sauberen Strich durch. Was niemand lesen kann, bringt keine Punkte.</li>
+    <li><b>Am Ende kontrollieren</b>Nimm dir die letzten fünf Minuten: Hast du jede Aufgabe bearbeitet? Stimmen Rechtschreibung und Einheiten?</li>
+  </ol>
+  <div class="merk"><strong>Lieber etwas als nichts:</strong> Ein leeres Feld bringt sicher keine Punkte. Schreib auf, was du weißt – auch eine halbe Antwort kann Punkte bringen.</div>
+</section>
+<section>
+  <h2>Arbeitsanweisungen verstehen</h2>
+  <p class="prose">In jeder Aufgabe steht ein <strong>Arbeitswort</strong>. Es sagt dir genau, was du tun sollst. Lehrkräfte nennen diese Wörter auch <strong>Operatoren</strong>.</p>
+  <div class="opgrid">
+    <div class="card"><h3>Nenne</h3><p>Zähle kurz auf, ohne zu erklären.</p><p><em>Nenne die drei Grundfarben.</em></p></div>
+    <div class="card"><h3>Beschreibe</h3><p>Sag genau und der Reihe nach, wie etwas ist oder abläuft – in eigenen Worten.</p><p><em>Beschreibe den Weg vom Hauptbahnhof zu den Landungsbrücken.</em></p></div>
+    <div class="card"><h3>Erkläre</h3><p>Mach verständlich, wie oder warum etwas so ist.</p><p><em>Erkläre, wie Tag und Nacht entstehen.</em></p></div>
+    <div class="card"><h3>Begründe</h3><p>Gib Gründe für eine Aussage an, oft mit „weil“.</p><p><em>Begründe, warum „das Lesen“ großgeschrieben wird.</em></p></div>
+    <div class="card"><h3>Vergleiche</h3><p>Suche Gemeinsamkeiten und Unterschiede.</p><p><em>Vergleiche die Nordsee mit der Ostsee.</em></p></div>
+    <div class="card"><h3>Ordne zu</h3><p>Bring Dinge zusammen, die zusammengehören.</p><p><em>Ordne die Ozeane der Karte zu.</em></p></div>
+  </div>
+</section>
+<section>
+  <h2>Wenn die Aufregung kommt</h2>
+  <p class="prose">Ein bisschen Aufregung ist ganz normal – sie macht dich sogar wach. Wird sie zu stark, helfen diese Tricks:</p>
+  <div class="duo">
+    <div class="card"><h3>Ruhig atmen</h3><p>Vier Sekunden einatmen, kurz halten, vier Sekunden ausatmen. Drei- bis viermal hintereinander.</p></div>
+    <div class="card"><h3>Mut-Satz</h3><p>Sag dir leise: „Ich habe geübt. Ich schaffe das Schritt für Schritt.“</p></div>
+    <div class="card"><h3>Kopf leer?</h3><p>Lass die Aufgabe kurz liegen und mach eine andere. Oft fällt es dir später wieder ein. Schreib Stichwörter auf, die dir einfallen.</p></div>
+    <div class="card"><h3>Lockern</h3><p>Drück die Füße fest auf den Boden. Zieh die Schultern hoch und lass sie fallen. Das entspannt.</p></div>
+  </div>
+  <div class="merk"><strong>Du bist nicht allein:</strong> Wenn du vor Arbeiten oft große Angst hast, sprich mit deinen Eltern oder deiner Klassenlehrerin oder deinem Klassenlehrer. Sie helfen dir gern.</div>
+</section>
+<section>
+  <h2>Nach der Arbeit</h2>
+  <p class="prose">Geschafft! Gönn dir etwas Schönes. Wenn du die Arbeit zurückbekommst, schau dir deine Fehler in Ruhe an und mach die <strong>Berichtigung</strong>. Aus Fehlern lernst du am meisten – beim nächsten Mal weißt du es.</p>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="ka1"><div class="taskhead"><h3>Aufgabe 1 · Was ist schlau?</h3><span class="score" data-score></span></div>
+  <p class="hint">Wähle die beste Antwort.</p><div data-qs></div></div>
+<div class="task" id="ka2"><div class="taskhead"><h3>Aufgabe 2 · Was sollst du tun?</h3><span class="score" data-score></span></div>
+  <p class="hint">Achte auf das fett gedruckte Arbeitswort. Was verlangt die Aufgabe von dir?</p><div data-qs></div></div>
+<div class="task" id="ka3"><div class="taskhead"><h3>Aufgabe 3 · Schritt für Schritt</h3><span class="score" data-score></span></div>
+  <p class="hint">Du bekommst die Arbeit. Bring die Schritte in die richtige Reihenfolge. Der erste Schritt kommt nach oben.</p>
+  <ol class="rank" data-rank></ol>
+  <div class="row"><button class="btn" data-check>Prüfen</button><button class="btn ghost" data-reset>Neu mischen</button></div>
+  <p class="fb" data-fb aria-live="polite"></p></div>
+<div class="task" id="ka4"><div class="taskhead"><h3>Aufgabe 4 · Stimmt das?</h3><span class="score" data-score></span></div>
+  <p class="hint">Richtig oder falsch?</p><div data-qs></div></div>
+<div class="task" id="ka5"><div class="taskhead"><h3>Aufgabe 5 · Mein Lernplan</h3></div>
+  <p class="hint">Für dein Heft: Wann schreibst du die nächste Arbeit?</p>
+  <ol class="steps">
+    <li>Stell oben im Lernplan ein, in wie vielen Tagen die Arbeit ist.</li>
+    <li>Schreib den Plan in dein Hausaufgabenheft. Trag die Themen ein, die drankommen.</li>
+    <li>Leg dir zu einem Thema zehn Karteikarten an und frag dich jeden Tag damit ab.</li>
+    <li>Hake jeden Tag ab, was du geschafft hast.</li>
+  </ol></div>
+<footer>Tipp: Die Übungen auf dieser Seite eignen sich prima zum Selbstabfragen. Mach sie vor einer Arbeit einfach mit „Neu beginnen“ noch einmal.</footer>
+</div>
+
 <div class="topic" id="neuigkeiten" hidden>
 <header>
   <p class="eyebrow">S.D.L.W. · Versionshinweise</p>
@@ -1273,7 +1435,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","neuigkeiten"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","neuigkeiten"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -2510,6 +2672,63 @@ quiz($("#d3"),shuffle([
     setTimeout(()=>g.classList.remove("party"),1700);setTimeout(()=>{g.classList.remove("aura");busy=false},2300)});
 })();
 
+/* ================= KLASSENARBEIT ================= */
+(function(){
+  const days=$("#lpDays"),out=$("#lpOut"),list=$("#lpList"),state=$("#lpState");if(!days)return;
+  const MID=["Lernzettel schreiben: das Wichtigste eines Themas auf eine Seite","Karteikarten anlegen und dich selbst abfragen","Übungsaufgaben lösen und mit der Lösung vergleichen","Jemandem den Stoff erklären","Karteikarten wiederholen: Was sitzt noch nicht?","Schwierige Aufgaben noch einmal üben"];
+  const fmt=d=>d.toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"numeric"});
+  function plan(n){const p=[];
+    for(let i=0;i<=n;i++){let t;
+      if(i===0)t=["Aufschreiben, welche Themen drankommen","Heft und Arbeitsblätter sortieren, Fehlendes besorgen"];
+      else if(i===n)t=["Gut frühstücken und ein Glas Wasser trinken","Tief durchatmen – du hast geübt!"];
+      else if(i===n-1)t=["Nur noch kurz wiederholen: Lernzettel und Karteikarten","Tasche packen (Packliste unten)","Früh schlafen gehen"];
+      else if(i===n-2&&n>=4)t=["Probe-Arbeit: Aufgaben ohne Hilfe lösen und dabei die Uhr stellen","Karteikarten wiederholen"];
+      else t=[MID[(i-1)%MID.length]].concat(i>1?["Karteikarten von gestern wiederholen"]:[]);
+      p.push(t)}
+    return p}
+  function render(){const n=+days.value,now=new Date();out.textContent=`${n} Tagen`;
+    list.innerHTML=plan(n).map((t,i)=>{const d=new Date(now);d.setDate(now.getDate()+i);
+      const head=i===0?"Heute":i===n?"Tag der Arbeit":`Tag ${i+1}`,sub=i===n?fmt(d):`${fmt(d)} · noch ${n-i} ${n-i===1?"Tag":"Tage"}`;
+      return`<li class="lp-day${i===n?" ex":""}"><h3>${head} <small>${sub}</small></h3>${t.map(x=>`<label class="check"><input type="checkbox"><span>${x}</span></label>`).join("")}</li>`}).join("");
+    const ex=new Date(now);ex.setDate(now.getDate()+n);const w=$("#lpWarn"),we=ex.getDay()===0||ex.getDay()===6;
+    w.hidden=!we;if(we)w.textContent=`Achtung: Dann wäre die Arbeit an einem ${ex.toLocaleDateString("de-DE",{weekday:"long"})}. Stimmt die Zahl der Tage?`;
+    status()}
+  function status(){const b=[...list.querySelectorAll("input")],k=b.filter(x=>x.checked).length;
+    state.className="lp-state"+(k===b.length?" done":"");state.textContent=k===b.length?"Alles geschafft – du bist super vorbereitet!":`${k} von ${b.length} Punkten geschafft`}
+  list.addEventListener("change",()=>{status();const b=[...list.querySelectorAll("input")];if(b.every(x=>x.checked)){guckiCheer();guckiSay("Super geplant!",2200)}});
+  days.addEventListener("input",render);render();
+  // Packliste
+  const PACK=["Füller oder Tintenroller","Ersatzpatronen","Tintenkiller","Bleistift und Anspitzer","Radiergummi","Lineal und Geodreieck","Buntstifte","Erlaubte Hilfsmittel (frag nach!)","Eine Flasche Wasser","Ein kleiner Snack"];
+  const pl=$("#packList"),ps=$("#packState");
+  pl.innerHTML=PACK.map(x=>`<label class="check"><input type="checkbox"><span>${x}</span></label>`).join("");
+  const pst=()=>{const b=[...pl.querySelectorAll("input")],k=b.filter(x=>x.checked).length;ps.className="lp-state"+(k===b.length?" done":"");ps.textContent=k===b.length?"Tasche gepackt!":`${k} von ${b.length} eingepackt`;return k===b.length};
+  pl.addEventListener("change",()=>{if(pst()){guckiCheer();guckiSay("Tasche gepackt!",2000)}});pst();
+})();
+quiz($("#ka1"),shuffle([
+  {q:"Deine Lehrerin kündigt eine Arbeit in einer Woche an. Was machst du zuerst?",a:"a",o:[{v:"a",label:"Aufschreiben, welche Themen drankommen"},{v:"b",label:"Bis zum Abend vorher warten"},{v:"c",label:"Das ganze Buch auswendig lernen"},{v:"d",label:"Gar nichts – es ist ja noch lange hin"}],why:"Wer weiß, was drankommt, kann gut planen."},
+  {q:"Wie lernst du am besten?",a:"a",o:[{v:"a",label:"An mehreren Tagen ein bisschen und dich selbst abfragen"},{v:"b",label:"Am Abend vorher bis spät in die Nacht"},{v:"c",label:"Den Hefteintrag zehnmal durchlesen"},{v:"d",label:"Mit dem Handy daneben, falls jemand schreibt"}],why:"Verteilt lernen und sich selbst abfragen bringt am meisten."},
+  {q:"Am Abend vor der Arbeit …",a:"a",o:[{v:"a",label:"wiederholst du kurz und gehst früh schlafen"},{v:"b",label:"fängst du ein neues Thema an"},{v:"c",label:"bleibst du lange wach und lernst alles noch einmal"},{v:"d",label:"packst du die Tasche erst morgen früh"}],why:"Im Schlaf speichert dein Gehirn das Gelernte."},
+  {q:"Du bekommst die Arbeit auf den Tisch. Was machst du als Erstes?",a:"a",o:[{v:"a",label:"Namen und Datum hinschreiben und alle Aufgaben durchlesen"},{v:"b",label:"Sofort bei Aufgabe 1 losschreiben"},{v:"c",label:"Schauen, was die anderen machen"},{v:"d",label:"Mit der schwersten Aufgabe anfangen"}],why:"So weißt du, was kommt, und kannst deine Zeit einteilen."},
+  {q:"Bei Aufgabe 3 kommst du nicht weiter. Was ist schlau?",a:"a",o:[{v:"a",label:"Ein Zeichen an den Rand machen und später zurückkommen"},{v:"b",label:"So lange grübeln, bis die Zeit um ist"},{v:"c",label:"Die Arbeit sofort abgeben"},{v:"d",label:"Den Rest der Arbeit auch weglassen"}],why:"So verlierst du keine Zeit und sammelst erst die sicheren Punkte."},
+  {q:"Du bist fünf Minuten vor Schluss fertig. Was machst du?",a:"a",o:[{v:"a",label:"Alles noch einmal kontrollieren"},{v:"b",label:"Schon mal die Tasche packen"},{v:"c",label:"Leise mit dem Nachbarn reden"},{v:"d",label:"Bilder an den Rand malen"}],why:"Beim Kontrollieren findest du oft noch kleine Fehler."}
+]).map(it=>({...it,o:shuffle(it.o)})));
+(function(){
+  const M={nenne:"Kurz aufzählen, ohne zu erklären",beschreibe:"Genau und der Reihe nach sagen, wie etwas ist oder abläuft",erklaere:"Verständlich machen, wie oder warum etwas so ist",begruende:"Gründe angeben, zum Beispiel mit „weil“",vergleiche:"Gemeinsamkeiten und Unterschiede suchen",ordne:"Dinge zusammenbringen, die zusammengehören"};
+  const Q=[["nenne","<strong>Nenne</strong> drei Ozeane."],["beschreibe","<strong>Beschreibe</strong> den Weg vom Hauptbahnhof zu den Landungsbrücken."],["erklaere","<strong>Erkläre</strong>, wie Tag und Nacht entstehen."],["begruende","<strong>Begründe</strong>, warum „das Lesen“ großgeschrieben wird."],["vergleiche","<strong>Vergleiche</strong> die Nordsee mit der Ostsee."],["ordne","<strong>Ordne</strong> die Farben den Grundfarben und Mischfarben <strong>zu</strong>."]];
+  quiz($("#ka2"),shuffle(Q).map(([k,q])=>({q:`<span>${q}</span>`,a:k,o:shuffle([k,...shuffle(Object.keys(M).filter(x=>x!==k)).slice(0,3)]).map(v=>({v,label:M[v]})),why:""})));
+})();
+(function(){
+  const ST={a:"Ankommen und tief durchatmen",b:"Namen und Datum aufs Blatt schreiben",c:"Alle Aufgaben einmal durchlesen",d:"Mit einer Aufgabe beginnen, die du gut kannst",e:"Zu den schwierigen Aufgaben zurückkehren",f:"In den letzten Minuten alles kontrollieren"};
+  rankTask($("#ka3"),Object.keys(ST),k=>({n:ST[k],c:"var(--lern)"}),"Perfekt! So gehst du ruhig und mit Plan durch die Arbeit.","Noch nicht ganz. Schau dir oben „In der Arbeit: Schritt für Schritt“ noch einmal an.");
+})();
+quiz($("#ka4"),shuffle([
+  ["Wenn ich etwas nur oft genug durchlese, kann ich es in der Arbeit.","f","Durchlesen allein reicht meistens nicht. Frag dich selbst ab!"],
+  ["Ein bisschen Aufregung vor der Arbeit ist normal.","r","Fast allen geht es so. Ruhiges Atmen hilft."],
+  ["Schlafen hilft beim Lernen.","r","Im Schlaf festigt dein Gehirn, was du gelernt hast."],
+  ["Ein leeres Feld ist besser als eine halbe Antwort.","f","Auch eine halbe Antwort kann Punkte bringen."],
+  ["Das Handy neben dem Heft hilft beim Konzentrieren.","f","Das Handy lenkt ab. Leg es beim Lernen weg."],
+  ["Aus der Berichtigung kann ich für die nächste Arbeit lernen.","r","Genau! Aus Fehlern lernt man am meisten."]
+]).map(([q,a,why])=>({q,a,o:[{v:"r",label:"richtig"},{v:"f",label:"falsch"}],why})));
 /* --- Neu beginnen --- */
 (function(){
   function resetTask(box){if(!box._reset)return;box._reset();delete box.dataset.perfect;delete box.dataset.fails;const t=box.closest(".topic");if(t)delete t.dataset.mega;if(typeof Wegweiser==="object")Wegweiser.refresh()}

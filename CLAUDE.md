@@ -121,10 +121,11 @@ Reihenfolge in der Datei:
 
 ### Externe Abhängigkeiten
 
-- Google Fonts (Schriften).
-- Weltkarten-Daten: `https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js`. Die Seite fängt den Aufruf
-  `echarts.registerMap` mit einem kleinen Platzhalter ab und zeichnet die Karten selbst. Lädt die Datei nicht
-  (offline), erscheint eine einfache Punktkarte als Ersatz.
+- Google Fonts (Schriften). Die einzige Abhängigkeit aus dem Internet; ohne Internet greifen die Ersatzschriften.
+- Weltkarten-Daten: **eingebettet** als `<script>` in `src/entdeckerheft.html`. Es ist die unveränderte Datei
+  `echarts@4.9.0/map/js/world.js` (rund 100 KB, Apache-Lizenz 2.0, Lizenzkopf bleibt stehen). Die Seite fängt den
+  Aufruf `echarts.registerMap` mit einem kleinen Platzhalter ab und zeichnet die Karten selbst. Die Punktkarte
+  (`GRID`) bleibt als Ersatz im Code, falls die Daten einmal fehlen. Die Kartendaten nicht von Hand bearbeiten.
 - `localStorage` nur für Komfort: Hell/Dunkel-Wahl und Gucki-Sonnenbrille. Alles funktioniert auch ohne.
 
 ## Neues Kapitel hinzufügen – Checkliste
@@ -203,7 +204,6 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
 
 ## Bekannte Grenzen
 
-- Die echten Kartendaten lassen sich nur online testen; ohne Internet erscheint die Punktkarte.
 - Töne brauchen eingeschalteten Ton am Gerät (iPhone/iPad: Stummschalter aus).
 - Firefox auf Android/Tablets schiebt unten klebende Elemente beim Hochscrollen manchmal um die Höhe der
   Adressleiste nach oben (Mozilla-Bugs 1797964 und 2012733; nur mit Adressleiste oben, schlimmer bei Zoom oder

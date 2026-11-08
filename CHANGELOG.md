@@ -10,6 +10,7 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschn
 
 ### Verbessert
 
+- **Globus (Tag und Nacht, Meere):** Die grob als Rechtecke eingezeichneten Wüsten (gelblich: Sahara/Arabien, Mitte Australiens) sind entfernt. Sie waren nirgends erklärt und lenkten vom Thema ab. Land ist jetzt einheitlich grün, Eis weiß, Meer blau.
 - **Weltkarte ohne Internet:** Die Kartendaten (Apache ECharts 4.9.0, `map/js/world.js`, Apache-Lizenz 2.0) sind jetzt direkt in die Seite eingebaut, statt beim Öffnen von jsdelivr geladen zu werden. Kontinente, Meere, Globen und Weltzeituhr zeigen auch offline die echte Karte. Die Datei wird dadurch etwa 100 KB größer. Nur die Schriften kommen noch von Google Fonts; offline greifen Ersatzschriften.
 - **Aufgabe 1 „Tag oder Nacht?“ (n1, Kapitel Tag und Nacht):** Vorher kamen sechsmal dieselbe Frage, ob der Punkt auf der hellen Seite liegt; die Erklärung nannte nur die Uhrzeit. Jetzt gibt es drei Stufen:
   - **Erkennen:** eine Frage am Globus-Bild, Tag oder Nacht, mit Begründung

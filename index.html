@@ -554,7 +554,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "items": [
     "Die Übung „Tag oder Nacht?“ ist neu: Du liest auf der Erde von oben ab, ob in Hamburg gerade Morgen, Mittag, Abend oder Mitternacht ist – der Pfeil zeigt dir, wie sich die Erde dreht. Dazu kommen Fragen, warum es überhaupt Tag und Nacht gibt.",
     "Bei der Weltzeituhr passen jetzt alle Wörter in die Kästchen, auch „Sonnenuntergang“. Oben stehen Stadt und Uhrzeit, darunter, ob dort gerade Tag oder Nacht ist.",
-    "Die echte Weltkarte funktioniert jetzt auch ohne Internet – zum Beispiel im Klassenraum ohne WLAN."
+    "Die echte Weltkarte funktioniert jetzt auch ohne Internet – zum Beispiel im Klassenraum ohne WLAN.",
+    "Der Globus ist aufgeräumt: Land ist grün, Eis ist weiß, Meer ist blau – ohne den rätselhaften gelben Streifen."
    ]
   },
   {
@@ -2014,7 +2015,6 @@ const TEX=(function(){
   for(let v=0;v<TH;v++){const lat=90-(v+.5)/TH*180;for(let u=0;u<TW;u++){const lon=(u+.5)/TW*360-180,i=v*TW+u;let col;
     if(d[i*4]<128)col=[34,98,170];
     else if(lat<-60||(lat>59&&lon>-74&&lon<-12))col=[236,241,246];
-    else if((lat>14&&lat<32&&lon>-17&&lon<58)||(lat>-31&&lat<-19&&lon>117&&lon<142))col=[200,172,112];
     else col=[98,148,76];
     t[i*3]=col[0];t[i*3+1]=col[1];t[i*3+2]=col[2]}}
   return t;

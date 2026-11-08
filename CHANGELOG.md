@@ -13,7 +13,7 @@ Besser zurechtfinden.
 - **Wegweiser-Leiste:** Eine Leiste unter der Navigation bleibt beim Scrollen oben stehen und zeigt Fach, Kapitel und den aktuellen Abschnitt („Du bist hier“). Über „Abschnitte“ springt man direkt zu jeder Erklärung und jeder Aufgabe des Kapitels.
 - **Inhaltsverzeichnis:** Auf breiten Bildschirmen (ab 1240 px) steht rechts neben dem Inhalt ein Inhaltsverzeichnis, das den aktuellen Abschnitt markiert.
 - **Nach oben:** Ein Knopf unten links bringt zurück an den Seitenanfang, sobald man etwas gescrollt hat.
-- **Eigene Seite für Versionshinweise:** Der Knopf „✦ Neu in …“ öffnet jetzt die Seite `#neuigkeiten`. Die neuesten Versionen stehen dort ausführlich. Je zehn ältere Versionen werden zu einem Block zusammengefasst, die Einzelheiten lassen sich aufklappen.
+- **Eigene Seite für Versionshinweise:** Ein kleines ✦-Symbol oben rechts öffnet die Seite `#neuigkeiten`. Ein roter Punkt am Symbol zeigt, dass es eine Version gibt, die man sich noch nicht angesehen hat. Die neuesten Versionen stehen dort ausführlich. Je zehn ältere Versionen werden zu einem Block zusammengefasst, die Einzelheiten lassen sich aufklappen.
 
 ### Verbessert
 

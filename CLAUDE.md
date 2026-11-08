@@ -56,7 +56,8 @@ Es gibt keine Abhängigkeiten und keinen Paketmanager. Node.js ab Version 18 rei
 Reihenfolge in der Datei:
 
 1. `<title>`, Google-Fonts-Link, `<style>` mit allen Farb-Tokens (`:root`) und den Regeln für die dunkle Ansicht.
-2. Kopfzeile (`.topbar`): Jahrgang, Link „✦ Neu in vX“ zur Seite `#neuigkeiten`, Hell/Dunkel-Knopf.
+2. Kopfzeile (`.topbar`): Jahrgang, kleines rundes ✦-Symbol (`#newsBtn`) als Link zur Seite `#neuigkeiten`
+   mit rotem Punkt, solange die neueste Version noch nicht angesehen wurde (`localStorage` „seenVersion“), Hell/Dunkel-Knopf.
 3. JSON-Block `<script type="application/json" id="releaseData">` – die Versionshinweise der Webseite
    im Format `{"releases":[…neueste zuerst…],"summaries":[…]}`.
 4. Navigation (`nav.navx`): Fächer (`.fach`) mit Themen-Links (`a[data-topic]`).

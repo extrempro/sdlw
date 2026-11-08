@@ -61,6 +61,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cr-path b{color:var(--ink);font-weight:700;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:560px){.cr-path{display:block;white-space:normal;line-height:1.25}.cr-path .cr-f,.cr-path .sep{display:none}.cr-path .cr-t{font-size:.76rem}.cr-path .fdot{display:inline-block;margin-right:5px;vertical-align:1px}.cr-path b{display:block;white-space:nowrap}}
 a.btn{text-decoration:none;display:inline-flex;align-items:center;gap:2px}
+.iconbtn{position:relative;width:38px;height:38px;padding:0!important;justify-content:center;border-radius:50%;font-size:1.05rem}
+#newsBtn.iconbtn{border-radius:50%}
+#newsBtn[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.iconbtn .ndot{position:absolute;top:3px;right:3px;width:10px;height:10px;border-radius:50%;background:var(--pin);border:2px solid var(--sheet)}
 #crBtn{padding:5px 12px;font-size:.85rem;flex:none}
 .cr-list{position:absolute;left:0;right:0;top:calc(100% - 2px);background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:6px;max-height:60vh;overflow:auto;box-shadow:0 14px 30px -14px rgba(0,0,0,.45)}
 .cr-list button,.toc button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:6px 10px;color:var(--ink);font:inherit;font-size:.92rem;font-weight:700;cursor:pointer}
@@ -413,7 +417,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </style>
 
 <div class="wrap">
-<div class="topbar"><div class="tb-l"><span class="eyebrow">Entdeckerheft</span><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><a class="btn ghost" id="newsBtn" href="#neuigkeiten"></a><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
+<div class="topbar"><div class="tb-l"><span class="eyebrow">Entdeckerheft</span><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><a class="btn ghost iconbtn" id="newsBtn" href="#neuigkeiten"></a><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
 <script type="application/json" id="releaseData">
 {
  "releases": [
@@ -426,7 +430,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     "Mit „Abschnitte“ springst du direkt zu einer Erklärung oder Aufgabe im Kapitel.",
     "Auf großen Bildschirmen steht rechts ein Inhaltsverzeichnis, das beim Scrollen mitläuft.",
     "Mit dem Knopf „Nach oben“ kommst du schnell zurück an den Anfang.",
-    "Die Versionshinweise haben jetzt eine eigene Seite. Nach zehn Änderungen werden sie zusammengefasst."
+    "Die Versionshinweise haben jetzt eine eigene Seite. Du findest sie über das kleine ✦ oben rechts. Ein roter Punkt zeigt, dass es etwas Neues gibt.",
+    "Nach zehn Änderungen werden die Versionshinweise zusammengefasst, damit es übersichtlich bleibt."
    ]
   },
   {
@@ -1133,7 +1138,10 @@ const f1=n=>(Math.round(n*10)/10).toString();
   let RD={releases:[],summaries:[]};try{RD=JSON.parse(document.getElementById("releaseData").textContent)}catch(_){}
   const rel=RD.releases||[],btn=$("#newsBtn"),page=$("#relPage");if(!rel.length){btn.hidden=true;return}
   const de=d=>{const[y,m,t]=d.split("-");return`${+t}.${+m}.${y}`};
-  btn.innerHTML=`<span aria-hidden="true">✦</span><span class="nlbl"> Neu in v${rel[0].version}</span>`;btn.setAttribute("aria-label",`Versionshinweise: Was ist neu in Version ${rel[0].version}?`);
+  const latest=rel[0].version;let seen="";try{seen=localStorage.getItem("seenVersion")||""}catch(_){}
+  btn.innerHTML=`<span aria-hidden="true">✦</span>${seen!==latest?`<span class="ndot" aria-hidden="true"></span>`:""}`;
+  btn.title=`Was ist neu? (Version ${latest})`;btn.setAttribute("aria-label",`Versionshinweise: Was ist neu in Version ${latest}?${seen!==latest?" Es gibt Neues.":""}`);
+  window.markReleaseSeen=()=>{try{localStorage.setItem("seenVersion",latest)}catch(_){}const d=btn.querySelector(".ndot");if(d)d.remove();btn.setAttribute("aria-label",`Versionshinweise: Was ist neu in Version ${latest}?`)};
   const asc=rel.slice().reverse(),blocks=[];for(let i=0;i<asc.length;i+=10)blocks.push(asc.slice(i,i+10));
   const current=(blocks.pop()||[]).reverse(),older=blocks.reverse();
   const card=(r,first)=>`<div class="rcard"><div class="rhead"><h3>Version ${r.version}</h3><span class="rdate">${de(r.date)}</span>${first?`<span class="rnew">neu</span>`:""}</div>${r.title?`<p><strong>${r.title}</strong></p>`:""}<ul>${r.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
@@ -1151,7 +1159,7 @@ function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"farbkreis";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
   document.querySelectorAll(".topics a").forEach(a=>{if(a.dataset.topic===t)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
-  const nb=$("#newsBtn");if(nb){if(t==="neuigkeiten")nb.setAttribute("aria-current","page");else nb.removeAttribute("aria-current")}
+  const nb=$("#newsBtn");if(nb){if(t==="neuigkeiten"){nb.setAttribute("aria-current","page");if(window.markReleaseSeen)markReleaseSeen()}else nb.removeAttribute("aria-current")}
   if(scroll)window.scrollTo(0,0);
   if(typeof Wegweiser==="object")Wegweiser.update(t);
 }

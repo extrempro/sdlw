@@ -10,7 +10,12 @@ Farbkreis mit Namen, dazu Itten und die Geschichte des Farbkreises.
 
 ### Neu
 
-- **Farbnamen in der Grafik** (Kapitel Farbkreis): Alle 12 Farben sind im Ring beschriftet; zusammengesetzte Namen stehen zweizeilig („Blau-/violett“). Im Stern in der Mitte sind die drei Grundfarben beschriftet. Die Schriftfarbe richtet sich nach der Helligkeit der Fläche; abgedunkelte Felder bekommen Schrift in Textfarbe. Ein Schalter „Farbnamen im Kreis zeigen“ blendet die Namen zum Üben aus. Der Ring ist dafür etwas breiter.
+- **Beschriftung in der Farbkreis-Grafik** mit drei Ansichten (Knöpfe „Im Kreis zeigen“):
+  - **Farbart** (Standard): Jedes Feld im Ring zeigt „Grundfarbe“, „Mischfarbe 1.“ oder „Mischfarbe 2.“. Darunter steht eine Legende, die auch das Dreieck in der Mitte (Grundfarben) und die Spitzen (Mischfarben 1. Ordnung) erklärt.
+  - **Namen:** alle 12 Farbnamen im Ring (zusammengesetzte zweizeilig, z. B. „Blau-/violett“), die drei Grundfarben auch im Dreieck
+  - **Nichts:** zum Üben ohne Beschriftung
+
+  Die Schriftfarbe richtet sich nach der Helligkeit der Fläche; abgedunkelte Felder bekommen Schrift in Textfarbe. Der Ring ist dafür etwas breiter.
 - **Abschnitt „Wer war Johannes Itten?“** mit Zeitleiste: 1888 geboren in Südern-Linden (Schweiz), Ausbildung zum Grundschullehrer, Studium u. a. bei Adolf Hölzel, ab 1919 Lehrer am Bauhaus in Weimar (Vorkurs), später Kunstschulen in Berlin, Krefeld und Zürich, 1961 „Kunst der Farbe“, 1967 gestorben in Zürich. Dazu ein Merkkasten zu den sieben Farbkontrasten.
 - **Abschnitt „Wie ist der Farbkreis entstanden?“** mit Zeitleiste: Newton 1704 („Opticks“), Goethe 1810 („Zur Farbenlehre“, sechs Farben), Hölzel um 1900, Ittens Farbstern 1921 (12 Farben, 7 Helligkeitsstufen, Bauhaus-Mappe „Utopia“), Ittens Farbkreis 1961.
 

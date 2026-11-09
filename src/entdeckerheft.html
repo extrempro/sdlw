@@ -337,11 +337,13 @@ svg.wheel{width:100%;max-width:360px;margin:0 auto;display:block}
 .wheel.dim .seg{fill-opacity:.28}
 .wheel.dim .seg.on{fill-opacity:1}
 .wheelcol{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
-.wheeltog{display:flex;gap:8px;align-items:center;font-weight:700;font-size:.92rem}
+.wheeltog{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;align-items:center;font-weight:700;font-size:.92rem}
+.wheel-leg{margin:0;padding-left:1.2em;max-width:32em;font-size:.92rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.wheel-leg strong{color:var(--ink)}
 .wheel .lbl{font-family:var(--display);font-weight:800;font-size:14px;text-anchor:middle;dominant-baseline:central;pointer-events:none}
 .wheel .lbl.in{font-size:15px}
 .wheel.dim .lbl:not(.on){fill:var(--ink);opacity:.8}
-.wheel.nonames .lbl{display:none}
+.wheel.m-art .lbl.nm,.wheel.m-nm .lbl.art,.wheel.m-aus .lbl{display:none}
 .itten-zeit{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;border-left:4px solid var(--line);margin-left:6px}
 .itten-zeit li{display:grid;grid-template-columns:5.2em 1fr;gap:12px;padding:8px 0 8px 16px;position:relative}
 .itten-zeit li::before{content:"";position:absolute;left:-10px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--sheet);border:3px solid var(--ink)}
@@ -655,7 +657,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "date": "2026-11-09",
    "title": "Der Farbkreis erzählt seine Geschichte",
    "items": [
-    "Im Farbkreis stehen jetzt die Namen der Farben direkt in der Grafik. Willst du dich selbst testen? Dann schalte die Namen einfach aus.",
+    "Im Farbkreis siehst du jetzt direkt, welche Farbe eine Grundfarbe und welche eine Mischfarbe ist. Du kannst auch die Namen der Farben anzeigen lassen – oder alles ausblenden und dich selbst testen.",
     "Neu: Wer war Johannes Itten? Erfahre, wie aus einem Grundschullehrer ein berühmter Farblehrer am Bauhaus wurde.",
     "Neu: Wie ist der Farbkreis entstanden? Eine Zeitreise von Isaac Newton über Goethe bis zu Ittens Farbstern."
    ]
@@ -875,8 +877,13 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <section>
   <h2>Entdecke den Farbkreis</h2>
   <div class="sheet wheelbox">
-    <div class="wheelcol"><svg class="wheel" id="wheel" viewBox="-170 -170 340 340" role="group" aria-label="Farbkreis nach Itten mit 12 Farben"></svg>
-    <label class="wheeltog"><input type="checkbox" id="wheelNames" checked> Farbnamen im Kreis zeigen</label></div>
+    <div class="wheelcol"><svg class="wheel m-art" id="wheel" viewBox="-170 -170 340 340" role="group" aria-label="Farbkreis nach Itten mit 12 Farben"></svg>
+    <div class="wheeltog"><span>Im Kreis zeigen:</span><div class="bl-chips" id="wheelMode" role="group" aria-label="Beschriftung im Farbkreis"><button type="button" data-m="art" aria-pressed="true">Farbart</button><button type="button" data-m="nm" aria-pressed="false">Namen</button><button type="button" data-m="aus" aria-pressed="false">Nichts</button></div></div>
+    <ul class="wheel-leg" id="wheelLeg">
+      <li><strong>Grundfarbe:</strong> kann man nicht mischen. Die drei Grundfarben bilden auch das Dreieck in der Mitte.</li>
+      <li><strong>Mischfarbe 1. Ordnung:</strong> aus zwei Grundfarben. Sie bilden die drei Spitzen um das Dreieck.</li>
+      <li><strong>Mischfarbe 2. Ordnung:</strong> aus einer Grundfarbe und einer Mischfarbe 1. Ordnung.</li>
+    </ul></div>
     <div class="info" id="info" aria-live="polite"></div>
   </div>
 </section>
@@ -2054,14 +2061,16 @@ addShape(Pp([V[0],V[1],V[2]]),2);addShape(Pp([V[2],V[3],V[4]]),6);addShape(Pp([V
 /* Farbnamen in der Grafik: im Ring (lange Namen zweizeilig) und im Stern in der Mitte */
 const SPLIT={Gelborange:["Gelb-","orange"],Rotorange:["Rot-","orange"],Rotviolett:["Rot-","violett"],Blauviolett:["Blau-","violett"],Blaugrün:["Blau-","grün"],Gelbgrün:["Gelb-","grün"]};
 const lum=h=>{const c=[1,3,5].map(k=>parseInt(h.slice(k,k+2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]};
-function addLabel(x,y,i,inner){const t=document.createElementNS(NS,"text"),lines=SPLIT[C[i].n]||[C[i].n];t.setAttribute("class","lbl"+(inner?" "+inner:""));t.dataset.i=i;
+const ART=[["Grund-","farbe"],["Misch-","farbe 1."],["Misch-","farbe 2."]];
+function addLabel(x,y,i,inner,kind){const t=document.createElementNS(NS,"text"),lines=kind==="art"?ART[C[i].t]:(SPLIT[C[i].n]||[C[i].n]);t.setAttribute("class","lbl "+kind+(inner?" "+inner:""));t.dataset.i=i;
   t.setAttribute("fill",lum(C[i].h)>.35?"#1C1F2E":"#FFFFFF");t.setAttribute("aria-hidden","true");
   lines.forEach((l,k)=>{const s=document.createElementNS(NS,"tspan");s.setAttribute("x",x);s.setAttribute("y",(+y+(k-(lines.length-1)/2)*15).toFixed(1));s.textContent=l;t.appendChild(s)});W.appendChild(t)}
-C.forEach((c,i)=>{const[x,y]=pt(-90+i*30,134);addLabel(x,y,i,false)});
+C.forEach((c,i)=>{const[x,y]=pt(-90+i*30,134);addLabel(x,y,i,false,"nm");addLabel(x,y,i,false,"art")});
 const cen=a=>[(a.reduce((s,p)=>s+ +p[0],0)/a.length).toFixed(1),(a.reduce((s,p)=>s+ +p[1],0)/a.length).toFixed(1)];
 const midX=(poly,y)=>{const xs=[];poly.forEach((p,k)=>{const q=poly[(k+1)%poly.length],y1=+p[1],y2=+q[1];if((y1-y)*(y2-y)<=0&&y1!==y2)xs.push(+p[0]+(+q[0]-+p[0])*(y-y1)/(y2-y1))});return xs.length>1?((Math.min(...xs)+Math.max(...xs))/2).toFixed(1):null};
-[[[T[0],M01,["0","0"],M20],0],[[T[1],M12,["0","0"],M01],4],[[T[2],M20,["0","0"],M12],8],[[V[0],V[1],V[2]],2],[[V[2],V[3],V[4]],6],[[V[4],V[5],V[0]],10]].forEach(([poly,i])=>{if(C[i].t!==0)return;const[cx,cy]=cen(poly);addLabel(midX(poly,+cy)||cx,cy,i,"in")});
-$("#wheelNames").addEventListener("change",e=>W.classList.toggle("nonames",!e.target.checked));
+[[[T[0],M01,["0","0"],M20],0],[[T[1],M12,["0","0"],M01],4],[[T[2],M20,["0","0"],M12],8],[[V[0],V[1],V[2]],2],[[V[2],V[3],V[4]],6],[[V[4],V[5],V[0]],10]].forEach(([poly,i])=>{if(C[i].t!==0)return;const[cx,cy]=cen(poly),x=midX(poly,+cy)||cx;addLabel(x,cy,i,"in","nm")});
+$("#wheelMode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b)return;const m=b.dataset.m;
+  W.classList.remove("m-art","m-nm","m-aus");W.classList.add("m-"+m);$("#wheelMode").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#wheelLeg").hidden=m!=="art"});
 const line=document.createElementNS(NS,"line");line.setAttribute("class","pair");line.style.display="none";W.appendChild(line);
 function select(i){
   const g=(i+6)%12;W.classList.add("dim");

@@ -20,6 +20,8 @@ Farbkreis mit Namen, dazu Itten und die Geschichte des Farbkreises.
 
 ### Verbessert
 
+- Zeitleisten im Farbkreis-Kapitel auf dem Handy kompakter (Jahr und Text nebeneinander, weniger Abstand).
+- Fünfmal schnell auf Gucki tippen: Gucki kichert („Hihihi!“) und streckt die Zunge raus, statt die große Party zu starten.
 - Projekt-Kontext: Das Repository heißt jetzt `extrempro/sdlw`. Die Historie wurde ohne private E-Mail-Adresse übernommen.
 
 ## [1.6.0] – 2026-11-08

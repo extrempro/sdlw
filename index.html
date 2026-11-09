@@ -368,7 +368,7 @@ svg.wheel{width:100%;max-width:360px;margin:0 auto;display:block}
 .itten-zeit li{display:grid;grid-template-columns:5.2em 1fr;gap:12px;padding:8px 0 8px 16px;position:relative}
 .itten-zeit li::before{content:"";position:absolute;left:-10px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--sheet);border:3px solid var(--ink)}
 .itten-zeit b{font-family:var(--display)}
-@media (max-width:480px){.itten-zeit li{grid-template-columns:1fr;gap:2px}}
+@media (max-width:480px){.itten-zeit li{grid-template-columns:3.9em 1fr;gap:8px;padding:5px 0 5px 12px;font-size:.92rem;line-height:1.4}.itten-zeit li::before{top:10px;width:10px;height:10px;left:-9px}.itten-zeit b{font-size:.95rem}}
 .wheel .pair{stroke:var(--ink);stroke-width:2.5;stroke-dasharray:6 5}
 .info{display:flex;flex-direction:column;gap:10px;min-width:0}
 .info .big{display:flex;align-items:center;gap:12px}
@@ -601,6 +601,18 @@ svg.meter{width:100%;max-width:520px;height:auto;display:block}
 .gucki .pupille{position:absolute;left:6px;top:6px;width:10px;height:10px;border-radius:50%;background:#1C1F2E;transition:transform .08s linear}
 .gucki .pupille::after{content:"";position:absolute;left:2px;top:2px;width:3px;height:3px;border-radius:50%;background:#FFFFFF}
 .gucki .lid{position:absolute;inset:0;background:#139DB3;transform:translateY(-100%);transition:transform .09s}
+/* Kichern mit Zunge (fünfmal schnell auf Gucki tippen) */
+.gucki .mund{display:none;position:absolute;left:21px;top:44px;width:26px;height:13px;background:#0E3F47;border-radius:0 0 14px 14px}
+.gucki .zunge{position:absolute;left:6px;top:5px;width:14px;height:17px;background:#FF7A8A;border-radius:0 0 8px 8px;transform-origin:50% 0}
+.gucki.kicher{overflow:visible}
+.gucki.kicher .kopf{animation:kichern 2.2s ease-in-out}
+.gucki.kicher .mund{display:block}
+.gucki.kicher .zunge{animation:zunge .35s ease-in-out .5s 4 alternate}
+.gucki.kicher .auge{background:transparent;border:3px solid #0E6F7E;border-bottom:0;border-radius:14px 14px 0 0;height:11px;top:19px;overflow:visible}
+.gucki.kicher .pupille,.gucki.kicher .lid,.gucki.kicher .brille{display:none}
+@keyframes kichern{0%{transform:translateY(0)}12%{transform:translateY(-34px)}20%{transform:translateY(-34px) rotate(-5deg)}28%{transform:translateY(-36px) rotate(5deg)}36%{transform:translateY(-34px) rotate(-5deg)}44%{transform:translateY(-36px) rotate(5deg)}52%{transform:translateY(-34px) rotate(-4deg)}60%{transform:translateY(-35px) rotate(3deg)}85%{transform:translateY(-34px) rotate(0)}100%{transform:translateY(0)}}
+@keyframes zunge{from{transform:scaleY(.6) rotate(-6deg)}to{transform:scaleY(1.15) rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){.gucki.kicher .kopf{animation:none;transform:translateY(-34px)}.gucki.kicher .zunge{animation:none}}
 .gucki.blink .lid{transform:translateY(0)}
 .gucki .hand{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) - 6px + var(--gx));width:20px;height:13px;border-radius:10px;background:#0E8496;transition:transform .35s}
 .gucki .hand.l{left:0}.gucki .hand.r{right:0}
@@ -678,6 +690,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "date": "2026-11-09",
    "title": "Der Farbkreis erzählt seine Geschichte",
    "items": [
+    "Die Zeitleisten zu Itten und zur Geschichte des Farbkreises sind auf dem Handy jetzt kompakter.",
+    "Tipp fünfmal schnell auf Gucki – dann kichert er und streckt dir die Zunge raus!",
     "Im Farbkreis zeigen kleine Abzeichen, welche Farbe eine Primärfarbe (P), Sekundärfarbe (S) oder Tertiärfarbe (T) ist. Tippst du in der Liste auf eine Farbart, leuchten genau diese Farben auf. Du kannst auch die Namen anzeigen oder alles ausblenden.",
     "Neu: Wer war Johannes Itten? Erfahre, wie aus einem Grundschullehrer ein berühmter Farblehrer am Bauhaus wurde.",
     "Neu: Wie ist der Farbkreis entstanden? Eine Zeitreise von Isaac Newton über Goethe bis zu Ittens Farbstern."
@@ -1811,7 +1825,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 
 <button class="totop" id="toTop" type="button" hidden aria-label="Nach oben zum Seitenanfang"><span aria-hidden="true">↑</span><span class="ttl"> Nach oben</span></button>
 <div class="gucki" id="gucki" aria-hidden="true" title="Hallo!">
-  <div class="kopf"><div class="auge l"><div class="pupille"></div><div class="lid"></div></div><div class="auge r"><div class="pupille"></div><div class="lid"></div></div><div class="traene l"></div><div class="traene r"></div><div class="brille"><span class="glas l"></span><span class="steg"></span><span class="glas r"></span></div></div>
+  <div class="kopf"><div class="auge l"><div class="pupille"></div><div class="lid"></div></div><div class="auge r"><div class="pupille"></div><div class="lid"></div></div><div class="traene l"></div><div class="traene r"></div><div class="mund"><div class="zunge"></div></div><div class="brille"><span class="glas l"></span><span class="steg"></span><span class="glas r"></span></div></div>
   <div class="hand l"></div><div class="hand r"></div>
 </div>
 <script>window.echarts={registerMap:function(n,g){if(!window.__WORLD&&/world/i.test(n))window.__WORLD=g}};</script>
@@ -2875,9 +2889,11 @@ function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn
   at(15400,()=>Konfetti.clearPile());
   at(17000,()=>{Konfetti.pile(false);guckiMegaOn=false});
 }
-// Kleiner Trick zum Vorführen: Gucki fünfmal schnell antippen
-(function(){const g=document.getElementById("gucki");if(!g)return;let n=0,tm=0;
-  g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n>=5){n=0;setTimeout(guckiMega,300)}})})();
+// Kleiner Spaß: Gucki fünfmal schnell antippen – er kichert und streckt die Zunge raus
+(function(){const g=document.getElementById("gucki");if(!g)return;let n=0,tm=0,busy=false;
+  g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n<5||busy||guckiMegaOn)return;n=0;busy=true;
+    g.classList.remove("cry","clap");g.classList.add("kicher");guckiSay("Hihihi!",1900);
+    setTimeout(()=>{g.classList.remove("kicher");busy=false},2300)})})();
 /* ================= NOTEN ================= */
 const NN=["c","d","e","f","g","a","h"];
 const nName=st=>NN[st%7]+(st<7?"'":"''");

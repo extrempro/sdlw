@@ -206,7 +206,7 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
 - Lageplan im Kompass-Kapitel ist ausdrücklich als ausgedachtes Beispiel gekennzeichnet.
 - Zeitzonen und Uhrzeiten rechnen ohne Sommerzeit; das steht auf der Seite.
 - Gucki-Jugendwörter: „Aura“ (3 fehlerfreie Übungen in Folge), „Cringe“ (3 Fehler in Folge), Banner „DAS CRAZY!“.
-- Fünfmal schnell auf Gucki tippen startet die große Party (Vorführ-Trick für Lehrkräfte).
+- Fünfmal schnell auf Gucki tippen: Gucki kichert („Hihihi!“, Klasse `.kicher`, Mund `.mund` mit `.zunge`) und streckt die Zunge raus. Die große Party gibt es nur noch, wenn alle Übungen eines Kapitels fehlerfrei sind.
 - Versionshinweise stehen auf einer eigenen Seite (`#neuigkeiten`) und werden je zehn Versionen zusammengefasst.
 - „Nach oben“ unten links, Gucki unten rechts – die beiden Ecken nicht anders belegen.
 - Name auf der Seite: „S.D.L.W.“ (Super Duper Lern Webseite) mit Regenbogen-Animation; Klick aufs Logo:

@@ -347,6 +347,17 @@ svg.wheel{width:100%;max-width:360px;margin:0 auto;display:block}
 .wheel .seg:focus-visible{stroke:var(--ink);stroke-width:3}
 .wheel.dim .seg{fill-opacity:.28}
 .wheel.dim .seg.on{fill-opacity:1}
+.wheelcol{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
+.wheeltog{display:flex;gap:8px;align-items:center;font-weight:700;font-size:.92rem}
+.wheel .lbl{font-family:var(--display);font-weight:800;font-size:14px;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.wheel .lbl.in{font-size:15px}
+.wheel.dim .lbl:not(.on){fill:var(--ink);opacity:.8}
+.wheel.nonames .lbl{display:none}
+.itten-zeit{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;border-left:4px solid var(--line);margin-left:6px}
+.itten-zeit li{display:grid;grid-template-columns:5.2em 1fr;gap:12px;padding:8px 0 8px 16px;position:relative}
+.itten-zeit li::before{content:"";position:absolute;left:-10px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--sheet);border:3px solid var(--ink)}
+.itten-zeit b{font-family:var(--display)}
+@media (max-width:480px){.itten-zeit li{grid-template-columns:1fr;gap:2px}}
 .wheel .pair{stroke:var(--ink);stroke-width:2.5;stroke-dasharray:6 5}
 .info{display:flex;flex-direction:column;gap:10px;min-width:0}
 .info .big{display:flex;align-items:center;gap:12px}
@@ -652,6 +663,16 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
+   "version": "1.7.0",
+   "date": "2026-11-09",
+   "title": "Der Farbkreis erzählt seine Geschichte",
+   "items": [
+    "Im Farbkreis stehen jetzt die Namen der Farben direkt in der Grafik. Willst du dich selbst testen? Dann schalte die Namen einfach aus.",
+    "Neu: Wer war Johannes Itten? Erfahre, wie aus einem Grundschullehrer ein berühmter Farblehrer am Bauhaus wurde.",
+    "Neu: Wie ist der Farbkreis entstanden? Eine Zeitreise von Isaac Newton über Goethe bis zu Ittens Farbstern."
+   ]
+  },
+  {
    "version": "1.6.0",
    "date": "2026-11-08",
    "title": "Neue Reisen für Gucki",
@@ -839,9 +860,35 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="lead">Der Maler und Kunstlehrer Johannes Itten hat 1961 einen Farbkreis mit <strong>12 Farben</strong> veröffentlicht. Er zeigt dir, welche Farben du aus nur drei Farben mischen kannst – und welche Farben besonders stark miteinander leuchten.</p>
 </section>
 <section>
+  <h2>Wer war Johannes Itten?</h2>
+  <p class="prose">Johannes Itten war ein Maler aus der Schweiz – und vor allem ein Lehrer. Er wollte, dass man Farben nicht nur schön findet, sondern auch <strong>versteht</strong>: Warum leuchten manche Farben nebeneinander so stark? Warum wirken manche warm und andere kalt?</p>
+  <ol class="itten-zeit">
+    <li><b>1888</b><span>Johannes Itten wird in Südern-Linden in der Schweiz geboren.</span></li>
+    <li><b>Jugend</b><span>Er macht zuerst eine Ausbildung zum Grundschullehrer. Danach studiert er Malerei, unter anderem bei dem Maler Adolf Hölzel, der sich viel mit Farben beschäftigt.</span></li>
+    <li><b>1919</b><span>Er wird Lehrer am <strong>Bauhaus</strong> in Weimar, einer berühmten Kunstschule. Dort leitet er den Vorkurs: Alle Neuen lernen bei ihm zuerst Formen, Materialien und Farben kennen.</span></li>
+    <li><b>Später</b><span>Er leitet Kunstschulen in Berlin, Krefeld und Zürich und gibt Farbkurse.</span></li>
+    <li><b>1961</b><span>Sein Buch <strong>„Kunst der Farbe“</strong> erscheint – mit dem Farbkreis aus 12 Farben, den du hier kennenlernst.</span></li>
+    <li><b>1967</b><span>Johannes Itten stirbt in Zürich.</span></li>
+  </ol>
+  <div class="merk"><strong>Gut zu wissen:</strong> Itten beschrieb sieben <strong>Farbkontraste</strong>, also Arten, wie Farben nebeneinander wirken – zum Beispiel hell und dunkel, warm und kalt oder Gegenfarben. Zwei davon lernst du in diesem Kapitel kennen: die Komplementärfarben und warme und kalte Farben.</div>
+</section>
+<section>
+  <h2>Wie ist der Farbkreis entstanden?</h2>
+  <p class="prose">Itten war nicht der Erste mit einem Farbkreis. Schon lange vor ihm haben Menschen überlegt, wie man Farben ordnen kann. Ittens Farbkreis ist das Ergebnis von über 250 Jahren Nachdenken über Farben.</p>
+  <ol class="itten-zeit">
+    <li><b>1704</b><span>Der englische Forscher <strong>Isaac Newton</strong> lässt Sonnenlicht durch ein Glasprisma fallen. Das Licht zerfällt in die Farben des Regenbogens. In seinem Buch „Opticks“ ordnet er diese Farben in einem Kreis an – einer der ersten Farbkreise.</span></li>
+    <li><b>1810</b><span>Der Dichter <strong>Johann Wolfgang von Goethe</strong> veröffentlicht sein Buch „Zur Farbenlehre“. Darin steht ein Farbkreis aus sechs Farben. Goethe interessiert sich besonders dafür, wie Farben auf uns wirken – zum Beispiel warm oder kalt.</span></li>
+    <li><b>Um 1900</b><span>Der Maler <strong>Adolf Hölzel</strong>, Ittens Lehrer, arbeitet mit eigenen Farbkreisen im Kunstunterricht. Daran knüpft Itten an.</span></li>
+    <li><b>1921</b><span>Am Bauhaus zeigt Itten seinen <strong>Farbstern</strong>: 12 Farben, jede in 7 Helligkeitsstufen von ganz hell bis ganz dunkel. Er sieht aus wie eine aufgeklappte Kugel.</span></li>
+    <li><b>1961</b><span>In seinem Buch „Kunst der Farbe“ erscheint der Farbkreis, wie du ihn hier siehst: 12 Farben im Ring, in der Mitte die drei Grundfarben und die drei Mischfarben 1. Ordnung.</span></li>
+  </ol>
+  <div class="merk"><strong>Heute:</strong> Ittens Farbkreis steht in vielen Kunstbüchern und wird in Schulen auf der ganzen Welt benutzt. Es gibt auch andere Farbkreise – zum Beispiel für Bildschirme, die mit Licht statt mit Farbe arbeiten. Für das Malen mit Farbkasten passt Ittens Kreis besonders gut.</div>
+</section>
+<section>
   <h2>Entdecke den Farbkreis</h2>
   <div class="sheet wheelbox">
-    <svg class="wheel" id="wheel" viewBox="-170 -170 340 340" role="group" aria-label="Farbkreis nach Itten mit 12 Farben"></svg>
+    <div class="wheelcol"><svg class="wheel" id="wheel" viewBox="-170 -170 340 340" role="group" aria-label="Farbkreis nach Itten mit 12 Farben"></svg>
+    <label class="wheeltog"><input type="checkbox" id="wheelNames" checked> Farbnamen im Kreis zeigen</label></div>
     <div class="info" id="info" aria-live="polite"></div>
   </div>
 </section>
@@ -2007,7 +2054,7 @@ function addShape(d,i){
   p.setAttribute("class","seg");p.setAttribute("tabindex","0");p.setAttribute("role","button");p.setAttribute("aria-label",C[i].n);
   p.dataset.i=i;W.appendChild(p);
 }
-C.forEach((c,i)=>{const mid=-90+i*30,a0=mid-15,a1=mid+15,R=162,r=110;
+C.forEach((c,i)=>{const mid=-90+i*30,a0=mid-15,a1=mid+15,R=168,r=99;
   const [x0,y0]=pt(a0,R),[x1,y1]=pt(a1,R),[x2,y2]=pt(a1,r),[x3,y3]=pt(a0,r);
   addShape(`M${x0} ${y0}A${R} ${R} 0 0 1 ${x1} ${y1}L${x2} ${y2}A${r} ${r} 0 0 0 ${x3} ${y3}Z`,i)});
 const V=[-90,-30,30,90,150,210].map(a=>pt(a,94));const T=[V[0],V[2],V[4]];
@@ -2016,11 +2063,22 @@ const M01=mid(T[0],T[1]),M12=mid(T[1],T[2]),M20=mid(T[2],T[0]);
 const Pp=a=>"M"+a.map(p=>p.join(" ")).join("L")+"Z";
 addShape(Pp([T[0],M01,["0","0"],M20]),0);addShape(Pp([T[1],M12,["0","0"],M01]),4);addShape(Pp([T[2],M20,["0","0"],M12]),8);
 addShape(Pp([V[0],V[1],V[2]]),2);addShape(Pp([V[2],V[3],V[4]]),6);addShape(Pp([V[4],V[5],V[0]]),10);
+/* Farbnamen in der Grafik: im Ring (lange Namen zweizeilig) und im Stern in der Mitte */
+const SPLIT={Gelborange:["Gelb-","orange"],Rotorange:["Rot-","orange"],Rotviolett:["Rot-","violett"],Blauviolett:["Blau-","violett"],Blaugrün:["Blau-","grün"],Gelbgrün:["Gelb-","grün"]};
+const lum=h=>{const c=[1,3,5].map(k=>parseInt(h.slice(k,k+2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+function addLabel(x,y,i,inner){const t=document.createElementNS(NS,"text"),lines=SPLIT[C[i].n]||[C[i].n];t.setAttribute("class","lbl"+(inner?" "+inner:""));t.dataset.i=i;
+  t.setAttribute("fill",lum(C[i].h)>.35?"#1C1F2E":"#FFFFFF");t.setAttribute("aria-hidden","true");
+  lines.forEach((l,k)=>{const s=document.createElementNS(NS,"tspan");s.setAttribute("x",x);s.setAttribute("y",(+y+(k-(lines.length-1)/2)*15).toFixed(1));s.textContent=l;t.appendChild(s)});W.appendChild(t)}
+C.forEach((c,i)=>{const[x,y]=pt(-90+i*30,134);addLabel(x,y,i,false)});
+const cen=a=>[(a.reduce((s,p)=>s+ +p[0],0)/a.length).toFixed(1),(a.reduce((s,p)=>s+ +p[1],0)/a.length).toFixed(1)];
+const midX=(poly,y)=>{const xs=[];poly.forEach((p,k)=>{const q=poly[(k+1)%poly.length],y1=+p[1],y2=+q[1];if((y1-y)*(y2-y)<=0&&y1!==y2)xs.push(+p[0]+(+q[0]-+p[0])*(y-y1)/(y2-y1))});return xs.length>1?((Math.min(...xs)+Math.max(...xs))/2).toFixed(1):null};
+[[[T[0],M01,["0","0"],M20],0],[[T[1],M12,["0","0"],M01],4],[[T[2],M20,["0","0"],M12],8],[[V[0],V[1],V[2]],2],[[V[2],V[3],V[4]],6],[[V[4],V[5],V[0]],10]].forEach(([poly,i])=>{if(C[i].t!==0)return;const[cx,cy]=cen(poly);addLabel(midX(poly,+cy)||cx,cy,i,"in")});
+$("#wheelNames").addEventListener("change",e=>W.classList.toggle("nonames",!e.target.checked));
 const line=document.createElementNS(NS,"line");line.setAttribute("class","pair");line.style.display="none";W.appendChild(line);
 function select(i){
   const g=(i+6)%12;W.classList.add("dim");
-  W.querySelectorAll(".seg").forEach(s=>s.classList.toggle("on",+s.dataset.i===i||+s.dataset.i===g));
-  const [ax,ay]=pt(-90+i*30,136),[bx,by]=pt(-90+g*30,136);
+  W.querySelectorAll(".seg,.lbl").forEach(s=>s.classList.toggle("on",+s.dataset.i===i||+s.dataset.i===g));
+  const [ax,ay]=pt(-90+i*30,134),[bx,by]=pt(-90+g*30,134);
   line.setAttribute("x1",ax);line.setAttribute("y1",ay);line.setAttribute("x2",bx);line.setAttribute("y2",by);line.style.display="";
   const c=C[i],mix=c.t===0?"kann man nicht mischen":`${C[c.m[0]].n} + ${C[c.m[1]].n}`;
   $("#info").innerHTML=`<div class="big"><span class="dot" style="background:${c.h}"></span><h3>${c.n}</h3></div>

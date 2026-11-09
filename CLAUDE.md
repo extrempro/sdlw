@@ -110,9 +110,10 @@ Reihenfolge in der Datei:
   automatisch einen Knopf hinzu. Er muss **nach** allen Übungen im Skript stehen.
 - **Zählende Übungen:** Nur `.task`-Elemente mit `[data-score]` zählen für die Kapitel-Party.
   Mal-, Schreib- und Experimentieraufträge haben kein `[data-score]`.
-- **Farbkreis-Grafik:** Ring (r 99–168) und Stern werden in `#wheel` gezeichnet; Beschriftung per `addLabel` in zwei Sorten:
-  `.art` (Farbart aus `ART`) und `.nm` (Namen, zweizeilig über `SPLIT`); Schriftfarbe nach Helligkeit. Die Knöpfe
-  `#wheelMode` setzen am SVG `m-art` (Standard), `m-nm` oder `m-aus`; `#wheelLeg` erklärt die Farbarten.
+- **Farbkreis-Grafik:** Ring (r 99–168) und Stern werden in `#wheel` gezeichnet. Abzeichen P/S/T per `addBadge`
+  (`.badge.art`, Arten in `ART`/`ARTN`), Namen per `addLabel` (`.lbl.nm`, zweizeilig über `SPLIT`). Die Knöpfe
+  `#wheelMode` setzen am SVG `m-art` (Standard), `m-nm` oder `m-aus`. Die Legende `#wheelLeg` hebt per
+  `showType(t)` eine Farbart hervor; `select(i)` zeigt eine Farbe mit Gegenfarbe.
 - **Weltkarte/Globen:** Natural-Earth-Projektion, eigene Ozeangrenzen (`OPOLY`), eigener vereinfachter
   Umriss von Antarktika (`ANT_PTS`), weil die Antarktis in den geladenen Daten falsch gezeichnet wird.
 - **Töne (Musik):** Web Audio API (`nTone`, `nTick`), startet erst nach einer Berührung.

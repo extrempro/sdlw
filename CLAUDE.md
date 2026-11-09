@@ -7,7 +7,7 @@ Bitte vor jeder Änderung lesen und bei größeren Änderungen mit aktualisieren
 
 Das Entdeckerheft ist eine interaktive Lernseite. Auf der Seite selbst heißt sie **S.D.L.W.** – eine lustige
 Abkürzung für „Super Duper Lern Webseite“ (Seitentitel, Logo oben links). Ausgeschrieben steht der Name nicht sichtbar
-auf der Seite, sondern nur als Hinweis beim Darüberfahren, für Screenreader und in Guckis Ruf. Projekt und Repository heißen Entdeckerheft.
+auf der Seite, sondern nur als Hinweis beim Darüberfahren, für Screenreader und in Guckis Ruf. Das Projekt heißt Entdeckerheft, das Repository auf GitHub `extrempro/sdlw` (früher `extrempro/entdeckerheft`; umgezogen, damit keine private E-Mail-Adresse in der Historie steht).
 Die Seite ist für die **5. Klasse eines Gymnasiums in Hamburg**.
 Jedes Thema ist ein **Kapitel** mit kurzer Erklärung, einem interaktiven Teil zum Ausprobieren und Übungsaufgaben,
 die sofort Rückmeldung geben. Ein kleines Maskottchen („Gucki“) reagiert auf richtige und falsche Antworten.
@@ -110,6 +110,10 @@ Reihenfolge in der Datei:
   automatisch einen Knopf hinzu. Er muss **nach** allen Übungen im Skript stehen.
 - **Zählende Übungen:** Nur `.task`-Elemente mit `[data-score]` zählen für die Kapitel-Party.
   Mal-, Schreib- und Experimentieraufträge haben kein `[data-score]`.
+- **Farbkreis-Grafik:** Ring (r 99–168) und Stern werden in `#wheel` gezeichnet. Abzeichen P/S/T per `addBadge`
+  (`.badge.art`, Arten in `ART`/`ARTN`), Namen per `addLabel` (`.lbl.nm`, zweizeilig über `SPLIT`). Die Knöpfe
+  `#wheelMode` setzen am SVG `m-art` (Standard), `m-nm` oder `m-aus`. Die Legende `#wheelLeg` hebt per
+  `showType(t)` eine Farbart hervor; `select(i)` zeigt eine Farbe mit Gegenfarbe.
 - **Weltkarte/Globen:** Natural-Earth-Projektion, eigene Ozeangrenzen (`OPOLY`), eigener vereinfachter
   Umriss von Antarktika (`ANT_PTS`), weil die Antarktis in den geladenen Daten falsch gezeichnet wird.
 - **Töne (Musik):** Web Audio API (`nTone`, `nTick`), startet erst nach einer Berührung.
@@ -202,7 +206,7 @@ Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktuali
 - Lageplan im Kompass-Kapitel ist ausdrücklich als ausgedachtes Beispiel gekennzeichnet.
 - Zeitzonen und Uhrzeiten rechnen ohne Sommerzeit; das steht auf der Seite.
 - Gucki-Jugendwörter: „Aura“ (3 fehlerfreie Übungen in Folge), „Cringe“ (3 Fehler in Folge), Banner „DAS CRAZY!“.
-- Fünfmal schnell auf Gucki tippen startet die große Party (Vorführ-Trick für Lehrkräfte).
+- Fünfmal schnell auf Gucki tippen: Gucki kichert („Hihihi!“, Klasse `.kicher`, Mund `.mund` mit `.zunge`) und streckt die Zunge raus. Die große Party gibt es nur noch, wenn alle Übungen eines Kapitels fehlerfrei sind.
 - Versionshinweise stehen auf einer eigenen Seite (`#neuigkeiten`) und werden je zehn Versionen zusammengefasst.
 - „Nach oben“ unten links, Gucki unten rechts – die beiden Ecken nicht anders belegen.
 - Name auf der Seite: „S.D.L.W.“ (Super Duper Lern Webseite) mit Regenbogen-Animation; Klick aufs Logo:

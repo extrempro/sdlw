@@ -331,11 +331,33 @@ svg.wheel{width:100%;max-width:360px;margin:0 auto;display:block}
 /* Abdunkeln über fill-opacity statt opacity: Chrome auf Android zeichnet SVG-Flächen mit opacity-Übergang sonst zerstückelt */
 .wheel .seg{cursor:pointer;stroke:var(--sheet);stroke-width:2;transition:fill-opacity .2s;-webkit-tap-highlight-color:transparent}
 /* Handy: Kreis kleiner, damit Kreis und Erklärung zusammen auf den Bildschirm passen */
-@media (max-width:620px){.wheelbox{gap:12px;padding:14px}svg.wheel{max-width:min(300px,46vh)}.wheelbox .info{gap:6px}.wheelbox .info .dot{width:34px;height:34px}.wheelbox .info .hint{font-size:.85rem;margin:0}}
+@media (max-width:620px){.wheelbox{gap:12px;padding:14px}svg.wheel{max-width:min(360px,56vh)}.wheelbox .info{gap:6px}.wheelbox .info .dot{width:34px;height:34px}.wheelbox .info .hint{font-size:.85rem;margin:0}}
 .wheel .seg:focus{outline:none}
 .wheel .seg:focus-visible{stroke:var(--ink);stroke-width:3}
 .wheel.dim .seg{fill-opacity:.28}
 .wheel.dim .seg.on{fill-opacity:1}
+.wheelcol{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
+.wheeltog{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;align-items:center;font-weight:700;font-size:.92rem}
+.wheel-leg{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;width:100%;max-width:30em}
+.wheel-leg button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:8px 10px;border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;font-size:.95rem;cursor:pointer}
+.wheel-leg button[aria-pressed="true"]{border-color:var(--ink);background:var(--sheet)}
+.wheel-leg small{display:block;color:var(--muted);font-size:.85rem}
+.bdg{flex:none;width:28px;height:28px;border-radius:50%;background:#FFFFFF;color:#1C1F2E;border:2px solid #1C1F2E;display:inline-flex;align-items:center;justify-content:center;font:800 .95rem var(--display)}
+.wheel .badge circle{fill:#FFFFFF;stroke:#1C1F2E;stroke-width:2}
+.wheel .badge text{fill:#1C1F2E;font-family:var(--display);font-weight:800;font-size:19px;text-anchor:middle;dominant-baseline:central}
+.wheel .badge.in circle{stroke-width:1.5}
+.wheel .badge.in text{font-size:16px}
+.wheel .badge{pointer-events:none}
+.wheel.dim .badge:not(.on){opacity:.45}
+.wheel .lbl{font-family:var(--display);font-weight:800;font-size:14px;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.wheel .lbl.in{font-size:15px}
+.wheel.dim .lbl:not(.on){fill:var(--ink);opacity:.8}
+.wheel.m-art .nm,.wheel.m-nm .art,.wheel.m-aus .nm,.wheel.m-aus .art{display:none}
+.itten-zeit{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;border-left:4px solid var(--line);margin-left:6px}
+.itten-zeit li{display:grid;grid-template-columns:5.2em 1fr;gap:12px;padding:8px 0 8px 16px;position:relative}
+.itten-zeit li::before{content:"";position:absolute;left:-10px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--sheet);border:3px solid var(--ink)}
+.itten-zeit b{font-family:var(--display)}
+@media (max-width:480px){.itten-zeit li{grid-template-columns:3.9em 1fr;gap:8px;padding:5px 0 5px 12px;font-size:.92rem;line-height:1.4}.itten-zeit li::before{top:10px;width:10px;height:10px;left:-9px}.itten-zeit b{font-size:.95rem}}
 .wheel .pair{stroke:var(--ink);stroke-width:2.5;stroke-dasharray:6 5}
 .info{display:flex;flex-direction:column;gap:10px;min-width:0}
 .info .big{display:flex;align-items:center;gap:12px}
@@ -568,6 +590,18 @@ svg.meter{width:100%;max-width:520px;height:auto;display:block}
 .gucki .pupille{position:absolute;left:6px;top:6px;width:10px;height:10px;border-radius:50%;background:#1C1F2E;transition:transform .08s linear}
 .gucki .pupille::after{content:"";position:absolute;left:2px;top:2px;width:3px;height:3px;border-radius:50%;background:#FFFFFF}
 .gucki .lid{position:absolute;inset:0;background:#139DB3;transform:translateY(-100%);transition:transform .09s}
+/* Kichern mit Zunge (fünfmal schnell auf Gucki tippen) */
+.gucki .mund{display:none;position:absolute;left:21px;top:44px;width:26px;height:13px;background:#0E3F47;border-radius:0 0 14px 14px}
+.gucki .zunge{position:absolute;left:6px;top:5px;width:14px;height:17px;background:#FF7A8A;border-radius:0 0 8px 8px;transform-origin:50% 0}
+.gucki.kicher{overflow:visible}
+.gucki.kicher .kopf{animation:kichern 2.2s ease-in-out}
+.gucki.kicher .mund{display:block}
+.gucki.kicher .zunge{animation:zunge .35s ease-in-out .5s 4 alternate}
+.gucki.kicher .auge{background:transparent;border:3px solid #0E6F7E;border-bottom:0;border-radius:14px 14px 0 0;height:11px;top:19px;overflow:visible}
+.gucki.kicher .pupille,.gucki.kicher .lid,.gucki.kicher .brille{display:none}
+@keyframes kichern{0%{transform:translateY(0)}12%{transform:translateY(-34px)}20%{transform:translateY(-34px) rotate(-5deg)}28%{transform:translateY(-36px) rotate(5deg)}36%{transform:translateY(-34px) rotate(-5deg)}44%{transform:translateY(-36px) rotate(5deg)}52%{transform:translateY(-34px) rotate(-4deg)}60%{transform:translateY(-35px) rotate(3deg)}85%{transform:translateY(-34px) rotate(0)}100%{transform:translateY(0)}}
+@keyframes zunge{from{transform:scaleY(.6) rotate(-6deg)}to{transform:scaleY(1.15) rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){.gucki.kicher .kopf{animation:none;transform:translateY(-34px)}.gucki.kicher .zunge{animation:none}}
 .gucki.blink .lid{transform:translateY(0)}
 .gucki .hand{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) - 6px + var(--gx));width:20px;height:13px;border-radius:10px;background:#0E8496;transition:transform .35s}
 .gucki .hand.l{left:0}.gucki .hand.r{right:0}
@@ -639,6 +673,18 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.7.0",
+   "date": "2026-11-09",
+   "title": "Der Farbkreis erzählt seine Geschichte",
+   "items": [
+    "Die Zeitleisten zu Itten und zur Geschichte des Farbkreises sind auf dem Handy jetzt kompakter.",
+    "Tipp fünfmal schnell auf Gucki – dann kichert er und streckt dir die Zunge raus!",
+    "Im Farbkreis zeigen kleine Abzeichen, welche Farbe eine Primärfarbe (P), Sekundärfarbe (S) oder Tertiärfarbe (T) ist. Tippst du in der Liste auf eine Farbart, leuchten genau diese Farben auf. Du kannst auch die Namen anzeigen oder alles ausblenden.",
+    "Neu: Wer war Johannes Itten? Erfahre, wie aus einem Grundschullehrer ein berühmter Farblehrer am Bauhaus wurde.",
+    "Neu: Wie ist der Farbkreis entstanden? Eine Zeitreise von Isaac Newton über Goethe bis zu Ittens Farbstern."
+   ]
+  },
   {
    "version": "1.6.0",
    "date": "2026-11-08",
@@ -827,9 +873,40 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="lead">Der Maler und Kunstlehrer Johannes Itten hat 1961 einen Farbkreis mit <strong>12 Farben</strong> veröffentlicht. Er zeigt dir, welche Farben du aus nur drei Farben mischen kannst – und welche Farben besonders stark miteinander leuchten.</p>
 </section>
 <section>
+  <h2>Wer war Johannes Itten?</h2>
+  <p class="prose">Johannes Itten war ein Maler aus der Schweiz – und vor allem ein Lehrer. Er wollte, dass man Farben nicht nur schön findet, sondern auch <strong>versteht</strong>: Warum leuchten manche Farben nebeneinander so stark? Warum wirken manche warm und andere kalt?</p>
+  <ol class="itten-zeit">
+    <li><b>1888</b><span>Johannes Itten wird in Südern-Linden in der Schweiz geboren.</span></li>
+    <li><b>Jugend</b><span>Er macht zuerst eine Ausbildung zum Grundschullehrer. Danach studiert er Malerei, unter anderem bei dem Maler Adolf Hölzel, der sich viel mit Farben beschäftigt.</span></li>
+    <li><b>1919</b><span>Er wird Lehrer am <strong>Bauhaus</strong> in Weimar, einer berühmten Kunstschule. Dort leitet er den Vorkurs: Alle Neuen lernen bei ihm zuerst Formen, Materialien und Farben kennen.</span></li>
+    <li><b>Später</b><span>Er leitet Kunstschulen in Berlin, Krefeld und Zürich und gibt Farbkurse.</span></li>
+    <li><b>1961</b><span>Sein Buch <strong>„Kunst der Farbe“</strong> erscheint – mit dem Farbkreis aus 12 Farben, den du hier kennenlernst.</span></li>
+    <li><b>1967</b><span>Johannes Itten stirbt in Zürich.</span></li>
+  </ol>
+  <div class="merk"><strong>Gut zu wissen:</strong> Itten beschrieb sieben <strong>Farbkontraste</strong>, also Arten, wie Farben nebeneinander wirken – zum Beispiel hell und dunkel, warm und kalt oder Gegenfarben. Zwei davon lernst du in diesem Kapitel kennen: die Komplementärfarben und warme und kalte Farben.</div>
+</section>
+<section>
+  <h2>Wie ist der Farbkreis entstanden?</h2>
+  <p class="prose">Itten war nicht der Erste mit einem Farbkreis. Schon lange vor ihm haben Menschen überlegt, wie man Farben ordnen kann. Ittens Farbkreis ist das Ergebnis von über 250 Jahren Nachdenken über Farben.</p>
+  <ol class="itten-zeit">
+    <li><b>1704</b><span>Der englische Forscher <strong>Isaac Newton</strong> lässt Sonnenlicht durch ein Glasprisma fallen. Das Licht zerfällt in die Farben des Regenbogens. In seinem Buch „Opticks“ ordnet er diese Farben in einem Kreis an – einer der ersten Farbkreise.</span></li>
+    <li><b>1810</b><span>Der Dichter <strong>Johann Wolfgang von Goethe</strong> veröffentlicht sein Buch „Zur Farbenlehre“. Darin steht ein Farbkreis aus sechs Farben. Goethe interessiert sich besonders dafür, wie Farben auf uns wirken – zum Beispiel warm oder kalt.</span></li>
+    <li><b>Um 1900</b><span>Der Maler <strong>Adolf Hölzel</strong>, Ittens Lehrer, arbeitet mit eigenen Farbkreisen im Kunstunterricht. Daran knüpft Itten an.</span></li>
+    <li><b>1921</b><span>Am Bauhaus zeigt Itten seinen <strong>Farbstern</strong>: 12 Farben, jede in 7 Helligkeitsstufen von ganz hell bis ganz dunkel. Er sieht aus wie eine aufgeklappte Kugel.</span></li>
+    <li><b>1961</b><span>In seinem Buch „Kunst der Farbe“ erscheint der Farbkreis, wie du ihn hier siehst: 12 Farben im Ring, in der Mitte die drei Grundfarben und die drei Mischfarben 1. Ordnung.</span></li>
+  </ol>
+  <div class="merk"><strong>Heute:</strong> Ittens Farbkreis steht in vielen Kunstbüchern und wird in Schulen auf der ganzen Welt benutzt. Es gibt auch andere Farbkreise – zum Beispiel für Bildschirme, die mit Licht statt mit Farbe arbeiten. Für das Malen mit Farbkasten passt Ittens Kreis besonders gut.</div>
+</section>
+<section>
   <h2>Entdecke den Farbkreis</h2>
   <div class="sheet wheelbox">
-    <svg class="wheel" id="wheel" viewBox="-170 -170 340 340" role="group" aria-label="Farbkreis nach Itten mit 12 Farben"></svg>
+    <div class="wheelcol"><svg class="wheel m-art" id="wheel" viewBox="-170 -170 340 340" role="group" aria-label="Farbkreis nach Itten mit 12 Farben"></svg>
+    <div class="wheeltog"><span>Im Kreis zeigen:</span><div class="bl-chips" id="wheelMode" role="group" aria-label="Beschriftung im Farbkreis"><button type="button" data-m="art" aria-pressed="true">P · S · T</button><button type="button" data-m="nm" aria-pressed="false">Namen</button><button type="button" data-m="aus" aria-pressed="false">Nichts</button></div></div>
+    <ul class="wheel-leg" id="wheelLeg">
+      <li><button type="button" data-t="0" aria-pressed="false"><span class="bdg">P</span><span><b>Primärfarben</b> (Grundfarben)<small>kann man nicht mischen</small></span></button></li>
+      <li><button type="button" data-t="1" aria-pressed="false"><span class="bdg">S</span><span><b>Sekundärfarben</b> (Mischfarben 1. Ordnung)<small>aus zwei Primärfarben</small></span></button></li>
+      <li><button type="button" data-t="2" aria-pressed="false"><span class="bdg">T</span><span><b>Tertiärfarben</b> (Mischfarben 2. Ordnung)<small>aus einer Primär- und einer Sekundärfarbe</small></span></button></li>
+    </ul></div>
     <div class="info" id="info" aria-live="polite"></div>
   </div>
 </section>
@@ -1736,7 +1813,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 
 <button class="totop" id="toTop" type="button" hidden aria-label="Nach oben zum Seitenanfang"><span aria-hidden="true">↑</span><span class="ttl"> Nach oben</span></button>
 <div class="gucki" id="gucki" aria-hidden="true" title="Hallo!">
-  <div class="kopf"><div class="auge l"><div class="pupille"></div><div class="lid"></div></div><div class="auge r"><div class="pupille"></div><div class="lid"></div></div><div class="traene l"></div><div class="traene r"></div><div class="brille"><span class="glas l"></span><span class="steg"></span><span class="glas r"></span></div></div>
+  <div class="kopf"><div class="auge l"><div class="pupille"></div><div class="lid"></div></div><div class="auge r"><div class="pupille"></div><div class="lid"></div></div><div class="traene l"></div><div class="traene r"></div><div class="mund"><div class="zunge"></div></div><div class="brille"><span class="glas l"></span><span class="steg"></span><span class="glas r"></span></div></div>
   <div class="hand l"></div><div class="hand r"></div>
 </div>
 <script>window.echarts={registerMap:function(n,g){if(!window.__WORLD&&/world/i.test(n))window.__WORLD=g}};</script>
@@ -1995,7 +2072,7 @@ function addShape(d,i){
   p.setAttribute("class","seg");p.setAttribute("tabindex","0");p.setAttribute("role","button");p.setAttribute("aria-label",C[i].n);
   p.dataset.i=i;W.appendChild(p);
 }
-C.forEach((c,i)=>{const mid=-90+i*30,a0=mid-15,a1=mid+15,R=162,r=110;
+C.forEach((c,i)=>{const mid=-90+i*30,a0=mid-15,a1=mid+15,R=168,r=99;
   const [x0,y0]=pt(a0,R),[x1,y1]=pt(a1,R),[x2,y2]=pt(a1,r),[x3,y3]=pt(a0,r);
   addShape(`M${x0} ${y0}A${R} ${R} 0 0 1 ${x1} ${y1}L${x2} ${y2}A${r} ${r} 0 0 0 ${x3} ${y3}Z`,i)});
 const V=[-90,-30,30,90,150,210].map(a=>pt(a,94));const T=[V[0],V[2],V[4]];
@@ -2004,22 +2081,45 @@ const M01=mid(T[0],T[1]),M12=mid(T[1],T[2]),M20=mid(T[2],T[0]);
 const Pp=a=>"M"+a.map(p=>p.join(" ")).join("L")+"Z";
 addShape(Pp([T[0],M01,["0","0"],M20]),0);addShape(Pp([T[1],M12,["0","0"],M01]),4);addShape(Pp([T[2],M20,["0","0"],M12]),8);
 addShape(Pp([V[0],V[1],V[2]]),2);addShape(Pp([V[2],V[3],V[4]]),6);addShape(Pp([V[4],V[5],V[0]]),10);
-const line=document.createElementNS(NS,"line");line.setAttribute("class","pair");line.style.display="none";W.appendChild(line);
+/* Farbnamen in der Grafik: im Ring (lange Namen zweizeilig) und im Stern in der Mitte */
+const SPLIT={Gelborange:["Gelb-","orange"],Rotorange:["Rot-","orange"],Rotviolett:["Rot-","violett"],Blauviolett:["Blau-","violett"],Blaugrün:["Blau-","grün"],Gelbgrün:["Gelb-","grün"]};
+const lum=h=>{const c=[1,3,5].map(k=>parseInt(h.slice(k,k+2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+const ART=["P","S","T"],ARTN=["Primärfarbe","Sekundärfarbe","Tertiärfarbe"];
+function addBadge(x,y,i,inner){const g=document.createElementNS(NS,"g"),r=inner?13:16;g.setAttribute("class","badge art"+(inner?" in":""));g.dataset.i=i;g.setAttribute("aria-hidden","true");
+  g.innerHTML=`<circle cx="${x}" cy="${y}" r="${r}"/><text x="${x}" y="${y}">${ART[C[i].t]}</text>`;W.appendChild(g)}
+function addLabel(x,y,i,inner,kind){const t=document.createElementNS(NS,"text"),lines=SPLIT[C[i].n]||[C[i].n];t.setAttribute("class","lbl "+kind+(inner?" "+inner:""));t.dataset.i=i;
+  t.setAttribute("fill",lum(C[i].h)>.35?"#1C1F2E":"#FFFFFF");t.setAttribute("aria-hidden","true");
+  lines.forEach((l,k)=>{const s=document.createElementNS(NS,"tspan");s.setAttribute("x",x);s.setAttribute("y",(+y+(k-(lines.length-1)/2)*15).toFixed(1));s.textContent=l;t.appendChild(s)});W.appendChild(t)}
+C.forEach((c,i)=>{const[x,y]=pt(-90+i*30,134);addLabel(x,y,i,false,"nm");addBadge(x,y,i,false)});
+const cen=a=>[(a.reduce((s,p)=>s+ +p[0],0)/a.length).toFixed(1),(a.reduce((s,p)=>s+ +p[1],0)/a.length).toFixed(1)];
+const midX=(poly,y)=>{const xs=[];poly.forEach((p,k)=>{const q=poly[(k+1)%poly.length],y1=+p[1],y2=+q[1];if((y1-y)*(y2-y)<=0&&y1!==y2)xs.push(+p[0]+(+q[0]-+p[0])*(y-y1)/(y2-y1))});return xs.length>1?((Math.min(...xs)+Math.max(...xs))/2).toFixed(1):null};
+[[[T[0],M01,["0","0"],M20],0],[[T[1],M12,["0","0"],M01],4],[[T[2],M20,["0","0"],M12],8],[[V[0],V[1],V[2]],2],[[V[2],V[3],V[4]],6],[[V[4],V[5],V[0]],10]].forEach(([poly,i])=>{const[cx,cy]=cen(poly),x=midX(poly,+cy)||cx;addBadge(x,cy,i,true);if(C[i].t===0)addLabel(x,cy,i,"in","nm")});
+$("#wheelMode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b)return;const m=b.dataset.m;
+  W.classList.remove("m-art","m-nm","m-aus");W.classList.add("m-"+m);$("#wheelMode").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#wheelLeg").hidden=m==="aus"});
+/* Legende: Primär-, Sekundär- oder Tertiärfarben im Kreis hervorheben */
+$("#wheelLeg").addEventListener("click",e=>{const b=e.target.closest("button[data-t]");if(!b)return;showType(+b.dataset.t)});
+function showType(t){W.classList.add("dim");line.style.display="none";
+  W.querySelectorAll(".seg,.lbl,.badge").forEach(s=>s.classList.toggle("on",C[+s.dataset.i].t===t));
+  $("#wheelLeg").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(+x.dataset.t===t)));
+  const L=C.map((c,i)=>i).filter(i=>C[i].t===t),txt=["Diese drei Farben kann man nicht aus anderen Farben mischen. Im Stern bilden sie das Dreieck in der Mitte.","Jede entsteht aus zwei Primärfarben. Im Stern bilden sie die drei Spitzen um das Dreieck.","Jede entsteht aus einer Primärfarbe und einer Sekundärfarbe. Im Kreis liegt sie genau zwischen den beiden."][t];
+  $("#info").innerHTML=`<div class="big"><span class="bdg" style="width:46px;height:46px;font-size:1.4rem">${ART[t]}</span><h3>${ARTN[t]}n</h3></div><p>${txt}</p><div class="chips">${L.map(i=>`<span class="chip">${sw(i)}${C[i].n}</span>`).join("")}</div><p class="hint">Tippe auf eine Farbe im Kreis, um mehr über sie zu erfahren.</p>`}
+const line=document.createElementNS(NS,"line");line.setAttribute("class","pair");line.style.display="none";W.insertBefore(line,W.querySelector(".lbl,.badge"));
 function select(i){
   const g=(i+6)%12;W.classList.add("dim");
-  W.querySelectorAll(".seg").forEach(s=>s.classList.toggle("on",+s.dataset.i===i||+s.dataset.i===g));
-  const [ax,ay]=pt(-90+i*30,136),[bx,by]=pt(-90+g*30,136);
+  W.querySelectorAll(".seg,.lbl,.badge").forEach(s=>s.classList.toggle("on",+s.dataset.i===i||+s.dataset.i===g));
+  $("#wheelLeg").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));
+  const [ax,ay]=pt(-90+i*30,134),[bx,by]=pt(-90+g*30,134);
   line.setAttribute("x1",ax);line.setAttribute("y1",ay);line.setAttribute("x2",bx);line.setAttribute("y2",by);line.style.display="";
   const c=C[i],mix=c.t===0?"kann man nicht mischen":`${C[c.m[0]].n} + ${C[c.m[1]].n}`;
   $("#info").innerHTML=`<div class="big"><span class="dot" style="background:${c.h}"></span><h3>${c.n}</h3></div>
-   <dl><dt>Art</dt><dd>${TYP[c.t]}</dd><dt>Mischung</dt><dd>${mix}</dd><dt>Gegenfarbe</dt><dd><span class="chip">${sw(g)}${C[g].n}</span></dd></dl>
+   <dl><dt>Art</dt><dd>${ARTN[c.t]} (${TYP[c.t]})</dd><dt>Mischung</dt><dd>${mix}</dd><dt>Gegenfarbe</dt><dd><span class="chip">${sw(g)}${C[g].n}</span></dd></dl>
    <p class="hint">Die gestrichelte Linie verbindet die beiden Komplementärfarben. Tippe auf eine andere Farbe im Kreis.</p>`;
 }
 W.addEventListener("click",e=>{const s=e.target.closest(".seg");if(!s)return;select(+s.dataset.i);
   // Auf dem Handy steht die Erklärung unter dem Kreis: nur wenn sie nicht ganz zu sehen ist, ein Stück hinscrollen
   const r=$("#info").getBoundingClientRect();if(r.bottom>innerHeight)$("#info").scrollIntoView({block:"nearest",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
 W.addEventListener("keydown",e=>{const s=e.target.closest(".seg");if(s&&(e.key==="Enter"||e.key===" ")){e.preventDefault();select(+s.dataset.i)}});
-select(0);
+$("#info").innerHTML=`<h3>Tippe auf eine Farbe</h3><p>Dann siehst du, wie sie heißt, wie man sie mischt und welche Farbe ihre Gegenfarbe ist.</p><p class="hint">Oder tippe in der Liste beim Kreis auf Primär-, Sekundär- oder Tertiärfarben – dann leuchten genau diese Farben auf.</p>`;
 const colorOpt=i=>({v:i,label:`${sw(i)}${C[i].n}`});
 const pickOpts=(a,pool)=>shuffle([a,...shuffle(pool.filter(x=>x!==a)).slice(0,3)]).map(colorOpt);
 quiz($("#t1"),shuffle([2,6,10,1,9,5]).map(i=>({q:`${chip(C[i].m[0])} + ${chip(C[i].m[1])} = ?`,a:i,
@@ -2777,9 +2877,11 @@ function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn
   at(15400,()=>Konfetti.clearPile());
   at(17000,()=>{Konfetti.pile(false);guckiMegaOn=false});
 }
-// Kleiner Trick zum Vorführen: Gucki fünfmal schnell antippen
-(function(){const g=document.getElementById("gucki");if(!g)return;let n=0,tm=0;
-  g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n>=5){n=0;setTimeout(guckiMega,300)}})})();
+// Kleiner Spaß: Gucki fünfmal schnell antippen – er kichert und streckt die Zunge raus
+(function(){const g=document.getElementById("gucki");if(!g)return;let n=0,tm=0,busy=false;
+  g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n<5||busy||guckiMegaOn)return;n=0;busy=true;
+    g.classList.remove("cry","clap");g.classList.add("kicher");guckiSay("Hihihi!",1900);
+    setTimeout(()=>{g.classList.remove("kicher");busy=false},2300)})})();
 /* ================= NOTEN ================= */
 const NN=["c","d","e","f","g","a","h"];
 const nName=st=>NN[st%7]+(st<7?"'":"''");

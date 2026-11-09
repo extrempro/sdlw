@@ -4,6 +4,26 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
 
+## [1.7.0] – 2026-11-09
+
+Farbkreis mit Namen, dazu Itten und die Geschichte des Farbkreises.
+
+### Neu
+
+- **Farbarten im Farbkreis sichtbar** (Kapitel Farbkreis): Jedes Feld im Ring und jedes Feld im Stern trägt ein rundes Abzeichen **P** (Primärfarbe/Grundfarbe), **S** (Sekundärfarbe/Mischfarbe 1. Ordnung) oder **T** (Tertiärfarbe/Mischfarbe 2. Ordnung). So sieht man auch, dass das Dreieck in der Mitte aus den P-Farben besteht und die Spitzen aus den S-Farben.
+  - **Legende zum Antippen:** Die drei Farbarten stehen mit deutschem und internationalem Begriff in einer Liste. Ein Tipp hebt genau diese Farben im Kreis hervor und zählt sie mit Kurzerklärung auf.
+  - **Ansichten** über die Knöpfe „Im Kreis zeigen“: „P · S · T“ (Standard), „Namen“ (alle 12 Farbnamen, zusammengesetzte zweizeilig) oder „Nichts“ zum Üben.
+  - Beim Antippen einer Farbe steht im Infofeld jetzt auch der internationale Begriff, z. B. „Primärfarbe (Grundfarbe)“. Der Kreis startet ohne Auswahl in voller Farbe.
+  - Der Ring ist etwas breiter, und auf dem Handy ist der Kreis größer (bis 360 px).
+- **Abschnitt „Wer war Johannes Itten?“** mit Zeitleiste: 1888 geboren in Südern-Linden (Schweiz), Ausbildung zum Grundschullehrer, Studium u. a. bei Adolf Hölzel, ab 1919 Lehrer am Bauhaus in Weimar (Vorkurs), später Kunstschulen in Berlin, Krefeld und Zürich, 1961 „Kunst der Farbe“, 1967 gestorben in Zürich. Dazu ein Merkkasten zu den sieben Farbkontrasten.
+- **Abschnitt „Wie ist der Farbkreis entstanden?“** mit Zeitleiste: Newton 1704 („Opticks“), Goethe 1810 („Zur Farbenlehre“, sechs Farben), Hölzel um 1900, Ittens Farbstern 1921 (12 Farben, 7 Helligkeitsstufen, Bauhaus-Mappe „Utopia“), Ittens Farbkreis 1961.
+
+### Verbessert
+
+- Zeitleisten im Farbkreis-Kapitel auf dem Handy kompakter (Jahr und Text nebeneinander, weniger Abstand).
+- Fünfmal schnell auf Gucki tippen: Gucki kichert („Hihihi!“) und streckt die Zunge raus, statt die große Party zu starten.
+- Projekt-Kontext: Das Repository heißt jetzt `extrempro/sdlw`. Die Historie wurde ohne private E-Mail-Adresse übernommen.
+
 ## [1.6.0] – 2026-11-08
 
 Zwei neue Touren für Guckis Weltreise.

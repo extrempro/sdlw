@@ -197,6 +197,15 @@ Die Seite ist zusätzlich als claude.ai-Artifact veröffentlicht (privat, über 
 https://claude.ai/artifact/R6pJni9HKDoiQHJXYtZUyB
 Veröffentlicht wird `src/entdeckerheft.html`. Nach jeder Änderung dort aktualisieren (auch vor dem Pull Request).
 
+## Zusammenarbeit mit der Lehrkraft
+
+- **Offen sagen, was man nicht weiß oder nicht prüfen konnte.** Unsicherheiten (Fakten, Jahreszahlen, Verhalten
+  auf echten Geräten, Dinge, die in der Sitzung nicht möglich waren) nicht stillschweigend übergehen, sondern
+  direkt in der Antwort nennen.
+- **Lieber nachfragen als raten**, wenn eine Entscheidung bei der Lehrkraft liegt oder Informationen fehlen
+  (z. B. wie der Webserver eingerichtet ist, welches Schulbuch genutzt wird).
+- Am Ende einer Änderung kurz sagen, was getestet wurde und was nicht (z. B. nur simuliertes Handy, nur helle Ansicht).
+
 ## Getroffene Entscheidungen (nicht ohne Rückfrage ändern)
 
 - Fünf Ozeane (mit Südlichem und Arktischem Ozean); Hinweis auf Atlanten mit drei Ozeanen.

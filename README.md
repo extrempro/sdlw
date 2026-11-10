@@ -27,5 +27,4 @@ Die fertige Datei hängt außerdem an jedem [GitHub-Release](../../releases) als
   `node scripts/check-release.mjs` prüft, ob alles zusammenpasst.
 - Änderungen kommen per Pull Request auf `main`. Nach dem Merge entsteht automatisch ein GitHub-Release.
 
-Alle Details, Konventionen und die Checkliste für neue Kapitel stehen in [CLAUDE.md](CLAUDE.md).
 Die Versionshinweise stehen in [CHANGELOG.md](CHANGELOG.md).

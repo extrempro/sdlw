@@ -535,6 +535,11 @@ details{border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px}
 summary{cursor:pointer;font-weight:700}
 details p{margin-top:8px}
 footer{color:var(--muted);font-size:.85rem}
+.quellen{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:8px;font-size:.95rem}
+.quellen a{color:var(--ink);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+.srclink{margin:8px 0 0;font-size:.8rem;color:var(--muted)}
+.srcin{color:inherit;text-decoration:underline}
+.srclink a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 /* Deutsch */
 #deutsch .merk{--accent:var(--af)}
 .lupe{display:flex;flex-direction:column;gap:10px;font-size:1.15rem}
@@ -685,6 +690,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "date": "2026-11-11",
    "title": "S.D.L.W. als App",
    "items": [
+    "Die Aufgaben, für die du Heft, Atlas, Schulhof oder Kunstraum gebraucht hast, sind weg. Jetzt kannst du jede Aufgabe direkt hier lösen – nur „Mein Lernplan“ ist für dein Hausaufgabenheft geblieben.",
+    "Ganz unten auf der Startseite gibt es jetzt einen kleinen Link „Quellen“. Dort steht, wo du alles nachlesen kannst.",
     "Auf der Startseite steht jetzt, wie du S.D.L.W. als App bekommst – auf manchen Geräten sogar mit eigenem Knopf „App installieren“.",
     "Du kannst S.D.L.W. jetzt wie eine App auf dein Tablet, Handy oder deinen Computer legen – mit Gucki als App-Symbol.",
     "Die App startet auch ohne Internet, zum Beispiel im Bus oder wenn das WLAN in der Schule mal streikt.",
@@ -893,6 +900,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   </div>
   <p class="prose">Gucki schaut dir unten rechts zu. Er klatscht, wenn du richtig liegst. Schaffst du ein ganzes Kapitel ohne Fehler, gibt es eine große Überraschung. Mit dem Haus oben rechts kommst du immer hierher zurück.</p>
 </div>
+<p class="srclink"><a href="#quellen">Quellen</a></p>
 </div>
 
 <!-- ============ FARBKREIS ============ -->
@@ -977,16 +985,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="hint">Welche Farbe liegt im Farbkreis genau gegenüber? Du darfst oben im Kreis nachschauen.</p><div data-qs></div></div>
 <div class="task" id="t4"><div class="taskhead"><h3>Aufgabe 4 · Warm oder kalt?</h3><span class="score" data-score></span></div>
   <p class="hint">Entscheide für jede Farbe.</p><div data-qs></div></div>
-<div class="task" id="t5"><div class="taskhead"><h3>Aufgabe 5 · Male deinen eigenen Farbkreis</h3></div>
-  <p class="hint">Für den Kunstraum: Du brauchst deinen Tuschkasten, einen Pinsel, Wasser und ein Blatt mit einem vorgezeichneten Kreis in 12 Feldern.</p>
-  <ol class="steps">
-    <li>Male Gelb ganz oben. Lass dann drei Felder frei und male Rot. Wieder drei Felder weiter kommt Blau.</li>
-    <li>Mische genau in die Mitte zwischen zwei Grundfarben die Mischfarbe 1. Ordnung: Orange, Violett und Grün.</li>
-    <li>Fülle die sechs leeren Felder mit den Mischfarben 2. Ordnung.</li>
-    <li>Wasche den Pinsel vor jeder neuen Farbe gut aus, damit die Farben sauber bleiben.</li>
-    <li>Vergleiche zum Schluss mit dem Farbkreis auf dieser Seite. Welche Mischung war am schwierigsten?</li>
-  </ol></div>
-<footer>Tipp: Gelbe Tuschfarbe ist schwach – nimm beim Mischen lieber mehr Gelb und gib das Rot oder Blau nur in kleinen Tupfern dazu.</footer>
+<footer>Auf dem Bildschirm leuchten Farben anders als im Tuschkasten. Probier das Mischen ruhig auch einmal mit echten Farben aus.</footer>
 </div>
 
 <!-- ============ KONTINENTE ============ -->
@@ -1037,16 +1036,6 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="fb" data-fb aria-live="polite"></p></div>
 <div class="task" id="k3"><div class="taskhead"><h3>Aufgabe 3 · Kontinente-Quiz</h3><span class="score" data-score></span></div>
   <p class="hint">Wähle die richtige Antwort. Die Karte oben hilft dir.</p><div data-qs></div></div>
-<div class="task" id="k4"><div class="taskhead"><h3>Aufgabe 4 · Steckbrief</h3></div>
-  <p class="hint">Für dein Heft: Wähle einen Kontinent außer Europa und schreibe einen Steckbrief. Nutze deinen Atlas.</p>
-  <ol class="steps">
-    <li>Name des Kontinents und seine Größe in Millionen km²</li>
-    <li>An welche Ozeane grenzt er?</li>
-    <li>Nenne drei Länder, die dort liegen.</li>
-    <li>Wie heißt der höchste Berg? Wie heißt ein großer Fluss?</li>
-    <li>Ein Tier, das dort lebt, und eine Sache, die du besonders spannend findest</li>
-    <li>Zeichne die Umrisse des Kontinents ab und markiere die Hauptstadt eines Landes.</li>
-  </ol></div>
 <footer>Die Flächen sind gerundet. In Büchern findest du manchmal leicht andere Zahlen, je nachdem, welche Inseln mitgezählt werden.</footer>
 </div>
 
@@ -1122,18 +1111,6 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="hint">Lies jeden Satz genau.</p><div data-qs></div></div>
 <div class="task" id="m4"><div class="taskhead"><h3>Aufgabe 4 · Meeres-Quiz</h3><span class="score" data-score></span></div>
   <p class="hint">Wähle die richtige Antwort.</p><div data-qs></div></div>
-<div class="task" id="m5"><div class="taskhead"><h3>Aufgabe 5 · Atlas-Auftrag: Ein Containerschiff reist nach China</h3></div>
-  <p class="hint">Für dein Heft: Du brauchst deinen Atlas und eine Weltkarte.</p>
-  <p class="prose">Ein Containerschiff fährt vom Hamburger Hafen nach Shanghai in China. Es nimmt den kürzesten Weg durch den Suezkanal.</p>
-  <ol class="steps">
-    <li>Suche Hamburg und Shanghai im Atlas.</li>
-    <li>Verfolge den Weg mit dem Finger. Schreibe alle Flüsse, Meere, Kanäle und Ozeane in der richtigen Reihenfolge auf.</li>
-    <li>Zeichne den Weg mit Farbstift auf einer Weltkarte ein.</li>
-    <li>Welche Kontinente siehst du unterwegs? Notiere sie.</li>
-  </ol>
-  <details><summary>Lösung anzeigen</summary>
-    <p>Elbe → Nordsee → Ärmelkanal → Atlantik → Straße von Gibraltar → Mittelmeer → Suezkanal → Rotes Meer → Indischer Ozean → Pazifik (Südchinesisches Meer und Ostchinesisches Meer) → Shanghai.</p>
-    <p>Kontinente unterwegs: Europa, Afrika, Asien.</p></details></div>
 <footer>Die Flächen sind gerundet. Je nachdem, wo man die Grenzen zieht, findest du in Büchern leicht andere Zahlen.</footer>
 </div>
 
@@ -1226,15 +1203,6 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="hint">Rechne die Uhrzeit aus. Denk daran: Nach 24 Uhr beginnt ein neuer Tag.</p><div data-qs></div></div>
 <div class="task" id="n6"><div class="taskhead"><h3>Aufgabe 5 · Zeitzonen-Quiz</h3><span class="score" data-score></span></div>
   <p class="hint">Wähle die richtige Antwort. Die Weltzeituhr oben hilft dir.</p><div data-qs></div></div>
-<div class="task" id="n4"><div class="taskhead"><h3>Aufgabe 6 · Experiment: Tag und Nacht im Klassenraum</h3></div>
-  <p class="hint">Ihr braucht: eine Taschenlampe (die Sonne), einen Globus oder eine Orange mit einem Holzspieß als Erdachse, eine kleine Stecknadel und einen abgedunkelten Raum.</p>
-  <ol class="steps">
-    <li>Steckt die Nadel dort in den Globus oder die Orange, wo ungefähr Hamburg liegt.</li>
-    <li>Eine Person leuchtet mit der Taschenlampe von der Seite auf die Erde.</li>
-    <li>Dreht die Erde langsam. Von oben auf den Nordpol geschaut dreht ihr gegen den Uhrzeigersinn.</li>
-    <li>Beobachtet: Wann kommt die Nadel ins Licht? Das ist der Sonnenaufgang. Wann verschwindet sie im Schatten?</li>
-    <li>Schreibt in euer Heft: Warum gibt es Tag und Nacht? Benutzt die Wörter Erdachse, Drehung, Sonne und Hälfte.</li>
-  </ol></div>
 <footer>Die Uhrzeiten von New York und Tokio gelten für die Winterzeit. Im Modell steht die Sonne um 12 Uhr genau im Süden, in Wirklichkeit weicht das je nach Ort etwas ab.</footer>
 </div>
 
@@ -1340,15 +1308,6 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="hint">Das ist wieder der Beispiel-Lageplan, aber er liegt verdreht: Der rote Nordpfeil zeigt nicht nach oben. Drehe die Karte mit den Knöpfen, bis der Nordpfeil nach oben zeigt. Dann kannst du die Richtung wie in Aufgabe 2 ablesen.</p><div data-qs></div></div>
 <div class="task" id="c4"><div class="taskhead"><h3>Aufgabe 4 · Kompass-Quiz</h3><span class="score" data-score></span></div>
   <p class="hint">Wähle die richtige Antwort.</p><div data-qs></div></div>
-<div class="task" id="c5"><div class="taskhead"><h3>Aufgabe 5 · Kompass-Rallye auf dem Schulhof</h3></div>
-  <p class="hint">Für draußen: Ihr braucht einen Kompass, Stift und Heft. Arbeitet zu zweit.</p>
-  <ol class="steps">
-    <li>Stellt euch in die Mitte des Schulhofs und nordet den Kompass ein.</li>
-    <li>Schaut nach Norden, Osten, Süden und Westen. Schreibt auf, was ihr in jeder Richtung seht.</li>
-    <li>Zeichnet eine einfache Karte vom Schulhof mit Nordpfeil.</li>
-    <li>Versteckt einen Gegenstand und schreibt eine Wegbeschreibung, zum Beispiel: „10 Schritte nach Osten, dann 5 Schritte nach Süden.“</li>
-    <li>Tauscht die Wegbeschreibung mit einem anderen Team. Findet ihr den Gegenstand?</li>
-  </ol></div>
 <footer>Die Kompassnadel zeigt genau genommen zum magnetischen Nordpol. Der liegt etwas neben dem geografischen Nordpol. In Hamburg ist der Unterschied so klein, dass du ihn nicht beachten musst.</footer>
 </div>
 <!-- ============ NOTEN ============ -->
@@ -1448,15 +1407,6 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="hint">Erkenne die Pausen, fülle Lücken im Takt und hör genau hin. Bei den Hörfragen: Erst auf „Rhythmus anhören“ tippen, dann den passenden Takt wählen.</p><div data-qs></div></div>
 <div class="task" id="u4"><div class="taskhead"><h3>Aufgabe 5 · Notenwörter</h3><span class="score" data-score></span></div>
   <p class="hint">Die Noten ergeben ein Wort. Lies die Notennamen von links nach rechts.</p><div data-qs></div></div>
-<div class="task" id="u5"><div class="taskhead"><h3>Aufgabe 6 · Komponiere deine eigene Melodie</h3></div>
-  <p class="hint">Für dein Heft oder Notenblatt.</p>
-  <ol class="steps">
-    <li>Zeichne fünf Linien und einen Violinschlüssel. Schreibe 4/4 dahinter.</li>
-    <li>Schreibe zwei Takte. Benutze nur die Töne c', d', e', f' und g' und fülle jeden Takt mit genau vier Schlägen.</li>
-    <li>Prüfe: Hat jeder Takt vier Schläge? Steht am Ende ein Schlussstrich?</li>
-    <li>Spiele deine Melodie oben auf der Klaviatur. Gefällt sie dir? Dann gib ihr einen Namen.</li>
-    <li>Tausche mit deinem Nachbarn: Kann er oder sie deine Melodie lesen und spielen?</li>
-  </ol></div>
 <footer>Die Töne werden mit einem einfachen Klang im Browser erzeugt. Damit du etwas hörst, muss der Ton am Gerät eingeschaltet sein.</footer>
 </div>
 <!-- ============ DEUTSCH ============ -->
@@ -1529,14 +1479,6 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="hint">Alle Wörter sind hier kleingeschrieben. Welches davon ist ein Nomen? Achte auf die Endungen.</p><div data-qs></div></div>
 <div class="task" id="d4"><div class="taskhead"><h3>Aufgabe 4 · Warum groß?</h3><span class="score" data-score></span></div>
   <p class="hint">Warum wird das markierte Wort großgeschrieben?</p><div data-qs></div></div>
-<div class="task" id="d5"><div class="taskhead"><h3>Aufgabe 5 · Schreibauftrag mit Signalwörtern</h3></div>
-  <p class="hint">Für dein Heft.</p>
-  <ol class="steps">
-    <li>Schreibe drei Sätze, in denen ein Verb zum Nomen wird. Benutze <em>beim, zum</em> oder <em>das</em>. Beispiel: Beim Radfahren trage ich einen Helm.</li>
-    <li>Schreibe drei Sätze mit <em>etwas, nichts</em> oder <em>alles</em> und einem Adjektiv. Beispiel: Ich wünsche dir alles Gute.</li>
-    <li>Unterstreiche in jedem Satz das Signalwort und kreise das großgeschriebene Wort ein.</li>
-    <li>Partnerarbeit: Diktiere deinem Nachbarn einen Satz. Kontrolliert gemeinsam die Groß- und Kleinschreibung.</li>
-  </ol></div>
 <footer>Die Beispiele richten sich nach den amtlichen Regeln der deutschen Rechtschreibung.</footer>
 </div>
 
@@ -1830,6 +1772,49 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </section>
 </div>
 
+<div class="topic" id="quellen" hidden>
+<header>
+  <p class="eyebrow">S.D.L.W. · Quellen</p>
+  <h1>Quellen</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4)"></div>
+</header>
+<section>
+  <p class="lead">Woher wissen wir das alles? Hier stehen Bücher und Webseiten, in denen du die Sachen auf S.D.L.W. nachlesen kannst – und die Daten und Schriften, die in der Seite stecken.</p>
+</section>
+<section>
+  <h2>Deutsch: Groß- und Kleinschreibung</h2>
+  <ul class="quellen">
+    <li>Rat für deutsche Rechtschreibung: <a href="https://www.rechtschreibrat.com/DOX/RfdR_Amtliches-Regelwerk_2024.pdf" target="_blank" rel="noopener">Deutsche Rechtschreibung – Regeln und Wörterverzeichnis</a>. Amtliches Regelwerk, aktualisierte Fassung 2024.</li>
+  </ul>
+</section>
+<section>
+  <h2>Kunst: Farbkreis und Johannes Itten</h2>
+  <ul class="quellen">
+    <li>Johannes Itten: <i>Kunst der Farbe</i>. Ravensburg: Otto Maier Verlag, 1961.</li>
+    <li>Bauhaus Kooperation: <a href="https://bauhauskooperation.com/wissen/das-bauhaus/koepfe/biografien/biografie-detail/person-565" target="_blank" rel="noopener">Biografie Johannes Itten</a> (Lebensdaten, Ausbildung, Bauhaus, Berlin, Krefeld, Zürich).</li>
+    <li>The Museum of Modern Art (MoMA): <a href="https://www.moma.org/collection/works/143828" target="_blank" rel="noopener">Johannes Itten, „Farbenkugel in 7 Lichtstufen und 12 Tönen“, 1921</a> (Ittens Farbstern, Utopia-Verlag, Weimar).</li>
+    <li>Isaac Newton: <i>Opticks</i>. London, 1704.</li>
+    <li>Johann Wolfgang von Goethe: <i>Zur Farbenlehre</i>. Tübingen, 1810.</li>
+  </ul>
+</section>
+<section>
+  <h2>Erdkunde: Kontinente und Meere</h2>
+  <ul class="quellen">
+    <li>National Oceanic and Atmospheric Administration (NOAA): <a href="https://oceanservice.noaa.gov/facts/howmanyoceans.html" target="_blank" rel="noopener">How many oceans are there?</a> (ein Weltmeer, fünf Ozeane, Südlicher Ozean).</li>
+    <li>Flächen, Höhen und Einwohnerzahlen sind gerundete Werte aus gängigen Atlanten und Nachschlagewerken. Je nach Quelle und je nachdem, wo man die Grenzen zieht, weichen sie etwas voneinander ab.</li>
+  </ul>
+</section>
+<section>
+  <h2>Karten, Daten und Schriften</h2>
+  <ul class="quellen">
+    <li>Weltkarte: Ländergrenzen aus <a href="https://github.com/apache/echarts/blob/4.9.0/map/js/world.js" target="_blank" rel="noopener">Apache ECharts 4.9.0, Datei <code>map/js/world.js</code></a>, Apache-Lizenz 2.0. Den Umriss von Antarktika und die Grenzen der Ozeane haben wir vereinfacht selbst gezeichnet.</li>
+    <li>Kartenprojektion: Bojan Šavrič, Bernhard Jenny, Tom Patterson, Dušan Petrovič, Lorenz Hurni: <i>A Polynomial Equation for the Natural Earth Projection</i>. Cartography and Geographic Information Science 38 (4), 2011, S. 363–372.</li>
+    <li>Schrift <a href="https://fonts.google.com/specimen/Bricolage+Grotesque" target="_blank" rel="noopener">Bricolage Grotesque</a> von Mathieu Triay und Schrift <a href="https://www.brailleinstitute.org/freefont/" target="_blank" rel="noopener">Atkinson Hyperlegible</a> vom Braille Institute of America, beide unter der SIL Open Font License 1.1.</li>
+  </ul>
+</section>
+<footer>Die übrigen Erklärungen (zum Beispiel zu Noten, Kompass, Tag und Nacht und zum Lernen für Klassenarbeiten) entsprechen dem üblichen Schulwissen der 5. Klasse. Fehler gefunden? Sag deiner Lehrerin oder deinem Lehrer Bescheid.</footer>
+</div>
+
 <div class="topic" id="neuigkeiten" hidden>
 <header>
   <p class="eyebrow">S.D.L.W. · Versionshinweise</p>
@@ -1840,7 +1825,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="lead">Hier steht, was sich auf der S.D.L.W., der Super Duper Lern Webseite, verändert hat. Die neueste Version steht ganz oben. Nach zehn Änderungen fassen wir die Hinweise zusammen, damit diese Seite übersichtlich bleibt.</p>
 </section>
 <div id="relPage" class="relpage"></div>
-<footer>Die ausführlichen Versionshinweise für Lehrkräfte stehen im Projekt auf GitHub in der Datei CHANGELOG.md.</footer>
+<footer>Die ausführlichen Versionshinweise für Lehrkräfte stehen im Projekt auf GitHub in der Datei CHANGELOG.md. · <a href="#quellen" class="srcin">Quellen</a></footer>
 </div>
 </div>
 
@@ -1913,7 +1898,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten","quellen"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -1989,7 +1974,7 @@ const Wegweiser=(function(){
     if(a){const fn=a.closest(".fach").querySelector(".fachname");fach=fn.textContent.trim();const d=fn.querySelector(".fdot");color=d?d.style.background:"";
       const ic=a.querySelector(".ico");ico.innerHTML=ic?ic.outerHTML:""}
     else{fach="S.D.L.W.";color="#7A5BC4";
-      const sym=topic==="start"?`<svg viewBox="0 0 24 24" width="60%" height="60%" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`:topic==="spiele"?"🎮":"✦";
+      const sym=topic==="start"?`<svg viewBox="0 0 24 24" width="60%" height="60%" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`:topic==="spiele"?"🎮":topic==="quellen"?"📚":"✦";
       if(topic==="start")title="Startseite";
       ico.innerHTML=`<span class="ico" style="background:conic-gradient(#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4,#E3202A);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-weight:800">${sym}</span>`}
     document.documentElement.style.setProperty("--fc",color||"var(--ink)")}

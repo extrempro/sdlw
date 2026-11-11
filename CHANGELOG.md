@@ -2,7 +2,30 @@
 
 Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
-Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH (siehe CLAUDE.md, Abschnitt „Release-Prozess“).
+Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
+
+## [1.8.0] – 2026-11-11
+
+S.D.L.W. ist jetzt eine Progressive Web App.
+
+### Neu
+
+- **Als App installierbar:** `manifest.webmanifest` mit Name „S.D.L.W.“, Farben und App-Symbolen (Gucki, 192 und 512 px, dazu eine „maskable“-Variante für Android). Chrome und Edge bieten „App installieren“ an, auf iPhone/iPad geht es über Teilen → „Zum Home-Bildschirm“.
+- **Startet offline:** Der Service Worker `sw.js` speichert Seite, Manifest und Symbole auf dem Gerät. Mit Internet kommt die Seite immer frisch vom Server (nach höchstens 4 Sekunden Warten die gespeicherte), ohne Internet die gespeicherte.
+- **Hinweis für die Kinder auf der Startseite** („Zu Hause lernen – mit der S.D.L.W.-App“): kurze Anleitung für iPhone/iPad und für Android/Windows/Chromebook, Hinweis „Frag vorher deine Eltern“. In Chrome und Edge erscheint zusätzlich ein Knopf „App installieren“. Der Hinweis verschwindet, wenn die Seite schon als App läuft oder als Datei geöffnet ist.
+- **Automatische Updates:** Der Speichername in `sw.js` enthält Version und Prüfsumme. Nach jedem Release holen sich die Geräte die neue Version von selbst.
+
+- **Quellenverzeichnis** als eigene Seite `#quellen` (nicht in der Navigation): amtliches Regelwerk der Rechtschreibung, Itten (*Kunst der Farbe*, Biografie der Bauhaus Kooperation, Farbstern 1921 bei MoMA), Newton, Goethe, NOAA zu den fünf Ozeanen, Kartendaten (ECharts 4.9.0), Natural-Earth-Projektion (Šavrič u. a. 2011) und Schriften. Erreichbar über einen kleinen grauen Link „Quellen“ ganz unten auf der Startseite und auf der Seite mit den Versionshinweisen.
+
+### Geändert
+
+- **Aufträge für Heft und Schule entfernt**, weil die App vor allem zum Lernen außerhalb der Schule gedacht ist: Farbkreis malen (Kunst, t5), Kontinent-Steckbrief (k4), Atlas-Auftrag Containerschiff (m5), Experiment Tag und Nacht (n4), Kompass-Rallye (c5), eigene Melodie (u5) und Schreibauftrag Signalwörter (d5). „Mein Lernplan“ im Kapitel „Fit für die Klassenarbeit“ bleibt. Der Tuschfarben-Tipp am Ende des Farbkreis-Kapitels ist durch einen allgemeinen Hinweis ersetzt.
+
+### Verbessert
+
+- `scripts/build.mjs` erzeugt jetzt auch `manifest.webmanifest` und `sw.js`, `scripts/check-release.mjs` prüft sie mit. Die App-Symbole entstehen einmalig mit `scripts/make-icons.mjs` (braucht Playwright).
+- Alle Adressen sind relativ: Die App funktioniert in der Hauptadresse und in einem Unterordner. Beim Öffnen als Datei und in der claude.ai-Vorschau bleibt alles wie bisher.
+- Die Projektbeschreibung (CLAUDE.md) liegt nicht mehr im Repository, sondern im claude.ai-Projekt.
 
 ## [1.7.0] – 2026-11-09
 

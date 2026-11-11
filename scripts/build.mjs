@@ -37,7 +37,7 @@ export const ICONS = ["icons/icon-192.png", "icons/icon-512.png", "icons/icon-ma
 export function manifest() {
   return JSON.stringify({
     id: "./",
-    name: "S.D.L.W. – Super Duper Lern Webseite",
+    name: "S.D.L.W.",
     short_name: "S.D.L.W.",
     description: "Lernseite für die 5. Klasse: Deutsch, Kunst, Erdkunde, Musik, Lerntipps und Lernspiele mit Gucki.",
     lang: "de",

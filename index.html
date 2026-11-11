@@ -157,6 +157,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sstep b{font-family:var(--display);font-size:1.05rem;display:flex;align-items:center;gap:8px}
 .sstep .n{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;background:var(--ink);color:var(--sheet);font-weight:800;font-size:.9rem;flex:none}
 .sstep p{margin:0;font-size:.95rem}
+/* Hinweis „S.D.L.W. als App“ auf der Startseite */
+.appcard{display:flex;gap:16px;align-items:center;background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.appcard img{width:64px;height:64px;border-radius:16px;flex:none;background:var(--paper)}
+.appcard p{margin:0}
+.appcard .btn{margin-top:10px}
+.appsteps .sstep b{font-size:1rem}
+@media (max-width:480px){.appcard{align-items:flex-start;padding:14px}.appcard img{width:48px;height:48px;border-radius:12px}}
 /* Kapitel Klassenarbeit (Bereich Lernen) */
 #klassenarbeit .merk{--accent:var(--lern)}
 #ka3 .sw{display:none}
@@ -695,6 +702,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "date": "2026-11-11",
    "title": "S.D.L.W. als App",
    "items": [
+    "Auf der Startseite steht jetzt, wie du S.D.L.W. als App bekommst – auf manchen Geräten sogar mit eigenem Knopf „App installieren“.",
     "Du kannst S.D.L.W. jetzt wie eine App auf dein Tablet, Handy oder deinen Computer legen – mit Gucki als App-Symbol.",
     "Die App startet auch ohne Internet, zum Beispiel im Bus oder wenn das WLAN in der Schule mal streikt.",
     "Neue Versionen holt sich die App von selbst, sobald du wieder Internet hast."
@@ -877,6 +885,21 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <div class="sblock">
   <h2>Spiele</h2>
   <div id="startGames"></div>
+</div>
+<div class="sblock" id="appHint">
+  <h2>Zu Hause lernen – mit der S.D.L.W.-App</h2>
+  <div class="appcard">
+    <img id="appIcon" alt="" width="64" height="64">
+    <div>
+      <p>Du kannst S.D.L.W. wie eine App auf dein Tablet, Handy oder deinen Computer legen. Dann ist Gucki mit einem Tipp da – und das Lernen klappt sogar <strong>ohne Internet</strong>, zum Beispiel im Auto oder im Urlaub.</p>
+      <button class="btn" id="appBtn" type="button" hidden>App installieren</button>
+    </div>
+  </div>
+  <div class="ssteps appsteps">
+    <div class="sstep"><b>📱 iPhone oder iPad</b><p>Öffne S.D.L.W. in Safari. Tippe auf das Teilen-Symbol (Viereck mit Pfeil nach oben) und dann auf „Zum Home-Bildschirm“.</p></div>
+    <div class="sstep"><b>💻 Android, Windows oder Chromebook</b><p>Öffne S.D.L.W. in Chrome oder Edge. Tippe auf das Menü (⋮ oder …) und dann auf „App installieren“ oder „Zum Startbildschirm hinzufügen“.</p></div>
+  </div>
+  <p class="prose">Frag am besten vorher deine Eltern. Die App kostet nichts und braucht kein Konto.</p>
 </div>
 <div class="sblock">
   <h2>So lernst du hier</h2>
@@ -1926,6 +1949,18 @@ function renderGames(box){if(!box)return;const reg=$("#gameReg"),dot=reg.querySe
     return`<a class="scard" href="#${a.dataset.topic}" style="--sc:${col}">${ic?ic.outerHTML:""}<span class="st-t"><span class="st-f"><span class="fdot" style="background:${col}"></span>Spiel</span><b>${name}</b><span class="st-d">${a.dataset.desc||""}</span></span></a>`}).join("")}</div>`}
 /* ---------- Startseite: Kapitelkarten aus der Navigation (Symbol, Name, data-desc, Fachfarbe) ---------- */
 let startGreeted=false;
+// Hinweis „S.D.L.W. als App“: ausblenden, wenn die Seite schon als App läuft oder als Datei geöffnet ist.
+(function(){const box=document.getElementById("appHint");if(!box)return;
+  const isApp=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+  if(isApp()||location.protocol==="file:"){box.hidden=true;return}
+  const ic=document.querySelector('link[rel="icon"]');if(ic)document.getElementById("appIcon").src=ic.href;
+  const btn=document.getElementById("appBtn");let ask=null;
+  addEventListener("beforeinstallprompt",e=>{e.preventDefault();ask=e;btn.hidden=false});
+  btn.addEventListener("click",async()=>{if(!ask)return;ask.prompt();const r=await ask.userChoice;ask=null;btn.hidden=true;
+    if(r&&r.outcome==="accepted"){guckiCheer();guckiSay("Juhu, bis gleich in der App!",2200)}});
+  addEventListener("appinstalled",()=>{btn.hidden=true});
+})();
+
 function renderStart(){
   const box=$("#startList");if(!box)return;let h="";
   document.querySelectorAll(".navx .fach").forEach(f=>{const fn=f.querySelector(".fachname"),dot=fn.querySelector(".fdot"),col=dot?dot.style.background:"var(--ink)";

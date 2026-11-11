@@ -10,8 +10,9 @@ S.D.L.W. ist jetzt eine Progressive Web App.
 
 ### Neu
 
-- **Als App installierbar:** `manifest.webmanifest` mit Name, Farben und App-Symbolen (Gucki, 192 und 512 px, dazu eine „maskable“-Variante für Android). Chrome und Edge bieten „App installieren“ an, auf iPhone/iPad geht es über Teilen → „Zum Home-Bildschirm“.
+- **Als App installierbar:** `manifest.webmanifest` mit Name „S.D.L.W.“, Farben und App-Symbolen (Gucki, 192 und 512 px, dazu eine „maskable“-Variante für Android). Chrome und Edge bieten „App installieren“ an, auf iPhone/iPad geht es über Teilen → „Zum Home-Bildschirm“.
 - **Startet offline:** Der Service Worker `sw.js` speichert Seite, Manifest und Symbole auf dem Gerät. Mit Internet kommt die Seite immer frisch vom Server (nach höchstens 4 Sekunden Warten die gespeicherte), ohne Internet die gespeicherte.
+- **Hinweis für die Kinder auf der Startseite** („Zu Hause lernen – mit der S.D.L.W.-App“): kurze Anleitung für iPhone/iPad und für Android/Windows/Chromebook, Hinweis „Frag vorher deine Eltern“. In Chrome und Edge erscheint zusätzlich ein Knopf „App installieren“. Der Hinweis verschwindet, wenn die Seite schon als App läuft oder als Datei geöffnet ist.
 - **Automatische Updates:** Der Speichername in `sw.js` enthält Version und Prüfsumme. Nach jedem Release holen sich die Geräte die neue Version von selbst.
 
 ### Verbessert

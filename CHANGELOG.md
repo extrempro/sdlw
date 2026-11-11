@@ -4,6 +4,22 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.8.0] – 2026-11-11
+
+S.D.L.W. ist jetzt eine Progressive Web App.
+
+### Neu
+
+- **Als App installierbar:** `manifest.webmanifest` mit Name, Farben und App-Symbolen (Gucki, 192 und 512 px, dazu eine „maskable“-Variante für Android). Chrome und Edge bieten „App installieren“ an, auf iPhone/iPad geht es über Teilen → „Zum Home-Bildschirm“.
+- **Startet offline:** Der Service Worker `sw.js` speichert Seite, Manifest und Symbole auf dem Gerät. Mit Internet kommt die Seite immer frisch vom Server (nach höchstens 4 Sekunden Warten die gespeicherte), ohne Internet die gespeicherte.
+- **Automatische Updates:** Der Speichername in `sw.js` enthält Version und Prüfsumme. Nach jedem Release holen sich die Geräte die neue Version von selbst.
+
+### Verbessert
+
+- `scripts/build.mjs` erzeugt jetzt auch `manifest.webmanifest` und `sw.js`, `scripts/check-release.mjs` prüft sie mit. Die App-Symbole entstehen einmalig mit `scripts/make-icons.mjs` (braucht Playwright).
+- Alle Adressen sind relativ: Die App funktioniert in der Hauptadresse und in einem Unterordner. Beim Öffnen als Datei und in der claude.ai-Vorschau bleibt alles wie bisher.
+- Die Projektbeschreibung (CLAUDE.md) liegt nicht mehr im Repository, sondern im claude.ai-Projekt.
+
 ## [1.7.0] – 2026-11-09
 
 Farbkreis mit Namen, dazu Itten und die Geschichte des Farbkreises.

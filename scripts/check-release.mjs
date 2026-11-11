@@ -2,7 +2,7 @@
 //   1. Die neueste Version in CHANGELOG.md und in den Versionshinweisen der Webseite
 //      (JSON-Block id="releaseData" in src/entdeckerheft.html) ist gleich – Nummer und Datum.
 //   2. Die Versionen auf der Webseite sind absteigend sortiert und haben Einträge.
-//   3. index.html ist aktuell (entspricht dem Build aus src/entdeckerheft.html).
+//   3. index.html, manifest.webmanifest und sw.js sind aktuell (entsprechen dem Build), die App-Symbole sind da.
 //
 // Aufrufe:
 //   node scripts/check-release.mjs            → prüft alles (Exit-Code 1 bei Fehlern)
@@ -10,7 +10,7 @@
 //   node scripts/check-release.mjs --notes    → gibt die Release Notes der aktuellen Version (Markdown) aus
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { build, root } from "./build.mjs";
+import { buildAll, ICONS, root } from "./build.mjs";
 
 const changelog = readFileSync(join(root, "CHANGELOG.md"), "utf8");
 const src = readFileSync(join(root, "src/entdeckerheft.html"), "utf8");
@@ -71,12 +71,17 @@ if (rel.length) {
   });
 } else if (m) errors.push("Die Versionshinweise der Webseite sind leer.");
 
-const idx = join(root, "index.html");
-if (!existsSync(idx)) errors.push("index.html fehlt. Bitte `node scripts/build.mjs` ausführen.");
-else if (readFileSync(idx, "utf8") !== build()) errors.push("index.html ist nicht aktuell. Bitte `node scripts/build.mjs` ausführen.");
+for (const f of ICONS) if (!existsSync(join(root, f))) errors.push(`${f} fehlt. Bitte \`node scripts/make-icons.mjs\` ausführen.`);
+if (!errors.some(e => e.includes("icons/"))) {
+  for (const [f, text] of Object.entries(buildAll())) {
+    const p = join(root, f);
+    if (!existsSync(p)) errors.push(`${f} fehlt. Bitte \`node scripts/build.mjs\` ausführen.`);
+    else if (readFileSync(p, "utf8") !== text) errors.push(`${f} ist nicht aktuell. Bitte \`node scripts/build.mjs\` ausführen.`);
+  }
+}
 
 if (errors.length) fail(errors.join("\n"));
-console.log(`Alles in Ordnung: Version ${version} vom ${date}, CHANGELOG.md und Webseite stimmen überein, index.html ist aktuell.`);
+console.log(`Alles in Ordnung: Version ${version} vom ${date}, CHANGELOG.md und Webseite stimmen überein, index.html, Manifest und Service Worker sind aktuell.`);
 
 function fail(msg) {
   console.error("Fehler bei den Versionshinweisen:\n" + msg);

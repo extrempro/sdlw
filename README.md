@@ -20,9 +20,21 @@ Ein Kapitel direkt öffnen: `index.html#deutsch`, `#farbkreis`, `#kontinente`, `
 
 Die fertige Datei hängt außerdem an jedem [GitHub-Release](../../releases) als Download.
 
+## Als App (Progressive Web App)
+
+Liegt die Seite auf einem Webserver mit **https**, lässt sie sich als App installieren und startet danach auch
+ohne Internet. Dafür müssen neben `index.html` auch `manifest.webmanifest`, `sw.js` und der Ordner `icons/`
+auf dem Server liegen (bei einem `git clone` ist das automatisch so). Hauptadresse oder Unterordner – beides geht.
+
+- Chrome/Edge (Android, Windows, Chromebook): Symbol „App installieren“ in der Adressleiste oder im Menü.
+- iPhone/iPad: in Safari Teilen → „Zum Home-Bildschirm“.
+
+Neue Versionen holt sich die App von selbst, sobald das Gerät online ist.
+
 ## Mitarbeiten
 
-- Bearbeitet wird nur `src/entdeckerheft.html`. `index.html` entsteht mit `node scripts/build.mjs`.
+- Bearbeitet wird nur `src/entdeckerheft.html`. `index.html`, `manifest.webmanifest` und `sw.js` entstehen mit
+  `node scripts/build.mjs`. Die App-Symbole in `icons/` erzeugt `node scripts/make-icons.mjs` (braucht Playwright).
 - Jede Änderung bekommt eine neue Version mit Versionshinweisen in `CHANGELOG.md` **und** auf der Webseite.
   `node scripts/check-release.mjs` prüft, ob alles zusammenpasst.
 - Änderungen kommen per Pull Request auf `main`. Nach dem Merge entsteht automatisch ein GitHub-Release.

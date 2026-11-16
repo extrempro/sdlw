@@ -181,6 +181,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-note{display:block;font-size:.8rem;color:var(--muted);font-weight:400}
 .vk-say{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:var(--sheet);font-size:1rem;line-height:1;cursor:pointer;flex:none}
 .vk-say:hover{border-color:var(--ink)}
+.vk-say.speaking{border-color:var(--engl);animation:vkpulse .9s ease-in-out infinite}
+@keyframes vkpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--engl) 25%,transparent)}}
+@media (prefers-reduced-motion:reduce){.vk-say.speaking{animation:none;box-shadow:0 0 0 3px var(--engl)}}
+.vk-voice{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:700;font-size:.92rem}
+.vk-voice select{font:inherit;font-weight:400;padding:7px 10px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);max-width:100%;flex:1 1 220px;min-width:0}
+.vk-help{font-size:.92rem;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--sheet)}
+.vk-help summary{cursor:pointer;font-weight:700}
+.vk-help p,.vk-help ul{margin:8px 0}
+.vk-help ul{padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
 .vk-opts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .vk-boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .vk-box{border:2px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
@@ -887,6 +896,17 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.10.1",
+   "date": "2026-11-16",
+   "title": "Schöneres Vorlesen",
+   "items": [
+    "Beim Vorlesen sucht sich S.D.L.W. jetzt die natürlichste britische Stimme auf deinem Gerät aus – Roboterstimmen werden nicht mehr benutzt.",
+    "Im Wörterbuch kannst du die Stimme selbst wählen, wenn dein Gerät mehrere hat.",
+    "Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam. Solange gesprochen wird, leuchtet der Knopf.",
+    "Unter „Klingt die Stimme wie ein Roboter?“ steht, wie man auf dem Gerät eine schönere Stimme lädt."
+   ]
+  },
   {
    "version": "1.10.0",
    "date": "2026-11-16",
@@ -1774,6 +1794,17 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
       <label class="vk-search"><span class="sr-only">Wort suchen</span><input type="search" id="vkSearch" placeholder="Suchen … z. B. Katze oder cat" autocomplete="off" spellcheck="false"></label>
       <div class="bl-chips vk-units" id="vkDictUnits" role="group" aria-label="Teile des Buchs"></div>
     </div>
+    <div class="vk-voice" id="vkVoiceBox" hidden><label for="vkVoice">Stimme</label><select id="vkVoice"></select><button type="button" class="vk-say" id="vkVoiceTry" aria-label="Stimme ausprobieren" title="Ausprobieren">🔊</button></div>
+    <details class="vk-help"><summary>Klingt die Stimme wie ein Roboter?</summary>
+      <p>Das Vorlesen kommt von deinem Gerät. Viele Geräte haben schönere englische Stimmen, die man erst laden muss. Frag am besten deine Eltern. Die Namen der Menüs können je nach Gerät etwas anders heißen.</p>
+      <ul>
+        <li><b>iPhone und iPad:</b> Einstellungen → Bedienungshilfen → Gesprochene Inhalte → Stimmen → Englisch → eine britische Stimme wie „Serena“ oder „Daniel“ in der Variante „Erweitert“ oder „Premium“ laden.</li>
+        <li><b>Android:</b> Einstellungen → Sprache bzw. System → Text-in-Sprache-Ausgabe → Google-Sprachausgabe → Sprachdaten installieren → Englisch (Vereinigtes Königreich).</li>
+        <li><b>Mac:</b> Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Englisch (Vereinigtes Königreich).</li>
+        <li><b>Windows:</b> Im Browser Edge gibt es sehr natürliche Stimmen („Natural“), solange Internet da ist.</li>
+      </ul>
+      <p>Danach S.D.L.W. neu laden und oben bei „Stimme“ die neue Stimme auswählen. Tipp: Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam.</p>
+    </details>
     <p class="hint" id="vkCount" aria-live="polite"></p>
     <ul class="vk-list" id="vkList"></ul>
   </div>
@@ -4038,16 +4069,41 @@ const Vok=(function(){
     if(um)return{ok:true,hint:`Richtig! Schreib ä, ö, ü und ß, wenn du kannst: <b>${um}</b>`};
     const near=ans.some(a=>norm(a).length>=4&&lev(norm(a),norm(raw))===1);
     return{ok:false,near}}
-  // --- Vorlesen (Gerätestimme, britisches Englisch, wenn vorhanden) ---
+  // --- Vorlesen (Gerätestimme) ---
+  // Die Seite kann nur Stimmen nutzen, die auf dem Gerät installiert sind. Sie nimmt die natürlichste britische Stimme:
+  // „Natural/Neural/Premium/Enhanced“-Stimmen und Google-Stimmen bevorzugt, Spaß- und Roboterstimmen nie.
+  // Ohne Internet nur Stimmen, die auf dem Gerät liegen. Eigene Wahl im Wörterbuch (localStorage „vokVoice“).
   const canSay="speechSynthesis" in window&&"SpeechSynthesisUtterance" in window;
-  let voice=null;
-  function pickVoice(){if(!canSay)return;const v=speechSynthesis.getVoices();voice=v.find(x=>/^en[-_]GB/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}
-  if(canSay){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",pickVoice)}
-  function say(en){if(!canSay)return;const t=en.replace(/\(=[^)]*\)/g,"").replace(/[()]/g,"").replace(/\.\.\./g,"").replace(/\s\/\s/g,", ");
-    try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=voice?voice.lang:"en-GB";if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}catch(_){}}
+  const BAD=/espeak|compact|fred|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|kathy|grandma|grandpa|eddy|flo\b|reed|rocko|sandy|shelley/i;
+  function score(v){if(!/^en/i.test(v.lang))return-1e9;let s=/^en[-_]GB/i.test(v.lang)?50:/^en[-_](IE|AU|NZ)/i.test(v.lang)?25:20;
+    if(/natural|neural|premium|enhanced|online|wavenet|studio|verbessert|erweitert/i.test(v.name))s+=40;
+    if(/google/i.test(v.name))s+=25;
+    if(/daniel|serena|kate|oliver|stephanie|arthur|martha|sonia|libby|ryan|maisie|thomas|hazel|george|susan/i.test(v.name))s+=10;
+    if(BAD.test(v.name))s-=100;
+    if(v.localService===false&&navigator.onLine===false)s-=200;
+    return s}
+  let voice=null,voices=[];
+  const ranked=()=>voices.filter(v=>score(v)>-1e8).sort((a,b)=>score(b)-score(a));
+  function pickVoice(){if(!canSay)return;voices=speechSynthesis.getVoices()||[];let want=null;try{want=localStorage.getItem("vokVoice")}catch(_){}
+    const r=ranked();voice=(want&&r.find(v=>v.name===want))||r[0]||null;document.dispatchEvent(new Event("vokvoices"))}
+  if(canSay){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",pickVoice);setTimeout(pickVoice,800)}
+  function setVoice(name){try{name?localStorage.setItem("vokVoice",name):localStorage.removeItem("vokVoice")}catch(_){}pickVoice()}
+  // Schreibweisen fürs Sprechen glätten
+  function speakText(en){return en.replace(/\(=[^)]*\)/g,"").replace(/[()]/g,"").replace(/\s*(\.\.\.|…)\s*/g," ").replace(/\s\/\s/g,", ")
+    .replace(/\bMrs\b\.?/g,"Missus").replace(/\bMr\b\.?/g,"Mister").replace(/\bsb\b/g,"somebody").replace(/\bsth\b/g,"something").replace(/\s+/g," ").replace(/\s+([,.!?])/g,"$1").replace(/[,\s]+$/,"").trim()}
+  let last={t:"",at:0},cur=null,curBtn=null,warned=false;
+  function say(en,btn){if(!canSay)return;if(!voices.length)pickVoice();
+    if(!voice&&voices.length&&!warned){warned=true;if(typeof guckiSay==="function")guckiSay("Auf diesem Gerät fehlt eine englische Stimme. Tipps stehen im Wörterbuch.",3200)}
+    const t=speakText(en),now=Date.now(),slow=t===last.t&&now-last.at<4000;last={t,at:now};
+    const go=()=>{try{const u=new SpeechSynthesisUtterance(t);u.lang=voice?voice.lang:"en-GB";if(voice)u.voice=voice;u.rate=slow?.62:.9;u.pitch=1;
+      const done=()=>{if(curBtn)curBtn.classList.remove("speaking");curBtn=null};
+      u.onend=done;u.onerror=done;cur=u;if(curBtn)curBtn.classList.remove("speaking");curBtn=btn||null;if(curBtn)curBtn.classList.add("speaking");
+      speechSynthesis.resume();speechSynthesis.speak(u)}catch(_){}};
+    // Safari spricht nach cancel() manchmal nicht – darum kurz warten, wenn gerade etwas läuft
+    if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,90)}else go()}
   const sayBtn=en=>canSay?`<button type="button" class="vk-say" data-say="${esc(en)}" aria-label="Vorlesen: ${esc(en)}" title="Vorlesen">🔊</button>`:"";
   function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
-  document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b){e.stopPropagation();say(b.dataset.say)}},true);
+  document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b){e.stopPropagation();say(b.dataset.say,b)}},true);
   // --- Karteikasten (gespeichert auf dem Gerät: localStorage „vokBox“) ---
   let box={};try{box=JSON.parse(localStorage.getItem("vokBox")||"{}")||{}}catch(_){box={}}
   const save=()=>{try{localStorage.setItem("vokBox",JSON.stringify(box))}catch(_){}};
@@ -4063,7 +4119,7 @@ const Vok=(function(){
       btn.innerHTML=`<span class="vk-long">${ed?"Englisch → Deutsch":"Deutsch → Englisch"}</span><span class="vk-short">${ed?"EN → DE":"DE → EN"}</span><span class="vk-swi" aria-hidden="true">⇄</span>`;
       btn.setAttribute("aria-label",`Richtung: ${ed?"Englisch nach Deutsch":"Deutsch nach Englisch"}. Tippen zum Wechseln`);btn.title="Richtung wechseln"};
     draw();btn.onclick=()=>{btn.dataset.d=btn.dataset.d==="ed"?"de":"ed";draw();set(btn.dataset.d)}}
-  return{variants,answersFor,check,say,sayBtn,canSay,esc,fach,setFach,clearBox,unitChips,dirSwap}
+  return{variants,answersFor,check,say,sayBtn,canSay,ranked,setVoice,get voice(){return voice},speakText,score,esc,fach,setFach,clearBox,unitChips,dirSwap}
 })();
 
 // --- Wörterbuch ---
@@ -4080,6 +4136,13 @@ const Vok=(function(){
     list.innerHTML=h||`<li><span class="vk-de">Kein Wort gefunden. Probier es mit einem anderen Wort.</span></li>`;
     cnt.textContent=items.length===1?"1 Eintrag":`${items.length} Einträge`}
   Vok.unitChips($("#vkDictUnits"),sel,render);inp.addEventListener("input",render);render();
+  // Stimmenwahl (nur wenn das Gerät mehr als eine englische Stimme hat)
+  const vb=$("#vkVoiceBox"),vs=$("#vkVoice");
+  function voicesUI(){if(!Vok.canSay||!vb)return;const r=Vok.ranked();vb.hidden=r.length<2;if(r.length<2)return;
+    const curN=Vok.voice&&Vok.voice.name;
+    vs.innerHTML=r.map(v=>`<option value="${Vok.esc(v.name)}"${v.name===curN?" selected":""}>${Vok.esc(v.name.replace(/^Microsoft\s+|^Google\s+/,m=>m))} (${v.lang.replace("_","-")})</option>`).join("")}
+  document.addEventListener("vokvoices",voicesUI);voicesUI();
+  if(vs){vs.onchange=()=>{Vok.setVoice(vs.value);Vok.say("Hello! How are you?",$("#vkVoiceTry"))};$("#vkVoiceTry").onclick=e=>{e.stopPropagation();Vok.say("Hello! How are you?",e.currentTarget)}}
 })();
 
 // --- Aufgabe 1: Karteikasten ---

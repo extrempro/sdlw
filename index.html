@@ -171,8 +171,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-tools{display:flex;flex-direction:column;gap:10px}
 .vk-search input{width:100%;font:inherit;font-size:1rem;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
 .vk-search input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
-.vk-list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--sheet);max-height:440px;overflow:auto}
-.vk-list li{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:center;padding:8px 12px;border-top:1px solid var(--line)}
+.vk-list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--sheet);max-height:min(62vh,520px);overflow:auto;overscroll-behavior:contain}
+.vk-list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) auto;grid-template-areas:"en de say";gap:4px 10px;align-items:center;padding:7px 10px 7px 12px;border-top:1px solid var(--line)}
+.vk-list .vk-en{grid-area:en}.vk-list .vk-de{grid-area:de}.vk-list .vk-say{grid-area:say}
 .vk-list li:first-child{border-top:0}
 .vk-list li.vk-letter{display:block;padding:6px 12px;background:var(--paper);font:800 .85rem var(--display);color:var(--muted);position:sticky;top:0}
 .vk-en{font-weight:700;overflow-wrap:anywhere}
@@ -186,6 +187,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-box{border:2px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
 .vk-box b{font-family:var(--display);font-size:1.4rem;line-height:1}
 .vk-box span{font-size:.8rem;color:var(--muted)}
+.vk-fn{font-size:inherit}
 .vk-box i{display:block;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
 .vk-box i::after{content:"";display:block;height:100%;width:var(--w,0%);background:var(--engl)}
 .vk-stage{display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -219,8 +221,20 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-solution{font-family:var(--display);font-size:clamp(1.6rem,6vw,2.4rem);font-weight:800;line-height:1.15;overflow-wrap:anywhere;padding:8px 14px;border-radius:12px;background:var(--okbg);color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .fs-on .vk-pad canvas{height:clamp(170px,40vh,340px)}
 @media (max-width:600px){.vk-pad canvas,.fs-on .vk-pad canvas{height:clamp(140px,26vh,200px)}}
-@media (max-width:480px){.vk-list li{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}.vk-list li .vk-de{grid-column:1/-1;grid-row:2;color:var(--muted)}
-  .vk-boxes{gap:6px}.vk-box{padding:6px 8px}.vk-box b{font-size:1.15rem}.vk-card{aspect-ratio:4/3}}
+details.vk-set{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:0}
+details.vk-set>summary{cursor:pointer;padding:9px 12px;font-size:.9rem;font-weight:700;list-style:none;display:block}
+.vk-set summary::-webkit-details-marker{display:none}
+.vk-set summary::before{content:"▸";display:inline-block;margin-right:6px;color:var(--muted);transition:transform .2s}
+.vk-set[open] summary::before{transform:rotate(90deg)}
+.vk-set summary [data-sum]{font-weight:400;color:var(--muted);overflow-wrap:anywhere}
+.vk-set .vk-opts{padding:0 12px 12px}
+.taskhead .fs-btn,.fs-row .fs-btn{padding:4px 10px;font-size:.82rem;align-self:center}
+.taskhead .resetbtn{align-self:center}
+@media (max-width:480px){.vk-list li{padding:6px 8px 6px 10px;gap:2px 8px;font-size:.95rem}.vk-list .vk-say{width:32px;height:32px;font-size:.9rem}
+  .vk-boxes{gap:6px}.vk-box{padding:6px 8px}.vk-box b{font-size:1.15rem}.vk-fn{display:none}
+  .vk-card{aspect-ratio:16/10}.vk-face{padding:12px}
+  .bl-chips button{padding:5px 12px;font-size:.9rem}.vk-opts .seg button{padding:7px 9px;font-size:.85rem}
+  .task .taskhead{justify-content:flex-start}.task .taskhead .fs-btn,.task .taskhead .resetbtn{margin-left:0}.task .taskhead .score{margin-left:auto}.task .taskhead h3{flex-basis:100%}}
 @media (prefers-reduced-motion:reduce){.vk-inner{transition:none}}
 
 #ka3 .sw{display:none}
@@ -775,6 +789,16 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.9.1",
+   "date": "2026-11-16",
+   "title": "Vokabeln aufgeräumt",
+   "items": [
+    "Im Karteikasten kommt nicht mehr zweimal hintereinander dieselbe Karte.",
+    "Beim Schreiben mit dem Stift liest dein Gerät das Wort nur noch einmal vor.",
+    "Auf dem Handy ist das Vokabel-Kapitel kompakter: Das Wörterbuch zeigt Englisch und Deutsch in einer Zeile, und die Auswahl (Welcome, Theme 1, Richtung) kannst du auf- und zuklappen."
+   ]
+  },
   {
    "version": "1.9.0",
    "date": "2026-11-16",
@@ -1636,21 +1660,21 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
 <div class="task" id="vk1" data-train><div class="taskhead"><h3>Aufgabe 1 · Karteikasten</h3></div>
   <p class="hint">Lies die Karte und überleg dir die Antwort. Dann dreh die Karte um und sag ehrlich, ob du es gewusst hast. Dein Karteikasten wird auf diesem Gerät gespeichert.</p>
-  <div class="vk-opts">
+  <details class="vk-set" data-set><summary><span class="vk-setlbl">Auswahl</span> <span data-sum></span></summary><div class="vk-opts">
     <div class="bl-chips" data-units role="group" aria-label="Teil des Buchs"></div>
     <div class="seg" data-dir role="group" aria-label="Richtung"><button type="button" data-d="ed" aria-pressed="true">Englisch → Deutsch</button><button type="button" data-d="de" aria-pressed="false">Deutsch → Englisch</button></div>
-  </div>
+  </div></details>
   <div class="vk-boxes" data-boxes></div>
   <div class="vk-stage" data-stage></div>
   <div class="vk-foot"><button type="button" class="btn ghost" data-clear>Karteikasten leeren</button><span class="hint" data-clearinfo aria-live="polite"></span></div>
 </div>
 <div class="task" id="vk2"><div class="taskhead"><h3>Aufgabe 2 · Vokabeln schreiben</h3><span class="score" data-score></span></div>
   <p class="hint">Die schwere Variante: Schreib die Übersetzung selbst – mit der Tastatur oder mit Stift und Finger. Zehn Wörter pro Runde. Achte genau auf die Rechtschreibung!</p>
-  <div class="vk-opts">
+  <details class="vk-set" data-set><summary><span class="vk-setlbl">Auswahl</span> <span data-sum></span></summary><div class="vk-opts">
     <div class="seg" data-mode role="group" aria-label="Schreiben mit"><button type="button" data-m="key" aria-pressed="true">⌨️ Tastatur</button><button type="button" data-m="pen" aria-pressed="false">✏️ Stift</button></div>
     <div class="bl-chips" data-units role="group" aria-label="Teil des Buchs"></div>
     <div class="seg" data-dir role="group" aria-label="Richtung"><button type="button" data-d="de" aria-pressed="true">Deutsch → Englisch</button><button type="button" data-d="ed" aria-pressed="false">Englisch → Deutsch</button></div>
-  </div>
+  </div></details>
   <div class="vk-write" data-write aria-live="polite"></div>
 </div>
 <footer>Die Vokabeln passen zu Welcome und Theme 1 deines Englischbuchs. Beispielsätze und Bilder findest du im Buch. Das Vorlesen übernimmt die Stimme deines Geräts – manche Geräte sprechen etwas anders als deine Lehrerin oder dein Lehrer.</footer>
@@ -3831,6 +3855,17 @@ const Vok=(function(){
   return{variants,answersFor,check,say,sayBtn,canSay,esc,fach,setFach,clearBox,unitChips,dirSeg}
 })();
 
+// --- Auswahl-Kasten (aufklappbar): zeigt kurz, was gewählt ist; auf dem Handy zugeklappt ---
+(function(){
+  document.querySelectorAll("#vokabeln [data-set]").forEach(d=>{
+    const sum=$("[data-sum]",d);
+    const upd=()=>{const u=[...d.querySelectorAll("[data-units] [aria-pressed=true]")].map(b=>b.textContent).join(" + ");
+      const segs=[...d.querySelectorAll(".seg [aria-pressed=true]")].map(b=>b.textContent.replace(/^[^A-Za-zÄÖÜäöü]+/,""));
+      sum.textContent=[u].concat(segs).filter(Boolean).join(" · ")};
+    d.addEventListener("click",()=>setTimeout(upd,0));d._upd=upd;
+    if(!matchMedia("(max-width:600px)").matches)d.open=true;setTimeout(upd,0)})
+})();
+
 // --- Wörterbuch ---
 (function(){
   const list=$("#vkList");if(!list)return;
@@ -3855,13 +3890,14 @@ const Vok=(function(){
   const pool=()=>all.filter(w=>sel.has(w.unit));
   function drawBoxes(){const p=pool(),n=[0,0,0,0];p.forEach(w=>n[Vok.fach(w,dir)]++);
     const names=["","Neu","Fast","Gekonnt"];
-    boxes.innerHTML=[1,2,3].map(f=>`<div class="vk-box"><b>${n[f]}</b><span>Fach ${f} · ${names[f]}</span><i style="--w:${p.length?Math.round(n[f]/p.length*100):0}%"></i></div>`).join("")}
+    boxes.innerHTML=[1,2,3].map(f=>`<div class="vk-box"><b>${n[f]}</b><span><small class="vk-fn">Fach ${f} · </small>${names[f]}</span><i style="--w:${p.length?Math.round(n[f]/p.length*100):0}%"></i></div>`).join("")}
   function pick(){const p=pool();if(!p.length)return null;
     const by=[[],[],[],[]];p.forEach(w=>by[Vok.fach(w,dir)].push(w));
     if(!by[1].length&&!by[2].length)return"done";
-    const r=Math.random();let f=r<.65?1:r<.92?2:3;
-    while(!by[f].length)f=f===3?1:f+1;
-    let c=by[f].filter(w=>w!==last);if(!c.length)c=by[f];return c[Math.floor(Math.random()*c.length)]}
+    // Fach zufällig (meist Fach 1), aber nie dieselbe Karte zweimal hintereinander – auch wenn im Fach nur sie liegt
+    const r=Math.random(),order=r<.65?[1,2,3]:r<.92?[2,1,3]:[3,1,2];
+    for(const f of order){const c=by[f].filter(w=>w!==last);if(c.length)return c[Math.floor(Math.random()*c.length)]}
+    return last}
   function show(){drawBoxes();cur=pick();
     if(cur==="done"){stage.innerHTML=`<p class="fb ok">Super! Alle Karten liegen in Fach 3. Du kannst alle Wörter!</p><div class="vk-row"><button class="btn" type="button" data-again>Alle noch einmal üben</button></div>`;
       guckiCheer();guckiSay("Alle Karten gekonnt!",2200);
@@ -3900,9 +3936,9 @@ const Vok=(function(){
   function head(w){const q=dir==="de"?w.de:w.en,lang=dir==="de"?"Englisch":"Deutsch";
     return`<div class="vk-prog"><span>Wort ${i+1} von ${round.length}</span><span>${right} richtig</span></div>
       <div><p class="hint">${mode==="pen"?"Schreib":"Was heißt"} das auf ${lang}${mode==="pen"?" – mit Stift oder Finger.":"?"}</p><div class="vk-q">${Vok.esc(q)} ${dir==="ed"?Vok.sayBtn(w.en):""}</div>${w.note&&dir==="ed"?`<p class="hint">${Vok.esc(w.note)}</p>`:""}</div>`}
-  function result(w,ok){const nxt=$("[data-next]",wrap);
+  function result(w,ok,said){
     if(ok){right++;guckiCheer();Vok.setFach(w,dir,Vok.fach(w,dir)+1)}else{wrong.push(w);Vok.setFach(w,dir,1)}
-    if(dir==="de")Vok.say(w.en)}
+    if(dir==="de"&&!said)Vok.say(w.en)}
   function ask(){const w=round[i];if(mode==="pen")return askPen(w);
     wrap.innerHTML=head(w)+`
       <form class="vk-form" data-form autocomplete="off"><label class="sr-only" for="vkIn">Deine Antwort</label>
@@ -3946,7 +3982,7 @@ const Vok=(function(){
         <div class="vk-row" style="justify-content:flex-start"><button type="button" class="btn vk-yes" data-y>✓ Richtig geschrieben</button><button type="button" class="btn vk-no" data-n>✗ Noch nicht</button></div>`;
       if(dir==="de")Vok.say(w.en);
       setTimeout(()=>{const so=$(".vk-solution",wrap);if(so)so.scrollIntoView({block:"center",behavior:"smooth"})},50);
-      const done=ok=>{result(w,ok);$("[data-sol] .vk-row",wrap).innerHTML=`<button type="button" class="btn" data-next>${i+1<round.length?"Weiter →":"Ergebnis"}</button>`;$("[data-next]",wrap).onclick=next;$("[data-next]",wrap).focus({preventScroll:true})};
+      const done=ok=>{result(w,ok,true);$("[data-sol] .vk-row",wrap).innerHTML=`<button type="button" class="btn" data-next>${i+1<round.length?"Weiter →":"Ergebnis"}</button>`;$("[data-next]",wrap).onclick=next;$("[data-next]",wrap).focus({preventScroll:true})};
       $("[data-y]",wrap).onclick=()=>done(true);$("[data-n]",wrap).onclick=()=>done(false);$("[data-y]",wrap).focus({preventScroll:true})};
     cv._size=size;size();first=false}
   window.addEventListener("resize",()=>{const c=$("[data-pad]",wrap);if(c&&c._size)c._size()});

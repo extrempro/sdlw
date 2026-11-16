@@ -4,6 +4,18 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.9.1] – 2026-11-16
+
+### Behoben
+
+- **Karteikasten:** Dieselbe Karte kam oft zweimal hintereinander, wenn die erste als „Gewusst“ allein in Fach 2 lag und danach Fach 2 gezogen wurde. Die zuletzt gezeigte Karte wird jetzt über alle Fächer hinweg ausgeschlossen.
+- **Vokabeln schreiben, Stift-Modus:** Das Wort wurde bei „Lösung zeigen“ und noch einmal bei „Richtig geschrieben“/„Noch nicht“ vorgelesen. Jetzt nur noch beim Zeigen der Lösung.
+
+### Verbessert
+
+- **Vokabeln auf dem Handy:** Wörterbuch-Zeilen einzeilig (Englisch | Deutsch | 🔊), Liste höher (bis 62 % der Bildschirmhöhe). Die Auswahl (Teil, Richtung, Tastatur/Stift) steckt in einem aufklappbaren Kasten mit Kurzfassung, auf dem Handy zugeklappt. Fach-Kästen ohne „Fach N ·“, Karteikarte flacher.
+- **Aufgabenkopf auf dem Handy (alle Kapitel):** Überschrift in eigener Zeile, darunter „⛶ Vollbild“ und „↺ Neu beginnen“ linksbündig in gleicher Größe, Punktestand rechts.
+
 ## [1.9.0] – 2026-11-16
 
 Neues Fach Englisch mit dem Kapitel „Vokabeln“.

@@ -15,6 +15,7 @@ Neues Fach Englisch mit dem Kapitel „Vokabeln“.
 - **Aufgabe 1 · Karteikasten:** Karten zum Umdrehen, „Gewusst“/„Noch nicht“, drei Fächer (Neu, Fast, Gekonnt), Richtung Englisch → Deutsch oder Deutsch → Englisch. Der Stand wird auf dem Gerät gespeichert (`localStorage` „vokBox“), „Karteikasten leeren“ mit zweitem Tippen zur Sicherheit. Zählt nicht für die Kapitel-Party (`data-train`, im Wegweiser ohne ✎).
 - **Aufgabe 2 · Vokabeln schreiben:** zehn Wörter pro Runde (ohne Redewendungen), beide Richtungen, zählt für die Kapitel-Party. Großzügig bei „to“ vor Verben, Klammern, Kurzformen und „Freund/in“; Groß-/Kleinschreibung und ae/oe/ue/ss statt Umlauten gelten als richtig mit Hinweis; „Fast!“ bei einem falschen Buchstaben. Ergebnisse wandern auch in den Karteikasten. Knöpfe für ä, ö, ü, ß.
 - **Gucki-Blitzrunde:** neuer Fragen-Generator „Englisch“.
+- **Vollbild für Übungen und Spiele:** Jede Aufgabe (`.task`) bekommt im Kopf einen Knopf „⛶ Vollbild“, die vier Spiele einen über der Spielfläche. Die Fläche liegt dann über der ganzen Seite (Gucki bleibt sichtbar, „Nach oben“ ist ausgeblendet), mit Leiste „✕ Schließen“. Wo der Browser es erlaubt, schaltet sich zusätzlich echtes Vollbild ein; Esc, Seitenwechsel oder das Beenden des Browser-Vollbilds schließen es wieder.
 
 ## [1.8.0] – 2026-11-11
 

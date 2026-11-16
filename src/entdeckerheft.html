@@ -510,6 +510,22 @@ canvas.globe:active{cursor:grabbing}
 .turnrow .btn{padding:6px 12px;font-size:.9rem}
 .turnok{font-weight:700;color:var(--ok)}
 .taskhead .resetbtn{padding:4px 10px;font-size:.82rem;margin-left:auto}
+/* Vollbild für Übungen und Spiele */
+.fs-btn{padding:4px 10px;font-size:.82rem}
+.taskhead .fs-btn{margin-left:auto}
+.taskhead .fs-btn~.resetbtn{margin-left:0}
+.fs-row{display:flex;justify-content:flex-end;margin-bottom:8px}
+body.fs-lock{overflow:hidden}
+body.fs-lock .totop{display:none}
+.fs-on{position:fixed!important;inset:0!important;z-index:17;margin:0!important;max-width:none!important;width:auto!important;height:auto!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:auto;overscroll-behavior:contain;background:var(--paper)!important;
+  padding:calc(env(safe-area-inset-top,0px) + 8px) max(16px,calc(env(safe-area-inset-right,0px) + 16px)) calc(env(safe-area-inset-bottom,0px) + 72px) max(16px,calc(env(safe-area-inset-left,0px) + 16px))!important}
+.fs-on>*{width:100%;max-width:760px;margin-inline:auto}
+.fs-on .fs-btn{display:none}
+.fs-on .taskhead .resetbtn{margin-left:auto}
+.fs-bar{position:sticky;top:calc(-8px - env(safe-area-inset-top,0px));z-index:3;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;background:var(--paper);border-bottom:1px solid var(--line)}
+.fs-bar span{font:800 1rem var(--display);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fs-bar .btn{padding:6px 12px;font-size:.9rem;flex:none}
+.ff-wrap.fs-on .ff-stage{width:min(100%,calc(100dvh - 190px));min-width:260px}
 .taskhead .score{order:2}
 .allreset{align-self:flex-start}
 svg.tzmap{cursor:default;min-width:560px}
@@ -745,7 +761,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     "Im Wörterbuch suchst du Wörter auf Englisch oder Deutsch. Mit 🔊 liest dir dein Gerät das englische Wort vor.",
     "Im Karteikasten drehst du Karten um und sortierst sie in Fach 1, 2 und 3. Dein Gerät merkt sich, was du schon kannst.",
     "Die schwere Variante: Schreib die Vokabeln selbst – zehn Wörter pro Runde, in beide Richtungen.",
-    "In der Gucki-Blitzrunde gibt es jetzt auch Englisch-Fragen."
+    "In der Gucki-Blitzrunde gibt es jetzt auch Englisch-Fragen.",
+    "Jede Übung und jedes Spiel hat jetzt einen Knopf „⛶ Vollbild“. Dann siehst du nur noch die Aufgabe – und Gucki natürlich."
    ]
   },
   {
@@ -3893,5 +3910,29 @@ const Vok=(function(){
     const b=document.createElement("button");b.type="button";b.className="btn ghost allreset";b.textContent="↺ Alle Aufgaben neu beginnen";
     b.onclick=()=>{topic.querySelectorAll(".task").forEach(resetTask);b.textContent="✓ Alle Aufgaben sind zurückgesetzt";setTimeout(()=>b.textContent="↺ Alle Aufgaben neu beginnen",2000)};
     sec.appendChild(b)});
+})();
+/* --- Vollbild für Übungen und Spiele --- */
+// Jede Übung (.task) und die Spielflächen bekommen einen Knopf „⛶ Vollbild“. Die Fläche liegt dann über der ganzen Seite
+// (Gucki bleibt sichtbar). Wo der Browser es kann, wird zusätzlich echtes Vollbild eingeschaltet (nicht auf dem iPhone).
+(function(){
+  let cur=null,bar=null;const GAMES=["#ffWrap","#wrWrap","#blWrap","#mmWrap"];
+  const fire=()=>setTimeout(()=>window.dispatchEvent(new Event("resize")),60);
+  function title(el){const t=el.closest(".topic"),h1=t&&t.querySelector("h1");return h1?h1.textContent.trim():"S.D.L.W."}
+  function open(el){if(cur)close(true);cur=el;el.classList.add("fs-on");document.body.classList.add("fs-lock");
+    bar=document.createElement("div");bar.className="fs-bar";
+    bar.innerHTML=`<span>${title(el)}</span><button type="button" class="btn ghost" aria-label="Vollbild beenden">✕ Schließen</button>`;
+    el.prepend(bar);bar.querySelector("button").onclick=()=>close();el.scrollTop=0;
+    const de=document.documentElement;
+    try{if(de.requestFullscreen&&!document.fullscreenElement)de.requestFullscreen({navigationUI:"hide"}).catch(()=>{})}catch(_){}
+    bar.querySelector("button").focus({preventScroll:true});fire()}
+  function close(keepFs){if(!cur)return;const el=cur;cur=null;el.classList.remove("fs-on");document.body.classList.remove("fs-lock");if(bar){bar.remove();bar=null}
+    if(!keepFs&&document.fullscreenElement){try{document.exitFullscreen().catch(()=>{})}catch(_){}}
+    const b=el.querySelector(".fs-btn")||(el.previousElementSibling&&el.previousElementSibling.querySelector(".fs-btn"));if(b)b.focus({preventScroll:true});fire()}
+  const mk=el=>{const b=document.createElement("button");b.type="button";b.className="btn ghost fs-btn";b.textContent="⛶ Vollbild";b.setAttribute("aria-label","Im Vollbild öffnen");b.onclick=()=>open(el);return b};
+  document.querySelectorAll(".task").forEach(t=>{const head=$(".taskhead",t);if(!head)return;const r=$(".resetbtn",head);head.insertBefore(mk(t),r||null)});
+  GAMES.forEach(sel=>{const el=$(sel);if(!el)return;const row=document.createElement("div");row.className="fs-row";row.appendChild(mk(el));el.parentNode.insertBefore(row,el)});
+  document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&cur)close(true)});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&cur)close()});
+  window.addEventListener("hashchange",()=>{if(cur)close()});
 })();
 </script>

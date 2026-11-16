@@ -215,6 +215,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-keys button{min-width:40px;height:40px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font:700 1rem var(--body)}
 .vk-prog{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:700}
 .vk-sum{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.vk-modebar{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.vk-modebar .hint{margin:0}
+.vk-mode button{font-size:1.15rem;line-height:1;padding:7px 12px}
+.vk-mode .vk-ml{font-size:.9rem}
+@media (max-width:480px){.vk-mode .vk-ml{display:none}.vk-mode button{font-size:1.3rem;padding:7px 14px}}
 .vk-pad{position:relative;border:2px solid var(--line);border-radius:14px;background:var(--sheet);overflow:hidden}
 .vk-pad canvas{display:block;width:100%;height:clamp(150px,30vh,260px);touch-action:none;cursor:crosshair}
 .vk-padhint{position:absolute;left:14px;top:10px;color:var(--muted);font-size:.85rem;pointer-events:none}
@@ -796,7 +801,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "items": [
     "Im Karteikasten kommt nicht mehr zweimal hintereinander dieselbe Karte.",
     "Beim Schreiben mit dem Stift liest dein Gerät das Wort nur noch einmal vor.",
-    "Auf dem Handy ist das Vokabel-Kapitel kompakter: Das Wörterbuch zeigt Englisch und Deutsch in einer Zeile, und die Auswahl (Welcome, Theme 1, Richtung) kannst du auf- und zuklappen."
+    "Auf dem Handy ist das Vokabel-Kapitel kompakter: Das Wörterbuch zeigt Englisch und Deutsch in einer Zeile, und die Auswahl (Welcome, Theme 1, Richtung) kannst du auf- und zuklappen.",
+    "Beim Vokabelschreiben wechselst du mit ✏️ und ⌨️ zwischen Stift und Tastatur. Auf Handy und Tablet schreibst du jetzt gleich mit dem Stift oder Finger."
    ]
   },
   {
@@ -1671,10 +1677,10 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <div class="task" id="vk2"><div class="taskhead"><h3>Aufgabe 2 · Vokabeln schreiben</h3><span class="score" data-score></span></div>
   <p class="hint">Die schwere Variante: Schreib die Übersetzung selbst – mit der Tastatur oder mit Stift und Finger. Zehn Wörter pro Runde. Achte genau auf die Rechtschreibung!</p>
   <details class="vk-set" data-set><summary><span class="vk-setlbl">Auswahl</span> <span data-sum></span></summary><div class="vk-opts">
-    <div class="seg" data-mode role="group" aria-label="Schreiben mit"><button type="button" data-m="key" aria-pressed="true">⌨️ Tastatur</button><button type="button" data-m="pen" aria-pressed="false">✏️ Stift</button></div>
     <div class="bl-chips" data-units role="group" aria-label="Teil des Buchs"></div>
     <div class="seg" data-dir role="group" aria-label="Richtung"><button type="button" data-d="de" aria-pressed="true">Deutsch → Englisch</button><button type="button" data-d="ed" aria-pressed="false">Englisch → Deutsch</button></div>
   </div></details>
+  <div class="vk-modebar"><span class="hint" id="vkModeLbl">Schreiben mit</span><div class="seg vk-mode" data-mode role="group" aria-labelledby="vkModeLbl"><button type="button" data-m="pen" aria-pressed="true" aria-label="Stift oder Finger" title="Stift oder Finger">✏️<span class="vk-ml"> Stift</span></button><button type="button" data-m="key" aria-pressed="false" aria-label="Tastatur" title="Tastatur">⌨️<span class="vk-ml"> Tastatur</span></button></div></div>
   <div class="vk-write" data-write aria-live="polite"></div>
 </div>
 <footer>Die Vokabeln passen zu Welcome und Theme 1 deines Englischbuchs. Beispielsätze und Bilder findest du im Buch. Das Vorlesen übernimmt die Stimme deines Geräts – manche Geräte sprechen etwas anders als deine Lehrerin oder dein Lehrer.</footer>
@@ -3931,7 +3937,7 @@ const Vok=(function(){
   const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id)),wrap=$("[data-write]",task),sc=$("[data-score]",task);
   const small=()=>matchMedia("(max-width:600px)").matches;
   const nice=t=>t.replace(/\s*\(=\s*([^)]+)\)/g," (auch: $1)");
-  let dir="de",mode=matchMedia("(min-width:700px) and (pointer:coarse)").matches?"pen":"key",round=[],i=0,right=0,wrong=[],first=true;const N=10;
+  let dir="de",mode=matchMedia("(pointer:coarse)").matches?"pen":"key",round=[],i=0,right=0,wrong=[],first=true;const N=10;
   function start(){const p=all.filter(w=>sel.has(w.unit)&&!w.p);round=shuffle(p).slice(0,Math.min(N,p.length));i=0;right=0;wrong=[];sc.textContent="";delete task.dataset.perfect;ask()}
   function head(w){const q=dir==="de"?w.de:w.en,lang=dir==="de"?"Englisch":"Deutsch";
     return`<div class="vk-prog"><span>Wort ${i+1} von ${round.length}</span><span>${right} richtig</span></div>
@@ -3994,8 +4000,7 @@ const Vok=(function(){
     $("[data-new]",wrap).onclick=()=>{start();const x=$("#vkIn",wrap);if(x)x.focus({preventScroll:true})};
     guckiDone(perfect,task)}
   const modeEl=$("[data-mode]",task);
-  function setMode(m){mode=m;modeEl.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m));
-    if(m==="pen"&&small()&&!task.classList.contains("fs-on")){const fs=$(".fs-btn",task);if(fs)fs.click()}}
+  function setMode(m){mode=m;modeEl.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m))}
   modeEl.onclick=e=>{const b=e.target.closest("button[data-m]");if(!b||b.dataset.m===mode)return;setMode(b.dataset.m);first=true;start()};
   setMode(mode);
   Vok.unitChips($("[data-units]",task),sel,()=>{first=true;start()});

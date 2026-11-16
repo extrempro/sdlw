@@ -168,7 +168,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 #klassenarbeit .merk{--accent:var(--lern)}
 /* ===== Englisch: Vokabeln ===== */
 #vokabeln .merk{--accent:var(--engl)}
-.vk-tools{display:flex;flex-direction:column;gap:10px}
+.vk-dict{gap:12px}
+.vk-row2{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.vk-row2 .hint{margin:0}
+#vokabeln .vk-dict .vk-list{border-radius:12px;padding:0;margin:0;list-style:none}
+#vokabeln .vk-dict .vk-list li{margin:0}
 .vk-search input{width:100%;font:inherit;font-size:1rem;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
 .vk-search input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
 .vk-list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--sheet);max-height:min(62vh,520px);overflow:auto;overscroll-behavior:contain}
@@ -181,6 +185,20 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-note{display:block;font-size:.8rem;color:var(--muted);font-weight:400}
 .vk-say{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:var(--sheet);font-size:1rem;line-height:1;cursor:pointer;flex:none}
 .vk-say:hover{border-color:var(--ink)}
+.vk-say.speaking{border-color:var(--engl);animation:vkpulse .9s ease-in-out infinite}
+@keyframes vkpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--engl) 25%,transparent)}}
+@media (prefers-reduced-motion:reduce){.vk-say.speaking{animation:none;box-shadow:0 0 0 3px var(--engl)}}
+.vk-voice{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:700;font-size:.92rem}
+.vk-vnote{flex-basis:100%;font-weight:400;font-size:.85rem;color:var(--muted)}
+.vk-vnote:empty{display:none}
+.vk-voice select{font:inherit;font-weight:400;padding:7px 10px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);max-width:100%;flex:1 1 220px;min-width:0}
+.vk-help{font-size:.92rem;border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--sheet);display:block}
+.vk-help[open]{display:flex;flex-direction:column;gap:10px}
+.vk-help h3{margin:6px 0 0;font-size:1rem}
+.vk-help summary{cursor:pointer;font-weight:700}
+.vk-help p,.vk-help ul{margin:0}
+.vk-help .vk-voice{padding:10px 0;border-bottom:1px solid var(--line)}
+.vk-help ul{padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
 .vk-opts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .vk-boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .vk-box{border:2px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
@@ -214,6 +232,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-keys button{min-width:40px;height:40px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font:700 1rem var(--body)}
 .vk-prog{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:700}
 .vk-sum{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+@media (max-width:600px){#vokabeln .trio{gap:8px}#vokabeln .trio .card{padding:10px 14px;gap:2px}#vokabeln .trio .card h3{font-size:1rem}#vokabeln .trio .card p{font-size:.92rem}}
 .vk-mode{padding:3px}.vk-mode button{font-size:1.1rem;line-height:1;padding:5px 10px}
 .vk-mode .vk-ml{font-size:.9rem}
 @media (max-width:480px){.vk-mode .vk-ml{display:none}.vk-mode button{font-size:1.2rem;padding:5px 11px}}
@@ -432,8 +451,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .nv-tab .nv-chev{color:var(--muted);font-size:1.05rem;line-height:1;margin-left:2px;display:inline-block;transition:transform .2s}
 .nv-tab[aria-expanded="true"] .nv-chev{transform:rotate(90deg)}
 .nv-tab[aria-expanded="true"]{border-color:var(--fc);box-shadow:inset 0 0 0 1.5px var(--fc)}
-.nv-sub .nv-over2{font-size:.85rem;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:4px 8px}
-.nv-sub .nv-over2:hover,.nv-sub .nv-over2[aria-current="page"]{color:var(--ink)}
+.nv-tabw{display:inline-flex;align-items:center;gap:4px}
 /* Computer (ab 1240 px): Leiste links, aktuelles Fach aufgeklappt */
 @media (min-width:1240px){
   .navx{position:fixed;top:120px;width:min(240px,calc(50% - 416px));left:calc(50% - 400px - min(240px,calc(50% - 416px)));max-height:calc(100vh - 150px);overflow:auto;padding:4px;z-index:5}
@@ -454,9 +472,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .nv-chev{color:var(--muted);font-size:1.1rem;line-height:1;transition:transform .2s}
   .nv-acc[aria-expanded="true"] .nv-chev{transform:rotate(90deg)}
   .nv-acc[aria-current="true"] .nv-fn{text-decoration:underline;text-decoration-color:var(--fc);text-decoration-thickness:3px;text-underline-offset:4px}
-  .nv-over2{font-size:.82rem;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:4px 8px;border-radius:8px}
-  .nv-over2:hover{color:var(--ink)}
-  .nv-over2[aria-current="page"]{color:var(--ink);background:var(--sheet)}
+  .nv-row{position:relative}
+  .nv-f.open .nv-kaps{margin:2px 0 6px 15px!important;gap:1px!important}
 }
 /* Handy: Knopf „☰ Themen“, aufgeklappt erst Fächer, dann Kapitel */
 @media (max-width:600px){
@@ -476,9 +493,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .nv-ftile small{font-size:.8rem;color:var(--muted);font-weight:700}
   .nv-ftile .fdot{display:none}
   .nv-ftile[aria-current]{background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--fc)}
-  .nv-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+  .nv-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
   .nv-back{font:700 .9rem var(--body);padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
-  .nv-over{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+  .nv-ph{display:inline-flex;align-items:center;gap:8px;font-size:.95rem}
+
   .nv-kaps{display:grid;grid-template-columns:1fr;gap:6px}
   .nv-kaps .nv-kap{border-radius:12px;padding:5px 10px 5px 5px}
   .nv-sub{display:none}
@@ -887,6 +905,18 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.10.1",
+   "date": "2026-11-16",
+   "title": "Schöneres Vorlesen",
+   "items": [
+    "Beim Vorlesen sucht sich S.D.L.W. jetzt die natürlichste britische Stimme auf deinem Gerät aus – Roboterstimmen werden nicht mehr benutzt.",
+    "Im Wörterbuch steht jetzt, welche Stimme vorliest. Hat dein Gerät mehrere, kannst du dort eine andere wählen.",
+    "Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam. Solange gesprochen wird, leuchtet der Knopf.",
+    "Unter „Klingt die Stimme wie ein Roboter?“ steht, wie man auf dem Gerät eine schönere Stimme lädt.",
+    "Das Vokabel-Kapitel ist aufgeräumt: Das Wörterbuch steht in einem eigenen Kasten, Stimme und Tipps zum Vorlesen findest du darunter zum Aufklappen."
+   ]
+  },
   {
    "version": "1.10.0",
    "date": "2026-11-16",
@@ -1769,14 +1799,28 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <section>
   <h2>Wörterbuch</h2>
   <p class="prose">Such ein Wort auf Englisch oder Deutsch. Mit 🔊 hörst du, wie man es ausspricht.</p>
-  <div class="vk-dict">
-    <div class="vk-tools">
-      <label class="vk-search"><span class="sr-only">Wort suchen</span><input type="search" id="vkSearch" placeholder="Suchen … z. B. Katze oder cat" autocomplete="off" spellcheck="false"></label>
+  <div class="card vk-dict">
+    <label class="vk-search"><span class="sr-only">Wort suchen</span><input type="search" id="vkSearch" placeholder="Suchen … z. B. Katze oder cat" autocomplete="off" spellcheck="false"></label>
+    <div class="vk-row2">
       <div class="bl-chips vk-units" id="vkDictUnits" role="group" aria-label="Teile des Buchs"></div>
+      <p class="hint" id="vkCount" aria-live="polite"></p>
     </div>
-    <p class="hint" id="vkCount" aria-live="polite"></p>
     <ul class="vk-list" id="vkList"></ul>
   </div>
+  <details class="vk-help">
+    <summary>🔊 Vorlesen: Stimme wählen und Tipps</summary>
+      <div class="vk-voice" id="vkVoiceBox"><label for="vkVoice">Stimme</label><select id="vkVoice"></select><button type="button" class="vk-say" id="vkVoiceTry" aria-label="Stimme ausprobieren" title="Ausprobieren">🔊</button><span class="vk-vnote" id="vkVoiceNote"></span></div>
+      <h3>Klingt die Stimme wie ein Roboter?</h3>
+      <p>Das Vorlesen kommt von deinem Gerät. Viele Geräte haben schönere englische Stimmen, die man erst laden muss. Frag am besten deine Eltern. Die Namen der Menüs können je nach Gerät etwas anders heißen.</p>
+      <ul>
+        <li><b>iPhone und iPad:</b> Einstellungen → Bedienungshilfen → Gesprochene Inhalte → Stimmen → Englisch → eine britische Stimme wie „Serena“ oder „Daniel“ in der Variante „Erweitert“ oder „Premium“ laden.</li>
+        <li><b>Android:</b> Einstellungen → Sprache bzw. System → Text-in-Sprache-Ausgabe → Google-Sprachausgabe → Sprachdaten installieren → Englisch (Vereinigtes Königreich).</li>
+        <li><b>Mac:</b> Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Englisch (Vereinigtes Königreich).</li>
+        <li><b>Windows:</b> Im Browser Edge gibt es sehr natürliche Stimmen („Natural“), solange Internet da ist. Chrome hat „Google UK English“.</li>
+        <li><b>Firefox am Computer:</b> Firefox nutzt nur die einfachen Stimmen des Computers. Zum Vokabellernen lieber Edge, Chrome oder Safari nehmen.</li>
+      </ul>
+      <p>Danach S.D.L.W. neu laden und hier bei „Stimme“ die neue Stimme auswählen. Tipp: Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam.</p>
+  </details>
 </section>
 <section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
 <div class="task" id="vk1" data-train><div class="taskhead"><h3>Aufgabe 1 · Karteikasten</h3></div>
@@ -2273,16 +2317,16 @@ const Menu=(function(){
     return`<div class="nv-grade" role="group" aria-label="Klasse wählen">${g.map(x=>`<button type="button" data-g="${x}" aria-pressed="${x===Klassen.grade}">Klasse ${x}</button>`).join("")}</div>`}
   function render(){const cf=curFach(),F=Klassen.visF();
     if(phone()){const pf=phoneFach&&F.find(f=>f.id===phoneFach);
-      ui.innerHTML=pf?`<div class="nv-head"><button type="button" class="nv-back" data-back>‹ Alle Fächer</button><a class="nv-over" href="#fach-${pf.id}" style="--fc:${pf.color}"><span class="fdot" style="background:${pf.color}"></span>${pf.name} · Übersicht</a></div><div class="nv-kaps">${kapLinks(pf)}</div>`
+      ui.innerHTML=pf?`<div class="nv-head"><button type="button" class="nv-back" data-back>‹ Alle Fächer</button><span class="nv-ph" style="--fc:${pf.color}"><span class="fdot" style="background:${pf.color}"></span><b>${pf.name}</b></span></div><div class="nv-kaps">${kapLinks(pf)}</div>`
         :`${gradeSel()}<div class="nv-fgrid">${F.map(f=>`<button type="button" class="nv-ftile" data-f="${f.id}" style="--fc:${f.color}"${f.id===cf?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><b>${f.name}</b><small>${f.kap.length}</small></button>`).join("")}</div>`;return}
     if(desk()){ // Leiste links: Fächer klappen auf und zu, die Übersicht ist ein eigener Link
       ui.innerHTML=`${gradeSel()}<div class="nv-facher">${F.map(f=>{const open=openF.has(f.id),here=f.id===cf;
-        return`<div class="nv-f${open?" open":""}" style="--fc:${f.color}"><button type="button" class="nv-fach nv-acc" data-tog="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><span class="nv-fn">${f.name}</span><span class="nv-chev" aria-hidden="true">›</span></button>${open?`<div class="nv-kaps">${kapLinks(f)}<a class="nv-over2" href="#fach-${f.id}"${topic==="fach-"+f.id?' aria-current="page"':""}>Übersicht ${f.name}</a></div>`:""}</div>`}).join("")}</div>`;return}
+        return`<div class="nv-f${open?" open":""}" style="--fc:${f.color}"><div class="nv-row"><button type="button" class="nv-fach nv-acc" data-tog="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><span class="nv-fn">${f.name}</span><span class="nv-chev" aria-hidden="true">›</span></button></div>${open?`<div class="nv-kaps">${kapLinks(f)}</div>`:""}</div>`}).join("")}</div>`;return}
     // Tablet: Fach-Knöpfe klappen die Kapitelzeile darunter auf und zu (immer nur ein Fach offen)
     ui.innerHTML=`${gradeSel()}<div class="nv-facher">${F.map(f=>{const open=f.id===tabF,here=f.id===cf;
-      return`<button type="button" class="nv-fach nv-tab" data-tab="${f.id}" aria-expanded="${open}" style="--fc:${f.color}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span>${f.name}<span class="nv-chev" aria-hidden="true">›</span></button>`}).join("")}</div>`;
+      return`<span class="nv-tabw" style="--fc:${f.color}"><button type="button" class="nv-fach nv-tab" data-tab="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span>${f.name}<span class="nv-chev" aria-hidden="true">›</span></button></span>`}).join("")}</div>`;
     const tf=F.find(f=>f.id===tabF);
-    ui.insertAdjacentHTML("beforeend",tf?`<div class="nv-sub" style="--fc:${tf.color}">${kapLinks(tf)}<a class="nv-over2" href="#fach-${tf.id}"${topic==="fach-"+tf.id?' aria-current="page"':""}>Übersicht ${tf.name}</a></div>`:"")}
+    ui.insertAdjacentHTML("beforeend",tf?`<div class="nv-sub" style="--fc:${tf.color}">${kapLinks(tf)}</div>`:"")}
   ui.addEventListener("click",e=>{const t=e.target.closest("[data-f],[data-back],[data-g],[data-tog],[data-tab]");if(!t)return;e.stopPropagation();
     if(t.dataset.tab){tabF=tabF===t.dataset.tab?null:t.dataset.tab;render();const b=ui.querySelector(`[data-tab="${t.dataset.tab}"]`);if(b)b.focus({preventScroll:true});return}
     if(t.dataset.tog){const id=t.dataset.tog;if(openF.has(id))openF.delete(id);else openF.add(id);render();const b=ui.querySelector(`[data-tog="${id}"]`);if(b)b.focus({preventScroll:true});return}
@@ -4038,16 +4082,42 @@ const Vok=(function(){
     if(um)return{ok:true,hint:`Richtig! Schreib ä, ö, ü und ß, wenn du kannst: <b>${um}</b>`};
     const near=ans.some(a=>norm(a).length>=4&&lev(norm(a),norm(raw))===1);
     return{ok:false,near}}
-  // --- Vorlesen (Gerätestimme, britisches Englisch, wenn vorhanden) ---
+  // --- Vorlesen (Gerätestimme) ---
+  // Die Seite kann nur Stimmen nutzen, die auf dem Gerät installiert sind. Sie nimmt die natürlichste britische Stimme:
+  // „Natural/Neural/Premium/Enhanced“-Stimmen und Google-Stimmen bevorzugt, Spaß- und Roboterstimmen nie.
+  // Ohne Internet nur Stimmen, die auf dem Gerät liegen. Eigene Wahl im Wörterbuch (localStorage „vokVoice“).
   const canSay="speechSynthesis" in window&&"SpeechSynthesisUtterance" in window;
-  let voice=null;
-  function pickVoice(){if(!canSay)return;const v=speechSynthesis.getVoices();voice=v.find(x=>/^en[-_]GB/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}
-  if(canSay){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",pickVoice)}
-  function say(en){if(!canSay)return;const t=en.replace(/\(=[^)]*\)/g,"").replace(/[()]/g,"").replace(/\.\.\./g,"").replace(/\s\/\s/g,", ");
-    try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=voice?voice.lang:"en-GB";if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}catch(_){}}
+  const BAD=/espeak|compact|fred|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|kathy|grandma|grandpa|eddy|flo\b|reed|rocko|sandy|shelley/i;
+  function score(v){if(!/^en/i.test(v.lang))return-1e9;let s=/^en[-_]GB/i.test(v.lang)?50:/^en[-_](IE|AU|NZ)/i.test(v.lang)?25:20;
+    if(/natural|neural|premium|enhanced|online|wavenet|studio|verbessert|erweitert/i.test(v.name))s+=40;
+    if(/google/i.test(v.name))s+=25;
+    if(/daniel|serena|kate|oliver|stephanie|arthur|martha|sonia|libby|ryan|maisie|thomas|hazel|george|susan/i.test(v.name))s+=10;
+    if(BAD.test(v.name))s-=100;
+    if(v.localService===false&&navigator.onLine===false)s-=200;
+    return s}
+  let voice=null,voices=[];
+  const ranked=()=>voices.filter(v=>score(v)>-1e8).sort((a,b)=>score(b)-score(a));
+  function pickVoice(){if(!canSay)return;voices=speechSynthesis.getVoices()||[];let want=null;try{want=localStorage.getItem("vokVoice")}catch(_){}
+    const r=ranked();voice=(want&&r.find(v=>v.name===want))||r[0]||null;document.dispatchEvent(new Event("vokvoices"))}
+  // Manche Browser melden ihre Stimmen spät (v. a. in eingebetteten Seiten) – darum mehrmals nachfragen
+  if(canSay){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",pickVoice);[300,800,1500,3000,6000,10000].forEach(t=>setTimeout(()=>{if(!voice)pickVoice()},t))}
+  function setVoice(name){try{name?localStorage.setItem("vokVoice",name):localStorage.removeItem("vokVoice")}catch(_){}pickVoice()}
+  // Schreibweisen fürs Sprechen glätten
+  function speakText(en){return en.replace(/\(=[^)]*\)/g,"").replace(/[()]/g,"").replace(/\s*(\.\.\.|…)\s*/g," ").replace(/\s\/\s/g,", ")
+    .replace(/\bMrs\b\.?/g,"Missus").replace(/\bMr\b\.?/g,"Mister").replace(/\bsb\b/g,"somebody").replace(/\bsth\b/g,"something").replace(/\s+/g," ").replace(/\s+([,.!?])/g,"$1").replace(/[,\s]+$/,"").trim()}
+  let last={t:"",at:0},cur=null,curBtn=null,warned=false;
+  function say(en,btn){if(!canSay)return;if(!voices.length)pickVoice();
+    if(!voice&&voices.length&&!warned){warned=true;if(typeof guckiSay==="function")guckiSay("Auf diesem Gerät fehlt eine englische Stimme. Tipps stehen im Wörterbuch.",3200)}
+    const t=speakText(en),now=Date.now(),slow=t===last.t&&now-last.at<4000;last={t,at:now};
+    const go=()=>{try{const u=new SpeechSynthesisUtterance(t);u.lang=voice?voice.lang:"en-GB";if(voice)u.voice=voice;u.rate=slow?.62:.9;u.pitch=1;
+      const done=()=>{if(curBtn)curBtn.classList.remove("speaking");curBtn=null};
+      u.onend=done;u.onerror=done;cur=u;if(curBtn)curBtn.classList.remove("speaking");curBtn=btn||null;if(curBtn)curBtn.classList.add("speaking");
+      speechSynthesis.resume();speechSynthesis.speak(u)}catch(_){}};
+    // Safari spricht nach cancel() manchmal nicht – darum kurz warten, wenn gerade etwas läuft
+    if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,90)}else go()}
   const sayBtn=en=>canSay?`<button type="button" class="vk-say" data-say="${esc(en)}" aria-label="Vorlesen: ${esc(en)}" title="Vorlesen">🔊</button>`:"";
   function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
-  document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b){e.stopPropagation();say(b.dataset.say)}},true);
+  document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b){e.stopPropagation();say(b.dataset.say,b)}},true);
   // --- Karteikasten (gespeichert auf dem Gerät: localStorage „vokBox“) ---
   let box={};try{box=JSON.parse(localStorage.getItem("vokBox")||"{}")||{}}catch(_){box={}}
   const save=()=>{try{localStorage.setItem("vokBox",JSON.stringify(box))}catch(_){}};
@@ -4063,7 +4133,7 @@ const Vok=(function(){
       btn.innerHTML=`<span class="vk-long">${ed?"Englisch → Deutsch":"Deutsch → Englisch"}</span><span class="vk-short">${ed?"EN → DE":"DE → EN"}</span><span class="vk-swi" aria-hidden="true">⇄</span>`;
       btn.setAttribute("aria-label",`Richtung: ${ed?"Englisch nach Deutsch":"Deutsch nach Englisch"}. Tippen zum Wechseln`);btn.title="Richtung wechseln"};
     draw();btn.onclick=()=>{btn.dataset.d=btn.dataset.d==="ed"?"de":"ed";draw();set(btn.dataset.d)}}
-  return{variants,answersFor,check,say,sayBtn,canSay,esc,fach,setFach,clearBox,unitChips,dirSwap}
+  return{variants,answersFor,check,say,sayBtn,canSay,ranked,setVoice,refresh:pickVoice,get voice(){return voice},speakText,score,esc,fach,setFach,clearBox,unitChips,dirSwap}
 })();
 
 // --- Wörterbuch ---
@@ -4080,6 +4150,20 @@ const Vok=(function(){
     list.innerHTML=h||`<li><span class="vk-de">Kein Wort gefunden. Probier es mit einem anderen Wort.</span></li>`;
     cnt.textContent=items.length===1?"1 Eintrag":`${items.length} Einträge`}
   Vok.unitChips($("#vkDictUnits"),sel,render);inp.addEventListener("input",render);render();
+  // Stimmenwahl (nur wenn das Gerät mehr als eine englische Stimme hat)
+  const vb=$("#vkVoiceBox"),vs=$("#vkVoice");
+  function voicesUI(){if(!vb)return;const note=$("#vkVoiceNote");
+    if(!Vok.canSay){vb.hidden=false;vs.hidden=true;$("#vkVoiceTry").hidden=true;note.textContent="Dein Browser kann leider nicht vorlesen.";return}
+    const r=Vok.ranked();vs.hidden=!r.length;vs.disabled=r.length<2;
+    // Firefox am Computer bringt keine eigenen (natürlichen) Stimmen mit, nur die des Betriebssystems
+    const plain=Vok.voice&&!/natural|neural|premium|enhanced|google|online|verbessert|erweitert/i.test(Vok.voice.name);
+    const ffHint=/firefox/i.test(navigator.userAgent)&&!/android|mobile/i.test(navigator.userAgent)&&plain?" Tipp: Firefox hat am Computer nur einfache Stimmen. In Edge oder Chrome klingt das Vorlesen meist viel natürlicher.":"";
+    note.textContent=(!r.length?"Noch keine englische Stimme gefunden – tippe einmal auf 🔊 oder lies die Hilfe darunter.":r.length<2?"Dein Gerät hat nur diese englische Stimme.":"")+ffHint;note.textContent=note.textContent.trim();
+    if(!r.length)return;
+    const curN=Vok.voice&&Vok.voice.name;
+    vs.innerHTML=r.map(v=>`<option value="${Vok.esc(v.name)}"${v.name===curN?" selected":""}>${Vok.esc(v.name.replace(/^Microsoft\s+|^Google\s+/,m=>m))} (${v.lang.replace("_","-")})</option>`).join("")}
+  document.addEventListener("vokvoices",voicesUI);voicesUI();
+  if(vs){vs.addEventListener("focus",()=>{if(Vok.ranked().length<2)Vok.refresh()});vs.onchange=()=>{Vok.setVoice(vs.value);Vok.say("Hello! How are you?",$("#vkVoiceTry"))};$("#vkVoiceTry").onclick=e=>{e.stopPropagation();Vok.refresh();Vok.say("Hello! How are you?",e.currentTarget)}}
 })();
 
 // --- Aufgabe 1: Karteikasten ---

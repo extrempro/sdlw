@@ -4,6 +4,19 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.10.1] – 2026-11-16
+
+### Verbessert
+
+- **Vorlesen (Vokabeln) klingt natürlicher:** Die Stimme wird nach Qualität ausgewählt – britisches Englisch zuerst, „Natural/Neural/Premium/Enhanced“- und Google-Stimmen bevorzugt, Spaß- und Roboterstimmen (z. B. eSpeak, Fred, Eloquence-Stimmen wie Eddy) nie. Ohne Internet nur Stimmen, die auf dem Gerät liegen. Etwas natürlicheres Tempo (0,9).
+- **Stimmenwahl im Wörterbuch** (Zeile „Stimme“ unter der Suche, immer sichtbar): zeigt die benutzte Stimme, bei mehreren englischen Stimmen auswählbar (gespeichert in `localStorage` „vokVoice“), mit Hörprobe und Hinweis, wenn das Gerät nur eine oder keine englische Stimme meldet. Stimmen werden bis 10 Sekunden nach dem Laden und bei Antippen nachgefragt, weil manche Browser sie spät melden.
+- **Hilfe „Klingt die Stimme wie ein Roboter?“** im Wörterbuch: wie man auf iPhone/iPad, Android, Mac und Windows bessere englische Stimmen lädt; Hinweis zu Firefox. Erkennt die Seite Firefox am Computer mit einer einfachen Stimme, steht unter „Stimme“ der Tipp, Edge oder Chrome zu nehmen (Firefox bringt keine eigenen natürlichen Stimmen mit).
+- **Zweimal schnell auf 🔊** spricht das Wort langsam (0,62). Der Knopf pulsiert, solange gesprochen wird.
+- **Aussprache:** „Mr/Mrs“ als „Mister/Missus“, Auslassungspunkte und „/“ werden nicht mitgesprochen.
+- **Menü aufgeräumt:** Der unterstrichene Link „Übersicht …“ im Menü entfällt; Fächer klappen im Menü nur auf und zu, zur Fach-Übersicht geht es über die Fach-Kacheln der Startseite. Abstände in der Computer-Leiste und im Handy-Menü vereinheitlicht.
+- **Vokabel-Kapitel einheitlicher:** Das Wörterbuch steht wie die Ausprobier-Teile der anderen Kapitel in einem weißen Kasten (Suche, darunter Teile und Anzahl in einer Zeile, dann die Liste). Stimmenwahl und Tipps stecken im aufklappbaren Bereich „🔊 Vorlesen: Stimme wählen und Tipps“ darunter. Die drei Fach-Karten sind auf dem Handy kompakter.
+- **Zuverlässiger:** Stimmen werden nachgeladen, wenn das Gerät sie spät meldet; nach einem Abbruch kurze Pause vor dem Sprechen (Safari); Hinweis von Gucki, wenn gar keine englische Stimme installiert ist.
+
 ## [1.10.0] – 2026-11-16
 
 Navigation in drei Stufen: Klasse → Fach → Kapitel, vorbereitet für etwa zehn Fächer und weitere Klassenstufen.

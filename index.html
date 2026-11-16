@@ -406,28 +406,99 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .navx{display:block}
 .faecher{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 14px;align-items:center}
 .fach{display:contents}
-/* Handy: Fach-Navigation hinter dem Knopf „☰ Themen“, aufgeklappt kompakt in zwei Spalten */
+/* ===== Menü: Klasse → Fach → Kapitel ===== */
+/* Die Liste .faecher ist nur noch Datenquelle; sichtbar ist #navUI (.nv). */
+.navx .faecher{display:none!important}
 .nav-tog{display:none}
+.nv-fdot,.nv .fdot{width:10px;height:10px;border-radius:50%;flex:none}
+.nv-grade{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.nv-grade button,.jg-m button{font:700 .9rem var(--body);padding:6px 14px;border-radius:999px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer}
+.nv-grade button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+.nv-kap{display:inline-flex;align-items:center;gap:7px;padding:3px 12px 3px 3px;border-radius:999px;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);text-decoration:none;font-weight:700;font-size:.92rem;line-height:1.2}
+.nv-kap .ico{width:28px;height:28px;flex:none}
+.nv-kap:hover{border-color:var(--muted)}
+.nv-kap[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+.nv a:focus-visible,.nv button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+/* Tablet und kleiner Computer: Fach-Reiter, darunter die Kapitel des aktuellen Fachs */
+.nv-facher{display:flex;flex-wrap:wrap;gap:6px}
+.nv-f{display:contents}
+.nv-f .nv-kaps{display:none}
+.nv-fach{display:inline-flex;align-items:center;gap:7px;padding:7px 14px 7px 11px;border-radius:999px;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);text-decoration:none;font-weight:700;font-size:.92rem}
+.nv-fach:hover{border-color:var(--muted)}
+.nv-fach[aria-current]{border-color:var(--fc);box-shadow:inset 0 0 0 1.5px var(--fc)}
+.nv-fach[aria-current="page"],.nv-fach[aria-current="page"]:hover{background:var(--ink);border-color:var(--ink);box-shadow:none;color:var(--sheet)}
+.nv-sub{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px;padding:8px 0 0 12px;border-left:4px solid var(--fc)}
+.nv-tab{font:inherit;font-weight:700;font-size:.92rem;cursor:pointer}
+.nv-tab .nv-chev{color:var(--muted);font-size:1.05rem;line-height:1;margin-left:2px;display:inline-block;transition:transform .2s}
+.nv-tab[aria-expanded="true"] .nv-chev{transform:rotate(90deg)}
+.nv-tab[aria-expanded="true"]{border-color:var(--fc);box-shadow:inset 0 0 0 1.5px var(--fc)}
+.nv-sub .nv-over2{font-size:.85rem;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:4px 8px}
+.nv-sub .nv-over2:hover,.nv-sub .nv-over2[aria-current="page"]{color:var(--ink)}
+/* Computer (ab 1240 px): Leiste links, aktuelles Fach aufgeklappt */
+@media (min-width:1240px){
+  .navx{position:fixed;top:120px;width:min(240px,calc(50% - 416px));left:calc(50% - 400px - min(240px,calc(50% - 416px)));max-height:calc(100vh - 150px);overflow:auto;padding:4px;z-index:5}
+  .nv-sub{display:none}
+  .nv-facher{flex-direction:column;flex-wrap:nowrap;gap:2px}
+  .nv-f{display:block}
+  .nv-fach{display:flex;width:100%;border-color:transparent;background:transparent;padding:7px 10px;border-radius:10px}
+  .nv-fach:hover{background:var(--sheet);border-color:var(--line)}
+  .nv-fach[aria-current="true"]{box-shadow:none;border-color:transparent;background:transparent;color:var(--ink)}
+  .nv-f.open .nv-kaps{display:flex;flex-direction:column;gap:2px;margin:2px 0 8px 14px;padding-left:10px;border-left:3px solid var(--fc)}
+  .nv-f.open .nv-kap{border-color:transparent;background:transparent;font-size:.88rem;padding:3px 8px 3px 3px;border-radius:10px}
+  .nv-f.open .nv-kap:hover{background:var(--sheet)}
+  .nv-f.open .nv-kap[aria-current="page"]{background:var(--ink);color:var(--sheet)}
+  .nv-f.open .nv-kap .ico{width:24px;height:24px}
+  .nv-fach[aria-current="page"],.nv-fach[aria-current="page"]:hover{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+  .nv-acc{font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;text-align:left;color:var(--ink)}
+  .nv-acc .nv-fn{flex:1}
+  .nv-chev{color:var(--muted);font-size:1.1rem;line-height:1;transition:transform .2s}
+  .nv-acc[aria-expanded="true"] .nv-chev{transform:rotate(90deg)}
+  .nv-acc[aria-current="true"] .nv-fn{text-decoration:underline;text-decoration-color:var(--fc);text-decoration-thickness:3px;text-underline-offset:4px}
+  .nv-over2{font-size:.82rem;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:4px 8px;border-radius:8px}
+  .nv-over2:hover{color:var(--ink)}
+  .nv-over2[aria-current="page"]{color:var(--ink);background:var(--sheet)}
+}
+/* Handy: Knopf „☰ Themen“, aufgeklappt erst Fächer, dann Kapitel */
 @media (max-width:600px){
   .nav-tog{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:6px 8px 6px 6px;border-radius:999px;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);font:inherit;cursor:pointer;text-align:left}
   .nav-tog:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-  .nt-cur{display:flex;align-items:center;gap:8px;min-width:0;font-weight:700;font-size:.95rem}
+  .nt-cur{display:flex;align-items:center;gap:8px;min-width:0;font-weight:700;font-size:.95rem;padding-left:4px}
   .nt-cur .ico{width:30px;height:30px;flex:none}
   .nt-cur span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .nt-lbl{flex:none;font-weight:700;font-size:.9rem;padding:6px 12px;border-radius:999px;background:var(--ink);color:var(--sheet)}
   .nt-car{display:inline-block;transition:transform .2s}
   .nav-tog[aria-expanded="true"] .nt-car{transform:rotate(180deg)}
-  .navx .faecher{display:none}
-  .navx.open .faecher{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;margin-top:10px;padding:12px;border:1.5px solid var(--line);border-radius:18px;background:var(--sheet)}
-  .navx.open .fach{display:flex;flex-direction:column;gap:6px;min-width:0}
-  .navx.open .fach.wide{grid-column:1/-1}
-  .navx.open .fach.wide .topics{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-  .navx.open .topics{flex-direction:column;flex-wrap:nowrap;gap:6px}
-  .navx.open .topics a{padding:3px 10px 3px 3px;min-width:0}
-  .navx.open .topics .ico{width:26px;height:26px;flex:none}
-  .navx.open .topics b{font-size:.88rem;white-space:normal}
+  .nv{display:none}
+  .navx.open .nv{display:block;margin-top:10px;padding:12px;border:1.5px solid var(--line);border-radius:18px;background:var(--sheet)}
+  .nv-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .nv-ftile{display:flex;align-items:center;gap:8px;padding:12px;border-radius:14px;border:1.5px solid var(--line);border-left:6px solid var(--fc);background:var(--paper);color:var(--ink);font:inherit;text-align:left;cursor:pointer;min-width:0}
+  .nv-ftile b{font-size:.95rem;flex:1;min-width:0;overflow-wrap:anywhere}
+  .nv-ftile small{font-size:.8rem;color:var(--muted);font-weight:700}
+  .nv-ftile .fdot{display:none}
+  .nv-ftile[aria-current]{background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--fc)}
+  .nv-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+  .nv-back{font:700 .9rem var(--body);padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+  .nv-over{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+  .nv-kaps{display:grid;grid-template-columns:1fr;gap:6px}
+  .nv-kaps .nv-kap{border-radius:12px;padding:5px 10px 5px 5px}
+  .nv-sub{display:none}
 }
-@media (max-width:480px){.faecher{gap:4px}.fach .topics{margin-bottom:0}}
+/* Klasse oben */
+.jg{position:relative}
+.jg-l,.jg-b{display:inline-flex;align-items:center;gap:4px;font:700 .85rem var(--body);padding:5px 12px;border-radius:999px;background:var(--ink);color:var(--sheet);border:0}
+.jg-b{cursor:pointer}
+.jg-m{position:absolute;top:calc(100% + 6px);left:0;z-index:30;display:flex;flex-direction:column;gap:4px;padding:6px;border-radius:14px;border:1.5px solid var(--line);background:var(--sheet);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.jg-m[hidden]{display:none}
+/* Fach-Kacheln (Startseite) */
+.ftiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.ftile{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:18px;border:1.5px solid var(--line);border-top:6px solid var(--sc);background:var(--sheet);color:var(--ink);text-decoration:none}
+.ftile:hover{border-color:var(--muted);border-top-color:var(--sc)}
+.ftile:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.ftile b{font-family:var(--display);font-size:1.25rem}
+.ft-ic{display:flex;gap:4px}
+.ft-ic .ico{width:30px;height:30px}
+.ft-n{font-size:.88rem;color:var(--muted);font-weight:700}
+@media (max-width:480px){.ftiles{grid-template-columns:1fr 1fr;gap:8px}.ftile{padding:12px}.ftile b{font-size:1.05rem}.ft-ic .ico{width:24px;height:24px}}
 @media (max-width:480px){.tlbl{display:none}}
 .fachname{margin:0;display:flex;align-items:center;gap:6px;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
 .fdot{width:9px;height:9px;border-radius:50%;flex:none}
@@ -812,10 +883,21 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </head>
 <body>
 <div class="wrap">
-<div class="topbar"><div class="tb-l"><button class="logo" id="logo" type="button" title="Super Duper Lern Webseite" aria-label="S.D.L.W. – Super Duper Lern Webseite. Antippen für eine Überraschung."><span class="logo-t" aria-hidden="true">S.D.L.W.</span></button><div class="seg jg" role="group" aria-label="Jahrgang"><button type="button" aria-pressed="true">Klasse 5</button></div></div><div class="tb-r"><a class="btn ghost iconbtn" id="homeBtn" href="#start" title="Startseite" aria-label="Startseite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg></a><a class="btn ghost iconbtn" id="gameBtn" href="#spiele" title="Spiele" aria-label="Spiele"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7.5h10a4.5 4.5 0 0 1 4.4 5.4l-.8 4a2.7 2.7 0 0 1-4.6 1.3L13.8 16h-3.6L8 18.2a2.7 2.7 0 0 1-4.6-1.3l-.8-4A4.5 4.5 0 0 1 7 7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10.5v3M6.5 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="15.6" cy="11" r="1.1" fill="currentColor"/><circle cx="17.6" cy="13.2" r="1.1" fill="currentColor"/></svg></a><a class="btn ghost iconbtn" id="newsBtn" href="#neuigkeiten"></a><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
+<div class="topbar"><div class="tb-l"><button class="logo" id="logo" type="button" title="Super Duper Lern Webseite" aria-label="S.D.L.W. – Super Duper Lern Webseite. Antippen für eine Überraschung."><span class="logo-t" aria-hidden="true">S.D.L.W.</span></button><div class="jg"><span class="jg-l" data-grade-lbl>Klasse 5</span></div></div><div class="tb-r"><a class="btn ghost iconbtn" id="homeBtn" href="#start" title="Startseite" aria-label="Startseite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg></a><a class="btn ghost iconbtn" id="gameBtn" href="#spiele" title="Spiele" aria-label="Spiele"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7.5h10a4.5 4.5 0 0 1 4.4 5.4l-.8 4a2.7 2.7 0 0 1-4.6 1.3L13.8 16h-3.6L8 18.2a2.7 2.7 0 0 1-4.6-1.3l-.8-4A4.5 4.5 0 0 1 7 7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10.5v3M6.5 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="15.6" cy="11" r="1.1" fill="currentColor"/><circle cx="17.6" cy="13.2" r="1.1" fill="currentColor"/></svg></a><a class="btn ghost iconbtn" id="newsBtn" href="#neuigkeiten"></a><button class="btn ghost" id="themeBtn" type="button"></button></div></div>
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.10.0",
+   "date": "2026-11-16",
+   "title": "Neues Menü: erst das Fach, dann das Kapitel",
+   "items": [
+    "Jedes Fach hat jetzt eine eigene Übersichtsseite mit allen Kapiteln.",
+    "Auf der Startseite findest du deine Fächer als bunte Kacheln.",
+    "Im Menü wählst du erst das Fach und dann das Kapitel – auf dem Handy über „☰ Themen“, auf dem Tablet über die Fach-Knöpfe und am Computer in der Leiste links. Überall gilt: Ein Tipp auf ein Fach zeigt seine Kapitel, ein zweiter klappt sie wieder zu.",
+    "S.D.L.W. ist bereit für weitere Fächer und Klassen. Sobald es Kapitel für eine andere Klasse gibt, kannst du oben deine Klasse auswählen."
+   ]
+  },
   {
    "version": "1.9.2",
    "date": "2026-11-16",
@@ -995,25 +1077,25 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <nav class="navx" aria-label="Themen">
   <button type="button" class="nav-tog" id="navTog" aria-expanded="false" aria-controls="faecher"><span class="nt-cur" id="navCur"></span><span class="nt-lbl"><span aria-hidden="true">☰</span> Themen <span class="nt-car" aria-hidden="true">▾</span></span></button>
   <div class="faecher" id="faecher">
-    <div class="fach"><p class="fachname"><span class="fdot" style="background:#D2553A"></span>Deutsch</p><div class="topics">
+    <div class="fach" data-fach="deutsch" data-kl="5"><p class="fachname"><span class="fdot" style="background:#D2553A"></span>Deutsch</p><div class="topics">
       <a href="#deutsch" data-topic="deutsch" data-desc="Wann schreibt man groß? Nomen erkennen, Signalwörter finden und Fehler aufspüren."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D2553A"/><text x="16" y="21.5" text-anchor="middle" style="font:800 14px 'Bricolage Grotesque','Trebuchet MS',sans-serif;fill:#FFFFFF">Aa</text></svg><span><b>Groß und klein</b></span></a>
     </div></div>
-    <div class="fach"><p class="fachname"><span class="fdot" style="background:#3157C8"></span>Englisch</p><div class="topics">
+    <div class="fach" data-fach="englisch" data-kl="5"><p class="fachname"><span class="fdot" style="background:#3157C8"></span>Englisch</p><div class="topics">
       <a href="#vokabeln" data-topic="vokabeln" data-desc="Vokabeln zu Welcome und Theme 1: nachschlagen, anhören, mit Karteikarten üben und schreiben."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#3157C8"/><text x="16" y="21.5" text-anchor="middle" style="font:800 14px 'Bricolage Grotesque','Trebuchet MS',sans-serif;fill:#FFFFFF">En</text></svg><span><b>Vokabeln</b></span></a>
     </div></div>
-    <div class="fach"><p class="fachname"><span class="fdot" style="background:#E3202A"></span>Kunst</p><div class="topics">
+    <div class="fach" data-fach="kunst" data-kl="5"><p class="fachname"><span class="fdot" style="background:#E3202A"></span>Kunst</p><div class="topics">
       <a href="#farbkreis" data-topic="farbkreis" data-desc="Grundfarben, Mischfarben und Gegenfarben – am Farbkreis zum Anklicken."><span class="ico ico-farb" aria-hidden="true"></span><span><b>Farbkreis</b></span></a>
     </div></div>
-    <div class="fach"><p class="fachname"><span class="fdot" style="background:#139DB3"></span>Erdkunde</p><div class="topics">
+    <div class="fach" data-fach="erdkunde" data-kl="5"><p class="fachname"><span class="fdot" style="background:#139DB3"></span>Erdkunde</p><div class="topics">
       <a href="#kontinente" data-topic="kontinente" data-desc="Die sieben Kontinente auf der Weltkarte: Wo liegt was, und welcher ist am größten?"><span class="ico ico-kont" aria-hidden="true"></span><span><b>Kontinente</b></span></a>
       <a href="#meere" data-topic="meere" data-desc="Die fünf Ozeane auf Karte und Globus, dazu Nordsee und Ostsee im Vergleich."><span class="ico ico-meer" aria-hidden="true"></span><span><b>Meere</b></span></a>
       <a href="#tagnacht" data-topic="tagnacht" data-desc="Warum es Tag und Nacht gibt, wie Jahreszeiten entstehen und was Zeitzonen sind."><span class="ico ico-tag" aria-hidden="true"></span><span><b>Tag und Nacht</b></span></a>
       <a href="#kompass" data-topic="kompass" data-desc="Himmelsrichtungen, Windrose und wie du mit dem Kompass eine Karte einnordest."><svg class="ico ico-komp" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#FFFFFF" stroke="#1C1F2E" stroke-width="2"/><path d="M16 5 L19.5 16 L12.5 16 Z" fill="#D2232A"/><path d="M16 27 L19.5 16 L12.5 16 Z" fill="#5B6075"/></svg><span><b>Kompass</b></span></a>
     </div></div>
-    <div class="fach"><p class="fachname"><span class="fdot" style="background:#7A5BC4"></span>Musik</p><div class="topics">
+    <div class="fach" data-fach="musik" data-kl="5"><p class="fachname"><span class="fdot" style="background:#7A5BC4"></span>Musik</p><div class="topics">
       <a href="#noten" data-topic="noten" data-desc="Notennamen, Notenwerte und Pausen – mit einer Klaviatur zum Anhören."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#7A5BC4"/><ellipse cx="12.5" cy="21.5" rx="4.6" ry="3.4" transform="rotate(-20 12.5 21.5)" fill="#FFFFFF"/><path d="M16.6 20.5V7.5c2.5 1.6 5.6 2.6 5.6 6.4" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Noten lesen</b></span></a>
     </div></div>
-    <div class="fach"><p class="fachname"><span class="fdot" style="background:#2E9447"></span>Lernen</p><div class="topics">
+    <div class="fach" data-fach="lernen" data-kl="alle"><p class="fachname"><span class="fdot" style="background:#2E9447"></span>Lernen</p><div class="topics">
       <a href="#klassenarbeit" data-topic="klassenarbeit" data-desc="Wie du dich gut vorbereitest und in der Arbeit ruhig und Schritt für Schritt vorgehst."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#2E9447"/><rect x="9" y="7" width="14" height="18" rx="2.5" fill="#FFFFFF"/><path d="M11.6 13.2l1.7 1.7 3-3.2M11.6 19.2l1.7 1.7 3-3.2" fill="none" stroke="#2E9447" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.2 13.6h2.6M18.2 19.6h2.6" stroke="#2E9447" stroke-width="1.9" stroke-linecap="round"/></svg><span><b>Klassenarbeit</b></span></a>
     </div></div>
   </div>
@@ -1043,15 +1125,15 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <!-- ============ STARTSEITE ============ -->
 <div class="topic" id="start" hidden>
 <header>
-  <p class="eyebrow">S.D.L.W. · Klasse 5 · Startseite</p>
+  <p class="eyebrow">S.D.L.W. · <span data-grade-lbl>Klasse 5</span> · Startseite</p>
   <h1>Hallo! Was möchtest du heute entdecken?</h1>
   <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,#E3202A,#F28A1E,#FFE000,#3DA647,#139DB3,#2B5BAA,#7A5BC4)"></div>
 </header>
 <div class="sblock">
-  <p class="lead">Hier lernst du Deutsch, Kunst, Erdkunde und Musik – mit Erklärungen, Dingen zum Ausprobieren und Übungen. Unter „Lernen“ findest du Tipps für die nächste Klassenarbeit. Und weiter unten warten Spiele mit Gucki. Such dir ein Kapitel aus!</p>
+  <p class="lead">Hier lernst du für die Schule – mit Erklärungen, Dingen zum Ausprobieren und Übungen. Unter „Lernen“ findest du Tipps für die nächste Klassenarbeit. Und weiter unten warten Spiele mit Gucki. Such dir ein Kapitel aus!</p>
 </div>
 <div class="sblock">
-  <h2>Alle Kapitel</h2>
+  <h2>Deine Fächer</h2>
   <div id="startList"></div>
 </div>
 <div class="sblock">
@@ -2142,21 +2224,95 @@ const f1=n=>(Math.round(n*10)/10).toString();
 })();
 /* ---------- Kapitel-Umschalter ---------- */
 const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","vokabeln","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten","quellen"];
-/* --- Themen-Knopf (Handy) --- */
-// Auf dem Handy steckt die Fach-Navigation hinter „☰ Themen“; der Knopf zeigt das aktuelle Kapitel.
-const NavTog=(function(){
-  const nav=$(".navx"),btn=$("#navTog"),cur=$("#navCur");if(!nav||!btn)return null;
-  nav.querySelectorAll(".fach").forEach(f=>{if(f.querySelectorAll(".topics a").length>2)f.classList.add("wide")});
+/* --- Klassen, Fächer und Menü --- */
+// Datenquelle ist die (versteckte) Liste .navx .faecher: Fach = .fach[data-fach], Kapitel = a[data-topic].
+// Klasse eines Kapitels: data-kl am Link, sonst am Fach, sonst "5". "alle" = in jeder Klasse (z. B. Lernen).
+// Die gewählte Klasse merkt sich das Gerät (localStorage „klasse“). Jedes Fach hat eine Übersichtsseite #fach-<id>.
+const Klassen=(function(){
+  const facher=[...document.querySelectorAll(".navx .fach[data-fach]")].map(f=>{const fn=f.querySelector(".fachname"),dot=fn.querySelector(".fdot");
+    return{id:f.dataset.fach,name:fn.textContent.trim(),color:dot?dot.style.background:"var(--ink)",kl:f.dataset.kl||"5",
+      kap:[...f.querySelectorAll("a[data-topic]")].map(a=>({id:a.dataset.topic,a,kl:a.dataset.kl||f.dataset.kl||"5"}))}});
+  const all=[].concat(...facher.map(f=>f.kap.map(k=>Object.assign(k,{fach:f}))));
+  const grades=[...new Set(all.map(k=>k.kl).filter(k=>k!=="alle"))].sort((a,b)=>a-b);
+  let grade=null;try{grade=localStorage.getItem("klasse")}catch(_){}
+  if(!grades.includes(grade))grade=grades[0]||"5";
+  const vis=k=>k.kl==="alle"||k.kl===grade;
+  const visF=()=>facher.map(f=>({...f,kap:f.kap.filter(vis)})).filter(f=>f.kap.length);
+  const byKap=id=>all.find(k=>k.id===id),byFach=id=>facher.find(f=>f.id===id);
+  // Übersichtsseiten anlegen (vor #neuigkeiten) und als Seiten bekannt machen
+  const anchor=document.getElementById("neuigkeiten");
+  facher.forEach(f=>{const d=document.createElement("div");d.className="topic fachpage";d.id="fach-"+f.id;d.hidden=true;anchor.parentNode.insertBefore(d,anchor);TOPICS.push(d.id)});
+  function setGrade(g,silent){if(!grades.includes(g)||g===grade)return;grade=g;try{localStorage.setItem("klasse",g)}catch(_){}
+    document.querySelectorAll("[data-grade-lbl]").forEach(e=>e.textContent="Klasse "+g);if(!silent)window.dispatchEvent(new Event("klasse"))}
+  function card(k){const a=k.a,el=document.getElementById(k.id);if(!el)return"";const col=k.fach.color;
+    const ic=a.querySelector(".ico"),name=a.querySelector("b").textContent.trim(),h1=el.querySelector("h1");
+    const tasks=[...el.querySelectorAll(".task[data-score]")],done=tasks.filter(t=>t.dataset.perfect).length,n=tasks.length;
+    const prog=!n?"":done===n?`<span class="sprog all">✓ Alle ${n} Übungen fehlerfrei!</span>`:done?`<span class="sprog"><i><span style="width:${Math.round(done/n*100)}%"></span></i>${done} von ${n} fehlerfrei</span>`:`<span class="sprog">${n} Übungen</span>`;
+    return`<a class="scard" href="#${k.id}" style="--sc:${col}" aria-label="${name}: ${h1?h1.textContent.trim():""}">${ic?ic.outerHTML:""}<span class="st-t"><span class="st-f"><span class="fdot" style="background:${col}"></span>${k.fach.name}</span><b>${name}</b><span class="st-d">${a.dataset.desc||(h1?h1.textContent.trim():"")}</span>${prog}</span></a>`}
+  function renderFach(id){const f=byFach(id.replace(/^fach-/,"")),el=document.getElementById(id);if(!f||!el)return;
+    const kap=f.kap.filter(vis),n=kap.length;
+    el.innerHTML=`<header><p class="eyebrow">${f.kl==="alle"?"Für alle Klassen":"Klasse "+grade} · Fach</p><h1>${f.name}</h1><div class="stripe" aria-hidden="true" style="background:${f.color}"></div></header>
+      <div class="sblock"><p class="lead">${n===1?"Hier gibt es ein Kapitel":`Hier gibt es ${n} Kapitel`}${f.kl==="alle"?"":` für Klasse ${grade}`}. Such dir eins aus!</p>
+      ${n?`<div class="scards">${kap.map(card).join("")}</div>`:`<p class="hint">In Klasse ${grade} gibt es hier noch keine Kapitel.</p>`}</div>`}
+  function fachTiles(){return`<div class="ftiles">${visF().map(f=>{const icons=f.kap.slice(0,4).map(k=>{const i=k.a.querySelector(".ico");return i?i.outerHTML:""}).join("");
+      const tasks=f.kap.flatMap(k=>{const el=document.getElementById(k.id);return el?[...el.querySelectorAll(".task[data-score]")]:[]}),done=tasks.filter(t=>t.dataset.perfect).length;
+      return`<a class="ftile" href="#fach-${f.id}" style="--sc:${f.color}"><span class="ft-ic">${icons}</span><b>${f.name}</b><span class="ft-n">${f.kap.length===1?"1 Kapitel":f.kap.length+" Kapitel"}${tasks.length&&done?` · ${done}/${tasks.length} ✓`:""}</span></a>`}).join("")}</div>`}
+  return{facher,all,grades,get grade(){return grade},setGrade,vis,visF,byKap,byFach,renderFach,fachTiles,card}
+})();
+
+const Menu=(function(){
+  const nav=$(".navx"),btn=$("#navTog"),cur=$("#navCur");if(!nav)return null;
+  const ui=document.createElement("div");ui.className="nv";ui.id="navUI";nav.appendChild(ui);if(btn)btn.setAttribute("aria-controls","navUI");
+  let topic="start",phoneFach=null;const phone=()=>matchMedia("(max-width:600px)").matches,desk=()=>matchMedia("(min-width:1240px)").matches;
+  const openF=new Set();let lastF=null,tabF=null; // Computer: aufgeklappte Fächer in der Leiste; Tablet: offenes Fach
   const NAMES={start:"Startseite",spiele:"Spiele",neuigkeiten:"Neuigkeiten",quellen:"Quellen"};
-  function set(open){nav.classList.toggle("open",open);btn.setAttribute("aria-expanded",open)}
-  btn.addEventListener("click",()=>set(!nav.classList.contains("open")));
+  function curFach(){if(topic.startsWith("fach-"))return topic.slice(5);const k=Klassen.byKap(topic);return k?k.fach.id:null}
+  function kapLinks(f){return f.kap.map(k=>{const i=k.a.querySelector(".ico"),b=k.a.querySelector("b");
+    return`<a class="nv-kap" href="#${k.id}"${k.id===topic?' aria-current="page"':""}>${i?i.outerHTML:""}<span>${b?b.textContent:""}</span></a>`}).join("")}
+  function gradeSel(){const g=Klassen.grades;if(g.length<2)return"";
+    return`<div class="nv-grade" role="group" aria-label="Klasse wählen">${g.map(x=>`<button type="button" data-g="${x}" aria-pressed="${x===Klassen.grade}">Klasse ${x}</button>`).join("")}</div>`}
+  function render(){const cf=curFach(),F=Klassen.visF();
+    if(phone()){const pf=phoneFach&&F.find(f=>f.id===phoneFach);
+      ui.innerHTML=pf?`<div class="nv-head"><button type="button" class="nv-back" data-back>‹ Alle Fächer</button><a class="nv-over" href="#fach-${pf.id}" style="--fc:${pf.color}"><span class="fdot" style="background:${pf.color}"></span>${pf.name} · Übersicht</a></div><div class="nv-kaps">${kapLinks(pf)}</div>`
+        :`${gradeSel()}<div class="nv-fgrid">${F.map(f=>`<button type="button" class="nv-ftile" data-f="${f.id}" style="--fc:${f.color}"${f.id===cf?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><b>${f.name}</b><small>${f.kap.length}</small></button>`).join("")}</div>`;return}
+    if(desk()){ // Leiste links: Fächer klappen auf und zu, die Übersicht ist ein eigener Link
+      ui.innerHTML=`${gradeSel()}<div class="nv-facher">${F.map(f=>{const open=openF.has(f.id),here=f.id===cf;
+        return`<div class="nv-f${open?" open":""}" style="--fc:${f.color}"><button type="button" class="nv-fach nv-acc" data-tog="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><span class="nv-fn">${f.name}</span><span class="nv-chev" aria-hidden="true">›</span></button>${open?`<div class="nv-kaps">${kapLinks(f)}<a class="nv-over2" href="#fach-${f.id}"${topic==="fach-"+f.id?' aria-current="page"':""}>Übersicht ${f.name}</a></div>`:""}</div>`}).join("")}</div>`;return}
+    // Tablet: Fach-Knöpfe klappen die Kapitelzeile darunter auf und zu (immer nur ein Fach offen)
+    ui.innerHTML=`${gradeSel()}<div class="nv-facher">${F.map(f=>{const open=f.id===tabF,here=f.id===cf;
+      return`<button type="button" class="nv-fach nv-tab" data-tab="${f.id}" aria-expanded="${open}" style="--fc:${f.color}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span>${f.name}<span class="nv-chev" aria-hidden="true">›</span></button>`}).join("")}</div>`;
+    const tf=F.find(f=>f.id===tabF);
+    ui.insertAdjacentHTML("beforeend",tf?`<div class="nv-sub" style="--fc:${tf.color}">${kapLinks(tf)}<a class="nv-over2" href="#fach-${tf.id}"${topic==="fach-"+tf.id?' aria-current="page"':""}>Übersicht ${tf.name}</a></div>`:"")}
+  ui.addEventListener("click",e=>{const t=e.target.closest("[data-f],[data-back],[data-g],[data-tog],[data-tab]");if(!t)return;e.stopPropagation();
+    if(t.dataset.tab){tabF=tabF===t.dataset.tab?null:t.dataset.tab;render();const b=ui.querySelector(`[data-tab="${t.dataset.tab}"]`);if(b)b.focus({preventScroll:true});return}
+    if(t.dataset.tog){const id=t.dataset.tog;if(openF.has(id))openF.delete(id);else openF.add(id);render();const b=ui.querySelector(`[data-tog="${id}"]`);if(b)b.focus({preventScroll:true});return}
+    if(t.dataset.f){phoneFach=t.dataset.f;render();const first=ui.querySelector(".nv-back");if(first)first.focus()}
+    else if(t.hasAttribute("data-back")){phoneFach=null;render()}
+    else if(t.dataset.g){Klassen.setGrade(t.dataset.g);phoneFach=null}});
+  function set(open){nav.classList.toggle("open",open);if(btn)btn.setAttribute("aria-expanded",open);if(open){phoneFach=curFach();render()}}
+  if(btn)btn.addEventListener("click",()=>set(!nav.classList.contains("open")));
   document.addEventListener("click",e=>{if(nav.classList.contains("open")&&!nav.contains(e.target))set(false)});
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&nav.classList.contains("open")){set(false);btn.focus()}});
-  function update(t){set(false);
-    const a=document.querySelector(`.navx .topics a[data-topic="${t}"], #gameReg a[data-topic="${t}"]`);
-    if(a){const ico=a.querySelector(".ico"),name=a.querySelector("b");cur.innerHTML=(ico?ico.outerHTML:"")+`<span>${name?name.textContent:""}</span>`}
-    else cur.innerHTML=`<span>${NAMES[t]||"S.D.L.W."}</span>`}
-  return{update,set}})();
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&nav.classList.contains("open")){set(false);btn&&btn.focus()}});
+  let w=phone()+"|"+desk();window.addEventListener("resize",()=>{const n=phone()+"|"+desk();if(n!==w){w=n;render()}});
+  window.addEventListener("klasse",()=>{render();route(false)});
+  function update(t){topic=t;const nf=t.startsWith("fach-")?t.slice(5):(Klassen.byKap(t)||{fach:{}}).fach.id||null;
+    if(nf&&nf!==lastF){openF.add(nf);lastF=nf}tabF=nf;nav.classList.remove("open");if(btn)btn.setAttribute("aria-expanded","false");phoneFach=null;
+    const k=Klassen.byKap(t),f=t.startsWith("fach-")?Klassen.byFach(t.slice(5)):null;
+    if(cur){if(k){const i=k.a.querySelector(".ico"),b=k.a.querySelector("b");cur.innerHTML=(i?i.outerHTML:"")+`<span>${b?b.textContent:""}</span>`}
+      else if(f)cur.innerHTML=`<span class="fdot" style="background:${f.color};width:14px;height:14px"></span><span>${f.name}</span>`;
+      else{const g=document.querySelector(`#gameReg a[data-topic="${t}"]`);if(g){const i=g.querySelector(".ico"),b=g.querySelector("b");cur.innerHTML=(i?i.outerHTML:"")+`<span>${b?b.textContent:""}</span>`}else cur.innerHTML=`<span>${NAMES[t]||"S.D.L.W."}</span>`}}
+    document.body.classList.toggle("has-sub",!!(k||f));render()}
+  return{update,set,render}})();
+
+// Klassen-Umschalter oben (nur sichtbar als Auswahl, wenn es mehr als eine Klasse gibt)
+(function(){const box=$(".topbar .jg");if(!box)return;const g=Klassen.grades;
+  if(g.length<2){box.innerHTML=`<span class="jg-l" data-grade-lbl>Klasse ${Klassen.grade}</span>`;return}
+  box.innerHTML=`<button type="button" class="jg-b" aria-haspopup="true" aria-expanded="false"><span data-grade-lbl>Klasse ${Klassen.grade}</span> ▾</button><div class="jg-m" hidden>${g.map(x=>`<button type="button" data-g="${x}">Klasse ${x}</button>`).join("")}</div>`;
+  const b=$(".jg-b",box),m=$(".jg-m",box);
+  b.onclick=e=>{e.stopPropagation();const o=m.hidden;m.hidden=!o;b.setAttribute("aria-expanded",o)};
+  m.onclick=e=>{const x=e.target.closest("[data-g]");if(!x)return;Klassen.setGrade(x.dataset.g);m.hidden=true;b.setAttribute("aria-expanded","false")};
+  document.addEventListener("click",()=>{m.hidden=true;b.setAttribute("aria-expanded","false")});
+})();
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -2164,7 +2320,9 @@ function route(scroll){
   const nb=$("#newsBtn");if(nb){if(t==="neuigkeiten"){nb.setAttribute("aria-current","page");if(window.markReleaseSeen)markReleaseSeen()}else nb.removeAttribute("aria-current")}
   const hb=$("#homeBtn");if(hb){if(t==="start")hb.setAttribute("aria-current","page");else hb.removeAttribute("aria-current")}
   const gb=$("#gameBtn"),isGame=t==="spiele"||!!document.querySelector(`#gameReg a[data-topic="${t}"]`);if(gb){if(isGame)gb.setAttribute("aria-current","page");else gb.removeAttribute("aria-current")}
-  if(NavTog)NavTog.update(t);
+  const kk=Klassen.byKap(t);if(kk&&kk.kl!=="alle"&&kk.kl!==Klassen.grade)Klassen.setGrade(kk.kl,true);
+  if(t.startsWith("fach-"))Klassen.renderFach(t);
+  if(Menu)Menu.update(t);
   if(t==="start"){renderStart();renderGames($("#startGames"))}
   if(t==="spiele")renderGames($("#gameList"));
   if(scroll)window.scrollTo(0,0);
@@ -2189,16 +2347,8 @@ let startGreeted=false;
 })();
 
 function renderStart(){
-  const box=$("#startList");if(!box)return;let h="";
-  document.querySelectorAll(".navx .fach").forEach(f=>{const fn=f.querySelector(".fachname"),dot=fn.querySelector(".fdot"),col=dot?dot.style.background:"var(--ink)";
-    const fname=fn.textContent.trim();
-    f.querySelectorAll("a[data-topic]").forEach(a=>{const id=a.dataset.topic,el=document.getElementById(id);if(!el)return;
-      const ic=a.querySelector(".ico"),name=a.querySelector("b").textContent.trim(),h1=el.querySelector("h1");
-      const tasks=[...el.querySelectorAll(".task[data-score]")],done=tasks.filter(t=>t.dataset.perfect).length,n=tasks.length;
-      const prog=!n?"":done===n?`<span class="sprog all">✓ Alle ${n} Übungen fehlerfrei!</span>`:done?`<span class="sprog"><i><span style="width:${Math.round(done/n*100)}%"></span></i>${done} von ${n} fehlerfrei</span>`:`<span class="sprog">${n} Übungen</span>`;
-      h+=`<a class="scard" href="#${id}" style="--sc:${col}" aria-label="${name}: ${h1?h1.textContent.trim():""}">${ic?ic.outerHTML:""}<span class="st-t"><span class="st-f"><span class="fdot" style="background:${col}"></span>${fname}</span><b>${name}</b><span class="st-d">${a.dataset.desc||(h1?h1.textContent.trim():"")}</span>${prog}</span></a>`});
-});
-  box.innerHTML=`<div class="scards">${h}</div>`;
+  const box=$("#startList");if(!box)return;
+  box.innerHTML=Klassen.fachTiles();
   if(!startGreeted){startGreeted=true;setTimeout(()=>{if(typeof guckiSay==="function"&&!location.hash.slice(1).replace("start",""))guckiSay("Hallo! Such dir ein Kapitel aus.",2600)},900)}
 }
 window.addEventListener("hashchange",()=>route(true));
@@ -2233,6 +2383,8 @@ const Wegweiser=(function(){
     const a=document.querySelector(`.topics a[data-topic="${topic}"]`);let color="";
     if(a){const fn=a.closest(".fach").querySelector(".fachname");fach=fn.textContent.trim();const d=fn.querySelector(".fdot");color=d?d.style.background:"";
       const ic=a.querySelector(".ico");ico.innerHTML=ic?ic.outerHTML:""}
+    else if(topic.startsWith("fach-")&&Klassen.byFach(topic.slice(5))){const f=Klassen.byFach(topic.slice(5));fach=f.name;color=f.color;title="Übersicht";
+      const k0=f.kap.find(Klassen.vis)||f.kap[0],i0=k0&&k0.a.querySelector(".ico");ico.innerHTML=i0?i0.outerHTML:""}
     else{fach="S.D.L.W.";color="#7A5BC4";
       const sym=topic==="start"?`<svg viewBox="0 0 24 24" width="60%" height="60%" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2M6.2 9.6V20h4.3v-5.6h3V20h4.3V9.6" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`:topic==="spiele"?"🎮":topic==="quellen"?"📚":"✦";
       if(topic==="start")title="Startseite";

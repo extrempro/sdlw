@@ -443,6 +443,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .nv-f.open .nv-kap[aria-current="page"]{background:var(--ink);color:var(--sheet)}
   .nv-f.open .nv-kap .ico{width:24px;height:24px}
   .nv-fach[aria-current="page"],.nv-fach[aria-current="page"]:hover{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+  .nv-acc{font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;text-align:left;color:var(--ink)}
+  .nv-acc .nv-fn{flex:1}
+  .nv-chev{color:var(--muted);font-size:1.1rem;line-height:1;transition:transform .2s}
+  .nv-acc[aria-expanded="true"] .nv-chev{transform:rotate(90deg)}
+  .nv-acc[aria-current="true"] .nv-fn{text-decoration:underline;text-decoration-color:var(--fc);text-decoration-thickness:3px;text-underline-offset:4px}
+  .nv-over2{font-size:.82rem;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:4px 8px;border-radius:8px}
+  .nv-over2:hover{color:var(--ink)}
+  .nv-over2[aria-current="page"]{color:var(--ink);background:var(--sheet)}
 }
 /* Handy: Knopf „☰ Themen“, aufgeklappt erst Fächer, dann Kapitel */
 @media (max-width:600px){
@@ -880,7 +888,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "items": [
     "Jedes Fach hat jetzt eine eigene Übersichtsseite mit allen Kapiteln.",
     "Auf der Startseite findest du deine Fächer als bunte Kacheln.",
-    "Im Menü wählst du erst das Fach und dann das Kapitel – auf dem Handy über „☰ Themen“, auf dem Tablet über die Fach-Knöpfe und am Computer in der Leiste links.",
+    "Im Menü wählst du erst das Fach und dann das Kapitel – auf dem Handy über „☰ Themen“, auf dem Tablet über die Fach-Knöpfe und am Computer in der Leiste links. Dort klappst du ein Fach mit einem Klick auf und wieder zu.",
     "S.D.L.W. ist bereit für weitere Fächer und Klassen. Sobald es Kapitel für eine andere Klasse gibt, kannst du oben deine Klasse auswählen."
    ]
   },
@@ -2249,7 +2257,8 @@ const Klassen=(function(){
 const Menu=(function(){
   const nav=$(".navx"),btn=$("#navTog"),cur=$("#navCur");if(!nav)return null;
   const ui=document.createElement("div");ui.className="nv";ui.id="navUI";nav.appendChild(ui);if(btn)btn.setAttribute("aria-controls","navUI");
-  let topic="start",phoneFach=null;const phone=()=>matchMedia("(max-width:600px)").matches;
+  let topic="start",phoneFach=null;const phone=()=>matchMedia("(max-width:600px)").matches,desk=()=>matchMedia("(min-width:1240px)").matches;
+  const openF=new Set();let lastF=null; // Computer: aufgeklappte Fächer in der Leiste
   const NAMES={start:"Startseite",spiele:"Spiele",neuigkeiten:"Neuigkeiten",quellen:"Quellen"};
   function curFach(){if(topic.startsWith("fach-"))return topic.slice(5);const k=Klassen.byKap(topic);return k?k.fach.id:null}
   function kapLinks(f){return f.kap.map(k=>{const i=k.a.querySelector(".ico"),b=k.a.querySelector("b");
@@ -2260,11 +2269,15 @@ const Menu=(function(){
     if(phone()){const pf=phoneFach&&F.find(f=>f.id===phoneFach);
       ui.innerHTML=pf?`<div class="nv-head"><button type="button" class="nv-back" data-back>‹ Alle Fächer</button><a class="nv-over" href="#fach-${pf.id}" style="--fc:${pf.color}"><span class="fdot" style="background:${pf.color}"></span>${pf.name} · Übersicht</a></div><div class="nv-kaps">${kapLinks(pf)}</div>`
         :`${gradeSel()}<div class="nv-fgrid">${F.map(f=>`<button type="button" class="nv-ftile" data-f="${f.id}" style="--fc:${f.color}"${f.id===cf?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><b>${f.name}</b><small>${f.kap.length}</small></button>`).join("")}</div>`;return}
+    if(desk()){ // Leiste links: Fächer klappen auf und zu, die Übersicht ist ein eigener Link
+      ui.innerHTML=`${gradeSel()}<div class="nv-facher">${F.map(f=>{const open=openF.has(f.id),here=f.id===cf;
+        return`<div class="nv-f${open?" open":""}" style="--fc:${f.color}"><button type="button" class="nv-fach nv-acc" data-tog="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><span class="nv-fn">${f.name}</span><span class="nv-chev" aria-hidden="true">›</span></button>${open?`<div class="nv-kaps">${kapLinks(f)}<a class="nv-over2" href="#fach-${f.id}"${topic==="fach-"+f.id?' aria-current="page"':""}>Übersicht ${f.name}</a></div>`:""}</div>`}).join("")}</div>`;return}
     ui.innerHTML=`${gradeSel()}<div class="nv-facher">${F.map(f=>{const open=f.id===cf;
       return`<div class="nv-f${open?" open":""}" style="--fc:${f.color}"><a class="nv-fach" href="#fach-${f.id}"${topic==="fach-"+f.id?' aria-current="page"':open?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span>${f.name}</a>${open?`<div class="nv-kaps">${kapLinks(f)}</div>`:""}</div>`}).join("")}</div>`;
     const cfo=F.find(f=>f.id===cf);
     ui.insertAdjacentHTML("beforeend",cfo?`<div class="nv-sub" style="--fc:${cfo.color}">${kapLinks(cfo)}</div>`:"")}
-  ui.addEventListener("click",e=>{const t=e.target.closest("[data-f],[data-back],[data-g]");if(!t)return;e.stopPropagation();
+  ui.addEventListener("click",e=>{const t=e.target.closest("[data-f],[data-back],[data-g],[data-tog]");if(!t)return;e.stopPropagation();
+    if(t.dataset.tog){const id=t.dataset.tog;if(openF.has(id))openF.delete(id);else openF.add(id);render();const b=ui.querySelector(`[data-tog="${id}"]`);if(b)b.focus({preventScroll:true});return}
     if(t.dataset.f){phoneFach=t.dataset.f;render();const first=ui.querySelector(".nv-back");if(first)first.focus()}
     else if(t.hasAttribute("data-back")){phoneFach=null;render()}
     else if(t.dataset.g){Klassen.setGrade(t.dataset.g);phoneFach=null}});
@@ -2272,9 +2285,10 @@ const Menu=(function(){
   if(btn)btn.addEventListener("click",()=>set(!nav.classList.contains("open")));
   document.addEventListener("click",e=>{if(nav.classList.contains("open")&&!nav.contains(e.target))set(false)});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&nav.classList.contains("open")){set(false);btn&&btn.focus()}});
-  let w=phone();window.addEventListener("resize",()=>{if(phone()!==w){w=phone();render()}});
+  let w=phone()+"|"+desk();window.addEventListener("resize",()=>{const n=phone()+"|"+desk();if(n!==w){w=n;render()}});
   window.addEventListener("klasse",()=>{render();route(false)});
-  function update(t){topic=t;nav.classList.remove("open");if(btn)btn.setAttribute("aria-expanded","false");phoneFach=null;
+  function update(t){topic=t;const nf=t.startsWith("fach-")?t.slice(5):(Klassen.byKap(t)||{fach:{}}).fach.id||null;
+    if(nf&&nf!==lastF){openF.add(nf);lastF=nf}nav.classList.remove("open");if(btn)btn.setAttribute("aria-expanded","false");phoneFach=null;
     const k=Klassen.byKap(t),f=t.startsWith("fach-")?Klassen.byFach(t.slice(5)):null;
     if(cur){if(k){const i=k.a.querySelector(".ico"),b=k.a.querySelector("b");cur.innerHTML=(i?i.outerHTML:"")+`<span>${b?b.textContent:""}</span>`}
       else if(f)cur.innerHTML=`<span class="fdot" style="background:${f.color};width:14px;height:14px"></span><span>${f.name}</span>`;

@@ -8,7 +8,10 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrek
 
 ### Neu
 
-- **Zehn neue Gucki-Tricks:** Fünfmal schnell auf Gucki tippen zeigt jetzt zufällig einen von elf Tricks (nie zweimal derselbe hintereinander): Kichern (wie bisher), Schwindel (Kopf wackelt, Pupillen kreisen), Niesen (Luft holen, „HATSCHI!“, Tröpfchen), Einschlafen (Augen fallen zu, Zs steigen auf), Winken, Kuckuck (abtauchen, nur die Augen gucken raus), Disco (Farben wechseln, Noten fliegen), Zaubertrick (weg mit Funkeln, „Tadaa!“), Erschrecken (Sprung, Kulleraugen, Hände hoch, „!“), Rakete (zittern, abheben, zurückplumpsen) und Jonglieren (drei bunte Bälle). Jeder Trick hat eigene Sprechblasen. Bei „Bewegungen reduzieren“ bleibt nur die Sprechblase.
+- **Neue Gucki-Tricks:** Fünfmal schnell auf Gucki tippen zeigt jetzt zufällig einen von 21 Tricks (nie zweimal derselbe hintereinander): Kichern (wie bisher), Schwindel (Kopf wackelt, Pupillen kreisen), Niesen (Luft holen, „HATSCHI!“, Tröpfchen), Einschlafen (Augen fallen zu, Zs steigen auf), Winken, Kuckuck (abtauchen, nur die Augen gucken raus), Disco (Farben wechseln, Noten fliegen), Zaubertrick (weg mit Funkeln, „Tadaa!“), Erschrecken (Sprung, Kulleraugen, Hände hoch, „!“), Rakete (zittern, abheben, zurückplumpsen) und Jonglieren (drei bunte Bälle). Jeder Trick hat eigene Sprechblasen. Bei „Bewegungen reduzieren“ bleibt nur die Sprechblase.
+- **Zehn weitere Tricks, insgesamt 21:** Seifenblasen, Sonnenbrille (fällt von oben auf die Nase, Gucki nickt, Daumen hoch), Idee (Glühbirne geht an … und wieder aus: „ach nee, vergessen“), Herzen und Schluckauf („hicks!“).
+- **Fünf übertriebene Tricks für die ganze Seite** (Gucki bleibt in seiner Ecke): Erdbeben (alles wackelt), Kopfstand (die Seite dreht sich um 180° und zurück), Gucki-Regen (32 kleine Guckis fallen vom Himmel), Schwerkraft kaputt (Kopfzeile, Menü, Überschriften und Kästen im Bild fallen runter und hüpfen zurück) und Licht aus (alles dunkel, nur Gucki im Lichtkegel). Alles kehrt danach von selbst zurück, nichts blinkt, Klicks auf die Seite gehen weiter. Bei „Bewegungen reduzieren“ und im Vollbild fallen die Seiten-Tricks weg (nur „Licht aus“, ein sanftes Abdunkeln, bleibt).
+- Für Lehrkräfte zum Vorführen in der Browser-Konsole: `GuckiTricks.play("fx-regen")` (Namen in `GuckiTricks`).
 
 ## [1.11.0] – 2026-11-16
 

@@ -826,7 +826,7 @@ svg.meter{width:100%;max-width:520px;height:auto;display:block}
 .gucki.kicher .pupille,.gucki.kicher .lid,.gucki.kicher .brille{display:none}
 @keyframes kichern{0%{transform:translateY(0)}12%{transform:translateY(-34px)}20%{transform:translateY(-34px) rotate(-5deg)}28%{transform:translateY(-36px) rotate(5deg)}36%{transform:translateY(-34px) rotate(-5deg)}44%{transform:translateY(-36px) rotate(5deg)}52%{transform:translateY(-34px) rotate(-4deg)}60%{transform:translateY(-35px) rotate(3deg)}85%{transform:translateY(-34px) rotate(0)}100%{transform:translateY(0)}}
 @keyframes zunge{from{transform:scaleY(.6) rotate(-6deg)}to{transform:scaleY(1.15) rotate(6deg)}}
-/* ===== Gucki-Tricks (fünfmal schnell antippen): zufällig eine von elf Animationen ===== */
+/* ===== Gucki-Tricks (fünfmal schnell antippen): zufällig eine von 21 Animationen (Nr. 16–20 bewegen die ganze Seite) ===== */
 .gucki[class*="fx-"]{overflow:visible}
 .gucki .gfx{position:absolute;pointer-events:none;z-index:4;font-family:var(--display);font-weight:800;line-height:1}
 /* 1 Schwindel: Kopf wackelt, Pupillen kreisen */
@@ -900,6 +900,69 @@ svg.meter{width:100%;max-width:520px;height:auto;display:block}
 .gucki .gfx-ball{left:4px;top:10px;width:14px;height:14px;border-radius:50%;opacity:0;animation:fxBall .8s linear calc(var(--i) * .27s) 3}
 .gucki .gfx-ball:nth-of-type(3n+1){background:#E3202A}.gucki .gfx-ball:nth-of-type(3n+2){background:#FFD000}.gucki .gfx-ball:nth-of-type(3n){background:#3DA647}
 @keyframes fxBall{0%{opacity:1;transform:translate(0,0)}25%{transform:translate(15px,-62px)}50%{transform:translate(30px,-80px)}75%{transform:translate(45px,-62px)}100%{opacity:1;transform:translate(60px,0)}}
+/* 11 Seifenblasen: Mund rund, Blasen steigen schaukelnd auf */
+.gucki.fx-blasen .kopf{animation:fxHoch 3s ease-in-out}
+.gucki.fx-blasen .mund{display:block;animation:fxBlasMund 3s ease-in-out}
+.gucki.fx-blasen .zunge{display:none}
+@keyframes fxBlasMund{0%,100%{transform:scale(.6,.3)}15%,85%{transform:scale(.55,.75)}}
+.gucki .gfx-blase{left:calc(22px + var(--i) * 3px);top:30px;width:var(--s);height:var(--s);border-radius:50%;border:2px solid #6FC3EE;background:radial-gradient(circle at 32% 30%,#fff 0 18%,rgba(160,215,245,.25) 45%,rgba(160,215,245,.05) 70%);opacity:0;animation:fxBlase 2s ease-out calc(.3s + var(--i) * .28s) forwards}
+@keyframes fxBlase{0%{opacity:0;transform:scale(.2)}12%{opacity:1;transform:translate(-6px,-14px) scale(1)}40%{transform:translate(calc(-20px - var(--i) * 6px),-60px)}70%{transform:translate(calc(-6px - var(--i) * 9px),-100px)}90%{opacity:1}100%{opacity:0;transform:translate(calc(-16px - var(--i) * 8px),-135px) scale(1.25)}}
+/* 12 Cool: Sonnenbrille fällt von oben auf die Nase, Gucki nickt im Takt */
+.gucki.gucki.fx-cool .brille{display:block;animation:fxBrille 2.8s cubic-bezier(.3,1.25,.5,1)}
+.gucki.gucki.cool.fx-cool .brille{animation:none}
+.gucki.fx-cool .kopf{animation:fxNicken .55s ease-in-out 5}
+.gucki.fx-cool .hand.r{animation:fxDaumen 2.8s ease-in-out}
+@keyframes fxBrille{0%{transform:translateY(-70px);opacity:0}25%,85%{transform:none;opacity:1}100%{transform:translateY(-70px);opacity:0}}
+@keyframes fxNicken{0%,100%{transform:translateY(-6px)}50%{transform:translateY(-2px) rotate(5deg)}}
+@keyframes fxDaumen{0%,100%{transform:none}20%,80%{transform:translate(4px,-40px) rotate(-30deg)}}
+/* 13 Idee: Blick nach oben, Glühbirne geht an, dann vergessen */
+.gucki.fx-idee .kopf{animation:fxIdee 2.9s ease-in-out}
+.gucki.fx-idee .pupille{animation:fxObenSchauen 2.9s ease-in-out!important}
+@keyframes fxIdee{0%,100%{transform:none}15%,55%{transform:translateY(-18px) rotate(-6deg)}62%{transform:translateY(-26px)}70%,90%{transform:translateY(-18px) rotate(6deg)}}
+@keyframes fxObenSchauen{0%,100%{transform:none}15%,55%{transform:translate(2px,-5px)}70%,90%{transform:translate(-3px,1px)}}
+.gucki .gfx-birne{left:22px;top:-74px;font-size:32px;opacity:0;animation:fxBirne 2.2s ease-out .45s forwards}
+@keyframes fxBirne{0%{opacity:0;transform:scale(.3)}15%{opacity:1;transform:scale(1.25);filter:drop-shadow(0 0 10px #FFD000)}30%,65%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 8px #FFD000)}80%{opacity:1;filter:grayscale(1)}100%{opacity:0;transform:translateY(-10px);filter:grayscale(1)}}
+/* 14 Herzen: Gucki schaukelt verliebt, Herzen steigen auf */
+.gucki.fx-herzen .kopf{animation:fxSchaukel 2.8s ease-in-out}
+.gucki.fx-herzen .lid{animation:fxHerzLid 2.8s ease-in-out}
+@keyframes fxSchaukel{0%,100%{transform:none}20%{transform:translateY(-16px) rotate(-7deg)}45%{transform:translateY(-16px) rotate(7deg)}70%{transform:translateY(-16px) rotate(-5deg)}}
+@keyframes fxHerzLid{0%,100%{transform:translateY(-100%)}15%,85%{transform:translateY(-55%)}}
+.gucki .gfx-herz{left:calc(var(--i) * 11px);top:0;font-size:var(--s);opacity:0;animation:fxHerz 1.7s ease-out calc(.2s + var(--i) * .22s) forwards}
+@keyframes fxHerz{0%{opacity:0;transform:scale(.3)}20%{opacity:1;transform:scale(1)}100%{opacity:0;transform:translate(calc((var(--i) - 3) * 7px),-90px) rotate(calc((var(--i) - 3) * 8deg))}}
+/* 15 Schluckauf: viermal ein kleiner Ruck nach oben */
+.gucki.fx-hicks .kopf{animation:fxHicks .75s ease-out 4}
+.gucki.fx-hicks .auge{animation:fxHicksAuge .75s ease-out 4}
+@keyframes fxHicks{0%,40%,100%{transform:translateY(-4px)}8%{transform:translateY(-22px) scale(1.04,.96)}20%{transform:translateY(-6px)}}
+@keyframes fxHicksAuge{0%,40%,100%{transform:none}8%{transform:scale(1.2)}}
+.gucki .gfx-hicks{left:-6px;top:-40px;font-size:15px;color:#7A5BC4;opacity:0;animation:fxHicksText .75s ease-out calc(var(--i) * .75s) forwards}
+@keyframes fxHicksText{0%{opacity:0;transform:scale(.4)}12%{opacity:1;transform:scale(1.15) rotate(-8deg)}60%{opacity:1;transform:translateY(-8px) rotate(-8deg)}100%{opacity:0;transform:translateY(-16px) rotate(-8deg)}}
+/* ===== Große Tricks: die ganze Seite macht mit (Gucki bleibt in seiner Ecke) ===== */
+body[class*="pfx-"] .wrap{overflow-x:clip}
+.pfx-layer{position:fixed;inset:0;pointer-events:none;z-index:19;overflow:hidden}
+/* 16 Erdbeben: alles wackelt */
+body.pfx-beben .wrap>*,body.pfx-beben #toTop,.gucki.fx-beben .kopf{animation:pfxBeben .14s linear 13}
+@keyframes pfxBeben{0%,100%{transform:none}25%{transform:translate(-7px,3px) rotate(-.6deg)}50%{transform:translate(5px,-4px) rotate(.5deg)}75%{transform:translate(-4px,-2px) rotate(-.3deg)}}
+.gucki.fx-beben .auge{animation:fxGross 1.9s ease-out}
+/* 17 Kopfstand: die Seite dreht sich einmal auf den Kopf und zurück */
+body.pfx-kopf .wrap>*,body.pfx-kopf #toTop{transform-origin:var(--ox,50%) var(--oy,50%);animation:pfxKopf 3.4s ease-in-out}
+@keyframes pfxKopf{0%,100%{transform:none}28%,68%{transform:rotate(180deg)}}
+.gucki.fx-kopfstand .kopf{animation:fxWobble 3.3s ease-in-out}
+/* 18 Gucki-Regen: lauter kleine Guckis fallen vom Himmel */
+.pfx-regen img{position:absolute;top:-70px;left:var(--x);width:var(--s);height:calc(var(--s) * 1.25);object-fit:cover;object-position:top;animation:pfxRegen var(--dur) cubic-bezier(.45,0,.9,.6) var(--del) both}
+@keyframes pfxRegen{0%{transform:none}100%{transform:translateY(calc(100vh + 110px)) rotate(var(--rot))}}
+.gucki.fx-regen .kopf{animation:fxDisco .5s ease-in-out 7}
+/* 19 Schwerkraft: Überschriften, Texte und Kästen fallen runter und hüpfen zurück */
+.pfx-fall{animation:pfxFall 3.2s var(--fd,0s) both}
+@keyframes pfxFall{0%{transform:none;animation-timing-function:ease-in-out}10%{transform:rotate(calc(var(--fr) * .15));animation-timing-function:cubic-bezier(.55,0,1,.45)}38%{transform:translateY(var(--fy)) rotate(var(--fr))}70%{transform:translateY(var(--fy)) rotate(var(--fr));animation-timing-function:cubic-bezier(.3,1.35,.5,1)}100%{transform:none}}
+.gucki.fx-schwerkraft .kopf{animation:fxSchreck 3s cubic-bezier(.3,1.6,.5,1)}
+.gucki.fx-schwerkraft .hand.l{animation:fxHandL 3s ease-out}
+.gucki.fx-schwerkraft .hand.r{animation:fxHandR 3s ease-out}
+/* 20 Licht aus: alles dunkel, nur Gucki im Lichtkegel */
+.pfx-licht{background:radial-gradient(circle at var(--lx) var(--ly),rgba(4,5,10,0) 0 70px,rgba(4,5,10,.93) 150px);animation:pfxLicht 4.1s ease both}
+@keyframes pfxLicht{0%{opacity:0}12%,82%{opacity:1}100%{opacity:0}}
+.gucki.fx-licht .pupille{animation:fxSchauen 3.9s ease-in-out!important}
+@keyframes fxSchauen{0%,100%{transform:none}15%,30%{transform:translate(-5px,-2px)}40%,55%{transform:translate(4px,-3px)}65%,80%{transform:translate(-2px,3px)}}
+@media (prefers-reduced-motion:reduce){body[class*="pfx-"] .wrap>*,body[class*="pfx-"] #toTop,.pfx-fall{animation:none!important}.pfx-regen{display:none}}
 @media (prefers-reduced-motion:reduce){.gucki[class*="fx-"] .kopf,.gucki[class*="fx-"] .hand,.gucki[class*="fx-"] .auge,.gucki[class*="fx-"] .pupille,.gucki[class*="fx-"] .lid,.gucki .gfx{animation:none!important}.gucki .gfx{display:none}}
 @media (prefers-reduced-motion:reduce){.gucki.kicher .kopf{animation:none;transform:translateY(-34px)}.gucki.kicher .zunge{animation:none}}
 .gucki.blink .lid{transform:translateY(0)}
@@ -978,8 +1041,10 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "date": "2026-11-16",
    "title": "Gucki hat neue Tricks",
    "items": [
-    "Tippe fünfmal schnell auf Gucki – jetzt zeigt er dir jedes Mal zufällig einen von elf Tricks.",
+    "Tippe fünfmal schnell auf Gucki – jetzt zeigt er dir jedes Mal zufällig einen von 21 Tricks.",
     "Neu dabei: Gucki wird schwindelig, niest, schläft ein, winkt, spielt Kuckuck, tanzt Disco, zaubert sich weg, erschrickt sich, fliegt wie eine Rakete und jongliert.",
+    "Außerdem pustet er Seifenblasen, setzt seine Sonnenbrille auf, hat eine Idee (und vergisst sie wieder), verteilt Herzen und hat Schluckauf.",
+    "Fünf Tricks sind richtig übertrieben, da macht die ganze Seite mit: ein Erdbeben, die Seite steht Kopf, es regnet Guckis, die Schwerkraft ist kaputt und jemand macht das Licht aus.",
     "Und natürlich kichert er weiter und streckt dir die Zunge raus."
    ]
   },
@@ -3457,10 +3522,17 @@ function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn
   at(15400,()=>Konfetti.clearPile());
   at(17000,()=>{Konfetti.pile(false);guckiMegaOn=false});
 }
-// Kleiner Spaß: Gucki fünfmal schnell antippen – zufällig einer von elf Tricks (nie zweimal derselbe hintereinander)
-(function(){const g=document.getElementById("gucki");if(!g)return;let n=0,tm=0,busy=false,last=-1;
+// Kleiner Spaß: Gucki fünfmal schnell antippen – zufällig einer von 21 Tricks (nie zweimal derselbe hintereinander).
+// Tricks mit page:true bewegen die ganze Seite (nur .wrap und #toTop, Gucki bleibt stehen); sie fallen weg bei
+// „Bewegung reduzieren“ und im Vollbild. fx() gibt Elemente oder Aufräum-Funktionen zurück, die am Ende entfernt bzw. aufgerufen werden.
+(function(){const g=document.getElementById("gucki");if(!g)return;let n=0,tm=0,busy=false,last=-1;const B=document.body;
   const add=(cls,list,vars)=>list.map((t,i)=>{const s=document.createElement("span");s.className="gfx "+cls;s.textContent=t;s.style.setProperty("--i",i);
     if(vars)for(const k in vars(i))s.style.setProperty(k,vars(i)[k]);g.appendChild(s);return s});
+  const bodyCls=c=>{B.classList.add(c);return()=>B.classList.remove(c)};
+  const layer=cls=>{const d=document.createElement("div");d.className="pfx-layer "+cls;d.setAttribute("aria-hidden","true");B.appendChild(d);return d};
+  const pageKids=()=>[...document.querySelectorAll(".wrap > *, #toTop")].filter(e=>e.getClientRects().length);
+  const unset=(els,keys)=>()=>els.forEach(e=>keys.forEach(k=>e.style.removeProperty(k)));
+  const rnd=(a,b)=>a+Math.random()*(b-a);
   const TRICKS=[
     {c:"kicher",ms:2300,say:[[0,"Hihihi!",1900]]},
     {c:"fx-schwindel",ms:2500,say:[[200,"Huiii … mir ist schwindelig!",2200]]},
@@ -3472,14 +3544,44 @@ function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn
     {c:"fx-zauber",ms:2500,say:[[0,"Simsalabim …",1100],[1900,"Tadaa!",1000]],fx:()=>add("gfx-funke",["✨","✨","✨","✨","✨","✨"],i=>({"--x":[-10,50,20,-6,56,24][i],"--y":[-20,-24,-44,20,16,-6][i]}))},
     {c:"fx-schreck",ms:2300,say:[[150,"Huch! Hast du mich erschreckt!",2000]],fx:()=>add("gfx-ruf",["!"])},
     {c:"fx-rakete",ms:3500,say:[[0,"3 … 2 … 1 … Start! 🚀",1500],[2900,"Wieder da!",1100]],fx:()=>add("gfx-flamme",["🔥"])},
-    {c:"fx-jonglier",ms:2900,say:[[200,"Guck mal, ich kann jonglieren!",2400]],fx:()=>add("gfx-ball",["","",""])}
+    {c:"fx-jonglier",ms:2900,say:[[200,"Guck mal, ich kann jonglieren!",2400]],fx:()=>add("gfx-ball",["","",""])},
+    {c:"fx-blasen",ms:3300,say:[[200,"Blubb! Seifenblasen! 🫧",2400]],fx:()=>add("gfx-blase",["","","","","","",""],i=>({"--s":[12,18,24][i%3]+"px"}))},
+    {c:"fx-cool",ms:2900,say:[[500,"Cool bleiben. 😎",2200]]},
+    {c:"fx-idee",ms:3000,say:[[500,"Pling! Ich hab 'ne Idee!",1300],[1900,"… ach nee, vergessen. 😅",1100]],fx:()=>add("gfx-birne",["💡"])},
+    {c:"fx-herzen",ms:2900,say:[[200,"Du bist super! ❤️",2400]],fx:()=>add("gfx-herz",["❤️","💛","💚","💙","💜","❤️"],i=>({"--s":[14,19,24][i%3]+"px"}))},
+    {c:"fx-hicks",ms:3200,say:[[2200,"Ich hab Schluckauf! 😳",1300]],fx:()=>add("gfx-hicks",["hicks!","hicks!","hicks!","hicks!"])},
+    // ab hier: die ganze Seite macht mit
+    {c:"fx-beben",page:1,ms:2200,say:[[0,"Erdbeben!!! 😱",1500],[1850,"Puh, vorbei!",1100]],fx:()=>[bodyCls("pfx-beben")]},
+    {c:"fx-kopfstand",page:1,ms:3600,say:[[300,"Huch! Alles steht Kopf! 🙃",2000],[2600,"Schon besser.",1000]],fx:()=>{
+      const els=pageKids(),cx=innerWidth/2,cy=innerHeight/2;
+      els.forEach(e=>{const r=e.getBoundingClientRect();e.style.setProperty("--ox",(cx-r.left)+"px");e.style.setProperty("--oy",(cy-r.top)+"px")});
+      return[bodyCls("pfx-kopf"),unset(els,["--ox","--oy"])]}},
+    {c:"fx-regen",page:1,ms:4200,say:[[200,"Es regnet Guckis! ☔",2800]],fx:()=>{
+      const d=layer("pfx-regen"),ic=document.querySelector('link[rel="icon"]');if(!ic)return[d];
+      for(let i=0;i<32;i++){const m=new Image();m.src=ic.href;m.alt="";const st=m.style;
+        st.setProperty("--x",rnd(-2,96).toFixed(1)+"%");st.setProperty("--s",Math.round(rnd(22,52))+"px");
+        st.setProperty("--dur",rnd(1.4,2.4).toFixed(2)+"s");st.setProperty("--del",rnd(0,1.6).toFixed(2)+"s");st.setProperty("--rot",Math.round(rnd(-300,300))+"deg");d.appendChild(m)}
+      return[d]}},
+    {c:"fx-schwerkraft",page:1,ms:4000,say:[[250,"Huch! Die Schwerkraft ist kaputt!",2100],[3000,"Alles wieder an seinem Platz!",1300]],fx:()=>{
+      const vh=innerHeight,t=document.querySelector(".topic:not([hidden])");
+      let els=[...document.querySelectorAll(".topbar > *, #crumbs, #toc, nav.navx"),...(t?t.querySelectorAll(":scope > header > *, section > *"):[])].filter(e=>{const r=e.getBoundingClientRect();return r.height>0&&r.bottom>0&&r.top<vh});
+      els=els.filter(e=>!els.some(o=>o!==e&&o.contains(e))).slice(0,40);
+      els.forEach(e=>{const r=e.getBoundingClientRect();e.style.setProperty("--fy",Math.round(vh-r.top+30)+"px");e.style.setProperty("--fr",rnd(-24,24).toFixed(1)+"deg");e.style.setProperty("--fd",rnd(0,.5).toFixed(2)+"s");e.classList.add("pfx-fall")});
+      return[()=>els.forEach(e=>e.classList.remove("pfx-fall")),unset(els,["--fy","--fr","--fd"]),bodyCls("pfx-schwer")]}},
+    {c:"fx-licht",page:1,calm:1,ms:4300,say:[[500,"Huch! Wer hat das Licht ausgemacht? 🔦",2400],[3500,"Ah, viel besser!",1100]],fx:()=>{
+      const r=g.querySelector(".kopf").getBoundingClientRect(),d=layer("pfx-licht");
+      d.style.setProperty("--lx",Math.round(r.left+r.width/2)+"px");d.style.setProperty("--ly",Math.round(Math.min(r.top+r.height/2,innerHeight-30))+"px");return[d]}}
   ];
-  g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n<5||busy||guckiMegaOn)return;n=0;busy=true;
-    let k;do{k=Math.floor(Math.random()*TRICKS.length)}while(k===last&&TRICKS.length>1);last=k;const t=TRICKS[k];
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)");
+  g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n<5||busy||guckiMegaOn)return;n=0;
+    const quiet=reduce.matches||document.querySelector(".fs-on");const pool=TRICKS.filter(t=>!t.page||t.calm||!quiet);
+    let t;do{t=pool[Math.floor(Math.random()*pool.length)]}while(t===last&&pool.length>1);play(t)});
+  function play(t){busy=true;last=t;
     g.classList.remove("cry","clap","talk");g.classList.add(t.c);const extra=t.fx?t.fx():[];
     t.say.forEach(([at,text,ms])=>setTimeout(()=>{document.querySelectorAll(".gucki-bubble").forEach(b=>b.remove());guckiSay(text,ms)},at));
-    setTimeout(()=>{g.classList.remove(t.c);extra.forEach(e=>e.remove());busy=false},t.ms)});
-  window.GuckiTricks=TRICKS.map(t=>t.c); // für Tests und Vorführung
+    setTimeout(()=>{g.classList.remove(t.c);extra.forEach(e=>typeof e==="function"?e():e.remove());busy=false},t.ms)}
+  // für Tests und Vorführung: GuckiTricks.play("fx-regen")
+  window.GuckiTricks=TRICKS.map(t=>t.c);window.GuckiTricks.play=c=>{const t=TRICKS.find(x=>x.c===c);if(t&&!busy&&!guckiMegaOn)play(t)};
 })();
 /* ================= NOTEN ================= */
 const NN=["c","d","e","f","g","a","h"];

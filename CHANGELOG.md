@@ -4,6 +4,19 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.9.0] – 2026-11-16
+
+Neues Fach Englisch mit dem Kapitel „Vokabeln“.
+
+### Neu
+
+- **Kapitel „Vokabeln“** (`#vokabeln`, Fach Englisch, Farbe `--engl`): 210 Einträge zu Welcome und Theme 1 des Englischbuchs (192 Wörter, 18 Redewendungen). Übernommen sind nur Wort und Bedeutung – keine Beispielsätze, Bilder, Lautschrift oder Seitenzahlen aus dem Buch. Mit ° markierte Einträge (nur zum Verstehen) und Arbeitsanweisungen fehlen.
+- **Wörterbuch** mit Suche (Englisch und Deutsch), Auswahl Welcome/Theme 1, alphabetisch mit Buchstaben-Überschriften, Vorlesen per 🔊 (Sprachausgabe des Geräts, britisches Englisch, wenn vorhanden).
+- **Aufgabe 1 · Karteikasten:** Karten zum Umdrehen, „Gewusst“/„Noch nicht“, drei Fächer (Neu, Fast, Gekonnt), Richtung Englisch → Deutsch oder Deutsch → Englisch. Der Stand wird auf dem Gerät gespeichert (`localStorage` „vokBox“), „Karteikasten leeren“ mit zweitem Tippen zur Sicherheit. Zählt nicht für die Kapitel-Party (`data-train`, im Wegweiser ohne ✎).
+- **Aufgabe 2 · Vokabeln schreiben:** zehn Wörter pro Runde (ohne Redewendungen), beide Richtungen, zählt für die Kapitel-Party. Großzügig bei „to“ vor Verben, Klammern, Kurzformen und „Freund/in“; Groß-/Kleinschreibung und ae/oe/ue/ss statt Umlauten gelten als richtig mit Hinweis; „Fast!“ bei einem falschen Buchstaben. Ergebnisse wandern auch in den Karteikasten. Knöpfe für ä, ö, ü, ß. Umschalter „⌨️ Tastatur / ✏️ Stift“: Im Stift-Modus schreibt das Kind auf eine Zeichenfläche mit Hilfslinien (Stift, Finger oder Maus), tippt „Lösung zeigen“ und bewertet selbst („Richtig geschrieben“ / „Noch nicht“) – keine Handschrifterkennung, läuft offline. Auf Tablets (Touch, ab 700 px) ist der Stift voreingestellt; auf dem Handy öffnet sich die Aufgabe beim Wechsel zum Stift im Vollbild.
+- **Gucki-Blitzrunde:** neuer Fragen-Generator „Englisch“.
+- **Vollbild für Übungen und Spiele:** Jede Aufgabe (`.task`) bekommt im Kopf einen Knopf „⛶ Vollbild“, die vier Spiele einen über der Spielfläche. Die Fläche liegt dann über der ganzen Seite (Gucki bleibt sichtbar, „Nach oben“ ist ausgeblendet), mit Leiste „✕ Schließen“. Wo der Browser es erlaubt, schaltet sich zusätzlich echtes Vollbild ein; Esc, Seitenwechsel oder das Beenden des Browser-Vollbilds schließen es wieder.
+
 ## [1.8.0] – 2026-11-11
 
 S.D.L.W. ist jetzt eine Progressive Web App.

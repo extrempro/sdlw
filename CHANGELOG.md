@@ -4,6 +4,20 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.10.0] – 2026-11-16
+
+Navigation in drei Stufen: Klasse → Fach → Kapitel, vorbereitet für etwa zehn Fächer und weitere Klassenstufen.
+
+### Neu
+
+- **Fach-Übersichtsseiten** `#fach-<id>` (z. B. `#fach-erdkunde`), automatisch aus der Navigation erzeugt: Kapitelkarten mit Fortschritt; im Wegweiser „Fach · Übersicht“.
+- **Klassenstufen:** Jedes Kapitel hat eine Klasse (`data-kl` am Link oder am Fach, sonst 5; `alle` = jede Klasse, z. B. Lernen). Menü, Startseite und Übersichten zeigen nur Kapitel der gewählten Klasse; Fächer ohne Kapitel werden ausgeblendet. Die Wahl merkt sich das Gerät (`localStorage` „klasse“). Gibt es mehr als eine Klasse, wird „Klasse 5“ oben zum Umschalter (auch im Handy-Menü); bisher ist es ein Schild. Ein direkter Link auf ein Kapitel einer anderen Klasse stellt die Klasse um.
+- **Startseite:** „Deine Fächer“ als Kacheln (Fachfarbe, Kapitelsymbole, Anzahl, Fortschritt) statt der Liste aller Kapitel; Einleitung ohne feste Fächerliste.
+
+### Verbessert
+
+- **Menü je Gerät:** Handy – „☰ Themen“ öffnet Fach-Kacheln, ein Tipp zeigt die Kapitel mit „‹ Alle Fächer“ und Link zur Übersicht (öffnet direkt beim aktuellen Fach). Tablet und kleiner Computer – eine Zeile Fach-Knöpfe, darunter die Kapitel des aktuellen Fachs. Computer ab 1240 px – Leiste links neben dem Inhalt, das aktuelle Fach ist aufgeklappt; der Inhalt beginnt dadurch deutlich weiter oben.
+
 ## [1.9.2] – 2026-11-16
 
 ### Verbessert

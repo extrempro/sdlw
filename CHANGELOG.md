@@ -4,6 +4,21 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.9.1] – 2026-11-16
+
+### Behoben
+
+- **Karteikasten:** Dieselbe Karte kam oft zweimal hintereinander, wenn die erste als „Gewusst“ allein in Fach 2 lag und danach Fach 2 gezogen wurde. Die zuletzt gezeigte Karte wird jetzt über alle Fächer hinweg ausgeschlossen.
+- **Vokabeln schreiben, Stift-Modus:** Das Wort wurde bei „Lösung zeigen“ und noch einmal bei „Richtig geschrieben“/„Noch nicht“ vorgelesen. Jetzt nur noch beim Zeigen der Lösung.
+
+### Verbessert
+
+- **Vokabeln auf dem Handy:** Wörterbuch-Zeilen einzeilig (Englisch | Deutsch | 🔊), Liste höher (bis 62 % der Bildschirmhöhe). Fach-Kästen ohne „Fach N ·“, Karteikarte flacher.
+- **Ausrollen mit Docker/Arcane:** `docker-compose.yml` und `nginx.conf` liegen jetzt im Repository (Hauptordner), damit die Git-Synchronisierung von Arcane den Stack direkt ausrollen kann. nginx bindet das Repository nur lesend ein und liefert ausschließlich `/`, `/index.html`, `/manifest.webmanifest`, `/sw.js` und `/icons/` aus, alles andere gibt 404. Seite, Manifest und Service Worker mit `Cache-Control: no-cache`, damit Updates sofort ankommen; Symbole einen Tag. Anleitung in der README.
+- **Auswahl-Leiste (Vokabeln):** immer sichtbar statt aufklappbarem Kasten. Teile als Häkchen-Knöpfe (✓ Welcome, ✓ Theme 1; abgewählt gestrichelt), Richtung als ein Knopf, der bei jedem Tipp wechselt („Englisch → Deutsch ⇄“, auf dem Handy „EN → DE ⇄“), bei „Vokabeln schreiben“ in derselben Leiste der Umschalter Stift/Tastatur als Emoji-Knöpfe ✏️ ⌨️ (auf dem Handy nur Emoji). Das Wörterbuch nutzt dieselben Häkchen-Knöpfe.
+- **Vokabeln schreiben:** Stift ist jetzt auf allen Touch-Geräten Standard (Handy und Tablet, `pointer:coarse`), am Computer die Tastatur. Das automatische Vollbild beim Wechsel zum Stift auf dem Handy entfällt.
+- **Aufgabenkopf auf dem Handy (alle Kapitel):** Überschrift in eigener Zeile, darunter „⛶ Vollbild“ und „↺ Neu beginnen“ linksbündig in gleicher Größe, Punktestand rechts.
+
 ## [1.9.0] – 2026-11-16
 
 Neues Fach Englisch mit dem Kapitel „Vokabeln“.

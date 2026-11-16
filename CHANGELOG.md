@@ -9,7 +9,7 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrek
 ### Verbessert
 
 - **Vorlesen (Vokabeln) klingt natürlicher:** Die Stimme wird nach Qualität ausgewählt – britisches Englisch zuerst, „Natural/Neural/Premium/Enhanced“- und Google-Stimmen bevorzugt, Spaß- und Roboterstimmen (z. B. eSpeak, Fred, Eloquence-Stimmen wie Eddy) nie. Ohne Internet nur Stimmen, die auf dem Gerät liegen. Etwas natürlicheres Tempo (0,9).
-- **Stimmenwahl im Wörterbuch**, wenn das Gerät mehrere englische Stimmen hat (wird auf dem Gerät gespeichert, `localStorage` „vokVoice“), mit Hörprobe.
+- **Stimmenwahl im Wörterbuch** (Zeile „Stimme“ unter der Suche, immer sichtbar): zeigt die benutzte Stimme, bei mehreren englischen Stimmen auswählbar (gespeichert in `localStorage` „vokVoice“), mit Hörprobe und Hinweis, wenn das Gerät nur eine oder keine englische Stimme meldet. Stimmen werden bis 10 Sekunden nach dem Laden und bei Antippen nachgefragt, weil manche Browser sie spät melden.
 - **Hilfe „Klingt die Stimme wie ein Roboter?“** im Wörterbuch: wie man auf iPhone/iPad, Android, Mac und Windows bessere englische Stimmen lädt.
 - **Zweimal schnell auf 🔊** spricht das Wort langsam (0,62). Der Knopf pulsiert, solange gesprochen wird.
 - **Aussprache:** „Mr/Mrs“ als „Mister/Missus“, Auslassungspunkte und „/“ werden nicht mitgesprochen.

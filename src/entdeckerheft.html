@@ -169,6 +169,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes vkpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--engl) 25%,transparent)}}
 @media (prefers-reduced-motion:reduce){.vk-say.speaking{animation:none;box-shadow:0 0 0 3px var(--engl)}}
 .vk-voice{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:700;font-size:.92rem}
+.vk-vnote{flex-basis:100%;font-weight:400;font-size:.85rem;color:var(--muted)}
+.vk-vnote:empty{display:none}
 .vk-voice select{font:inherit;font-weight:400;padding:7px 10px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);max-width:100%;flex:1 1 220px;min-width:0}
 .vk-help{font-size:.92rem;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--sheet)}
 .vk-help summary{cursor:pointer;font-weight:700}
@@ -885,7 +887,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "title": "Schöneres Vorlesen",
    "items": [
     "Beim Vorlesen sucht sich S.D.L.W. jetzt die natürlichste britische Stimme auf deinem Gerät aus – Roboterstimmen werden nicht mehr benutzt.",
-    "Im Wörterbuch kannst du die Stimme selbst wählen, wenn dein Gerät mehrere hat.",
+    "Im Wörterbuch steht jetzt, welche Stimme vorliest. Hat dein Gerät mehrere, kannst du dort eine andere wählen.",
     "Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam. Solange gesprochen wird, leuchtet der Knopf.",
     "Unter „Klingt die Stimme wie ein Roboter?“ steht, wie man auf dem Gerät eine schönere Stimme lädt."
    ]
@@ -1777,7 +1779,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
       <label class="vk-search"><span class="sr-only">Wort suchen</span><input type="search" id="vkSearch" placeholder="Suchen … z. B. Katze oder cat" autocomplete="off" spellcheck="false"></label>
       <div class="bl-chips vk-units" id="vkDictUnits" role="group" aria-label="Teile des Buchs"></div>
     </div>
-    <div class="vk-voice" id="vkVoiceBox" hidden><label for="vkVoice">Stimme</label><select id="vkVoice"></select><button type="button" class="vk-say" id="vkVoiceTry" aria-label="Stimme ausprobieren" title="Ausprobieren">🔊</button></div>
+    <div class="vk-voice" id="vkVoiceBox"><label for="vkVoice">Stimme</label><select id="vkVoice"></select><button type="button" class="vk-say" id="vkVoiceTry" aria-label="Stimme ausprobieren" title="Ausprobieren">🔊</button><span class="vk-vnote" id="vkVoiceNote"></span></div>
     <details class="vk-help"><summary>Klingt die Stimme wie ein Roboter?</summary>
       <p>Das Vorlesen kommt von deinem Gerät. Viele Geräte haben schönere englische Stimmen, die man erst laden muss. Frag am besten deine Eltern. Die Namen der Menüs können je nach Gerät etwas anders heißen.</p>
       <ul>
@@ -4069,7 +4071,8 @@ const Vok=(function(){
   const ranked=()=>voices.filter(v=>score(v)>-1e8).sort((a,b)=>score(b)-score(a));
   function pickVoice(){if(!canSay)return;voices=speechSynthesis.getVoices()||[];let want=null;try{want=localStorage.getItem("vokVoice")}catch(_){}
     const r=ranked();voice=(want&&r.find(v=>v.name===want))||r[0]||null;document.dispatchEvent(new Event("vokvoices"))}
-  if(canSay){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",pickVoice);setTimeout(pickVoice,800)}
+  // Manche Browser melden ihre Stimmen spät (v. a. in eingebetteten Seiten) – darum mehrmals nachfragen
+  if(canSay){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",pickVoice);[300,800,1500,3000,6000,10000].forEach(t=>setTimeout(()=>{if(!voice)pickVoice()},t))}
   function setVoice(name){try{name?localStorage.setItem("vokVoice",name):localStorage.removeItem("vokVoice")}catch(_){}pickVoice()}
   // Schreibweisen fürs Sprechen glätten
   function speakText(en){return en.replace(/\(=[^)]*\)/g,"").replace(/[()]/g,"").replace(/\s*(\.\.\.|…)\s*/g," ").replace(/\s\/\s/g,", ")
@@ -4102,7 +4105,7 @@ const Vok=(function(){
       btn.innerHTML=`<span class="vk-long">${ed?"Englisch → Deutsch":"Deutsch → Englisch"}</span><span class="vk-short">${ed?"EN → DE":"DE → EN"}</span><span class="vk-swi" aria-hidden="true">⇄</span>`;
       btn.setAttribute("aria-label",`Richtung: ${ed?"Englisch nach Deutsch":"Deutsch nach Englisch"}. Tippen zum Wechseln`);btn.title="Richtung wechseln"};
     draw();btn.onclick=()=>{btn.dataset.d=btn.dataset.d==="ed"?"de":"ed";draw();set(btn.dataset.d)}}
-  return{variants,answersFor,check,say,sayBtn,canSay,ranked,setVoice,get voice(){return voice},speakText,score,esc,fach,setFach,clearBox,unitChips,dirSwap}
+  return{variants,answersFor,check,say,sayBtn,canSay,ranked,setVoice,refresh:pickVoice,get voice(){return voice},speakText,score,esc,fach,setFach,clearBox,unitChips,dirSwap}
 })();
 
 // --- Wörterbuch ---
@@ -4121,11 +4124,15 @@ const Vok=(function(){
   Vok.unitChips($("#vkDictUnits"),sel,render);inp.addEventListener("input",render);render();
   // Stimmenwahl (nur wenn das Gerät mehr als eine englische Stimme hat)
   const vb=$("#vkVoiceBox"),vs=$("#vkVoice");
-  function voicesUI(){if(!Vok.canSay||!vb)return;const r=Vok.ranked();vb.hidden=r.length<2;if(r.length<2)return;
+  function voicesUI(){if(!vb)return;const note=$("#vkVoiceNote");
+    if(!Vok.canSay){vb.hidden=false;vs.hidden=true;$("#vkVoiceTry").hidden=true;note.textContent="Dein Browser kann leider nicht vorlesen.";return}
+    const r=Vok.ranked();vs.hidden=!r.length;vs.disabled=r.length<2;
+    note.textContent=!r.length?"Noch keine englische Stimme gefunden – tippe einmal auf 🔊 oder lies die Hilfe darunter.":r.length<2?"Dein Gerät hat nur diese englische Stimme.":"";
+    if(!r.length)return;
     const curN=Vok.voice&&Vok.voice.name;
     vs.innerHTML=r.map(v=>`<option value="${Vok.esc(v.name)}"${v.name===curN?" selected":""}>${Vok.esc(v.name.replace(/^Microsoft\s+|^Google\s+/,m=>m))} (${v.lang.replace("_","-")})</option>`).join("")}
   document.addEventListener("vokvoices",voicesUI);voicesUI();
-  if(vs){vs.onchange=()=>{Vok.setVoice(vs.value);Vok.say("Hello! How are you?",$("#vkVoiceTry"))};$("#vkVoiceTry").onclick=e=>{e.stopPropagation();Vok.say("Hello! How are you?",e.currentTarget)}}
+  if(vs){vs.addEventListener("focus",()=>{if(Vok.ranked().length<2)Vok.refresh()});vs.onchange=()=>{Vok.setVoice(vs.value);Vok.say("Hello! How are you?",$("#vkVoiceTry"))};$("#vkVoiceTry").onclick=e=>{e.stopPropagation();Vok.refresh();Vok.say("Hello! How are you?",e.currentTarget)}}
 })();
 
 // --- Aufgabe 1: Karteikasten ---

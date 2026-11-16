@@ -4,6 +4,17 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.11.0] – 2026-11-16
+
+Gucki macht beim Vokabellernen mit.
+
+### Neu
+
+- **Aufgabe 3 · Gucki fragt ab** (`#vk3`, zählt für das Kapitel): Hörverstehen – Gucki spricht ein englisches Wort (Sprechblase „🎧 Hör gut zu!“, das Wort wird nicht gezeigt), vier deutsche Bedeutungen zur Wahl, „🔊 Nochmal hören“, zehn Wörter pro Runde, nur der erste Versuch zählt. Start über „▶ Los geht's“ (Vorlesen braucht ein Antippen). Ohne Sprachausgabe zeigt Gucki das Wort.
+- **Gucki spricht vor:** Bei jedem Vorlesen bewegt Gucki den Mund (Klasse `.gucki.talk`) und zeigt das Wort in der Sprechblase.
+- **Gucki-Tipp in „Vokabeln schreiben“** (Tastatur und Stift): „💡 Gucki, hilf mir!“ zeigt den ersten Buchstaben und die Länge (z. B. „d _ _“). Ein Wort mit Tipp zählt als richtig, aber die Runde nicht als fehlerfrei, und das Wort rückt im Karteikasten nicht vor.
+- **Mutmachen im Karteikasten:** bei „Noch nicht“ ein aufmunternder Satz (ohne Weinen), bei 5, 10, 20, 30 „Gewusst“ in Folge und bei je 25 gekonnten Wörtern Jubel.
+
 ## [1.10.1] – 2026-11-16
 
 ### Verbessert

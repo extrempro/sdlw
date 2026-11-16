@@ -406,7 +406,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .navx{display:block}
 .faecher{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 14px;align-items:center}
 .fach{display:contents}
-@media (max-width:480px){.faecher{grid-template-columns:1fr;gap:4px}.fach .topics{margin-bottom:6px}}
+/* Handy: Fach-Navigation hinter dem Knopf „☰ Themen“, aufgeklappt kompakt in zwei Spalten */
+.nav-tog{display:none}
+@media (max-width:600px){
+  .nav-tog{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:6px 8px 6px 6px;border-radius:999px;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);font:inherit;cursor:pointer;text-align:left}
+  .nav-tog:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  .nt-cur{display:flex;align-items:center;gap:8px;min-width:0;font-weight:700;font-size:.95rem}
+  .nt-cur .ico{width:30px;height:30px;flex:none}
+  .nt-cur span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nt-lbl{flex:none;font-weight:700;font-size:.9rem;padding:6px 12px;border-radius:999px;background:var(--ink);color:var(--sheet)}
+  .nt-car{display:inline-block;transition:transform .2s}
+  .nav-tog[aria-expanded="true"] .nt-car{transform:rotate(180deg)}
+  .navx .faecher{display:none}
+  .navx.open .faecher{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;margin-top:10px;padding:12px;border:1.5px solid var(--line);border-radius:18px;background:var(--sheet)}
+  .navx.open .fach{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .navx.open .fach.wide{grid-column:1/-1}
+  .navx.open .fach.wide .topics{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .navx.open .topics{flex-direction:column;flex-wrap:nowrap;gap:6px}
+  .navx.open .topics a{padding:3px 10px 3px 3px;min-width:0}
+  .navx.open .topics .ico{width:26px;height:26px;flex:none}
+  .navx.open .topics b{font-size:.88rem;white-space:normal}
+}
+@media (max-width:480px){.faecher{gap:4px}.fach .topics{margin-bottom:0}}
 @media (max-width:480px){.tlbl{display:none}}
 .fachname{margin:0;display:flex;align-items:center;gap:6px;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
 .fdot{width:9px;height:9px;border-radius:50%;flex:none}
@@ -796,6 +817,15 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
+   "version": "1.9.2",
+   "date": "2026-11-16",
+   "title": "Aufgeräumtes Menü auf dem Handy",
+   "items": [
+    "Auf dem Handy siehst du oben nur noch, in welchem Kapitel du bist. Tippe auf „☰ Themen“, dann klappen alle Fächer auf.",
+    "So bist du viel schneller beim Lernen, ohne erst lange nach unten zu wischen."
+   ]
+  },
+  {
    "version": "1.9.1",
    "date": "2026-11-16",
    "title": "Vokabeln aufgeräumt",
@@ -963,7 +993,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 }
 </script>
 <nav class="navx" aria-label="Themen">
-  <div class="faecher">
+  <button type="button" class="nav-tog" id="navTog" aria-expanded="false" aria-controls="faecher"><span class="nt-cur" id="navCur"></span><span class="nt-lbl"><span aria-hidden="true">☰</span> Themen <span class="nt-car" aria-hidden="true">▾</span></span></button>
+  <div class="faecher" id="faecher">
     <div class="fach"><p class="fachname"><span class="fdot" style="background:#D2553A"></span>Deutsch</p><div class="topics">
       <a href="#deutsch" data-topic="deutsch" data-desc="Wann schreibt man groß? Nomen erkennen, Signalwörter finden und Fehler aufspüren."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D2553A"/><text x="16" y="21.5" text-anchor="middle" style="font:800 14px 'Bricolage Grotesque','Trebuchet MS',sans-serif;fill:#FFFFFF">Aa</text></svg><span><b>Groß und klein</b></span></a>
     </div></div>
@@ -2111,6 +2142,21 @@ const f1=n=>(Math.round(n*10)/10).toString();
 })();
 /* ---------- Kapitel-Umschalter ---------- */
 const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","vokabeln","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten","quellen"];
+/* --- Themen-Knopf (Handy) --- */
+// Auf dem Handy steckt die Fach-Navigation hinter „☰ Themen“; der Knopf zeigt das aktuelle Kapitel.
+const NavTog=(function(){
+  const nav=$(".navx"),btn=$("#navTog"),cur=$("#navCur");if(!nav||!btn)return null;
+  nav.querySelectorAll(".fach").forEach(f=>{if(f.querySelectorAll(".topics a").length>2)f.classList.add("wide")});
+  const NAMES={start:"Startseite",spiele:"Spiele",neuigkeiten:"Neuigkeiten",quellen:"Quellen"};
+  function set(open){nav.classList.toggle("open",open);btn.setAttribute("aria-expanded",open)}
+  btn.addEventListener("click",()=>set(!nav.classList.contains("open")));
+  document.addEventListener("click",e=>{if(nav.classList.contains("open")&&!nav.contains(e.target))set(false)});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&nav.classList.contains("open")){set(false);btn.focus()}});
+  function update(t){set(false);
+    const a=document.querySelector(`.navx .topics a[data-topic="${t}"], #gameReg a[data-topic="${t}"]`);
+    if(a){const ico=a.querySelector(".ico"),name=a.querySelector("b");cur.innerHTML=(ico?ico.outerHTML:"")+`<span>${name?name.textContent:""}</span>`}
+    else cur.innerHTML=`<span>${NAMES[t]||"S.D.L.W."}</span>`}
+  return{update,set}})();
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -2118,6 +2164,7 @@ function route(scroll){
   const nb=$("#newsBtn");if(nb){if(t==="neuigkeiten"){nb.setAttribute("aria-current","page");if(window.markReleaseSeen)markReleaseSeen()}else nb.removeAttribute("aria-current")}
   const hb=$("#homeBtn");if(hb){if(t==="start")hb.setAttribute("aria-current","page");else hb.removeAttribute("aria-current")}
   const gb=$("#gameBtn"),isGame=t==="spiele"||!!document.querySelector(`#gameReg a[data-topic="${t}"]`);if(gb){if(isGame)gb.setAttribute("aria-current","page");else gb.removeAttribute("aria-current")}
+  if(NavTog)NavTog.update(t);
   if(t==="start"){renderStart();renderGames($("#startGames"))}
   if(t==="spiele")renderGames($("#gameList"));
   if(scroll)window.scrollTo(0,0);

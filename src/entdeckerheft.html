@@ -152,7 +152,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 #klassenarbeit .merk{--accent:var(--lern)}
 /* ===== Englisch: Vokabeln ===== */
 #vokabeln .merk{--accent:var(--engl)}
-.vk-tools{display:flex;flex-direction:column;gap:10px}
+.vk-dict{gap:12px}
+.vk-row2{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.vk-row2 .hint{margin:0}
+#vokabeln .vk-dict .vk-list{border-radius:12px;padding:0;margin:0;list-style:none}
+#vokabeln .vk-dict .vk-list li{margin:0}
 .vk-search input{width:100%;font:inherit;font-size:1rem;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
 .vk-search input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
 .vk-list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--sheet);max-height:min(62vh,520px);overflow:auto;overscroll-behavior:contain}
@@ -172,9 +176,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-vnote{flex-basis:100%;font-weight:400;font-size:.85rem;color:var(--muted)}
 .vk-vnote:empty{display:none}
 .vk-voice select{font:inherit;font-weight:400;padding:7px 10px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);max-width:100%;flex:1 1 220px;min-width:0}
-.vk-help{font-size:.92rem;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--sheet)}
+.vk-help{font-size:.92rem;border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--sheet);display:block}
+.vk-help[open]{display:flex;flex-direction:column;gap:10px}
+.vk-help h3{margin:6px 0 0;font-size:1rem}
 .vk-help summary{cursor:pointer;font-weight:700}
-.vk-help p,.vk-help ul{margin:8px 0}
+.vk-help p,.vk-help ul{margin:0}
+.vk-help .vk-voice{padding:10px 0;border-bottom:1px solid var(--line)}
 .vk-help ul{padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
 .vk-opts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .vk-boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -209,6 +216,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-keys button{min-width:40px;height:40px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font:700 1rem var(--body)}
 .vk-prog{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:700}
 .vk-sum{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+@media (max-width:600px){#vokabeln .trio{gap:8px}#vokabeln .trio .card{padding:10px 14px;gap:2px}#vokabeln .trio .card h3{font-size:1rem}#vokabeln .trio .card p{font-size:.92rem}}
 .vk-mode{padding:3px}.vk-mode button{font-size:1.1rem;line-height:1;padding:5px 10px}
 .vk-mode .vk-ml{font-size:.9rem}
 @media (max-width:480px){.vk-mode .vk-ml{display:none}.vk-mode button{font-size:1.2rem;padding:5px 11px}}
@@ -427,9 +435,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .nv-tab .nv-chev{color:var(--muted);font-size:1.05rem;line-height:1;margin-left:2px;display:inline-block;transition:transform .2s}
 .nv-tab[aria-expanded="true"] .nv-chev{transform:rotate(90deg)}
 .nv-tab[aria-expanded="true"]{border-color:var(--fc);box-shadow:inset 0 0 0 1.5px var(--fc)}
-.nv-go{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;flex:none;color:var(--ink);background:var(--sheet);border:1.5px solid var(--line);text-decoration:none;font-weight:800;font-size:1rem;line-height:1}
-.nv-go:hover{border-color:var(--fc,var(--ink));color:var(--ink)}
-.nv-go[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
 .nv-tabw{display:inline-flex;align-items:center;gap:4px}
 /* Computer (ab 1240 px): Leiste links, aktuelles Fach aufgeklappt */
 @media (min-width:1240px){
@@ -452,8 +457,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .nv-acc[aria-expanded="true"] .nv-chev{transform:rotate(90deg)}
   .nv-acc[aria-current="true"] .nv-fn{text-decoration:underline;text-decoration-color:var(--fc);text-decoration-thickness:3px;text-underline-offset:4px}
   .nv-row{position:relative}
-  .nv-acc{padding-right:66px!important}
-  .nv-row .nv-go{position:absolute;right:30px;top:50%;transform:translateY(-50%)}
   .nv-f.open .nv-kaps{margin:2px 0 6px 15px!important;gap:1px!important}
 }
 /* Handy: Knopf „☰ Themen“, aufgeklappt erst Fächer, dann Kapitel */
@@ -477,7 +480,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .nv-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
   .nv-back{font:700 .9rem var(--body);padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
   .nv-ph{display:inline-flex;align-items:center;gap:8px;font-size:.95rem}
-  .nv-ph .nv-go{width:34px;height:34px}
+
   .nv-kaps{display:grid;grid-template-columns:1fr;gap:6px}
   .nv-kaps .nv-kap{border-radius:12px;padding:5px 10px 5px 5px}
   .nv-sub{display:none}
@@ -894,7 +897,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     "Im Wörterbuch steht jetzt, welche Stimme vorliest. Hat dein Gerät mehrere, kannst du dort eine andere wählen.",
     "Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam. Solange gesprochen wird, leuchtet der Knopf.",
     "Unter „Klingt die Stimme wie ein Roboter?“ steht, wie man auf dem Gerät eine schönere Stimme lädt.",
-    "Im Menü führt jetzt ein kleiner Pfeil → neben dem Fach zur Übersicht. Der Fachname klappt die Kapitel auf und zu."
+    "Das Vokabel-Kapitel ist aufgeräumt: Das Wörterbuch steht in einem eigenen Kasten, Stimme und Tipps zum Vorlesen findest du darunter zum Aufklappen."
    ]
   },
   {
@@ -1779,13 +1782,18 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <section>
   <h2>Wörterbuch</h2>
   <p class="prose">Such ein Wort auf Englisch oder Deutsch. Mit 🔊 hörst du, wie man es ausspricht.</p>
-  <div class="vk-dict">
-    <div class="vk-tools">
-      <label class="vk-search"><span class="sr-only">Wort suchen</span><input type="search" id="vkSearch" placeholder="Suchen … z. B. Katze oder cat" autocomplete="off" spellcheck="false"></label>
+  <div class="card vk-dict">
+    <label class="vk-search"><span class="sr-only">Wort suchen</span><input type="search" id="vkSearch" placeholder="Suchen … z. B. Katze oder cat" autocomplete="off" spellcheck="false"></label>
+    <div class="vk-row2">
       <div class="bl-chips vk-units" id="vkDictUnits" role="group" aria-label="Teile des Buchs"></div>
+      <p class="hint" id="vkCount" aria-live="polite"></p>
     </div>
-    <div class="vk-voice" id="vkVoiceBox"><label for="vkVoice">Stimme</label><select id="vkVoice"></select><button type="button" class="vk-say" id="vkVoiceTry" aria-label="Stimme ausprobieren" title="Ausprobieren">🔊</button><span class="vk-vnote" id="vkVoiceNote"></span></div>
-    <details class="vk-help"><summary>Klingt die Stimme wie ein Roboter?</summary>
+    <ul class="vk-list" id="vkList"></ul>
+  </div>
+  <details class="vk-help">
+    <summary>🔊 Vorlesen: Stimme wählen und Tipps</summary>
+      <div class="vk-voice" id="vkVoiceBox"><label for="vkVoice">Stimme</label><select id="vkVoice"></select><button type="button" class="vk-say" id="vkVoiceTry" aria-label="Stimme ausprobieren" title="Ausprobieren">🔊</button><span class="vk-vnote" id="vkVoiceNote"></span></div>
+      <h3>Klingt die Stimme wie ein Roboter?</h3>
       <p>Das Vorlesen kommt von deinem Gerät. Viele Geräte haben schönere englische Stimmen, die man erst laden muss. Frag am besten deine Eltern. Die Namen der Menüs können je nach Gerät etwas anders heißen.</p>
       <ul>
         <li><b>iPhone und iPad:</b> Einstellungen → Bedienungshilfen → Gesprochene Inhalte → Stimmen → Englisch → eine britische Stimme wie „Serena“ oder „Daniel“ in der Variante „Erweitert“ oder „Premium“ laden.</li>
@@ -1794,11 +1802,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
         <li><b>Windows:</b> Im Browser Edge gibt es sehr natürliche Stimmen („Natural“), solange Internet da ist. Chrome hat „Google UK English“.</li>
         <li><b>Firefox am Computer:</b> Firefox nutzt nur die einfachen Stimmen des Computers. Zum Vokabellernen lieber Edge, Chrome oder Safari nehmen.</li>
       </ul>
-      <p>Danach S.D.L.W. neu laden und oben bei „Stimme“ die neue Stimme auswählen. Tipp: Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam.</p>
-    </details>
-    <p class="hint" id="vkCount" aria-live="polite"></p>
-    <ul class="vk-list" id="vkList"></ul>
-  </div>
+      <p>Danach S.D.L.W. neu laden und hier bei „Stimme“ die neue Stimme auswählen. Tipp: Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam.</p>
+  </details>
 </section>
 <section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
 <div class="task" id="vk1" data-train><div class="taskhead"><h3>Aufgabe 1 · Karteikasten</h3></div>
@@ -2291,20 +2296,18 @@ const Menu=(function(){
   function curFach(){if(topic.startsWith("fach-"))return topic.slice(5);const k=Klassen.byKap(topic);return k?k.fach.id:null}
   function kapLinks(f){return f.kap.map(k=>{const i=k.a.querySelector(".ico"),b=k.a.querySelector("b");
     return`<a class="nv-kap" href="#${k.id}"${k.id===topic?' aria-current="page"':""}>${i?i.outerHTML:""}<span>${b?b.textContent:""}</span></a>`}).join("")}
-  // Pfeil → neben dem Fach: führt zur Fach-Übersicht (der Fachname selbst klappt nur auf und zu)
-  const goLink=f=>`<a class="nv-go" href="#fach-${f.id}" aria-label="Übersicht ${f.name}" title="Übersicht ${f.name}"${topic==="fach-"+f.id?' aria-current="page"':""}><span aria-hidden="true">→</span></a>`;
   function gradeSel(){const g=Klassen.grades;if(g.length<2)return"";
     return`<div class="nv-grade" role="group" aria-label="Klasse wählen">${g.map(x=>`<button type="button" data-g="${x}" aria-pressed="${x===Klassen.grade}">Klasse ${x}</button>`).join("")}</div>`}
   function render(){const cf=curFach(),F=Klassen.visF();
     if(phone()){const pf=phoneFach&&F.find(f=>f.id===phoneFach);
-      ui.innerHTML=pf?`<div class="nv-head"><button type="button" class="nv-back" data-back>‹ Alle Fächer</button><span class="nv-ph" style="--fc:${pf.color}"><span class="fdot" style="background:${pf.color}"></span><b>${pf.name}</b>${goLink(pf)}</span></div><div class="nv-kaps">${kapLinks(pf)}</div>`
+      ui.innerHTML=pf?`<div class="nv-head"><button type="button" class="nv-back" data-back>‹ Alle Fächer</button><span class="nv-ph" style="--fc:${pf.color}"><span class="fdot" style="background:${pf.color}"></span><b>${pf.name}</b></span></div><div class="nv-kaps">${kapLinks(pf)}</div>`
         :`${gradeSel()}<div class="nv-fgrid">${F.map(f=>`<button type="button" class="nv-ftile" data-f="${f.id}" style="--fc:${f.color}"${f.id===cf?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><b>${f.name}</b><small>${f.kap.length}</small></button>`).join("")}</div>`;return}
     if(desk()){ // Leiste links: Fächer klappen auf und zu, die Übersicht ist ein eigener Link
       ui.innerHTML=`${gradeSel()}<div class="nv-facher">${F.map(f=>{const open=openF.has(f.id),here=f.id===cf;
-        return`<div class="nv-f${open?" open":""}" style="--fc:${f.color}"><div class="nv-row"><button type="button" class="nv-fach nv-acc" data-tog="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><span class="nv-fn">${f.name}</span><span class="nv-chev" aria-hidden="true">›</span></button>${goLink(f)}</div>${open?`<div class="nv-kaps">${kapLinks(f)}</div>`:""}</div>`}).join("")}</div>`;return}
+        return`<div class="nv-f${open?" open":""}" style="--fc:${f.color}"><div class="nv-row"><button type="button" class="nv-fach nv-acc" data-tog="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span><span class="nv-fn">${f.name}</span><span class="nv-chev" aria-hidden="true">›</span></button></div>${open?`<div class="nv-kaps">${kapLinks(f)}</div>`:""}</div>`}).join("")}</div>`;return}
     // Tablet: Fach-Knöpfe klappen die Kapitelzeile darunter auf und zu (immer nur ein Fach offen)
     ui.innerHTML=`${gradeSel()}<div class="nv-facher">${F.map(f=>{const open=f.id===tabF,here=f.id===cf;
-      return`<span class="nv-tabw" style="--fc:${f.color}"><button type="button" class="nv-fach nv-tab" data-tab="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span>${f.name}<span class="nv-chev" aria-hidden="true">›</span></button>${open?goLink(f):""}</span>`}).join("")}</div>`;
+      return`<span class="nv-tabw" style="--fc:${f.color}"><button type="button" class="nv-fach nv-tab" data-tab="${f.id}" aria-expanded="${open}"${here?' aria-current="true"':""}><span class="fdot" style="background:${f.color}"></span>${f.name}<span class="nv-chev" aria-hidden="true">›</span></button></span>`}).join("")}</div>`;
     const tf=F.find(f=>f.id===tabF);
     ui.insertAdjacentHTML("beforeend",tf?`<div class="nv-sub" style="--fc:${tf.color}">${kapLinks(tf)}</div>`:"")}
   ui.addEventListener("click",e=>{const t=e.target.closest("[data-f],[data-back],[data-g],[data-tog],[data-tab]");if(!t)return;e.stopPropagation();

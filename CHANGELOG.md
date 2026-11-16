@@ -16,7 +16,7 @@ Navigation in drei Stufen: Klasse → Fach → Kapitel, vorbereitet für etwa ze
 
 ### Verbessert
 
-- **Menü je Gerät:** Handy – „☰ Themen“ öffnet Fach-Kacheln, ein Tipp zeigt die Kapitel mit „‹ Alle Fächer“ und Link zur Übersicht (öffnet direkt beim aktuellen Fach). Tablet und kleiner Computer – eine Zeile Fach-Knöpfe, darunter die Kapitel des aktuellen Fachs. Computer ab 1240 px – Leiste links neben dem Inhalt; ein Klick auf ein Fach klappt dessen Kapitel auf und zu (mehrere gleichzeitig möglich, das aktuelle Fach ist beim Öffnen aufgeklappt und unterstrichen), die Fach-Übersicht ist ein eigener Link „Übersicht …“ unter den Kapiteln. Der Inhalt beginnt dadurch deutlich weiter oben.
+- **Menü je Gerät:** Handy – „☰ Themen“ öffnet Fach-Kacheln, ein Tipp zeigt die Kapitel mit „‹ Alle Fächer“ und Link zur Übersicht (öffnet direkt beim aktuellen Fach). Tablet und kleiner Computer – eine Zeile Fach-Knöpfe; ein Tipp klappt darunter die Kapitelzeile des Fachs auf und wieder zu (immer ein Fach offen, beim Öffnen das aktuelle), mit Link „Übersicht …“. Auf allen Geräten gleich: Ein Tipp auf ein Fach zeigt nur dessen Kapitel, die Übersicht ist ein eigener Link. Computer ab 1240 px – Leiste links neben dem Inhalt; ein Klick auf ein Fach klappt dessen Kapitel auf und zu (mehrere gleichzeitig möglich, das aktuelle Fach ist beim Öffnen aufgeklappt und unterstrichen), die Fach-Übersicht ist ein eigener Link „Übersicht …“ unter den Kapiteln. Der Inhalt beginnt dadurch deutlich weiter oben.
 
 ## [1.9.2] – 2026-11-16
 

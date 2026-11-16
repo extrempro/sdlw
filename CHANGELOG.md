@@ -4,6 +4,12 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.9.2] – 2026-11-16
+
+### Verbessert
+
+- **Fach-Navigation auf dem Handy** (bis 600 px Breite): Statt aller Fächer und Kapitel (fast eine Bildschirmhöhe) steht oben nur noch ein Knopf mit dem aktuellen Kapitel (Symbol und Name) und „☰ Themen“. Antippen klappt die Fächer kompakt in zwei Spalten auf; Erdkunde mit vier Kapiteln über die ganze Breite. Schließt sich beim Kapitelwechsel, bei Esc und beim Tippen daneben. Auf Spiel-, Start-, Neuigkeiten- und Quellenseite zeigt der Knopf deren Namen. Tablet und Computer unverändert.
+
 ## [1.9.1] – 2026-11-16
 
 ### Behoben

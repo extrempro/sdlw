@@ -213,6 +213,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-keys button{min-width:40px;height:40px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font:700 1rem var(--body)}
 .vk-prog{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:700}
 .vk-sum{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.vk-pad{position:relative;border:2px solid var(--line);border-radius:14px;background:var(--sheet);overflow:hidden}
+.vk-pad canvas{display:block;width:100%;height:clamp(150px,30vh,260px);touch-action:none;cursor:crosshair}
+.vk-padhint{position:absolute;left:14px;top:10px;color:var(--muted);font-size:.85rem;pointer-events:none}
+.vk-solution{font-family:var(--display);font-size:clamp(1.6rem,6vw,2.4rem);font-weight:800;line-height:1.15;overflow-wrap:anywhere;padding:8px 14px;border-radius:12px;background:var(--okbg);color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fs-on .vk-pad canvas{height:clamp(170px,40vh,340px)}
+@media (max-width:600px){.vk-pad canvas,.fs-on .vk-pad canvas{height:clamp(140px,26vh,200px)}}
 @media (max-width:480px){.vk-list li{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}.vk-list li .vk-de{grid-column:1/-1;grid-row:2;color:var(--muted)}
   .vk-boxes{gap:6px}.vk-box{padding:6px 8px}.vk-box b{font-size:1.15rem}.vk-card{aspect-ratio:4/3}}
 @media (prefers-reduced-motion:reduce){.vk-inner{transition:none}}
@@ -777,7 +783,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     "Neu ist das Fach Englisch mit über 200 Vokabeln zu Welcome und Theme 1 deines Englischbuchs.",
     "Im Wörterbuch suchst du Wörter auf Englisch oder Deutsch. Mit 🔊 liest dir dein Gerät das englische Wort vor.",
     "Im Karteikasten drehst du Karten um und sortierst sie in Fach 1, 2 und 3. Dein Gerät merkt sich, was du schon kannst.",
-    "Die schwere Variante: Schreib die Vokabeln selbst – zehn Wörter pro Runde, in beide Richtungen.",
+    "Die schwere Variante: Schreib die Vokabeln selbst – zehn Wörter pro Runde, in beide Richtungen. Mit der Tastatur prüft Gucki für dich. Mit ✏️ Stift schreibst du mit Stift oder Finger und vergleichst danach selbst mit der Lösung.",
     "In der Gucki-Blitzrunde gibt es jetzt auch Englisch-Fragen.",
     "Jede Übung und jedes Spiel hat jetzt einen Knopf „⛶ Vollbild“. Dann siehst du nur noch die Aufgabe – und Gucki natürlich."
    ]
@@ -1639,8 +1645,9 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="vk-foot"><button type="button" class="btn ghost" data-clear>Karteikasten leeren</button><span class="hint" data-clearinfo aria-live="polite"></span></div>
 </div>
 <div class="task" id="vk2"><div class="taskhead"><h3>Aufgabe 2 · Vokabeln schreiben</h3><span class="score" data-score></span></div>
-  <p class="hint">Die schwere Variante: Schreib die Übersetzung selbst. Zehn Wörter pro Runde. Achte genau auf die Rechtschreibung!</p>
+  <p class="hint">Die schwere Variante: Schreib die Übersetzung selbst – mit der Tastatur oder mit Stift und Finger. Zehn Wörter pro Runde. Achte genau auf die Rechtschreibung!</p>
   <div class="vk-opts">
+    <div class="seg" data-mode role="group" aria-label="Schreiben mit"><button type="button" data-m="key" aria-pressed="true">⌨️ Tastatur</button><button type="button" data-m="pen" aria-pressed="false">✏️ Stift</button></div>
     <div class="bl-chips" data-units role="group" aria-label="Teil des Buchs"></div>
     <div class="seg" data-dir role="group" aria-label="Richtung"><button type="button" data-d="de" aria-pressed="true">Deutsch → Englisch</button><button type="button" data-d="ed" aria-pressed="false">Englisch → Deutsch</button></div>
   </div>
@@ -3882,14 +3889,22 @@ const Vok=(function(){
 })();
 
 // --- Aufgabe 2: Vokabeln schreiben (zählt für das Kapitel) ---
+// Zwei Arten: Tastatur (Seite prüft) und Stift (Kind schreibt mit Stift/Finger und vergleicht selbst).
 (function(){
   const task=$("#vk2");if(!task)return;
   const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id)),wrap=$("[data-write]",task),sc=$("[data-score]",task);
-  let dir="de",round=[],i=0,right=0,wrong=[],first=true;const N=10;
+  const small=()=>matchMedia("(max-width:600px)").matches;
+  const nice=t=>t.replace(/\s*\(=\s*([^)]+)\)/g," (auch: $1)");
+  let dir="de",mode=matchMedia("(min-width:700px) and (pointer:coarse)").matches?"pen":"key",round=[],i=0,right=0,wrong=[],first=true;const N=10;
   function start(){const p=all.filter(w=>sel.has(w.unit)&&!w.p);round=shuffle(p).slice(0,Math.min(N,p.length));i=0;right=0;wrong=[];sc.textContent="";delete task.dataset.perfect;ask()}
-  function ask(){const w=round[i],q=dir==="de"?w.de:w.en,lang=dir==="de"?"Englisch":"Deutsch";
-    wrap.innerHTML=`<div class="vk-prog"><span>Wort ${i+1} von ${round.length}</span><span>${right} richtig</span></div>
-      <div><p class="hint">Was heißt das auf ${lang}?</p><div class="vk-q">${Vok.esc(q)} ${dir==="ed"?Vok.sayBtn(w.en):""}</div>${w.note&&dir==="ed"?`<p class="hint">${Vok.esc(w.note)}</p>`:""}</div>
+  function head(w){const q=dir==="de"?w.de:w.en,lang=dir==="de"?"Englisch":"Deutsch";
+    return`<div class="vk-prog"><span>Wort ${i+1} von ${round.length}</span><span>${right} richtig</span></div>
+      <div><p class="hint">${mode==="pen"?"Schreib":"Was heißt"} das auf ${lang}${mode==="pen"?" – mit Stift oder Finger.":"?"}</p><div class="vk-q">${Vok.esc(q)} ${dir==="ed"?Vok.sayBtn(w.en):""}</div>${w.note&&dir==="ed"?`<p class="hint">${Vok.esc(w.note)}</p>`:""}</div>`}
+  function result(w,ok){const nxt=$("[data-next]",wrap);
+    if(ok){right++;guckiCheer();Vok.setFach(w,dir,Vok.fach(w,dir)+1)}else{wrong.push(w);Vok.setFach(w,dir,1)}
+    if(dir==="de")Vok.say(w.en)}
+  function ask(){const w=round[i];if(mode==="pen")return askPen(w);
+    wrap.innerHTML=head(w)+`
       <form class="vk-form" data-form autocomplete="off"><label class="sr-only" for="vkIn">Deine Antwort</label>
         <input id="vkIn" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" lang="${dir==="de"?"en":"de"}" placeholder="${dir==="de"?"auf Englisch …":"auf Deutsch …"}">
         <button class="btn" type="submit">Prüfen</button></form>
@@ -3899,19 +3914,54 @@ const Vok=(function(){
     wrap.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{const s=inp.selectionStart??inp.value.length,e=inp.selectionEnd??s;inp.value=inp.value.slice(0,s)+b.dataset.k+inp.value.slice(e);inp.focus();inp.setSelectionRange(s+1,s+1)});
     $("[data-form]",wrap).onsubmit=e=>{e.preventDefault();if(inp.readOnly){next();return}
       if(!inp.value.trim()){fb.className="fb no";fb.textContent="Schreib zuerst eine Antwort.";return}
-      const r=Vok.check(inp.value,w,dir,all),sol=dir==="de"?w.en:w.de;inp.readOnly=true;
-      if(r.ok){right++;inp.classList.add("ok");fb.className="fb ok";fb.innerHTML=r.hint?`✓ ${r.hint}`:"✓ Richtig!";guckiCheer();Vok.setFach(w,dir,Vok.fach(w,dir)+1)}
-      else{inp.classList.add("no");fb.className="fb no";fb.innerHTML=`${r.near?"Fast! Ein Buchstabe stimmt nicht. ":""}Richtig ist: <b>${Vok.esc(sol)}</b>`;guckiCry();wrong.push(w);Vok.setFach(w,dir,1)}
-      if(dir==="de")Vok.say(w.en);
+      const r=Vok.check(inp.value,w,dir,all),sol=nice(dir==="de"?w.en:w.de);inp.readOnly=true;
+      if(r.ok){inp.classList.add("ok");fb.className="fb ok";fb.innerHTML=r.hint?`✓ ${r.hint}`:"✓ Richtig!"}
+      else{inp.classList.add("no");fb.className="fb no";fb.innerHTML=`${r.near?"Fast! Ein Buchstabe stimmt nicht. ":""}Richtig ist: <b>${Vok.esc(sol)}</b>`;guckiCry()}
+      result(w,r.ok);
       const btn=$("[data-form] .btn",wrap);btn.textContent=i+1<round.length?"Weiter →":"Ergebnis";btn.focus()};
     if(!first)inp.focus({preventScroll:true});first=false}
+  // --- Stift: Zeichenfläche mit Hilfslinien, Striche werden relativ gespeichert (passt sich der Breite an) ---
+  function askPen(w){const sol=nice(dir==="de"?w.en:w.de);
+    wrap.innerHTML=head(w)+`
+      <div class="vk-pad"><canvas data-pad aria-label="Schreibfläche: Schreib das Wort mit Stift oder Finger"></canvas><span class="vk-padhint" data-padhint>Hier schreiben ✏️</span></div>
+      <div class="vk-row" style="justify-content:flex-start"><button type="button" class="btn ghost" data-clr>Löschen</button><button type="button" class="btn" data-show>Lösung zeigen</button></div>
+      <div data-sol></div><p class="fb" data-fb></p>`;
+    const cv=$("[data-pad]",wrap),ctx=cv.getContext("2d"),fb=$("[data-fb]",wrap),strokes=[];let curS=null;
+    function size(){const r=cv.getBoundingClientRect(),d=Math.min(3,window.devicePixelRatio||1);cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);draw()}
+    function draw(){const W=cv.width,H=cv.height,cs=getComputedStyle(task);ctx.clearRect(0,0,W,H);
+      ctx.strokeStyle=cs.getPropertyValue("--line").trim()||"#DDE0EA";ctx.lineWidth=Math.max(1,W/400);ctx.setLineDash([W/80,W/80]);
+      [.3,.62].forEach(y=>{ctx.beginPath();ctx.moveTo(0,H*y);ctx.lineTo(W,H*y);ctx.stroke()});ctx.setLineDash([]);
+      ctx.beginPath();ctx.moveTo(0,H*.8);ctx.lineTo(W,H*.8);ctx.stroke();
+      ctx.strokeStyle=cs.getPropertyValue("--ink").trim()||"#1C1F2E";ctx.lineCap="round";ctx.lineJoin="round";
+      strokes.forEach(s=>{ctx.lineWidth=Math.max(2.5,W/170);ctx.beginPath();s.forEach((p,k)=>k?ctx.lineTo(p[0]*W,p[1]*H):ctx.moveTo(p[0]*W,p[1]*H));if(s.length===1)ctx.lineTo(s[0][0]*W+.5,s[0][1]*H);ctx.stroke()})}
+    const pt=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]};
+    cv.addEventListener("pointerdown",e=>{if(cv.dataset.lock)return;e.preventDefault();cv.setPointerCapture(e.pointerId);curS=[pt(e)];strokes.push(curS);$("[data-padhint]",wrap).hidden=true;draw()});
+    cv.addEventListener("pointermove",e=>{if(!curS)return;e.preventDefault();(e.getCoalescedEvents?e.getCoalescedEvents():[e]).forEach(x=>curS.push(pt(x)));draw()});
+    ["pointerup","pointercancel","pointerleave"].forEach(t=>cv.addEventListener(t,()=>{curS=null}));
+    $("[data-clr]",wrap).onclick=()=>{if(cv.dataset.lock)return;strokes.length=0;$("[data-padhint]",wrap).hidden=false;draw()};
+    $("[data-show]",wrap).onclick=()=>{if(!strokes.length){fb.className="fb no";fb.textContent="Schreib zuerst das Wort.";return}
+      cv.dataset.lock=1;fb.textContent="";$("[data-clr]",wrap).parentElement.hidden=true;
+      $("[data-sol]",wrap).innerHTML=`<p class="hint">So schreibt man es richtig. Vergleiche Buchstabe für Buchstabe:</p>
+        <div class="vk-solution">${Vok.esc(sol)} ${Vok.sayBtn(w.en)}</div>
+        <div class="vk-row" style="justify-content:flex-start"><button type="button" class="btn vk-yes" data-y>✓ Richtig geschrieben</button><button type="button" class="btn vk-no" data-n>✗ Noch nicht</button></div>`;
+      if(dir==="de")Vok.say(w.en);
+      setTimeout(()=>{const so=$(".vk-solution",wrap);if(so)so.scrollIntoView({block:"center",behavior:"smooth"})},50);
+      const done=ok=>{result(w,ok);$("[data-sol] .vk-row",wrap).innerHTML=`<button type="button" class="btn" data-next>${i+1<round.length?"Weiter →":"Ergebnis"}</button>`;$("[data-next]",wrap).onclick=next;$("[data-next]",wrap).focus({preventScroll:true})};
+      $("[data-y]",wrap).onclick=()=>done(true);$("[data-n]",wrap).onclick=()=>done(false);$("[data-y]",wrap).focus({preventScroll:true})};
+    cv._size=size;size();first=false}
+  window.addEventListener("resize",()=>{const c=$("[data-pad]",wrap);if(c&&c._size)c._size()});
   function next(){i++;if(i<round.length){ask();return}
     const perfect=right===round.length;sc.textContent=`${right}/${round.length}`;
     wrap.innerHTML=`<p class="fb ${perfect?"ok":"no"}">${perfect?"Alle Wörter richtig geschrieben – stark!":`${right} von ${round.length} richtig.`}</p>
       ${wrong.length?`<p class="hint">Diese Wörter übst du am besten noch einmal (sie liegen jetzt in Fach 1 deines Karteikastens):</p><ul class="vk-sum">${wrong.map(w=>`<li><b>${Vok.esc(w.en)}</b> – ${Vok.esc(w.de)}</li>`).join("")}</ul>`:""}
       <div class="vk-row" style="justify-content:flex-start"><button class="btn" type="button" data-new>Neue Runde</button></div>`;
-    $("[data-new]",wrap).onclick=()=>{start();$("#vkIn",wrap)&&$("#vkIn",wrap).focus({preventScroll:true})};
+    $("[data-new]",wrap).onclick=()=>{start();const x=$("#vkIn",wrap);if(x)x.focus({preventScroll:true})};
     guckiDone(perfect,task)}
+  const modeEl=$("[data-mode]",task);
+  function setMode(m){mode=m;modeEl.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m));
+    if(m==="pen"&&small()&&!task.classList.contains("fs-on")){const fs=$(".fs-btn",task);if(fs)fs.click()}}
+  modeEl.onclick=e=>{const b=e.target.closest("button[data-m]");if(!b||b.dataset.m===mode)return;setMode(b.dataset.m);first=true;start()};
+  setMode(mode);
   Vok.unitChips($("[data-units]",task),sel,()=>{first=true;start()});
   Vok.dirSeg($("[data-dir]",task),()=>dir,d=>{dir=d;first=true;start()});
   start();task._reset=()=>{first=true;start()};

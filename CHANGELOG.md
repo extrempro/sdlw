@@ -4,6 +4,12 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.12.0] – 2026-11-16
+
+### Neu
+
+- **Zehn neue Gucki-Tricks:** Fünfmal schnell auf Gucki tippen zeigt jetzt zufällig einen von elf Tricks (nie zweimal derselbe hintereinander): Kichern (wie bisher), Schwindel (Kopf wackelt, Pupillen kreisen), Niesen (Luft holen, „HATSCHI!“, Tröpfchen), Einschlafen (Augen fallen zu, Zs steigen auf), Winken, Kuckuck (abtauchen, nur die Augen gucken raus), Disco (Farben wechseln, Noten fliegen), Zaubertrick (weg mit Funkeln, „Tadaa!“), Erschrecken (Sprung, Kulleraugen, Hände hoch, „!“), Rakete (zittern, abheben, zurückplumpsen) und Jonglieren (drei bunte Bälle). Jeder Trick hat eigene Sprechblasen. Bei „Bewegungen reduzieren“ bleibt nur die Sprechblase.
+
 ## [1.11.0] – 2026-11-16
 
 Gucki macht beim Vokabellernen mit.

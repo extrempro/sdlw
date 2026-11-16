@@ -13,6 +13,7 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrek
 - **Hilfe „Klingt die Stimme wie ein Roboter?“** im Wörterbuch: wie man auf iPhone/iPad, Android, Mac und Windows bessere englische Stimmen lädt; Hinweis zu Firefox. Erkennt die Seite Firefox am Computer mit einer einfachen Stimme, steht unter „Stimme“ der Tipp, Edge oder Chrome zu nehmen (Firefox bringt keine eigenen natürlichen Stimmen mit).
 - **Zweimal schnell auf 🔊** spricht das Wort langsam (0,62). Der Knopf pulsiert, solange gesprochen wird.
 - **Aussprache:** „Mr/Mrs“ als „Mister/Missus“, Auslassungspunkte und „/“ werden nicht mitgesprochen.
+- **Menü: Pfeil → zur Fach-Übersicht** statt des unterstrichenen Links „Übersicht …“ – am Computer neben jedem Fach, auf dem Tablet neben dem aufgeklappten Fach, auf dem Handy neben dem Fachnamen über den Kapiteln. Abstände in der Computer-Leiste und im Handy-Menü vereinheitlicht.
 - **Zuverlässiger:** Stimmen werden nachgeladen, wenn das Gerät sie spät meldet; nach einem Abbruch kurze Pause vor dem Sprechen (Safari); Hinweis von Gucki, wenn gar keine englische Stimme installiert ist.
 
 ## [1.10.0] – 2026-11-16

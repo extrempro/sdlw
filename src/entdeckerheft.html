@@ -14,7 +14,7 @@
   --ok:#1E7B45; --okbg:#E3F4EA; --bad:#B3261E; --badbg:#FBE6E4; --focus:#1E5AAA;
   --land:#DCD3C2; --landline:#C2B7A2; --sea:#DCE8F2; --pin:#D2232A;
   --pac:#2B5BAA; --atl:#139DB3; --ind:#7A5BC4; --sud:#22A57C; --ark:#8CC3E6;
-  --lern:#237A3A; --spiel:#B01E78;
+  --lern:#237A3A; --spiel:#B01E78; --engl:#3157C8;
   --as:#E2A12B; --af:#D2553A; --na:#6FA845; --sa:#1F8E6E; --eu:#5A63D6; --au:#C2549B; --an:#8FA6C0;
   --sun:#F4B41A; --earth:#4A93D0; --night:#0B1230; --daybg:#FFF0C2; --dayfg:#6B4E00; --nightpill:#26305A; --nightfg:#FFFFFF;
   --park:#E5EFDA; --road:#FFFFFF; --plate:#E9EEF6; --plateline:#B5C1D4;
@@ -26,13 +26,13 @@
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; color-scheme:dark}}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; --engl:#7EA2F0; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#14161F; --sheet:#1D2030; --ink:#ECEDF4; --muted:#A3A8BE; --line:#33384D;
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; color-scheme:dark}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; --engl:#7EA2F0; color-scheme:dark}
 
 [hidden]{display:none!important}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
@@ -150,6 +150,57 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:480px){.appcard{align-items:flex-start;padding:14px}.appcard img{width:48px;height:48px;border-radius:12px}}
 /* Kapitel Klassenarbeit (Bereich Lernen) */
 #klassenarbeit .merk{--accent:var(--lern)}
+/* ===== Englisch: Vokabeln ===== */
+#vokabeln .merk{--accent:var(--engl)}
+.vk-tools{display:flex;flex-direction:column;gap:10px}
+.vk-search input{width:100%;font:inherit;font-size:1rem;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
+.vk-search input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
+.vk-list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--sheet);max-height:440px;overflow:auto}
+.vk-list li{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:center;padding:8px 12px;border-top:1px solid var(--line)}
+.vk-list li:first-child{border-top:0}
+.vk-list li.vk-letter{display:block;padding:6px 12px;background:var(--paper);font:800 .85rem var(--display);color:var(--muted);position:sticky;top:0}
+.vk-en{font-weight:700;overflow-wrap:anywhere}
+.vk-de{overflow-wrap:anywhere}
+.vk-note{display:block;font-size:.8rem;color:var(--muted);font-weight:400}
+.vk-say{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:var(--sheet);font-size:1rem;line-height:1;cursor:pointer;flex:none}
+.vk-say:hover{border-color:var(--ink)}
+.vk-opts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.vk-opts .seg button{font-size:.9rem;padding:8px 10px}
+.vk-boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.vk-box{border:2px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
+.vk-box b{font-family:var(--display);font-size:1.4rem;line-height:1}
+.vk-box span{font-size:.8rem;color:var(--muted)}
+.vk-box i{display:block;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.vk-box i::after{content:"";display:block;height:100%;width:var(--w,0%);background:var(--engl)}
+.vk-stage{display:flex;flex-direction:column;align-items:center;gap:12px}
+.vk-card{display:block;width:min(100%,420px);aspect-ratio:3/2;color:inherit;font:inherit;perspective:900px;border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.vk-inner{display:block;position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.vk-card.flip .vk-inner{transform:rotateY(180deg)}
+.vk-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;border:2px solid var(--line);background:var(--sheet);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;box-shadow:0 6px 0 var(--line)}
+.vk-face.back{transform:rotateY(180deg);border-color:var(--engl)}
+.vk-face small{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.vk-face b{font-family:var(--display);font-size:clamp(1.3rem,5vw,1.9rem);line-height:1.15;overflow-wrap:anywhere}
+.vk-face em{font-style:normal;font-size:.95rem;color:var(--muted)}
+.vk-face .vk-tap{font-size:.85rem;color:var(--muted)}
+.vk-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center}
+.btn.vk-yes{background:var(--ok);color:var(--sheet)}
+.btn.vk-no{background:var(--bad);color:var(--sheet)}
+.vk-foot{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.vk-write{display:flex;flex-direction:column;gap:12px}
+.vk-q{font-family:var(--display);font-size:1.5rem;font-weight:800;line-height:1.2;overflow-wrap:anywhere}
+.vk-form{display:flex;gap:8px;flex-wrap:wrap}
+.vk-form input{flex:1 1 200px;min-width:0;font:inherit;font-size:1.1rem;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
+.vk-form input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
+.vk-form input.ok{border-color:var(--ok);background:var(--okbg)}
+.vk-form input.no{border-color:var(--bad);background:var(--badbg)}
+.vk-keys{display:flex;gap:6px;flex-wrap:wrap}
+.vk-keys button{min-width:40px;height:40px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font:700 1rem var(--body)}
+.vk-prog{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:700}
+.vk-sum{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+@media (max-width:480px){.vk-list li{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}.vk-list li .vk-de{grid-column:1/-1;grid-row:2;color:var(--muted)}
+  .vk-boxes{gap:6px}.vk-box{padding:6px 8px}.vk-box b{font-size:1.15rem}.vk-card{aspect-ratio:4/3}}
+@media (prefers-reduced-motion:reduce){.vk-inner{transition:none}}
+
 #ka3 .sw{display:none}
 .aufbox,.atembox{display:flex;flex-direction:column;gap:12px}
 .aufq{margin:0;font-weight:700}
@@ -686,6 +737,18 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
+   "version": "1.9.0",
+   "date": "2026-11-16",
+   "title": "Neues Fach: Englisch-Vokabeln",
+   "items": [
+    "Neu ist das Fach Englisch mit über 200 Vokabeln zu Welcome und Theme 1 deines Englischbuchs.",
+    "Im Wörterbuch suchst du Wörter auf Englisch oder Deutsch. Mit 🔊 liest dir dein Gerät das englische Wort vor.",
+    "Im Karteikasten drehst du Karten um und sortierst sie in Fach 1, 2 und 3. Dein Gerät merkt sich, was du schon kannst.",
+    "Die schwere Variante: Schreib die Vokabeln selbst – zehn Wörter pro Runde, in beide Richtungen.",
+    "In der Gucki-Blitzrunde gibt es jetzt auch Englisch-Fragen."
+   ]
+  },
+  {
    "version": "1.8.0",
    "date": "2026-11-11",
    "title": "S.D.L.W. als App",
@@ -811,13 +874,29 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    ]
   }
  ],
- "summaries": []
+ "summaries": [
+  {
+   "from": "1.0.0",
+   "to": "1.8.0",
+   "title": "Die ersten zehn Versionen",
+   "items": [
+    "Aus dem Entdeckerheft wurde S.D.L.W. – mit Startseite, Haus-Knopf und Wegweiser, damit du dich gut zurechtfindest.",
+    "Dazu kam der Bereich „Fit für die Klassenarbeit“ mit Lernplan und Tipps gegen starke Aufregung.",
+    "Vier Spiele mit Gucki: Fang die Farben, Guckis Weltreise, die Blitzrunde und das Notenmemory.",
+    "Der Farbkreis zeigt Primär-, Sekundär- und Tertiärfarben und erzählt von Johannes Itten.",
+    "S.D.L.W. läuft ohne Internet und lässt sich als App auf dein Gerät legen."
+   ]
+  }
+ ]
 }
 </script>
 <nav class="navx" aria-label="Themen">
   <div class="faecher">
     <div class="fach"><p class="fachname"><span class="fdot" style="background:#D2553A"></span>Deutsch</p><div class="topics">
       <a href="#deutsch" data-topic="deutsch" data-desc="Wann schreibt man groß? Nomen erkennen, Signalwörter finden und Fehler aufspüren."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#D2553A"/><text x="16" y="21.5" text-anchor="middle" style="font:800 14px 'Bricolage Grotesque','Trebuchet MS',sans-serif;fill:#FFFFFF">Aa</text></svg><span><b>Groß und klein</b></span></a>
+    </div></div>
+    <div class="fach"><p class="fachname"><span class="fdot" style="background:#3157C8"></span>Englisch</p><div class="topics">
+      <a href="#vokabeln" data-topic="vokabeln" data-desc="Vokabeln zu Welcome und Theme 1: nachschlagen, anhören, mit Karteikarten üben und schreiben."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#3157C8"/><text x="16" y="21.5" text-anchor="middle" style="font:800 14px 'Bricolage Grotesque','Trebuchet MS',sans-serif;fill:#FFFFFF">En</text></svg><span><b>Vokabeln</b></span></a>
     </div></div>
     <div class="fach"><p class="fachname"><span class="fdot" style="background:#E3202A"></span>Kunst</p><div class="topics">
       <a href="#farbkreis" data-topic="farbkreis" data-desc="Grundfarben, Mischfarben und Gegenfarben – am Farbkreis zum Anklicken."><span class="ico ico-farb" aria-hidden="true"></span><span><b>Farbkreis</b></span></a>
@@ -1482,6 +1561,66 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <footer>Die Beispiele richten sich nach den amtlichen Regeln der deutschen Rechtschreibung.</footer>
 </div>
 
+<!-- ============ ENGLISCH: VOKABELN ============ -->
+<div class="topic" id="vokabeln" hidden>
+<header>
+  <p class="eyebrow">Englisch · Klasse 5 · Wortschatz</p>
+  <h1>Vokabeln</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--engl),#E3202A,var(--engl))"></div>
+</header>
+<section>
+  <p class="lead">Hier findest du die Vokabeln aus deinem Englischbuch (Welcome und Theme 1). Du kannst sie nachschlagen, dir vorlesen lassen, mit Karteikarten üben und zum Schluss richtig schreiben.</p>
+</section>
+<section>
+  <h2>So lernst du Vokabeln</h2>
+  <p class="prose">Vokabeln bleiben am besten hängen, wenn du sie <strong>oft und in kleinen Portionen</strong> wiederholst – lieber jeden Tag zehn Minuten als einmal in der Woche eine Stunde. Sprich die Wörter laut mit und schreib sie auf. Dann merkt sich dein Gehirn sie gleich auf mehreren Wegen.</p>
+  <div class="trio">
+    <div class="card"><h3>Fach 1 · Neu</h3><p>Hier liegen alle Wörter, die du noch nicht sicher kannst. Die übst du am häufigsten.</p></div>
+    <div class="card"><h3>Fach 2 · Fast</h3><p>Einmal gewusst? Dann wandert die Karte ein Fach weiter. Sie kommt seltener dran.</p></div>
+    <div class="card"><h3>Fach 3 · Gekonnt</h3><p>Noch einmal gewusst – geschafft! Weißt du ein Wort nicht mehr, geht es zurück in Fach 1.</p></div>
+  </div>
+  <div class="merk"><strong>Merke:</strong> Bei Verben steht im Englischen oft ein <b>to</b> davor: <i>to read</i> = lesen. Beim Schreiben darfst du das <b>to</b> auch weglassen.</div>
+</section>
+<section>
+  <h2>Wörterbuch</h2>
+  <p class="prose">Such ein Wort auf Englisch oder Deutsch. Mit 🔊 hörst du, wie man es ausspricht.</p>
+  <div class="vk-dict">
+    <div class="vk-tools">
+      <label class="vk-search"><span class="sr-only">Wort suchen</span><input type="search" id="vkSearch" placeholder="Suchen … z. B. Katze oder cat" autocomplete="off" spellcheck="false"></label>
+      <div class="bl-chips" id="vkDictUnits" role="group" aria-label="Teil des Buchs"></div>
+    </div>
+    <p class="hint" id="vkCount" aria-live="polite"></p>
+    <ul class="vk-list" id="vkList"></ul>
+  </div>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="vk1" data-train><div class="taskhead"><h3>Aufgabe 1 · Karteikasten</h3></div>
+  <p class="hint">Lies die Karte und überleg dir die Antwort. Dann dreh die Karte um und sag ehrlich, ob du es gewusst hast. Dein Karteikasten wird auf diesem Gerät gespeichert.</p>
+  <div class="vk-opts">
+    <div class="bl-chips" data-units role="group" aria-label="Teil des Buchs"></div>
+    <div class="seg" data-dir role="group" aria-label="Richtung"><button type="button" data-d="ed" aria-pressed="true">Englisch → Deutsch</button><button type="button" data-d="de" aria-pressed="false">Deutsch → Englisch</button></div>
+  </div>
+  <div class="vk-boxes" data-boxes></div>
+  <div class="vk-stage" data-stage></div>
+  <div class="vk-foot"><button type="button" class="btn ghost" data-clear>Karteikasten leeren</button><span class="hint" data-clearinfo aria-live="polite"></span></div>
+</div>
+<div class="task" id="vk2"><div class="taskhead"><h3>Aufgabe 2 · Vokabeln schreiben</h3><span class="score" data-score></span></div>
+  <p class="hint">Die schwere Variante: Schreib die Übersetzung selbst. Zehn Wörter pro Runde. Achte genau auf die Rechtschreibung!</p>
+  <div class="vk-opts">
+    <div class="bl-chips" data-units role="group" aria-label="Teil des Buchs"></div>
+    <div class="seg" data-dir role="group" aria-label="Richtung"><button type="button" data-d="de" aria-pressed="true">Deutsch → Englisch</button><button type="button" data-d="ed" aria-pressed="false">Englisch → Deutsch</button></div>
+  </div>
+  <div class="vk-write" data-write aria-live="polite"></div>
+</div>
+<footer>Die Vokabeln passen zu Welcome und Theme 1 deines Englischbuchs. Beispielsätze und Bilder findest du im Buch. Das Vorlesen übernimmt die Stimme deines Geräts – manche Geräte sprechen etwas anders als deine Lehrerin oder dein Lehrer.</footer>
+</div>
+
+<script type="application/json" id="vocabData">
+{"units":[
+{"id": "welcome", "name": "Welcome", "words": [["and", "und"], ["are", "bist, sind, seid"], ["to listen to", "zuhören, anhören, hören"], ["to read", "lesen"], ["What's your name?", "Wie heißt du?", "p"], ["My name is ...", "Ich heiße ...", "p"], ["Where are you from?", "Woher kommst du?", "p"], ["I'm from ...", "Ich komme aus ...", "p"], ["How old are you?", "Wie alt bist du?", "p"], ["I'm eleven years old.", "Ich bin elf Jahre alt.", "p"], ["I like ...", "Ich mag ...", "p"], ["I don't like ...", "Ich mag ... nicht.", "p"], ["What about you?", "Was ist mit dir?, Und du?", "p"], ["What's your favourite ...?", "Was ist dein Lieblings...?", "p"], ["There is ... / There are ...", "Es gibt ...", "p"], ["too", "auch"], ["twin", "Zwilling"], ["boring", "langweilig"], ["football", "Fußball"], ["what's (= what is)", "was ist"], ["that", "das, der, die"], ["cat", "Katze"], ["her", "ihr, ihre"], ["you", "du, dich, dir, Sie, Ihnen, ihr, euch"], ["sweet", "süß"], ["clever", "klug, gescheit, schlau"], ["dog", "Hund"], ["skateboarding", "Skateboard fahren"], ["great", "groß, riesig, großartig, wunderbar"], ["it's (= it is)", "es ist"], ["school", "Schule"], ["for", "für"], ["girl", "Mädchen"], ["boy", "Junge"], ["with", "mit"], ["he's (= he is)", "er ist"], ["right", "richtig"], ["example", "Beispiel"], ["in-line skating", "Inlineskaten"], ["house", "Haus"], ["in", "in"], ["big", "groß"], ["small", "klein"]]},
+{"id": "t1", "name": "Theme 1", "words": [["new", "neu"], ["lamp", "Lampe"], ["door", "Tür"], ["book", "Buch"], ["room", "Zimmer, Raum"], ["kitchen", "Küche"], ["bedroom", "Schlafzimmer"], ["bathroom", "Bad, Badezimmer"], ["dining room", "Esszimmer"], ["living room", "Wohnzimmer"], ["garden", "Garten"], ["window", "Fenster"], ["upstairs", "oben, nach oben"], ["downstairs", "unten, nach unten"], ["dad", "Papa, Vati"], ["mum", "Mama, Mutti"], ["thing", "Ding, Sache, Gegenstand"], ["(mobile) phone", "Handy, Telefon, Mobiltelefon"], ["shoe", "Schuh"], ["on", "auf, an"], ["under", "unter"], ["next to", "neben"], ["in front of", "vor"], ["behind", "hinter"], ["between", "zwischen"], ["pencil case", "Federmäppchen"], ["school bag, schoolbag", "Schultasche"], ["desk", "Schreibtisch"], ["chair", "Stuhl"], ["bed", "Bett"], ["shelf", "Regal, Regalbrett", "", "Mehrzahl: shelves"], ["wardrobe", "Kleiderschrank, Schrank"], ["pencil", "Bleistift"], ["to write (down)", "schreiben, aufschreiben"], ["about", "über, von, wegen"], ["to close", "schließen, zumachen"], ["that's (= that is)", "das ist"], ["it", "es, er, sie"], ["she", "sie"], ["to say", "sagen"], ["happy", "glücklich, zufrieden, fröhlich"], ["sad", "traurig"], ["excited", "aufgeregt"], ["worried", "besorgt, beunruhigt"], ["lonely", "einsam"], ["because", "weil, da"], ["friend", "Freund/in"], ["not", "nicht"], ["here", "hier"], ["many", "viele"], ["word", "Wort"], ["Are you OK?", "Alles in Ordnung?", "p"], ["well", "nun, nun ja, tja"], ["a bit", "ein bisschen, ein wenig"], ["grandma", "Oma, Omi"], ["grandpa", "Opa, Opi"], ["best", "beste, bester, bestes"], ["now", "jetzt, nun"], ["at home", "zu Hause"], ["very", "sehr"], ["busy", "beschäftigt"], ["easy", "leicht, einfach"], ["What about ...?", "Was ist mit ...?, Wie wäre es mit ...?", "p"], ["but", "aber"], ["really", "wirklich, tatsächlich, echt"], ["home", "Zuhause"], ["What's wrong with ...?", "Was stimmt nicht mit ...?", "p"], ["fantastic", "fantastisch"], ["place", "Ort, Platz, Stelle"], ["to show", "zeigen"], ["let's (= let us)", "lass uns, lasst uns"], ["game", "Spiel"], ["photo", "Foto"], ["people", "Leute, Menschen", "", "immer Mehrzahl: one person – two people"], ["Mr", "Herr (Anrede)"], ["Mrs", "Frau (Anrede)"], ["to be", "sein"], ["page", "Seite"], ["sentence", "Satz"], ["from", "von, aus"], ["nice", "schön, nett, freundlich, angenehm"], ["to love", "lieben, sehr mögen"], ["why", "warum"], ["to know", "wissen, kennen"], ["me", "mich, mir"], ["to come (in)", "kommen, hereinkommen, mitkommen"], ["canal", "Kanal"], ["shop", "Geschäft, Laden"], ["sign", "Schild, Zeichen"], ["underground station", "U-Bahn-Station"], ["to go", "gehen, fahren"], ["number", "Nummer, Zahl"], ["English", "Englisch"], ["to look", "sehen, schauen, aussehen"], ["shopping", "Einkaufen"], ["to hate", "hassen"], ["amazing", "erstaunlich, toll"], ["little", "klein"], ["Shut up!", "Halt den Mund!", "p"], ["hungry", "hungrig"], ["ice cream", "Eis, Eiscreme"], ["good", "gut"], ["chocolate", "Schokolade"], ["to get", "bekommen, erhalten, holen"], ["still", "noch, immer noch"], ["I'm fine.", "Mir geht es gut.", "p"], ["answer", "Antwort, Lösung"], ["boat", "Boot, Schiff"], ["question", "Frage"], ["to", "nach, zu, in, an"], ["or", "oder"], ["then", "dann"], ["to ask", "fragen"], ["sister", "Schwester"], ["to answer", "antworten, beantworten"], ["to use", "benutzen, nutzen, verwenden"], ["feeling", "Gefühl"], ["exercise", "Übung, Aufgabe"], ["How are you?", "Wie geht es dir?", "p"], ["please", "bitte"], ["to send", "schicken, zuschicken"], ["bye (= goodbye)", "tschüss"], ["at", "an, auf, in, bei"], ["picture", "Bild"], ["child", "Kind", "", "Mehrzahl: children"], ["noise", "Geräusch"], ["mouse", "Maus", "", "Mehrzahl: mice"], ["to help", "helfen"], ["son", "Sohn"], ["daughter", "Tochter"], ["funny", "lustig, witzig, komisch"], ["newspaper", "Zeitung"], ["who", "wer"], ["to find", "finden"], ["to bring in", "hereinbringen, einbringen"], ["when", "wenn"], ["to speak", "sprechen"], ["where's (= where is)", "wo ist"], ["again", "wieder, noch einmal"], ["to check", "überprüfen, nachsehen"], ["to work", "arbeiten"], ["classmate", "Klassenkamerad/in, Mitschüler/in"], ["family", "Familie"], ["parents", "Eltern"], ["father", "Vater"], ["mother", "Mutter"], ["brother", "Bruder"], ["grandparents", "Großeltern"], ["grandfather", "Großvater"], ["grandmother", "Großmutter"], ["aunt", "Tante"], ["uncle", "Onkel"], ["flat", "Wohnung"], ["How many ...?", "Wie viele ...?", "p"], ["to look after", "sich kümmern um"], ["minute", "Minute"], ["to live", "leben, wohnen"], ["always", "immer"], ["day", "Tag"], ["must", "müssen"], ["together", "zusammen"], ["like", "wie"], ["his", "sein, seine"], ["to like", "mögen"], ["above", "über"], ["class", "Klasse, Schulklasse"], ["year", "Jahr"]]}
+]}
+</script>
 <!-- ============ VERSIONSHINWEISE (eigene Seite) ============ -->
 <!-- ============ KLASSENARBEIT (Bereich Lernen) ============ -->
 <div class="topic" id="klassenarbeit" hidden>
@@ -1898,7 +2037,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten","quellen"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","vokabeln","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten","quellen"];
 function route(scroll){
   const t=TOPICS.includes(location.hash.slice(1))?location.hash.slice(1):"start";
   TOPICS.forEach(id=>{document.getElementById(id).hidden=id!==t});
@@ -1956,6 +2095,7 @@ const Wegweiser=(function(){
     el.querySelectorAll("section > h2, .task .taskhead h3").forEach(h=>{const task=h.closest(".task");out.push({el:task||h,label:h.textContent.trim(),lvl:task?2:1,task})});
     return out}
   function status(it){if(!it.task)return"";
+    if(it.task.hasAttribute("data-train"))return"";
     if(!it.task.querySelector("[data-score]"))return`<span class="st part" title="Auftrag für Heft oder Klasse">✎</span>`;
     return it.task.dataset.perfect?`<span class="st ok" title="Fehlerfrei geschafft">✓</span>`:""}
   function listHTML(){let h="",n=0,grp="";
@@ -3517,6 +3657,9 @@ quiz($("#ka6"),shuffle([
               ()=>{const i=Math.floor(Math.random()*8),a=DIRS[(i+4)%8];return{q:`Was ist die Gegenrichtung von ${DIRS[i]}?`,a,o:opts(a,DIRS),k:"gr"+i}},
               ()=>{const i=Math.floor(Math.random()*4)*2,a=DIRS[i+1];return{q:`Welche Himmelsrichtung liegt genau zwischen ${DIRS[i]} und ${DIRS[(i+2)%8]}?`,a,o:opts(a,DIRS),k:"zw"+i}},
               ()=>{const t=pick([["Wo geht die Sonne auf?","im Osten"],["Wo geht die Sonne unter?","im Westen"],["Wo steht die Sonne bei uns mittags?","im Süden"]]);return{q:t[0],a:t[1],o:opts(t[1],["im Osten","im Westen","im Süden","im Norden"]),k:"so"+t[0]}}],
+    Englisch:[()=>{const V=vocabAll().filter(w=>!w.p),w=pick(V),de=x=>x.de.split(/,\s*/)[0],en=x=>x.en.replace(/\s*\(=[^)]*\)/,"");
+                 if(Math.random()<.5){const a=de(w);return{q:`Was heißt „${en(w)}“ auf Deutsch?`,r:`${en(w)} = ${w.de}`,a,o:opts(a,[...new Set(V.filter(x=>x!==w&&!x.de.includes(a)).map(de))]),k:"ve"+w.k}}
+                 const a=en(w);return{q:`Was heißt „${de(w)}“ auf Englisch?`,r:`${de(w)} = ${w.en}`,a,o:opts(a,[...new Set(V.filter(x=>x!==w&&!x.de.split(/,\s*/).includes(de(w))).map(en))]),k:"vd"+w.k}}],
     Musik:[()=>{const[q,a,w]=pick(NOTE);return{q,a,o:opts(a,w),k:"mu"+q}}],
     Lernen:[()=>{const t=pick([["Was hilft beim Lernen am meisten?","sich selbst abfragen",["nur durchlesen","Musik laut hören","alles am Abend vorher"]],["Was machst du in der Arbeit zuerst?","alle Aufgaben durchlesen",["sofort losschreiben","die schwerste Aufgabe","aus dem Fenster schauen"]],["Was hilft bei Aufregung?","langsam ausatmen",["schnell atmen","Luft anhalten","weglaufen"]],["Wann gehst du vor einer Arbeit ins Bett?","früh",["sehr spät","gar nicht","egal"]]]);return{q:t[0],a:t[1],o:opts(t[1],t[2]),k:"le"+t[0]}}]};
   const FACH=Object.keys(G);let sel=new Set(FACH),st=null,timer=0,best=0;
@@ -3582,6 +3725,162 @@ quiz($("#ka6"),shuffle([
   grid.addEventListener("click",e=>{const b=e.target.closest(".mm-card");if(b)flip(+b.dataset.i)});
   modeEl.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.m!=="neu")mode=b.dataset.m;start()});
   start();
+})();
+/* ================= ENGLISCH: VOKABELN ================= */
+// Daten: JSON-Block #vocabData – {units:[{id,name,words:[[englisch, deutsch, art?, hinweis?]]}]}
+// art "p" = Redewendung (nur Wörterbuch und Karteikarten, nicht in „Vokabeln schreiben“).
+function vocabAll(){
+  if(vocabAll._c)return vocabAll._c;let d={units:[]};
+  try{d=JSON.parse(document.getElementById("vocabData").textContent)}catch(_){}
+  const out=[];d.units.forEach(u=>u.words.forEach(w=>out.push({en:w[0],de:w[1],p:w[2]==="p",note:w[3]||"",unit:u.id,uname:u.name,k:u.id+"|"+w[0]})));
+  vocabAll._units=d.units.map(u=>({id:u.id,name:u.name}));return vocabAll._c=out}
+const Vok=(function(){
+  // --- Antworten vergleichen ---
+  const norm=s=>s.toLowerCase().replace(/[’‘`´]/g,"'").replace(/[.!?¿¡"„“”…]/g,"").replace(/\s+/g," ").trim();
+  const umlaut=s=>s.replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss");
+  // "(auf)schreiben" → schreiben, aufschreiben · "Freund/in" → Freund, Freundin · "what's (= what is)" → what's, what is
+  function variants(str){const out=new Set();
+    str.split(/,\s*|;\s*/).forEach(part=>{part=part.replace(/\.\.\./g,"").trim();if(!part)return;
+      const eq=part.match(/\(=\s*([^)]+)\)/);if(eq){add(part.replace(eq[0],""));add(eq[1])}else add(part)});
+    function add(p){p=p.trim();if(!p)return;
+      let list=[p];if(/\([^)]*\)/.test(p))list=[p.replace(/\([^)]*\)/g,""),p.replace(/[()]/g,"")];
+      list.forEach(x=>{x=x.replace(/\s+/g," ").trim();if(!x)return;
+        if(/\/in\b/.test(x)){out.add(x.replace(/\/in\b/g,""));out.add(x.replace(/\/in\b/g,"in"))}else out.add(x)})}
+    return[...out]}
+  function answersFor(item,dir,all){
+    if(dir==="ed")return variants(item.de);
+    const target=new Set(variants(item.de).map(norm));let res=[];
+    // auch andere Wörter mit derselben Bedeutung gelten (z. B. „groß“: big oder great)
+    all.forEach(o=>{const ov=new Set(variants(o.de).map(norm));if(o===item||[...target].every(t=>ov.has(t)))res=res.concat(variants(o.en))});
+    const plus=[];res.forEach(r=>{if(/^to /i.test(r))plus.push(r.slice(3))});return[...new Set(res.concat(plus))]}
+  function lev(a,b){const m=a.length,n=b.length;if(Math.abs(m-n)>1)return 2;const d=Array.from({length:m+1},(_,i)=>[i]);for(let j=1;j<=n;j++)d[0][j]=j;
+    for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n]}
+  // Ergebnis: ok, hint (Groß/klein, Umlaute), near (fast richtig)
+  function check(input,item,dir,all){
+    const raw=input.trim().replace(/[’‘`´]/g,"'");const ans=answersFor(item,dir,all);if(!raw)return{ok:false};
+    const exact=ans.find(a=>a.replace(/[.!?…]/g,"").trim()===raw.replace(/[.!?…]/g,"").trim()||(dir==="de"&&norm(a)===norm(raw)));
+    if(exact)return{ok:true};
+    const ci=ans.find(a=>norm(a)===norm(raw));
+    if(ci)return{ok:true,hint:`Achte auf Groß- und Kleinschreibung: <b>${ci}</b>`};
+    const um=ans.find(a=>umlaut(norm(a))===umlaut(norm(raw)));
+    if(um)return{ok:true,hint:`Richtig! Schreib ä, ö, ü und ß, wenn du kannst: <b>${um}</b>`};
+    const near=ans.some(a=>norm(a).length>=4&&lev(norm(a),norm(raw))===1);
+    return{ok:false,near}}
+  // --- Vorlesen (Gerätestimme, britisches Englisch, wenn vorhanden) ---
+  const canSay="speechSynthesis" in window&&"SpeechSynthesisUtterance" in window;
+  let voice=null;
+  function pickVoice(){if(!canSay)return;const v=speechSynthesis.getVoices();voice=v.find(x=>/^en[-_]GB/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}
+  if(canSay){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",pickVoice)}
+  function say(en){if(!canSay)return;const t=en.replace(/\(=[^)]*\)/g,"").replace(/[()]/g,"").replace(/\.\.\./g,"").replace(/\s\/\s/g,", ");
+    try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=voice?voice.lang:"en-GB";if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}catch(_){}}
+  const sayBtn=en=>canSay?`<button type="button" class="vk-say" data-say="${esc(en)}" aria-label="Vorlesen: ${esc(en)}" title="Vorlesen">🔊</button>`:"";
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
+  document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b){e.stopPropagation();say(b.dataset.say)}},true);
+  // --- Karteikasten (gespeichert auf dem Gerät: localStorage „vokBox“) ---
+  let box={};try{box=JSON.parse(localStorage.getItem("vokBox")||"{}")||{}}catch(_){box={}}
+  const save=()=>{try{localStorage.setItem("vokBox",JSON.stringify(box))}catch(_){}};
+  const fach=(it,dir)=>box[dir+"|"+it.k]||1;
+  function setFach(it,dir,f){if(f<=1)delete box[dir+"|"+it.k];else box[dir+"|"+it.k]=Math.min(3,f);save()}
+  function clearBox(){box={};save()}
+  // Teil-Auswahl (Welcome / Theme 1) als Knöpfe
+  function unitChips(el,sel,onChange){const units=(vocabAll(),vocabAll._units);
+    const draw=()=>{el.innerHTML=units.map(u=>`<button type="button" data-u="${u.id}" aria-pressed="${sel.has(u.id)}">${esc(u.name)}</button>`).join("")};draw();
+    el.onclick=e=>{const b=e.target.closest("button[data-u]");if(!b)return;const u=b.dataset.u;if(sel.has(u)&&sel.size>1)sel.delete(u);else sel.add(u);draw();onChange()}}
+  function dirSeg(el,get,set){el.onclick=e=>{const b=e.target.closest("button[data-d]");if(!b)return;set(b.dataset.d);el.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b))}}
+  return{variants,answersFor,check,say,sayBtn,canSay,esc,fach,setFach,clearBox,unitChips,dirSeg}
+})();
+
+// --- Wörterbuch ---
+(function(){
+  const list=$("#vkList");if(!list)return;
+  const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id)),inp=$("#vkSearch"),cnt=$("#vkCount");
+  const key=s=>s.toLowerCase().replace(/^\(mobile\)\s*/,"").replace(/^to\s+/,"").replace(/^the\s+/,"");
+  const fold=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/ß/g,"ss");
+  function render(){const q=fold(inp.value.trim());
+    const items=all.filter(w=>sel.has(w.unit)&&(!q||fold(w.en).includes(q)||fold(w.de).includes(q))).sort((a,b)=>key(a.en).localeCompare(key(b.en),"en"));
+    let h="",letter="";
+    items.forEach(w=>{const L=key(w.en).charAt(0).toUpperCase();if(!q&&L!==letter){letter=L;h+=`<li class="vk-letter" aria-hidden="true">${L}</li>`}
+      h+=`<li><span class="vk-en">${Vok.esc(w.en)}${w.note?`<span class="vk-note">${Vok.esc(w.note)}</span>`:""}</span>${Vok.sayBtn(w.en)}<span class="vk-de">${Vok.esc(w.de)}</span></li>`});
+    list.innerHTML=h||`<li><span class="vk-de">Kein Wort gefunden. Probier es mit einem anderen Wort.</span></li>`;
+    cnt.textContent=items.length===1?"1 Eintrag":`${items.length} Einträge`}
+  Vok.unitChips($("#vkDictUnits"),sel,render);inp.addEventListener("input",render);render();
+})();
+
+// --- Aufgabe 1: Karteikasten ---
+(function(){
+  const task=$("#vk1");if(!task)return;
+  const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id));let dir="ed",cur=null,last=null,clearArm=false;
+  const stage=$("[data-stage]",task),boxes=$("[data-boxes]",task),clr=$("[data-clear]",task),clrInfo=$("[data-clearinfo]",task);
+  const pool=()=>all.filter(w=>sel.has(w.unit));
+  function drawBoxes(){const p=pool(),n=[0,0,0,0];p.forEach(w=>n[Vok.fach(w,dir)]++);
+    const names=["","Neu","Fast","Gekonnt"];
+    boxes.innerHTML=[1,2,3].map(f=>`<div class="vk-box"><b>${n[f]}</b><span>Fach ${f} · ${names[f]}</span><i style="--w:${p.length?Math.round(n[f]/p.length*100):0}%"></i></div>`).join("")}
+  function pick(){const p=pool();if(!p.length)return null;
+    const by=[[],[],[],[]];p.forEach(w=>by[Vok.fach(w,dir)].push(w));
+    if(!by[1].length&&!by[2].length)return"done";
+    const r=Math.random();let f=r<.65?1:r<.92?2:3;
+    while(!by[f].length)f=f===3?1:f+1;
+    let c=by[f].filter(w=>w!==last);if(!c.length)c=by[f];return c[Math.floor(Math.random()*c.length)]}
+  function show(){drawBoxes();cur=pick();
+    if(cur==="done"){stage.innerHTML=`<p class="fb ok">Super! Alle Karten liegen in Fach 3. Du kannst alle Wörter!</p><div class="vk-row"><button class="btn" type="button" data-again>Alle noch einmal üben</button></div>`;
+      guckiCheer();guckiSay("Alle Karten gekonnt!",2200);
+      $("[data-again]",stage).onclick=()=>{pool().forEach(w=>Vok.setFach(w,dir,2));show()};return}
+    if(!cur){stage.innerHTML=`<p class="hint">Keine Karten ausgewählt.</p>`;return}
+    last=cur;const front=dir==="ed"?cur.en:cur.de,back=dir==="ed"?cur.de:cur.en,fl=dir==="ed"?"Englisch":"Deutsch",bl=dir==="ed"?"Deutsch":"Englisch";
+    stage.innerHTML=`<button type="button" class="vk-card" data-card aria-label="Karte umdrehen">
+        <span class="vk-inner"><span class="vk-face front"><small>${fl} · Fach ${Vok.fach(cur,dir)}</small><b>${Vok.esc(front)}</b>${cur.p?"<em>Redewendung</em>":""}<span class="vk-tap">Antippen zum Umdrehen</span></span>
+        <span class="vk-face back"><small>${bl}</small><b>${Vok.esc(back)}</b>${cur.note?`<em>${Vok.esc(cur.note)}</em>`:""}</span></span></button>
+      <div class="vk-row" data-act>${dir==="ed"?Vok.sayBtn(cur.en):""}<button type="button" class="btn" data-flip>Umdrehen</button></div>`;
+    const card=$("[data-card]",stage);card.onclick=flip;$("[data-flip]",stage).onclick=flip}
+  function flip(){const card=$("[data-card]",stage);if(card.classList.contains("flip"))return;card.classList.add("flip");card.setAttribute("aria-label",`Antwort: ${dir==="ed"?cur.de:cur.en}`);
+    const act=$("[data-act]",stage);
+    act.innerHTML=`${Vok.sayBtn(cur.en)}<button type="button" class="btn vk-yes" data-y>✓ Gewusst</button><button type="button" class="btn vk-no" data-n>✗ Noch nicht</button>`;
+    if(dir==="de")Vok.say(cur.en);
+    $("[data-y]",act).onclick=()=>{const f=Vok.fach(cur,dir);Vok.setFach(cur,dir,f+1);if(f+1>=3)guckiCheer();show()};
+    $("[data-n]",act).onclick=()=>{Vok.setFach(cur,dir,1);show()};
+    $("[data-y]",act).focus()}
+  Vok.unitChips($("[data-units]",task),sel,show);
+  Vok.dirSeg($("[data-dir]",task),()=>dir,d=>{dir=d;last=null;show()});
+  clr.onclick=()=>{if(!clearArm){clearArm=true;clr.textContent="Wirklich leeren? Nochmal tippen";clrInfo.textContent="Alle Karten wandern zurück in Fach 1.";setTimeout(()=>{clearArm=false;clr.textContent="Karteikasten leeren";clrInfo.textContent=""},4000);return}
+    clearArm=false;Vok.clearBox();clr.textContent="Karteikasten leeren";clrInfo.textContent="Geleert – alle Karten liegen wieder in Fach 1.";show()};
+  task.addEventListener("keydown",e=>{if(e.target.closest("input"))return;if((e.key===" "||e.key==="Enter")&&e.target.matches("[data-card]")){e.preventDefault();flip()}});
+  show();
+})();
+
+// --- Aufgabe 2: Vokabeln schreiben (zählt für das Kapitel) ---
+(function(){
+  const task=$("#vk2");if(!task)return;
+  const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id)),wrap=$("[data-write]",task),sc=$("[data-score]",task);
+  let dir="de",round=[],i=0,right=0,wrong=[],first=true;const N=10;
+  function start(){const p=all.filter(w=>sel.has(w.unit)&&!w.p);round=shuffle(p).slice(0,Math.min(N,p.length));i=0;right=0;wrong=[];sc.textContent="";delete task.dataset.perfect;ask()}
+  function ask(){const w=round[i],q=dir==="de"?w.de:w.en,lang=dir==="de"?"Englisch":"Deutsch";
+    wrap.innerHTML=`<div class="vk-prog"><span>Wort ${i+1} von ${round.length}</span><span>${right} richtig</span></div>
+      <div><p class="hint">Was heißt das auf ${lang}?</p><div class="vk-q">${Vok.esc(q)} ${dir==="ed"?Vok.sayBtn(w.en):""}</div>${w.note&&dir==="ed"?`<p class="hint">${Vok.esc(w.note)}</p>`:""}</div>
+      <form class="vk-form" data-form autocomplete="off"><label class="sr-only" for="vkIn">Deine Antwort</label>
+        <input id="vkIn" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" lang="${dir==="de"?"en":"de"}" placeholder="${dir==="de"?"auf Englisch …":"auf Deutsch …"}">
+        <button class="btn" type="submit">Prüfen</button></form>
+      ${dir==="ed"?`<div class="vk-keys" aria-label="Sonderzeichen">${["ä","ö","ü","ß"].map(c=>`<button type="button" data-k="${c}">${c}</button>`).join("")}</div>`:""}
+      <p class="fb" data-fb></p>`;
+    const inp=$("#vkIn",wrap),fb=$("[data-fb]",wrap);
+    wrap.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{const s=inp.selectionStart??inp.value.length,e=inp.selectionEnd??s;inp.value=inp.value.slice(0,s)+b.dataset.k+inp.value.slice(e);inp.focus();inp.setSelectionRange(s+1,s+1)});
+    $("[data-form]",wrap).onsubmit=e=>{e.preventDefault();if(inp.readOnly){next();return}
+      if(!inp.value.trim()){fb.className="fb no";fb.textContent="Schreib zuerst eine Antwort.";return}
+      const r=Vok.check(inp.value,w,dir,all),sol=dir==="de"?w.en:w.de;inp.readOnly=true;
+      if(r.ok){right++;inp.classList.add("ok");fb.className="fb ok";fb.innerHTML=r.hint?`✓ ${r.hint}`:"✓ Richtig!";guckiCheer();Vok.setFach(w,dir,Vok.fach(w,dir)+1)}
+      else{inp.classList.add("no");fb.className="fb no";fb.innerHTML=`${r.near?"Fast! Ein Buchstabe stimmt nicht. ":""}Richtig ist: <b>${Vok.esc(sol)}</b>`;guckiCry();wrong.push(w);Vok.setFach(w,dir,1)}
+      if(dir==="de")Vok.say(w.en);
+      const btn=$("[data-form] .btn",wrap);btn.textContent=i+1<round.length?"Weiter →":"Ergebnis";btn.focus()};
+    if(!first)inp.focus({preventScroll:true});first=false}
+  function next(){i++;if(i<round.length){ask();return}
+    const perfect=right===round.length;sc.textContent=`${right}/${round.length}`;
+    wrap.innerHTML=`<p class="fb ${perfect?"ok":"no"}">${perfect?"Alle Wörter richtig geschrieben – stark!":`${right} von ${round.length} richtig.`}</p>
+      ${wrong.length?`<p class="hint">Diese Wörter übst du am besten noch einmal (sie liegen jetzt in Fach 1 deines Karteikastens):</p><ul class="vk-sum">${wrong.map(w=>`<li><b>${Vok.esc(w.en)}</b> – ${Vok.esc(w.de)}</li>`).join("")}</ul>`:""}
+      <div class="vk-row" style="justify-content:flex-start"><button class="btn" type="button" data-new>Neue Runde</button></div>`;
+    $("[data-new]",wrap).onclick=()=>{start();$("#vkIn",wrap)&&$("#vkIn",wrap).focus({preventScroll:true})};
+    guckiDone(perfect,task)}
+  Vok.unitChips($("[data-units]",task),sel,()=>{first=true;start()});
+  Vok.dirSeg($("[data-dir]",task),()=>dir,d=>{dir=d;first=true;start()});
+  start();task._reset=()=>{first=true;start()};
 })();
 /* --- Neu beginnen --- */
 (function(){

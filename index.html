@@ -1803,7 +1803,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
         <li><b>iPhone und iPad:</b> Einstellungen → Bedienungshilfen → Gesprochene Inhalte → Stimmen → Englisch → eine britische Stimme wie „Serena“ oder „Daniel“ in der Variante „Erweitert“ oder „Premium“ laden.</li>
         <li><b>Android:</b> Einstellungen → Sprache bzw. System → Text-in-Sprache-Ausgabe → Google-Sprachausgabe → Sprachdaten installieren → Englisch (Vereinigtes Königreich).</li>
         <li><b>Mac:</b> Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Englisch (Vereinigtes Königreich).</li>
-        <li><b>Windows:</b> Im Browser Edge gibt es sehr natürliche Stimmen („Natural“), solange Internet da ist.</li>
+        <li><b>Windows:</b> Im Browser Edge gibt es sehr natürliche Stimmen („Natural“), solange Internet da ist. Chrome hat „Google UK English“.</li>
+        <li><b>Firefox am Computer:</b> Firefox nutzt nur die einfachen Stimmen des Computers. Zum Vokabellernen lieber Edge, Chrome oder Safari nehmen.</li>
       </ul>
       <p>Danach S.D.L.W. neu laden und oben bei „Stimme“ die neue Stimme auswählen. Tipp: Tippst du zweimal schnell auf 🔊, spricht das Gerät das Wort langsam.</p>
     </details>
@@ -4144,7 +4145,10 @@ const Vok=(function(){
   function voicesUI(){if(!vb)return;const note=$("#vkVoiceNote");
     if(!Vok.canSay){vb.hidden=false;vs.hidden=true;$("#vkVoiceTry").hidden=true;note.textContent="Dein Browser kann leider nicht vorlesen.";return}
     const r=Vok.ranked();vs.hidden=!r.length;vs.disabled=r.length<2;
-    note.textContent=!r.length?"Noch keine englische Stimme gefunden – tippe einmal auf 🔊 oder lies die Hilfe darunter.":r.length<2?"Dein Gerät hat nur diese englische Stimme.":"";
+    // Firefox am Computer bringt keine eigenen (natürlichen) Stimmen mit, nur die des Betriebssystems
+    const plain=Vok.voice&&!/natural|neural|premium|enhanced|google|online|verbessert|erweitert/i.test(Vok.voice.name);
+    const ffHint=/firefox/i.test(navigator.userAgent)&&!/android|mobile/i.test(navigator.userAgent)&&plain?" Tipp: Firefox hat am Computer nur einfache Stimmen. In Edge oder Chrome klingt das Vorlesen meist viel natürlicher.":"";
+    note.textContent=(!r.length?"Noch keine englische Stimme gefunden – tippe einmal auf 🔊 oder lies die Hilfe darunter.":r.length<2?"Dein Gerät hat nur diese englische Stimme.":"")+ffHint;note.textContent=note.textContent.trim();
     if(!r.length)return;
     const curN=Vok.voice&&Vok.voice.name;
     vs.innerHTML=r.map(v=>`<option value="${Vok.esc(v.name)}"${v.name===curN?" selected":""}>${Vok.esc(v.name.replace(/^Microsoft\s+|^Google\s+/,m=>m))} (${v.lang.replace("_","-")})</option>`).join("")}

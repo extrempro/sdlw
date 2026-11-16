@@ -169,6 +169,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-note{display:block;font-size:.8rem;color:var(--muted);font-weight:400}
 .vk-say{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:var(--sheet);font-size:1rem;line-height:1;cursor:pointer;flex:none}
 .vk-say:hover{border-color:var(--ink)}
+.vk-hintout{margin:0;font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:.04em;color:var(--ink)}
+.vk-listen{display:flex;flex-direction:column;gap:12px}
+.vk-listen .hint{margin:0}
+.vk-ear{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn.vk-again{font-size:1.05rem;padding:12px 20px}
+.btn.vk-again.speaking{box-shadow:0 0 0 4px color-mix(in srgb,var(--engl) 35%,transparent)}
+.gucki.talk .mund{display:block;animation:guckitalk .18s ease-in-out infinite alternate}
+.gucki.talk .zunge{display:none}
+@keyframes guckitalk{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.gucki.talk .mund{animation:none}}
 .vk-say.speaking{border-color:var(--engl);animation:vkpulse .9s ease-in-out infinite}
 @keyframes vkpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--engl) 25%,transparent)}}
 @media (prefers-reduced-motion:reduce){.vk-say.speaking{animation:none;box-shadow:0 0 0 3px var(--engl)}}
@@ -888,6 +898,17 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.11.0",
+   "date": "2026-11-16",
+   "title": "Gucki lernt mit dir Vokabeln",
+   "items": [
+    "Gucki spricht jetzt mit: Wenn ein Wort vorgelesen wird, bewegt er den Mund und zeigt es in seiner Sprechblase.",
+    "Neue Aufgabe „Gucki fragt ab“: Gucki sagt ein englisches Wort, ohne es zu zeigen – du hörst genau hin und wählst die Bedeutung.",
+    "Beim Vokabelschreiben hilft dir „💡 Gucki, hilf mir!“ mit dem ersten Buchstaben. Ein Wort mit Tipp zählt aber nicht als fehlerfrei.",
+    "Im Karteikasten macht Gucki dir Mut, wenn du ein Wort noch nicht weißt, und jubelt bei Serien und wenn du viele Wörter kannst."
+   ]
+  },
   {
    "version": "1.10.1",
    "date": "2026-11-16",
@@ -1824,6 +1845,11 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <div class="seg vk-mode" data-mode role="group" aria-label="Schreiben mit"><button type="button" data-m="pen" aria-pressed="true" aria-label="Mit Stift oder Finger schreiben" title="Stift oder Finger">✏️<span class="vk-ml"> Stift</span></button><button type="button" data-m="key" aria-pressed="false" aria-label="Mit der Tastatur schreiben" title="Tastatur">⌨️<span class="vk-ml"> Tastatur</span></button></div>
   </div>
   <div class="vk-write" data-write aria-live="polite"></div>
+</div>
+<div class="task" id="vk3"><div class="taskhead"><h3>Aufgabe 3 · Gucki fragt ab</h3><span class="score" data-score></span></div>
+  <p class="hint">Gucki sagt ein englisches Wort – aber er zeigt es nicht. Hör genau hin und wähl die richtige Bedeutung. Zehn Wörter pro Runde.</p>
+  <div class="vk-bar"><div class="bl-chips vk-units" data-units role="group" aria-label="Teile des Buchs"></div></div>
+  <div class="vk-listen" data-listen aria-live="polite"></div>
 </div>
 <footer>Die Vokabeln passen zu Welcome und Theme 1 deines Englischbuchs. Beispielsätze und Bilder findest du im Buch. Das Vorlesen übernimmt die Stimme deines Geräts – manche Geräte sprechen etwas anders als deine Lehrerin oder dein Lehrer.</footer>
 </div>
@@ -4089,12 +4115,16 @@ const Vok=(function(){
   function speakText(en){return en.replace(/\(=[^)]*\)/g,"").replace(/[()]/g,"").replace(/\s*(\.\.\.|…)\s*/g," ").replace(/\s\/\s/g,", ")
     .replace(/\bMrs\b\.?/g,"Missus").replace(/\bMr\b\.?/g,"Mister").replace(/\bsb\b/g,"somebody").replace(/\bsth\b/g,"something").replace(/\s+/g," ").replace(/\s+([,.!?])/g,"$1").replace(/[,\s]+$/,"").trim()}
   let last={t:"",at:0},cur=null,curBtn=null,warned=false;
-  function say(en,btn){if(!canSay)return;if(!voices.length)pickVoice();
+  function say(en,btn,opt){if(!canSay)return;if(!voices.length)pickVoice();
     if(!voice&&voices.length&&!warned){warned=true;if(typeof guckiSay==="function")guckiSay("Auf diesem Gerät fehlt eine englische Stimme. Tipps stehen im Wörterbuch.",3200)}
     const t=speakText(en),now=Date.now(),slow=t===last.t&&now-last.at<4000;last={t,at:now};
     const go=()=>{try{const u=new SpeechSynthesisUtterance(t);u.lang=voice?voice.lang:"en-GB";if(voice)u.voice=voice;u.rate=slow?.62:.9;u.pitch=1;
-      const done=()=>{if(curBtn)curBtn.classList.remove("speaking");curBtn=null};
+      const g=document.getElementById("gucki");
+      const done=()=>{if(curBtn)curBtn.classList.remove("speaking");curBtn=null;if(g)g.classList.remove("talk")};
       u.onend=done;u.onerror=done;cur=u;if(curBtn)curBtn.classList.remove("speaking");curBtn=btn||null;if(curBtn)curBtn.classList.add("speaking");
+      // Gucki spricht mit: Mund bewegt sich, Sprechblase zeigt das Wort (bei „Gucki fragt ab“ nicht verraten)
+      if(g&&!guckiMegaOn&&!g.classList.contains("party")){g.classList.add("talk");setTimeout(()=>g.classList.remove("talk"),Math.min(6000,900+t.length*90));
+        document.querySelectorAll(".gucki-bubble").forEach(b=>b.remove());guckiSay(opt&&opt.bubble!=null?opt.bubble:(t.length>34?t.slice(0,32)+"…":t)+(/[.!?]$/.test(t)?"":"!"),Math.max(1400,900+t.length*70))}
       speechSynthesis.resume();speechSynthesis.speak(u)}catch(_){}};
     // Safari spricht nach cancel() manchmal nicht – darum kurz warten, wenn gerade etwas läuft
     if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,90)}else go()}
@@ -4152,7 +4182,9 @@ const Vok=(function(){
 // --- Aufgabe 1: Karteikasten ---
 (function(){
   const task=$("#vk1");if(!task)return;
-  const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id));let dir="ed",cur=null,last=null,clearArm=false;
+  const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id));let dir="ed",cur=null,last=null,clearArm=false,streak=0;
+  const MUT=["Kein Problem – die Karte kommt bald wieder!","Übung macht den Meister!","Sag das Wort einmal laut – das hilft!","Fast! Beim nächsten Mal klappt's.","Jeder Fehler macht dein Gehirn schlauer!"];
+  const gekonnt=()=>pool().filter(w=>Vok.fach(w,dir)===3).length;
   const stage=$("[data-stage]",task),boxes=$("[data-boxes]",task),clr=$("[data-clear]",task),clrInfo=$("[data-clearinfo]",task);
   const pool=()=>all.filter(w=>sel.has(w.unit));
   function drawBoxes(){const p=pool(),n=[0,0,0,0];p.forEach(w=>n[Vok.fach(w,dir)]++);
@@ -4180,8 +4212,11 @@ const Vok=(function(){
     const act=$("[data-act]",stage);
     act.innerHTML=`${Vok.sayBtn(cur.en)}<button type="button" class="btn vk-yes" data-y>✓ Gewusst</button><button type="button" class="btn vk-no" data-n>✗ Noch nicht</button>`;
     if(dir==="de")Vok.say(cur.en);
-    $("[data-y]",act).onclick=()=>{const f=Vok.fach(cur,dir);Vok.setFach(cur,dir,f+1);if(f+1>=3)guckiCheer();show()};
-    $("[data-n]",act).onclick=()=>{Vok.setFach(cur,dir,1);show()};
+    $("[data-y]",act).onclick=()=>{const f=Vok.fach(cur,dir),before=gekonnt();Vok.setFach(cur,dir,f+1);streak++;const now=gekonnt();
+      if(now>before&&now%25===0){guckiCheer();guckiSay(`Schon ${now} Wörter gekonnt!`,2600)}
+      else if([5,10,20,30].includes(streak)){guckiCheer();guckiSay(`${streak} in Folge gewusst!`,2200)}
+      else if(f+1>=3)guckiCheer();show()};
+    $("[data-n]",act).onclick=()=>{Vok.setFach(cur,dir,1);streak=0;guckiSay(MUT[Math.floor(Math.random()*MUT.length)],2400);show()};
     $("[data-y]",act).focus()}
   Vok.unitChips($("[data-units]",task),sel,show);
   Vok.dirSwap($("[data-swap]",task),d=>{dir=d;last=null;show()});
@@ -4198,21 +4233,30 @@ const Vok=(function(){
   const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id)),wrap=$("[data-write]",task),sc=$("[data-score]",task);
   const small=()=>matchMedia("(max-width:600px)").matches;
   const nice=t=>t.replace(/\s*\(=\s*([^)]+)\)/g," (auch: $1)");
-  let dir="de",mode=matchMedia("(pointer:coarse)").matches?"pen":"key",round=[],i=0,right=0,wrong=[],first=true;const N=10;
-  function start(){const p=all.filter(w=>sel.has(w.unit)&&!w.p);round=shuffle(p).slice(0,Math.min(N,p.length));i=0;right=0;wrong=[];sc.textContent="";delete task.dataset.perfect;ask()}
+  let dir="de",mode=matchMedia("(pointer:coarse)").matches?"pen":"key",round=[],i=0,right=0,wrong=[],first=true;const N=10,hinted=new Set();
+  // Gucki-Tipp: erster Buchstabe und Länge (c _ _). Ein Wort mit Tipp zählt nicht als fehlerfrei.
+  function hintFor(w){const v=Vok.variants(dir==="de"?w.en:w.de)[0]||"",t=dir==="de"?v.replace(/^to\s+/i,""):v;
+    return[...t].map((c,k)=>k===0?c:/[A-Za-zÄÖÜäöüß]/.test(c)?"_":c===" "?"\u2002":c).join("\u2009")}
+  const hintBtn=`<button type="button" class="btn ghost vk-hintbtn" data-hint>💡 Gucki, hilf mir!</button>`;
+  function wireHint(w){const b=$("[data-hint]",wrap),out=$("[data-hintout]",wrap);if(!b)return;
+    b.onclick=()=>{hinted.add(w);out.textContent=hintFor(w);out.hidden=false;b.disabled=true;
+      const first=(hintFor(w)[0]||"").toUpperCase();guckiSay(`Psst … es fängt mit „${first}“ an!`,2200)}}
+  function start(){const p=all.filter(w=>sel.has(w.unit)&&!w.p);round=shuffle(p).slice(0,Math.min(N,p.length));i=0;right=0;wrong=[];hinted.clear();sc.textContent="";delete task.dataset.perfect;ask()}
   function head(w){const q=dir==="de"?w.de:w.en,lang=dir==="de"?"Englisch":"Deutsch";
     return`<div class="vk-prog"><span>Wort ${i+1} von ${round.length}</span><span>${right} richtig</span></div>
       <div><p class="hint">${mode==="pen"?"Schreib":"Was heißt"} das auf ${lang}${mode==="pen"?" – mit Stift oder Finger.":"?"}</p><div class="vk-q">${Vok.esc(q)} ${dir==="ed"?Vok.sayBtn(w.en):""}</div>${w.note&&dir==="ed"?`<p class="hint">${Vok.esc(w.note)}</p>`:""}</div>`}
   function result(w,ok,said){
-    if(ok){right++;guckiCheer();Vok.setFach(w,dir,Vok.fach(w,dir)+1)}else{wrong.push(w);Vok.setFach(w,dir,1)}
+    if(ok){right++;guckiCheer();if(!hinted.has(w))Vok.setFach(w,dir,Vok.fach(w,dir)+1)}else{wrong.push(w);Vok.setFach(w,dir,1)}
     if(dir==="de"&&!said)Vok.say(w.en)}
   function ask(){const w=round[i];if(mode==="pen")return askPen(w);
     wrap.innerHTML=head(w)+`
       <form class="vk-form" data-form autocomplete="off"><label class="sr-only" for="vkIn">Deine Antwort</label>
         <input id="vkIn" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" lang="${dir==="de"?"en":"de"}" placeholder="${dir==="de"?"auf Englisch …":"auf Deutsch …"}">
         <button class="btn" type="submit">Prüfen</button></form>
-      ${dir==="ed"?`<div class="vk-keys" aria-label="Sonderzeichen">${["ä","ö","ü","ß"].map(c=>`<button type="button" data-k="${c}">${c}</button>`).join("")}</div>`:""}
+      <div class="vk-row" style="justify-content:flex-start">${dir==="ed"?`<div class="vk-keys" aria-label="Sonderzeichen">${["ä","ö","ü","ß"].map(c=>`<button type="button" data-k="${c}">${c}</button>`).join("")}</div>`:""}${hintBtn}</div>
+      <p class="vk-hintout" data-hintout hidden aria-live="polite"></p>
       <p class="fb" data-fb></p>`;
+    wireHint(w);
     const inp=$("#vkIn",wrap),fb=$("[data-fb]",wrap);
     wrap.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{const s=inp.selectionStart??inp.value.length,e=inp.selectionEnd??s;inp.value=inp.value.slice(0,s)+b.dataset.k+inp.value.slice(e);inp.focus();inp.setSelectionRange(s+1,s+1)});
     $("[data-form]",wrap).onsubmit=e=>{e.preventDefault();if(inp.readOnly){next();return}
@@ -4221,14 +4265,17 @@ const Vok=(function(){
       if(r.ok){inp.classList.add("ok");fb.className="fb ok";fb.innerHTML=r.hint?`✓ ${r.hint}`:"✓ Richtig!"}
       else{inp.classList.add("no");fb.className="fb no";fb.innerHTML=`${r.near?"Fast! Ein Buchstabe stimmt nicht. ":""}Richtig ist: <b>${Vok.esc(sol)}</b>`;guckiCry()}
       result(w,r.ok);
+      const hb=$("[data-hint]",wrap);if(hb)hb.disabled=true;
       const btn=$("[data-form] .btn",wrap);btn.textContent=i+1<round.length?"Weiter →":"Ergebnis";btn.focus()};
     if(!first)inp.focus({preventScroll:true});first=false}
   // --- Stift: Zeichenfläche mit Hilfslinien, Striche werden relativ gespeichert (passt sich der Breite an) ---
   function askPen(w){const sol=nice(dir==="de"?w.en:w.de);
     wrap.innerHTML=head(w)+`
       <div class="vk-pad"><canvas data-pad aria-label="Schreibfläche: Schreib das Wort mit Stift oder Finger"></canvas><span class="vk-padhint" data-padhint>Hier schreiben ✏️</span></div>
-      <div class="vk-row" style="justify-content:flex-start"><button type="button" class="btn ghost" data-clr>Löschen</button><button type="button" class="btn" data-show>Lösung zeigen</button></div>
+      <div class="vk-row" style="justify-content:flex-start"><button type="button" class="btn ghost" data-clr>Löschen</button>${hintBtn}<button type="button" class="btn" data-show>Lösung zeigen</button></div>
+      <p class="vk-hintout" data-hintout hidden aria-live="polite"></p>
       <div data-sol></div><p class="fb" data-fb></p>`;
+    wireHint(w);
     const cv=$("[data-pad]",wrap),ctx=cv.getContext("2d"),fb=$("[data-fb]",wrap),strokes=[];let curS=null;
     function size(){const r=cv.getBoundingClientRect(),d=Math.min(3,window.devicePixelRatio||1);cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);draw()}
     function draw(){const W=cv.width,H=cv.height,cs=getComputedStyle(task);ctx.clearRect(0,0,W,H);
@@ -4254,8 +4301,8 @@ const Vok=(function(){
     cv._size=size;size();first=false}
   window.addEventListener("resize",()=>{const c=$("[data-pad]",wrap);if(c&&c._size)c._size()});
   function next(){i++;if(i<round.length){ask();return}
-    const perfect=right===round.length;sc.textContent=`${right}/${round.length}`;
-    wrap.innerHTML=`<p class="fb ${perfect?"ok":"no"}">${perfect?"Alle Wörter richtig geschrieben – stark!":`${right} von ${round.length} richtig.`}</p>
+    const perfect=right===round.length&&!hinted.size,nh=hinted.size;sc.textContent=`${right}/${round.length}`;
+    wrap.innerHTML=`<p class="fb ${perfect?"ok":"no"}">${perfect?"Alle Wörter richtig geschrieben – stark!":`${right} von ${round.length} richtig${nh?` (${nh===1?"ein Wort":nh+" Wörter"} mit Gucki-Tipp)`:""}.`}</p>
       ${wrong.length?`<p class="hint">Diese Wörter übst du am besten noch einmal (sie liegen jetzt in Fach 1 deines Karteikastens):</p><ul class="vk-sum">${wrong.map(w=>`<li><b>${Vok.esc(w.en)}</b> – ${Vok.esc(w.de)}</li>`).join("")}</ul>`:""}
       <div class="vk-row" style="justify-content:flex-start"><button class="btn" type="button" data-new>Neue Runde</button></div>`;
     $("[data-new]",wrap).onclick=()=>{start();const x=$("#vkIn",wrap);if(x)x.focus({preventScroll:true})};
@@ -4267,6 +4314,39 @@ const Vok=(function(){
   Vok.unitChips($("[data-units]",task),sel,()=>{first=true;start()});
   Vok.dirSwap($("[data-swap]",task),d=>{dir=d;first=true;start()});
   start();task._reset=()=>{first=true;start()};
+})();
+
+// --- Aufgabe 3: Gucki fragt ab (Hörverstehen, zählt für das Kapitel) ---
+(function(){
+  const task=$("#vk3");if(!task)return;
+  const all=vocabAll(),units=vocabAll._units,sel=new Set(units.map(u=>u.id)),wrap=$("[data-listen]",task),sc=$("[data-score]",task);
+  const de1=w=>w.de.split(/,\s*/)[0];const N=10;let round=[],i=0,right=0,miss=false;
+  function start(intro){const p=all.filter(w=>sel.has(w.unit)&&!w.p);round=shuffle(p).slice(0,Math.min(N,p.length));i=0;right=0;sc.textContent="";delete task.dataset.perfect;
+    if(intro){wrap.innerHTML=`<div class="vk-row" style="justify-content:flex-start"><button type="button" class="btn" data-go>▶ Los geht's</button></div>${Vok.canSay?"":`<p class="hint">Dein Gerät kann leider nicht vorlesen. Dann zeigt Gucki dir das Wort.</p>`}`;$("[data-go]",wrap).onclick=ask}else ask()}
+  const speak=w=>Vok.say(w.en,$("[data-again]",wrap),{bubble:"🎧 Hör gut zu!"});
+  function ask(){const w=round[i];miss=false;
+    const others=shuffle([...new Set(all.filter(x=>x!==w&&!x.p&&!x.de.split(/,\s*/).includes(de1(w))).map(de1))]).slice(0,3);
+    const opts=shuffle([de1(w)].concat(others));
+    wrap.innerHTML=`<div class="vk-prog"><span>Wort ${i+1} von ${round.length}</span><span>${right} richtig</span></div>
+      <div class="vk-ear"><button type="button" class="btn vk-again" data-again>🔊 ${Vok.canSay?"Nochmal hören":"Wort zeigen"}</button>${Vok.canSay?"":`<span class="vk-q">${Vok.esc(w.en)}</span>`}</div>
+      <p class="hint">Was hat Gucki gesagt? Wähl die deutsche Bedeutung:</p>
+      <div class="opts">${opts.map(o=>`<button type="button" class="opt" data-o="${Vok.esc(o)}">${Vok.esc(o)}</button>`).join("")}</div>
+      <p class="fb" data-fb></p>`;
+    const fb=$("[data-fb]",wrap);$("[data-again]",wrap).onclick=e=>{e.stopPropagation();speak(w)};
+    wrap.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{
+      if(b.dataset.o===de1(w)){b.classList.add("right");wrap.querySelectorAll("[data-o]").forEach(x=>x.disabled=true);if(!miss)right++;guckiCheer();
+        fb.className="fb ok";fb.innerHTML=`Richtig! <b>${Vok.esc(w.en)}</b> = ${Vok.esc(w.de)}`;
+        fb.insertAdjacentHTML("afterend",`<div class="vk-row" style="justify-content:flex-start"><button type="button" class="btn" data-next>${i+1<round.length?"Weiter →":"Ergebnis"}</button></div>`);
+        const nb=$("[data-next]",wrap);nb.onclick=next;nb.focus({preventScroll:true})}
+      else{b.classList.add("wrong");b.disabled=true;miss=true;guckiCry();fb.className="fb no";fb.textContent="Noch nicht – hör nochmal genau hin!"}});
+    if(Vok.canSay)setTimeout(()=>speak(w),250)}
+  function next(){i++;if(i<round.length){ask();return}
+    const perfect=right===round.length;sc.textContent=`${right}/${round.length}`;
+    wrap.innerHTML=`<p class="fb ${perfect?"ok":"no"}">${perfect?"Alles auf Anhieb richtig gehört – super Ohren!":`${right} von ${round.length} beim ersten Versuch richtig.`}</p>
+      <div class="vk-row" style="justify-content:flex-start"><button class="btn" type="button" data-new>Neue Runde</button></div>`;
+    $("[data-new]",wrap).onclick=()=>start(false);guckiDone(perfect,task)}
+  Vok.unitChips($("[data-units]",task),sel,()=>start(true));
+  start(true);task._reset=()=>start(true);
 })();
 /* --- Neu beginnen --- */
 (function(){

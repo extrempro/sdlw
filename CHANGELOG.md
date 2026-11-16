@@ -13,8 +13,9 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrek
 
 ### Verbessert
 
-- **Vokabeln auf dem Handy:** Wörterbuch-Zeilen einzeilig (Englisch | Deutsch | 🔊), Liste höher (bis 62 % der Bildschirmhöhe). Die Auswahl (Teil, Richtung, Tastatur/Stift) steckt in einem aufklappbaren Kasten mit Kurzfassung, auf dem Handy zugeklappt. Fach-Kästen ohne „Fach N ·“, Karteikarte flacher.
-- **Vokabeln schreiben:** Umschalter Stift/Tastatur als Emoji-Knöpfe ✏️ ⌨️ in eigener Zeile „Schreiben mit“ über der Aufgabe (auf dem Handy nur Emoji, sonst mit Text), nicht mehr im Auswahl-Kasten. Stift ist jetzt auf allen Touch-Geräten Standard (Handy und Tablet, `pointer:coarse`), am Computer die Tastatur. Das automatische Vollbild beim Wechsel zum Stift auf dem Handy entfällt.
+- **Vokabeln auf dem Handy:** Wörterbuch-Zeilen einzeilig (Englisch | Deutsch | 🔊), Liste höher (bis 62 % der Bildschirmhöhe). Fach-Kästen ohne „Fach N ·“, Karteikarte flacher.
+- **Auswahl-Leiste (Vokabeln):** immer sichtbar statt aufklappbarem Kasten. Teile als Häkchen-Knöpfe (✓ Welcome, ✓ Theme 1; abgewählt gestrichelt), Richtung als ein Knopf, der bei jedem Tipp wechselt („Englisch → Deutsch ⇄“, auf dem Handy „EN → DE ⇄“), bei „Vokabeln schreiben“ in derselben Leiste der Umschalter Stift/Tastatur als Emoji-Knöpfe ✏️ ⌨️ (auf dem Handy nur Emoji). Das Wörterbuch nutzt dieselben Häkchen-Knöpfe.
+- **Vokabeln schreiben:** Stift ist jetzt auf allen Touch-Geräten Standard (Handy und Tablet, `pointer:coarse`), am Computer die Tastatur. Das automatische Vollbild beim Wechsel zum Stift auf dem Handy entfällt.
 - **Aufgabenkopf auf dem Handy (alle Kapitel):** Überschrift in eigener Zeile, darunter „⛶ Vollbild“ und „↺ Neu beginnen“ linksbündig in gleicher Größe, Punktestand rechts.
 
 ## [1.9.0] – 2026-11-16

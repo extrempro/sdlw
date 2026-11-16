@@ -166,7 +166,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-say{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:var(--sheet);font-size:1rem;line-height:1;cursor:pointer;flex:none}
 .vk-say:hover{border-color:var(--ink)}
 .vk-opts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.vk-opts .seg button{font-size:.9rem;padding:8px 10px}
 .vk-boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .vk-box{border:2px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
 .vk-box b{font-family:var(--display);font-size:1.4rem;line-height:1}
@@ -199,30 +198,32 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vk-keys button{min-width:40px;height:40px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font:700 1rem var(--body)}
 .vk-prog{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:700}
 .vk-sum{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
-.vk-modebar{display:flex;align-items:center;justify-content:flex-end;gap:8px}
-.vk-modebar .hint{margin:0}
-.vk-mode button{font-size:1.15rem;line-height:1;padding:7px 12px}
+.vk-mode{padding:3px}.vk-mode button{font-size:1.1rem;line-height:1;padding:5px 10px}
 .vk-mode .vk-ml{font-size:.9rem}
-@media (max-width:480px){.vk-mode .vk-ml{display:none}.vk-mode button{font-size:1.3rem;padding:7px 14px}}
+@media (max-width:480px){.vk-mode .vk-ml{display:none}.vk-mode button{font-size:1.2rem;padding:5px 11px}}
 .vk-pad{position:relative;border:2px solid var(--line);border-radius:14px;background:var(--sheet);overflow:hidden}
 .vk-pad canvas{display:block;width:100%;height:clamp(150px,30vh,260px);touch-action:none;cursor:crosshair}
 .vk-padhint{position:absolute;left:14px;top:10px;color:var(--muted);font-size:.85rem;pointer-events:none}
 .vk-solution{font-family:var(--display);font-size:clamp(1.6rem,6vw,2.4rem);font-weight:800;line-height:1.15;overflow-wrap:anywhere;padding:8px 14px;border-radius:12px;background:var(--okbg);color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .fs-on .vk-pad canvas{height:clamp(170px,40vh,340px)}
 @media (max-width:600px){.vk-pad canvas,.fs-on .vk-pad canvas{height:clamp(140px,26vh,200px)}}
-details.vk-set{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:0}
-details.vk-set>summary{cursor:pointer;padding:9px 12px;font-size:.9rem;font-weight:700;list-style:none;display:block}
-.vk-set summary::-webkit-details-marker{display:none}
-.vk-set summary::before{content:"▸";display:inline-block;margin-right:6px;color:var(--muted);transition:transform .2s}
-.vk-set[open] summary::before{transform:rotate(90deg)}
-.vk-set summary [data-sum]{font-weight:400;color:var(--muted);overflow-wrap:anywhere}
-.vk-set .vk-opts{padding:0 12px 12px}
+/* Auswahl-Leiste: Teile (Häkchen-Knöpfe), Richtung (ein Knopf), Stift/Tastatur */
+.vk-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.vk-bar .vk-units{flex:0 1 auto}
+.bl-chips.vk-units button{font:700 .9rem var(--body,inherit);padding:6px 12px;border-radius:999px;border:2px dashed var(--line);background:transparent;color:var(--muted)}
+.bl-chips.vk-units button[aria-pressed="true"]{border:2px solid var(--engl);background:var(--sheet);color:var(--ink)}
+.bl-chips.vk-units button[aria-pressed="true"]::before{content:"✓ ";color:var(--engl)}
+.vk-swap{display:inline-flex;align-items:center;gap:6px;font:700 .9rem var(--body,inherit);padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer}
+.vk-swap:hover{border-color:var(--ink)}
+.vk-swap .vk-swi{color:var(--engl);font-size:1.05rem;line-height:1}
+.vk-swap .vk-short{display:none}
+.vk-bar .vk-mode{margin-left:auto}
 .taskhead .fs-btn,.fs-row .fs-btn{padding:4px 10px;font-size:.82rem;align-self:center}
 .taskhead .resetbtn{align-self:center}
 @media (max-width:480px){.vk-list li{padding:6px 8px 6px 10px;gap:2px 8px;font-size:.95rem}.vk-list .vk-say{width:32px;height:32px;font-size:.9rem}
   .vk-boxes{gap:6px}.vk-box{padding:6px 8px}.vk-box b{font-size:1.15rem}.vk-fn{display:none}
   .vk-card{aspect-ratio:16/10}.vk-face{padding:12px}
-  .bl-chips button{padding:5px 12px;font-size:.9rem}.vk-opts .seg button{padding:7px 9px;font-size:.85rem}
+  .vk-swap .vk-long{display:none}.vk-swap .vk-short{display:inline}.bl-chips.vk-units button,.vk-swap{padding:5px 10px}
   .task .taskhead{justify-content:flex-start}.task .taskhead .fs-btn,.task .taskhead .resetbtn{margin-left:0}.task .taskhead .score{margin-left:auto}.task .taskhead h3{flex-basis:100%}}
 @media (prefers-reduced-motion:reduce){.vk-inner{transition:none}}
 
@@ -784,7 +785,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
    "items": [
     "Im Karteikasten kommt nicht mehr zweimal hintereinander dieselbe Karte.",
     "Beim Schreiben mit dem Stift liest dein Gerät das Wort nur noch einmal vor.",
-    "Auf dem Handy ist das Vokabel-Kapitel kompakter: Das Wörterbuch zeigt Englisch und Deutsch in einer Zeile, und die Auswahl (Welcome, Theme 1, Richtung) kannst du auf- und zuklappen.",
+    "Auf dem Handy ist das Vokabel-Kapitel kompakter: Das Wörterbuch zeigt Englisch und Deutsch in einer Zeile.",
+    "Neue Auswahl-Leiste: Tippe auf ✓ Welcome oder ✓ Theme 1, um Teile an- oder auszuschalten. Mit dem Knopf ⇄ wechselst du die Richtung.",
     "Beim Vokabelschreiben wechselst du mit ✏️ und ⌨️ zwischen Stift und Tastatur. Auf Handy und Tablet schreibst du jetzt gleich mit dem Stift oder Finger."
    ]
   },
@@ -1640,7 +1642,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="vk-dict">
     <div class="vk-tools">
       <label class="vk-search"><span class="sr-only">Wort suchen</span><input type="search" id="vkSearch" placeholder="Suchen … z. B. Katze oder cat" autocomplete="off" spellcheck="false"></label>
-      <div class="bl-chips" id="vkDictUnits" role="group" aria-label="Teil des Buchs"></div>
+      <div class="bl-chips vk-units" id="vkDictUnits" role="group" aria-label="Teile des Buchs"></div>
     </div>
     <p class="hint" id="vkCount" aria-live="polite"></p>
     <ul class="vk-list" id="vkList"></ul>
@@ -1649,21 +1651,21 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
 <div class="task" id="vk1" data-train><div class="taskhead"><h3>Aufgabe 1 · Karteikasten</h3></div>
   <p class="hint">Lies die Karte und überleg dir die Antwort. Dann dreh die Karte um und sag ehrlich, ob du es gewusst hast. Dein Karteikasten wird auf diesem Gerät gespeichert.</p>
-  <details class="vk-set" data-set><summary><span class="vk-setlbl">Auswahl</span> <span data-sum></span></summary><div class="vk-opts">
-    <div class="bl-chips" data-units role="group" aria-label="Teil des Buchs"></div>
-    <div class="seg" data-dir role="group" aria-label="Richtung"><button type="button" data-d="ed" aria-pressed="true">Englisch → Deutsch</button><button type="button" data-d="de" aria-pressed="false">Deutsch → Englisch</button></div>
-  </div></details>
+  <div class="vk-bar">
+    <div class="bl-chips vk-units" data-units role="group" aria-label="Teile des Buchs"></div>
+    <button type="button" class="vk-swap" data-swap data-d="ed"></button>
+  </div>
   <div class="vk-boxes" data-boxes></div>
   <div class="vk-stage" data-stage></div>
   <div class="vk-foot"><button type="button" class="btn ghost" data-clear>Karteikasten leeren</button><span class="hint" data-clearinfo aria-live="polite"></span></div>
 </div>
 <div class="task" id="vk2"><div class="taskhead"><h3>Aufgabe 2 · Vokabeln schreiben</h3><span class="score" data-score></span></div>
   <p class="hint">Die schwere Variante: Schreib die Übersetzung selbst – mit der Tastatur oder mit Stift und Finger. Zehn Wörter pro Runde. Achte genau auf die Rechtschreibung!</p>
-  <details class="vk-set" data-set><summary><span class="vk-setlbl">Auswahl</span> <span data-sum></span></summary><div class="vk-opts">
-    <div class="bl-chips" data-units role="group" aria-label="Teil des Buchs"></div>
-    <div class="seg" data-dir role="group" aria-label="Richtung"><button type="button" data-d="de" aria-pressed="true">Deutsch → Englisch</button><button type="button" data-d="ed" aria-pressed="false">Englisch → Deutsch</button></div>
-  </div></details>
-  <div class="vk-modebar"><span class="hint" id="vkModeLbl">Schreiben mit</span><div class="seg vk-mode" data-mode role="group" aria-labelledby="vkModeLbl"><button type="button" data-m="pen" aria-pressed="true" aria-label="Stift oder Finger" title="Stift oder Finger">✏️<span class="vk-ml"> Stift</span></button><button type="button" data-m="key" aria-pressed="false" aria-label="Tastatur" title="Tastatur">⌨️<span class="vk-ml"> Tastatur</span></button></div></div>
+  <div class="vk-bar">
+    <div class="bl-chips vk-units" data-units role="group" aria-label="Teile des Buchs"></div>
+    <button type="button" class="vk-swap" data-swap data-d="de"></button>
+    <div class="seg vk-mode" data-mode role="group" aria-label="Schreiben mit"><button type="button" data-m="pen" aria-pressed="true" aria-label="Mit Stift oder Finger schreiben" title="Stift oder Finger">✏️<span class="vk-ml"> Stift</span></button><button type="button" data-m="key" aria-pressed="false" aria-label="Mit der Tastatur schreiben" title="Tastatur">⌨️<span class="vk-ml"> Tastatur</span></button></div>
+  </div>
   <div class="vk-write" data-write aria-live="polite"></div>
 </div>
 <footer>Die Vokabeln passen zu Welcome und Theme 1 deines Englischbuchs. Beispielsätze und Bilder findest du im Buch. Das Vorlesen übernimmt die Stimme deines Geräts – manche Geräte sprechen etwas anders als deine Lehrerin oder dein Lehrer.</footer>
@@ -3840,19 +3842,12 @@ const Vok=(function(){
   function unitChips(el,sel,onChange){const units=(vocabAll(),vocabAll._units);
     const draw=()=>{el.innerHTML=units.map(u=>`<button type="button" data-u="${u.id}" aria-pressed="${sel.has(u.id)}">${esc(u.name)}</button>`).join("")};draw();
     el.onclick=e=>{const b=e.target.closest("button[data-u]");if(!b)return;const u=b.dataset.u;if(sel.has(u)&&sel.size>1)sel.delete(u);else sel.add(u);draw();onChange()}}
-  function dirSeg(el,get,set){el.onclick=e=>{const b=e.target.closest("button[data-d]");if(!b)return;set(b.dataset.d);el.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b))}}
-  return{variants,answersFor,check,say,sayBtn,canSay,esc,fach,setFach,clearBox,unitChips,dirSeg}
-})();
-
-// --- Auswahl-Kasten (aufklappbar): zeigt kurz, was gewählt ist; auf dem Handy zugeklappt ---
-(function(){
-  document.querySelectorAll("#vokabeln [data-set]").forEach(d=>{
-    const sum=$("[data-sum]",d);
-    const upd=()=>{const u=[...d.querySelectorAll("[data-units] [aria-pressed=true]")].map(b=>b.textContent).join(" + ");
-      const segs=[...d.querySelectorAll(".seg [aria-pressed=true]")].map(b=>b.textContent.replace(/^[^A-Za-zÄÖÜäöü]+/,""));
-      sum.textContent=[u].concat(segs).filter(Boolean).join(" · ")};
-    d.addEventListener("click",()=>setTimeout(upd,0));d._upd=upd;
-    if(!matchMedia("(max-width:600px)").matches)d.open=true;setTimeout(upd,0)})
+  // Richtung als ein Knopf, der bei jedem Tipp wechselt (ed = Englisch → Deutsch, de = Deutsch → Englisch)
+  function dirSwap(btn,set){const draw=()=>{const ed=btn.dataset.d==="ed";
+      btn.innerHTML=`<span class="vk-long">${ed?"Englisch → Deutsch":"Deutsch → Englisch"}</span><span class="vk-short">${ed?"EN → DE":"DE → EN"}</span><span class="vk-swi" aria-hidden="true">⇄</span>`;
+      btn.setAttribute("aria-label",`Richtung: ${ed?"Englisch nach Deutsch":"Deutsch nach Englisch"}. Tippen zum Wechseln`);btn.title="Richtung wechseln"};
+    draw();btn.onclick=()=>{btn.dataset.d=btn.dataset.d==="ed"?"de":"ed";draw();set(btn.dataset.d)}}
+  return{variants,answersFor,check,say,sayBtn,canSay,esc,fach,setFach,clearBox,unitChips,dirSwap}
 })();
 
 // --- Wörterbuch ---
@@ -3906,7 +3901,7 @@ const Vok=(function(){
     $("[data-n]",act).onclick=()=>{Vok.setFach(cur,dir,1);show()};
     $("[data-y]",act).focus()}
   Vok.unitChips($("[data-units]",task),sel,show);
-  Vok.dirSeg($("[data-dir]",task),()=>dir,d=>{dir=d;last=null;show()});
+  Vok.dirSwap($("[data-swap]",task),d=>{dir=d;last=null;show()});
   clr.onclick=()=>{if(!clearArm){clearArm=true;clr.textContent="Wirklich leeren? Nochmal tippen";clrInfo.textContent="Alle Karten wandern zurück in Fach 1.";setTimeout(()=>{clearArm=false;clr.textContent="Karteikasten leeren";clrInfo.textContent=""},4000);return}
     clearArm=false;Vok.clearBox();clr.textContent="Karteikasten leeren";clrInfo.textContent="Geleert – alle Karten liegen wieder in Fach 1.";show()};
   task.addEventListener("keydown",e=>{if(e.target.closest("input"))return;if((e.key===" "||e.key==="Enter")&&e.target.matches("[data-card]")){e.preventDefault();flip()}});
@@ -3987,7 +3982,7 @@ const Vok=(function(){
   modeEl.onclick=e=>{const b=e.target.closest("button[data-m]");if(!b||b.dataset.m===mode)return;setMode(b.dataset.m);first=true;start()};
   setMode(mode);
   Vok.unitChips($("[data-units]",task),sel,()=>{first=true;start()});
-  Vok.dirSeg($("[data-dir]",task),()=>dir,d=>{dir=d;first=true;start()});
+  Vok.dirSwap($("[data-swap]",task),d=>{dir=d;first=true;start()});
   start();task._reset=()=>{first=true;start()};
 })();
 /* --- Neu beginnen --- */

@@ -30,7 +30,7 @@ img{max-width:100%}
   --ok:#1E7B45; --okbg:#E3F4EA; --bad:#B3261E; --badbg:#FBE6E4; --focus:#1E5AAA;
   --land:#DCD3C2; --landline:#C2B7A2; --sea:#DCE8F2; --pin:#D2232A;
   --pac:#2B5BAA; --atl:#139DB3; --ind:#7A5BC4; --sud:#22A57C; --ark:#8CC3E6;
-  --lern:#237A3A; --spiel:#B01E78; --engl:#3157C8;
+  --lern:#237A3A; --spiel:#B01E78; --engl:#3157C8; --mathe:#A85300;
   --as:#E2A12B; --af:#D2553A; --na:#6FA845; --sa:#1F8E6E; --eu:#5A63D6; --au:#C2549B; --an:#8FA6C0;
   --sun:#F4B41A; --earth:#4A93D0; --night:#0B1230; --daybg:#FFF0C2; --dayfg:#6B4E00; --nightpill:#26305A; --nightfg:#FFFFFF;
   --park:#E5EFDA; --road:#FFFFFF; --plate:#E9EEF6; --plateline:#B5C1D4;
@@ -42,13 +42,13 @@ img{max-width:100%}
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; --engl:#7EA2F0; color-scheme:dark}}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; --engl:#7EA2F0; --mathe:#F0A35A; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#14161F; --sheet:#1D2030; --ink:#ECEDF4; --muted:#A3A8BE; --line:#33384D;
   --ok:#6FD39A; --okbg:#173326; --bad:#F2998F; --badbg:#3A1D1C; --focus:#8DB4F0;
   --land:#4A4537; --landline:#6A6350; --sea:#22324A; --pin:#FF6B6B; --an:#7E8FA0;
   --daybg:#4A3A10; --dayfg:#FFE08A; --nightpill:#3A4680;
-  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; --engl:#7EA2F0; color-scheme:dark}
+  --park:#1F2B22; --road:#3A4458; --plate:#263047; --plateline:#4A5671; --lern:#5CC474; --spiel:#F27BC0; --engl:#7EA2F0; --mathe:#F0A35A; color-scheme:dark}
 
 [hidden]{display:none!important}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
@@ -435,6 +435,129 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .navx{display:block}
 .faecher{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 14px;align-items:center}
 .fach{display:contents}
+/* ===== Mathe: Rechnen mit natürlichen Zahlen und Längen ===== */
+#zahlen .merk,#laengen .merk{--accent:var(--mathe)}
+.cc{display:inline-grid;grid-template-columns:repeat(var(--w),2.1em);font:700 1.35rem/1 var(--body);font-variant-numeric:tabular-nums;border:1px solid var(--line);border-radius:6px;padding:0;max-width:100%}
+.cc>span{height:2.1em;display:flex;align-items:center;justify-content:center;min-width:0;box-shadow:inset -1px -1px 0 color-mix(in srgb,var(--line) 70%,transparent)}
+.cc .op{color:var(--muted)}
+.cc .c{height:1.5em;font-size:.75rem;color:var(--muted);align-items:flex-start}
+.cc .line{border-top:3px solid var(--ink)}
+.cc input{width:1.6em;height:1.6em;text-align:center;font:inherit;border:2px solid var(--line);border-radius:6px;background:var(--sheet);color:var(--ink);padding:0}
+.cc input.cc-c{width:1.4em;height:1.3em;font-size:.75rem;color:var(--muted);border-style:dashed}
+.cc input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
+.cc input.ok{border-color:var(--ok);background:var(--okbg)}
+.cc input.no{border-color:var(--bad);background:var(--badbg)}
+.mz-cc{display:flex;justify-content:center}
+.mz-ex .mz-cc{justify-content:flex-start}
+.mz-grid{display:flex;flex-wrap:wrap;gap:16px 22px}
+.mz-train,.mz-baum,.mz-conv{display:flex;flex-direction:column;gap:14px}
+.mz-mode .chip{padding:6px 14px;font-size:.95rem}
+.mz-say{margin:0;font-weight:700;min-height:1.4em}
+.mz-say.ok{color:var(--ok)}.mz-say.no{color:var(--bad)}
+.mz-term{font:800 clamp(1.3rem,5vw,1.8rem)/1.4 var(--display);display:flex;flex-wrap:wrap;gap:.25em;align-items:center}
+.mz-term button{font:inherit;min-width:1.5em;padding:0 .2em;border-radius:10px;border:2px solid var(--mathe);background:var(--sheet);color:var(--ink);cursor:pointer}
+.mz-term button:hover{background:var(--paper)}
+.mz-term button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.mz-end{color:var(--ok)}
+.mz-tree{width:100%;height:auto;display:block;margin:0 auto}
+.mz-tree line{stroke:var(--ink);stroke-width:2}
+.mz-tree line.off{stroke:var(--line);stroke-dasharray:4 4}
+.mz-tree circle.on{fill:var(--mathe);stroke:none}
+.mz-tree circle.off{fill:var(--paper);stroke:var(--line);stroke-width:2;stroke-dasharray:4 3}
+.mz-tree text{text-anchor:middle;font-family:var(--body);font-weight:700;fill:var(--ink)}
+.mz-tree .tn{font-size:20px}
+.mz-tree .to{font-size:17px;fill:var(--sheet)}
+.mz-tree circle.off+.to{fill:var(--muted)}
+.mz-tree .tr{font-size:18px}
+.mz-tree .tr.off{fill:var(--muted)}
+.mz-tree.sm{max-width:300px!important;margin:0}
+.mz-qt{display:block;width:100%}
+.mz-qt .mz-mess{max-width:520px}
+.mz-qt .cc{font-size:1.15rem}
+.mz-t{font:800 1.2rem var(--display);letter-spacing:.01em}
+/* Längen */
+.mz-trep{display:flex;flex-direction:column;gap:14px}
+.mz-stairs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:0;height:270px;padding-top:4px}
+.mz-stairs .col{display:flex;flex-direction:column;justify-content:flex-end;height:100%;position:relative}
+.mz-stairs .st{height:calc(70px + (4 - var(--s)) * 52px);background:var(--mathe);color:var(--sheet);display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 2px 6px;
+  border-radius:12px 12px 0 0;box-shadow:inset 0 5px 0 color-mix(in srgb,var(--sheet) 30%,transparent);text-align:center}
+.mz-stairs .col+.col .st{border-left:2px solid var(--sheet)}
+.mz-stairs .col:first-child .st{border-radius:12px 12px 0 12px}
+.mz-stairs .col:last-child .st{border-radius:12px 12px 12px 0}
+.mz-stairs .st b{font:800 1.6rem/1 var(--display)}
+.mz-stairs .st span{font-size:.78rem;font-weight:700;hyphens:auto;overflow-wrap:anywhere;line-height:1.2}
+.mz-stairs .st small{margin-top:auto;font-size:.8rem;font-weight:800;line-height:1.25;padding:0 2px}
+.mz-dir{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:600px){.mz-dir{grid-template-columns:1fr}}
+.mz-dir .card{flex-direction:row;align-items:flex-start;gap:12px;border-width:2px}
+.mz-dir .card.dn{border-color:var(--ok)}.mz-dir .card.up{border-color:var(--focus)}
+.mz-dir .card>b{font-size:1.6rem;line-height:1;flex:none}
+.mz-dir .card h3{margin:0 0 4px}.mz-dir .card p{margin:0 0 6px;font-size:.95rem}
+.mz-dir .bsp{font:800 1.05rem var(--display);margin:0!important}
+.mz-h3{margin:6px 0 0;font:800 1.15rem var(--display)}
+.mz-zoom{display:flex;flex-direction:column;gap:0}
+.mz-zoom .zt{margin:10px 0 6px}
+.mz-zoom .zt:first-child{margin-top:0}
+.mz-zoom .zbar{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border:2px solid var(--ink);border-radius:4px;overflow:hidden}
+.mz-zoom .zbar i{font-style:normal;font-weight:800;font-size:.85rem;text-align:center;padding:9px 0;background:var(--sheet);color:var(--ink);border-left:1px solid var(--ink)}
+.mz-zoom .zbar i:first-child{border-left:0}
+.mz-zoom .zbar i.hl{background:var(--mathe);color:var(--sheet)}
+.mz-zoom .zstep{position:relative}
+.mz-zoom .zcone{display:block;width:100%;height:58px}
+.mz-zoom .zl{position:absolute;top:4px;right:0;margin:0;font-size:.9rem;text-align:right;max-width:62%;line-height:1.3}
+.mz-zoom .zcone polygon{fill:color-mix(in srgb,var(--mathe) 22%,transparent)}
+.mz-zoom .zcone line{stroke:var(--mathe);stroke-width:2;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
+.mz-bsp{display:flex;flex-direction:column;gap:6px}
+.mz-bsp .lbl{font-size:.85rem;font-weight:700;color:var(--muted)}
+.mz-bsp ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.mz-bsp li{text-align:center;font-weight:800;font-variant-numeric:tabular-nums;padding:6px 2px;border-radius:8px;background:var(--paper);border:1px solid var(--line);overflow-wrap:anywhere;font-size:.95rem}
+.mz-bsp li.on{border:2px solid var(--mathe);background:var(--sheet)}
+.mz-merk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.mz-merk .card{gap:2px;padding:12px}
+.mz-merk b{font:800 1.3rem var(--display)}
+.mz-merk span{font-size:.92rem}
+.mz-geo,.mz-mess{width:100%;height:auto;display:block}
+.mz-geo .geo,.mz-mess .geo{fill:color-mix(in srgb,var(--sea) 70%,transparent);stroke:var(--plateline);stroke-width:2}
+.mz-geo .geo-t line,.mz-mess .geo-t line{stroke:var(--ink);stroke-width:1.2}
+.mz-geo .geo-t text,.mz-mess .geo-t text{font:700 20px var(--body);fill:var(--ink);text-anchor:middle}
+.mz-geo .zero{fill:var(--bad)!important;font-size:24px!important}
+.mz-geo .geo-s,.mz-mess .geo-s{stroke:var(--pin);stroke-width:5;stroke-linecap:butt}
+.mz-mess .geo-e{stroke:var(--pin);stroke-width:2}
+.mz-geo .geo-h{fill:var(--pin);cursor:ew-resize;touch-action:none}
+.mz-geo .geo-l{font:700 18px var(--body);fill:var(--muted);text-anchor:middle}
+.mz-range{display:flex;flex-direction:column;gap:4px;font-size:.92rem;color:var(--muted);font-weight:700}
+.mz-range input{width:100%;accent-color:var(--mathe)}
+.mz-in input{width:8em;font:inherit;font-size:1.1rem;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
+.mz-in select{font:inherit;font-size:1.1rem;padding:9px 10px;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink)}
+.mz-in :focus{outline:3px solid var(--focus);outline-offset:1px}
+.mz-swt{overflow-x:auto}
+.mz-swt table{border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:100%}
+.mz-swt th,.mz-swt td{border:1px solid var(--line);text-align:center;padding:4px 2px;min-width:1.9em}
+.mz-swt th{font:800 .95rem var(--display);background:var(--paper)}
+.mz-swt th.sub{font:700 .8rem var(--body);color:var(--muted)}
+.mz-swt td{font:700 1.25rem var(--body);height:1.9em;position:relative}
+.mz-swt td.ue{background:color-mix(in srgb,var(--mathe) 16%,var(--sheet))}
+.mz-swt .comma{position:absolute;right:-.28em;bottom:.1em;font-style:normal;color:var(--bad);font-size:1.4rem;z-index:1}
+.mz-out{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.mz-out li{border:2px solid var(--line);border-radius:10px;padding:5px 10px;font-weight:700;background:var(--sheet)}
+.mz-out li.mix{border-color:var(--mathe)}
+.mz-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.mz-steps .card b{width:30px;height:30px;border-radius:50%;background:var(--mathe);color:var(--sheet);display:flex;align-items:center;justify-content:center;font:800 1rem var(--display)}
+.mz-steps .card p{margin:0;font-size:.92rem}
+.mz-sach{display:flex;flex-direction:column;gap:12px}
+.mz-prog{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.mz-prog li{font-size:.82rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.mz-prog li.cur{border-color:var(--ink);color:var(--ink)}
+.mz-prog li.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.mz-story{margin:0;line-height:2;font-size:1.05rem}
+.mz-tok{font:inherit;color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:8px;padding:0 5px;line-height:1.5}
+button.mz-tok{cursor:pointer}
+.mz-tok.on{background:#FFE9A8;color:#1C1F2E;border-color:#C79A00}
+.mz-tok.q{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;border-color:var(--mathe)}
+@media (max-width:720px){.mz-merk,.mz-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.cc{font-size:1.2rem}.mz-stairs{height:250px}.mz-stairs .st{height:calc(58px + (4 - var(--s)) * 44px);padding:8px 1px 4px}.mz-stairs .st b{font-size:1.25rem}.mz-stairs .st span{display:none}
+  .mz-bsp li{font-size:.8rem;padding:5px 1px}.mz-stairs .st small{font-size:.75rem}.mz-zoom .zl .lg{display:none}.mz-zoom .zl{font-size:.95rem}.mz-zoom .zbar i{font-size:.75rem}
+  .mz-swt th,.mz-swt td{min-width:1.5em;padding:3px 1px}.mz-swt td{font-size:1.05rem}}
 /* ===== Menü: Klasse → Fach → Kapitel ===== */
 /* Die Liste .faecher ist nur noch Datenquelle; sichtbar ist #navUI (.nv). */
 .navx .faecher{display:none!important}
@@ -1054,6 +1177,20 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
+   "version": "1.13.0",
+   "date": "2026-11-27",
+   "title": "Neues Fach: Mathe",
+   "items": [
+    "Neu im Menü: Mathe mit zwei Kapiteln – genau rechtzeitig zum Üben für die Klassenarbeit.",
+    "„Rechnen“: schriftlich addieren und subtrahieren (mit Ergänzen und Übertrag), die Probe, Klammer vor Punkt vor Strich und der Rechenbaum.",
+    "Im Schreib-Trainer rechnest du Stelle für Stelle. Wenn du nicht weiterweißt, erklärt dir der Tipp-Knopf die nächste Stelle.",
+    "Beim Rechenbaum tippst du an, was du zuerst rechnest – und der Baum wächst mit.",
+    "„Längen“: eine Einheitentreppe, eine Lupe, die zeigt, warum 1 m genau 10 dm sind, Merkgrößen zum Schätzen (zum Beispiel der Michel), Messen am Geodreieck, Umrechnen mit Komma und gemischt, eine Stellenwerttafel zum Ausprobieren und Sachaufgaben in vier Schritten.",
+    "In beiden Kapiteln gibt es Fehlerdetektiv-Aufgaben. Nach „Neu beginnen“ kommen immer neue Zahlen, du kannst also so oft üben, wie du willst.",
+    "In der Gucki-Blitzrunde gibt es jetzt auch Mathe-Fragen."
+   ]
+  },
+  {
    "version": "1.12.0",
    "date": "2026-11-16",
    "title": "Gucki hat neue Tricks",
@@ -1283,6 +1420,10 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     </div></div>
     <div class="fach" data-fach="englisch" data-kl="5"><p class="fachname"><span class="fdot" style="background:#3157C8"></span>Englisch</p><div class="topics">
       <a href="#vokabeln" data-topic="vokabeln" data-desc="Vokabeln zu Welcome und Theme 1: nachschlagen, anhören, mit Karteikarten üben und schreiben."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#3157C8"/><text x="16" y="21.5" text-anchor="middle" style="font:800 14px 'Bricolage Grotesque','Trebuchet MS',sans-serif;fill:#FFFFFF">En</text></svg><span><b>Vokabeln</b></span></a>
+    </div></div>
+    <div class="fach" data-fach="mathe" data-kl="5"><p class="fachname"><span class="fdot" style="background:#A85300"></span>Mathe</p><div class="topics">
+      <a href="#zahlen" data-topic="zahlen" data-desc="Schriftlich addieren und subtrahieren, die Probe, Klammer vor Punkt vor Strich und der Rechenbaum."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#A85300"/><path d="M9 11.5h7M12.5 8v7M17.5 22.5h6" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"/><path d="M19 9.5l4 4M23 9.5l-4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/><path d="M8.5 21h6M8.5 24h6" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Rechnen</b></span></a>
+      <a href="#laengen" data-topic="laengen" data-desc="Längen schätzen, mit dem Geodreieck messen, umrechnen und Sachaufgaben lösen."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#A85300"/><rect x="5" y="12" width="22" height="9" rx="1.5" fill="#FFFFFF"/><path d="M9 12v4M13 12v2.6M17 12v4M21 12v2.6M25 12v4" stroke="#A85300" stroke-width="1.6"/></svg><span><b>Längen</b></span></a>
     </div></div>
     <div class="fach" data-fach="kunst" data-kl="5"><p class="fachname"><span class="fdot" style="background:#E3202A"></span>Kunst</p><div class="topics">
       <a href="#farbkreis" data-topic="farbkreis" data-desc="Grundfarben, Mischfarben und Gegenfarben – am Farbkreis zum Anklicken."><span class="ico ico-farb" aria-hidden="true"></span><span><b>Farbkreis</b></span></a>
@@ -1947,6 +2088,206 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <footer>Die Beispiele richten sich nach den amtlichen Regeln der deutschen Rechtschreibung.</footer>
 </div>
 
+<!-- ============ MATHE: RECHNEN MIT NATÜRLICHEN ZAHLEN ============ -->
+<div class="topic" id="zahlen" hidden>
+<header>
+  <p class="eyebrow">Mathe · Klasse 5 · Natürliche Zahlen</p>
+  <h1>Rechnen mit natürlichen Zahlen</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--mathe) 0 24%,var(--line) 24% 26%,var(--mathe) 26% 49%,var(--line) 49% 51%,var(--mathe) 51% 74%,var(--line) 74% 76%,var(--mathe) 76%)"></div>
+</header>
+<section>
+  <p class="lead">Die <strong>natürlichen Zahlen</strong> sind die Zahlen 0, 1, 2, 3, 4 … – also die Zahlen, mit denen du zählst. Hier lernst du, wie du große Zahlen <strong>schriftlich</strong> addierst und subtrahierst, wie du dein Ergebnis mit einer <strong>Probe</strong> überprüfst und in welcher <strong>Reihenfolge</strong> du rechnest.</p>
+</section>
+<section>
+  <h2>Schriftlich addieren</h2>
+  <div class="duo">
+    <div class="card"><h3>So geht's</h3><ul>
+      <li>Schreibe die Zahlen <strong>stellengerecht</strong> untereinander: Einer unter Einer, Zehner unter Zehner, Hunderter unter Hunderter.</li>
+      <li>Rechne <strong>von rechts nach links</strong>, also mit den Einern zuerst.</li>
+      <li>Kommt 10 oder mehr heraus, schreibst du nur die letzte Ziffer hin. Die Zehnerziffer ist der <strong>Übertrag</strong>: Du schreibst sie klein unter die nächste Stelle und rechnest sie dort mit.</li></ul></div>
+    <div class="card mz-ex"><h3>Beispiel: 467 + 285</h3><div class="mz-cc" data-cc="467+285"></div>
+      <p class="hint">Einer: 7 + 5 = 12, schreibe 2, Übertrag 1. Zehner: 6 + 8 + 1 = 15, schreibe 5, Übertrag 1. Hunderter: 4 + 2 + 1 = 7.</p></div>
+  </div>
+</section>
+<section>
+  <h2>Schriftlich subtrahieren: Ergänzen</h2>
+  <div class="duo">
+    <div class="card"><h3>So geht's</h3><ul>
+      <li>Schreibe die größere Zahl oben hin, die kleinere stellengerecht darunter.</li>
+      <li>Rechne von rechts nach links und <strong>ergänze</strong> die untere Ziffer bis zur oberen: „8 plus wie viel ist 12?“</li>
+      <li>Ist die obere Ziffer zu klein, denkst du dir oben eine 1 davor (aus 2 wird 12). Dafür schreibst du unten bei der nächsten Stelle einen kleinen <strong>Übertrag 1</strong> und rechnest ihn dort zur unteren Ziffer dazu.</li></ul></div>
+    <div class="card mz-ex"><h3>Beispiel: 742 − 358</h3><div class="mz-cc" data-cc="742-358"></div>
+      <p class="hint">Einer: 8 + 4 = 12, schreibe 4, Übertrag 1. Zehner: 5 + 1 = 6, 6 + 8 = 14, schreibe 8, Übertrag 1. Hunderter: 3 + 1 = 4, 4 + 3 = 7, schreibe 3.</p></div>
+  </div>
+  <div class="merk"><strong>Die Probe:</strong> Mit der Umkehraufgabe prüfst du, ob dein Ergebnis stimmt.<br>
+    Minus-Aufgabe: <strong>Ergebnis + untere Zahl</strong> muss die obere Zahl ergeben. 384 + 358 = 742 ✓<br>
+    Plus-Aufgabe: <strong>Ergebnis − eine Zahl</strong> muss die andere Zahl ergeben. 752 − 285 = 467 ✓</div>
+</section>
+<section>
+  <h2>Schreib-Trainer: Stelle für Stelle</h2>
+  <div class="sheet mz-train" id="mzTrain">
+    <div class="row mz-mode" role="group" aria-label="Rechenart"><button type="button" class="chip" data-op="+" aria-pressed="true">Plus</button><button type="button" class="chip" data-op="-" aria-pressed="false">Minus</button></div>
+    <div class="mz-cc" data-train></div>
+    <p class="mz-say" data-say aria-live="polite"></p>
+    <div class="row"><button class="btn" type="button" data-tip>Tipp für die nächste Stelle</button><button class="btn ghost" type="button" data-check>Prüfen</button><button class="btn ghost" type="button" data-new>Neue Aufgabe</button></div>
+  </div>
+  <p class="hint">Tippe in die Kästchen unter dem Strich. Fang ganz rechts an, der Cursor springt dann von selbst eine Stelle nach links. Die kleinen Kästchen über dem Strich sind für den Übertrag, die musst du nicht ausfüllen.</p>
+</section>
+<section>
+  <h2>In welcher Reihenfolge rechne ich?</h2>
+  <div class="trio">
+    <div class="card"><h3>1. Klammern zuerst</h3><p>Was in Klammern steht, rechnest du immer zuerst aus.<br><em>(20 − 3) · 4 = 17 · 4 = 68</em></p></div>
+    <div class="card"><h3>2. Punkt vor Strich</h3><p>Mal (·) und geteilt (:) kommen vor plus (+) und minus (−).<br><em>20 − 3 · 4 = 20 − 12 = 8</em></p></div>
+    <div class="card"><h3>3. Von links nach rechts</h3><p>Sonst rechnest du einfach von links nach rechts.<br><em>20 − 5 + 3 = 15 + 3 = 18</em></p></div>
+  </div>
+  <div class="merk"><strong>Merksatz: Klammer vor Punkt vor Strich.</strong> Dieselben Zahlen können ganz verschiedene Ergebnisse haben: 20 − 3 · 4 = 8, aber (20 − 3) · 4 = 68.</div>
+</section>
+<section>
+  <h2>Der Rechenbaum</h2>
+  <p class="prose">Ein <strong>Rechenbaum</strong> zeigt, in welcher Reihenfolge du rechnest. Oben stehen die Zahlen. Wo zwei Äste zusammenlaufen, steht im Kreis die Rechnung, darunter das Ergebnis. Ganz unten steht das Endergebnis.</p>
+  <div class="sheet mz-baum" id="mzBaum">
+    <div class="mz-term" data-term></div>
+    <p class="mz-say" data-say aria-live="polite"></p>
+    <svg class="mz-tree" data-tree role="img" aria-label="Rechenbaum"></svg>
+    <div class="row"><button class="btn ghost" type="button" data-new>Neue Rechnung</button></div>
+  </div>
+  <p class="hint">Tippe auf das Rechenzeichen, das du als Nächstes rechnen musst. Der Baum wächst dann mit.</p>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="z1"><div class="taskhead"><h3>Aufgabe 1 · Schriftlich rechnen</h3><span class="score" data-score></span></div>
+  <p class="hint">Rechne die vier Aufgaben schriftlich aus. Den Übertrag kannst du in die kleinen Kästchen schreiben. Dann tippe auf „Prüfen“.</p>
+  <div class="mz-grid" data-calcs></div>
+  <div class="row"><button class="btn" type="button" data-check>Prüfen</button></div>
+  <p class="fb" data-fb aria-live="polite"></p></div>
+<div class="task" id="z2"><div class="taskhead"><h3>Aufgabe 2 · Die Probe</h3><span class="score" data-score></span></div>
+  <p class="hint">Mit welcher Rechnung prüfst du das Ergebnis? Und stimmt es?</p><div data-qs></div></div>
+<div class="task" id="z3"><div class="taskhead"><h3>Aufgabe 3 · Was rechnest du zuerst?</h3><span class="score" data-score></span></div>
+  <p class="hint">Denk an „Klammer vor Punkt vor Strich“ und sonst von links nach rechts.</p><div data-qs></div></div>
+<div class="task" id="z4"><div class="taskhead"><h3>Aufgabe 4 · Rechne aus</h3><span class="score" data-score></span></div>
+  <p class="hint">Rechne im Kopf oder auf einem Zettel. Achte auf die Reihenfolge.</p><div data-qs></div></div>
+<div class="task" id="z5"><div class="taskhead"><h3>Aufgabe 5 · Rechenbaum und Term</h3><span class="score" data-score></span></div>
+  <p class="hint">Welche Rechnung passt zu dem Rechenbaum?</p><div data-qs></div></div>
+<div class="task" id="z6"><div class="taskhead"><h3>Aufgabe 6 · Fehlerdetektiv</h3><span class="score" data-score></span></div>
+  <p class="hint">Hier hat jemand gerechnet und dabei einen Fehler gemacht. Was ist schiefgegangen?</p><div data-qs></div></div>
+<footer>Beim schriftlichen Subtrahieren lernst du hier das Ergänzen mit Übertrag. Manche Schulen lernen ein anderes Verfahren (Abziehen mit Entbündeln). Frag im Zweifel deine Lehrerin oder deinen Lehrer.</footer>
+</div>
+
+<!-- ============ MATHE: LÄNGEN ============ -->
+<div class="topic" id="laengen" hidden>
+<header>
+  <p class="eyebrow">Mathe · Klasse 5 · Größen</p>
+  <h1>Längen</h1>
+  <div class="stripe" aria-hidden="true" style="background:repeating-linear-gradient(90deg,var(--mathe) 0 18px,var(--sheet) 18px 20px)"></div>
+</header>
+<section>
+  <p class="lead">Wie lang, wie hoch, wie weit? Eine Länge besteht immer aus zwei Teilen: der <strong>Maßzahl</strong> und der <strong>Einheit</strong>. Bei <strong>3 m</strong> ist 3 die Maßzahl und m (Meter) die Einheit. Ohne Einheit weiß niemand, ob du 3 Millimeter oder 3 Kilometer meinst.</p>
+</section>
+<section>
+  <h2>Die Längeneinheiten</h2>
+  <div class="sheet mz-trep" id="mzTrep">
+    <div class="mz-stairs" role="img" aria-label="Einheitentreppe von oben nach unten: Kilometer, Meter, Dezimeter, Zentimeter, Millimeter. 1 km = 1000 m, 1 m = 10 dm, 1 dm = 10 cm, 1 cm = 10 mm.">
+      <div class="col" style="--s:0"><div class="st"><b>km</b><span lang="de">Kilometer</span><small>1 km = 1000 m</small></div></div>
+      <div class="col" style="--s:1"><div class="st"><b>m</b><span lang="de">Meter</span><small>1 m = 10 dm</small></div></div>
+      <div class="col" style="--s:2"><div class="st"><b>dm</b><span lang="de">Dezimeter</span><small>1 dm = 10 cm</small></div></div>
+      <div class="col" style="--s:3"><div class="st"><b>cm</b><span lang="de">Zentimeter</span><small>1 cm = 10 mm</small></div></div>
+      <div class="col" style="--s:4"><div class="st"><b>mm</b><span lang="de">Millimeter</span></div></div>
+    </div>
+    <div class="mz-dir">
+      <div class="card dn"><b aria-hidden="true">⬇</b><div><h3>Die Treppe runter</h3><p>Du gehst zu einer <strong>kleineren</strong> Einheit. Weil die Stücke kleiner sind, brauchst du <strong>mehr</strong> davon. Die Zahl wird größer: <strong>mal 10</strong> (von km zu m: mal 1000).</p><p class="bsp">3 m = 30 dm</p></div></div>
+      <div class="card up"><b aria-hidden="true">⬆</b><div><h3>Die Treppe rauf</h3><p>Du gehst zu einer <strong>größeren</strong> Einheit. Weil die Stücke größer sind, brauchst du <strong>weniger</strong> davon. Die Zahl wird kleiner: <strong>geteilt durch 10</strong> (von m zu km: geteilt durch 1000).</p><p class="bsp">300 cm = 30 dm</p></div></div>
+    </div>
+    <div class="mz-bsp" aria-live="polite"><span class="lbl">Eine Länge, fünf Schreibweisen – alles ist gleich lang:</span><ol data-bsp></ol></div>
+    <div class="row"><button class="btn ghost" type="button" data-bsp-next>Anderes Beispiel</button></div>
+  </div>
+  <h3 class="mz-h3">Warum mal 10? Schau mit der Lupe hinein!</h3>
+  <div class="sheet mz-zoom" aria-label="Ein Meter besteht aus 10 Dezimetern. Ein Dezimeter besteht aus 10 Zentimetern. Ein Zentimeter besteht aus 10 Millimetern.">
+    <p class="zt"><strong>1 Meter</strong> besteht aus <strong>10 Dezimetern</strong>:</p>
+    <div class="zbar" aria-hidden="true"><i class="hl">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i></div>
+    <div class="zstep"><svg class="zcone" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,0 10,0 100,30 0,30"/><line x1="0" y1="0" x2="0" y2="30"/><line x1="10" y1="0" x2="100" y2="30"/></svg><p class="zl"><span aria-hidden="true">🔍</span> <span class="lg">Lupe auf den ersten Dezimeter: </span><strong>1 dm = 10 cm</strong></p></div>
+    <div class="zbar" aria-hidden="true"><i class="hl">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i></div>
+    <div class="zstep"><svg class="zcone" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,0 10,0 100,30 0,30"/><line x1="0" y1="0" x2="0" y2="30"/><line x1="10" y1="0" x2="100" y2="30"/></svg><p class="zl"><span aria-hidden="true">🔍</span> <span class="lg">Lupe auf den ersten Zentimeter: </span><strong>1 cm = 10 mm</strong></p></div>
+    <div class="zbar" aria-hidden="true"><i class="hl">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i></div>
+    <p class="zt hint">Und ein <strong>Kilometer</strong>? Das sind 1000 Meter – ungefähr 10 Fußballfelder hintereinander.</p>
+  </div>
+  <div class="merk"><strong>Merke: Je kleiner die Einheit, desto größer die Zahl.</strong><br>
+    1 km = 1000 m · 1 m = 10 dm · 1 dm = 10 cm · 1 cm = 10 mm. Außerdem gilt: 1 m = 100 cm = 1000 mm.</div>
+</section>
+<section>
+  <h2>Schätzen mit Merkgrößen</h2>
+  <p class="prose">Wenn du dir ein paar Längen gut merkst, kannst du andere Längen damit vergleichen und schätzen.</p>
+  <div class="mz-merk">
+    <div class="card"><b>1 mm</b><span>ungefähr so dick wie eine Bankkarte</span></div>
+    <div class="card"><b>1 cm</b><span>ungefähr so breit wie dein kleiner Finger</span></div>
+    <div class="card"><b>1 dm</b><span>ungefähr so breit wie die Hand eines Erwachsenen</span></div>
+    <div class="card"><b>1 m</b><span>ungefähr so hoch wie eine Türklinke</span></div>
+    <div class="card"><b>100 m</b><span>ungefähr so lang wie ein Fußballfeld</span></div>
+    <div class="card"><b>1 km</b><span>ungefähr 12 bis 15 Minuten zu Fuß</span></div>
+    <div class="card"><b>110 m</b><span>so hoch ist die Elbphilharmonie</span></div>
+    <div class="card"><b>132 m</b><span>so hoch ist der Turm vom Michel</span></div>
+  </div>
+</section>
+<section>
+  <h2>Messen mit dem Geodreieck</h2>
+  <div class="duo">
+    <div class="card"><h3>So misst du richtig</h3><ul>
+      <li>Lege das Geodreieck mit der langen Seite an die Strecke.</li>
+      <li>Die <strong>0 steht in der Mitte</strong> der langen Seite, nicht am Rand! Lege die 0 genau an den Anfang der Strecke.</li>
+      <li>Lies am Ende der Strecke ab: erst die ganzen Zentimeter, dann die kleinen Millimeterstriche.</li>
+      <li>Schreibe <strong>Maßzahl und Einheit</strong> auf: 4 cm 3 mm = 4,3 cm = 43 mm.</li></ul></div>
+    <div class="card"><h3>Ausprobieren</h3>
+      <svg class="mz-geo" id="mzGeo" viewBox="170 0 440 150" role="img" aria-label="Geodreieck mit einer Strecke"></svg>
+      <label class="mz-range"><span>Länge der Strecke</span><input type="range" min="5" max="72" value="43" id="mzGeoR"></label>
+      <p class="mz-say" id="mzGeoOut" aria-live="polite"></p></div>
+  </div>
+  <p class="hint">Zieh das Ende der roten Strecke oder benutze den Regler. Achtung: Auf dem Bildschirm ist ein Zentimeter nicht unbedingt so groß wie in echt. Richtig messen kannst du nur auf Papier mit deinem eigenen Geodreieck.</p>
+</section>
+<section>
+  <h2>Umrechnen: mit Komma und gemischt</h2>
+  <p class="prose">Dieselbe Länge kannst du auf verschiedene Arten aufschreiben. Am besten siehst du das in der <strong>Stellenwerttafel</strong>: In jede Spalte kommt genau eine Ziffer.</p>
+  <div class="sheet mz-conv" id="mzConv">
+    <div class="row mz-in"><label><span class="sr-only">Maßzahl</span><input type="text" inputmode="decimal" value="3,45" data-num aria-label="Maßzahl"></label>
+      <select data-unit aria-label="Einheit"><option>km</option><option selected>m</option><option>dm</option><option>cm</option><option>mm</option></select></div>
+    <div class="mz-swt" data-swt></div>
+    <ul class="mz-out" data-out aria-live="polite"></ul>
+  </div>
+  <div class="duo">
+    <div class="card"><h3>Kommaschreibweise</h3><p>Das Komma steht immer <strong>hinter der Einheit</strong>, die vorne steht: 3,45 m heißt 3 m, 4 dm und 5 cm. Beim Umrechnen in die kleinere Einheit rutscht das Komma nach rechts: 3,45 m = 34,5 dm = 345 cm.</p></div>
+    <div class="card"><h3>Gemischte Schreibweise</h3><p>Hier stehen zwei Einheiten: <strong>3 m 45 cm</strong>. Das ist dasselbe wie 3,45 m oder 345 cm.<br><strong>Vorsicht:</strong> 3 m 5 cm = 3,05 m, nicht 3,5 m! Die 0 hält den Platz für die Dezimeter frei.</p></div>
+  </div>
+</section>
+<section>
+  <h2>Mit Längen rechnen</h2>
+  <div class="merk"><strong>Erst in dieselbe Einheit umrechnen, dann rechnen.</strong><br>
+    2,5 m + 80 cm = 250 cm + 80 cm = 330 cm = 3,3 m<br>
+    1 km − 350 m = 1000 m − 350 m = 650 m</div>
+</section>
+<section>
+  <h2>Sachaufgaben lösen</h2>
+  <div class="mz-steps">
+    <div class="card"><b>1</b><h3>Frage finden</h3><p>Was sollst du herausfinden? Unterstreiche die Frage.</p></div>
+    <div class="card"><b>2</b><h3>Angaben markieren</h3><p>Welche Zahlen brauchst du? Manche Angaben sind unwichtig.</p></div>
+    <div class="card"><b>3</b><h3>Rechnen</h3><p>Stelle die Rechnung auf. Rechne vorher in dieselbe Einheit um.</p></div>
+    <div class="card"><b>4</b><h3>Antwortsatz</h3><p>Beantworte die Frage in einem ganzen Satz – mit Einheit!</p></div>
+  </div>
+</section>
+<section><p class="eyebrow">Jetzt bist du dran</p><h2>Übungsaufgaben</h2></section>
+<div class="task" id="l1"><div class="taskhead"><h3>Aufgabe 1 · Schätzen</h3><span class="score" data-score></span></div>
+  <p class="hint">Welche Länge passt ungefähr? Denk an die Merkgrößen.</p><div data-qs></div></div>
+<div class="task" id="l2"><div class="taskhead"><h3>Aufgabe 2 · Messen</h3><span class="score" data-score></span></div>
+  <p class="hint">Wie lang ist die rote Strecke? Schau genau, wo sie anfängt.</p><div data-qs></div></div>
+<div class="task" id="l3"><div class="taskhead"><h3>Aufgabe 3 · Umrechnen</h3><span class="score" data-score></span></div>
+  <p class="hint">Rechne in die angegebene Einheit um. Die Einheitentreppe hilft dir.</p><div data-qs></div></div>
+<div class="task" id="l4"><div class="taskhead"><h3>Aufgabe 4 · Gleich lang oder länger?</h3><span class="score" data-score></span></div>
+  <p class="hint">Rechne beide Längen in dieselbe Einheit um, dann kannst du sie vergleichen.</p><div data-qs></div></div>
+<div class="task" id="l5"><div class="taskhead"><h3>Aufgabe 5 · Mit Längen rechnen</h3><span class="score" data-score></span></div>
+  <p class="hint">Erst in dieselbe Einheit umrechnen, dann rechnen.</p><div data-qs></div></div>
+<div class="task" id="l6"><div class="taskhead"><h3>Aufgabe 6 · Sachaufgabe in vier Schritten</h3><span class="score" data-score></span></div>
+  <div class="mz-sach" data-sach></div></div>
+<div class="task" id="l7"><div class="taskhead"><h3>Aufgabe 7 · Fehlerdetektiv</h3><span class="score" data-score></span></div>
+  <p class="hint">Stimmt das? Wenn nicht: Welcher Fehler ist passiert?</p><div data-qs></div></div>
+<footer>Merkgrößen sind ungefähre Werte zum Schätzen. Die Höhen von Michel und Elbphilharmonie stammen von hamburg.de (siehe Quellen).</footer>
+</div>
+
 <!-- ============ ENGLISCH: VOKABELN ============ -->
 <div class="topic" id="vokabeln" hidden>
 <header>
@@ -2350,6 +2691,14 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   </ul>
 </section>
 <section>
+  <h2>Mathe: Längen</h2>
+  <ul class="quellen">
+    <li>Hamburg.de: <a href="https://www.hamburg.de/tourismus/sehenswuerdigkeiten/michel-hamburg-306340" target="_blank" rel="noopener">Der Michel</a> (Turm 132 Meter hoch).</li>
+    <li>Hamburg.de: <a href="https://www.hamburg.de/tourismus/sehenswuerdigkeiten/elbphiharmonie/elbphilharmonie-in-zahlen-397866" target="_blank" rel="noopener">Elbphilharmonie in Zahlen</a> (110 Meter hoch).</li>
+    <li>Die übrigen Merkgrößen (Türklinke, Fußballfeld, Fußweg) sind gerundete Erfahrungswerte zum Schätzen.</li>
+  </ul>
+</section>
+<section>
   <h2>Karten, Daten und Schriften</h2>
   <ul class="quellen">
     <li>Weltkarte: Ländergrenzen aus <a href="https://github.com/apache/echarts/blob/4.9.0/map/js/world.js" target="_blank" rel="noopener">Apache ECharts 4.9.0, Datei <code>map/js/world.js</code></a>, Apache-Lizenz 2.0. Den Umriss von Antarktika und die Grenzen der Ozeane haben wir vereinfacht selbst gezeichnet.</li>
@@ -2357,7 +2706,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <li>Schrift <a href="https://fonts.google.com/specimen/Bricolage+Grotesque" target="_blank" rel="noopener">Bricolage Grotesque</a> von Mathieu Triay und Schrift <a href="https://www.brailleinstitute.org/freefont/" target="_blank" rel="noopener">Atkinson Hyperlegible</a> vom Braille Institute of America, beide unter der SIL Open Font License 1.1.</li>
   </ul>
 </section>
-<footer>Die übrigen Erklärungen (zum Beispiel zu Noten, Kompass, Tag und Nacht und zum Lernen für Klassenarbeiten) entsprechen dem üblichen Schulwissen der 5. Klasse. Fehler gefunden? Sag deiner Lehrerin oder deinem Lehrer Bescheid.</footer>
+<footer>Die übrigen Erklärungen (zum Beispiel zu Noten, Kompass, Tag und Nacht, zum schriftlichen Rechnen und zum Lernen für Klassenarbeiten) entsprechen dem üblichen Schulwissen der 5. Klasse. Fehler gefunden? Sag deiner Lehrerin oder deinem Lehrer Bescheid.</footer>
 </div>
 
 <div class="topic" id="neuigkeiten" hidden>
@@ -2443,7 +2792,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","vokabeln","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten","quellen"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","vokabeln","zahlen","laengen","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten","quellen"];
 /* --- Klassen, Fächer und Menü --- */
 // Datenquelle ist die (versteckte) Liste .navx .faecher: Fach = .fach[data-fach], Kapitel = a[data-topic].
 // Klasse eines Kapitels: data-kl am Link, sonst am Fach, sonst "5". "alle" = in jeder Klasse (z. B. Lernen).
@@ -3975,6 +4324,357 @@ quiz($("#ka6"),shuffle([
   {q:"Deine Hände zittern. Welcher leise Trick hilft?",a:"a",o:[{v:"a",label:"Fäuste fest ballen, bis fünf zählen, locker lassen"},{v:"b",label:"Mit dem Stift auf den Tisch trommeln"},{v:"c",label:"Aufstehen und herumlaufen"},{v:"d",label:"Die Hände unter den Tisch klemmen und warten"}],why:"Erst anspannen, dann loslassen – so entspannen sich die Muskeln."},
   {q:"Was macht die Aufregung schon vorher kleiner?",a:"a",o:[{v:"a",label:"Gut vorbereitet, ausgeschlafen und satt in die Arbeit gehen"},{v:"b",label:"Am Abend vorher lange aufbleiben"},{v:"c",label:"Ohne Frühstück losgehen"},{v:"d",label:"Erst am Morgen anfangen zu lernen"}],why:"Wer vorbereitet, ausgeschlafen und satt ist, bleibt ruhiger."}
 ]).map(it=>({...it,o:shuffle(it.o)})));
+/* ================= MATHE: GEMEINSAME BAUSTEINE ================= */
+// Alle Aufgaben werden mit Zufallszahlen erzeugt: Nach „Neu beginnen“ kommen neue Zahlen.
+const MZ=(function(){
+  const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  const STELLE=["Einer","Zehner","Hunderter","Tausender","Zehntausender","Hunderttausender"];
+  const dig=(n,i)=>Math.floor(n/10**i)%10;
+  const len=n=>String(n).length;
+  // Zahl mit schmalem Leerzeichen als Tausendertrennung (ab 10 000, wie im Schulbuch)
+  const num=n=>{const s=String(n);return s.length>4?s.replace(/\B(?=(\d{3})+(?!\d))/g," "):s};
+  // Überträge: c[i] = Übertrag, der in Stelle i hineingeht
+  function carries(a,b,op){const n=Math.max(len(a),len(b))+1,c=[0];
+    for(let i=0;i<n;i++){const s=op==="+"?dig(a,i)+dig(b,i)+c[i]:dig(b,i)+c[i];c[i+1]=op==="+"?(s>=10?1:0):(dig(a,i)<s?1:0)}return c}
+  const result=(a,b,op)=>op==="+"?a+b:a-b;
+  // Schriftliche Rechnung als Raster. opt.input: Eingabefelder; opt.shown: Ergebnis zum Anzeigen (z. B. mit Fehler); opt.shift: untere Zahl verrutscht
+  function grid(host,a,b,op,opt={}){const r=result(a,b,op),shown=opt.shown!=null?opt.shown:r,sh=opt.shift||0;
+    const w=Math.max(len(a),len(b)+sh,len(shown),opt.input?len(r):0)+1,c=carries(a,b,op);
+    const cell=(cls,t="")=>`<span class="${cls}">${t}</span>`;let h="";
+    const row=(n,from)=>{const s=String(n);for(let k=0;k<w-1;k++){const i=w-2-k,j=s.length-1-(i-from);h+=cell("d",j>=0&&j<s.length&&i>=from?s[j]:"")}};
+    h+=cell("op");row(a,0);
+    h+=cell("op",op==="+"?"+":"−");const sb=String(b);for(let k=0;k<w-1;k++){const i=w-2-k,j=sb.length-1-(i-sh);h+=cell("d",i>=sh&&j>=0?sb[j]:"")}
+    h+=cell("op");for(let k=0;k<w-1;k++){const i=w-2-k;
+      if(opt.input&&i>0&&i<len(r)+1&&i<=Math.max(len(a),len(b)))h+=`<span class="c"><input class="cc-c" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Übertrag bei den ${STELLE[i]||"Stellen"}" data-i="${i}"></span>`;
+      else h+=cell("c",opt.carry&&c[i]&&!sh?"1":"")}
+    h+=cell("op line");const rs=String(shown);
+    for(let k=0;k<w-1;k++){const i=w-2-k;
+      if(opt.input)h+=i<len(r)?`<span class="d line"><input class="cc-d" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${STELLE[i]||"Stelle"} vom Ergebnis" data-i="${i}"></span>`:cell("d line");
+      else h+=cell("d line",i<rs.length?rs[rs.length-1-i]:"")}
+    host.innerHTML=`<div class="cc" style="--w:${w}" role="group" aria-label="${num(a)} ${op==="+"?"plus":"minus"} ${num(b)}">${h}</div>`;
+    if(opt.input){const ins=[...host.querySelectorAll(".cc-d")];
+      host.querySelectorAll("input").forEach(inp=>{
+        inp.addEventListener("input",()=>{inp.value=inp.value.replace(/\D/g,"").slice(-1);inp.classList.remove("ok","no");
+          if(inp.value&&inp.classList.contains("cc-d")){const k=ins.indexOf(inp),nx=ins[k-1];if(nx)nx.focus()}host.dispatchEvent(new Event("ccinput"))});
+        inp.addEventListener("keydown",e=>{if(e.key==="Backspace"&&!inp.value&&inp.classList.contains("cc-d")){const k=ins.indexOf(inp),pv=ins[k+1];if(pv){e.preventDefault();pv.focus();pv.value=""}}})})}
+    return{r,check(){let ok=0,all=0;host.querySelectorAll(".cc-d").forEach(inp=>{const i=+inp.dataset.i,want=dig(r,i);all++;
+        const good=inp.value!==""&&+inp.value===want;inp.classList.toggle("ok",good);inp.classList.toggle("no",!good);if(good)ok++});return ok===all},
+      digits(){return[...host.querySelectorAll(".cc-d")].map(x=>x.value)}}}
+  // Sprech-Tipp für Stelle i
+  function tip(a,b,op,i){const c=carries(a,b,op),r=result(a,b,op),S=STELLE[i]||"Stelle",ai=dig(a,i),bi=dig(b,i),ci=c[i],out=c[i+1];
+    if(i>=len(r))return`Fertig! Das Ergebnis ist ${num(r)}.${op==="-"&&i<len(a)?" Eine 0 ganz vorne schreibt man nicht.":""}`;
+    if(op==="+"){const parts=[ai,bi].filter((x,k)=>k===0||i<len(b)||x);const s=ai+bi+ci;
+      return`${S}: ${[ai,...(i<len(b)?[bi]:[])].join(" + ")}${ci?" + Übertrag 1":""} = ${s}. Schreibe ${s%10}${out?", Übertrag 1":""}.`}
+    const u=bi+ci,top=ai+(out?10:0);
+    return`${S}: ${ci?`${bi} + Übertrag 1 = ${u}. `:""}${out?`${u} plus wie viel ist ${ai}? Das geht nicht, also nimm ${top}: `:`${u} plus wie viel ist ${ai}? `}${u} + ${top-u} = ${top}. Schreibe ${top-u}${out?", Übertrag 1":""}.`}
+  // Aufgaben mit mindestens k Überträgen
+  function task(op,minD=3,maxD=4,k=2){for(;;){const la=ri(minD,maxD),a=ri(10**(la-1),10**la-1);let b;
+      if(op==="+"){const lb=ri(minD,la);b=ri(10**(lb-1),10**lb-1)}else{const lb=ri(Math.max(2,minD-1),la);b=ri(10**(lb-1),Math.min(10**lb-1,a-1));if(b<10)continue}
+      const c=carries(a,b,op);if(c.reduce((s,x)=>s+x,0)>=k&&(op==="-"||a+b<10**5))return[a,b]}}
+  /* ---- Terme (Rechenausdrücke) als Baum: Zahl oder {o,l,r} ---- */
+  const P={"+":1,"−":1,"·":2,":":2};
+  const val=t=>typeof t==="number"?t:(o=>o==="+"?val(t.l)+val(t.r):o==="−"?val(t.l)-val(t.r):o==="·"?val(t.l)*val(t.r):val(t.l)/val(t.r))(t.o);
+  function okTerm(t){if(typeof t==="number")return true;const l=val(t.l),r=val(t.r),v=val(t);return okTerm(t.l)&&okTerm(t.r)&&v>=0&&Number.isInteger(v)&&v<=2000&&!(t.o===":"&&r===0)}
+  function show(t,pp=0,right=false,fn){if(typeof t==="number")return fn?fn.n(t):String(t);const p=P[t.o];
+    const s=`${show(t.l,p,false,fn)} ${fn?fn.o(t):t.o} ${show(t.r,p,true,fn)}`;return p<pp||(p===pp&&right)?`(${s})`:s}
+  const N=(o,l,r)=>({o,l,r});
+  const T=[
+    ()=>N("+",ri(2,60),N("·",ri(2,9),ri(2,9))),
+    ()=>N("−",ri(30,99),N("·",ri(2,9),ri(2,9))),
+    ()=>N("·",N("+",ri(2,15),ri(2,15)),ri(2,6)),
+    ()=>N("·",N("−",ri(10,30),ri(2,9)),ri(2,5)),
+    ()=>N("−",N("·",ri(3,9),ri(3,9)),ri(2,20)),
+    ()=>{const b=ri(2,9);return N("+",N(":",b*ri(2,9),b),ri(2,40))},
+    ()=>{const c=ri(2,9),q=ri(2,9),a=ri(1,c*q-1);return N(":",N("+",a,c*q-a),c)},
+    ()=>N("−",N("+",ri(10,60),N("·",ri(2,9),ri(2,9))),ri(2,20)),
+    ()=>N("−",ri(60,150),N("·",N("+",ri(2,6),ri(2,6)),ri(2,6))),
+    ()=>N("+",N("·",ri(2,9),ri(2,9)),N("·",ri(2,9),ri(2,9))),
+    ()=>N("·",N("+",ri(2,9),ri(2,9)),N("−",ri(8,15),ri(2,7))),
+    ()=>N("+",N("−",ri(20,60),ri(2,19)),ri(2,30)),
+    ()=>{const b=ri(2,6);return N("·",N(":",b*ri(2,8),b),ri(2,6))}];
+  function term(single){for(;;){const t=pick(T)();if(okTerm(t)&&(!single||ready(t).length===1))return t}}
+  // Rechnungen, deren beide Seiten schon Zahlen sind (dürfen als Nächstes gerechnet werden)
+  function ready(t,acc=[]){if(typeof t==="number")return acc;if(typeof t.l==="number"&&typeof t.r==="number")acc.push(t);else{ready(t.l,acc);ready(t.r,acc)}return acc}
+  // Ausdruck als Zeichenfolge mit anderen Regeln auswerten (für typische Fehler)
+  function evalStr(s,mode){const tk=s.replace(/\s+/g,"").match(/\d+|[+−·:()]/g);let p=0;
+    const ap=(a,o,b)=>o==="+"?a+b:o==="−"?a-b:o==="·"?a*b:a/b;
+    function atom(){if(tk[p]==="("){p++;const v=expr();p++;return v}return +tk[p++]}
+    function lr(){let v=atom();while(p<tk.length&&tk[p]!==")"){const o=tk[p++];v=ap(v,o,atom())}return v}
+    function term_(){let v=atom();while("·:".includes(tk[p]||"x")){const o=tk[p++];v=ap(v,o,atom())}return v}
+    function prec(){let v=term_();while("+−".includes(tk[p]||"x")){const o=tk[p++];v=ap(v,o,term_())}return v}
+    const expr=mode==="lr"?lr:prec;
+    if(mode==="nobr"){const t2=s.replace(/[()]/g,"");return evalStr(t2,"prec")}
+    return expr()}
+  // Rechenbaum als SVG; t: Baum, done: Set der schon gerechneten Knoten (null = alle)
+  function treeSVG(svg,t,done,opt={}){const leaves=[];let id=0;
+    (function walk(n){if(typeof n==="number"){leaves.push(n);return}walk(n.l);walk(n.r)})(t);
+    const DX=opt.dx||54,LH=opt.lh||78,W=leaves.length*DX,pos=new Map();let li=0;
+    function lay(n){if(typeof n==="number"){const p={x:DX/2+li++*DX,y:0,leaf:1,n};pos.set(p,p);return p}
+      const l=lay(n.l),r=lay(n.r),p={x:(l.x+r.x)/2,y:Math.max(l.y,r.y)+1,n,l,r};return p}
+    const root=lay(t),H=(root.y+1)*LH+20;
+    const Y=y=>18+y*LH;let lines="",nodes="";
+    (function draw(p){if(p.leaf){nodes+=`<text class="tn" x="${p.x}" y="${Y(0)+6}">${p.n}</text>`;return}
+      const on=!done||done.has(p.n),cy=Y(p.y)-6;
+      [p.l,p.r].forEach(c=>{const y0=c.leaf?Y(0)+12:Y(c.y)+31;lines+=`<line x1="${c.x}" y1="${y0}" x2="${p.x}" y2="${cy-13}" class="${on?"":"off"}"/>`;draw(c)});
+      nodes+=`<circle cx="${p.x}" cy="${cy}" r="13" class="${on?"on":"off"}"/><text class="to" x="${p.x}" y="${cy+5}">${p.n.o}</text>`+
+        `<text class="tr${on?"":" off"}" x="${p.x}" y="${cy+30}">${on?val(p.n):"?"}</text>`})(root);
+    svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.style.maxWidth=W*1.15+"px";svg.innerHTML=lines+nodes}
+  /* ---- Längen: alles intern in Millimetern ---- */
+  const EXP={mm:0,cm:1,dm:2,m:3,km:6},UNITS=["km","m","dm","cm","mm"];
+  function len_(mm,u){const f=EXP[u];if(!f)return num(mm)+" "+u;let s=String(mm).padStart(f+1,"0");const i=s.slice(0,-f),fr=s.slice(-f).replace(/0+$/,"");return num(+i)+(fr?","+fr:"")+" "+u}
+  const nOnly=(mm,u)=>len_(mm,u).replace(/ \S+$/,"");
+  function mixed(mm,big,small){const f=10**EXP[big],a=Math.floor(mm/f),b=(mm%f)/10**EXP[small];if(!Number.isInteger(b))return null;return`${num(a)} ${big} ${num(b)} ${small}`}
+  function parse(s,u){s=String(s).trim().replace(/\s/g,"").replace(".",",");if(!/^\d+(,\d+)?$/.test(s))return null;const[i,fr=""]=s.split(","),f=EXP[u];if(fr.length>f)return NaN;return +(i+fr.padEnd(f,"0"))}
+  return{ri,pick,dig,len,num,carries,result,grid,tip,task,term,ready,val,show,evalStr,treeSVG,N,okTerm,EXP,UNITS,L:len_,nOnly,mixed,parse,STELLE}})();
+
+// quiz() mit neuen Zufallsaufgaben bei jedem „Neu beginnen“
+function mzQuiz(box,gen){const go=()=>{quiz(box,gen());box._reset=go};go()}
+
+/* ================= MATHE: RECHNEN MIT NATÜRLICHEN ZAHLEN ================= */
+// Beispiele in den Erklärungen
+document.querySelectorAll("#zahlen .mz-ex [data-cc]").forEach(h=>{const m=h.dataset.cc.match(/(\d+)([+-])(\d+)/);MZ.grid(h,+m[1],+m[3],m[2],{carry:true})});
+// Schreib-Trainer
+(function(){const box=$("#mzTrain");if(!box)return;const host=$("[data-train]",box),say=$("[data-say]",box);let op="+",a,b,g,step=0;
+  function load(){[a,b]=MZ.task(op,3,4,2);g=MZ.grid(host,a,b,op,{input:true});step=0;say.textContent="";say.className="mz-say"}
+  host.addEventListener("ccinput",()=>{say.className="mz-say";say.textContent=""});
+  box.querySelector(".mz-mode").onclick=e=>{const c=e.target.closest("[data-op]");if(!c)return;op=c.dataset.op;box.querySelectorAll("[data-op]").forEach(x=>x.setAttribute("aria-pressed",x===c));load()};
+  $("[data-tip]",box).onclick=()=>{// erste leere Stelle von rechts
+    let pos=0;const ds=[...host.querySelectorAll(".cc-d")];for(let j=ds.length-1;j>=0;j--){if(ds[j].value===""){pos=+ds[j].dataset.i;break}if(j===0)pos=MZ.len(g.r)}
+    say.className="mz-say";say.textContent=MZ.tip(a,b,op,pos)};
+  $("[data-check]",box).onclick=()=>{if(g.check()){say.className="mz-say ok";say.textContent=`Richtig! ${MZ.num(a)} ${op==="+"?"+":"−"} ${MZ.num(b)} = ${MZ.num(g.r)}. Probe: ${op==="+"?`${MZ.num(g.r)} − ${MZ.num(b)} = ${MZ.num(a)}`:`${MZ.num(g.r)} + ${MZ.num(b)} = ${MZ.num(a)}`} ✓`;guckiCheer()}
+    else{say.className="mz-say no";say.textContent="Die rot markierten Stellen stimmen noch nicht. Tipp: Lass dir die nächste Stelle erklären.";guckiCry()}};
+  $("[data-new]",box).onclick=load;load()})();
+// Rechenbaum zum Antippen
+(function(){const box=$("#mzBaum");if(!box)return;const tEl=$("[data-term]",box),say=$("[data-say]",box),svg=$("[data-tree]",box);let t,done,cur,step;
+  // cur: Arbeitskopie, in der gerechnete Teile durch Zahlen ersetzt werden; map von Arbeitsknoten zu Originalknoten
+  let orig;
+  function clone(n){if(typeof n==="number")return n;const c={o:n.o,l:clone(n.l),r:clone(n.r)};orig.set(c,n);return c}
+  function load(){t=MZ.term(false);orig=new Map();cur=clone(t);done=new Set();step=0;say.className="mz-say";say.textContent="Was rechnest du zuerst?";draw()}
+  function draw(){let k=0;const ids=new Map();
+    tEl.innerHTML=typeof cur==="number"?`<span class="mz-end">= ${cur}</span>`:MZ.show(cur,0,false,{n:x=>`<span>${x}</span>`,o:n=>{ids.set(String(k),n);return`<button type="button" data-k="${k++}" aria-label="${{"+":"plus","−":"minus","·":"mal",":":"geteilt durch"}[n.o]}">${n.o}</button>`}});
+    tEl._ids=ids;MZ.treeSVG(svg,t,done)}
+  // Warum darf dieses Rechenzeichen noch nicht? Es hat eine Seite, die noch nicht ausgerechnet ist
+  function why(n){const kid=[n.l,n.r].find(x=>typeof x!=="number"),kp={"+":1,"−":1,"·":2,":":2},s=x=>MZ.show(x);
+    if(kp[kid.o]<kp[n.o]||(kp[kid.o]===kp[n.o]&&kid===n.r))return`Zuerst die Klammer: ${s(kid)}.`;
+    if(kp[kid.o]>kp[n.o])return`Punkt vor Strich: Erst ${s(kid)} rechnen.`;
+    return`Von links nach rechts: Erst ${s(kid)} rechnen.`}
+  tEl.addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(!b)return;const n=tEl._ids.get(b.dataset.k);
+    if(typeof n.l==="number"&&typeof n.r==="number"){const v=MZ.val(n),o=orig.get(n);done.add(o);step++;
+      say.className="mz-say ok";say.textContent=`Schritt ${step}: ${n.l} ${n.o} ${n.r} = ${v}`;
+      // n durch Zahl ersetzen
+      if(cur===n)cur=v;else(function rep(p){for(const s of["l","r"]){if(p[s]===n){p[s]=v;return true}if(typeof p[s]!=="number"&&rep(p[s]))return true}return false})(cur);
+      if(typeof cur==="number"){say.textContent+=` – fertig! Das Ergebnis ist ${cur}.`;guckiCheer()}draw()}
+    else{say.className="mz-say no";say.textContent=why(n);guckiCry()}});
+  $("[data-new]",box).onclick=load;load()})();
+// Aufgabe 1: schriftlich rechnen
+(function(){const box=$("#z1");if(!box)return;const wrap=$("[data-calcs]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box);let G=[];
+  function load(){wrap.innerHTML="";G=[];delete box.dataset.fails;fb.textContent="";sc.textContent="";
+    ["+","-","+","-"].forEach((op,k)=>{const[a,b]=MZ.task(op,3,4,k<2?2:3),d=document.createElement("div");d.className="mz-cc";wrap.appendChild(d);G.push(MZ.grid(d,a,b,op,{input:true}))})}
+  $("[data-check]",box).onclick=()=>{const ok=G.filter(g=>g.check()).length;sc.textContent=`${ok} von ${G.length} richtig`;
+    if(ok===G.length){fb.className="fb ok";fb.textContent="Alle vier richtig gerechnet!";guckiDone(!box.dataset.fails,box)}
+    else{fb.className="fb no";fb.textContent="Die rot markierten Ziffern stimmen noch nicht. Rechne diese Stellen noch einmal – denk an den Übertrag.";box.dataset.fails=1;guckiCry()}};
+  box._reset=load;load()})();
+// Aufgabe 2: Die Probe
+(function(){const box=$("#z2");if(!box)return;const n=MZ.num;
+  function items(){const out=[];
+    for(let k=0;k<2;k++){const op=k?"+":"-",[a,b]=MZ.task(op,3,3,1),r=MZ.result(a,b,op);
+      const q=op==="-"?`${n(a)} − ${n(b)} = ${n(r)}`:`${n(a)} + ${n(b)} = ${n(r)}`;
+      const right=op==="-"?`${n(r)} + ${n(b)}`:`${n(r)} − ${n(b)}`;const wrong=op==="-"?[`${n(a)} + ${n(b)}`,`${n(r)} − ${n(b)}`,`${n(a)} − ${n(r)} − ${n(b)}`]:[`${n(r)} + ${n(b)}`,`${n(a)} − ${n(b)}`,`${n(a)} + ${n(r)}`];
+      out.push({q:`Welche Rechnung ist die Probe für <b>${q}</b>?`,a:right,o:shuffle([right,...wrong]).map(v=>({v,label:v})),why:op==="-"?`Ergebnis plus untere Zahl: ${right} = ${n(a)}.`:`Ergebnis minus eine Zahl: ${right} = ${n(a)}.`})}
+    for(let k=0;k<2;k++){const[a,b]=MZ.task("-",3,3,2),r=a-b,bad=Math.random()<.6,sh=bad?r+MZ.pick([10,-10,100,1]):r,pr=sh+b;
+      const A=bad?`Falsch, richtig ist ${n(r)}`:"Das Ergebnis stimmt";
+      const o=bad?[A,"Das Ergebnis stimmt",`Falsch, richtig ist ${n(r+MZ.pick([2,-2,20]))}`]:[A,`Falsch, richtig ist ${n(r+10)}`,`Falsch, richtig ist ${n(r-1)}`];
+      out.push({q:`Tim rechnet ${n(a)} − ${n(b)} = ${n(sh)}. Seine Probe: ${n(sh)} + ${n(b)} = ${n(pr)}. Was stimmt?`,a:A,o:shuffle(o).map(v=>({v,label:v})),
+        why:bad?`Bei der Probe muss ${n(a)} herauskommen, nicht ${n(pr)}. Richtig ist ${n(a)} − ${n(b)} = ${n(r)}.`:`Die Probe ergibt genau ${n(a)}. Also stimmt das Ergebnis.`})}
+    return out}
+  mzQuiz(box,items)})();
+// Aufgabe 3: Was zuerst?
+function mzZuerst(){const out=[],seen=new Set();while(out.length<5){const t=MZ.term(true),s=MZ.show(t);if(seen.has(s))continue;seen.add(s);
+  const r=MZ.ready(t)[0],a=MZ.show(r);const all=[];(function w(n){if(typeof n==="number")return;all.push(n);w(n.l);w(n.r)})(t);
+  // Falsche Antworten: andere Rechenzeichen mit ihren direkten Nachbarzahlen aus der Zeichenfolge
+  const tk=s.replace(/[()]/g,"").split(" "),opts=new Set([a]);for(let i=1;i<tk.length;i+=2)opts.add(`${tk[i-1]} ${tk[i]} ${tk[i+1]}`);
+  const o=[...opts];if(o.length<2)continue;
+  out.push({q:`<span class="mz-t">${s}</span>`,a,o:o.map(v=>({v,label:v})),why:`${mzRule(t,r)} Zuerst: ${a} = ${MZ.val(r)}.`})}return out}
+// Welche Regel sagt, dass r zuerst kommt? Steht r (oder ein Teil darüber) in Klammern → Klammer; Punktrechnung bei Strich im Term → Punkt vor Strich
+function mzRule(t,r){const kp={"+":1,"−":1,"·":2,":":2};let br=false;
+  (function find(n){if(typeof n==="number")return false;if(n===r)return true;for(const s of["l","r"]){const c=n[s];if(find(c)){if(typeof c!=="number"&&(kp[c.o]<kp[n.o]||(kp[c.o]===kp[n.o]&&s==="r")))br=true;return true}}return false})(t);
+  if(br)return"Klammern zuerst.";if(kp[r.o]===2&&/[+−]/.test(MZ.show(t)))return"Punkt vor Strich.";return"Von links nach rechts."}
+(function(){const box=$("#z3");if(!box)return;mzQuiz(box,mzZuerst)})();
+// Aufgabe 4: Rechne aus
+function mzAus(){const out=[],seen=new Set();while(out.length<5){const t=MZ.term(false),s=MZ.show(t),v=MZ.val(t);if(seen.has(s))continue;seen.add(s);
+  const wr=new Set();[MZ.evalStr(s,"lr"),MZ.evalStr(s,"nobr"),v+MZ.pick([1,-1,2,10,-10])].forEach(x=>{if(Number.isInteger(x)&&x>=0&&x!==v)wr.add(x)});
+  while(wr.size<3){const x=v+MZ.pick([2,-2,3,4,-4,5,20]);if(x>=0&&x!==v)wr.add(x)}
+  const lr=MZ.evalStr(s,"lr");out.push({q:`<span class="mz-t">${s} = ?</span>`,a:String(v),o:shuffle([v,...[...wr].slice(0,3)]).map(x=>({v:String(x),label:String(x)})),
+    why:`Der Rechenweg: ${steps(t)}.`,hint:Number.isInteger(lr)&&lr!==v?"Noch nicht. Hast du einfach von links nach rechts gerechnet? Denk an Klammer vor Punkt vor Strich.":"Noch nicht – rechne Schritt für Schritt."})}return out}
+function steps(t){const c=JSON.parse(JSON.stringify(t)),out=[MZ.show(c)];let cur=c;
+  while(typeof cur!=="number"){const r=MZ.ready(cur)[0],v=MZ.val(r);if(cur===r)cur=v;else(function rep(p){for(const s of["l","r"]){if(p[s]===r){p[s]=v;return true}if(typeof p[s]!=="number"&&rep(p[s]))return true}return false})(cur);out.push(typeof cur==="number"?String(cur):MZ.show(cur))}
+  return out.join(" = ")}
+(function(){const box=$("#z4");if(!box)return;mzQuiz(box,mzAus)})();
+// Aufgabe 5: Welcher Term passt zum Rechenbaum?
+function mzBaum(){const out=[],seen=new Set();let tries=0;while(out.length<4&&tries++<200){const t=MZ.term(false),s=MZ.show(t),v=MZ.val(t);if(seen.has(s))continue;
+  // andere Bäume mit denselben Zahlen und Rechenzeichen in derselben Reihenfolge
+  const leaves=[],ops=[];(function w(n){if(typeof n==="number"){leaves.push(n);return}w(n.l);ops.push(n.o);w(n.r)})(t);
+  function all(i,j,oi){if(i===j)return[leaves[i]];const r=[];for(let k=i;k<j;k++)for(const l of all(i,k))for(const rr of all(k+1,j))r.push({o:ops[k],l,r:rr});return r}
+  const cand=all(0,leaves.length-1).filter(x=>MZ.okTerm(x)&&MZ.val(x)!==v).map(x=>MZ.show(x));const wrong=[...new Set(cand)].filter(x=>x!==s&&!x.includes("(("));
+  if(wrong.length<2)continue;seen.add(s);
+  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("class","mz-tree sm");svg.setAttribute("role","img");svg.setAttribute("aria-label","Rechenbaum");MZ.treeSVG(svg,t,null,{dx:50,lh:72});
+  out.push({q:`<span class="mz-qt">${svg.outerHTML}</span>`,a:s,o:shuffle([s,...shuffle(wrong).slice(0,2)]).map(x=>({v:x,label:x})),why:`Im Baum wird zuerst ${MZ.show(MZ.ready(t)[0])} gerechnet. Das Ergebnis ist ${v}.`})}return out}
+(function(){const box=$("#z5");if(!box)return;mzQuiz(box,mzBaum)})();
+// Aufgabe 6: Fehlerdetektiv
+function mzDetektiv(){const F=["Übertrag vergessen","Punkt vor Strich nicht beachtet","Klammer nicht zuerst gerechnet","Stellen nicht untereinander geschrieben","Alles richtig"];
+  const make={
+    uePlus(){const[a,b]=MZ.task("+",3,4,2);let s=0;for(let i=0;i<5;i++)s+=((MZ.dig(a,i)+MZ.dig(b,i))%10)*10**i;return{cc:[a,b,"+",{shown:s}],a:F[0],why:`Richtig ist ${MZ.num(a+b)}. Bei den rot gerechneten Stellen fehlt der Übertrag.`}},
+    ueMinus(){const[a,b]=MZ.task("-",3,4,2);let s=0;for(let i=0;i<5;i++){const ai=MZ.dig(a,i),bi=MZ.dig(b,i);s+=((ai-bi+10)%10)*10**i}return{cc:[a,b,"-",{shown:s}],a:F[0],why:`Richtig ist ${MZ.num(a-b)}. Wer ergänzt und oben eine 1 dazudenkt, muss unten bei der nächsten Stelle den Übertrag 1 dazurechnen.`}},
+    stellen(){const a=MZ.ri(300,899),b=MZ.ri(12,89),s=a+b*10;return{cc:[a,b,"+",{shown:s,shift:1}],a:F[3],why:`Die ${b} ist um eine Stelle verrutscht. Einer gehören unter Einer: Richtig ist ${a} + ${b} = ${a+b}.`}},
+    punkt(){for(;;){const t=MZ.term(true),s=MZ.show(t);if(s.includes("("))continue;const lr=MZ.evalStr(s,"lr"),v=MZ.val(t);if(Number.isInteger(lr)&&lr>=0&&lr!==v)return{t:`${s} = ${lr}`,a:F[1],why:`Mal und geteilt kommen zuerst. Richtig: ${steps(t)}.`}}},
+    klammer(){for(;;){const t=MZ.term(false),s=MZ.show(t);if(!s.includes("("))continue;const nb=MZ.evalStr(s,"nobr"),v=MZ.val(t);if(Number.isInteger(nb)&&nb>=0&&nb!==v)return{t:`${s} = ${nb}`,a:F[2],why:`Die Klammer kommt zuerst. Richtig: ${steps(t)}.`}}},
+    richtig(){if(Math.random()<.5){const[a,b]=MZ.task("-",3,4,2);return{cc:[a,b,"-",{shown:a-b}],a:F[4],why:"Hier stimmt alles. Probe: "+`${MZ.num(a-b)} + ${MZ.num(b)} = ${MZ.num(a)}.`}}const t=MZ.term(false);return{t:`${MZ.show(t)} = ${MZ.val(t)}`,a:F[4],why:`Hier stimmt alles: ${steps(t)}.`}}};
+  const order=shuffle(["uePlus","ueMinus","stellen","punkt","klammer","richtig"]).slice(0,5);
+  return order.map(k=>{const x=make[k]();let q;if(x.cc){const d=document.createElement("div");d.className="mz-cc";MZ.grid(d,x.cc[0],x.cc[1],x.cc[2],x.cc[3]);q=`<span class="mz-qt">${d.innerHTML}</span>`}else q=`<span class="mz-t">${x.t}</span>`;
+    return{q,a:x.a,o:F.map(v=>({v,label:v})),why:x.why}})}
+(function(){const box=$("#z6");if(!box)return;mzQuiz(box,mzDetektiv)})();
+
+/* ================= MATHE: LÄNGEN ================= */
+// Einheitentreppe: ein Beispiel läuft durch alle Stufen
+(function(){const box=$("#mzTrep");if(!box)return;const ol=$("[data-bsp]",box),BSP=[3000,2000000,450,25000,7,1500000,80];let k=0;
+  function show(){const mm=BSP[k%BSP.length],start=["km","m","dm","cm","mm"].find(u=>mm%10**MZ.EXP[u]===0);
+    ol.innerHTML=["km","m","dm","cm","mm"].map(u=>`<li class="${u===start?"on":""}">${MZ.L(mm,u)}</li>`).join("")}
+  $("[data-bsp-next]",box).onclick=()=>{k++;show()};show()})();
+// Geodreieck zum Ausprobieren: 0 in der Mitte, 40 Einheiten = 1 cm
+(function(){const svg=$("#mzGeo"),rg=$("#mzGeoR"),out=$("#mzGeoOut");if(!svg)return;const X0=280,CM=40,Y=46;
+  let ticks="";for(let m=-27;m<=80;m++){const x=X0+m*CM/10,h=m%10===0?20:m%5===0?13:7;ticks+=`<line x1="${x}" y1="${Y}" x2="${x}" y2="${Y+h}"/>`;if(m%10===0&&m)ticks+=`<text x="${x}" y="${Y+40}">${Math.abs(m/10)}</text>`}
+  svg.innerHTML=`<path class="geo" d="M-40 ${Y} H600 L${X0} ${Y+320} Z"/><g class="geo-t">${ticks}<text x="${X0}" y="${Y+40}" class="zero">0</text></g>
+    <line class="geo-s" x1="${X0}" y1="${Y-10}" x2="${X0+43*4}" y2="${Y-10}" data-s/><circle class="geo-h" cx="${X0+43*4}" cy="${Y-10}" r="11" data-h/>
+    <text class="geo-l" x="${X0}" y="${Y-22}">Anfang</text>`;
+  const s=$("[data-s]",svg),h=$("[data-h]",svg);
+  function set(mm){mm=Math.max(5,Math.min(72,Math.round(mm)));rg.value=mm;const x=X0+mm*CM/10;s.setAttribute("x2",x);h.setAttribute("cx",x);
+    out.textContent=`Die Strecke ist ${Math.floor(mm/10)} cm ${mm%10} mm lang${mm%10?`. Das sind ${MZ.L(mm,"cm")} oder ${mm} mm.`:`. Das sind ${mm} mm.`}`.replace(" 0 mm lang"," lang")}
+  rg.oninput=()=>set(+rg.value);
+  let drag=false;const toMM=e=>{const r=svg.getBoundingClientRect(),x=170+(e.clientX-r.left)/r.width*440;return(x-X0)/CM*10};
+  h.addEventListener("pointerdown",e=>{drag=true;h.setPointerCapture(e.pointerId)});
+  h.addEventListener("pointermove",e=>{if(drag)set(toMM(e))});h.addEventListener("pointerup",()=>drag=false);
+  set(43)})();
+// Umrechnungs-Maschine mit Stellenwerttafel
+(function(){const box=$("#mzConv");if(!box)return;const inp=$("[data-num]",box),sel=$("[data-unit]",box),swt=$("[data-swt]",box),out=$("[data-out]",box);
+  const COLS=[["km","H"],["km","Z"],["km","E"],["m","H"],["m","Z"],["m","E"],["dm",""],["cm",""],["mm",""]];
+  function upd(){const mm=MZ.parse(inp.value,sel.value);
+    if(mm==null||Number.isNaN(mm)||mm>999999999){swt.innerHTML="";out.innerHTML=`<li>${mm!=null&&Number.isNaN(mm)?"So genau geht es hier nicht: Kleiner als 1 mm rechnen wir nicht.":"Gib eine Zahl ein, zum Beispiel 3,45 oder 120."}</li>`;return}
+    const s=String(mm).padStart(9,"0"),first=s.search(/[1-9]/),u=sel.value,ue=8-MZ.EXP[u];// Spalte der Einer der gewählten Einheit
+    swt.innerHTML=`<table><thead><tr><th colspan="3">km</th><th colspan="3">m</th><th>dm</th><th>cm</th><th>mm</th></tr><tr>${COLS.map(c=>`<th class="sub">${c[1]}</th>`).join("")}</tr></thead>
+      <tbody><tr>${[...s].map((d,i)=>`<td class="${i===ue?"ue":""}${(i>=first||i>=ue)&&!(first<0&&i<ue)?"":" emp"}">${(i>=Math.min(first<0?9:first,ue))?d:""}${i===ue&&ue<8&&mm%10**(8-ue)?'<i class="comma">,</i>':""}</td>`).join("")}</tr></tbody></table>`;
+    const L=["km","m","dm","cm","mm"].map(x=>`<li>${MZ.L(mm,x)}</li>`).join("");
+    const M=[["km","m"],["m","cm"],["cm","mm"]].map(([b,k])=>mm>=10**MZ.EXP[b]&&mm%10**MZ.EXP[b]?MZ.mixed(mm,b,k):null).filter(Boolean).map(x=>`<li class="mix">${x}</li>`).join("");
+    out.innerHTML=L+M}
+  inp.addEventListener("input",upd);sel.addEventListener("change",upd);upd()})();
+// Aufgabe 1: Schätzen
+function mzSchaetz(){const S=[["Wie lang ist ein Bleistift ungefähr?","17 cm",["17 mm","17 m","17 dm"]],["Wie hoch ist eine Zimmertür ungefähr?","2 m",["2 dm","20 cm","20 m"]],["Wie lang ist eine Ameise ungefähr?","5 mm",["5 cm","5 dm","50 cm"]],
+    ["Wie lang ist ein Fußballfeld ungefähr?","100 m",["100 dm","10 m","1 km"]],["Wie lang ist ein Schulheft (DIN A4) ungefähr?","30 cm",["30 mm","3 m","30 dm"]],["Wie hoch ist der Turm vom Michel ungefähr?","132 m",["132 dm","13 m","1 km"]],
+    ["Wie lang ist ein Linienbus ungefähr?","12 m",["12 dm","120 cm","120 m"]],["Wie breit ist dein kleiner Finger ungefähr?","1 cm",["1 mm","1 dm","10 cm"]],["Wie weit kommst du in 15 Minuten zu Fuß ungefähr?","1 km",["1 m","100 dm","10 km"]],
+    ["Wie dick ist eine Bankkarte ungefähr?","1 mm",["1 cm","1 dm","10 mm"]],["Wie hoch ist eine Giraffe ungefähr?","5 m",["5 dm","50 cm","50 m"]],["Wie lang ist ein Tisch in der Schule ungefähr?","13 dm",["13 cm","13 m","130 mm"]]];
+  return shuffle(S).slice(0,6).map(([q,a,w])=>({q,a,o:shuffle([a,...w]).map(v=>({v,label:v})),why:`Ungefähr ${a} – das ist eine gute Schätzung.`}))}
+(function(){const box=$("#l1");if(!box)return;mzQuiz(box,mzSchaetz)})();
+// Aufgabe 2: Messen (Ausschnitt eines Geodreiecks, 0 bis 9 cm)
+function mzMessBild(s,e){const CM=50,X=18,Y=34;let t="";for(let m=0;m<=72;m++){const x=X+m*CM/10,h=m%10===0?20:m%5===0?13:7;t+=`<line x1="${x}" y1="${Y}" x2="${x}" y2="${Y+h}"/>`;if(m%10===0)t+=`<text x="${x}" y="${Y+40}">${m/10}</text>`}
+  return`<svg class="mz-mess" viewBox="0 0 396 84" role="img" aria-label="Lineal mit einer roten Strecke"><rect class="geo" x="4" y="${Y}" width="388" height="48" rx="4"/><g class="geo-t">${t}</g>
+    <line class="geo-s" x1="${X+s*CM/10}" y1="${Y-12}" x2="${X+e*CM/10}" y2="${Y-12}"/><line class="geo-e" x1="${X+s*CM/10}" y1="${Y-20}" x2="${X+s*CM/10}" y2="${Y-4}"/><line class="geo-e" x1="${X+e*CM/10}" y1="${Y-20}" x2="${X+e*CM/10}" y2="${Y-4}"/></svg>`}
+function mzMess(){const out=[];for(let k=0;k<5;k++){const off=k<2?0:MZ.pick([0,10,10,20,15]),l=MZ.ri(15,70-off),e=off+l;
+    const a=MZ.L(l,"cm"),w=new Set();if(off)w.add(MZ.L(e,"cm"));w.add(`${l} cm`);w.add(MZ.L(l+1,"cm"));w.add(MZ.L(l-1,"cm"));w.add(MZ.L(l+10,"cm"));w.delete(a);
+    out.push({q:`<span class="mz-qt">${mzMessBild(off,e)}</span>`,a,o:shuffle([a,...shuffle([...w]).slice(0,3)]).map(v=>({v,label:v})),
+      why:off?`Die Strecke beginnt bei ${MZ.L(off,"cm")} und endet bei ${MZ.L(e,"cm")}. Also ist sie ${MZ.L(e,"cm")} − ${MZ.L(off,"cm")} = ${a} lang (${l} mm).`:`Sie beginnt bei 0 und endet bei ${a}. Das sind ${l} mm.`,
+      hint:off?"Noch nicht. Schau genau: Die Strecke fängt nicht bei 0 an!":"Noch nicht. Zähle erst die ganzen Zentimeter, dann die Millimeterstriche."})}return out}
+(function(){const box=$("#l2");if(!box)return;mzQuiz(box,mzMess)})();
+// Aufgabe 3: Umrechnen
+function mzLen(u){// zufällige Länge, die in Einheit u gut darstellbar ist
+  const R={km:()=>MZ.ri(1,9)*10**6+MZ.ri(0,999)*1000,m:()=>MZ.ri(1,30)*1000+MZ.pick([0,MZ.ri(1,99)*10,MZ.ri(1,9)*100]),dm:()=>MZ.ri(1,90)*100+MZ.pick([0,MZ.ri(1,9)*10]),cm:()=>MZ.ri(2,900)*10+MZ.pick([0,0,MZ.ri(1,9)]),mm:()=>MZ.ri(5,9000)};return R[u]()}
+function mzUm(){const P=[["m","cm"],["cm","m"],["km","m"],["m","km"],["cm","mm"],["mm","cm"],["dm","cm"],["m","dm"],["m","mm"]];const out=[];
+  for(const[f,t]of shuffle(P).slice(0,6)){let mm;do{mm=mzLen(t==="km"?"km":f)}while(!Number.isInteger(mm/10**MZ.EXP[t]*1000)||MZ.L(mm,t).length>14);
+    const a=MZ.L(mm,t),d=MZ.EXP[f]-MZ.EXP[t],w=new Set();
+    [mm*10,mm/10,mm*100,mm/100].forEach(x=>{if(Number.isInteger(x)&&x>0)w.add(MZ.L(x,t))});w.delete(a);
+    out.push({q:`${MZ.L(mm,f)} = ? ${t}`,a,o:shuffle([a,...shuffle([...w]).slice(0,3)]).map(v=>({v,label:v})),
+      why:`${d>0?`Von ${f} nach ${t} geht es die Treppe hinunter: mal ${10**d}.`:`Von ${f} nach ${t} geht es die Treppe hinauf: geteilt durch ${10**-d}.`} ${MZ.L(mm,f)} = ${a}.`})}return out}
+(function(){const box=$("#l3");if(!box)return;mzQuiz(box,mzUm)})();
+// Aufgabe 4: gleich lang oder länger? (gemischte Schreibweise und Komma)
+function mzVgl(){const out=[];
+  for(let k=0;k<3;k++){const m=MZ.ri(1,9),c=MZ.pick([MZ.ri(1,9),MZ.ri(11,99)]),mm=m*1000+c*10,u=MZ.pick(["m","cm"]);
+    const bad=[mm*10,mm/10];if(c<10)bad.push(m*1000+c*100);else bad.push(m*1000+c);
+    const a=MZ.L(mm,u),w=[...new Set(bad.filter(x=>Number.isInteger(x)&&x!==mm).map(x=>MZ.L(x,u)))].filter(x=>x!==a);
+    out.push({q:`Welche Angabe ist genauso lang wie <b>${m} m ${c} cm</b>?`,a,o:shuffle([a,...w.slice(0,3)]).map(v=>({v,label:v})),
+      why:`${m} m ${c} cm = ${MZ.L(mm,"cm")} = ${MZ.L(mm,"m")}.${c<10?" Die 0 hält den Platz für die Dezimeter frei.":""}`})}
+  for(let k=0;k<3;k++){let A,B,u;do{u=MZ.pick([["m","cm"],["km","m"],["cm","mm"],["m","dm"]]);A=mzLen(u[0]);B=A+MZ.pick([0,-1,1,-1,1])*MZ.pick([1,2,5,10,50])*10**MZ.EXP[u[1]]}
+    while(B<=0||!Number.isInteger(B/10**MZ.EXP[u[1]]*1000)||MZ.L(B,u[1]).length>14);
+    const la=MZ.L(A,u[0]),lb=MZ.L(B,u[1]),same=MZ.L(B,u[0]),ans=A===B?"beide gleich lang":A>B?la:lb;
+    out.push({q:`Was ist länger: <b>${la}</b> oder <b>${lb}</b>?`,a:ans,o:[la,lb,"beide gleich lang"].map(v=>({v,label:v})),
+      why:A===B?`${lb} = ${la}. Beide sind gleich lang.`:`${lb} = ${same}. Also ist ${ans} länger.`})}
+  return shuffle(out)}
+(function(){const box=$("#l4");if(!box)return;mzQuiz(box,mzVgl)})();
+// Aufgabe 5: mit Längen rechnen (alle Werte in mm; naiv = typischer Fehler ohne Umrechnen)
+function mzRech(){const T=[
+  ()=>{const a=MZ.ri(1,4)*1000+MZ.ri(1,9)*100,b=MZ.ri(15,95)*10;return{q:`${MZ.L(a,"m")} + ${MZ.L(b,"cm")}`,mm:a+b,u:"cm",way:`${MZ.L(a,"cm")} + ${MZ.L(b,"cm")}`}},
+  ()=>{const b=MZ.ri(1,9)*100+MZ.ri(1,9)*10;return{q:`1 km − ${b} m`,mm:(1000-b)*1000,u:"m",way:`1000 m − ${b} m`}},
+  ()=>{const a=MZ.ri(31,99),b=MZ.ri(12,68);return{q:`${a} cm − ${b} mm`,mm:a*10-b,u:"mm",way:`${a*10} mm − ${b} mm`,naive:(a-b>0?a-b:null)}},
+  ()=>{const a=MZ.ri(2,6)*1000+MZ.ri(1,9)*10,b=MZ.ri(1,3)*1000+MZ.ri(10,90)*10;return{q:`${MZ.mixed(a,"m","cm")} + ${MZ.mixed(b,"m","cm")}`,mm:a+b,u:"cm",way:`${MZ.L(a,"cm")} + ${MZ.L(b,"cm")}`}},
+  ()=>{const a=MZ.ri(2,9)*1000,b=MZ.ri(11,95)*10;return{q:`${MZ.L(a,"m")} − ${MZ.L(b,"cm")}`,mm:a-b,u:"cm",way:`${MZ.L(a,"cm")} − ${MZ.L(b,"cm")}`}},
+  ()=>{const a=MZ.ri(2,5)*1000+MZ.ri(1,9)*100,n=MZ.ri(2,4);return{q:`${n} · ${MZ.L(a,"m")}`,mm:n*a,u:"cm",way:`${n} · ${MZ.L(a,"cm")}`}}];
+  return shuffle(T).slice(0,5).map(f=>{const x=f(),step=10**MZ.EXP[x.u],a=MZ.L(x.mm,x.u),w=new Set();
+    [x.mm+10*step,x.mm-10*step,x.mm*10,x.mm+100*step,x.naive!=null?x.naive*step:null].forEach(v=>{if(v!=null&&v>0)w.add(MZ.L(v,x.u))});w.delete(a);
+    return{q:`${x.q} = ? ${x.u}`,a,o:shuffle([a,...shuffle([...w]).slice(0,3)]).map(v=>({v,label:v})),why:`Erst umrechnen: ${x.way} = ${a}.`}})}
+(function(){const box=$("#l5");if(!box)return;mzQuiz(box,mzRech)})();
+// Aufgabe 6: Sachaufgabe in vier Schritten
+(function(){const box=$("#l6");if(!box)return;const host=$("[data-sach]",box),sc=$("[data-score]",box);let S,st,fails;
+  const STORIES=[
+    ()=>{const a=MZ.ri(1,3)*1000+MZ.ri(1,9)*100,b=MZ.ri(1,2)*1000+MZ.ri(1,9)*100,sw=MZ.ri(5,15),tot=a+b;
+      return{t:[["Die Klasse 5b wandert an der Alster entlang. "],["Vor der Pause gehen sie "],[MZ.mixed(a*1000,"km","m"),1],[". Unterwegs zählen sie "],[sw+" Schwäne",0],[". Nach der Pause gehen sie noch "],[MZ.mixed(b*1000,"km","m"),1],[". "],["Wie viele Meter wandern sie insgesamt?",2]],
+        calc:[`${a} m + ${b} m`,[`${a} m − ${b} m`,`${a} m + ${b} m + ${sw} m`,`${a} m · ${b} m`]],res:`${MZ.num(tot)} m`,
+        ans:[`Sie wandern insgesamt ${MZ.num(tot)} m.`,[`Sie sehen ${sw} Schwäne.`,`Sie wandern ${MZ.num(a)} m.`,`Insgesamt ${MZ.num(tot)}.`]]}},
+    ()=>{const rope=MZ.ri(3,5),c1=MZ.ri(45,95),c2=MZ.ri(110,160),rest=rope*100-c1-c2,age=MZ.ri(10,12);
+      return{t:[["Tom ist "],[age+" Jahre",0],[" alt. Er hat eine Schnur, die "],[rope+" m",1],[" lang ist. Für seinen Drachen schneidet er "],[c1+" cm",1],[" ab, für ein Armband "],[MZ.mixed(c2*10,"m","cm"),1],[". "],["Wie viele Zentimeter Schnur bleiben übrig?",2]],
+        calc:[`${rope*100} cm − ${c1} cm − ${c2} cm`,[`${rope} m − ${c1} cm − ${c2} cm`,`${rope*100} cm + ${c1} cm + ${c2} cm`,`${rope*100} cm − ${c1} cm`]],res:`${rest} cm`,
+        ans:[`Es bleiben ${rest} cm Schnur übrig.`,[`Der Drachen ist ${c1} cm lang.`,`Es bleiben ${rest} m Schnur übrig.`,`Tom hat ${rope} m Schnur.`]]}},
+    ()=>{const ship=MZ.ri(290,399),bark=MZ.ri(14,24),crew=MZ.ri(18,30),d=ship-bark;
+      return{t:[["Im Hamburger Hafen liegt ein Containerschiff. Es ist "],[ship+" m",1],[" lang. Auf dem Schiff arbeiten "],[crew+" Menschen",0],[". Daneben fährt eine Barkasse. Sie ist "],[bark+" m",1],[" lang. "],["Wie viel länger ist das Containerschiff?",2]],
+        calc:[`${ship} m − ${bark} m`,[`${ship} m + ${bark} m`,`${ship} m − ${crew} m`,`${bark} m − ${ship} m`]],res:`${d} m`,
+        ans:[`Das Containerschiff ist ${d} m länger als die Barkasse.`,[`Das Containerschiff ist ${ship} m lang.`,`Das Containerschiff ist ${d} länger.`,`Auf dem Schiff arbeiten ${crew} Menschen.`]]}},
+    ()=>{const n=MZ.ri(3,6),p=MZ.ri(2,3)*100+MZ.pick([25,50,75]),tot=n*p,uhr=MZ.ri(14,16);
+      return{t:[["Für das Schulfest hängen die Kinder eine Girlande auf. Sie besteht aus "],[n+" Stücken",1],[". Jedes Stück ist "],[MZ.mixed(p*10,"m","cm"),1],[" lang. Das Fest beginnt um "],[uhr+" Uhr",0],[". "],["Wie lang ist die Girlande insgesamt?",2]],
+        calc:[`${n} · ${p} cm`,[`${n} + ${p} cm`,`${p} cm − ${n}`,`${n} · ${Math.floor(p/100)} m`]],res:`${MZ.num(tot)} cm = ${MZ.L(tot*10,"m")}`,
+        ans:[`Die Girlande ist insgesamt ${MZ.L(tot*10,"m")} lang.`,[`Die Girlande hat ${n} Stücke.`,`Die Girlande ist ${MZ.L(p*10,"m")} lang.`,`Das Fest beginnt um ${uhr} Uhr.`]]}}];
+  const STEP=["1. Frage finden","2. Angaben markieren","3. Rechnung wählen","4. Antwortsatz"];
+  let lastS=-1;
+  function load(){let k;do{k=Math.floor(Math.random()*STORIES.length)}while(k===lastS);lastS=k;S=STORIES[k]();st=0;fails=0;sc.textContent="";render()}
+  function text(mark,click){return S.t.map((p,i)=>{if(p.length===1)return p[0];const c=`mz-tok${mark&&mark.has(i)?" on":""}${st>0&&p[1]===2?" q":""}`;
+    return click?`<button type="button" class="${c}" data-i="${i}">${p[0]}</button>`:`<span class="${c}">${p[0]}</span>`}).join("")}
+  function render(msg,cls){const prog=STEP.map((s,i)=>`<li class="${i<st?"ok":i===st?"cur":""}">${s}</li>`).join("");let body="";
+    if(st===0)body=`<p class="hint">Tippe auf die <strong>Frage</strong> in der Aufgabe.</p><p class="mz-story" data-story>${text(null,1)}</p>`;
+    else if(st===1)body=`<p class="hint">Tippe alle Angaben an, die du zum Rechnen <strong>brauchst</strong>. Dann tippe auf „Fertig“.</p><p class="mz-story" data-story>${text(host._mark,1)}</p><div class="row"><button class="btn" type="button" data-ok>Fertig</button></div>`;
+    else if(st===2)body=`<p class="mz-story">${text(host._mark)}</p><p class="hint">Welche Rechnung passt?</p><div class="opts" data-opts>${host._c.map(v=>`<button type="button" class="opt">${v}</button>`).join("")}</div>`;
+    else if(st===3)body=`<p class="mz-story">${text(host._mark)}</p><p class="mz-say ok">Rechnung: ${S.calc[0]} = ${S.res}</p><p class="hint">Welcher Antwortsatz passt zur Frage?</p><div class="opts" data-opts>${host._a.map(v=>`<button type="button" class="opt">${v}</button>`).join("")}</div>`;
+    else body=`<p class="mz-story">${text(host._mark)}</p><p class="mz-say ok">${S.ans[0]}</p><div class="row"><button class="btn ghost" type="button" data-next>Neue Sachaufgabe</button></div>`;
+    host.innerHTML=`<ol class="mz-prog">${prog}</ol>${body}<p class="fb ${cls||""}" aria-live="polite">${msg||""}</p>`;
+    const story=$("[data-story]",host);
+    if(story)story.onclick=e=>{const b=e.target.closest("[data-i]");if(!b)return;const i=+b.dataset.i,p=S.t[i];
+      if(st===0){if(p[1]===2){st=1;host._mark=new Set();guckiCheer();render("Richtig, das ist die Frage.","ok")}else{fails++;guckiCry();render("Das ist keine Frage. Die Frage endet mit einem Fragezeichen.","no")}}
+      else if(st===1&&p[1]!==2){host._mark.has(i)?host._mark.delete(i):host._mark.add(i);b.classList.toggle("on")}};
+    const ok=$("[data-ok]",host);if(ok)ok.onclick=()=>{const need=S.t.map((p,i)=>p[1]===1?i:-1).filter(i=>i>=0),m=host._mark;
+      const miss=need.filter(i=>!m.has(i)),extra=[...m].filter(i=>S.t[i][1]!==1);
+      if(!miss.length&&!extra.length){st=2;host._c=shuffle([S.calc[0],...S.calc[1]]);guckiCheer();render("Genau, diese Angaben brauchst du.","ok")}
+      else{fails++;guckiCry();render(extra.length?`„${S.t[extra[0]][0]}“ brauchst du zum Rechnen nicht.`:`Dir fehlt noch eine Angabe.`,"no")}};
+    const op=$("[data-opts]",host);if(op)op.onclick=e=>{const b=e.target.closest(".opt");if(!b)return;const v=b.textContent;
+      if(st===2){if(v===S.calc[0]){st=3;host._a=shuffle([S.ans[0],...S.ans[1]]);guckiCheer();render("Richtig gerechnet!","ok")}else{fails++;b.classList.add("wrong");b.disabled=true;guckiCry();$(".fb",host).className="fb no";$(".fb",host).textContent="Diese Rechnung passt nicht. Achte auf die Einheiten und darauf, was gefragt ist."}}
+      else if(st===3){if(v===S.ans[0]){st=4;sc.textContent=fails?"geschafft":"fehlerfrei";render("Super, die Sachaufgabe ist gelöst!","ok");guckiDone(!fails,box)}else{fails++;b.classList.add("wrong");b.disabled=true;guckiCry();$(".fb",host).className="fb no";$(".fb",host).textContent="Der Satz passt nicht zur Frage oder die Einheit fehlt."}}};
+    const nx=$("[data-next]",host);if(nx)nx.onclick=load}
+  box._reset=load;load()})();
+// Aufgabe 7: Fehlerdetektiv Längen
+function mzLDet(){const F=["Die 0 vergessen","Nicht in dieselbe Einheit umgerechnet","Falsche Umrechnungszahl","Einheit vergessen","Alles richtig"];
+  const M={
+    null_(){const m=MZ.ri(2,9),c=MZ.ri(1,9);return{t:`${m} m ${c} cm = ${m},${c} m`,a:F[0],why:`Richtig ist ${m},0${c} m. Die 0 hält den Platz für die Dezimeter frei.`}},
+    einheit(){const a=MZ.ri(2,6),c=MZ.ri(11,95),wr=a+c;return{t:`${a} m + ${c} cm = ${wr} cm`,a:F[1],why:`Erst umrechnen: ${a*100} cm + ${c} cm = ${a*100+c} cm.`}},
+    faktor(){const k=MZ.pick([["cm","m",100,10],["m","km",1000,100],["mm","cm",10,100]]),de=x=>String(x).replace(".",",");const v=MZ.ri(2,9)*k[2];return{t:`${MZ.num(v)} ${k[0]} = ${de(v/k[3])} ${k[1]}`,a:F[2],why:`1 ${k[1]} = ${k[2]} ${k[0]}. Richtig ist ${MZ.num(v)} ${k[0]} = ${MZ.num(v/k[2])} ${k[1]}.`}},
+    ohne(){const a=MZ.ri(120,480),b=MZ.ri(30,90);return{t:`${a} m + ${b} m = ${a+b}`,a:F[3],why:`Die Rechnung stimmt, aber zu einer Länge gehört immer die Einheit: ${a+b} m.`}},
+    ok(){const m=MZ.ri(2,9),c=MZ.ri(10,99);return MZ.pick([{t:`${m} m ${c} cm = ${m*100+c} cm`,a:F[4],why:`Stimmt: ${m} m = ${m*100} cm, dazu ${c} cm.`},{t:`${m},${c} m = ${m*100+c} cm`,a:F[4],why:`Stimmt: ${m},${c} m = ${m*100+c} cm.`}])}};
+  return shuffle(["null_","einheit","faktor","ohne","ok"]).map(k=>{const x=M[k]();return{q:`<span class="mz-t">${x.t}</span>`,a:x.a,o:F.map(v=>({v,label:v})),why:x.why}})}
+(function(){const box=$("#l7");if(!box)return;mzQuiz(box,mzLDet)})();
+
 /* ================= SPIEL: FANG DIE FARBEN ================= */
 (function(){
   const cv=$("#ffCv");if(!cv)return;
@@ -4208,6 +4908,11 @@ quiz($("#ka6"),shuffle([
     Englisch:[()=>{const V=vocabAll().filter(w=>!w.p),w=pick(V),de=x=>x.de.split(/,\s*/)[0],en=x=>x.en.replace(/\s*\(=[^)]*\)/,"");
                  if(Math.random()<.5){const a=de(w);return{q:`Was heißt „${en(w)}“ auf Deutsch?`,r:`${en(w)} = ${w.de}`,a,o:opts(a,[...new Set(V.filter(x=>x!==w&&!x.de.includes(a)).map(de))]),k:"ve"+w.k}}
                  const a=en(w);return{q:`Was heißt „${de(w)}“ auf Englisch?`,r:`${de(w)} = ${w.en}`,a,o:opts(a,[...new Set(V.filter(x=>x!==w&&!x.de.split(/,\s*/).includes(de(w))).map(en))]),k:"vd"+w.k}}],
+    Mathe:[()=>{const t=MZ.term(false),v=MZ.val(t),w=new Set();[MZ.evalStr(MZ.show(t),"lr"),MZ.evalStr(MZ.show(t),"nobr"),v+1,v-1,v+10,v-10,v+2].forEach(x=>{if(Number.isInteger(x)&&x>=0&&x!==v)w.add(String(x))});
+             return{q:`${MZ.show(t)} = ?`,a:String(v),o:opts(String(v),[...w]),k:"mt"+MZ.show(t)}},
+           ()=>{const P=[["m","cm"],["km","m"],["cm","mm"],["m","dm"],["cm","m"],["mm","cm"]],[f,t]=pick(P);let mm;do{mm=mzLen(f)}while(!Number.isInteger(mm/10**MZ.EXP[t]*1000)||MZ.L(mm,t).length>12);
+             const a=MZ.L(mm,t),w=[mm*10,mm/10,mm*100,mm/100].filter(x=>Number.isInteger(x)&&x>0).map(x=>MZ.L(x,t));return{q:`${MZ.L(mm,f)} = ? ${t}`,a,o:opts(a,w),k:"ml"+mm+t}},
+           ()=>{const a=MZ.ri(120,899),b=MZ.ri(15,99),op=pick(["+","−"]),v=op==="+"?a+b:a-b;return{q:`${a} ${op} ${b} = ?`,a:String(v),o:opts(String(v),[v+10,v-10,v+1,v-1,v+100].filter(x=>x>0).map(String)),k:"ms"+a+op+b}}],
     Musik:[()=>{const[q,a,w]=pick(NOTE);return{q,a,o:opts(a,w),k:"mu"+q}}],
     Lernen:[()=>{const t=pick([["Was hilft beim Lernen am meisten?","sich selbst abfragen",["nur durchlesen","Musik laut hören","alles am Abend vorher"]],["Was machst du in der Arbeit zuerst?","alle Aufgaben durchlesen",["sofort losschreiben","die schwerste Aufgabe","aus dem Fenster schauen"]],["Was hilft bei Aufregung?","langsam ausatmen",["schnell atmen","Luft anhalten","weglaufen"]],["Wann gehst du vor einer Arbeit ins Bett?","früh",["sehr spät","gar nicht","egal"]]]);return{q:t[0],a:t[1],o:opts(t[1],t[2]),k:"le"+t[0]}}]};
   const FACH=Object.keys(G);let sel=new Set(FACH),st=null,timer=0,best=0;

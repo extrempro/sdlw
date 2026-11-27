@@ -4,6 +4,17 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.13.0] – 2026-11-27
+
+### Neu
+
+- **Neues Fach Mathe (Klasse 5)** mit eigener Farbe (Token `--mathe`) und zwei Kapiteln, passend zur Klassenarbeit „Natürliche Zahlen und Längen“.
+- **Kapitel „Rechnen mit natürlichen Zahlen“** (`#zahlen`): schriftliches Addieren und Subtrahieren (Ergänzungsverfahren mit Übertrag) mit Beispielen, die Probe mit der Umkehraufgabe, Klammer vor Punkt vor Strich, der Rechenbaum. Zum Ausprobieren: ein Schreib-Trainer (Eingabe Stelle für Stelle, Tipp-Knopf erklärt die nächste Stelle) und ein Rechenbaum, der wächst, wenn man die richtige Rechnung antippt (bei falscher Wahl steht die Regel dabei). Übungen z1–z6: schriftlich rechnen, Probe, Was rechnest du zuerst?, Rechne aus, Rechenbaum und Term, Fehlerdetektiv (Übertrag vergessen, Punkt vor Strich, Klammer, verrutschte Stellen, alles richtig).
+- **Kapitel „Längen“** (`#laengen`): Maßzahl und Einheit, Einheitentreppe km–m–dm–cm–mm, Merkgrößen (u. a. Michel 132 m, Elbphilharmonie 110 m), Messen am Geodreieck (0 in der Mitte; Strecke zum Ziehen), Umrechnungs-Maschine mit Stellenwerttafel, Komma- und gemischte Schreibweise, Rechnen mit Längen, Sachaufgaben in vier Schritten. Übungen l1–l7: Schätzen, Messen (auch Strecken, die nicht bei 0 beginnen), Umrechnen, Vergleichen, Rechnen mit Längen, Sachaufgabe in vier Schritten (Frage finden, Angaben markieren, Rechnung wählen, Antwortsatz), Fehlerdetektiv.
+- Alle Mathe-Aufgaben werden mit Zufallszahlen erzeugt; „Neu beginnen“ bringt neue Aufgaben.
+- **Gucki-Blitzrunde:** neues Fach Mathe (Terme, Umrechnen, Plus/Minus).
+- **Quellen:** Höhen von Michel und Elbphilharmonie (hamburg.de).
+
 ## [1.12.0] – 2026-11-16
 
 ### Neu

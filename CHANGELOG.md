@@ -4,6 +4,17 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.14.0] – 2026-11-27
+
+### Neu
+
+- **Vier Mathe-Spiele** (im Spiele-Verzeichnis `#gameReg`, mit Vollbild und Rekord auf dem Gerät):
+  - **Gucki im Hafen** (`#hafen`): Ein Laderaum mit fester Länge muss genau gefüllt werden. Sechs Kisten mit Längen in verschiedenen Schreibweisen (Stufe 1 nur cm, Stufe 2 mit m und gemischt, Stufe 3 auch dm und mm); Antippen lädt/entlädt, das Schiff zeigt die Kisten maßstäblich, zu viel wird rot. Bei falscher Ladung steht da, wie viel fehlt oder zu viel ist. 8 Schiffe, 10 Punkte beim ersten Versuch, sonst 5. Rekord `hafenBest`.
+  - **Zahlenmauer** (`#mauer`): Mauer mit 4 Reihen, 4 vorgegebene Steine (eindeutig lösbar, auch mit Minus-Rechnen), drei Stufen bis zu vierstelligen Zahlen, Tipp-Knopf markiert einen lösbaren Stein. 5 Mauern pro Runde. Rekord je Stufe `mauerBest`.
+  - **Zielzahl-Jagd** (`#zielzahl`): Vier Zahlen (1–10) und eine Zielzahl (10–150); mit +, −, ·, : und Klammern eine Rechnung bauen, die alle vier Zahlen genau einmal nutzt. Live-Ergebnis und Rechenbaum, „Lösung zeigen“ (dann ohne Punkte). Jede richtige Lösung zählt. Rekord `zielBest`.
+  - **Längen-Memory** (`#lmemory`): 6 Paare gleicher Längen in verschiedenen Schreibweisen; „Knifflig“ mit Zwillingen wie 3 m 5 cm / 3 m 50 cm. Rekord `lmemBest`.
+- Alle Generatoren automatisch geprüft (jeweils mehrere hundert Durchläufe: lösbar, Paare gleich lang, Lösungen ergeben die Zielzahl).
+
 ## [1.13.2] – 2026-11-27
 
 ### Verbessert

@@ -506,6 +506,34 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mz-bsp li.on{border:2px solid var(--mathe);background:var(--sheet)}
 .mz-merk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .mz-merk .card{gap:2px;padding:12px}
+.mz-merk .card{align-items:flex-start}
+.mz-ic{width:64px;height:64px;flex:none;margin-bottom:4px}
+.mz-ic *{stroke-linecap:round;stroke-linejoin:round}
+.mz-ic .pl{fill:var(--plate);stroke:var(--ink);stroke-width:2}
+.mz-ic .ln{fill:none;stroke:var(--ink);stroke-width:1.6}
+.mz-ic .ln2{fill:none;stroke:var(--sheet);stroke-width:1.2;opacity:.6}
+.mz-ic .ink{fill:var(--ink)}
+.mz-ic .ink2{fill:none;stroke:var(--ink);stroke-width:2.6}
+.mz-ic .ac{fill:var(--sun)}
+.mz-ic .nail{fill:var(--sheet);stroke:var(--ink);stroke-width:1.4}
+.mz-ic .grass{fill:var(--na)}
+.mz-ic .wl{fill:none;stroke:#FFFFFF;stroke-width:1.6}
+.mz-ic .dot{fill:none;stroke:var(--muted);stroke-width:2.4;stroke-dasharray:1 5}
+.mz-ic .glass{fill:var(--sea);stroke:var(--ink);stroke-width:1.8}
+.mz-ic .brick{fill:var(--af);stroke:var(--ink);stroke-width:1.8}
+.mz-ic .roof{fill:var(--sa);stroke:var(--ink);stroke-width:1.6}
+.mz-ic .ms{fill:none;stroke:var(--mathe);stroke-width:3}
+.mz-ic .hl{fill:color-mix(in srgb,var(--mathe) 40%,transparent)}
+.mz-ic .hlb{fill:none;stroke:var(--mathe);stroke-width:2.4}
+.mz-ic .grid{fill:none;stroke:var(--earth);stroke-width:1;opacity:.6}
+.mz-ic .board{fill:var(--sa)}
+.mz-ic .desk{fill:var(--sun);stroke:var(--ink);stroke-width:1}
+.mz-ic .track{fill:var(--af)}
+.mz-ic .fin{fill:none;stroke:#FFFFFF;stroke-width:2.4;stroke-dasharray:3 3}
+.mz-ic .whl{fill:none;stroke:var(--ink);stroke-width:3}
+.mz-ic .spd{fill:none;stroke:var(--mathe);stroke-width:2.4}
+.mz-hh{grid-template-columns:repeat(2,minmax(0,1fr))!important;max-width:50%}
+@media (max-width:720px){.mz-hh{max-width:none}}
 .mz-merk b{font:800 1.3rem var(--display)}
 .mz-merk span{font-size:.92rem}
 .mz-geo,.mz-mess{width:100%;height:auto;display:block}
@@ -1167,6 +1195,16 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.13.2",
+   "date": "2026-11-27",
+   "title": "Merkgrößen aus der Schule",
+   "items": [
+    "Neue Merkgrößen aus deinem Schulalltag – jede mit Bild: 1 mm ist ein kleiner Abstand auf dem Lineal, 1 cm sind 2 Kästchen im Matheheft, 1 dm ist so lang wie dein Lineal von 0 bis 10, 1 m ist ein ganz großer Schritt, 10 m ist ungefähr ein Klassenzimmer, 100 m ist der 100‑m‑Lauf und 1 km fährst du mit dem Fahrrad in ungefähr 4 Minuten.",
+    "Michel und Elbphilharmonie stehen jetzt bei „Große Längen in Hamburg“.",
+    "Eine orange Klammer zeigt dir, welche Länge gemeint ist."
+   ]
+  },
   {
    "version": "1.13.1",
    "date": "2026-11-27",
@@ -2223,14 +2261,18 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <h2>Schätzen mit Merkgrößen</h2>
   <p class="prose">Wenn du dir ein paar Längen gut merkst, kannst du andere Längen damit vergleichen und schätzen.</p>
   <div class="mz-merk">
-    <div class="card"><b>1 mm</b><span>ungefähr so dick wie eine Bankkarte</span></div>
-    <div class="card"><b>1 cm</b><span>ungefähr so breit wie dein kleiner Finger</span></div>
-    <div class="card"><b>1 dm</b><span>ungefähr so breit wie die Hand eines Erwachsenen</span></div>
-    <div class="card"><b>1 m</b><span>ungefähr so hoch wie eine Türklinke</span></div>
-    <div class="card"><b>100 m</b><span>ungefähr so lang wie ein Fußballfeld</span></div>
-    <div class="card"><b>1 km</b><span>ungefähr 12 bis 15 Minuten zu Fuß</span></div>
-    <div class="card"><b>110 m</b><span>so hoch ist die Elbphilharmonie</span></div>
-    <div class="card"><b>132 m</b><span>so hoch ist der Turm vom Michel</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="pl" x="2" y="30" width="60" height="24" rx="2"/><path class="ln" d="M2 30v14"/><path class="ln" d="M12 30v8"/><path class="ln" d="M22 30v8"/><path class="ln" d="M32 30v8"/><path class="ln" d="M42 30v8"/><path class="ln" d="M52 30v14"/><path class="ln" d="M62 30v8"/><rect class="hl" x="22" y="30" width="10" height="8"/><path class="ms" d="M22 17V22H32V17"/></svg><b>1 mm</b><span>der Abstand zwischen zwei kleinen Strichen auf deinem Lineal</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="grid" d="M4 14V54"/><path class="grid" d="M14 14V54"/><path class="grid" d="M24 14V54"/><path class="grid" d="M34 14V54"/><path class="grid" d="M44 14V54"/><path class="grid" d="M54 14V54"/><path class="grid" d="M4 14H60"/><path class="grid" d="M4 24H60"/><path class="grid" d="M4 34H60"/><path class="grid" d="M4 44H60"/><path class="grid" d="M4 54H60"/><rect class="hl" x="24" y="24" width="20" height="10"/><rect class="hlb" x="24" y="24" width="20" height="10"/><path class="ms" d="M24 11V16H44V11"/></svg><b>1 cm</b><span>2 Kästchen in deinem Matheheft</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="pl" x="2" y="30" width="60" height="22" rx="2"/><path class="ln" d="M7 30v14"/><path class="ln" d="M12 30v8"/><path class="ln" d="M17 30v8"/><path class="ln" d="M22 30v8"/><path class="ln" d="M27 30v8"/><path class="ln" d="M32 30v14"/><path class="ln" d="M37 30v8"/><path class="ln" d="M42 30v8"/><path class="ln" d="M47 30v8"/><path class="ln" d="M52 30v8"/><path class="ln" d="M57 30v14"/><path class="ms" d="M7 23V18H57V23"/></svg><b>1 dm</b><span>so lang wie dein Lineal von 0 bis 10</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><circle class="ink" cx="32" cy="10" r="5"/><path class="ink2" d="M32 16v18M32 22l-9 8M32 22l9 6M32 34L14 52M32 34l18 18"/><path class="ln" d="M4 54h56"/><path class="ms" d="M14 65V60H50V65"/></svg><b>1 m</b><span>ungefähr ein ganz großer Schritt</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="pl" x="12" y="8" width="50" height="48" rx="2"/><rect class="board" x="20" y="10" width="34" height="5"/><rect class="desk" x="17" y="22" width="10" height="6" rx="1"/><rect class="desk" x="32" y="22" width="10" height="6" rx="1"/><rect class="desk" x="47" y="22" width="10" height="6" rx="1"/><rect class="desk" x="17" y="32" width="10" height="6" rx="1"/><rect class="desk" x="32" y="32" width="10" height="6" rx="1"/><rect class="desk" x="47" y="32" width="10" height="6" rx="1"/><rect class="desk" x="17" y="42" width="10" height="6" rx="1"/><rect class="desk" x="32" y="42" width="10" height="6" rx="1"/><rect class="desk" x="47" y="42" width="10" height="6" rx="1"/><path class="ms" d="M10 8H5V56H10"/></svg><b>10 m</b><span>ungefähr so lang wie ein Klassenzimmer</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="track" x="2" y="16" width="60" height="34" rx="2"/><path class="wl" d="M2 24.5h60M2 33h60M2 41.5h60"/><path class="fin" d="M56 16v34"/><path class="wl" d="M8 16v34"/><path class="ms" d="M8 5V10H56V5"/></svg><b>100 m</b><span>die Strecke beim 100‑m‑Lauf im Sport</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="spd" d="M2 30h8M4 36h8M2 42h6"/><circle class="whl" cx="18" cy="44" r="10"/><circle class="whl" cx="48" cy="44" r="10"/><path class="ink2" d="M18 44L28 28H44L48 44M28 28L33 44H18M33 44L44 28M25 23h7M44 28l-3-7h6"/></svg><b>1 km</b><span>ungefähr 4 Minuten mit dem Fahrrad</span></div>
+  </div>
+  <h3 class="mz-h3">Große Längen in Hamburg</h3>
+  <div class="mz-merk mz-hh">
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="glass" d="M8 16c6-6 10-2 14-8 4 4 8 6 12 0 4 6 10 2 14 6 4-2 6 0 8 2v20H8z"/><path class="ln" d="M8 24h48M8 30h48"/><rect class="brick" x="8" y="36" width="48" height="24"/><path class="ln2" d="M8 42h48M8 48h48M8 54h48"/><path class="ln" d="M2 60h60"/><path class="ms" d="M55 8H60V60H55"/></svg><b>110 m</b><span>so hoch ist die Elbphilharmonie</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="pl" d="M22 60V34h20v26M25 34v-8h14v8M27 26v-6h10v6"/><path class="roof" d="M28 20c0-4 2-6 4-8 2 2 4 4 4 8zM31 12h2v-4h-2z"/><path class="ink2" d="M32 8V2"/><circle class="ink" cx="32" cy="28" r="2.4"/><path class="ln" d="M28 42h8v8h-8zM4 60h56"/><path class="ms" d="M47 2H52V60H47"/></svg><b>132 m</b><span>so hoch ist der Turm vom Michel</span></div>
   </div>
 </section>
 <section>
@@ -4578,7 +4620,7 @@ function mzDetektiv(){const F=["Übertrag vergessen","Punkt vor Strich nicht bea
 function mzSchaetz(){const S=[["Wie lang ist ein Bleistift ungefähr?","17 cm",["17 mm","17 m","17 dm"]],["Wie hoch ist eine Zimmertür ungefähr?","2 m",["2 dm","20 cm","20 m"]],["Wie lang ist eine Ameise ungefähr?","5 mm",["5 cm","5 dm","50 cm"]],
     ["Wie lang ist ein Fußballfeld ungefähr?","100 m",["100 dm","10 m","1 km"]],["Wie lang ist ein Schulheft (DIN A4) ungefähr?","30 cm",["30 mm","3 m","30 dm"]],["Wie hoch ist der Turm vom Michel ungefähr?","132 m",["132 dm","13 m","1 km"]],
     ["Wie lang ist ein Linienbus ungefähr?","12 m",["12 dm","120 cm","120 m"]],["Wie breit ist dein kleiner Finger ungefähr?","1 cm",["1 mm","1 dm","10 cm"]],["Wie weit kommst du in 15 Minuten zu Fuß ungefähr?","1 km",["1 m","100 dm","10 km"]],
-    ["Wie dick ist eine Bankkarte ungefähr?","1 mm",["1 cm","1 dm","10 mm"]],["Wie hoch ist eine Giraffe ungefähr?","5 m",["5 dm","50 cm","50 m"]],["Wie lang ist ein Tisch in der Schule ungefähr?","13 dm",["13 cm","13 m","130 mm"]]];
+    ["Wie breit ist ein Kästchen in deinem Matheheft?","5 mm",["5 cm","5 dm","50 mm"]],["Wie hoch ist eine Giraffe ungefähr?","5 m",["5 dm","50 cm","50 m"]],["Wie lang ist ein Tisch in der Schule ungefähr?","13 dm",["13 cm","13 m","130 mm"]]];
   return shuffle(S).slice(0,6).map(([q,a,w])=>({q,a,o:shuffle([a,...w]).map(v=>({v,label:v})),why:`Ungefähr ${a} – das ist eine gute Schätzung.`}))}
 (function(){const box=$("#l1");if(!box)return;mzQuiz(box,mzSchaetz)})();
 // Aufgabe 2: Messen (Ausschnitt eines Geodreiecks, 0 bis 9 cm)

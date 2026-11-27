@@ -4,6 +4,12 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.13.2] – 2026-11-27
+
+### Verbessert
+
+- **Längen, „Schätzen mit Merkgrößen“:** neue Beispiele aus dem Schulalltag, die die Kinder selbst nachprüfen können (Wunsch der Lehrkraft): 1 mm = Strich-Abstand auf dem Lineal, 1 cm = 2 Kästchen im Matheheft, 1 dm = Lineal von 0 bis 10, 1 m ≈ ganz großer Schritt, 10 m ≈ Klassenzimmer, 100 m = 100‑m‑Lauf, 1 km ≈ 4 Minuten mit dem Fahrrad. Jede Karte mit eigener Zeichnung und einer Messklammer in der Mathe-Farbe. Michel und Elbphilharmonie stehen in einer eigenen Reihe „Große Längen in Hamburg“. In der Schätz-Übung ersetzt „Kästchen im Matheheft (5 mm)“ die Bankkarte.
+
 ## [1.13.1] – 2026-11-27
 
 ### Verbessert

@@ -1047,7 +1047,7 @@ svg.meter{width:100%;max-width:520px;height:auto;display:block}
 .gucki.kicher .pupille,.gucki.kicher .lid,.gucki.kicher .brille{display:none}
 @keyframes kichern{0%{transform:translateY(0)}12%{transform:translateY(-34px)}20%{transform:translateY(-34px) rotate(-5deg)}28%{transform:translateY(-36px) rotate(5deg)}36%{transform:translateY(-34px) rotate(-5deg)}44%{transform:translateY(-36px) rotate(5deg)}52%{transform:translateY(-34px) rotate(-4deg)}60%{transform:translateY(-35px) rotate(3deg)}85%{transform:translateY(-34px) rotate(0)}100%{transform:translateY(0)}}
 @keyframes zunge{from{transform:scaleY(.6) rotate(-6deg)}to{transform:scaleY(1.15) rotate(6deg)}}
-/* ===== Gucki-Tricks (fünfmal schnell antippen): zufällig eine von 21 Animationen (Nr. 16–20 bewegen die ganze Seite) ===== */
+/* ===== Gucki-Tricks (fünfmal schnell antippen): 100 Gucki-Tricks, 20 Seiten-Tricks, 5 seltene besondere (Baukasten weiter unten) ===== */
 .gucki[class*="fx-"]{overflow:visible}
 .gucki .gfx{position:absolute;pointer-events:none;z-index:4;font-family:var(--display);font-weight:800;line-height:1}
 /* 1 Schwindel: Kopf wackelt, Pupillen kreisen */
@@ -1184,6 +1184,141 @@ body.pfx-kopf .wrap>*,body.pfx-kopf #toTop{transform-origin:var(--ox,50%) var(--
 .gucki.fx-licht .pupille{animation:fxSchauen 3.9s ease-in-out!important}
 @keyframes fxSchauen{0%,100%{transform:none}15%,30%{transform:translate(-5px,-2px)}40%,55%{transform:translate(4px,-3px)}65%,80%{transform:translate(-2px,3px)}}
 @media (prefers-reduced-motion:reduce){body[class*="pfx-"] .wrap>*,body[class*="pfx-"] #toTop,.pfx-fall{animation:none!important}.pfx-regen{display:none}}
+/* ===== Gucki-Baukasten: Kopf (gh-), Augen (ge-), Mund (gm-), Hände (gd-), Hut und Teilchen (gfx-p) ===== */
+.gucki.fx-gen .kopf{transform-origin:50% 60px}
+.gucki.gh-hop .kopf{animation:fxHoch 2.8s ease-in-out}
+.gucki.gh-wobble .kopf{animation:fxWobble 2.6s ease-in-out}
+.gucki.gh-disco .kopf{animation:fxDisco .5s ease-in-out 5}
+.gucki.gh-nod .kopf{animation:fxNicken .55s ease-in-out 5}
+.gucki.gh-sway .kopf{animation:fxSchaukel 2.8s ease-in-out}
+.gucki.gh-peek .kopf,.gucki.gh-peek .hand{animation:fxKuckuck 2.8s ease-in-out}
+.gucki.gh-spin .kopf{animation:ghSpin 2.6s ease-in-out}
+.gucki.gh-squash .kopf{animation:ghSquash .65s ease-in-out 4}
+.gucki.gh-tilt .kopf{animation:ghTilt 2.8s ease-in-out}
+.gucki.gh-grow .kopf{animation:ghGrow 2.8s ease-in-out}
+.gucki.gh-tiny .kopf{animation:ghTiny 2.8s ease-in-out}
+.gucki.gh-float .kopf{animation:ghFloat 2.9s ease-in-out}
+.gucki.gh-jump .kopf{animation:ghJump .9s ease-in-out 3}
+.gucki.gh-shiver .kopf{animation:ghShiver .1s linear 26}
+.gucki.gh-lean .kopf{animation:ghLean 2.8s ease-in-out}
+.gucki.gh-bounce .kopf{animation:ghBounce .45s ease-in-out 6}
+.gucki.gh-shake .kopf{animation:ghShake .5s ease-in-out 5}
+.gucki.gh-robot .kopf{animation:ghRobot 2.6s linear}
+.gucki.gh-fade .kopf{animation:ghFade 2.9s ease-in-out}
+.gucki.gh-hue .kopf{animation:fxHoch 2.8s ease-in-out,fxHue 2.8s linear}
+.gucki.gh-giant .kopf{animation:ghGiant 2.9s ease-in-out}
+.gucki.gh-slow .kopf{animation:ghFloat 3.6s ease-in-out}
+.gucki.gh-dash .kopf{animation:ghDash 2.4s ease-in-out}
+@keyframes ghSpin{0%{transform:none}20%{transform:translateY(-30px)}70%{transform:translateY(-30px) rotate(360deg)}100%{transform:rotate(360deg)}}
+@keyframes ghSquash{0%,100%{transform:translateY(-6px)}40%{transform:translateY(-22px) scale(.92,1.1)}70%{transform:translateY(0) scale(1.12,.88)}}
+@keyframes ghTilt{0%,100%{transform:none}20%,45%{transform:translateY(-18px) rotate(-16deg)}55%,80%{transform:translateY(-18px) rotate(16deg)}}
+@keyframes ghGrow{0%,100%{transform:none}25%,75%{transform:translateY(-24px) scale(1.25)}}
+@keyframes ghTiny{0%,100%{transform:none}25%,75%{transform:translateY(-14px) scale(.6)}}
+@keyframes ghFloat{0%,100%{transform:none}25%{transform:translateY(-34px) rotate(-3deg)}50%{transform:translateY(-22px) rotate(3deg)}75%{transform:translateY(-36px) rotate(-2deg)}}
+@keyframes ghJump{0%,100%{transform:none}45%{transform:translateY(-58px)}}
+@keyframes ghShiver{0%,100%{transform:translate(-2px,-12px)}50%{transform:translate(2px,-12px)}}
+@keyframes ghLean{0%,100%{transform:none}25%,75%{transform:translate(-6px,-20px) rotate(-14deg)}}
+@keyframes ghBounce{0%,100%{transform:translateY(-4px)}50%{transform:translateY(-20px)}}
+@keyframes ghShake{0%,100%{transform:translateY(-14px) rotate(0)}25%{transform:translateY(-14px) rotate(-12deg)}75%{transform:translateY(-14px) rotate(12deg)}}
+@keyframes ghRobot{0%,100%{transform:none}12%{transform:translateY(-12px)}24%{transform:translateY(-12px) rotate(-10deg)}36%{transform:translateY(-24px) rotate(-10deg)}48%{transform:translateY(-24px) rotate(10deg)}60%{transform:translateY(-12px) rotate(10deg)}72%{transform:translateY(-12px)}84%{transform:translateY(-4px)}}
+@keyframes ghFade{0%,100%{transform:none;opacity:1}20%{transform:translateY(-20px);opacity:1}40%,65%{transform:translateY(-20px);opacity:.12}85%{transform:translateY(-20px);opacity:1}}
+@keyframes ghGiant{0%,100%{transform:none}30%,75%{transform:translateY(-40px) scale(1.55)}}
+@keyframes ghDash{0%,100%{transform:none}30%{transform:translate(-40px,-14px) rotate(-12deg)}60%{transform:translate(18px,-14px) rotate(8deg)}}
+.gucki.ge-wide .auge{animation:fxGross 2.6s ease-out}
+.gucki.ge-roll .pupille{animation:fxOrbit .5s linear 5!important}
+.gucki.ge-up .pupille{animation:fxObenSchauen 2.9s ease-in-out!important}
+.gucki.ge-side .pupille{animation:fxSchauen 2.8s ease-in-out!important}
+.gucki.ge-shut .lid{animation:ghShut 2.8s ease-in-out}
+.gucki.ge-blink .lid{animation:ghBlink .5s ease-in-out 5}
+.gucki.ge-half .lid{animation:fxHerzLid 2.8s ease-in-out}
+.gucki.ge-cross .auge.l .pupille{animation:ghCrossL 2.6s ease-in-out!important}
+.gucki.ge-cross .auge.r .pupille{animation:ghCrossR 2.6s ease-in-out!important}
+@keyframes ghShut{0%,100%{transform:translateY(-100%)}15%,85%{transform:translateY(0)}}
+@keyframes ghBlink{0%,60%,100%{transform:translateY(-100%)}75%{transform:translateY(0)}}
+@keyframes ghCrossL{0%,100%{transform:none}20%,80%{transform:translate(5px,1px)}}
+@keyframes ghCrossR{0%,100%{transform:none}20%,80%{transform:translate(-5px,1px)}}
+.gucki.gm-o .mund{display:block;animation:fxBlasMund 2.8s ease-in-out}
+.gucki.gm-grin .mund{display:block;animation:ghGrin 2.8s ease-in-out}
+.gucki.gm-talk .mund{display:block;animation:ghTalk .25s ease-in-out 11}
+.gucki.gm-o .zunge,.gucki.gm-grin .zunge,.gucki.gm-talk .zunge{display:none}
+.gucki.gm-tongue .mund{display:block}
+@keyframes ghGrin{0%,100%{transform:scale(.6,.3)}15%,85%{transform:scale(1.15,.9)}}
+@keyframes ghTalk{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(.9)}}
+.gucki.gd-wave .hand.r{animation:fxWink 2.4s ease-in-out}
+.gucki.gd-both .hand.l{animation:fxHandL 2.6s ease-out}
+.gucki.gd-both .hand.r{animation:fxHandR 2.6s ease-out}
+.gucki.gd-clap .hand.l{animation:ghClapL .3s ease-in-out 8}
+.gucki.gd-clap .hand.r{animation:ghClapR .3s ease-in-out 8}
+.gucki.gd-point .hand.r{animation:fxDaumen 2.8s ease-in-out}
+@keyframes ghClapL{0%,100%{transform:translate(4px,-46px)}50%{transform:translate(22px,-50px) rotate(20deg)}}
+@keyframes ghClapR{0%,100%{transform:translate(-4px,-46px)}50%{transform:translate(-22px,-50px) rotate(-20deg)}}
+.gucki .gfx-hat{left:50%;top:-30px;font-size:34px;font-family:system-ui,sans-serif;animation:ghHat .45s cubic-bezier(.3,1.5,.5,1) both;translate:-50% 0}
+@keyframes ghHat{from{transform:translateY(-40px);opacity:0}to{transform:none;opacity:1}}
+.gucki .gfx-p{left:var(--x);top:var(--y);font-size:var(--fs,22px);opacity:0;animation:var(--an,gpMove) var(--du,1.6s) var(--ea,ease-out) var(--de,0s) forwards}
+.gucki .gfx-p.t{font-family:var(--display);color:var(--ink);text-shadow:0 0 3px var(--sheet),0 0 3px var(--sheet)}
+@keyframes gpMove{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1;transform:translate(calc(var(--dx) * .15),calc(var(--dy) * .15)) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot,0deg))}}
+@keyframes gpPop{0%{opacity:0;transform:scale(.2)}20%{opacity:1;transform:scale(1.25)}35%,80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:translateY(-14px) scale(.9)}}
+@keyframes gpArc{0%{opacity:0;transform:none}10%{opacity:1}50%{transform:translate(calc(var(--dx) * .5),-110px) rotate(calc(var(--rot,0deg) * .5))}90%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot,0deg))}}
+.gucki .gfx-orb{left:39px;top:36px;width:0;height:0;animation:gpOrbit 2.6s linear .2s both}
+.gucki .gfx-orb>span{position:absolute;font-size:22px;transform:rotate(var(--a)) translateX(54px) rotate(calc(-1 * var(--a)));margin:-12px 0 0 -12px}
+@keyframes gpOrbit{0%{transform:rotate(0);opacity:0}10%,85%{opacity:1}100%{transform:rotate(540deg);opacity:0}}
+/* Seiten-Tricks mit einzelnen Elementen (.pfx-el, Verzögerung --d, Zufall --r) */
+body.pfx-pudding .wrap>*,body.pfx-pudding #toTop{transform-origin:50% 100%;animation:pfxPudding .55s ease-in-out 5}
+@keyframes pfxPudding{0%,100%{transform:none}25%{transform:scale(1.04,.94)}50%{transform:scale(.96,1.05)}75%{transform:scale(1.02,.97)}}
+.pfx-el{animation:var(--pan) var(--pdu,2.6s) ease-in-out var(--d,0s) both}
+@keyframes pfxWirbel2{0%{transform:none}45%{transform:rotate(360deg) scale(.7)}55%{transform:rotate(360deg) scale(.7)}100%{transform:rotate(360deg)}}
+@keyframes pfxWind{0%,100%{transform:none}35%,60%{transform:translateX(calc(30px + var(--r) * 50px)) skewX(-12deg)}}
+@keyframes pfxOla{0%,100%{transform:none}40%{transform:translateY(-34px)}60%{transform:translateY(4px)}}
+@keyframes pfxSchwebe{0%,100%{transform:none}30%{transform:translate(calc((var(--r) - .5) * 40px),-24px) rotate(calc((var(--r) - .5) * 14deg))}70%{transform:translate(calc((.5 - var(--r)) * 30px),-38px) rotate(calc((.5 - var(--r)) * 10deg))}}
+@keyframes pfxDomino{0%,100%{transform:none}30%,65%{transform:rotate(-14deg)}}
+@keyframes pfxSchmelz{0%,100%{transform:none}40%,65%{transform:scaleY(.25) skewX(calc((var(--r) - .5) * 30deg))}}
+.pfx-el.dom{transform-origin:0 100%}.pfx-el.melt{transform-origin:50% 100%}
+body.pfx-spiegel .wrap>*,body.pfx-spiegel #toTop{transform-origin:var(--ox,50%) var(--oy,50%);animation:pfxSpiegel 3.2s ease-in-out}
+@keyframes pfxSpiegel{0%,100%{transform:none}30%,70%{transform:scaleX(-1)}}
+body.pfx-zoom .wrap>*,body.pfx-zoom #toTop{transform-origin:var(--ox,50%) var(--oy,50%);animation:pfxZoom 2.8s cubic-bezier(.4,1.4,.5,1)}
+@keyframes pfxZoom{0%,100%{transform:none}35%,60%{transform:scale(.5)}}
+body.pfx-sepia .wrap>*{animation:pfxSepia 4s ease-in-out}
+@keyframes pfxSepia{0%,100%{filter:none}20%,80%{filter:sepia(.85) contrast(1.05)}}
+body.pfx-wasser .wrap>*{animation:pfxWasser 1.8s ease-in-out 2}
+@keyframes pfxWasser{0%,100%{transform:none}50%{transform:translateX(8px) skewX(-2deg)}}
+.pfx-wasserbg{background:linear-gradient(rgba(30,120,200,.22),rgba(10,60,140,.38));animation:pfxLicht 4s ease both}
+.pfx-flug span{position:absolute;left:var(--x);top:var(--y);font-size:var(--fs);font-family:system-ui,sans-serif;animation:var(--an) var(--du) var(--ea,linear) var(--de) both}
+@keyframes pfFall{0%{transform:none;opacity:0}8%{opacity:1}100%{transform:translate(var(--dx),calc(100vh + 120px)) rotate(var(--rot));opacity:1}}
+@keyframes pfRise{0%{transform:none;opacity:0}8%{opacity:1}100%{transform:translate(var(--dx),calc(-100vh - 140px)) rotate(var(--rot));opacity:1}}
+@keyframes pfSide{0%{transform:none}100%{transform:translate(calc(-100vw - 260px),var(--dx))}}
+@keyframes pfParade{0%{transform:translateX(0)}100%{transform:translateX(calc(100vw + 120px))}}
+.pfx-flug .gw{animation:var(--an) var(--du) linear var(--de) both,pfHop .45s ease-in-out var(--de) infinite}
+@keyframes pfHop{0%,100%{translate:0 0}50%{translate:0 -14px}}
+.pfx-flug img{width:var(--fs);height:auto}
+@media (prefers-reduced-motion:reduce){.gucki[class*="fx-"] .mund,.pfx-el,body.pfx-pudding .wrap>*,body.pfx-spiegel .wrap>*,body.pfx-zoom .wrap>*,body.pfx-wasser .wrap>*{animation:none!important}.pfx-flug{display:none}}
+/* ===== Besondere Gucki-Tricks ===== */
+.gucki.sp-gold .kopf{filter:sepia(1) saturate(4) hue-rotate(-12deg) brightness(1.12) drop-shadow(0 0 10px #FFD23F)}
+.sp-nacht{background:rgba(6,10,30,.93);animation:pfxLicht 7.2s ease both}
+.sp-nacht canvas{position:absolute;inset:0;width:100%;height:100%}
+.sp-chor .sg{position:absolute;bottom:-64px;left:calc(3% + var(--i) * 9.6%);width:56px;animation:spUp .5s ease-out calc(var(--i) * .07s) both,spBob .42s ease-in-out .7s 14 alternate,spDown .5s ease-in 6.9s forwards}
+.sp-chor .sg img{width:56px;height:auto;display:block}
+@keyframes spUp{from{translate:0 0}to{translate:0 -66px}}
+@keyframes spDown{from{translate:0 -66px}to{translate:0 10px}}
+@keyframes spBob{from{rotate:-7deg}to{rotate:7deg}}
+.sp-chor .sn{position:absolute;bottom:70px;left:var(--x);font:800 30px var(--display);color:var(--spiel);text-shadow:0 0 4px var(--sheet);opacity:0;animation:spNote 1.6s ease-out var(--de) forwards}
+@keyframes spNote{0%{opacity:0;transform:none}15%{opacity:1}100%{opacity:0;transform:translate(14px,-120px) rotate(18deg)}}
+.sp-zug .tr{position:absolute;bottom:12px;left:0;display:flex;gap:6px;align-items:flex-end;animation:spZug 6.2s linear both}
+@keyframes spZug{from{transform:translateX(100vw)}to{transform:translateX(calc(-100% - 40px))}}
+.sp-zug .lok{font-size:60px;line-height:1;font-family:system-ui,sans-serif}
+.sp-zug .wg{font-size:32px;line-height:1;background:var(--sheet);border:3px solid var(--mathe);border-radius:8px;padding:6px 7px;font-family:system-ui,sans-serif;animation:spRuckel .3s ease-in-out infinite alternate}
+.sp-zug .wg img{width:36px;height:auto;display:block}
+.sp-zug .dampf{position:absolute;left:6px;top:-34px;font-size:30px;font-family:system-ui,sans-serif;animation:spPuff 1s ease-out infinite}
+@keyframes spRuckel{from{translate:0 0}to{translate:0 -3px}}
+@keyframes spPuff{0%{opacity:.9;transform:none}100%{opacity:0;transform:translate(24px,-30px) scale(1.6)}}
+.sp-riese .rg{position:absolute;left:50%;bottom:0;width:min(72vw,520px);aspect-ratio:1/1.05;background:#139DB3;border-radius:50% 50% 0 0;animation:spRiese 5.6s ease-in-out both}
+@keyframes spRiese{0%{translate:-50% 100%}20%,78%{translate:-50% 42%}100%{translate:-50% 100%}}
+.sp-riese .ra{position:absolute;top:14%;width:27%;aspect-ratio:1;border-radius:50%;background:#FFFFFF;border:6px solid #0E6F7E;overflow:hidden}
+.sp-riese .ra.l{left:17%}.sp-riese .ra.r{right:17%}
+.sp-riese .ra b{position:absolute;left:28%;top:28%;width:44%;aspect-ratio:1;border-radius:50%;background:#1C1F2E;animation:spLook 5.6s ease-in-out both}
+.sp-riese .ra::after{content:"";position:absolute;inset:0;background:#139DB3;transform:translateY(-100%);animation:spBlink 5.6s ease-in-out both}
+@keyframes spLook{0%,30%{transform:none}40%,50%{transform:translate(-30%,-10%)}60%,70%{transform:translate(30%,-10%)}80%,100%{transform:none}}
+@keyframes spBlink{0%,52%,58%,100%{transform:translateY(-100%)}55%{transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){.sp-nacht,.sp-chor,.sp-zug,.sp-riese{display:none}}
 @media (prefers-reduced-motion:reduce){.gucki[class*="fx-"] .kopf,.gucki[class*="fx-"] .hand,.gucki[class*="fx-"] .auge,.gucki[class*="fx-"] .pupille,.gucki[class*="fx-"] .lid,.gucki .gfx{animation:none!important}.gucki .gfx{display:none}}
 @media (prefers-reduced-motion:reduce){.gucki.kicher .kopf{animation:none;transform:translateY(-34px)}.gucki.kicher .zunge{animation:none}}
 .gucki.blink .lid{transform:translateY(0)}
@@ -1258,6 +1393,16 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.16.0",
+   "date": "2026-11-27",
+   "title": "Gucki kann jetzt 120 Tricks",
+   "items": [
+    "Tippe fünfmal schnell auf Gucki: Jetzt gibt es 100 Gucki-Tricks – vom Pizza-Bäcker über den Mathe-Profi bis zum Hamburger Schietwetter.",
+    "Bei 20 Tricks macht die ganze Seite mit: Schneefall, Unterwasser, La-Ola-Welle, Domino, Gucki-Parade und viele mehr.",
+    "Ganz selten passiert etwas Besonderes: der Goldene Gucki, ein Feuerwerk, der Gucki-Chor, der Gucki-Express oder der Riesen-Gucki. Findest du alle fünf?"
+   ]
+  },
   {
    "version": "1.15.0",
    "date": "2026-11-27",
@@ -4167,7 +4312,7 @@ function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn
   at(15400,()=>Konfetti.clearPile());
   at(17000,()=>{Konfetti.pile(false);guckiMegaOn=false});
 }
-// Kleiner Spaß: Gucki fünfmal schnell antippen – zufällig einer von 21 Tricks (nie zweimal derselbe hintereinander).
+// Kleiner Spaß: Gucki fünfmal schnell antippen – zufällig einer von 120 Tricks (nie zweimal derselbe hintereinander), selten einer von 5 besonderen.
 // Tricks mit page:true bewegen die ganze Seite (nur .wrap und #toTop, Gucki bleibt stehen); sie fallen weg bei
 // „Bewegung reduzieren“ und im Vollbild. fx() gibt Elemente oder Aufräum-Funktionen zurück, die am Ende entfernt bzw. aufgerufen werden.
 (function(){const g=document.getElementById("gucki");if(!g)return;let n=0,tm=0,busy=false,last=-1;const B=document.body;
@@ -4217,16 +4362,201 @@ function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn
       const r=g.querySelector(".kopf").getBoundingClientRect(),d=layer("pfx-licht");
       d.style.setProperty("--lx",Math.round(r.left+r.width/2)+"px");d.style.setProperty("--ly",Math.round(Math.min(r.top+r.height/2,innerHeight-30))+"px");return[d]}}
   ];
+
+  // ---- Baukasten für weitere Tricks ----
+  // G(name, Sprüche, Aussehen, Hut, Teilchen, Muster, Anzahl, Dauer). Aussehen = Klassen wie "gh-hop ge-wide gm-o gd-wave".
+  // Muster: rise (steigen), fall (fallen), rain (Regen), burst (platzen), side (fliegen vorbei), pop (erscheinen über dem Kopf), arc (Bogen), orbit (kreisen)
+  const isTxt=t=>!/\p{Extended_Pictographic}/u.test(t);
+  function parts(list,mode,n){const em=list.split(" ").filter(Boolean);if(!em.length||!mode)return[];
+    if(mode==="orbit"){const o=document.createElement("span");o.className="gfx gfx-orb";o.innerHTML=Array.from({length:n},(_,i)=>`<span style="--a:${(i*360/n).toFixed(0)}deg">${em[i%em.length]}</span>`).join("");g.appendChild(o);return[o]}
+    return Array.from({length:n},(_,i)=>{const s=document.createElement("span"),t=em[i%em.length];s.className="gfx gfx-p"+(isTxt(t)?" t":"");s.textContent=t;let v;
+      if(mode==="rise")v={x:rnd(4,52),y:14,dx:rnd(-26,26),dy:-110-rnd(0,30),de:.2+i*.28,du:1.7};
+      else if(mode==="fall")v={x:rnd(-14,60),y:-150,dx:rnd(-10,10),dy:150,de:i*.3,du:1.4};
+      else if(mode==="rain")v={x:rnd(-80,96),y:-210,dx:-10,dy:240,de:i*.17,du:1.1,ea:"linear"};
+      else if(mode==="burst"){const a=-Math.PI*(i+.5)/n,r=rnd(64,92);v={x:30,y:22,dx:Math.cos(a)*r,dy:Math.sin(a)*r-8,de:.3+rnd(0,.2),du:1.3}}
+      else if(mode==="side")v={x:150,y:-56+i*24,dx:-340,dy:rnd(-10,10),de:.2+i*.35,du:2,ea:"linear"};
+      else if(mode==="arc")v={x:30,y:8,dx:rnd(-90,60),dy:50,de:i*.15,du:1.4,an:"gpArc",rot:rnd(-180,180)};
+      else v={x:20,y:-80,dx:0,dy:0,de:.3+i*1.05,du:1.15,an:"gpPop",fs:36};// pop
+      const st=s.style;st.setProperty("--x",v.x.toFixed(0)+"px");st.setProperty("--y",v.y+"px");st.setProperty("--dx",v.dx.toFixed(0)+"px");st.setProperty("--dy",v.dy.toFixed(0)+"px");
+      st.setProperty("--de",v.de.toFixed(2)+"s");st.setProperty("--du",v.du+"s");if(v.ea)st.setProperty("--ea",v.ea);if(v.an)st.setProperty("--an",v.an);if(v.fs)st.setProperty("--fs",v.fs+"px");
+      if(v.rot!=null||mode==="burst"||mode==="rain")st.setProperty("--rot",(v.rot!=null?v.rot:rnd(-40,40)).toFixed(0)+"deg");
+      g.appendChild(s);return s})}
+  function G(c,say,look,hat,em,mode,n,ms){return{c:"fx-gen",k:c,cls:look.split(" ").filter(Boolean),ms:ms||3000,
+    say:typeof say==="string"?[[200,say,2500]]:say,fx:()=>{const x=parts(em||"",mode,n||(mode==="pop"?1:5));
+      if(hat){const h=document.createElement("span");h.className="gfx gfx-hat";h.textContent=hat;g.querySelector(".kopf").appendChild(h);x.push(h)}return x}}}
+  TRICKS.push(
+    G("pizza","Mamma mia – Pizza! 🍕","gh-nod ge-wide gm-o","","🍕","rise",4),
+    G("geburtstag","Hoch soll ich leben! 🎂","gh-bounce gm-grin gd-both","🎉","🎈 🎂 🎈","rise",5),
+    G("koenig","Ich bin der König vom Klassenzimmer!","gh-grow gm-grin gd-both","👑","✨","burst",6),
+    G("pirat",[[100,"Arrr! Ahoi, ihr Landratten!",2600]],"gh-sway ge-half gm-talk","","⚓ 🦜","pop",2,3200),
+    G("astronaut","Houston, wir haben Hunger! 🚀","gh-float ge-up","","⭐ 🪐","orbit",5),
+    G("regenwolke","Oh nein, eine Regenwolke! ☔","gh-shiver ge-up gm-o","","💧","rain",8),
+    G("sonne","Ahh … Sonne tanken! ☀️","gh-lean ge-shut gm-grin","😎","☀️","pop",1),
+    G("schneemann","Brrr, ist das kalt! ⛄","gh-shiver ge-wide","🧣","❄️","fall",6),
+    G("nikolaus","Ho ho ho! Bald ist Nikolaus! 🎁","gh-bounce gm-grin gd-wave","🎅","🎁","fall",3),
+    G("schneeball","Schneeballschlacht!","gh-dash gm-grin","","❄️ ⚪","burst",8),
+    G("laterne","Laterne, Laterne … 🏮","gh-sway ge-up gm-talk","","🏮","pop",1),
+    G("kuerbis","Buh! 🎃","gh-jump ge-wide gm-o","","🎃","pop",1,2800),
+    G("ostern","Wo sind nur die Ostereier? 🥚","gh-tilt ge-side","🐰","🥚","fall",4),
+    G("detektiv","Hmm … ich habe eine Spur! 🔍","gh-lean ge-half","🕵️","🔍 👣","pop",2),
+    G("forscher","Heureka! Ich hab's! 🧪","gh-jump ge-wide gm-o gd-both","🥽","✨","burst",7),
+    G("mathegenie","1 + 1 = 2 – ich bin ein Mathe-Genie!","gh-grow gm-grin","🎓","+ − · : =","burst",5),
+    G("einmaleins","7 mal 8 ist 56!","gh-nod gm-talk gd-point","","7 · 8 = 56","rise",5),
+    G("abc","A, B, C … das kann ich im Schlaf!","gh-bounce ge-shut gm-talk","","A B C D","rise",4),
+    G("englisch","Hello! How are you?","gh-hop gm-grin gd-wave","🎩","🇬🇧","pop",1),
+    G("welt","Einmal um die ganze Welt! 🌍","gh-float ge-side","","✈️","orbit",2),
+    G("kompass","Norden ist da oben! 🧭","gh-tilt ge-up gd-point","","🧭","pop",1),
+    G("trommel","Trommelwirbel! 🥁","gh-bounce ge-shut gd-clap","","🥁","pop",1),
+    G("gitarre","Rock 'n' Roll! 🎸","gh-nod ge-shut gm-o","🤘","🎸 🎵","pop",2),
+    G("oper","Laaa-la-laaaa! 🎶","gh-grow ge-shut gm-o","","🎶 🎵","rise",5),
+    G("maler","Halt still, ich male dich! 🎨","gh-tilt ge-half","👨‍🎨","🎨 🖌️","pop",2),
+    G("regenbogen","Ein Regenbogen nur für dich! 🌈","gh-hue gm-grin gd-both","","🌈","pop",1),
+    G("fussball","Toooor! ⚽","gh-jump gm-o gd-both","","⚽","side",1,2800),
+    G("schwimmen","Ab ins Wasser! 🏊","gh-peek","🥽","💦","burst",7),
+    G("fahrrad","Kling kling! Aus dem Weg! 🚲","gh-dash ge-wide","⛑️","🚲","side",1,2800),
+    G("eis","Mmmh, lecker Eis! 🍦","gh-lean ge-shut gm-tongue","","🍦","pop",1),
+    G("hunger","Mein Bauch knurrt … 🍔","gh-shiver ge-half gm-o","","🍔 🍟","rise",4),
+    G("kuchen",[[200,"Wer hat meinen Kuchen gegessen?",1700],[2000,"… ach, ich selbst! 😋",1100]],"gh-tilt ge-side","","🍰","pop",1,3200),
+    G("popcorn","Popcorn! Pop, pop, pop! 🍿","gh-bounce ge-wide","","🍿","burst",8),
+    G("moin","Moin, moin! ⚓","gh-hop gm-grin gd-wave","🧢","⛴️","side",1),
+    G("moewe","Möwen-Alarm! Pass auf dein Brötchen auf!","gh-shake ge-up gm-o","","🕊️","side",3),
+    G("schietwetter","Typisch Hamburg: Schietwetter! ☔","gh-shiver ge-up","☂️","💧","rain",7),
+    G("katze","Miau? 🐱","gh-tilt ge-wide","🐱","🐾","rise",4),
+    G("frosch","Quaaak! 🐸","gh-jump ge-wide gm-o","","🐸","pop",1,2800),
+    G("biene","Summ, summ, summ! 🐝","gh-shiver ge-roll","","🐝","orbit",3),
+    G("schmetterling","Oh, ein Schmetterling! 🦋","gh-float ge-side gm-o","","🦋","side",2),
+    G("dino","Rooaar! 🦖","gh-giant ge-wide gm-o gd-both","","🦖","pop",1),
+    G("einhorn","Einhorn-Magie! 🦄","gh-hue ge-up gm-grin","🦄","✨","burst",7),
+    G("gespenst","Huuuuh! Ein Gespenst! 👻","gh-tiny ge-wide gm-o","","👻","pop",1),
+    G("roboter","Piep. Bop. Ich. Bin. Ein. Ro-bo-ter.","gh-robot ge-cross gm-talk","🤖","⚙️","rise",3),
+    G("alien","Bringt mich zu eurem Lehrer! 👽","gh-float ge-roll","","🛸","side",1),
+    G("gewitter","Gewitter! Schnell nach drinnen! ⚡","gh-shiver ge-wide gm-o","","⚡","fall",3),
+    G("mond","Gute Nacht, Mond! 🌙","gh-slow ge-shut","🌙","💤","rise",3,3600),
+    G("hausaufgaben","Hausaufgaben? Schon fertig! 📚","gh-nod gm-grin gd-point","","📚","pop",1),
+    G("bleistift","Spitzen, spitzen, spitzen! ✏️","gh-spin ge-roll","","✏️","pop",1),
+    G("kopfrechnen","Kopfrechnen ist mein Ding! 🧮","gh-squash ge-up gm-talk","","1 2 3 4 5","rise",5),
+    G("denken","Ich denke … und denke … und denke … 💭","gh-slow ge-up","","💭","pop",1,3400),
+    G("danke","Danke, dass du mit mir lernst! 🌟","gh-hop gm-grin gd-both","","🌟","rise",5),
+    G("pokal","Ein Pokal für dich! 🏆","gh-jump gm-grin gd-both","","🏆","pop",1),
+    G("applaus","Bravo, bravo! 👏","gh-bounce gm-grin gd-clap","","👏","burst",6),
+    G("party","Party! 🎉","gh-disco gm-grin gd-both","🥳","🎉 🎊","burst",8),
+    G("ballon","Ich fliiiege! 🎈","gh-float ge-up gm-o","","🎈","pop",1,3200),
+    G("yoga","Ommm … ganz ruhig atmen.","gh-slow ge-shut","🧘","🌸","rise",3,3600),
+    G("kitzeln","Hihi, nicht kitzeln!","gh-shiver ge-shut gm-grin","","hi hi hi","rise",3),
+    G("grummel",[[200,"Grrrr …",1100],[1500,"… nur Spaß! 😄",1300]],"gh-shake ge-half","","💢","pop",1),
+    G("tada","Ta-daaa!","gh-grow gm-grin gd-both","🎩","✨","burst",7),
+    G("wow","Wow! Einfach wow! 🤩","gh-hop ge-wide gm-o","","⭐","burst",6),
+    G("verwirrt","Häh? Was? Wie? Wo?","gh-tilt ge-cross","","? ? ?","rise",3),
+    G("schielen","Guck mal, ich kann schielen!","gh-wobble ge-cross gm-grin","","👀","pop",1),
+    G("schnecke","Ich bin heute ein bisschen langsam … 🐌","gh-slow ge-half","","🐌","side",1,3800),
+    G("rennen","Achtung, fertig, los! 💨","gh-dash ge-wide","","💨","side",3),
+    G("lachen","HAHAHA! 😂","gh-bounce ge-shut gm-o","","HA HA HA","rise",3),
+    G("pusten","Pffffff! 🌬️","gh-lean gm-o","","💨","side",2),
+    G("kaugummi",[[200,"Eine Kaugummiblase …",1500],[1900,"PLOPP!",900]],"gh-squash ge-wide gm-o","","🫧","pop",1),
+    G("farbwechsel","Ich kann meine Farbe wechseln! 🌈","gh-hue gm-grin","","🎨","pop",1),
+    G("unsichtbar","Jetzt bin ich unsichtbar! … Siehst du mich noch?","gh-fade ge-shut","","✨","rise",3,3200),
+    G("riese","Ich bin ein Riese!","gh-giant gm-o gd-both","","","",0),
+    G("zwerg","Und jetzt bin ich ganz klein!","gh-tiny ge-wide gm-o","","","",0),
+    G("karussell","Karussell fahren! Wiiiie!","gh-spin ge-roll gm-o","🎠","","",0),
+    G("trampolin","Trampolin! Hopp, hopp, hopp!","gh-jump gm-grin gd-both","","","",0),
+    G("neinnein","Nein, nein, nein!","gh-shake ge-shut gm-talk","","❌","pop",1),
+    G("zaehne","Zähneputzen nicht vergessen! 🪥","gh-shiver gm-grin","","🪥","pop",1),
+    G("buch","Psst … das Buch ist so spannend! 📖","gh-lean ge-side","👓","📖","pop",1),
+    G("post","Post für dich! ✉️","gh-hop gm-grin gd-point","","✉️","side",1),
+    G("geschenk","Ein Geschenk – für mich? 🎁","gh-hop ge-wide gm-o gd-both","","🎁","pop",1),
+    G("schatz","Ich habe einen Schatz gefunden! 💎","gh-jump ge-wide gm-grin","","💎 🪙","burst",7),
+    G("vulkan","Vulkan-Ausbruch! 🌋","gh-shiver ge-wide gm-o","","🔥","arc",6),
+    G("blume",[[200,"Ich pflanze was …",1400],[1700,"… und es wächst! 🌻",1400]],"gh-nod ge-up gm-grin","","🌱 🌻","pop",2,3200),
+    G("kleeblatt","Glück gehabt! 🍀","gh-hop gm-grin","","🍀","burst",5),
+    G("tannenbaum","Bald ist Advent! 🎄","gh-sway ge-up gm-grin","","🎄 ⭐","pop",2)
+  );
+  // ---- Seiten-Tricks aus dem Baukasten ----
+  const visEls=()=>{const vh=innerHeight,t=document.querySelector(".topic:not([hidden])");
+    let els=[...document.querySelectorAll(".topbar > *, #crumbs, #toc, nav.navx"),...(t?t.querySelectorAll(":scope > header > *, section > *"):[])].filter(e=>{const r=e.getBoundingClientRect();return r.height>0&&r.bottom>0&&r.top<vh});
+    return els.filter(e=>!els.some(o=>o!==e&&o.contains(e))).slice(0,40)};
+  function perEl(anim,dur,delay,extra){const els=visEls(),vh=innerHeight;
+    els.forEach((e,i)=>{const r=e.getBoundingClientRect(),st=e.style;st.setProperty("--pan",anim);st.setProperty("--pdu",dur+"s");st.setProperty("--r",Math.random().toFixed(2));
+      st.setProperty("--d",(delay==="top"?Math.max(0,r.top/vh)*.9:delay==="rnd"?rnd(0,.5):i*.05).toFixed(2)+"s");e.classList.add("pfx-el");if(extra)e.classList.add(extra)});
+    return[()=>els.forEach(e=>e.classList.remove("pfx-el",extra||"pfx-el")),unset(els,["--pan","--pdu","--r","--d"])]}
+  function flug(list,mode,n){const d=layer("pfx-flug"),em=list.split(" ");
+    for(let i=0;i<n;i++){const s=document.createElement("span"),st=s.style,t=em[i%em.length];
+      if(t==="GUCKI"){const ic=document.querySelector('link[rel="icon"]');if(ic){const m=new Image();m.src=ic.href;m.alt="";s.appendChild(m)}s.className="gw"}else s.textContent=t;
+      let v;if(mode==="fall")v={x:rnd(-2,96)+"%",y:"-70px",dx:rnd(-80,80),du:rnd(2.4,3.4),de:rnd(0,1.6),an:"pfFall",fs:rnd(24,44)};
+      else if(mode==="rise")v={x:rnd(-2,96)+"%",y:"calc(100% + 20px)",dx:rnd(-60,60),du:rnd(2.6,3.6),de:rnd(0,1.4),an:"pfRise",fs:rnd(28,52)};
+      else if(mode==="side")v={x:"100%",y:rnd(5,85)+"%",dx:rnd(-60,60),du:rnd(1.8,2.8),de:rnd(0,1.6),an:"pfSide",fs:rnd(28,46)};
+      else v={x:"-100px",y:"calc(100% - 96px)",dx:0,du:4,de:i*.32,an:"pfParade",fs:46};// parade
+      st.setProperty("--x",v.x);st.setProperty("--y",v.y);st.setProperty("--dx",v.dx.toFixed?v.dx.toFixed(0)+"px":v.dx);st.setProperty("--du",(+v.du).toFixed(2)+"s");st.setProperty("--de",(+v.de).toFixed(2)+"s");
+      st.setProperty("--an",v.an);st.setProperty("--fs",(+v.fs).toFixed(0)+"px");st.setProperty("--rot",rnd(-200,200).toFixed(0)+"deg");d.appendChild(s)}
+    return d}
+  function originKids(){const els=pageKids(),cx=innerWidth/2,cy=innerHeight/2;els.forEach(e=>{const r=e.getBoundingClientRect();e.style.setProperty("--ox",(cx-r.left)+"px");e.style.setProperty("--oy",(cy-r.top)+"px")});return unset(els,["--ox","--oy"])}
+  const P=(c,say,look,ms,fx,calm)=>({c:"fx-gen",k:c,page:1,calm,cls:look.split(" ").filter(Boolean),ms,say:typeof say==="string"?[[200,say,2600]]:say,fx});
+  TRICKS.push(
+    P("pudding","Alles wackelt wie Wackelpudding!","gh-squash gm-grin",3200,()=>[bodyCls("pfx-pudding")]),
+    P("wirbel","Wirbelwind! Alles dreht sich!","gh-spin ge-roll",3600,()=>perEl("pfxWirbel2",2.4,"rnd")),
+    P("schnee",[[200,"Es schneit! ❄️",2600]],"gh-shiver ge-up gm-o",4200,()=>[flug("❄️ ❄️ ⛄","fall",34)]),
+    P("laub","Herbstwind! 🍂","gh-sway ge-up",4200,()=>[flug("🍂 🍁 🍃","fall",30)]),
+    P("wasser",[[200,"Blubb … wir sind unter Wasser! 🐠",2800]],"gh-float ge-wide gm-o",4300,()=>[layer("pfx-wasserbg"),flug("🫧 🫧 🐠 🐟","rise",24),bodyCls("pfx-wasser")]),
+    P("spiegel","Spieglein, Spieglein …","gh-tilt ge-wide",3400,()=>[originKids(),bodyCls("pfx-spiegel")]),
+    P("zoom","Huiii – alles wird ganz klein!","gh-giant gm-o",3000,()=>[originKids(),bodyCls("pfx-zoom")]),
+    P("sturm","Sturm! Halt dich fest! 🌬️","gh-lean ge-shut",3400,()=>[...perEl("pfxWind",2.4,"rnd"),flug("🍃 🍃 💨","side",16)]),
+    P("ola","La-Ola-Welle! 🙌","gh-jump gm-grin gd-both",3400,()=>perEl("pfxOla",1.4,"top")),
+    P("ballons","Luftballons für alle! 🎈","gh-float ge-up gm-grin",4200,()=>[flug("🎈 🎈 🎈 🎉","rise",26)]),
+    P("schwerelos","Schwerelos – alles schwebt! 🧑‍🚀","gh-float ge-up gm-o",3800,()=>perEl("pfxSchwebe",3.2,"rnd")),
+    P("domino","Domino! Einer kippt nach dem anderen …","gh-lean ge-wide",3600,()=>perEl("pfxDomino",1.8,"top","dom")),
+    P("schmelzen","Hilfe, die Seite schmilzt! 🫠","gh-tiny ge-wide gm-o",3600,()=>perEl("pfxSchmelz",2.6,"rnd","melt")),
+    P("parade","Gucki-Parade! Alle mitmarschieren!","gh-bounce gm-grin gd-clap",5200,()=>[flug("GUCKI","parade",9)]),
+    P("sepia","Wie ein ganz altes Foto …","gh-slow ge-half",4200,()=>[bodyCls("pfx-sepia")],1)
+  );
+
+  // ---- Fünf ganz besondere Tricks: selten (etwa 1 von 30), mit Sammelalbum auf dem Gerät („guckiSpecial“) ----
+  const SP_KEY="guckiSpecial";let found=[];try{found=JSON.parse(localStorage.getItem(SP_KEY)||"[]")||[]}catch(_){}
+  const spFound=id=>{if(!found.includes(id)){found.push(id);try{localStorage.setItem(SP_KEY,JSON.stringify(found))}catch(_){}}return found.length};
+  function canvasLayer(cls){const d=layer(cls),c=document.createElement("canvas"),dpr=Math.min(2,devicePixelRatio||1);c.width=innerWidth*dpr;c.height=innerHeight*dpr;d.appendChild(c);const x=c.getContext("2d");x.scale(dpr,dpr);return{d,c,x}}
+  function feuerwerk(){const{d,x}=canvasLayer("sp-nacht"),W=innerWidth,H=innerHeight,cols=["#FFD23F","#FF7AA2","#7EE0FF","#9CFF8A","#FFFFFF","#C9A2FF"];let raf,t0=performance.now();
+    // Zielpunkte: „S.D.L.W.“ als Sternenschrift
+    const oc=document.createElement("canvas"),ow=Math.min(W*.9,700),oh=ow*.28;oc.width=ow;oc.height=oh;const ox=oc.getContext("2d");ox.fillStyle="#000";ox.font=`800 ${oh*.8}px 'Bricolage Grotesque',sans-serif`;ox.textAlign="center";ox.textBaseline="middle";ox.fillText("S.D.L.W.",ow/2,oh/2);
+    const data=ox.getImageData(0,0,ow,oh).data,pts=[],step=Math.max(5,Math.round(ow/110));for(let yy=0;yy<oh;yy+=step)for(let xx=0;xx<ow;xx+=step)if(data[(yy*ow+xx)*4+3]>128)pts.push([(W-ow)/2+xx,H*.32-oh/2+yy]);
+    const rockets=[0,1,2,3].map(i=>({x:W*(.2+.2*i),t:.3+i*.45,c:cols[i]})),sparks=[];let stars=null;
+    function frame(now){const t=(now-t0)/1000;x.clearRect(0,0,W,H);
+      rockets.forEach(r=>{const k=(t-r.t)/.9;if(k>0&&k<1){x.fillStyle=r.c;x.beginPath();x.arc(r.x,H-(H*.62)*k,3,0,7);x.fill()}
+        if(k>=1&&!r.done){r.done=1;for(let i=0;i<46;i++){const a=i/46*Math.PI*2,v=60+Math.random()*90;sparks.push({x:r.x,y:H*.38,vx:Math.cos(a)*v,vy:Math.sin(a)*v,c:r.c,b:t})}}});
+      sparks.forEach(s=>{const k=t-s.b;if(k>2.2)return;x.globalAlpha=Math.max(0,1-k/2.2);x.fillStyle=s.c;x.beginPath();x.arc(s.x+s.vx*k,s.y+s.vy*k+28*k*k,2.4,0,7);x.fill()});x.globalAlpha=1;
+      if(t>2.6){if(!stars)stars=pts.map(p=>({p,s:[W/2,H*.38],c:cols[Math.floor(Math.random()*cols.length)],ph:Math.random()*6}));
+        const k=Math.min(1,(t-2.6)/1.2),e=1-Math.pow(1-k,3);stars.forEach(s=>{const px=s.s[0]+(s.p[0]-s.s[0])*e,py=s.s[1]+(s.p[1]-s.s[1])*e;
+          x.globalAlpha=.75+.25*Math.sin(t*1.5+s.ph);x.fillStyle=s.c;x.beginPath();x.arc(px,py,Math.max(1.6,step*.34),0,7);x.fill()});x.globalAlpha=1}
+      if(t<7)raf=requestAnimationFrame(frame)}
+    raf=requestAnimationFrame(frame);return[d,()=>cancelAnimationFrame(raf)]}
+  function chor(){const d=layer("sp-chor"),ic=document.querySelector('link[rel="icon"]'),n=10;
+    for(let i=0;i<n;i++){const s=document.createElement("span");s.className="sg";s.style.setProperty("--i",i);if(ic){const m=new Image();m.src=ic.href;m.alt="";s.appendChild(m)}d.appendChild(s)}
+    // Ode an die Freude (Ludwig van Beethoven), erster Teil. Stufen: 0 = c'
+    const N=[[2,1],[2,1],[3,1],[4,1],[4,1],[3,1],[2,1],[1,1],[0,1],[0,1],[1,1],[2,1],[2,1.5],[1,.5],[1,2]],beat=.42;let when=.6;
+    try{N.forEach(([st,l])=>{nTone(nFreq(st+7),l*beat*.95,when,.16);when+=l*beat})}catch(_){}
+    const notes=[];let t=.6;N.forEach(([st,l],k)=>{const s=document.createElement("span");s.className="sn";s.textContent=k%2?"♪":"♫";s.style.setProperty("--x",(6+((k*7)%10)*9.2)+"%");s.style.setProperty("--de",t.toFixed(2)+"s");d.appendChild(s);t+=l*beat});
+    return[d]}
+  function express(){const d=layer("sp-zug"),ic=document.querySelector('link[rel="icon"]');
+    const w=["📐","🎨","🌍","🎵","📚","🔤"].map(e=>`<span class="wg">${e}</span>`).join("");
+    d.innerHTML=`<div class="tr"><span class="lok">🚂</span><span class="wg gk">${ic?`<img src="${ic.href}" alt="">`:"🙂"}</span>${w}<span class="dampf">☁️</span></div>`;return[d]}
+  function riese(){const d=layer("sp-riese");d.innerHTML=`<div class="rg"><i class="ra l"><b></b></i><i class="ra r"><b></b></i></div>`;return[d]}
+  const SPECIAL=[
+    {c:"sp-gold",k:"gold",spec:1,cls:["fx-gen","gh-grow"],ms:4200,say:[[200,"Du hast den Goldenen Gucki gefunden! ✨",2600]],fx:()=>parts("✨ 🌟 ✨","orbit",6)},
+    {c:"fx-gen",k:"feuerwerk",spec:1,page:1,cls:["gh-hop","ge-up","gm-o"],ms:7200,say:[[300,"Ein Feuerwerk nur für dich! 🎆",2400],[4200,"S.D.L.W. – Super Duper Lern Webseite!",2600]],fx:feuerwerk},
+    {c:"fx-gen",k:"chor",spec:1,page:1,cls:["gh-nod","ge-shut","gm-talk"],ms:7600,say:[[200,"Der Gucki-Chor singt für dich!",2400],[5200,"„Ode an die Freude“ von Beethoven 🎶",2200]],fx:chor},
+    {c:"fx-gen",k:"express",spec:1,page:1,cls:["gh-bounce","gm-grin","gd-wave"],ms:6600,say:[[200,"Einsteigen bitte! Der Gucki-Express fährt ab! 🚂",2800],[3600,"Tschu-tschu! Alle Fächer an Bord!",2200]],fx:express},
+    {c:"fx-gen",k:"riesengucki",spec:1,page:1,cls:["gh-peek"],ms:5600,say:[[1300,"Hallo, du da! 👋",2200],[3700,"Tschüss – ich muss weiter!",1500]],fx:riese}];
+
   const reduce=matchMedia("(prefers-reduced-motion: reduce)");
   g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n<5||busy||guckiMegaOn)return;n=0;
     const quiet=reduce.matches||document.querySelector(".fs-on");const pool=TRICKS.filter(t=>!t.page||t.calm||!quiet);
+    const sp=SPECIAL.filter(x=>!x.page||!quiet);if(Math.random()<1/30&&sp.length){play(sp[Math.floor(Math.random()*sp.length)]);return}
     let t;do{t=pool[Math.floor(Math.random()*pool.length)]}while(t===last&&pool.length>1);play(t)});
   function play(t){busy=true;last=t;
-    g.classList.remove("cry","clap","talk");g.classList.add(t.c);const extra=t.fx?t.fx():[];
+    g.classList.remove("cry","clap","talk");g.classList.add(t.c,...(t.cls||[]));const extra=t.fx?t.fx():[];
     t.say.forEach(([at,text,ms])=>setTimeout(()=>{document.querySelectorAll(".gucki-bubble").forEach(b=>b.remove());guckiSay(text,ms)},at));
-    setTimeout(()=>{g.classList.remove(t.c);extra.forEach(e=>typeof e==="function"?e():e.remove());busy=false},t.ms)}
+    setTimeout(()=>{g.classList.remove(t.c,...(t.cls||[]));extra.forEach(e=>typeof e==="function"?e():e.remove());busy=false;
+      if(t.spec){const n=spFound(t.k);guckiSay(n>=SPECIAL.length?"Du hast alle 5 besonderen Tricks gefunden! 🏆":`Besonderer Trick! ${n} von ${SPECIAL.length} gefunden.`,2600)}},t.ms)}
   // für Tests und Vorführung: GuckiTricks.play("fx-regen")
-  window.GuckiTricks=TRICKS.map(t=>t.c);window.GuckiTricks.play=c=>{const t=TRICKS.find(x=>x.c===c);if(t&&!busy&&!guckiMegaOn)play(t)};
+  window.GuckiTricks=TRICKS.map(t=>t.k||t.c);window.GuckiTricks.special=SPECIAL.map(t=>t.k);window.GuckiTricks.found=()=>found.slice();
+  window.GuckiTricks.play=c=>{const t=[...TRICKS,...SPECIAL].find(x=>x.k===c||x.c===c&&!x.k);if(t&&!busy&&!guckiMegaOn)play(t)};
 })();
 /* ================= NOTEN ================= */
 const NN=["c","d","e","f","g","a","h"];

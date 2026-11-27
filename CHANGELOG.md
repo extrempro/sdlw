@@ -4,6 +4,17 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.16.0] – 2026-11-27
+
+### Neu
+
+- **120 Gucki-Tricks beim fünfmal Antippen** (Wunsch der Lehrkraft): 100, bei denen Gucki etwas macht, und 20, bei denen die ganze Seite mitmacht.
+  - Neuer Baukasten `G(name, Sprüche, Aussehen, Hut, Teilchen, Muster, Anzahl, Dauer)`: Kopfbewegungen (`gh-…`, z. B. Sprung, Drehung, Riese, Zwerg, Roboter, unsichtbar), Augen (`ge-…`), Mund (`gm-…`), Hände (`gd-…`), Hut auf dem Kopf und Teilchen mit den Mustern steigen, fallen, Regen, platzen, vorbeifliegen, erscheinen, Bogen und kreisen. 84 neue Tricks, z. B. Pizza, König, Astronaut, Regenwolke, Nikolaus, Detektiv, Mathe-Genie, Einmaleins, Englisch, Kompass, Moin moin, Möwen-Alarm, Schietwetter, Dino, Roboter, Vulkan, Kleeblatt, Tannenbaum.
+  - 15 neue Seiten-Tricks: Wackelpudding, Wirbelwind, Schneefall, Herbstlaub, Unterwasser, Spiegel, Gummi-Zoom, Sturm, La-Ola-Welle, Luftballons, Schwerelos, Domino, Schmelzen, Gucki-Parade, Altes Foto. Bewegt werden nur Elemente in `.wrap` (einzeln über `.pfx-el`) oder Ebenen (`.pfx-flug`); nichts blinkt, alles kehrt zurück.
+- **5 besondere Tricks, selten (etwa 1 von 30)**: Goldener Gucki, Feuerwerk mit „S.D.L.W.“ in Sternen (Canvas, ohne Blitzen), Gucki-Chor mit „Ode an die Freude“ (Beethoven, Ton über die Web-Audio-Töne der Seite), Gucki-Express (Zug mit Fächer-Waggons), Riesen-Gucki. Gefundene besondere Tricks werden nur auf dem Gerät gezählt (`localStorage` „guckiSpecial“), Gucki sagt „3 von 5 gefunden“.
+- Bei „Bewegung reduzieren“ und im Vollbild kommen keine Seiten-Tricks (außer „Licht aus“ und „Altes Foto“); von den besonderen dann nur der Goldene Gucki.
+- Vorführen: `GuckiTricks.play("pizza")`, Liste in `GuckiTricks`, besondere in `GuckiTricks.special`.
+
 ## [1.15.0] – 2026-11-27
 
 ### Neu

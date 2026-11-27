@@ -4,7 +4,11 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
-## [1.14.1] – 2026-11-27
+## [1.15.0] – 2026-11-27
+
+### Neu
+
+- **Fang die Farben mit 10 Stufen** (Wunsch der Lehrkraft): je 3 Mischungen pro Stufe (Tabelle `LV`). Stufe 1–3 Mischfarben 1. Ordnung (ab 3 fallen auch Mischfarben als Störer), 4–5 Mischfarben 2. Ordnung, 6 beides, 7 alle 12 Farben fallen, 8 Tropfen schaukeln, 9 oft zwei Tropfen gleichzeitig, 10 Tropfen ohne Namen. Tempo und Abstand werden mit jeder Stufe enger. Beim Aufstieg ein Schild „Stufe X!“ mit Farbstrahlen (bei „Bewegung reduzieren“ ohne Animation), Konfetti, Gucki-Spruch und +1 Herz (höchstens 3). Nach Stufe 10 erscheint „Alle 10 Stufen geschafft!“ mit Party. Punkte steigen mit der Stufe. Testzugang `FangDieFarben.state()`.
 
 ### Behoben
 

@@ -1259,10 +1259,12 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
-   "version": "1.14.1",
+   "version": "1.15.0",
    "date": "2026-11-27",
-   "title": "Hafen und Zielzahl-Jagd verbessert",
+   "title": "Fang die Farben mit 10 Stufen",
    "items": [
+    "Fang die Farben hat jetzt 10 Stufen! Nach drei gemischten Farben steigst du auf – mit großem „Stufe!“-Schild, Konfetti und einem Herz zurück.",
+    "Jede Stufe ist etwas schwerer: schneller, mehr Farben, schaukelnde Tropfen, zwei auf einmal – und in Stufe 10 stehen keine Namen mehr an den Tropfen.",
     "Gucki im Hafen: Das volle Schiff fährt jetzt sauber nach rechts hinaus, und das nächste kommt von links herein. Nichts ruckelt oder springt mehr.",
     "Zielzahl-Jagd hat jetzt drei Stufen. Bei „Leicht“ sind es nur drei kleine Zahlen, bei „Schwer“ vier.",
     "Neu ist der Tipp-Knopf: Er verrät dir den ersten Rechenschritt."
@@ -2907,7 +2909,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="ff-wrap" id="ffWrap">
     <div class="ff-hud" style="justify-content:flex-end">
       <div class="ff-goal" hidden><span class="sw" id="ffSw"></span><span>Mische <b id="ffGoal">…</b></span><span class="ff-slots" id="ffSlots" aria-hidden="true"><i></i><i></i></span></div>
-      <div class="ff-stats"><span id="ffLvl">Stufe 1</span><span id="ffPts">0 Punkte</span><span class="ff-hearts" id="ffHearts" aria-label="3 Herzen">♥♥♥</span></div>
+      <div class="ff-stats"><span id="ffLvl">Stufe 1 von 10</span><span id="ffPts">0 Punkte</span><span class="ff-hearts" id="ffHearts" aria-label="3 Herzen">♥♥♥</span></div>
     </div>
     <div class="ff-stage" id="ffStage">
       <canvas id="ffCv" width="560" height="560" role="img" aria-label="Spielfeld: Farbtropfen fallen von oben, Gucki fängt sie unten mit einem Eimer"></canvas>
@@ -2923,7 +2925,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <li>Schau oben, welche Farbe Gucki mischen möchte.</li>
     <li>Bewege Gucki mit dem Finger, der Maus, den Pfeiltasten oder den Knöpfen ◀ ▶.</li>
     <li>Fang die <strong>zwei</strong> Farben, aus denen die Zielfarbe entsteht. Lass alle anderen Tropfen fallen.</li>
-    <li>Nach sechs gemischten Farben kommt Stufe 2: Jetzt mischst du Mischfarben 2. Ordnung – und es wird schneller!</li>
+    <li>Nach drei gemischten Farben kommst du in die nächste Stufe und bekommst ein Herz zurück. Es gibt 10 Stufen.</li>
+    <li>Ab Stufe 4 mischst du Mischfarben 2. Ordnung. Später schaukeln die Tropfen, es fallen zwei auf einmal – und in Stufe 10 stehen keine Namen mehr an den Tropfen!</li>
   </ol>
 </section>
 <section>
@@ -5140,42 +5143,62 @@ const LMemory=(function(){
   $("#ffRules").innerHTML=[...T1,...T2].map(i=>{const[a,b]=C[i].m;const d=k=>`<span class="d" style="background:${C[k].h}"></span>${C[k].n}`;return`<div class="ff-rule">${d(a)} + ${d(b)} = ${d(i)}</div>`}).join("");
   let st=null,raf=0,last=0,running=false,keys={},best=0;
   try{best=+localStorage.getItem("ffBest")||0}catch(_){}
-  const lvl=()=>st.mixes>=6?2:1;
-  function newGoal(){const pool=lvl()===1?T1:T2;let i;do{i=pool[Math.floor(Math.random()*pool.length)]}while(i===st.goal&&pool.length>1);
+  // 10 Stufen, je 3 Mischungen. g: Zielfarben (1 = Mischfarben 1. Ordnung, 2 = 2. Ordnung, 3 = beides), p: fallende Farben
+  // (0 = Grundfarben, 1 = Grund- und Mischfarben 1. Ordnung, 2 = alle 12), v: Fallgeschwindigkeit, iv: Abstand der Tropfen,
+  // need: Anteil passender Tropfen, sway: Tropfen schaukeln, dbl: Anteil doppelter Tropfen, noname: Tropfen ohne Namen
+  const LV=[null,
+    {g:1,p:0,v:90,iv:1.4,need:.55,msg:"Fang die Grundfarben!"},
+    {g:1,p:0,v:105,iv:1.25,need:.5,msg:"Etwas schneller!"},
+    {g:1,p:1,v:115,iv:1.2,need:.45,msg:"Jetzt fallen auch Mischfarben."},
+    {g:2,p:1,v:115,iv:1.2,need:.5,msg:"Neu: Mischfarben 2. Ordnung!"},
+    {g:2,p:1,v:130,iv:1.1,need:.45,msg:"Schneller!"},
+    {g:3,p:1,v:145,iv:1,need:.42,msg:"Alles gemischt!"},
+    {g:2,p:2,v:155,iv:.95,need:.4,msg:"Jetzt fallen alle 12 Farben."},
+    {g:2,p:2,v:160,iv:.9,need:.38,sway:28,msg:"Die Tropfen schaukeln!"},
+    {g:2,p:2,v:175,iv:.85,need:.36,sway:32,dbl:.35,msg:"Oft kommen zwei Tropfen auf einmal."},
+    {g:2,p:2,v:190,iv:.8,need:.34,sway:36,dbl:.4,noname:true,msg:"Profi-Stufe: Tropfen ohne Namen!"}];
+  const PER=3,lvl=()=>st.level||1,L=()=>LV[lvl()];
+  function newGoal(){const g=L().g,pool=g===1?T1:g===2?T2:[...T1,...T2];let i;do{i=pool[Math.floor(Math.random()*pool.length)]}while(i===st.goal&&pool.length>1);
     st.goal=i;st.have=[];st.flash=0;st.drops=[];st.intro=1.6;st.spawn=.3;hud();say(`Mische ${C[i].n}!`)}
-  function hud(){const c=C[st.goal];$("#ffSw").style.background=c.h;$("#ffGoal").textContent=c.n;$("#ffLvl").textContent=`Stufe ${lvl()}`;
+  function hud(){const c=C[st.goal];$("#ffSw").style.background=c.h;$("#ffGoal").textContent=c.n;$("#ffLvl").textContent=`Stufe ${lvl()} von 10`;
     $("#ffPts").textContent=`${st.pts} Punkte`;const h=$("#ffHearts");h.textContent="♥".repeat(st.hearts)+"♡".repeat(3-st.hearts);h.setAttribute("aria-label",`${st.hearts} Herzen`);
     [...$("#ffSlots").children].forEach((el,k)=>{const v=st.have[k];el.className=v!=null?"full":"";el.style.background=v!=null?C[v].h:""})}
   const say=t=>{live.textContent=t};
-  function start(){st={x:W/2,drops:[],fx:[],pts:0,hearts:3,mixes:0,streak:0,spawn:0,goal:-1,have:[],done:[],shake:0,mixShow:0,intro:0};newGoal();
+  function start(){st={x:W/2,drops:[],fx:[],pts:0,hearts:3,mixes:0,streak:0,spawn:0,goal:-1,have:[],done:[],shake:0,mixShow:0,intro:0,level:1,inLvl:0,lvlShow:0,t:0};newGoal();
     over.hidden=true;running=true;last=0;cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);cv.focus&&cv.focus()}
   function pause(p){if(!st||!st.hearts)return;running=!p;$("#ffP").textContent=p?"Weiter":"Pause";
     if(p){cancelAnimationFrame(raf);over.hidden=false;over.innerHTML=`<h3>Pause</h3><button class="btn" type="button" data-go>Weiter</button>`}
     else{over.hidden=true;last=0;raf=requestAnimationFrame(loop)}}
-  function end(){running=false;cancelAnimationFrame(raf);const rec=st.pts>best;if(rec){best=st.pts;try{localStorage.setItem("ffBest",String(best))}catch(_){}}
+  function end(won){running=false;cancelAnimationFrame(raf);const rec=st.pts>best;if(rec){best=st.pts;try{localStorage.setItem("ffBest",String(best))}catch(_){}}
     const learned=[...new Set(st.done)].map(i=>`<li>${C[C[i].m[0]].n} + ${C[C[i].m[1]].n} = ${C[i].n}</li>`).join("");
-    over.hidden=false;over.innerHTML=`<h3>${rec&&st.pts?"Neuer Rekord!":"Spiel vorbei"}</h3><p><strong>${st.pts} Punkte</strong> · ${st.mixes} Farben gemischt · Rekord: ${best}</p>${learned?`<p>Das hast du gemischt:</p><ul>${learned}</ul>`:""}<button class="btn" type="button" data-go>Nochmal spielen</button>`;
+    over.hidden=false;over.innerHTML=`<h3>${won?"Alle 10 Stufen geschafft! 🏆":rec&&st.pts?"Neuer Rekord!":"Spiel vorbei"}</h3><p><strong>${st.pts} Punkte</strong> · Stufe ${lvl()} von 10 · ${st.mixes} Farben gemischt · Rekord: ${best}</p>${learned?`<p>Das hast du gemischt:</p><ul>${learned}</ul>`:""}<button class="btn" type="button" data-go>Nochmal spielen</button>`;
     say(`Spiel vorbei. ${st.pts} Punkte.`);
+    if(won){guckiParty();return}
     if(rec&&st.pts){guckiCheer();guckiSay("Neuer Rekord!",2200);const r=cv.getBoundingClientRect();Konfetti.burst(r.left+r.width/2,r.top+r.height*.6,80,90,50,900)}
     else guckiSay(st.mixes?`${st.mixes} Farben gemischt!`:"Probier's nochmal!",2000)}
-  function spawn(){const pool=lvl()===1?C.map((c,i)=>i).filter(i=>C[i].t===0):C.map((c,i)=>i).filter(i=>C[i].t<2);
-    const need=C[st.goal].m.filter(k=>!st.have.includes(k));
-    const c=need.length&&Math.random()<.5?need[Math.floor(Math.random()*need.length)]:pool[Math.floor(Math.random()*pool.length)];
-    const sp=(lvl()===1?95:150)+st.mixes*4;
-    st.drops.push({c,x:40+Math.random()*(W-80),y:60,v:sp*(.85+Math.random()*.3)})}
+  function spawn(){const l=L(),pool=C.map((c,i)=>i).filter(i=>C[i].t<=l.p),need=C[st.goal].m.filter(k=>!st.have.includes(k));
+    // Die Bestandteile der Zielfarbe müssen fallen können, auch wenn sie nicht im Pool sind (Mischfarben 2. Ordnung brauchen eine Mischfarbe 1. Ordnung)
+    const one=()=>{const c=need.length&&Math.random()<l.need?need[Math.floor(Math.random()*need.length)]:pool[Math.floor(Math.random()*pool.length)];
+      const x=60+Math.random()*(W-120);st.drops.push({c,x,x0:x,y:60,v:l.v*(.85+Math.random()*.3),ph:Math.random()*6.3})};
+    one();if(l.dbl&&Math.random()<l.dbl)one()}
+  function levelUp(){st.level++;st.inLvl=0;st.hearts=Math.min(3,st.hearts+1);st.drops=[];st.lvlShow=2.6;st.lvlMsg=LV[st.level].msg;hud();say(`Stufe ${st.level}! ${st.lvlMsg}`);
+    guckiSay(st.level===10?"Letzte Stufe – du schaffst das!":`Stufe ${st.level}!`,2000);
+    if(!matchMedia("(prefers-reduced-motion: reduce)").matches){const r=cv.getBoundingClientRect();Konfetti.burst(r.left+r.width/2,r.top+r.height*.4,70,90,60,900)}}
   function catchDrop(d){const ok=C[st.goal].m.includes(d.c);
     if(ok&&!st.have.includes(d.c)){st.have.push(d.c);fx(d.x,d.y,C[d.c].h,`${C[d.c].n} ✓`);
-      if(st.have.length===2){st.mixes++;st.streak++;const bonus=Math.min(st.streak-1,5)*5;st.pts+=10+bonus;st.done.push(st.goal);
+      if(st.have.length===2){st.mixes++;st.inLvl++;st.streak++;const bonus=Math.min(st.streak-1,5)*5;st.pts+=10+lvl()*2+bonus;st.done.push(st.goal);
         const[a,b]=C[st.goal].m;st.mixShow=1.4;st.mixTxt=`${C[a].n} + ${C[b].n} = ${C[st.goal].n}!`;st.mixCol=C[st.goal].h;say(st.mixTxt);guckiCheer();
-        const lv=lvl();setTimeout(()=>{if(!st||!st.hearts)return;if(st.mixes===6&&lv===2){guckiSay("Stufe 2!",1800)}newGoal()},700)}
+        const up=st.inLvl>=PER,me=st;
+        setTimeout(()=>{if(st!==me||!st.hearts)return;if(up&&st.level>=10){end(true);return}if(up){levelUp();setTimeout(()=>{if(st===me&&st.hearts)newGoal()},2600)}else newGoal()},700)}
       hud()}
     else if(ok){fx(d.x,d.y,C[d.c].h,"hast du schon")}
     else{st.hearts--;st.streak=0;st.shake=.35;fx(d.x,d.y,"#E3202A",`${C[d.c].n} passt nicht`);say(`${C[d.c].n} gehört nicht zu ${C[st.goal].n}.`);hud();if(st.hearts<=0)setTimeout(end,350)}}
   const fx=(x,y,col,txt)=>st.fx.push({x,y,col,txt,t:0});
   function loop(ts){if(!running)return;const dt=last?Math.min(.05,(ts-last)/1000):0;last=ts;
     const sp=430*dt;if(keys.l)st.x-=sp;if(keys.r)st.x+=sp;st.x=Math.max(46,Math.min(W-46,st.x));
-    st.intro=Math.max(0,st.intro-dt);
-    if(!st.intro){st.spawn-=dt;if(st.spawn<=0&&st.have.length<2){spawn();st.spawn=Math.max(.6,(lvl()===1?1.3:1)-st.mixes*.02)}}
+    st.intro=Math.max(0,st.intro-dt);st.lvlShow=Math.max(0,(st.lvlShow||0)-dt);st.t=(st.t||0)+dt;
+    if(!st.intro&&!st.lvlShow){st.spawn-=dt;if(st.spawn<=0&&st.have.length<2){spawn();st.spawn=L().iv}}
+    const sw=L().sway||0;if(sw)st.drops.forEach(d=>{d.x=Math.max(30,Math.min(W-30,d.x0+Math.sin(st.t*1.6+d.ph)*sw))});
     const by=BY;
     st.drops.forEach(d=>{d.y+=d.v*dt;if(!d.gone&&d.y>by-6&&d.y<by+18&&Math.abs(d.x-st.x)<44){d.gone=true;if(st.hearts>0)catchDrop(d)}});
     st.drops=st.drops.filter(d=>!d.gone&&d.y<H+30);
@@ -5190,7 +5213,7 @@ const LMemory=(function(){
     // Tropfen mit Namen
     st.drops.forEach(d=>{const c=C[d.c];g.save();g.translate(d.x,d.y);g.beginPath();g.moveTo(0,-26);g.bezierCurveTo(10,-12,18,-2,18,8);g.arc(0,8,18,0,Math.PI);g.bezierCurveTo(-18,-2,-10,-12,0,-26);
       g.fillStyle=c.h;g.fill();g.lineWidth=2;g.strokeStyle="rgba(0,0,0,.25)";g.stroke();g.fillStyle="rgba(255,255,255,.55)";g.beginPath();g.ellipse(-6,2,4,7,-.4,0,7);g.fill();
-      g.font="700 13px 'Atkinson Hyperlegible',sans-serif";g.textAlign="center";g.lineWidth=4;g.strokeStyle=paper;g.strokeText(c.n,0,44);g.fillStyle=ink;g.fillText(c.n,0,44);g.restore()});
+      if(!L().noname){g.font="700 13px 'Atkinson Hyperlegible',sans-serif";g.textAlign="center";g.lineWidth=4;g.strokeStyle=paper;g.strokeText(c.n,0,44);g.fillStyle=ink;g.fillText(c.n,0,44)}g.restore()});
     // Gucki trägt den Eimer auf dem Kopf und schaut nur ein Stück aus dem Boden (wie am Bildschirmrand)
     const sx=st.shake?Math.sin(st.shake*60)*5:0,x=st.x+sx,by=BY;
     g.fillStyle="#139DB3";g.beginPath();g.roundRect?g.roundRect(x-32,by+40,64,H-by-40,[30,30,0,0]):g.rect(x-32,by+40,64,H-by-40);g.fill();
@@ -5213,6 +5236,14 @@ const LMemory=(function(){
       g.beginPath();g.arc(W/2,H/2-28,28,0,7);g.fillStyle=gc.h;g.fill();g.font="800 30px 'Bricolage Grotesque',sans-serif";g.fillStyle=ink;g.fillText(gc.n,W/2,H/2+38);g.globalAlpha=1}
     // Texte
     st.fx.forEach(f=>{g.globalAlpha=1-f.t;g.font="800 16px 'Bricolage Grotesque',sans-serif";g.textAlign="center";g.lineWidth=4;g.strokeStyle=paper;const y=f.y-30-f.t*40;g.strokeText(f.txt,f.x,y);g.fillStyle=f.col==="#E3202A"?"#C4161C":ink;g.fillText(f.txt,f.x,y);g.globalAlpha=1});
+    // Stufenaufstieg: großes Schild mit Strahlen, wächst kurz an
+    if(st.lvlShow){const k=2.6-st.lvlShow,a=Math.min(1,st.lvlShow*2,k*4),still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const sc=still?1:k<.35?.4+k/.35*.75:k<.55?1.15-(k-.35)*.75:1;g.save();g.globalAlpha=a;g.translate(W/2,H/2-20);
+      if(!still){g.save();g.rotate(k*.8);for(let i=0;i<12;i++){g.rotate(Math.PI/6);g.beginPath();g.moveTo(0,0);g.lineTo(-22,-260);g.lineTo(22,-260);g.closePath();g.fillStyle=C[i].h;g.globalAlpha=a*.28;g.fill()}g.restore();g.globalAlpha=a}
+      g.scale(sc,sc);g.fillStyle=cssv("--sheet")||"#FFFFFF";g.beginPath();g.roundRect?g.roundRect(-180,-80,360,160,24):g.rect(-180,-80,360,160);g.fill();g.lineWidth=6;g.strokeStyle=C[(st.level*5)%12].h;g.stroke();
+      g.textAlign="center";g.fillStyle=ink;g.font="800 54px 'Bricolage Grotesque',sans-serif";g.fillText(`Stufe ${st.level}!`,0,4);
+      g.font="700 17px 'Atkinson Hyperlegible',sans-serif";g.fillText(st.lvlMsg||"",0,44);
+      g.font="700 15px 'Atkinson Hyperlegible',sans-serif";g.fillStyle=cssv("--muted")||"#5B6075";g.fillText("+1 Herz",0,68);g.restore()}
     if(st.mixShow){g.globalAlpha=Math.min(1,st.mixShow*2);g.font="800 24px 'Bricolage Grotesque',sans-serif";g.textAlign="center";g.lineWidth=6;g.strokeStyle=paper;g.strokeText(st.mixTxt,W/2,H/2-60);g.fillStyle=ink;g.fillText(st.mixTxt,W/2,H/2-60);
       g.beginPath();g.arc(W/2,H/2-10,26,0,7);g.fillStyle=st.mixCol;g.fill();g.globalAlpha=1}}
   // Steuerung
@@ -5228,9 +5259,10 @@ const LMemory=(function(){
   document.addEventListener("keyup",e=>{if(e.key==="ArrowLeft")keys.l=false;if(e.key==="ArrowRight")keys.r=false});
   window.addEventListener("hashchange",()=>{if(running&&location.hash!=="#farbfang")pause(true)});
   document.addEventListener("visibilitychange",()=>{if(document.hidden&&running)pause(true)});
+  window.FangDieFarben={state:()=>st,LV}; // für automatische Tests
   // Startbildschirm
-  st={x:W/2,drops:[],fx:[],pts:0,hearts:0,mixes:0,have:[],goal:10,shake:0,mixShow:0,intro:0};hud();draw();$("#ffHearts").textContent="♥♥♥";
-  over.innerHTML=`<h3>Bereit?</h3><p>Fang die zwei Farben, aus denen Guckis Zielfarbe gemischt wird. Du hast drei Herzen.</p><p>Rekord auf diesem Gerät: ${best} Punkte</p><button class="btn" type="button" data-go>Los geht's</button>`;
+  st={x:W/2,drops:[],fx:[],pts:0,hearts:0,mixes:0,have:[],goal:10,shake:0,mixShow:0,intro:0,level:1,inLvl:0,lvlShow:0,t:0};hud();draw();$("#ffHearts").textContent="♥♥♥";
+  over.innerHTML=`<h3>Bereit?</h3><p>Fang die zwei Farben, aus denen Guckis Zielfarbe gemischt wird. Du hast drei Herzen. Schaffst du alle 10 Stufen?</p><p>Rekord auf diesem Gerät: ${best} Punkte</p><button class="btn" type="button" data-go>Los geht's</button>`;
 })();
 /* ================= SPIEL: GUCKIS WELTREISE ================= */
 (function(){

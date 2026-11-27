@@ -4,6 +4,20 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.15.0] – 2026-11-27
+
+### Neu
+
+- **Fang die Farben mit 10 Stufen** (Wunsch der Lehrkraft): je 3 Mischungen pro Stufe (Tabelle `LV`). Stufe 1–3 Mischfarben 1. Ordnung (ab 3 fallen auch Mischfarben als Störer), 4–5 Mischfarben 2. Ordnung, 6 beides, 7 alle 12 Farben fallen, 8 Tropfen schaukeln, 9 oft zwei Tropfen gleichzeitig, 10 Tropfen ohne Namen. Tempo und Abstand werden mit jeder Stufe enger. Beim Aufstieg ein Schild „Stufe X!“ mit Farbstrahlen (bei „Bewegung reduzieren“ ohne Animation), Konfetti, Gucki-Spruch und +1 Herz (höchstens 3). Nach Stufe 10 erscheint „Alle 10 Stufen geschafft!“ mit Party. Punkte steigen mit der Stufe. Testzugang `FangDieFarben.state()`.
+
+### Behoben
+
+- **Gucki im Hafen:** Beim Wechsel zum nächsten Schiff fuhr das alte Schiff rückwärts wieder ins Bild, während schon die neuen Kisten erschienen, und das Wasser fuhr mit. Jetzt: Wasser steht still (`.hf-sea`), das Schiff fährt nach rechts hinaus (`.out`) und das neue von links herein (`.in`). „Neues Spiel“ während der Ausfahrt bricht den Wechsel sauber ab (gilt auch für Zahlenmauer und Zielzahl-Jagd).
+
+### Verbessert
+
+- **Zielzahl-Jagd** war zu schwer: drei Stufen. Leicht = 3 Zahlen (1–9), plus/minus und höchstens einmal mal, Ziel 5–40; Mittel = 3 Zahlen mit mal oder geteilt, Ziel 10–90; Schwer = 4 Zahlen wie bisher. Neuer Tipp-Knopf zeigt den ersten Rechenschritt (danach höchstens 5 Punkte). Rekord je Stufe (`zielBest2`).
+
 ## [1.14.0] – 2026-11-27
 
 ### Neu

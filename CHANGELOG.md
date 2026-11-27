@@ -4,6 +4,16 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.14.1] – 2026-11-27
+
+### Behoben
+
+- **Gucki im Hafen:** Beim Wechsel zum nächsten Schiff fuhr das alte Schiff rückwärts wieder ins Bild, während schon die neuen Kisten erschienen, und das Wasser fuhr mit. Jetzt: Wasser steht still (`.hf-sea`), das Schiff fährt nach rechts hinaus (`.out`) und das neue von links herein (`.in`). „Neues Spiel“ während der Ausfahrt bricht den Wechsel sauber ab (gilt auch für Zahlenmauer und Zielzahl-Jagd).
+
+### Verbessert
+
+- **Zielzahl-Jagd** war zu schwer: drei Stufen. Leicht = 3 Zahlen (1–9), plus/minus und höchstens einmal mal, Ziel 5–40; Mittel = 3 Zahlen mit mal oder geteilt, Ziel 10–90; Schwer = 4 Zahlen wie bisher. Neuer Tipp-Knopf zeigt den ersten Rechenschritt (danach höchstens 5 Punkte). Rekord je Stufe (`zielBest2`).
+
 ## [1.14.0] – 2026-11-27
 
 ### Neu

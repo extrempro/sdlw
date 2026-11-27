@@ -597,13 +597,15 @@ button.mz-tok{cursor:pointer}
 /* ===== Mathe-Spiele ===== */
 .hf-wrap,.zm-wrap,.zz-wrap{display:flex;flex-direction:column;gap:12px;max-width:640px}
 .hf-goal{margin:0;font-size:1.15rem}.hf-goal b{font:800 1.5rem var(--display)}
-.hf-ship{position:relative;height:118px;--end:77%;background:linear-gradient(transparent 88px,var(--sea) 88px);border-radius:10px;overflow:hidden;transition:transform 1.4s ease-in}
-.hf-ship.sail{transform:translateX(110%)}
+.hf-sea{position:relative;height:118px;background:linear-gradient(transparent 88px,var(--sea) 88px);border-radius:10px;overflow:hidden}
+.hf-ship{position:absolute;inset:0;--end:77%}
+.hf-ship.out{transform:translateX(115%);transition:transform 1.2s ease-in}
+.hf-ship.in{animation:hfIn .9s ease-out}
+@keyframes hfIn{from{transform:translateX(-115%)}to{transform:none}}
 .hf-hold{position:absolute;left:8px;right:8px;top:14px;height:52px;border:2px dashed var(--line);border-radius:6px;background:var(--paper)}
 .hf-hold::after{content:"";position:absolute;inset:0 calc(100% - var(--end)) 0 0;border:3px solid var(--ink);border-radius:6px;pointer-events:none}
 .hf-box{position:absolute;top:4px;bottom:4px;background:var(--mathe);color:var(--sheet);border:2px solid var(--sheet);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;overflow:hidden;white-space:nowrap}
 .hf-box.over{background:var(--bad);color:var(--sheet)}
-.hf-end{position:absolute;top:6px;height:68px;left:calc(8px + (100% - 16px) * var(--end) / 100%);width:0}
 .hf-hull{position:absolute;left:0;right:0;top:66px;height:30px;background:var(--pac);clip-path:polygon(0 0,100% 0,94% 100%,4% 100%)}
 .hf-crates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .hf-crate{font:800 1.05rem var(--body);padding:14px 6px;border-radius:10px;border:2px solid var(--ink);color:var(--ink);background:var(--sheet);cursor:pointer;
@@ -628,6 +630,7 @@ button.mz-tok{cursor:pointer}
 .zz-line .ph{font:400 1rem var(--body);color:var(--muted)}
 .zz-pad{display:flex;flex-direction:column;gap:8px}
 .zz-nums,.zz-ops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.zz-nums{grid-template-columns:repeat(var(--k,4),minmax(0,1fr))}
 .zz-pad button{font:800 1.4rem var(--display);padding:10px 0;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer}
 .zz-nums button{border-color:var(--mathe);border-width:3px}
 .zz-nums button:disabled{opacity:.35;cursor:default}
@@ -636,7 +639,7 @@ button.mz-tok{cursor:pointer}
 .zz-tree{max-height:280px}
 .lm-grid .mm-face{padding:6px 4px}
 .lm-t{font:800 clamp(1rem,4.2vw,1.35rem) var(--display);overflow-wrap:anywhere;line-height:1.2}
-@media (prefers-reduced-motion:reduce){.hf-ship{transition:none}}
+@media (prefers-reduced-motion:reduce){.hf-ship.out,.hf-ship.in{transition:none;animation:none;transform:none}}
 /* ===== Menü: Klasse → Fach → Kapitel ===== */
 /* Die Liste .faecher ist nur noch Datenquelle; sichtbar ist #navUI (.nv). */
 .navx .faecher{display:none!important}
@@ -1255,6 +1258,16 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.14.1",
+   "date": "2026-11-27",
+   "title": "Hafen und Zielzahl-Jagd verbessert",
+   "items": [
+    "Gucki im Hafen: Das volle Schiff fährt jetzt sauber nach rechts hinaus, und das nächste kommt von links herein. Nichts ruckelt oder springt mehr.",
+    "Zielzahl-Jagd hat jetzt drei Stufen. Bei „Leicht“ sind es nur drei kleine Zahlen, bei „Schwer“ vier.",
+    "Neu ist der Tipp-Knopf: Er verrät dir den ersten Rechenschritt."
+   ]
+  },
   {
    "version": "1.14.0",
    "date": "2026-11-27",
@@ -2703,7 +2716,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="hf-wrap" id="hfWrap">
     <div class="mm-bar"><span id="hfRound"></span><span id="hfPts"></span></div>
     <p class="hf-goal" id="hfGoal"></p>
-    <div class="hf-ship" id="hfShip" aria-hidden="true"><div class="hf-hold" id="hfHold"></div><div class="hf-end"></div><div class="hf-hull"></div></div>
+    <div class="hf-sea" aria-hidden="true"><div class="hf-ship" id="hfShip"><div class="hf-hold" id="hfHold"></div><div class="hf-hull"></div></div></div>
     <p class="hint" id="hfInfo"></p>
     <div class="hf-crates" id="hfCrates" role="group" aria-label="Kisten am Kai"></div>
     <div class="row"><button class="btn" type="button" id="hfGo">⚓ Ablegen!</button><button class="btn ghost" type="button" id="hfNew">Neues Spiel</button></div>
@@ -2759,8 +2772,9 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--mathe),var(--spiel))"></div>
 </header>
 <section>
-  <p class="lead">Baue aus den <strong>vier Zahlen</strong> eine Rechnung, die genau die <strong>Zielzahl</strong> ergibt. Du darfst +, −, · und : benutzen und Klammern setzen. Jede Zahl kommt genau einmal vor.</p>
+  <p class="lead">Baue aus den Zahlen eine Rechnung, die genau die <strong>Zielzahl</strong> ergibt. Du darfst +, −, · und : benutzen und Klammern setzen. <strong>Jede Zahl kommt genau einmal vor.</strong> Fang mit „Leicht“ an: Da sind es nur drei kleine Zahlen.</p>
   <div class="zz-wrap" id="zzWrap">
+    <div class="bl-chips" id="zzLevel" role="group" aria-label="Schwierigkeit"></div>
     <div class="mm-bar"><span id="zzRound"></span><span id="zzPts"></span></div>
     <div class="zz-goal"><span>Zielzahl</span><b id="zzTarget"></b></div>
     <div class="zz-line" id="zzLine" aria-live="polite"></div>
@@ -2773,7 +2787,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     </div>
     <p class="zz-val" id="zzVal" aria-live="polite"></p>
     <svg class="mz-tree zz-tree" id="zzTree" role="img" aria-label="Rechenbaum zu deiner Rechnung"></svg>
-    <div class="row"><button class="btn" type="button" id="zzCheck">Prüfen</button><button class="btn ghost" type="button" id="zzGive">Lösung zeigen</button></div>
+    <div class="row"><button class="btn" type="button" id="zzCheck">Prüfen</button><button class="btn ghost" type="button" id="zzTip">Tipp</button><button class="btn ghost" type="button" id="zzGive">Lösung zeigen</button></div>
     <p class="wr-fb" id="zzFb" aria-live="polite"></p>
   </div>
 </section>
@@ -2782,7 +2796,8 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <ol class="steps">
     <li>Tippe Zahlen, Rechenzeichen und Klammern an. Oben siehst du deine Rechnung.</li>
     <li>Darunter rechnet Gucki mit und zeichnet den Rechenbaum – so siehst du, was zuerst gerechnet wird.</li>
-    <li>Ergibt deine Rechnung genau die Zielzahl und sind alle vier Zahlen dabei? Dann tippe auf „Prüfen“.</li>
+    <li>Ergibt deine Rechnung genau die Zielzahl und sind alle Zahlen dabei? Dann tippe auf „Prüfen“.</li>
+    <li>Kommst du nicht weiter? Der Tipp verrät dir den ersten Rechenschritt.</li>
     <li>Oft gibt es mehrere richtige Lösungen. Jede richtige zählt!</li>
   </ol>
   <div class="merk"><strong>Denk dran:</strong> Klammer vor Punkt vor Strich. Mehr dazu im Kapitel <a href="#zahlen">Rechnen</a>.</div>
@@ -4955,8 +4970,10 @@ const Hafen=(function(){
       if(dis.length<6-k)continue;
       const goalTxt=lv===1?MZ.L(L,"cm"):lv===2?(L%1000?MZ.mixed(L,"m","cm"):MZ.L(L,"m")):MZ.L(L,"m");
       return{lv,L,goalTxt,crates:shuffle([...parts,...dis]).map(mm=>({mm,t:label(mm,lv),on:false})),first:true}}}
-  function start(){st={r:0,pts:0,ok:0,over:false};next()}
-  function next(){st.cur=make(st.r);ship.classList.remove("sail");fb.textContent="";fb.className="wr-fb";render()}
+  function start(){if(st&&st.tm)clearTimeout(st.tm);st={r:0,pts:0,ok:0,over:false};next()}
+  function next(){st.cur=make(st.r);fb.textContent="";fb.className="wr-fb";render();sailIn()}
+  // Neues Schiff fährt von links herein (Klasse „in“ neu starten), das alte ist vorher nach rechts hinausgefahren
+  function sailIn(){ship.classList.remove("out","in");void ship.offsetWidth;ship.classList.add("in")}
   function render(){const c=st.cur;$("#hfRound").textContent=`Schiff ${st.r+1} von ${ROUNDS}`;$("#hfPts").textContent=`${st.pts} Punkte${best?` · Rekord: ${best}`:""}`;
     goal.innerHTML=`Laderaum: <b>${c.goalTxt}</b>`;
     let x=0;hold.innerHTML=c.crates.filter(k=>k.on).map(k=>{const w=k.mm/(c.L*SCALE)*100,over=x+k.mm>c.L,h=`<span class="hf-box${over?" over":""}" style="left:${x/(c.L*SCALE)*100}%;width:${w}%">${w>9?k.t:""}</span>`;x+=k.mm;return h}).join("");
@@ -4968,11 +4985,11 @@ const Hafen=(function(){
     if(!sum){fb.className="wr-fb";fb.textContent="Das Schiff ist noch leer!";return}
     const sumTxt=MZ.L(sum,"cm");
     if(sum===c.L){const p=c.first?10:5;st.pts+=p;st.ok++;fb.className="wr-fb ok";fb.textContent=`Genau voll: ${sumTxt} = ${c.goalTxt}. Leinen los! +${p} Punkte`;guckiCheer();
-      ship.classList.add("sail");st.busy=true;setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1600)}
+      ship.classList.remove("in");ship.classList.add("out");st.busy=true;st.tm=setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1350)}
     else{c.first=false;const d=Math.abs(c.L-sum);fb.className="wr-fb no";
       fb.textContent=sum<c.L?`Zusammen sind das ${sumTxt}. Es fehlen noch ${MZ.L(d,"cm")}.`:`Zusammen sind das ${sumTxt}. Das sind ${MZ.L(d,"cm")} zu viel!`}};
   function end(){st.over=true;const rec=st.pts>best;if(rec){best=st.pts;try{localStorage.setItem("hafenBest",String(best))}catch(_){}}
-    render();hold.innerHTML="";goal.innerHTML=`<b>Feierabend im Hafen!</b>`;info.textContent="";cr.innerHTML="";
+    render();hold.innerHTML="";sailIn();goal.innerHTML=`<b>Feierabend im Hafen!</b>`;info.textContent="";cr.innerHTML="";
     fb.className="wr-fb ok";fb.innerHTML=`${st.ok} von ${ROUNDS} Schiffen beladen, ${st.pts} Punkte.${rec?" 🏆 Neuer Rekord!":""} <button class="btn" type="button" id="hfAgain">Nochmal</button>`;$("#hfAgain").onclick=start;
     if(st.pts===ROUNDS*10)guckiParty();else guckiSay(rec?"Neuer Rekord!":"Gut gemacht, Kranführer!",2200)}
   $("#hfNew").onclick=start;start();
@@ -4993,7 +5010,7 @@ const Mauer=(function(){
     let giv;for(let t=0;t<500;t++){const g=shuffle(IDX.map(p=>key(...p))).slice(0,4);
       const upper=g.filter(x=>x[0]!=="0").length;if(upper<(lv===1?1:2))continue;if(solve(g)){giv=new Set(g);break}}
     return{v,giv}}
-  function start(){st={r:0,pts:0,ok:0,over:false};next()}
+  function start(){if(st&&st.tm)clearTimeout(st.tm);st={r:0,pts:0,ok:0,over:false};next()}
   function next(){st.cur=make(lv);st.cur.first=true;fb.textContent="";fb.className="wr-fb";render()}
   function chips(){lvEl.innerHTML=Object.entries(LV).map(([k,n])=>`<button type="button" data-l="${k}" aria-pressed="${+k===lv}">${n}</button>`).join("")}
   function render(){const c=st.cur;$("#zmRound").textContent=`Mauer ${st.r+1} von ${ROUNDS}`;$("#zmPts").textContent=`${st.pts} Punkte${best[lv]?` · Rekord: ${best[lv]}`:""}`;
@@ -5004,7 +5021,7 @@ const Mauer=(function(){
   $("#zmCheck").onclick=()=>{if(!st||st.over||st.busy)return;const c=st.cur;let ok=0,all=0,empty=0;
     wall.querySelectorAll("input").forEach(i=>{all++;if(i.value===""){empty++;i.classList.remove("ok","no");return}const g=+i.value===c.v[i.dataset.k];i.classList.toggle("ok",g);i.classList.toggle("no",!g);if(g)ok++});
     if(ok===all){const p=c.first?10:5;st.pts+=p;st.ok++;fb.className="wr-fb ok";fb.textContent=`Die Mauer steht! +${p} Punkte`;guckiCheer();st.busy=true;
-      setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1400)}
+      st.tm=setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1400)}
     else{c.first=false;fb.className="wr-fb no";fb.textContent=empty?`Noch ${empty} ${empty===1?"Stein":"Steine"} leer${all-ok-empty?`, ${all-ok-empty} falsch (rot)`:""}.`:"Die roten Steine stimmen noch nicht. Rechne sie noch einmal nach."}};
   $("#zmTip").onclick=()=>{if(!st||st.over)return;const c=st.cur;const known=k=>{if(c.giv.has(k))return true;const i=wall.querySelector(`input[data-k="${k}"]`);return i&&i.value!==""&&+i.value===c.v[k]};
     for(const t of TRI){const ks=t.map(p=>key(...p)),h=ks.map(known);if(h.filter(Boolean).length===2){const j=h.indexOf(false),inp=wall.querySelector(`input[data-k="${ks[j]}"]`);
@@ -5023,17 +5040,20 @@ const Mauer=(function(){
 /* ================= SPIEL: ZIELZAHL-JAGD ================= */
 const Zielzahl=(function(){
   const wrap=$("#zzWrap");if(!wrap)return null;
-  const line=$("#zzLine"),nums=$("#zzNums"),val=$("#zzVal"),svg=$("#zzTree"),fb=$("#zzFb");const ROUNDS=6;let st,best=0;
-  try{best=+localStorage.getItem("zielBest")||0}catch(_){}
+  const line=$("#zzLine"),nums=$("#zzNums"),val=$("#zzVal"),svg=$("#zzTree"),fb=$("#zzFb"),lvEl=$("#zzLevel");const ROUNDS=6,LV={1:"Leicht",2:"Mittel",3:"Schwer"};let st,best={},lv=1;
+  try{best=JSON.parse(localStorage.getItem("zielBest2")||"{}")||{}}catch(_){}
   const OPS=["+","−","·",":"],N=MZ.N;
   // Alle Baumformen mit vier Zahlen
   const SH=[(a,b,c,d,o)=>N(o[2],N(o[1],N(o[0],a,b),c),d),(a,b,c,d,o)=>N(o[1],N(o[0],a,b),N(o[2],c,d)),(a,b,c,d,o)=>N(o[2],N(o[0],a,N(o[1],b,c)),d),
     (a,b,c,d,o)=>N(o[0],a,N(o[2],N(o[1],b,c),d)),(a,b,c,d,o)=>N(o[0],a,N(o[1],b,N(o[2],c,d)))];
-  function make(){for(;;){const n=[0,0,0,0].map(()=>MZ.ri(1,10)),o=[0,1,2].map(()=>MZ.pick(OPS));if(!o.some(x=>x==="·"||x===":"))continue;
-      const t=MZ.pick(SH)(...n,o);if(!MZ.okTerm(t))continue;const v=MZ.val(t);if(v<10||v>150)continue;
+  // Stufe 1: drei Zahlen, plus/minus und höchstens einmal mal · Stufe 2: drei Zahlen mit mal oder geteilt · Stufe 3: vier Zahlen
+  const SH3=[(a,b,c,o)=>N(o[1],N(o[0],a,b),c),(a,b,c,o)=>N(o[0],a,N(o[1],b,c))];
+  function make(lv=3){for(;;){const k=lv<3?3:4,n=Array.from({length:k},()=>MZ.ri(lv===1?1:2,lv===1?9:10)),o=Array.from({length:k-1},()=>MZ.pick(lv===1?["+","−","+","−","·"]:OPS));
+      const pt=o.filter(x=>x==="·"||x===":").length;if(lv===1&&pt>1)continue;if(lv>=2&&!pt)continue;
+      const t=k===3?(pt?MZ.pick(SH3):SH3[0])(...n,o):MZ.pick(SH)(...n,o);if(!MZ.okTerm(t))continue;const v=MZ.val(t);if(v<(lv===1?5:10)||v>(lv===1?40:lv===2?90:150))continue;
       // keine Teilrechnung mit 0 oder „: 1“/„· 1“ als Abkürzung
       let bad=false;(function w(x){if(typeof x==="number")return;const l=MZ.val(x.l),r=MZ.val(x.r);if(MZ.val(x)===0||((x.o==="·"||x.o===":")&&(r===1||l===1)))bad=true;w(x.l);w(x.r)})(t);if(bad)continue;
-      return{n:shuffle(n),target:v,sol:MZ.show(t)}}}
+      return{n:shuffle(n),target:v,sol:MZ.show(t),tree:t,k}}}
   // Zerlegen und Rechnen: Zahl, + − · :, Klammern
   function parse(tk){let p=0;function atom(){const t=tk[p];if(!t)throw 0;if(t.t==="(")
         {p++;const e=sum();if(!tk[p]||tk[p].t!==")")throw 0;p++;return e}if(t.t==="n"){p++;return t.v}throw 0}
@@ -5042,31 +5062,36 @@ const Zielzahl=(function(){
       const e=sum();if(p!==tk.length)throw 0;return e}
   const exact=t=>{if(typeof t==="number")return t;const l=exact(t.l),r=exact(t.r);if(l==null||r==null)return null;
     if(t.o==="+")return l+r;if(t.o==="−")return l-r;if(t.o==="·")return l*r;return r!==0&&Number.isInteger(l/r)?l/r:null};
-  function start(){st={r:0,pts:0,ok:0,over:false};next()}
-  function next(){st.cur=make();st.cur.first=true;st.cur.shown=false;st.tk=[];fb.textContent="";fb.className="wr-fb";render()}
-  function render(){const c=st.cur;$("#zzRound").textContent=`Aufgabe ${st.r+1} von ${ROUNDS}`;$("#zzPts").textContent=`${st.pts} Punkte${best?` · Rekord: ${best}`:""}`;
+  function chips(){lvEl.innerHTML=Object.entries(LV).map(([k,n])=>`<button type="button" data-l="${k}" aria-pressed="${+k===lv}">${n}</button>`).join("")}
+  function start(){if(st&&st.tm)clearTimeout(st.tm);st={r:0,pts:0,ok:0,over:false};next()}
+  function next(){st.cur=make(lv);st.cur.first=true;st.cur.shown=false;st.tk=[];fb.textContent="";fb.className="wr-fb";render()}
+  function render(){const c=st.cur;$("#zzRound").textContent=`Aufgabe ${st.r+1} von ${ROUNDS}`;$("#zzPts").textContent=`${st.pts} Punkte${best[lv]?` · Rekord: ${best[lv]}`:""}`;
     $("#zzTarget").textContent=c.target;const used=new Set(st.tk.filter(t=>t.t==="n").map(t=>t.i));
-    nums.innerHTML=c.n.map((v,i)=>`<button type="button" data-i="${i}" ${used.has(i)?"disabled":""}>${v}</button>`).join("");
+    nums.style.setProperty("--k",c.n.length);nums.innerHTML=c.n.map((v,i)=>`<button type="button" data-i="${i}" ${used.has(i)?"disabled":""}>${v}</button>`).join("");
     line.innerHTML=st.tk.length?st.tk.map(t=>`<span>${t.t==="n"?t.v:t.t}</span>`).join(""):`<span class="ph">Tippe unten deine Rechnung …</span>`;
     let tree=null;try{tree=st.tk.length?parse(st.tk):null}catch(_){}
-    if(tree&&typeof tree!=="number"){const v=exact(tree);val.textContent=v==null?"Das geht nicht glatt auf (Teilen mit Rest).":`= ${v}`;val.className="zz-val"+(v===c.target?" hit":"");MZ.treeSVG(svg,tree,null,{dx:50,lh:70});svg.hidden=false}
-    else{val.textContent=st.tk.length?"Die Rechnung ist noch nicht fertig.":"";val.className="zz-val";svg.innerHTML="";svg.hidden=true}}
+    if(tree&&typeof tree!=="number"){const v=exact(tree);val.textContent=v==null?"Das geht nicht glatt auf (Teilen mit Rest).":`= ${v}`;val.className="zz-val"+(v===c.target?" hit":"");MZ.treeSVG(svg,tree,null,{dx:50,lh:70});svg.removeAttribute("hidden")}
+    else{val.textContent=st.tk.length?"Die Rechnung ist noch nicht fertig.":"";val.className="zz-val";svg.innerHTML="";svg.setAttribute("hidden","")}}
   nums.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||st.over||st.busy)return;const i=+b.dataset.i;st.tk.push({t:"n",v:st.cur.n[i],i});fb.textContent="";render()});
   $("#zzOps").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||st.over||st.busy)return;const t=b.dataset.t;
     if(t==="back")st.tk.pop();else if(t==="clear")st.tk=[];else st.tk.push({t});fb.textContent="";render()});
   $("#zzCheck").onclick=()=>{if(st.over||st.busy)return;const c=st.cur;let tree=null;try{tree=parse(st.tk)}catch(_){}
     const usedN=st.tk.filter(t=>t.t==="n").length;
     if(!tree){fb.className="wr-fb no";fb.textContent="Die Rechnung ist noch nicht fertig. Fehlt eine Zahl oder eine Klammer?";return}
-    if(usedN<4){fb.className="wr-fb no";fb.textContent=`Du hast erst ${usedN} von 4 Zahlen benutzt.`;return}
+    if(usedN<c.k){fb.className="wr-fb no";fb.textContent=`Du hast erst ${usedN} von ${c.k} Zahlen benutzt.`;return}
     const v=exact(tree);if(v===c.target){const p=c.shown?0:c.first?10:5;st.pts+=p;if(p)st.ok++;fb.className="wr-fb ok";fb.textContent=`Treffer: ${MZ.show(tree)} = ${c.target}!${p?` +${p} Punkte`:""}`;guckiCheer();st.busy=true;
-      setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1500)}
+      st.tm=setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1500)}
     else{c.first=false;fb.className="wr-fb no";fb.textContent=v==null?"Hier geht eine Division nicht glatt auf.":`Deine Rechnung ergibt ${v}, nicht ${c.target}. Versuch es anders!`}};
+  // Tipp: der erste Rechenschritt der vorbereiteten Lösung (danach höchstens 5 Punkte)
+  $("#zzTip").onclick=()=>{if(st.over||st.busy)return;const c=st.cur,r0=MZ.ready(c.tree)[0];c.first=false;fb.className="wr-fb";
+    fb.textContent=`Tipp: Rechne zuerst ${MZ.show(r0)} = ${MZ.val(r0)}.${c.k===3?"":" Danach schau, wie du mit den anderen Zahlen weiterkommst."}`};
   $("#zzGive").onclick=()=>{if(st.over||st.busy)return;st.cur.shown=true;st.cur.first=false;fb.className="wr-fb";fb.textContent=`Eine Lösung: ${st.cur.sol} = ${st.cur.target}. Tippe sie nach und prüfe – es gibt aber keine Punkte.`};
-  function end(){st.over=true;const rec=st.pts>best;if(rec){best=st.pts;try{localStorage.setItem("zielBest",String(best))}catch(_){}}
-    nums.innerHTML="";line.innerHTML="";val.textContent="";svg.innerHTML="";svg.hidden=true;$("#zzTarget").textContent="🏁";
-    fb.className="wr-fb ok";fb.innerHTML=`${st.ok} von ${ROUNDS} Zielzahlen getroffen, ${st.pts} Punkte.${rec?" 🏆 Neuer Rekord!":""} <button class="btn" type="button" id="zzAgain">Nochmal</button>`;$("#zzAgain").onclick=start;
+  function end(){st.over=true;const rec=st.pts>(best[lv]||0);if(rec){best[lv]=st.pts;try{localStorage.setItem("zielBest2",JSON.stringify(best))}catch(_){}}
+    nums.innerHTML="";line.innerHTML="";val.textContent="";svg.innerHTML="";svg.setAttribute("hidden","");$("#zzTarget").textContent="🏁";
+    fb.className="wr-fb ok";fb.innerHTML=`${st.ok} von ${ROUNDS} Zielzahlen getroffen, ${st.pts} Punkte.${rec?" 🏆 Neuer Rekord!":""} <button class="btn" type="button" id="zzAgain">Nochmal</button>${lv<3?` <button class="btn ghost" type="button" id="zzUp">Weiter mit ${LV[lv+1]}</button>`:""}`;$("#zzAgain").onclick=start;const up=$("#zzUp");if(up)up.onclick=()=>{lv++;chips();start()};
     if(st.pts===ROUNDS*10)guckiParty();else guckiSay(rec?"Neuer Rekord!":"Volltreffer-Profi!",2200)}
-  start();
+  lvEl.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;lv=+b.dataset.l;chips();start()});
+  chips();start();
   return{make,parse,exact}})();
 
 /* ================= SPIEL: LÄNGEN-MEMORY ================= */

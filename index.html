@@ -594,6 +594,49 @@ button.mz-tok{cursor:pointer}
 @media (max-width:480px){.cc{font-size:1.2rem}.mz-stairs{height:250px}.mz-stairs .st{height:calc(58px + (4 - var(--s)) * 44px);padding:8px 1px 4px}.mz-stairs .st b{font-size:1.25rem}.mz-stairs .st span{display:none}
   .mz-bsp li{font-size:.8rem;padding:5px 1px}.mz-stairs .st small{font-size:.75rem}.mz-dmrow i{font-size:.75rem}
   .mz-swt th,.mz-swt td{min-width:1.5em;padding:3px 1px}.mz-swt td{font-size:1.05rem}}
+/* ===== Mathe-Spiele ===== */
+.hf-wrap,.zm-wrap,.zz-wrap{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.hf-goal{margin:0;font-size:1.15rem}.hf-goal b{font:800 1.5rem var(--display)}
+.hf-ship{position:relative;height:118px;--end:77%;background:linear-gradient(transparent 88px,var(--sea) 88px);border-radius:10px;overflow:hidden;transition:transform 1.4s ease-in}
+.hf-ship.sail{transform:translateX(110%)}
+.hf-hold{position:absolute;left:8px;right:8px;top:14px;height:52px;border:2px dashed var(--line);border-radius:6px;background:var(--paper)}
+.hf-hold::after{content:"";position:absolute;inset:0 calc(100% - var(--end)) 0 0;border:3px solid var(--ink);border-radius:6px;pointer-events:none}
+.hf-box{position:absolute;top:4px;bottom:4px;background:var(--mathe);color:var(--sheet);border:2px solid var(--sheet);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;overflow:hidden;white-space:nowrap}
+.hf-box.over{background:var(--bad);color:var(--sheet)}
+.hf-end{position:absolute;top:6px;height:68px;left:calc(8px + (100% - 16px) * var(--end) / 100%);width:0}
+.hf-hull{position:absolute;left:0;right:0;top:66px;height:30px;background:var(--pac);clip-path:polygon(0 0,100% 0,94% 100%,4% 100%)}
+.hf-crates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.hf-crate{font:800 1.05rem var(--body);padding:14px 6px;border-radius:10px;border:2px solid var(--ink);color:var(--ink);background:var(--sheet);cursor:pointer;
+  background-image:repeating-linear-gradient(90deg,transparent 0 22px,color-mix(in srgb,var(--line) 70%,transparent) 22px 24px)}
+.hf-crate[aria-pressed="true"]{background:var(--paper);border-style:dashed;color:var(--muted)}
+.hf-crate:focus-visible,.zz-pad button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wr-fb.no{color:var(--bad)}
+.zm-wall{display:flex;flex-direction:column;align-items:center;gap:6px}
+.zm-row{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:6px;width:calc(var(--n) * 25% - 4px)}
+.zm-b{display:flex;min-width:0}
+.zm-b,.zm-b input{height:52px;border-radius:8px;font:800 1.2rem var(--body);font-variant-numeric:tabular-nums}
+.zm-b.giv{align-items:center;justify-content:center;background:var(--mathe);color:var(--sheet)}
+.zm-b input{width:100%;min-width:0;text-align:center;border:2px solid var(--line);background:var(--sheet);color:var(--ink);padding:0}
+.zm-b input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
+.zm-b input.ok{border-color:var(--ok);background:var(--okbg)}
+.zm-b input.no{border-color:var(--bad);background:var(--badbg)}
+.zm-b input.tip{border-color:var(--focus);border-width:3px}
+.zz-goal{display:flex;align-items:center;gap:12px}
+.zz-goal span{font-weight:700;color:var(--muted)}
+.zz-goal b{font:800 2.2rem var(--display);background:var(--mathe);color:var(--sheet);border-radius:12px;padding:2px 16px;min-width:2.2em;text-align:center}
+.zz-line{min-height:56px;border:2px solid var(--ink);border-radius:12px;padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:800 1.5rem var(--display);background:var(--sheet)}
+.zz-line .ph{font:400 1rem var(--body);color:var(--muted)}
+.zz-pad{display:flex;flex-direction:column;gap:8px}
+.zz-nums,.zz-ops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.zz-pad button{font:800 1.4rem var(--display);padding:10px 0;border-radius:10px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer}
+.zz-nums button{border-color:var(--mathe);border-width:3px}
+.zz-nums button:disabled{opacity:.35;cursor:default}
+.zz-val{margin:0;font-weight:800;font-size:1.1rem;min-height:1.4em}
+.zz-val.hit{color:var(--ok)}
+.zz-tree{max-height:280px}
+.lm-grid .mm-face{padding:6px 4px}
+.lm-t{font:800 clamp(1rem,4.2vw,1.35rem) var(--display);overflow-wrap:anywhere;line-height:1.2}
+@media (prefers-reduced-motion:reduce){.hf-ship{transition:none}}
 /* ===== Menü: Klasse → Fach → Kapitel ===== */
 /* Die Liste .faecher ist nur noch Datenquelle; sichtbar ist #navUI (.nv). */
 .navx .faecher{display:none!important}
@@ -1213,6 +1256,18 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
+   "version": "1.14.0",
+   "date": "2026-11-27",
+   "title": "Vier neue Mathe-Spiele",
+   "items": [
+    "Gucki im Hafen: Belade an den Landungsbrücken ein Schiff genau voll – welche Kisten passen zusammen? Dafür rechnest du Längen um und zählst sie zusammen.",
+    "Zahlenmauer: Jeder Stein ist so groß wie die beiden darunter zusammen. Finde die fehlenden Steine – in drei Stufen bis zu großen Zahlen.",
+    "Zielzahl-Jagd: Baue aus vier Zahlen eine Rechnung, die genau die Zielzahl ergibt. Gucki zeichnet dir den Rechenbaum dazu.",
+    "Längen-Memory: Finde die Karten, auf denen dieselbe Länge steht – zum Beispiel 3 m 5 cm und 3,05 m.",
+    "Du findest alle vier Spiele über den 🎮-Knopf oben rechts."
+   ]
+  },
+  {
    "version": "1.13.2",
    "date": "2026-11-27",
    "title": "Merkgrößen aus der Schule",
@@ -1453,6 +1508,17 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
  ],
  "summaries": [
   {
+   "from": "1.9.0",
+   "to": "1.13.2",
+   "title": "Englisch, Mathe und ein neues Menü",
+   "items": [
+    "Zwei neue Fächer: Englisch mit Vokabeln zum Nachschlagen, Anhören und Üben, und Mathe mit den Kapiteln „Rechnen“ und „Längen“.",
+    "Das Menü wurde neu gebaut: Erst wählst du das Fach, dann das Kapitel. Später kommen so auch andere Klassenstufen dazu.",
+    "Gucki fragt dich Vokabeln ab, liest vor und kennt jetzt 21 Tricks, wenn du ihn fünfmal schnell antippst.",
+    "In Mathe gibt es einen Schreib-Trainer, einen Rechenbaum zum Antippen, ein Lineal, die Einheitentreppe und Merkgrößen aus deinem Schulalltag."
+   ]
+  },
+  {
    "from": "1.0.0",
    "to": "1.8.0",
    "title": "Die ersten zehn Versionen",
@@ -1504,6 +1570,10 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
       <a href="#weltreise" data-topic="weltreise" data-desc="Fahr mit Gucki und seinem Schiff um die Welt: Himmelsrichtung finden, Hafen anlaufen, Frage beantworten."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#139DB3"/><path d="M7 18h18l-3 5H10z" fill="#FFFFFF"/><path d="M16 7v10M16 8l6 7h-6" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/></svg><span><b>Guckis Weltreise</b></span></a>
       <a href="#blitz" data-topic="blitz" data-desc="60 Sekunden, Fragen aus allen Kapiteln: Wie viele schaffst du hintereinander?"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#E2A12B"/><path d="M18 5 9 18h6l-2 9 10-14h-6z" fill="#FFFFFF"/></svg><span><b>Gucki-Blitzrunde</b></span></a>
       <a href="#memory" data-topic="memory" data-desc="Ein Memory zum Notenlesen: Finde Note und Notenname, Pause und Pausenname. Mit Ton beim Aufdecken!"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#7A5BC4"/><rect x="6" y="8" width="9" height="13" rx="2" fill="#FFFFFF"/><rect x="17" y="11" width="9" height="13" rx="2" fill="#FFFFFF" fill-opacity=".75"/><ellipse cx="9.6" cy="17.5" rx="2" ry="1.5" fill="#7A5BC4"/><path d="M11.4 17.3V11.4" stroke="#7A5BC4" stroke-width="1.2"/></svg><span><b>Notenmemory</b></span></a>
+      <a href="#hafen" data-topic="hafen" data-desc="Belade mit Gucki ein Schiff im Hamburger Hafen: Welche Kisten füllen den Laderaum genau? Längen umrechnen und addieren."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#A85300"/><rect x="9" y="9" width="6" height="6" fill="#FFFFFF"/><rect x="16" y="9" width="7" height="6" fill="#FFFFFF"/><path d="M5 17h22l-3 6H8z" fill="#FFFFFF"/></svg><span><b>Gucki im Hafen</b></span></a>
+      <a href="#mauer" data-topic="mauer" data-desc="Jeder Stein ist die Summe der beiden darunter: Finde die fehlenden Steine – mit plus und minus."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#A85300"/><g fill="#FFFFFF"><rect x="13" y="7" width="7" height="5" rx="1"/><rect x="9" y="13" width="7" height="5" rx="1"/><rect x="17" y="13" width="7" height="5" rx="1"/><rect x="5" y="19" width="7" height="5" rx="1"/><rect x="13" y="19" width="7" height="5" rx="1"/><rect x="21" y="19" width="7" height="5" rx="1"/></g></svg><span><b>Zahlenmauer</b></span></a>
+      <a href="#zielzahl" data-topic="zielzahl" data-desc="Vier Zahlen, eine Zielzahl: Baue mit Klammern und Rechenzeichen die passende Rechnung."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#A85300"/><circle cx="16" cy="16" r="9" fill="none" stroke="#FFFFFF" stroke-width="2.4"/><circle cx="16" cy="16" r="4.5" fill="none" stroke="#FFFFFF" stroke-width="2.4"/><circle cx="16" cy="16" r="1.6" fill="#FFFFFF"/></svg><span><b>Zielzahl-Jagd</b></span></a>
+      <a href="#lmemory" data-topic="lmemory" data-desc="Ein Memory mit Längen: Finde die Karten, auf denen dieselbe Länge anders geschrieben steht."><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#A85300"/><rect x="7" y="8" width="10" height="14" rx="2" fill="#FFFFFF"/><rect x="15" y="11" width="10" height="14" rx="2" fill="#FFFFFF" stroke="#A85300" stroke-width="1.6"/><path d="M17.5 18h5" stroke="#A85300" stroke-width="1.8"/></svg><span><b>Längen-Memory</b></span></a>
     </div></div>
 </div>
 <div class="crumbs" id="crumbs">
@@ -2621,6 +2691,131 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </section>
 </div>
 
+<!-- ============ SPIEL: GUCKI IM HAFEN ============ -->
+<div class="topic" id="hafen" hidden>
+<header>
+  <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Mathe</p>
+  <h1>Gucki im Hafen</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--mathe),var(--spiel))"></div>
+</header>
+<section>
+  <p class="lead">Gucki ist Kranführer an den Landungsbrücken. Das Schiff muss <strong>genau voll</strong> beladen werden – kein Zentimeter zu viel, kein Zentimeter zu wenig. Welche Kisten passen zusammen?</p>
+  <div class="hf-wrap" id="hfWrap">
+    <div class="mm-bar"><span id="hfRound"></span><span id="hfPts"></span></div>
+    <p class="hf-goal" id="hfGoal"></p>
+    <div class="hf-ship" id="hfShip" aria-hidden="true"><div class="hf-hold" id="hfHold"></div><div class="hf-end"></div><div class="hf-hull"></div></div>
+    <p class="hint" id="hfInfo"></p>
+    <div class="hf-crates" id="hfCrates" role="group" aria-label="Kisten am Kai"></div>
+    <div class="row"><button class="btn" type="button" id="hfGo">⚓ Ablegen!</button><button class="btn ghost" type="button" id="hfNew">Neues Spiel</button></div>
+    <p class="wr-fb" id="hfFb" aria-live="polite"></p>
+  </div>
+</section>
+<section>
+  <h2>So spielst du</h2>
+  <ol class="steps">
+    <li>Oben steht, wie lang der Laderaum des Schiffs ist.</li>
+    <li>Tippe Kisten an, um sie zu verladen. Noch einmal tippen holt sie wieder herunter.</li>
+    <li>Rechne alle Längen in <strong>dieselbe Einheit</strong> um und zähle sie zusammen.</li>
+    <li>Passt es genau? Dann tippe auf „Ablegen!“. Beim ersten Versuch gibt es 10 Punkte, danach 5.</li>
+  </ol>
+  <div class="merk"><strong>Tipp:</strong> Umrechnen und Längen addieren übst du im Kapitel <a href="#laengen">Längen</a>. Am einfachsten rechnest du alles in Zentimeter um.</div>
+</section>
+</div>
+
+<!-- ============ SPIEL: ZAHLENMAUER ============ -->
+<div class="topic" id="mauer" hidden>
+<header>
+  <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Mathe</p>
+  <h1>Zahlenmauer</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--mathe),var(--spiel))"></div>
+</header>
+<section>
+  <p class="lead">In einer Zahlenmauer ist jeder Stein so groß wie die <strong>beiden Steine darunter zusammen</strong>. Ein paar Steine sind schon da – findest du die anderen?</p>
+  <div class="zm-wrap" id="zmWrap">
+    <div class="bl-chips" id="zmLevel" role="group" aria-label="Schwierigkeit"></div>
+    <div class="mm-bar"><span id="zmRound"></span><span id="zmPts"></span></div>
+    <div class="zm-wall" id="zmWall"></div>
+    <div class="row"><button class="btn" type="button" id="zmCheck">Prüfen</button><button class="btn ghost" type="button" id="zmTip">Tipp</button></div>
+    <p class="wr-fb" id="zmFb" aria-live="polite"></p>
+  </div>
+</section>
+<section>
+  <h2>So spielst du</h2>
+  <ol class="steps">
+    <li>Zwei Steine nebeneinander ergeben zusammen den Stein darüber: <strong>unten plus unten = oben</strong>.</li>
+    <li>Kennst du den oberen Stein und einen unteren, rechnest du minus: <strong>oben minus unten = der andere unten</strong>.</li>
+    <li>Fang dort an, wo du schon zwei von drei Steinen kennst.</li>
+    <li>Ab Stufe 3 sind die Zahlen groß – dann rechnest du am besten schriftlich auf einem Zettel.</li>
+  </ol>
+  <div class="merk"><strong>Tipp:</strong> Schriftlich addieren und subtrahieren übst du im Kapitel <a href="#zahlen">Rechnen</a>.</div>
+</section>
+</div>
+
+<!-- ============ SPIEL: ZIELZAHL-JAGD ============ -->
+<div class="topic" id="zielzahl" hidden>
+<header>
+  <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Mathe</p>
+  <h1>Zielzahl-Jagd</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--mathe),var(--spiel))"></div>
+</header>
+<section>
+  <p class="lead">Baue aus den <strong>vier Zahlen</strong> eine Rechnung, die genau die <strong>Zielzahl</strong> ergibt. Du darfst +, −, · und : benutzen und Klammern setzen. Jede Zahl kommt genau einmal vor.</p>
+  <div class="zz-wrap" id="zzWrap">
+    <div class="mm-bar"><span id="zzRound"></span><span id="zzPts"></span></div>
+    <div class="zz-goal"><span>Zielzahl</span><b id="zzTarget"></b></div>
+    <div class="zz-line" id="zzLine" aria-live="polite"></div>
+    <div class="zz-pad">
+      <div class="zz-nums" id="zzNums" role="group" aria-label="Zahlen"></div>
+      <div class="zz-ops" id="zzOps" role="group" aria-label="Rechenzeichen und Klammern">
+        <button type="button" data-t="+" aria-label="plus">+</button><button type="button" data-t="−" aria-label="minus">−</button><button type="button" data-t="·" aria-label="mal">·</button><button type="button" data-t=":" aria-label="geteilt durch">:</button>
+        <button type="button" data-t="(" aria-label="Klammer auf">(</button><button type="button" data-t=")" aria-label="Klammer zu">)</button><button type="button" data-t="back" aria-label="Letztes löschen">⌫</button><button type="button" data-t="clear" aria-label="Alles löschen">C</button>
+      </div>
+    </div>
+    <p class="zz-val" id="zzVal" aria-live="polite"></p>
+    <svg class="mz-tree zz-tree" id="zzTree" role="img" aria-label="Rechenbaum zu deiner Rechnung"></svg>
+    <div class="row"><button class="btn" type="button" id="zzCheck">Prüfen</button><button class="btn ghost" type="button" id="zzGive">Lösung zeigen</button></div>
+    <p class="wr-fb" id="zzFb" aria-live="polite"></p>
+  </div>
+</section>
+<section>
+  <h2>So spielst du</h2>
+  <ol class="steps">
+    <li>Tippe Zahlen, Rechenzeichen und Klammern an. Oben siehst du deine Rechnung.</li>
+    <li>Darunter rechnet Gucki mit und zeichnet den Rechenbaum – so siehst du, was zuerst gerechnet wird.</li>
+    <li>Ergibt deine Rechnung genau die Zielzahl und sind alle vier Zahlen dabei? Dann tippe auf „Prüfen“.</li>
+    <li>Oft gibt es mehrere richtige Lösungen. Jede richtige zählt!</li>
+  </ol>
+  <div class="merk"><strong>Denk dran:</strong> Klammer vor Punkt vor Strich. Mehr dazu im Kapitel <a href="#zahlen">Rechnen</a>.</div>
+</section>
+</div>
+
+<!-- ============ SPIEL: LÄNGEN-MEMORY ============ -->
+<div class="topic" id="lmemory" hidden>
+<header>
+  <p class="eyebrow"><a href="#spiele">Spiele</a> · Klasse 5 · Mathe</p>
+  <h1>Längen-Memory</h1>
+  <div class="stripe" aria-hidden="true" style="background:linear-gradient(90deg,var(--mathe),var(--spiel))"></div>
+</header>
+<section>
+  <p class="lead">Finde immer zwei Karten, auf denen <strong>dieselbe Länge</strong> steht – nur anders geschrieben. Vorsicht, manche Karten sehen sich sehr ähnlich!</p>
+  <div class="mm-wrap" id="lmWrap">
+    <div class="bl-chips" id="lmMode" role="group" aria-label="Schwierigkeit"></div>
+    <div class="mm-bar"><span id="lmPairs"></span><span id="lmMoves"></span></div>
+    <div class="mm-grid lm-grid" id="lmGrid"></div>
+    <p class="wr-fb" id="lmFb" aria-live="polite"></p>
+  </div>
+</section>
+<section>
+  <h2>So spielst du</h2>
+  <ol class="steps">
+    <li>Tippe zwei Karten an. Steht auf beiden dieselbe Länge, bleiben sie offen und werden grün.</li>
+    <li>Passen sie nicht, drehen sie sich wieder um. Merk dir, wo welche Karte liegt!</li>
+    <li>Ein Zug sind zwei aufgedeckte Karten. Bei 6 Paaren sind 6 Züge das Beste, was geht.</li>
+  </ol>
+  <div class="merk"><strong>Tipp:</strong> 3 m 5 cm = 3,05 m – aber 3 m 50 cm = 3,5 m. Mehr dazu im Kapitel <a href="#laengen">Längen</a>.</div>
+</section>
+</div>
+
 <!-- ============ SPIEL: GUCKI-BLITZRUNDE ============ -->
 <div class="topic" id="blitz" hidden>
 <header>
@@ -2858,7 +3053,7 @@ const f1=n=>(Math.round(n*10)/10).toString();
   page.innerHTML=h;
 })();
 /* ---------- Kapitel-Umschalter ---------- */
-const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","vokabeln","zahlen","laengen","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","neuigkeiten","quellen"];
+const TOPICS=["start","farbkreis","kontinente","meere","tagnacht","kompass","noten","deutsch","vokabeln","zahlen","laengen","klassenarbeit","spiele","farbfang","weltreise","blitz","memory","hafen","mauer","zielzahl","lmemory","neuigkeiten","quellen"];
 /* --- Klassen, Fächer und Menü --- */
 // Datenquelle ist die (versteckte) Liste .navx .faecher: Fach = .fach[data-fach], Kapitel = a[data-topic].
 // Klasse eines Kapitels: data-kl am Link, sonst am Fach, sonst "5". "alle" = in jeder Klasse (z. B. Lernen).
@@ -4741,6 +4936,176 @@ function mzLDet(){const F=["Die 0 vergessen","Nicht in dieselbe Einheit umgerech
   return shuffle(["null_","einheit","faktor","ohne","ok"]).map(k=>{const x=M[k]();return{q:`<span class="mz-t">${x.t}</span>`,a:x.a,o:F.map(v=>({v,label:v})),why:x.why}})}
 (function(){const box=$("#l7");if(!box)return;mzQuiz(box,mzLDet)})();
 
+/* ================= SPIEL: GUCKI IM HAFEN ================= */
+// Ein Laderaum mit fester Länge muss genau gefüllt werden. Alle Längen intern in mm (MZ aus dem Mathe-Block).
+const Hafen=(function(){
+  const wrap=$("#hfWrap");if(!wrap)return null;
+  const hold=$("#hfHold"),cr=$("#hfCrates"),fb=$("#hfFb"),goal=$("#hfGoal"),info=$("#hfInfo"),ship=$("#hfShip");
+  const ROUNDS=8,SCALE=1.3;let st,best=0;try{best=+localStorage.getItem("hafenBest")||0}catch(_){}
+  // Schreibweise einer Kistenlänge je Stufe
+  function label(mm,lv){const f=[];f.push(MZ.L(mm,"cm"));
+    if(lv>=2){f.push(MZ.L(mm,"m"));if(mm>=1000&&mm%1000)f.push(MZ.mixed(mm,"m","cm"))}
+    if(lv>=3){f.push(MZ.L(mm,"dm"));f.push(MZ.L(mm,"mm"))}
+    return MZ.pick(f.filter(Boolean))}
+  function make(r){const lv=r<3?1:r<6?2:3,k=lv===1?2:lv===2?MZ.pick([2,3]):3,step=lv===1?100:lv===2?50:10;
+    for(;;){const parts=[];const R={1:[4,25],2:[8,44],3:[40,220]}[lv];for(let i=0;i<k;i++)parts.push(MZ.ri(...R)*step);
+      const L=parts.reduce((a,b)=>a+b,0);if(L>6000||L<1500)continue;
+      const all=new Set(parts),dis=[];let tries=0;
+      while(dis.length<6-k&&tries++<100){const d=MZ.pick(parts)+MZ.pick([-1,1])*MZ.ri(1,3)*step;if(d>=300&&!all.has(d)){all.add(d);dis.push(d)}}
+      if(dis.length<6-k)continue;
+      const goalTxt=lv===1?MZ.L(L,"cm"):lv===2?(L%1000?MZ.mixed(L,"m","cm"):MZ.L(L,"m")):MZ.L(L,"m");
+      return{lv,L,goalTxt,crates:shuffle([...parts,...dis]).map(mm=>({mm,t:label(mm,lv),on:false})),first:true}}}
+  function start(){st={r:0,pts:0,ok:0,over:false};next()}
+  function next(){st.cur=make(st.r);ship.classList.remove("sail");fb.textContent="";fb.className="wr-fb";render()}
+  function render(){const c=st.cur;$("#hfRound").textContent=`Schiff ${st.r+1} von ${ROUNDS}`;$("#hfPts").textContent=`${st.pts} Punkte${best?` · Rekord: ${best}`:""}`;
+    goal.innerHTML=`Laderaum: <b>${c.goalTxt}</b>`;
+    let x=0;hold.innerHTML=c.crates.filter(k=>k.on).map(k=>{const w=k.mm/(c.L*SCALE)*100,over=x+k.mm>c.L,h=`<span class="hf-box${over?" over":""}" style="left:${x/(c.L*SCALE)*100}%;width:${w}%">${w>9?k.t:""}</span>`;x+=k.mm;return h}).join("");
+    ship.style.setProperty("--end",100/SCALE+"%");
+    const n=c.crates.filter(k=>k.on).length;info.textContent=n?`${n} ${n===1?"Kiste":"Kisten"} geladen.`:"Noch leer. Tippe Kisten an, um sie zu verladen.";
+    cr.innerHTML=c.crates.map((k,i)=>`<button type="button" class="hf-crate" data-i="${i}" aria-pressed="${k.on}">${k.t}</button>`).join("")}
+  cr.addEventListener("click",e=>{const b=e.target.closest(".hf-crate");if(!b||st.over||st.busy)return;const k=st.cur.crates[+b.dataset.i];k.on=!k.on;fb.textContent="";render()});
+  $("#hfGo").onclick=()=>{if(st.over||st.busy)return;const c=st.cur,sum=c.crates.filter(k=>k.on).reduce((a,k)=>a+k.mm,0);
+    if(!sum){fb.className="wr-fb";fb.textContent="Das Schiff ist noch leer!";return}
+    const sumTxt=MZ.L(sum,"cm");
+    if(sum===c.L){const p=c.first?10:5;st.pts+=p;st.ok++;fb.className="wr-fb ok";fb.textContent=`Genau voll: ${sumTxt} = ${c.goalTxt}. Leinen los! +${p} Punkte`;guckiCheer();
+      ship.classList.add("sail");st.busy=true;setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1600)}
+    else{c.first=false;const d=Math.abs(c.L-sum);fb.className="wr-fb no";
+      fb.textContent=sum<c.L?`Zusammen sind das ${sumTxt}. Es fehlen noch ${MZ.L(d,"cm")}.`:`Zusammen sind das ${sumTxt}. Das sind ${MZ.L(d,"cm")} zu viel!`}};
+  function end(){st.over=true;const rec=st.pts>best;if(rec){best=st.pts;try{localStorage.setItem("hafenBest",String(best))}catch(_){}}
+    render();hold.innerHTML="";goal.innerHTML=`<b>Feierabend im Hafen!</b>`;info.textContent="";cr.innerHTML="";
+    fb.className="wr-fb ok";fb.innerHTML=`${st.ok} von ${ROUNDS} Schiffen beladen, ${st.pts} Punkte.${rec?" 🏆 Neuer Rekord!":""} <button class="btn" type="button" id="hfAgain">Nochmal</button>`;$("#hfAgain").onclick=start;
+    if(st.pts===ROUNDS*10)guckiParty();else guckiSay(rec?"Neuer Rekord!":"Gut gemacht, Kranführer!",2200)}
+  $("#hfNew").onclick=start;start();
+  return{make}})();
+
+/* ================= SPIEL: ZAHLENMAUER ================= */
+const Mauer=(function(){
+  const wall=$("#zmWall");if(!wall)return null;
+  const fb=$("#zmFb"),lvEl=$("#zmLevel");const ROUNDS=5,LV={1:"Stufe 1",2:"Stufe 2",3:"Stufe 3"};let lv=1,st,best={};
+  try{best=JSON.parse(localStorage.getItem("mauerBest")||"{}")||{}}catch(_){}
+  const N=4,IDX=[];for(let r=0;r<N;r++)for(let i=0;i<N-r;i++)IDX.push([r,i]);
+  const key=(r,i)=>r+"-"+i;
+  // Tripel: zwei Steine unten und der Stein darüber
+  const TRI=[];for(let r=1;r<N;r++)for(let i=0;i<N-r;i++)TRI.push([[r-1,i],[r-1,i+1],[r,i]]);
+  function solve(known){const k=new Set(known);let ch=true;while(ch){ch=false;for(const t of TRI){const h=t.map(p=>k.has(key(...p)));if(h.filter(Boolean).length===2){t.forEach((p,j)=>{if(!h[j]){k.add(key(...p));ch=true}})}}}return k.size===IDX.length}
+  function make(lv){const R={1:[1,10],2:[5,60],3:[60,600]}[lv];const v={};const bot=[0,1,2,3].map(()=>MZ.ri(...R));
+    bot.forEach((x,i)=>v[key(0,i)]=x);for(let r=1;r<N;r++)for(let i=0;i<N-r;i++)v[key(r,i)]=v[key(r-1,i)]+v[key(r-1,i+1)];
+    let giv;for(let t=0;t<500;t++){const g=shuffle(IDX.map(p=>key(...p))).slice(0,4);
+      const upper=g.filter(x=>x[0]!=="0").length;if(upper<(lv===1?1:2))continue;if(solve(g)){giv=new Set(g);break}}
+    return{v,giv}}
+  function start(){st={r:0,pts:0,ok:0,over:false};next()}
+  function next(){st.cur=make(lv);st.cur.first=true;fb.textContent="";fb.className="wr-fb";render()}
+  function chips(){lvEl.innerHTML=Object.entries(LV).map(([k,n])=>`<button type="button" data-l="${k}" aria-pressed="${+k===lv}">${n}</button>`).join("")}
+  function render(){const c=st.cur;$("#zmRound").textContent=`Mauer ${st.r+1} von ${ROUNDS}`;$("#zmPts").textContent=`${st.pts} Punkte${best[lv]?` · Rekord: ${best[lv]}`:""}`;
+    let h="";for(let r=N-1;r>=0;r--){h+=`<div class="zm-row" style="--n:${N-r}">`;for(let i=0;i<N-r;i++){const k=key(r,i);
+        h+=c.giv.has(k)?`<span class="zm-b giv">${MZ.num(c.v[k])}</span>`:`<span class="zm-b"><input inputmode="numeric" autocomplete="off" data-k="${k}" aria-label="Stein in Reihe ${r+1}, Platz ${i+1}"></span>`}h+="</div>"}
+    wall.innerHTML=h}
+  wall.addEventListener("input",e=>{const i=e.target.closest("input");if(!i)return;i.value=i.value.replace(/\D/g,"").slice(0,5);i.classList.remove("ok","no","tip")});
+  $("#zmCheck").onclick=()=>{if(!st||st.over||st.busy)return;const c=st.cur;let ok=0,all=0,empty=0;
+    wall.querySelectorAll("input").forEach(i=>{all++;if(i.value===""){empty++;i.classList.remove("ok","no");return}const g=+i.value===c.v[i.dataset.k];i.classList.toggle("ok",g);i.classList.toggle("no",!g);if(g)ok++});
+    if(ok===all){const p=c.first?10:5;st.pts+=p;st.ok++;fb.className="wr-fb ok";fb.textContent=`Die Mauer steht! +${p} Punkte`;guckiCheer();st.busy=true;
+      setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1400)}
+    else{c.first=false;fb.className="wr-fb no";fb.textContent=empty?`Noch ${empty} ${empty===1?"Stein":"Steine"} leer${all-ok-empty?`, ${all-ok-empty} falsch (rot)`:""}.`:"Die roten Steine stimmen noch nicht. Rechne sie noch einmal nach."}};
+  $("#zmTip").onclick=()=>{if(!st||st.over)return;const c=st.cur;const known=k=>{if(c.giv.has(k))return true;const i=wall.querySelector(`input[data-k="${k}"]`);return i&&i.value!==""&&+i.value===c.v[k]};
+    for(const t of TRI){const ks=t.map(p=>key(...p)),h=ks.map(known);if(h.filter(Boolean).length===2){const j=h.indexOf(false),inp=wall.querySelector(`input[data-k="${ks[j]}"]`);
+        wall.querySelectorAll(".tip").forEach(x=>x.classList.remove("tip"));if(inp){inp.classList.add("tip");inp.focus()}
+        const [a,b,top]=ks.map(k=>c.v[k]);fb.className="wr-fb";fb.textContent=j===2?`Tipp: Der markierte Stein ist ${MZ.num(a)} + ${MZ.num(b)}.`:`Tipp: Der markierte Stein ist ${MZ.num(top)} − ${MZ.num(j===0?b:a)}.`;c.first=false;return}}
+    fb.textContent="Hier gibt es gerade keinen einfachen Tipp – prüfe deine Steine."};
+  function end(){st.over=true;const rec=!best[lv]||st.pts>best[lv];if(rec){best[lv]=st.pts;try{localStorage.setItem("mauerBest",JSON.stringify(best))}catch(_){}}
+    $("#zmPts").textContent=`${st.pts} Punkte · Rekord: ${best[lv]}`;wall.innerHTML="";
+    fb.className="wr-fb ok";fb.innerHTML=`${st.ok} Mauern gebaut, ${st.pts} Punkte.${rec?" 🏆 Neuer Rekord!":""} <button class="btn" type="button" id="zmAgain">Nochmal</button>${lv<3?` <button class="btn ghost" type="button" id="zmUp">Weiter mit ${LV[lv+1]}</button>`:""}`;
+    $("#zmAgain").onclick=start;const up=$("#zmUp");if(up)up.onclick=()=>{lv++;chips();start()};
+    if(st.pts===ROUNDS*10)guckiParty();else guckiSay(rec?"Neuer Rekord!":"Starke Mauern!",2200)}
+  lvEl.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;lv=+b.dataset.l;chips();start()});
+  chips();start();
+  return{make,solve}})();
+
+/* ================= SPIEL: ZIELZAHL-JAGD ================= */
+const Zielzahl=(function(){
+  const wrap=$("#zzWrap");if(!wrap)return null;
+  const line=$("#zzLine"),nums=$("#zzNums"),val=$("#zzVal"),svg=$("#zzTree"),fb=$("#zzFb");const ROUNDS=6;let st,best=0;
+  try{best=+localStorage.getItem("zielBest")||0}catch(_){}
+  const OPS=["+","−","·",":"],N=MZ.N;
+  // Alle Baumformen mit vier Zahlen
+  const SH=[(a,b,c,d,o)=>N(o[2],N(o[1],N(o[0],a,b),c),d),(a,b,c,d,o)=>N(o[1],N(o[0],a,b),N(o[2],c,d)),(a,b,c,d,o)=>N(o[2],N(o[0],a,N(o[1],b,c)),d),
+    (a,b,c,d,o)=>N(o[0],a,N(o[2],N(o[1],b,c),d)),(a,b,c,d,o)=>N(o[0],a,N(o[1],b,N(o[2],c,d)))];
+  function make(){for(;;){const n=[0,0,0,0].map(()=>MZ.ri(1,10)),o=[0,1,2].map(()=>MZ.pick(OPS));if(!o.some(x=>x==="·"||x===":"))continue;
+      const t=MZ.pick(SH)(...n,o);if(!MZ.okTerm(t))continue;const v=MZ.val(t);if(v<10||v>150)continue;
+      // keine Teilrechnung mit 0 oder „: 1“/„· 1“ als Abkürzung
+      let bad=false;(function w(x){if(typeof x==="number")return;const l=MZ.val(x.l),r=MZ.val(x.r);if(MZ.val(x)===0||((x.o==="·"||x.o===":")&&(r===1||l===1)))bad=true;w(x.l);w(x.r)})(t);if(bad)continue;
+      return{n:shuffle(n),target:v,sol:MZ.show(t)}}}
+  // Zerlegen und Rechnen: Zahl, + − · :, Klammern
+  function parse(tk){let p=0;function atom(){const t=tk[p];if(!t)throw 0;if(t.t==="(")
+        {p++;const e=sum();if(!tk[p]||tk[p].t!==")")throw 0;p++;return e}if(t.t==="n"){p++;return t.v}throw 0}
+      function prod(){let l=atom();while(tk[p]&&(tk[p].t==="·"||tk[p].t===":")){const o=tk[p++].t;l=N(o,l,atom())}return l}
+      function sum(){let l=prod();while(tk[p]&&(tk[p].t==="+"||tk[p].t==="−")){const o=tk[p++].t;l=N(o,l,prod())}return l}
+      const e=sum();if(p!==tk.length)throw 0;return e}
+  const exact=t=>{if(typeof t==="number")return t;const l=exact(t.l),r=exact(t.r);if(l==null||r==null)return null;
+    if(t.o==="+")return l+r;if(t.o==="−")return l-r;if(t.o==="·")return l*r;return r!==0&&Number.isInteger(l/r)?l/r:null};
+  function start(){st={r:0,pts:0,ok:0,over:false};next()}
+  function next(){st.cur=make();st.cur.first=true;st.cur.shown=false;st.tk=[];fb.textContent="";fb.className="wr-fb";render()}
+  function render(){const c=st.cur;$("#zzRound").textContent=`Aufgabe ${st.r+1} von ${ROUNDS}`;$("#zzPts").textContent=`${st.pts} Punkte${best?` · Rekord: ${best}`:""}`;
+    $("#zzTarget").textContent=c.target;const used=new Set(st.tk.filter(t=>t.t==="n").map(t=>t.i));
+    nums.innerHTML=c.n.map((v,i)=>`<button type="button" data-i="${i}" ${used.has(i)?"disabled":""}>${v}</button>`).join("");
+    line.innerHTML=st.tk.length?st.tk.map(t=>`<span>${t.t==="n"?t.v:t.t}</span>`).join(""):`<span class="ph">Tippe unten deine Rechnung …</span>`;
+    let tree=null;try{tree=st.tk.length?parse(st.tk):null}catch(_){}
+    if(tree&&typeof tree!=="number"){const v=exact(tree);val.textContent=v==null?"Das geht nicht glatt auf (Teilen mit Rest).":`= ${v}`;val.className="zz-val"+(v===c.target?" hit":"");MZ.treeSVG(svg,tree,null,{dx:50,lh:70});svg.hidden=false}
+    else{val.textContent=st.tk.length?"Die Rechnung ist noch nicht fertig.":"";val.className="zz-val";svg.innerHTML="";svg.hidden=true}}
+  nums.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||st.over||st.busy)return;const i=+b.dataset.i;st.tk.push({t:"n",v:st.cur.n[i],i});fb.textContent="";render()});
+  $("#zzOps").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||st.over||st.busy)return;const t=b.dataset.t;
+    if(t==="back")st.tk.pop();else if(t==="clear")st.tk=[];else st.tk.push({t});fb.textContent="";render()});
+  $("#zzCheck").onclick=()=>{if(st.over||st.busy)return;const c=st.cur;let tree=null;try{tree=parse(st.tk)}catch(_){}
+    const usedN=st.tk.filter(t=>t.t==="n").length;
+    if(!tree){fb.className="wr-fb no";fb.textContent="Die Rechnung ist noch nicht fertig. Fehlt eine Zahl oder eine Klammer?";return}
+    if(usedN<4){fb.className="wr-fb no";fb.textContent=`Du hast erst ${usedN} von 4 Zahlen benutzt.`;return}
+    const v=exact(tree);if(v===c.target){const p=c.shown?0:c.first?10:5;st.pts+=p;if(p)st.ok++;fb.className="wr-fb ok";fb.textContent=`Treffer: ${MZ.show(tree)} = ${c.target}!${p?` +${p} Punkte`:""}`;guckiCheer();st.busy=true;
+      setTimeout(()=>{st.busy=false;st.r++;if(st.r>=ROUNDS)end();else next()},1500)}
+    else{c.first=false;fb.className="wr-fb no";fb.textContent=v==null?"Hier geht eine Division nicht glatt auf.":`Deine Rechnung ergibt ${v}, nicht ${c.target}. Versuch es anders!`}};
+  $("#zzGive").onclick=()=>{if(st.over||st.busy)return;st.cur.shown=true;st.cur.first=false;fb.className="wr-fb";fb.textContent=`Eine Lösung: ${st.cur.sol} = ${st.cur.target}. Tippe sie nach und prüfe – es gibt aber keine Punkte.`};
+  function end(){st.over=true;const rec=st.pts>best;if(rec){best=st.pts;try{localStorage.setItem("zielBest",String(best))}catch(_){}}
+    nums.innerHTML="";line.innerHTML="";val.textContent="";svg.innerHTML="";svg.hidden=true;$("#zzTarget").textContent="🏁";
+    fb.className="wr-fb ok";fb.innerHTML=`${st.ok} von ${ROUNDS} Zielzahlen getroffen, ${st.pts} Punkte.${rec?" 🏆 Neuer Rekord!":""} <button class="btn" type="button" id="zzAgain">Nochmal</button>`;$("#zzAgain").onclick=start;
+    if(st.pts===ROUNDS*10)guckiParty();else guckiSay(rec?"Neuer Rekord!":"Volltreffer-Profi!",2200)}
+  start();
+  return{make,parse,exact}})();
+
+/* ================= SPIEL: LÄNGEN-MEMORY ================= */
+const LMemory=(function(){
+  const grid=$("#lmGrid");if(!grid)return null;
+  const modeEl=$("#lmMode"),fb=$("#lmFb");const MODES={leicht:"Leicht",knifflig:"Knifflig"};let mode="leicht",best={};
+  try{best=JSON.parse(localStorage.getItem("lmemBest")||"{}")||{}}catch(_){}
+  const save=()=>{try{localStorage.setItem("lmemBest",JSON.stringify(best))}catch(_){}};
+  // Alle sinnvollen Schreibweisen einer Länge
+  function forms(mm){const f=new Set();["km","m","dm","cm","mm"].forEach(u=>{const s=MZ.L(mm,u),d=(s.split(",")[1]||"").replace(/ .*/,"");
+      if(d.length<=3&&!/^0,00/.test(s)&&s.replace(/\D/g,"").length<=6)f.add(s)});
+    [["km","m"],["m","cm"],["cm","mm"]].forEach(([b,k])=>{if(mm>10**MZ.EXP[b]&&mm%10**MZ.EXP[b]){const x=MZ.mixed(mm,b,k);if(x)f.add(x)}});return[...f]}
+  function pairsFor(m){for(let t=0;t<200;t++){const vals=new Set();
+      if(m==="leicht"){while(vals.size<6)vals.add(MZ.pick([()=>MZ.ri(1,9)*1000+MZ.ri(1,9)*100,()=>MZ.ri(11,99)*10,()=>MZ.ri(1,9)*1000,()=>MZ.ri(2,9)*100,()=>MZ.ri(1,5)*1e6+MZ.ri(1,9)*1e5])())}
+      else{while(vals.size<6){const m1=MZ.ri(1,9),c=MZ.ri(1,9);// Zwillinge: 3 m 5 cm und 3 m 50 cm
+          vals.add(m1*1000+c*10);if(vals.size<6)vals.add(m1*1000+c*100)}}
+      const P=[...vals].map(mm=>{const f=shuffle(forms(mm));const a=m==="knifflig"?(f.find(x=>/ m \d+ cm/.test(x))||f[0]):f[0];const b=f.find(x=>x!==a&&(m!=="knifflig"||/,/.test(x)))||f.find(x=>x!==a);return b?{id:mm,a,b}:null});
+      if(P.some(x=>!x))continue;const texts=P.flatMap(p=>[p.a,p.b]);if(new Set(texts).size!==texts.length)continue;return P}}
+  let cards=[],open=[],found=0,moves=0,lock=false,P=[];
+  function bar(){$("#lmPairs").textContent=`${found} von ${P.length} Paaren`;$("#lmMoves").textContent=`${moves} ${moves===1?"Zug":"Züge"}${best[mode]?` · Rekord: ${best[mode]}`:""}`}
+  function start(){P=pairsFor(mode);cards=shuffle(P.flatMap(p=>[{p:p.id,t:p.a},{p:p.id,t:p.b}]));open=[];found=0;moves=0;lock=false;fb.textContent="";fb.className="wr-fb";
+    modeEl.innerHTML=Object.entries(MODES).map(([k,n])=>`<button type="button" data-m="${k}" aria-pressed="${k===mode}">${n}</button>`).join("")+`<button type="button" data-m="neu">↻ Neu mischen</button>`;
+    grid.innerHTML=cards.map((c,i)=>`<button type="button" class="mm-card" data-i="${i}" aria-label="Karte ${i+1}, verdeckt"><span class="mm-in"><span class="mm-back"><i></i></span><span class="mm-face"><b class="lm-t">${c.t}</b></span></span></button>`).join("");bar()}
+  function flip(i){if(lock)return;const el=grid.children[i],c=cards[i];if(el.classList.contains("open")||el.classList.contains("done"))return;
+    el.classList.add("open");el.setAttribute("aria-label",`Karte ${i+1}: ${c.t}`);open.push(i);
+    if(open.length<2)return;moves++;const[a,b]=open;open=[];
+    if(cards[a].p===cards[b].p&&a!==b){[a,b].forEach(k=>{grid.children[k].classList.remove("open");grid.children[k].classList.add("done")});found++;guckiCheer();
+      if(found===P.length)finish();else{fb.className="wr-fb ok";fb.textContent=`Ein Paar: ${cards[a].t} = ${cards[b].t}`}}
+    else{lock=true;[a,b].forEach(k=>grid.children[k].classList.add("miss"));fb.className="wr-fb";fb.textContent=`${cards[a].t} und ${cards[b].t} sind nicht gleich lang.`;
+      setTimeout(()=>{[a,b].forEach(k=>{const e=grid.children[k];e.classList.remove("open","miss");e.setAttribute("aria-label",`Karte ${k+1}, verdeckt`)});lock=false},1300)}
+    bar()}
+  function finish(){const rec=!best[mode]||moves<best[mode];if(rec){best[mode]=moves;save()}bar();
+    fb.className="wr-fb ok";fb.innerHTML=`Alle Paare gefunden – in ${moves} Zügen!${rec?" 🏆 Neuer Rekord!":""} <button class="btn" type="button" id="lmAgain">Nochmal</button>`;$("#lmAgain").onclick=start;
+    if(moves<=P.length+2)guckiParty();else guckiSay(rec?"Neuer Rekord!":"Alle Paare!",2000)}
+  grid.addEventListener("click",e=>{const b=e.target.closest(".mm-card");if(b)flip(+b.dataset.i)});
+  modeEl.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.m!=="neu")mode=b.dataset.m;start()});
+  start();
+  return{pairsFor,forms}})();
+
 /* ================= SPIEL: FANG DIE FARBEN ================= */
 (function(){
   const cv=$("#ffCv");if(!cv)return;
@@ -5358,7 +5723,7 @@ const Vok=(function(){
 // Jede Übung (.task) und die Spielflächen bekommen einen Knopf „⛶ Vollbild“. Die Fläche liegt dann über der ganzen Seite
 // (Gucki bleibt sichtbar). Wo der Browser es kann, wird zusätzlich echtes Vollbild eingeschaltet (nicht auf dem iPhone).
 (function(){
-  let cur=null,bar=null;const GAMES=["#ffWrap","#wrWrap","#blWrap","#mmWrap"];
+  let cur=null,bar=null;const GAMES=["#ffWrap","#wrWrap","#blWrap","#mmWrap","#hfWrap","#zmWrap","#zzWrap","#lmWrap"];
   const fire=()=>setTimeout(()=>window.dispatchEvent(new Event("resize")),60);
   function title(el){const t=el.closest(".topic"),h1=t&&t.querySelector("h1");return h1?h1.textContent.trim():"S.D.L.W."}
   function open(el){if(cur)close(true);cur=el;el.classList.add("fs-on");document.body.classList.add("fs-lock");

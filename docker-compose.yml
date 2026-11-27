@@ -6,6 +6,22 @@ services:
     image: nginx:stable-alpine
     container_name: meine-website
     restart: unless-stopped
+    # Härtung: keine zusätzlichen Rechte, Dateisystem schreibgeschützt (nginx schreibt nur in die tmpfs-Ordner),
+    # nur die Linux-Rechte, die nginx zum Starten braucht. Geprüft von scripts/test-nginx.sh in GitHub Actions.
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+      - NET_BIND_SERVICE
     ports:
       - "${PORT:-8080}:80"
     volumes:

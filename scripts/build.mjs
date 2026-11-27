@@ -107,6 +107,34 @@ async function page(req) {
 `;
 }
 
+// Content-Security-Policy für index.html: Skripte nur aus der Seite selbst, und zwar genau die eingebetteten
+// Skripte (per SHA-256-Prüfsumme). Fremde Skripte, Frames, Plugins und Formular-Ziele sind verboten.
+// frame-ancestors geht nicht als <meta>, das setzt nginx als Header (siehe nginx.conf).
+export function cspFor(html) {
+  const hashes = [];
+  for (const m of html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
+    const attrs = m[1] || "";
+    if (/\bsrc=/.test(attrs)) continue;
+    const type = (attrs.match(/\btype="([^"]*)"/) || [])[1];
+    if (type && !/^(text\/javascript|module)$/.test(type)) continue; // z. B. application/json wird nicht ausgeführt
+    hashes.push(`'sha256-${createHash("sha256").update(m[2], "utf8").digest("base64")}'`);
+  }
+  return [
+    "default-src 'self'",
+    `script-src 'self' ${hashes.join(" ")}`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self' data:",
+    "media-src 'self' data: blob:",
+    "connect-src 'self'",
+    "worker-src 'self'",
+    "manifest-src 'self'",
+    "object-src 'none'",
+    "base-uri 'none'",
+    "form-action 'none'",
+  ].join("; ");
+}
+
 export function build() {
   const src = readFileSync(join(root, "src/entdeckerheft.html"), "utf8");
   const cut = src.indexOf("</style>") + "</style>".length;
@@ -115,11 +143,12 @@ export function build() {
     .replace('<meta name="claude:viewport-fit-sides" content="cover">\n', "")
     .trim();
   const body = src.slice(cut).trim();
-  return `<!doctype html>
+  const html = `<!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--CSP-->
 ${PWA_HEAD}
 <style>
 ${SKELETON_STYLE}
@@ -132,6 +161,7 @@ ${PWA_BODY}
 </body>
 </html>
 `;
+  return html.replace("<!--CSP-->", `<meta http-equiv="Content-Security-Policy" content="${cspFor(html)}">`);
 }
 
 // Alle erzeugten Dateien: Pfad → Inhalt

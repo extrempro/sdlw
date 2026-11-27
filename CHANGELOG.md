@@ -4,6 +4,17 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.16.1] – 2026-11-27
+
+### Verbessert
+
+- **Sicherheitsprüfung nach OWASP ASVS 5.0 (Level 2)**, Ergebnisse in `docs/sicherheit.md`.
+- **Content-Security-Policy** in `index.html` (erzeugt von `scripts/build.mjs`): Skripte nur mit SHA-256-Prüfsumme, kein `unsafe-inline`/`unsafe-eval`, `object-src`, `base-uri`, `form-action` gesperrt.
+- **nginx:** alle Sicherheits-Header zentral im `server`-Block (auch auf Fehlerseiten): `frame-ancestors 'none'`, `X-Frame-Options`, `Permissions-Policy`, `Strict-Transport-Security`, COOP/CORP; `server_tokens off`; nur `GET`/`HEAD`.
+- **Container gehärtet:** `no-new-privileges`, schreibgeschütztes Dateisystem mit `tmpfs`, nur nötige Linux-Rechte.
+- **GitHub Actions** auf feste Commit-Prüfsummen gesetzt; die Prüfung läuft jetzt auch bei jedem Push auf `naechste-version`.
+- **Neue Tests:** `scripts/test-sicherheit.mjs` (CSP, Links, nginx- und Compose-Einstellungen) und `scripts/test-nginx.sh` (Live-Test des echten Containers in GitHub Actions).
+
 ## [1.16.0] – 2026-11-27
 
 ### Neu

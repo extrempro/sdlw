@@ -4,6 +4,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
+import { Script } from "node:vm";
 import { buildAll, root } from "./build.mjs";
 
 const errors = [];
@@ -43,9 +44,18 @@ check(!/<iframe|<object|<embed/i.test(markup), "keine iframes, object oder embed
 const ext = [...markup.matchAll(/<a\s[^>]*href="https?:\/\/[^"]*"[^>]*>/g)].map(m => m[0]);
 check(ext.length > 0 && ext.every(a => /target="_blank"/.test(a) && /rel="[^"]*noopener/.test(a)), `alle ${ext.length} externen Links mit target="_blank" haben rel="noopener"`);
 
+// 4b. Versionshinweise (werden per innerHTML eingesetzt) enthalten kein Markup
+const rd = readFileSync(join(root, "src/entdeckerheft.html"), "utf8").match(/id="releaseData">([\s\S]*?)<\/script>/);
+const rdText = rd ? JSON.stringify(JSON.parse(rd[1])) : "";
+check(!!rd && !/[<>]/.test(rdText), "Versionshinweise ohne < und > (kein Markup)");
+check(/<meta name="referrer" content="same-origin">/.test(html), "Referrer-Policy auch als <meta> in index.html");
+
 // 5. Service Worker: nur eigene Adressen, nur GET
 const sw = built["sw.js"];
+let swOk = true; try { new Script(sw); } catch { swOk = false; }
+check(swOk, "sw.js ist gültiges JavaScript");
 check(/req\.method !== "GET"/.test(sw) && /origin !== location\.origin/.test(sw), "Service Worker behandelt nur GET-Anfragen an die eigene Adresse");
+check(/opaqueredirect/.test(sw) && /res\.status < 500/.test(sw) && /if \(!start\) return net;/.test(sw), "Service Worker reicht Weiterleitungen und 404 durch, Speicher nur für die Startadresse");
 
 // 6. nginx.conf
 const ng = readFileSync(join(root, "nginx.conf"), "utf8"), code = ng.replace(/#.*$/gm, "");
@@ -54,6 +64,8 @@ for (const h of ["X-Content-Type-Options", "X-Frame-Options", "Content-Security-
   check(new RegExp(`^\\s*add_header ${h} .* always;`, "m").test(code), `nginx setzt ${h}`);
 const loc = code.split(/\blocation\b/).slice(1);
 check(loc.every(l => !/add_header/.test(l.split("}")[0])), "kein add_header in location-Blöcken (würde die Sicherheits-Header aufheben)");
+check(/disable_symlinks on;/.test(code), "nginx folgt keinen Symlinks");
+check(/location ~ \^\/icons\/icon-/.test(code) && !/location \/icons\/ \{/.test(code), "unter /icons/ nur icon-…png (Positivliste)");
 check(/server_tokens off;/.test(code), "nginx verrät seine Version nicht (server_tokens off)");
 check(/location \/ \{\s*return 404;/.test(code), "alles außer der Webseite gibt 404");
 check(/\$request_method !~ \^\(GET\|HEAD\)\$/.test(code), "nur GET und HEAD erlaubt");
@@ -63,6 +75,10 @@ const dc = readFileSync(join(root, "docker-compose.yml"), "utf8");
 check(/\.\/:\/srv\/site:ro/.test(dc) && /nginx\.conf:\/etc\/nginx\/conf\.d\/default\.conf:ro/.test(dc), "Repository und nginx.conf nur lesend eingebunden");
 check(/no-new-privileges:true/.test(dc), "Container ohne zusätzliche Rechte (no-new-privileges)");
 check(/read_only: true/.test(dc), "Container-Dateisystem schreibgeschützt (read_only)");
+for (const f of [".github/workflows/check.yml", ".github/workflows/release.yml"]) {
+  const w = readFileSync(join(root, f), "utf8");
+  check(!/uses: [^@\n]+@v\d/.test(w) && /persist-credentials: false/.test(w), `${f}: Actions per Prüfsumme, keine gespeicherten Zugangsdaten`);
+}
 
 if (errors.length) { console.error("\nFehler:\n- " + errors.join("\n- ")); process.exit(1); }
 console.log("\nAlles in Ordnung: Sicherheits-Tests bestanden.");

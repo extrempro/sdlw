@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Wc0wRZndcfdWvw+8zsi4JqkXQsZgBsC972//vh9qLSo=' 'sha256-iDE2z7nzXESShYHSddZiU+VgtMGt818rTq6N02EjBXA=' 'sha256-8hOKGHw1kZN4KgxaNRInwVIe9o9lObr1E5Z96gVkHXM=' 'sha256-TvvSyflNVM6/F576oQEyywkbbg/dM3xxzbLwBCMop3g='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Wc0wRZndcfdWvw+8zsi4JqkXQsZgBsC972//vh9qLSo=' 'sha256-iDE2z7nzXESShYHSddZiU+VgtMGt818rTq6N02EjBXA=' 'sha256-m+I9ARNDM1aRFAgYb8+g9VNHpvMMtX40vf3ScI7qFB0=' 'sha256-TvvSyflNVM6/F576oQEyywkbbg/dM3xxzbLwBCMop3g='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="same-origin">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#F6F7FA" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14161F" media="(prefers-color-scheme: dark)">
@@ -4519,7 +4520,8 @@ function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn
   );
 
   // ---- Fünf ganz besondere Tricks: selten (etwa 1 von 30), mit Sammelalbum auf dem Gerät („guckiSpecial“) ----
-  const SP_KEY="guckiSpecial";let found=[];try{found=JSON.parse(localStorage.getItem(SP_KEY)||"[]")||[]}catch(_){}
+  const SP_KEY="guckiSpecial";let found=[];try{found=JSON.parse(localStorage.getItem(SP_KEY)||"[]")}catch(_){}
+  if(!Array.isArray(found))found=[];
   const spFound=id=>{if(!found.includes(id)){found.push(id);try{localStorage.setItem(SP_KEY,JSON.stringify(found))}catch(_){}}return found.length};
   function canvasLayer(cls){const d=layer(cls),c=document.createElement("canvas"),dpr=Math.min(2,devicePixelRatio||1);c.width=innerWidth*dpr;c.height=innerHeight*dpr;d.appendChild(c);const x=c.getContext("2d");x.scale(dpr,dpr);return{d,c,x}}
   function feuerwerk(){const{d,x}=canvasLayer("sp-nacht"),W=innerWidth,H=innerHeight,cols=["#FFD23F","#FF7AA2","#7EE0FF","#9CFF8A","#FFFFFF","#C9A2FF"];let raf,t0=performance.now();
@@ -4553,6 +4555,7 @@ function guckiMega(){const g=document.getElementById("gucki");if(!g||guckiMegaOn
     {c:"fx-gen",k:"chor",spec:1,page:1,cls:["gh-nod","ge-shut","gm-talk"],ms:7600,say:[[200,"Der Gucki-Chor singt für dich!",2400],[5200,"„Ode an die Freude“ von Beethoven 🎶",2200]],fx:chor},
     {c:"fx-gen",k:"express",spec:1,page:1,cls:["gh-bounce","gm-grin","gd-wave"],ms:6600,say:[[200,"Einsteigen bitte! Der Gucki-Express fährt ab! 🚂",2800],[3600,"Tschu-tschu! Alle Fächer an Bord!",2200]],fx:express},
     {c:"fx-gen",k:"riesengucki",spec:1,page:1,cls:["gh-peek"],ms:5600,say:[[1300,"Hallo, du da! 👋",2200],[3700,"Tschüss – ich muss weiter!",1500]],fx:riese}];
+  found=found.filter(x=>typeof x==="string"&&SPECIAL.some(s=>s.k===x));
 
   const reduce=matchMedia("(prefers-reduced-motion: reduce)");
   g.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1200);if(n<5||busy||guckiMegaOn)return;n=0;
@@ -5888,7 +5891,8 @@ const Vok=(function(){
   function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
   document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b){e.stopPropagation();say(b.dataset.say,b)}},true);
   // --- Karteikasten (gespeichert auf dem Gerät: localStorage „vokBox“) ---
-  let box={};try{box=JSON.parse(localStorage.getItem("vokBox")||"{}")||{}}catch(_){box={}}
+  // Nur gültige Fächer 1–3 übernehmen; ein manipulierter oder kaputter Wert darf die Übung nicht lahmlegen
+  let box={};try{const raw=JSON.parse(localStorage.getItem("vokBox")||"{}");if(raw&&typeof raw==="object"&&!Array.isArray(raw))for(const k of Object.keys(raw))if(raw[k]===1||raw[k]===2||raw[k]===3)box[k]=raw[k]}catch(_){box={}}
   const save=()=>{try{localStorage.setItem("vokBox",JSON.stringify(box))}catch(_){}};
   const fach=(it,dir)=>box[dir+"|"+it.k]||1;
   function setFach(it,dir,f){if(f<=1)delete box[dir+"|"+it.k];else box[dir+"|"+it.k]=Math.min(3,f);save()}

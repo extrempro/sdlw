@@ -9,8 +9,10 @@ FAILED=0
 fail() { echo "::error::$1"; FAILED=1; }
 ok() { echo "ok  $1"; }
 
+# Tiefenverteidigung: ein eingeschmuggelter Symlink in icons/ darf nichts aus dem Repository ausliefern
+ln -sf ../.git/config icons/icon-symlink-test.png
 PORT=$PORT docker compose up -d --quiet-pull >/dev/null 2>&1 || { echo "::error::docker compose up ging nicht"; docker compose logs; exit 1; }
-trap 'docker compose down >/dev/null 2>&1' EXIT
+trap 'docker compose down >/dev/null 2>&1; rm -f icons/icon-symlink-test.png' EXIT
 i=0; until curl -fs "$URL/healthz" >/dev/null 2>&1; do i=$((i+1)); [ $i -gt 30 ] && { docker compose logs; fail "nginx startet nicht"; exit 1; }; sleep 1; done
 ok "nginx läuft, /healthz antwortet"
 
@@ -26,6 +28,10 @@ for p in /src/entdeckerheft.html /scripts/build.mjs /nginx.conf /docker-compose.
          /index.html.bak /.env /sw.js/ /index.html%00.txt; do
   got=$(status -X GET "$URL$p"); case "$got" in 400|403|404) ok "$got für $p";; *) fail "Erreichbar ($got): $p";; esac
 done
+
+# Symlinks werden nicht befolgt, und unter /icons/ gibt es nur icon-…png
+got=$(status "$URL/icons/icon-symlink-test.png"); case "$got" in 403|404) ok "$got für Symlink in icons/";; *) fail "Symlink in icons/ wird ausgeliefert ($got)";; esac
+for p in /icons/README /icons/icon-192.png.bak /icons/x.svg; do got=$(status "$URL$p"); case "$got" in 404) ok "404 für $p";; *) fail "$p gibt $got";; esac; done
 
 # Nur GET und HEAD
 for m in POST PUT DELETE OPTIONS PATCH TRACE; do got=$(status -X "$m" "$URL/"); case "$got" in 405) ok "405 für $m";; *) fail "Methode $m gibt $got";; esac; done

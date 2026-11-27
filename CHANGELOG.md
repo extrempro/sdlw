@@ -15,6 +15,14 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrek
 - **GitHub Actions** auf feste Commit-Prüfsummen gesetzt; die Prüfung läuft jetzt auch bei jedem Push auf `naechste-version`.
 - **Neue Tests:** `scripts/test-sicherheit.mjs` (CSP, Links, nginx- und Compose-Einstellungen) und `scripts/test-nginx.sh` (Live-Test des echten Containers in GitHub Actions).
 
+### Behoben
+
+- **Karteikasten und Sammelalbum** stürzen bei kaputten oder manipulierten gespeicherten Werten nicht mehr ab (`vokBox` nur Fächer 1–3, `guckiSpecial` nur bekannte Tricks).
+- **Service Worker:** Weiterleitungen und Antworten wie 404 kommen jetzt vom Server; die gespeicherte Seite gibt es nur für die Startadresse (offline, bei Serverfehlern oder nach 4 s). Notschalter in `docs/sicherheit.md`.
+- **nginx:** folgt keinen Symlinks mehr, unter `/icons/` nur noch `icon-….png`.
+- **GitHub Actions:** `persist-credentials: false`, das Token liegt nicht mehr auf der Platte.
+- `Referrer-Policy` zusätzlich als `<meta>` in `index.html`.
+
 ## [1.16.0] – 2026-11-27
 
 ### Neu

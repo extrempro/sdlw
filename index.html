@@ -495,18 +495,26 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mz-dir .card h3{margin:0 0 4px}.mz-dir .card p{margin:0 0 6px;font-size:.95rem}
 .mz-dir .bsp{font:800 1.05rem var(--display);margin:0!important}
 .mz-h3{margin:6px 0 0;font:800 1.15rem var(--display)}
-.mz-zoom{display:flex;flex-direction:column;gap:0}
-.mz-zoom .zt{margin:10px 0 6px}
-.mz-zoom .zt:first-child{margin-top:0}
-.mz-zoom .zbar{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border:2px solid var(--ink);border-radius:4px;overflow:hidden}
-.mz-zoom .zbar i{font-style:normal;font-weight:800;font-size:.85rem;text-align:center;padding:9px 0;background:var(--sheet);color:var(--ink);border-left:1px solid var(--ink)}
-.mz-zoom .zbar i:first-child{border-left:0}
-.mz-zoom .zbar i.hl{background:var(--mathe);color:var(--sheet)}
-.mz-zoom .zstep{position:relative}
-.mz-zoom .zcone{display:block;width:100%;height:58px}
-.mz-zoom .zl{position:absolute;top:4px;right:0;margin:0;font-size:.9rem;text-align:right;max-width:62%;line-height:1.3}
-.mz-zoom .zcone polygon{fill:color-mix(in srgb,var(--mathe) 22%,transparent)}
-.mz-zoom .zcone line{stroke:var(--mathe);stroke-width:2;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
+.mz-lineal{display:flex;flex-direction:column;gap:12px}
+.mz-lin{width:100%;height:auto;display:block}
+.mz-lin .lin{fill:color-mix(in srgb,var(--sea) 70%,var(--sheet));stroke:var(--plateline);stroke-width:2}
+.mz-lin .cm1{fill:color-mix(in srgb,var(--mathe) 35%,transparent)}
+.mz-lin .tk line{stroke:var(--ink);stroke-width:1.5}
+.mz-lin .tk text{font:700 24px var(--body);fill:var(--ink);text-anchor:middle}
+.mz-lin path{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.mz-lin .br1{stroke:var(--mathe)}.mz-lin .br2{stroke:var(--focus)}
+.mz-lin .lb1,.mz-lin .lb2{font:800 24px var(--body);fill:var(--ink);text-anchor:middle}
+.mz-lin .lb1{text-anchor:start}
+.mz-lk{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mz-lk li{display:flex;gap:10px;align-items:flex-start}
+.mz-lk .sw{flex:none;width:22px;height:14px;margin-top:5px;border-radius:3px}
+.mz-lk .sw.o{background:color-mix(in srgb,var(--mathe) 35%,transparent);border:3px solid var(--mathe)}
+.mz-lk .sw.b{border:3px solid var(--focus);border-top:0}
+.mz-dmrow{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border:2px solid var(--ink);border-radius:4px;overflow:hidden}
+.mz-dmrow i{font-style:normal;font-weight:800;font-size:.85rem;text-align:center;padding:14px 0 6px;color:var(--ink);border-left:1px solid var(--ink);
+  background-color:var(--plate);background-image:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 10%);background-size:100% 7px;background-repeat:no-repeat}
+.mz-dmrow i:first-child{border-left:0}
+.mz-lk1{margin:0}
 .mz-bsp{display:flex;flex-direction:column;gap:6px}
 .mz-bsp .lbl{font-size:.85rem;font-weight:700;color:var(--muted)}
 .mz-bsp ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
@@ -556,7 +564,7 @@ button.mz-tok{cursor:pointer}
 .mz-tok.q{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;border-color:var(--mathe)}
 @media (max-width:720px){.mz-merk,.mz-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:480px){.cc{font-size:1.2rem}.mz-stairs{height:250px}.mz-stairs .st{height:calc(58px + (4 - var(--s)) * 44px);padding:8px 1px 4px}.mz-stairs .st b{font-size:1.25rem}.mz-stairs .st span{display:none}
-  .mz-bsp li{font-size:.8rem;padding:5px 1px}.mz-stairs .st small{font-size:.75rem}.mz-zoom .zl .lg{display:none}.mz-zoom .zl{font-size:.95rem}.mz-zoom .zbar i{font-size:.75rem}
+  .mz-bsp li{font-size:.8rem;padding:5px 1px}.mz-stairs .st small{font-size:.75rem}.mz-dmrow i{font-size:.75rem}
   .mz-swt th,.mz-swt td{min-width:1.5em;padding:3px 1px}.mz-swt td{font-size:1.05rem}}
 /* ===== Menü: Klasse → Fach → Kapitel ===== */
 /* Die Liste .faecher ist nur noch Datenquelle; sichtbar ist #navUI (.nv). */
@@ -1176,6 +1184,15 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.13.1",
+   "date": "2026-11-27",
+   "title": "Längen: das Lineal erklärt's",
+   "items": [
+    "Bei den Längeneinheiten zeigt jetzt ein Lineal, warum man mal 10 rechnet: Von 0 bis 1 sind es 10 kleine Millimeter, von 0 bis 10 sind es 10 Zentimeter, also 1 Dezimeter.",
+    "Darunter siehst du: 10 Stücke von 1 dm hintereinander sind 1 Meter."
+   ]
+  },
   {
    "version": "1.13.0",
    "date": "2026-11-27",
@@ -2199,15 +2216,22 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     <div class="mz-bsp" aria-live="polite"><span class="lbl">Eine Länge, fünf Schreibweisen – alles ist gleich lang:</span><ol data-bsp></ol></div>
     <div class="row"><button class="btn ghost" type="button" data-bsp-next>Anderes Beispiel</button></div>
   </div>
-  <h3 class="mz-h3">Warum mal 10? Schau mit der Lupe hinein!</h3>
-  <div class="sheet mz-zoom" aria-label="Ein Meter besteht aus 10 Dezimetern. Ein Dezimeter besteht aus 10 Zentimetern. Ein Zentimeter besteht aus 10 Millimetern.">
-    <p class="zt"><strong>1 Meter</strong> besteht aus <strong>10 Dezimetern</strong>:</p>
-    <div class="zbar" aria-hidden="true"><i class="hl">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i><i class="">dm</i></div>
-    <div class="zstep"><svg class="zcone" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,0 10,0 100,30 0,30"/><line x1="0" y1="0" x2="0" y2="30"/><line x1="10" y1="0" x2="100" y2="30"/></svg><p class="zl"><span aria-hidden="true">🔍</span> <span class="lg">Lupe auf den ersten Dezimeter: </span><strong>1 dm = 10 cm</strong></p></div>
-    <div class="zbar" aria-hidden="true"><i class="hl">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i><i class="">cm</i></div>
-    <div class="zstep"><svg class="zcone" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,0 10,0 100,30 0,30"/><line x1="0" y1="0" x2="0" y2="30"/><line x1="10" y1="0" x2="100" y2="30"/></svg><p class="zl"><span aria-hidden="true">🔍</span> <span class="lg">Lupe auf den ersten Zentimeter: </span><strong>1 cm = 10 mm</strong></p></div>
-    <div class="zbar" aria-hidden="true"><i class="hl">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i><i class="">mm</i></div>
-    <p class="zt hint">Und ein <strong>Kilometer</strong>? Das sind 1000 Meter – ungefähr 10 Fußballfelder hintereinander.</p>
+  <h3 class="mz-h3">Warum mal 10? Schau auf dein Lineal!</h3>
+  <div class="sheet mz-lineal">
+    <svg class="mz-lin" viewBox="0 0 600 190" role="img" aria-label="Lineal von 0 bis 10 Zentimeter. Der erste Zentimeter ist markiert: Er hat 10 kleine Millimeter-Abstände.">
+      <rect class="lin" x="8" y="58" width="584" height="76" rx="6"/>
+      <rect class="cm1" x="30" y="58" width="54" height="32"/>
+      <g class="tk"><line x1="30" y1="58" x2="30" y2="88"/><text x="30" y="114">0</text><line x1="35.4" y1="58" x2="35.4" y2="70"/><line x1="40.8" y1="58" x2="40.8" y2="70"/><line x1="46.2" y1="58" x2="46.2" y2="70"/><line x1="51.6" y1="58" x2="51.6" y2="70"/><line x1="57" y1="58" x2="57" y2="78"/><line x1="62.4" y1="58" x2="62.4" y2="70"/><line x1="67.8" y1="58" x2="67.8" y2="70"/><line x1="73.2" y1="58" x2="73.2" y2="70"/><line x1="78.6" y1="58" x2="78.6" y2="70"/><line x1="84" y1="58" x2="84" y2="88"/><text x="84" y="114">1</text><line x1="89.4" y1="58" x2="89.4" y2="70"/><line x1="94.8" y1="58" x2="94.8" y2="70"/><line x1="100.2" y1="58" x2="100.2" y2="70"/><line x1="105.6" y1="58" x2="105.6" y2="70"/><line x1="111" y1="58" x2="111" y2="78"/><line x1="116.4" y1="58" x2="116.4" y2="70"/><line x1="121.8" y1="58" x2="121.8" y2="70"/><line x1="127.2" y1="58" x2="127.2" y2="70"/><line x1="132.6" y1="58" x2="132.6" y2="70"/><line x1="138" y1="58" x2="138" y2="88"/><text x="138" y="114">2</text><line x1="143.4" y1="58" x2="143.4" y2="70"/><line x1="148.8" y1="58" x2="148.8" y2="70"/><line x1="154.2" y1="58" x2="154.2" y2="70"/><line x1="159.6" y1="58" x2="159.6" y2="70"/><line x1="165" y1="58" x2="165" y2="78"/><line x1="170.4" y1="58" x2="170.4" y2="70"/><line x1="175.8" y1="58" x2="175.8" y2="70"/><line x1="181.2" y1="58" x2="181.2" y2="70"/><line x1="186.6" y1="58" x2="186.6" y2="70"/><line x1="192" y1="58" x2="192" y2="88"/><text x="192" y="114">3</text><line x1="197.4" y1="58" x2="197.4" y2="70"/><line x1="202.8" y1="58" x2="202.8" y2="70"/><line x1="208.2" y1="58" x2="208.2" y2="70"/><line x1="213.6" y1="58" x2="213.6" y2="70"/><line x1="219" y1="58" x2="219" y2="78"/><line x1="224.4" y1="58" x2="224.4" y2="70"/><line x1="229.8" y1="58" x2="229.8" y2="70"/><line x1="235.2" y1="58" x2="235.2" y2="70"/><line x1="240.6" y1="58" x2="240.6" y2="70"/><line x1="246" y1="58" x2="246" y2="88"/><text x="246" y="114">4</text><line x1="251.4" y1="58" x2="251.4" y2="70"/><line x1="256.8" y1="58" x2="256.8" y2="70"/><line x1="262.2" y1="58" x2="262.2" y2="70"/><line x1="267.6" y1="58" x2="267.6" y2="70"/><line x1="273" y1="58" x2="273" y2="78"/><line x1="278.4" y1="58" x2="278.4" y2="70"/><line x1="283.8" y1="58" x2="283.8" y2="70"/><line x1="289.2" y1="58" x2="289.2" y2="70"/><line x1="294.6" y1="58" x2="294.6" y2="70"/><line x1="300" y1="58" x2="300" y2="88"/><text x="300" y="114">5</text><line x1="305.4" y1="58" x2="305.4" y2="70"/><line x1="310.8" y1="58" x2="310.8" y2="70"/><line x1="316.2" y1="58" x2="316.2" y2="70"/><line x1="321.6" y1="58" x2="321.6" y2="70"/><line x1="327" y1="58" x2="327" y2="78"/><line x1="332.4" y1="58" x2="332.4" y2="70"/><line x1="337.8" y1="58" x2="337.8" y2="70"/><line x1="343.2" y1="58" x2="343.2" y2="70"/><line x1="348.6" y1="58" x2="348.6" y2="70"/><line x1="354" y1="58" x2="354" y2="88"/><text x="354" y="114">6</text><line x1="359.4" y1="58" x2="359.4" y2="70"/><line x1="364.8" y1="58" x2="364.8" y2="70"/><line x1="370.2" y1="58" x2="370.2" y2="70"/><line x1="375.6" y1="58" x2="375.6" y2="70"/><line x1="381" y1="58" x2="381" y2="78"/><line x1="386.4" y1="58" x2="386.4" y2="70"/><line x1="391.8" y1="58" x2="391.8" y2="70"/><line x1="397.2" y1="58" x2="397.2" y2="70"/><line x1="402.6" y1="58" x2="402.6" y2="70"/><line x1="408" y1="58" x2="408" y2="88"/><text x="408" y="114">7</text><line x1="413.4" y1="58" x2="413.4" y2="70"/><line x1="418.8" y1="58" x2="418.8" y2="70"/><line x1="424.2" y1="58" x2="424.2" y2="70"/><line x1="429.6" y1="58" x2="429.6" y2="70"/><line x1="435" y1="58" x2="435" y2="78"/><line x1="440.4" y1="58" x2="440.4" y2="70"/><line x1="445.8" y1="58" x2="445.8" y2="70"/><line x1="451.2" y1="58" x2="451.2" y2="70"/><line x1="456.6" y1="58" x2="456.6" y2="70"/><line x1="462" y1="58" x2="462" y2="88"/><text x="462" y="114">8</text><line x1="467.4" y1="58" x2="467.4" y2="70"/><line x1="472.8" y1="58" x2="472.8" y2="70"/><line x1="478.2" y1="58" x2="478.2" y2="70"/><line x1="483.6" y1="58" x2="483.6" y2="70"/><line x1="489" y1="58" x2="489" y2="78"/><line x1="494.4" y1="58" x2="494.4" y2="70"/><line x1="499.8" y1="58" x2="499.8" y2="70"/><line x1="505.2" y1="58" x2="505.2" y2="70"/><line x1="510.6" y1="58" x2="510.6" y2="70"/><line x1="516" y1="58" x2="516" y2="88"/><text x="516" y="114">9</text><line x1="521.4" y1="58" x2="521.4" y2="70"/><line x1="526.8" y1="58" x2="526.8" y2="70"/><line x1="532.2" y1="58" x2="532.2" y2="70"/><line x1="537.6" y1="58" x2="537.6" y2="70"/><line x1="543" y1="58" x2="543" y2="78"/><line x1="548.4" y1="58" x2="548.4" y2="70"/><line x1="553.8" y1="58" x2="553.8" y2="70"/><line x1="559.2" y1="58" x2="559.2" y2="70"/><line x1="564.6" y1="58" x2="564.6" y2="70"/><line x1="570" y1="58" x2="570" y2="88"/><text x="570" y="114">10</text></g>
+      <path class="br1" d="M30 50 v-10 H84 v10"/><text class="lb1" x="57.0" y="32">1 cm</text>
+      <path class="br2" d="M30 146 v10 H570 v-10"/><text class="lb2" x="300.0" y="182">10 cm = 1 dm</text>
+    </svg>
+    <ul class="mz-lk">
+      <li><span class="sw o" aria-hidden="true"></span><span>Von <b>0 bis 1</b> sind es <b>10 kleine Abstände</b>. Jeder ist 1 Millimeter. Also: <b>1 cm = 10 mm</b>.</span></li>
+      <li><span class="sw b" aria-hidden="true"></span><span>Von <b>0 bis 10</b> sind es <b>10 Zentimeter</b>. Das ist ein Dezimeter. Also: <b>1 dm = 10 cm</b>.</span></li>
+    </ul>
+    <div class="mz-dmrow" aria-hidden="true"><i>dm</i><i>dm</i><i>dm</i><i>dm</i><i>dm</i><i>dm</i><i>dm</i><i>dm</i><i>dm</i><i>dm</i></div>
+    <p class="mz-lk1">Legst du <b>10 solche Stücke von 1 dm</b> hintereinander, ist das <b>1 Meter</b>. Also: <b>1 m = 10 dm</b>.<br>
+      Und <b>1000 Meter</b> sind <b>1 Kilometer</b> – ungefähr 10 Fußballfelder hintereinander.</p>
   </div>
   <div class="merk"><strong>Merke: Je kleiner die Einheit, desto größer die Zahl.</strong><br>
     1 km = 1000 m · 1 m = 10 dm · 1 dm = 10 cm · 1 cm = 10 mm. Außerdem gilt: 1 m = 100 cm = 1000 mm.</div>

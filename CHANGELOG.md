@@ -4,6 +4,12 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.13.1] – 2026-11-27
+
+### Verbessert
+
+- **Längen, „Warum mal 10?“:** Die Lupe (Leisten mit Vergrößerungskeil) war schwer zu verstehen und ist ersetzt durch ein Lineal von 0 bis 10 cm: Der erste Zentimeter ist markiert (10 kleine Abstände = 10 mm), eine Klammer unter dem Lineal zeigt 10 cm = 1 dm, darunter eine Reihe aus 10 Dezimeter-Stücken = 1 m und der Satz zum Kilometer.
+
 ## [1.13.0] – 2026-11-27
 
 ### Neu

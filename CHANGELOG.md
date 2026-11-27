@@ -8,7 +8,7 @@ Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrek
 
 ### Verbessert
 
-- **Längen, „Schätzen mit Merkgrößen“:** Jede der acht Karten hat jetzt eine eigene kleine Zeichnung (Bankkarte von der Seite, kleiner Finger, Hand, Tür mit Klinke, Fußballfeld, Fußweg mit Uhr, Elbphilharmonie, Michel). Eine Messklammer in der Mathe-Farbe zeigt, welche Länge gemeint ist. Alle Farben über Tokens, hell und dunkel geprüft.
+- **Längen, „Schätzen mit Merkgrößen“:** neue Beispiele aus dem Schulalltag, die die Kinder selbst nachprüfen können (Wunsch der Lehrkraft): 1 mm = Strich-Abstand auf dem Lineal, 1 cm = 2 Kästchen im Matheheft, 1 dm ≈ Packung Taschentücher, 1 m ≈ ganz großer Schritt, 10 m ≈ Klassenzimmer, 100 m = 100‑m‑Lauf, 1 km = 2½ Runden auf der 400‑m‑Laufbahn. Jede Karte mit eigener Zeichnung und einer Messklammer in der Mathe-Farbe. Michel und Elbphilharmonie stehen in einer eigenen Reihe „Große Längen in Hamburg“. In der Schätz-Übung ersetzt „Kästchen im Matheheft (5 mm)“ die Bankkarte.
 
 ## [1.13.1] – 2026-11-27
 

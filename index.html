@@ -522,6 +522,23 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mz-bsp li.on{border:2px solid var(--mathe);background:var(--sheet)}
 .mz-merk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .mz-merk .card{gap:2px;padding:12px}
+.mz-merk .card{align-items:flex-start}
+.mz-ic{width:64px;height:64px;flex:none;margin-bottom:4px}
+.mz-ic *{stroke-linecap:round;stroke-linejoin:round}
+.mz-ic .pl{fill:var(--plate);stroke:var(--ink);stroke-width:2}
+.mz-ic .ln{fill:none;stroke:var(--ink);stroke-width:1.6}
+.mz-ic .ln2{fill:none;stroke:var(--sheet);stroke-width:1.2;opacity:.6}
+.mz-ic .ink{fill:var(--ink)}
+.mz-ic .ink2{fill:none;stroke:var(--ink);stroke-width:2.6}
+.mz-ic .ac{fill:var(--sun)}
+.mz-ic .nail{fill:var(--sheet);stroke:var(--ink);stroke-width:1.4}
+.mz-ic .grass{fill:var(--na)}
+.mz-ic .wl{fill:none;stroke:#FFFFFF;stroke-width:1.6}
+.mz-ic .dot{fill:none;stroke:var(--muted);stroke-width:2.4;stroke-dasharray:1 5}
+.mz-ic .glass{fill:var(--sea);stroke:var(--ink);stroke-width:1.8}
+.mz-ic .brick{fill:var(--af);stroke:var(--ink);stroke-width:1.8}
+.mz-ic .roof{fill:var(--sa);stroke:var(--ink);stroke-width:1.6}
+.mz-ic .ms{fill:none;stroke:var(--mathe);stroke-width:3}
 .mz-merk b{font:800 1.3rem var(--display)}
 .mz-merk span{font-size:.92rem}
 .mz-geo,.mz-mess{width:100%;height:auto;display:block}
@@ -1184,6 +1201,15 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.13.2",
+   "date": "2026-11-27",
+   "title": "Merkgrößen mit Bildern",
+   "items": [
+    "Beim Schätzen mit Merkgrößen hat jetzt jede Karte ein Bild: Bankkarte, kleiner Finger, Hand, Tür mit Klinke, Fußballfeld, Spaziergang, Elbphilharmonie und Michel.",
+    "Eine orange Klammer zeigt dir, welche Länge gemeint ist."
+   ]
+  },
   {
    "version": "1.13.1",
    "date": "2026-11-27",
@@ -2240,14 +2266,16 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <h2>Schätzen mit Merkgrößen</h2>
   <p class="prose">Wenn du dir ein paar Längen gut merkst, kannst du andere Längen damit vergleichen und schätzen.</p>
   <div class="mz-merk">
-    <div class="card"><b>1 mm</b><span>ungefähr so dick wie eine Bankkarte</span></div>
-    <div class="card"><b>1 cm</b><span>ungefähr so breit wie dein kleiner Finger</span></div>
-    <div class="card"><b>1 dm</b><span>ungefähr so breit wie die Hand eines Erwachsenen</span></div>
-    <div class="card"><b>1 m</b><span>ungefähr so hoch wie eine Türklinke</span></div>
-    <div class="card"><b>100 m</b><span>ungefähr so lang wie ein Fußballfeld</span></div>
-    <div class="card"><b>1 km</b><span>ungefähr 12 bis 15 Minuten zu Fuß</span></div>
-    <div class="card"><b>110 m</b><span>so hoch ist die Elbphilharmonie</span></div>
-    <div class="card"><b>132 m</b><span>so hoch ist der Turm vom Michel</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="pl" x="12" y="10" width="40" height="25" rx="3"/><rect class="ac" x="16" y="16" width="8" height="6" rx="1"/><path class="ln" d="M16 29h22"/>
+<rect class="ink" x="8" y="46" width="48" height="3" rx="1"/><path class="ms" d="M60 38v6M57 41l3 3 3-3M60 57v-6M57 54l3-3 3 3"/></svg><b>1 mm</b><span>ungefähr so dick wie eine Bankkarte</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="pl" d="M25 62V18a7 7 0 0 1 14 0v44"/><path class="nail" d="M28 18a4 4 0 0 1 8 0v4h-8z"/><path class="ln" d="M27 38h10M27 50h10"/><path class="ms" d="M25 3V8H39V3"/></svg><b>1 cm</b><span>ungefähr so breit wie dein kleiner Finger</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="pl" d="M14 62V30a4 4 0 0 1 8 0v-8a4 4 0 0 1 8 0v-2a4 4 0 0 1 8 0v4a4 4 0 0 1 8 0v18l6-6a3.5 3.5 0 0 1 5 5l-9 11v10"/><path class="ln" d="M22 30v10M30 22v16M38 24v14"/><path class="ms" d="M14 5V10H46V5"/></svg><b>1 dm</b><span>ungefähr so breit wie die Hand eines Erwachsenen</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="pl" x="24" y="4" width="28" height="56" rx="1"/><path class="ln" d="M28 8h20v22H28zM28 36h20v20H28z"/><path class="ink2" d="M45 32h6"/><circle class="ink" cx="45" cy="32" r="2"/><path class="ln" d="M4 60h56"/><path class="ms" d="M19 32H14V60H19"/></svg><b>1 m</b><span>ungefähr so hoch wie eine Türklinke</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="grass" x="3" y="18" width="58" height="34" rx="2"/><path class="wl" d="M32 18v34M7 22h50v26H7z"/><circle class="wl" cx="32" cy="35" r="6"/><path class="wl" d="M7 29h6v12H7M57 29h-6v12h6"/><path class="ms" d="M3 5V10H61V5"/></svg><b>100 m</b><span>ungefähr so lang wie ein Fußballfeld</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><circle class="ink" cx="17" cy="14" r="5"/><path class="ink2" d="M17 20l-2 14 6 8 2 14M15 34l-6 10M16 24l-7 6M17 24l8 5"/><path class="dot" d="M28 58c8-4 18-2 30-8"/>
+<circle class="pl" cx="47" cy="22" r="13"/><path class="ink2" d="M47 13v9l6 4"/></svg><b>1 km</b><span>ungefähr 12 bis 15 Minuten zu Fuß</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="glass" d="M8 16c6-6 10-2 14-8 4 4 8 6 12 0 4 6 10 2 14 6 4-2 6 0 8 2v20H8z"/><path class="ln" d="M8 24h48M8 30h48"/><rect class="brick" x="8" y="36" width="48" height="24"/><path class="ln2" d="M8 42h48M8 48h48M8 54h48"/><path class="ln" d="M2 60h60"/><path class="ms" d="M55 8H60V60H55"/></svg><b>110 m</b><span>so hoch ist die Elbphilharmonie</span></div>
+    <div class="card"><svg class="mz-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="pl" d="M22 60V34h20v26M25 34v-8h14v8M27 26v-6h10v6"/><path class="roof" d="M28 20c0-4 2-6 4-8 2 2 4 4 4 8zM31 12h2v-4h-2z"/><path class="ink2" d="M32 8V2"/><circle class="ink" cx="32" cy="28" r="2.4"/><path class="ln" d="M28 42h8v8h-8zM4 60h56"/><path class="ms" d="M47 2H52V60H47"/></svg><b>132 m</b><span>so hoch ist der Turm vom Michel</span></div>
   </div>
 </section>
 <section>

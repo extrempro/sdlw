@@ -4,6 +4,12 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.13.2] – 2026-11-27
+
+### Verbessert
+
+- **Längen, „Schätzen mit Merkgrößen“:** Jede der acht Karten hat jetzt eine eigene kleine Zeichnung (Bankkarte von der Seite, kleiner Finger, Hand, Tür mit Klinke, Fußballfeld, Fußweg mit Uhr, Elbphilharmonie, Michel). Eine Messklammer in der Mathe-Farbe zeigt, welche Länge gemeint ist. Alle Farben über Tokens, hell und dunkel geprüft.
+
 ## [1.13.1] – 2026-11-27
 
 ### Verbessert

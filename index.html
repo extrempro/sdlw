@@ -476,11 +476,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mz-qt .cc{font-size:1.15rem}
 .mz-t{font:800 1.2rem var(--display);letter-spacing:.01em}
 /* Längen */
-.mz-stairs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px 4px;align-items:start;position:relative}
-.mz-stairs .st{grid-row:1;background:var(--mathe);color:var(--sheet);border-radius:10px 10px 4px 4px;padding:8px 4px;text-align:center;display:flex;flex-direction:column;gap:2px;margin-top:calc(var(--s) * 22px)}
-.mz-stairs .st b{font:800 1.3rem var(--display)}
-.mz-stairs .st span{font-size:.78rem;overflow-wrap:anywhere}
-.mz-stairs i{grid-row:2;font-style:normal;font-weight:700;font-size:.9rem;color:var(--ink);text-align:center}
+.mz-trep{display:flex;flex-direction:column;gap:14px}
+.mz-stairs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:0;height:290px;padding-top:4px}
+.mz-stairs .col{display:flex;flex-direction:column;justify-content:flex-end;height:100%;position:relative}
+.mz-stairs .st{height:calc(70px + (4 - var(--s)) * 52px);background:var(--mathe);color:var(--sheet);display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 2px 6px;
+  border-radius:12px 12px 0 0;box-shadow:inset 0 5px 0 color-mix(in srgb,var(--sheet) 30%,transparent);text-align:center}
+.mz-stairs .col+.col .st{border-left:2px solid var(--sheet)}
+.mz-stairs .col:first-child .st{border-radius:12px 12px 0 12px}
+.mz-stairs .col:last-child .st{border-radius:12px 12px 12px 0}
+.mz-stairs .st b{font:800 1.6rem/1 var(--display)}
+.mz-stairs .st span{font-size:.78rem;font-weight:700;hyphens:auto;overflow-wrap:anywhere;line-height:1.2}
+.mz-stairs .ar{display:flex;flex-direction:column;gap:3px;align-items:flex-start;margin:0 0 6px -14px;position:relative;z-index:1}
+.mz-stairs .ar em{font-style:normal;font-weight:800;font-size:.8rem;white-space:nowrap;padding:2px 7px;border-radius:999px;background:var(--sheet);color:var(--ink);border:2px solid var(--line)}
+.mz-stairs .ar em.dn{border-color:var(--ok)}
+.mz-stairs .ar em.up{border-color:var(--focus)}
+.mz-leg{margin:0;font-size:.92rem;line-height:1.9}
+.mz-leg span{font-weight:800;font-size:.8rem;white-space:nowrap;padding:1px 7px;border-radius:999px;border:2px solid var(--ok);background:var(--sheet)}
+.mz-leg span.up{border-color:var(--focus);margin-left:6px}
+.mz-bsp{display:flex;flex-direction:column;gap:6px}
+.mz-bsp .lbl{font-size:.85rem;font-weight:700;color:var(--muted)}
+.mz-bsp ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.mz-bsp li{text-align:center;font-weight:800;font-variant-numeric:tabular-nums;padding:6px 2px;border-radius:8px;background:var(--paper);border:1px solid var(--line);overflow-wrap:anywhere;font-size:.95rem}
+.mz-bsp li.on{border:2px solid var(--mathe);background:var(--sheet)}
 .mz-merk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .mz-merk .card{gap:2px;padding:12px}
 .mz-merk b{font:800 1.3rem var(--display)}
@@ -524,7 +541,8 @@ button.mz-tok{cursor:pointer}
 .mz-tok.on{background:#FFE9A8;color:#1C1F2E;border-color:#C79A00}
 .mz-tok.q{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;border-color:var(--mathe)}
 @media (max-width:720px){.mz-merk,.mz-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:480px){.cc{font-size:1.2rem}.mz-stairs .st{margin-top:calc(var(--s) * 14px);padding:6px 2px}.mz-stairs .st span{display:none}.mz-stairs .st b{font-size:1.1rem}
+@media (max-width:480px){.cc{font-size:1.2rem}.mz-stairs{height:250px}.mz-stairs .st{height:calc(58px + (4 - var(--s)) * 44px);padding:8px 1px 4px}.mz-stairs .st b{font-size:1.25rem}.mz-stairs .st span{display:none}
+  .mz-stairs .ar{margin-left:-12px}.mz-stairs .ar em{font-size:.75rem;padding:1px 4px;border-width:1.5px}.mz-bsp li{font-size:.8rem;padding:5px 1px}
   .mz-swt th,.mz-swt td{min-width:1.5em;padding:3px 1px}.mz-swt td{font-size:1.05rem}}
 /* ===== Menü: Klasse → Fach → Kapitel ===== */
 /* Die Liste .faecher ist nur noch Datenquelle; sichtbar ist #navUI (.nv). */
@@ -1153,7 +1171,7 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
     "„Rechnen“: schriftlich addieren und subtrahieren (mit Ergänzen und Übertrag), die Probe, Klammer vor Punkt vor Strich und der Rechenbaum.",
     "Im Schreib-Trainer rechnest du Stelle für Stelle. Wenn du nicht weiterweißt, erklärt dir der Tipp-Knopf die nächste Stelle.",
     "Beim Rechenbaum tippst du an, was du zuerst rechnest – und der Baum wächst mit.",
-    "„Längen“: Einheitentreppe, Merkgrößen zum Schätzen (zum Beispiel der Michel), Messen am Geodreieck, Umrechnen mit Komma und gemischt, eine Stellenwerttafel zum Ausprobieren und Sachaufgaben in vier Schritten.",
+    "„Längen“: eine Einheitentreppe mit Pfeilen hinauf und hinunter, Merkgrößen zum Schätzen (zum Beispiel der Michel), Messen am Geodreieck, Umrechnen mit Komma und gemischt, eine Stellenwerttafel zum Ausprobieren und Sachaufgaben in vier Schritten.",
     "In beiden Kapiteln gibt es Fehlerdetektiv-Aufgaben. Nach „Neu beginnen“ kommen immer neue Zahlen, du kannst also so oft üben, wie du willst.",
     "In der Gucki-Blitzrunde gibt es jetzt auch Mathe-Fragen."
    ]
@@ -2152,12 +2170,17 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 </section>
 <section>
   <h2>Die Längeneinheiten</h2>
-  <div class="mz-stairs" aria-label="Einheitentreppe: 1 km = 1000 m, 1 m = 10 dm, 1 dm = 10 cm, 1 cm = 10 mm">
-    <div class="st" style="--s:0"><b>km</b><span>Kilometer</span></div><i style="grid-column:1/span 2">· 1000</i>
-    <div class="st" style="--s:1"><b>m</b><span>Meter</span></div><i style="grid-column:2/span 2">· 10</i>
-    <div class="st" style="--s:2"><b>dm</b><span>Dezimeter</span></div><i style="grid-column:3/span 2">· 10</i>
-    <div class="st" style="--s:3"><b>cm</b><span>Zentimeter</span></div><i style="grid-column:4/span 2">· 10</i>
-    <div class="st" style="--s:4"><b>mm</b><span>Millimeter</span></div>
+  <div class="sheet mz-trep" id="mzTrep">
+    <div class="mz-stairs" role="img" aria-label="Einheitentreppe: 1 km = 1000 m, 1 m = 10 dm, 1 dm = 10 cm, 1 cm = 10 mm. Treppe hinunter: mal, Treppe hinauf: geteilt durch.">
+      <div class="col" style="--s:0"><div class="st"><b>km</b><span lang="de">Kilometer</span></div></div>
+      <div class="col" style="--s:1"><span class="ar" aria-hidden="true"><em class="dn">· 1000 ↘</em><em class="up">↖ : 1000</em></span><div class="st"><b>m</b><span lang="de">Meter</span></div></div>
+      <div class="col" style="--s:2"><span class="ar" aria-hidden="true"><em class="dn">· 10 ↘</em><em class="up">↖ : 10</em></span><div class="st"><b>dm</b><span lang="de">Dezimeter</span></div></div>
+      <div class="col" style="--s:3"><span class="ar" aria-hidden="true"><em class="dn">· 10 ↘</em><em class="up">↖ : 10</em></span><div class="st"><b>cm</b><span lang="de">Zentimeter</span></div></div>
+      <div class="col" style="--s:4"><span class="ar" aria-hidden="true"><em class="dn">· 10 ↘</em><em class="up">↖ : 10</em></span><div class="st"><b>mm</b><span lang="de">Millimeter</span></div></div>
+    </div>
+    <p class="mz-leg"><span class="dn">· 10 ↘</span> Treppe hinunter: kleinere Einheit, die Maßzahl wird größer. <span class="up">↖ : 10</span> Treppe hinauf: größere Einheit, die Maßzahl wird kleiner.</p>
+    <div class="mz-bsp" aria-live="polite"><span class="lbl">Beispiel:</span><ol data-bsp></ol></div>
+    <div class="row"><button class="btn ghost" type="button" data-bsp-next>Anderes Beispiel</button></div>
   </div>
   <div class="merk"><strong>1 km = 1000 m · 1 m = 10 dm · 1 dm = 10 cm · 1 cm = 10 mm</strong><br>
     Gehst du die Treppe <strong>hinunter</strong> zur kleineren Einheit, wird die Maßzahl größer: Du rechnest mal 10 (bei km → m mal 1000).
@@ -4487,6 +4510,11 @@ function mzDetektiv(){const F=["Übertrag vergessen","Punkt vor Strich nicht bea
 (function(){const box=$("#z6");if(!box)return;mzQuiz(box,mzDetektiv)})();
 
 /* ================= MATHE: LÄNGEN ================= */
+// Einheitentreppe: ein Beispiel läuft durch alle Stufen
+(function(){const box=$("#mzTrep");if(!box)return;const ol=$("[data-bsp]",box),BSP=[3000,2000000,450,25000,7,1500000,80];let k=0;
+  function show(){const mm=BSP[k%BSP.length],start=["km","m","dm","cm","mm"].find(u=>mm%10**MZ.EXP[u]===0);
+    ol.innerHTML=["km","m","dm","cm","mm"].map(u=>`<li class="${u===start?"on":""}">${MZ.L(mm,u)}</li>`).join("")}
+  $("[data-bsp-next]",box).onclick=()=>{k++;show()};show()})();
 // Geodreieck zum Ausprobieren: 0 in der Mitte, 40 Einheiten = 1 cm
 (function(){const svg=$("#mzGeo"),rg=$("#mzGeoR"),out=$("#mzGeoOut");if(!svg)return;const X0=280,CM=40,Y=46;
   let ticks="";for(let m=-27;m<=80;m++){const x=X0+m*CM/10,h=m%10===0?20:m%5===0?13:7;ticks+=`<line x1="${x}" y1="${Y}" x2="${x}" y2="${Y+h}"/>`;if(m%10===0&&m)ticks+=`<text x="${x}" y="${Y+40}">${Math.abs(m/10)}</text>`}

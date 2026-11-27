@@ -93,9 +93,14 @@ self.addEventListener("fetch", e => {
   else e.respondWith(caches.match(req, { ignoreSearch: true }).then(hit => hit || fetch(req)));
 });
 
+// Nur die Startadresse (/ oder /index.html) darf aus dem Speicher kommen. Weiterleitungen und Antworten des Servers
+// wie 404 werden durchgereicht; die gespeicherte Seite gibt es nur ohne Netz, bei Serverfehlern (5xx) oder nach 4 s Warten.
 async function page(req) {
+  const path = new URL(req.url).pathname, start = path.endsWith("/") || path.endsWith("/index.html");
   const saved = () => caches.match("./index.html");
-  const net = fetch(req).then(res => (res.ok ? res : saved().then(s => s || res)));
+  const net = fetch(req).then(res =>
+    res.type === "opaqueredirect" || res.status < 500 || !start ? res : saved().then(s => s || res));
+  if (!start) return net;
   const slow = new Promise(r => setTimeout(r, 4000)).then(saved);
   try {
     const first = await Promise.race([net, slow]);
@@ -104,7 +109,37 @@ async function page(req) {
     return (await saved()) || Response.error();
   }
 }
+// Notschalter: Soll die App auf allen Geräten abgeschaltet werden, sw.js durch eine Datei ersetzen, die nur
+// „self.addEventListener('activate', () => self.registration.unregister())“ enthält (siehe docs/sicherheit.md).
 `;
+}
+
+// Content-Security-Policy für index.html: Skripte nur aus der Seite selbst, und zwar genau die eingebetteten
+// Skripte (per SHA-256-Prüfsumme). Fremde Skripte, Frames, Plugins und Formular-Ziele sind verboten.
+// frame-ancestors geht nicht als <meta>, das setzt nginx als Header (siehe nginx.conf).
+export function cspFor(html) {
+  const hashes = [];
+  for (const m of html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
+    const attrs = m[1] || "";
+    if (/\bsrc=/.test(attrs)) continue;
+    const type = (attrs.match(/\btype="([^"]*)"/) || [])[1];
+    if (type && !/^(text\/javascript|module)$/.test(type)) continue; // z. B. application/json wird nicht ausgeführt
+    hashes.push(`'sha256-${createHash("sha256").update(m[2], "utf8").digest("base64")}'`);
+  }
+  return [
+    "default-src 'self'",
+    `script-src 'self' ${hashes.join(" ")}`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self' data:",
+    "media-src 'self' data: blob:",
+    "connect-src 'self'",
+    "worker-src 'self'",
+    "manifest-src 'self'",
+    "object-src 'none'",
+    "base-uri 'none'",
+    "form-action 'none'",
+  ].join("; ");
 }
 
 export function build() {
@@ -115,11 +150,13 @@ export function build() {
     .replace('<meta name="claude:viewport-fit-sides" content="cover">\n', "")
     .trim();
   const body = src.slice(cut).trim();
-  return `<!doctype html>
+  const html = `<!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--CSP-->
+<meta name="referrer" content="same-origin">
 ${PWA_HEAD}
 <style>
 ${SKELETON_STYLE}
@@ -132,6 +169,7 @@ ${PWA_BODY}
 </body>
 </html>
 `;
+  return html.replace("<!--CSP-->", `<meta http-equiv="Content-Security-Policy" content="${cspFor(html)}">`);
 }
 
 // Alle erzeugten Dateien: Pfad → Inhalt

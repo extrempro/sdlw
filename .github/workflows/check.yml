@@ -1,9 +1,13 @@
 name: Prüfung
 
-# Bei jedem Pull Request: Versionshinweise müssen zusammenpassen, index.html muss aktuell sein
-# und die Versionsnummer darf noch nicht veröffentlicht sein.
+# Bei jedem Pull Request (und bei jedem Push auf den Arbeitsbranch): Versionshinweise müssen zusammenpassen,
+# index.html muss aktuell sein, die Versionsnummer darf noch nicht veröffentlicht sein, und die Sicherheits-Tests
+# (CSP, nginx-Header, Live-Test des Containers) müssen bestehen.
+# Die Actions sind auf feste Commit-Prüfsummen gesetzt (Schutz gegen veränderte Versions-Tags).
 on:
   pull_request:
+  push:
+    branches: [naechste-version]
 
 permissions:
   contents: read
@@ -12,12 +16,18 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 20
       - name: Versionshinweise und Build prüfen
         run: node scripts/check-release.mjs
+      - name: Sicherheits-Tests (CSP, Links, nginx.conf, docker-compose.yml)
+        run: node scripts/test-sicherheit.mjs
+      - name: Live-Test der Auslieferung (nginx-Container angreifen)
+        run: sh scripts/test-nginx.sh
       - name: Version muss neu sein
         env:
           GH_TOKEN: ${{ github.token }}

@@ -4,6 +4,12 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.18.1] – 2026-11-28
+
+### Verbessert
+
+- **Längen, Aufgabe 5:** ruhigere Anordnung (Rückmeldung der Lehrkraft: „zu unruhig“). Am Computer eine Liste mit festen Spalten (Frage | Antwort), alle Antwortfelder untereinander bündig; auf Handy und Tablet steht die Antwort bei allen Aufgaben unter der Frage. Auf dem Handy sind die Felder schmaler, damit zwei Felder (z. B. ☐ m ☐ cm) nebeneinander passen. Geprüft je 30 Runden bei 360 px mit 22 px und 19 px Schrift und bei 390 px: nichts abgeschnitten, Einheiten nie getrennt, kein seitliches Scrollen.
+
 ## [1.18.0] – 2026-11-28
 
 ### Neu

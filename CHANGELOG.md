@@ -4,6 +4,16 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.18.0] – 2026-11-28
+
+### Neu
+
+- **Längen, Aufgabe 5 – Sprung-Aufgaben** (Wunsch der Lehrkraft): sechs neue Aufgabentypen mit gemischten Angaben über mehrere Stufen der Einheitentreppe – km + cm → cm (z. B. 234 km 346 cm), m + mm → mm, dm + mm → mm, m + dm + cm → cm, km + m + cm → cm und umgekehrt cm → km + cm. In jeder Runde sind mindestens drei Sprung-Aufgaben dabei (geprüft über 500 Runden, im Schnitt 3,6). Die Breite der Eingabefelder richtet sich nach der Länge der Lösung (mindestens 5 Zeichen).
+
+### Behoben
+
+- **Längen, Aufgabe 5:** Auf Handys mit großer Schrift rutschten die Einheiten (cm, dm, km …) von ihren Eingabefeldern weg in die nächste Zeile (Rückmeldung der Lehrkraft mit Bildschirmfoto). Eingabefeld und Einheit sind jetzt ein Paar, das nie getrennt umbricht (`.pair`); reicht der Platz nicht, rutscht die ganze Antwort unter die Frage. Auf dem Handy sind die Felder etwas schmaler, damit einfache Aufgaben in eine Zeile passen. Geprüft bei 360 px mit 22 px Schrift, 412 px mit 19 px und 390 px mit 16 px.
+
 ## [1.17.0] – 2026-11-28
 
 ### Neu

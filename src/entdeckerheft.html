@@ -572,14 +572,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mz-mix .q{white-space:nowrap}
 .mz-mix .ans{display:flex;flex-wrap:wrap;gap:6px 12px}
 .mz-mix .pair{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
-.mz-mix input{width:5.6em;font:inherit;font-size:1.05rem;padding:7px 9px;border-radius:9px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);text-align:right}
+.mz-mix input{width:calc(var(--ch,6) * 1ch + 20px);min-width:4.6em;font-variant-numeric:tabular-nums;font:inherit;font-size:1.05rem;padding:7px 9px;border-radius:9px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);text-align:right}
 .mz-mix input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
 .mz-mix input.ok{border-color:var(--ok);background:var(--okbg)}
 .mz-mix input.no{border-color:var(--bad);background:var(--badbg)}
 .mz-mix .u{color:var(--muted);min-width:1.6em}
 .mz-mix .mix-tip{margin:6px 0 0;font-weight:400;font-size:.9rem;color:var(--muted)}
 @media (max-width:720px){.mz-mix{grid-template-columns:1fr}}
-@media (max-width:480px){.mz-mix input{width:4.4em;padding:7px 6px}.mz-mix{padding-left:1.4em}}
+@media (max-width:480px){.mz-mix input{padding:7px 6px}.mz-mix{padding-left:1.4em}}
 .mz-prog{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .mz-prog li{font-size:.82rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
 .mz-prog li.cur{border-color:var(--ink);color:var(--ink)}
@@ -1392,11 +1392,13 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 {
  "releases": [
   {
-   "version": "1.17.1",
+   "version": "1.18.0",
    "date": "2026-11-28",
-   "title": "Vermischte Aufgaben besser lesbar",
+   "title": "Knifflige Sprung-Aufgaben beim Umrechnen",
    "items": [
-    "Bei den vermischten Aufgaben zum Umrechnen bleiben Eingabefeld und Einheit jetzt immer zusammen – auch auf dem Handy mit großer Schrift."
+    "Neu bei den vermischten Aufgaben: Sprung-Aufgaben über mehrere Stufen der Einheitentreppe, zum Beispiel 234 km 346 cm = ? cm oder 3 m 5 mm = ? mm.",
+    "Auch mit drei Einheiten auf einmal, zum Beispiel 2 m 6 dm 5 cm = ? cm.",
+    "Eingabefeld und Einheit bleiben jetzt immer zusammen, und lange Zahlen passen ins Feld – auch auf dem Handy mit großer Schrift."
    ]
   },
   {
@@ -5320,14 +5322,26 @@ function mzMix(){const T=[
     ()=>{const mm=MZ.ri(2,9)*1000+MZ.ri(1,9)*100;return{mm,q:MZ.L(mm,"m"),to:"dm",tip:"1 m = 10 dm."}},
     ()=>{const mm=MZ.ri(1,9)*1000+MZ.ri(1,9)*10;return{mm,q:MZ.L(mm,"m"),to:"mm",tip:"1 m = 1000 mm. Das Komma rutscht drei Stellen nach rechts."}},
     ()=>{const mm=MZ.ri(2,9)*1e6+MZ.ri(1,999)*1000;return{mm,q:MZ.L(mm,"m"),to:["km","m"],tip:"Die Tausender sind die Kilometer, der Rest sind Meter."}}];
-  // Zwei Aufgaben mit gemischter Schreibweise als Ergebnis sind immer dabei, der Rest zufällig
-  const pick=[T[3],T[12],...shuffle(T.filter((_,i)=>i!==3&&i!==12)).slice(0,6)];
+  // Sprung-Aufgaben: gemischte Angaben über mehrere Stufen der Einheitentreppe (z. B. 234 km 346 cm = ? cm)
+  const n=x=>MZ.num(x),J=[
+    ()=>{const k=MZ.pick([MZ.ri(1,9),MZ.ri(10,99),MZ.ri(100,400)]),c=MZ.pick([MZ.ri(1,99),MZ.ri(100,999)]),mm=k*1e6+c*10;
+      return{mm,q:`${n(k)} km ${n(c)} cm`,to:"cm",tip:"1 km = 1000 m = 100 000 cm. Also erst die km mal 100 000, dann die cm dazuzählen."}},
+    ()=>{const m=MZ.ri(1,25),x=MZ.pick([MZ.ri(1,9),MZ.ri(10,99),MZ.ri(100,999)]),mm=m*1000+x;
+      return{mm,q:`${m} m ${x} mm`,to:"mm",tip:"1 m = 1000 mm. Achte auf die Nullen: 3 m 5 mm = 3005 mm."}},
+    ()=>{const d=MZ.ri(1,30),x=MZ.ri(1,99),mm=d*100+x;return{mm,q:`${d} dm ${x} mm`,to:"mm",tip:"1 dm = 10 cm = 100 mm."}},
+    ()=>{const m=MZ.ri(1,9),d=MZ.ri(1,9),c=MZ.ri(1,9),mm=m*1000+d*100+c*10;return{mm,q:`${m} m ${d} dm ${c} cm`,to:"cm",tip:"Alles in cm: 1 m = 100 cm, 1 dm = 10 cm. Dann zusammenzählen."}},
+    ()=>{const k=MZ.ri(1,9),m=MZ.ri(1,999),c=MZ.ri(1,99),mm=k*1e6+m*1000+c*10;return{mm,q:`${k} km ${m} m ${c} cm`,to:"cm",tip:"1 km = 100 000 cm, 1 m = 100 cm. Rechne jeden Teil in cm um und zähle zusammen."}},
+    ()=>{const k=MZ.ri(1,9),c=MZ.pick([MZ.ri(1,99),MZ.ri(100,9999)]),mm=k*1e6+c*10;return{mm,q:MZ.L(mm,"cm"),to:["km","cm"],tip:"100 000 cm = 1 km. Alles ab der Hunderttausender-Stelle sind Kilometer, der Rest Zentimeter."}}];
+  // Zwei Aufgaben mit gemischter Schreibweise als Ergebnis und mindestens drei Sprung-Aufgaben sind immer dabei
+  const sj=shuffle(J),pick=[T[3],T[12],...sj.slice(0,3),...shuffle([...T.filter((_,i)=>i!==3&&i!==12),...sj.slice(3)]).slice(0,3)];
   return shuffle(pick).map(f=>f())}
 (function(){const box=$("#l8");if(!box)return;const ol=$("[data-mix]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box);let items=[];
   // Eingabefeld und Einheit bilden ein Paar, das nie getrennt umbricht
-  const inp=(i,j,u)=>`<span class="pair"><input type="text" inputmode="decimal" autocomplete="off" data-i="${i}" data-j="${j}" aria-label="Ergebnis in ${u}"><span class="u">${u}</span></span>`;
+  // Feldbreite nach der Länge der Lösung (mindestens 5 Zeichen, damit die Breite nichts verrät)
+  const inp=(i,j,u,len)=>`<span class="pair"><input type="text" inputmode="decimal" autocomplete="off" data-i="${i}" data-j="${j}" aria-label="Ergebnis in ${u}" style="--ch:${Math.max(5,len+1)}"><span class="u">${u}</span></span>`;
+  const ln=(mm,u)=>MZ.nOnly(mm,u).replace(/\s/g,"").length;
   function load(){items=mzMix();delete box.dataset.fails;fb.textContent="";fb.className="fb";sc.textContent="";
-    ol.innerHTML=items.map((it,i)=>`<li><div class="mix-row"><span class="q">${it.q} =</span><span class="ans">${Array.isArray(it.to)?inp(i,0,it.to[0])+inp(i,1,it.to[1]):inp(i,0,it.to)}</span></div><p class="mix-tip" hidden></p></li>`).join("")}
+    ol.innerHTML=items.map((it,i)=>`<li><div class="mix-row"><span class="q">${it.q} =</span><span class="ans">${Array.isArray(it.to)?inp(i,0,it.to[0],ln(it.mm-it.mm%10**MZ.EXP[it.to[0]],it.to[0]))+inp(i,1,it.to[1],ln(it.mm%10**MZ.EXP[it.to[0]],it.to[1])):inp(i,0,it.to,ln(it.mm,it.to))}</span></div><p class="mix-tip" hidden></p></li>`).join("")}
   // Eingabe lesen: Leerzeichen und eine versehentlich mitgetippte Einheit weglassen, Punkt als Komma erlauben
   const read=(v,u)=>MZ.parse(String(v).replace(/\s+/g,"").replace(/(km|dm|cm|mm|m)$/i,""),u);
   ol.addEventListener("input",e=>{const t=e.target.closest("input");if(t){t.classList.remove("ok","no")}});

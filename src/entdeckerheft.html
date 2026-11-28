@@ -565,6 +565,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mz-steps .card b{width:30px;height:30px;border-radius:50%;background:var(--mathe);color:var(--sheet);display:flex;align-items:center;justify-content:center;font:800 1rem var(--display)}
 .mz-steps .card p{margin:0;font-size:.92rem}
 .mz-sach{display:flex;flex-direction:column;gap:12px}
+.mz-mix{margin:0;padding-left:1.6em;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 22px}
+.mz-mix li{font-weight:700;font-size:1.05rem}
+.mz-mix li::marker{color:var(--muted)}
+.mz-mix .q{display:inline-block;min-width:7.5em}
+.mz-mix input{width:5.6em;font:inherit;font-size:1.05rem;padding:7px 9px;border-radius:9px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);text-align:right}
+.mz-mix input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
+.mz-mix input.ok{border-color:var(--ok);background:var(--okbg)}
+.mz-mix input.no{border-color:var(--bad);background:var(--badbg)}
+.mz-mix .u{color:var(--muted);margin-right:4px}
+.mz-mix .mix-tip{margin:6px 0 0;font-weight:400;font-size:.9rem;color:var(--muted)}
+@media (max-width:720px){.mz-mix{grid-template-columns:1fr}}
 .mz-prog{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .mz-prog li{font-size:.82rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
 .mz-prog li.cur{border-color:var(--ink);color:var(--ink)}
@@ -1376,6 +1387,15 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
 <script type="application/json" id="releaseData">
 {
  "releases": [
+  {
+   "version": "1.17.0",
+   "date": "2026-11-28",
+   "title": "Vermischte Aufgaben zum Umrechnen",
+   "items": [
+    "Neu im Kapitel „Längen“: Aufgabe 5 mit acht vermischten Umrechnungen – mit Komma, in gemischter Schreibweise und mit allen Einheiten von km bis mm.",
+    "Du tippst die Zahl selbst ein, wie in der Klassenarbeit. Ist etwas falsch, bekommst du einen Tipp. Mit „Neu beginnen“ kommen neue Aufgaben."
+   ]
+  },
   {
    "version": "1.16.1",
    "date": "2026-11-27",
@@ -2567,11 +2587,16 @@ canvas.mega{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-
   <p class="hint">Rechne in die angegebene Einheit um. Die Einheitentreppe hilft dir.</p><div data-qs></div></div>
 <div class="task" id="l4"><div class="taskhead"><h3>Aufgabe 4 · Gleich lang oder länger?</h3><span class="score" data-score></span></div>
   <p class="hint">Rechne beide Längen in dieselbe Einheit um, dann kannst du sie vergleichen.</p><div data-qs></div></div>
-<div class="task" id="l5"><div class="taskhead"><h3>Aufgabe 5 · Mit Längen rechnen</h3><span class="score" data-score></span></div>
+<div class="task" id="l8"><div class="taskhead"><h3>Aufgabe 5 · Vermischte Aufgaben zum Umrechnen</h3><span class="score" data-score></span></div>
+  <p class="hint">Rechne um und tippe die Zahl ein. Ein Komma schreibst du so: <b>3,5</b>. Die Einheitentreppe oben hilft dir.</p>
+  <ol class="mz-mix" data-mix></ol>
+  <div class="row"><button class="btn" type="button" data-check>Prüfen</button></div>
+  <p class="fb" data-fb aria-live="polite"></p></div>
+<div class="task" id="l5"><div class="taskhead"><h3>Aufgabe 6 · Mit Längen rechnen</h3><span class="score" data-score></span></div>
   <p class="hint">Erst in dieselbe Einheit umrechnen, dann rechnen.</p><div data-qs></div></div>
-<div class="task" id="l6"><div class="taskhead"><h3>Aufgabe 6 · Sachaufgabe in vier Schritten</h3><span class="score" data-score></span></div>
+<div class="task" id="l6"><div class="taskhead"><h3>Aufgabe 7 · Sachaufgabe in vier Schritten</h3><span class="score" data-score></span></div>
   <div class="mz-sach" data-sach></div></div>
-<div class="task" id="l7"><div class="taskhead"><h3>Aufgabe 7 · Fehlerdetektiv</h3><span class="score" data-score></span></div>
+<div class="task" id="l7"><div class="taskhead"><h3>Aufgabe 8 · Fehlerdetektiv</h3><span class="score" data-score></span></div>
   <p class="hint">Stimmt das? Wenn nicht: Welcher Fehler ist passiert?</p><div data-qs></div></div>
 <footer>Merkgrößen sind ungefähre Werte zum Schätzen. Die Höhen von Michel und Elbphilharmonie stammen von hamburg.de (siehe Quellen).</footer>
 </div>
@@ -5211,7 +5236,7 @@ function mzVgl(){const out=[];
       why:A===B?`${lb} = ${la}. Beide sind gleich lang.`:`${lb} = ${same}. Also ist ${ans} länger.`})}
   return shuffle(out)}
 (function(){const box=$("#l4");if(!box)return;mzQuiz(box,mzVgl)})();
-// Aufgabe 5: mit Längen rechnen (alle Werte in mm; naiv = typischer Fehler ohne Umrechnen)
+// Aufgabe 6: mit Längen rechnen (alle Werte in mm; naiv = typischer Fehler ohne Umrechnen)
 function mzRech(){const T=[
   ()=>{const a=MZ.ri(1,4)*1000+MZ.ri(1,9)*100,b=MZ.ri(15,95)*10;return{q:`${MZ.L(a,"m")} + ${MZ.L(b,"cm")}`,mm:a+b,u:"cm",way:`${MZ.L(a,"cm")} + ${MZ.L(b,"cm")}`}},
   ()=>{const b=MZ.ri(1,9)*100+MZ.ri(1,9)*10;return{q:`1 km − ${b} m`,mm:(1000-b)*1000,u:"m",way:`1000 m − ${b} m`}},
@@ -5223,7 +5248,7 @@ function mzRech(){const T=[
     [x.mm+10*step,x.mm-10*step,x.mm*10,x.mm+100*step,x.naive!=null?x.naive*step:null].forEach(v=>{if(v!=null&&v>0)w.add(MZ.L(v,x.u))});w.delete(a);
     return{q:`${x.q} = ? ${x.u}`,a,o:shuffle([a,...shuffle([...w]).slice(0,3)]).map(v=>({v,label:v})),why:`Erst umrechnen: ${x.way} = ${a}.`}})}
 (function(){const box=$("#l5");if(!box)return;mzQuiz(box,mzRech)})();
-// Aufgabe 6: Sachaufgabe in vier Schritten
+// Aufgabe 7: Sachaufgabe in vier Schritten
 (function(){const box=$("#l6");if(!box)return;const host=$("[data-sach]",box),sc=$("[data-score]",box);let S,st,fails;
   const STORIES=[
     ()=>{const a=MZ.ri(1,3)*1000+MZ.ri(1,9)*100,b=MZ.ri(1,2)*1000+MZ.ri(1,9)*100,sw=MZ.ri(5,15),tot=a+b;
@@ -5267,7 +5292,44 @@ function mzRech(){const T=[
       else if(st===3){if(v===S.ans[0]){st=4;sc.textContent=fails?"geschafft":"fehlerfrei";render("Super, die Sachaufgabe ist gelöst!","ok");guckiDone(!fails,box)}else{fails++;b.classList.add("wrong");b.disabled=true;guckiCry();$(".fb",host).className="fb no";$(".fb",host).textContent="Der Satz passt nicht zur Frage oder die Einheit fehlt."}}};
     const nx=$("[data-next]",host);if(nx)nx.onclick=load}
   box._reset=load;load()})();
-// Aufgabe 7: Fehlerdetektiv Längen
+// Aufgabe 5 (l8): Vermischte Aufgaben zum Umrechnen – Eingabe der Zahl, alle Schreibweisen gemischt
+// Jede Aufgabe: Länge in mm, Frage (Schreibweise vorher), Ziel = eine Einheit oder gemischt [große, kleine Einheit]
+function mzMix(){const T=[
+    ()=>{const mm=MZ.ri(1,9)*1000+MZ.ri(1,99)*10;return{mm,q:MZ.L(mm,"m"),to:"cm",tip:"1 m = 100 cm. Das Komma rutscht zwei Stellen nach rechts."}},
+    ()=>{const mm=MZ.ri(11,999)*10;return{mm,q:MZ.L(mm,"cm"),to:"m",tip:"100 cm = 1 m. Teile durch 100: Das Komma rutscht zwei Stellen nach links."}},
+    ()=>{const mm=MZ.ri(1,9)*1000+MZ.pick([MZ.ri(1,9),MZ.ri(10,99)])*10;return{mm,q:MZ.mixed(mm,"m","cm"),to:"cm",tip:"Erst die Meter in cm umrechnen (· 100), dann die cm dazuzählen."}},
+    ()=>{const mm=MZ.ri(1,9)*1000+MZ.pick([MZ.ri(1,9),MZ.ri(10,99)])*10;return{mm,q:MZ.L(mm,"cm"),to:["m","cm"],tip:"Die Hunderter sind die Meter, der Rest sind Zentimeter."}},
+    ()=>{const mm=MZ.ri(1,9)*1e6+MZ.pick([MZ.ri(1,9)*100,MZ.ri(10,99)*10,MZ.ri(100,999)])*1000;return{mm,q:MZ.mixed(mm,"km","m"),to:"m",tip:"1 km = 1000 m. Achte auf die Nullen!"}},
+    ()=>{const mm=MZ.pick([MZ.ri(1,9)*1e6+MZ.ri(1,9)*1e5,MZ.ri(1,9)*1e5,MZ.ri(1,9)*1e6+MZ.ri(1,99)*1e4]);return{mm,q:MZ.L(mm,"m"),to:"km",tip:"1000 m = 1 km. Das Komma rutscht drei Stellen nach links."}},
+    ()=>{const mm=MZ.ri(2,9)*1e6+MZ.ri(1,9)*1e5;return{mm,q:MZ.L(mm,"km"),to:"m",tip:"1 km = 1000 m. Das Komma rutscht drei Stellen nach rechts."}},
+    ()=>{const mm=MZ.ri(11,99)*10+MZ.ri(1,9);return{mm,q:MZ.mixed(mm,"cm","mm"),to:"mm",tip:"1 cm = 10 mm."}},
+    ()=>{const mm=MZ.ri(12,95)*10+MZ.ri(1,9);return{mm,q:MZ.L(mm,"mm"),to:"cm",tip:"10 mm = 1 cm. Das Komma rutscht eine Stelle nach links."}},
+    ()=>{const mm=MZ.ri(2,40)*100;return{mm,q:MZ.L(mm,"dm"),to:"cm",tip:"1 dm = 10 cm."}},
+    ()=>{const mm=MZ.ri(2,9)*1000+MZ.ri(1,9)*100;return{mm,q:MZ.L(mm,"m"),to:"dm",tip:"1 m = 10 dm."}},
+    ()=>{const mm=MZ.ri(1,9)*1000+MZ.ri(1,9)*10;return{mm,q:MZ.L(mm,"m"),to:"mm",tip:"1 m = 1000 mm. Das Komma rutscht drei Stellen nach rechts."}},
+    ()=>{const mm=MZ.ri(2,9)*1e6+MZ.ri(1,999)*1000;return{mm,q:MZ.L(mm,"m"),to:["km","m"],tip:"Die Tausender sind die Kilometer, der Rest sind Meter."}}];
+  // Zwei Aufgaben mit gemischter Schreibweise als Ergebnis sind immer dabei, der Rest zufällig
+  const pick=[T[3],T[12],...shuffle(T.filter((_,i)=>i!==3&&i!==12)).slice(0,6)];
+  return shuffle(pick).map(f=>f())}
+(function(){const box=$("#l8");if(!box)return;const ol=$("[data-mix]",box),fb=$("[data-fb]",box),sc=$("[data-score]",box);let items=[];
+  const inp=(i,j,u)=>`<input type="text" inputmode="decimal" autocomplete="off" data-i="${i}" data-j="${j}" aria-label="Ergebnis in ${u}"> <span class="u">${u}</span>`;
+  function load(){items=mzMix();delete box.dataset.fails;fb.textContent="";fb.className="fb";sc.textContent="";
+    ol.innerHTML=items.map((it,i)=>`<li><span class="q">${it.q} =</span> ${Array.isArray(it.to)?inp(i,0,it.to[0])+" "+inp(i,1,it.to[1]):inp(i,0,it.to)}<p class="mix-tip" hidden></p></li>`).join("")}
+  // Eingabe lesen: Leerzeichen und eine versehentlich mitgetippte Einheit weglassen, Punkt als Komma erlauben
+  const read=(v,u)=>MZ.parse(String(v).replace(/\s+/g,"").replace(/(km|dm|cm|mm|m)$/i,""),u);
+  ol.addEventListener("input",e=>{const t=e.target.closest("input");if(t){t.classList.remove("ok","no")}});
+  ol.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.closest("input")){e.preventDefault();$("[data-check]",box).click()}});
+  $("[data-check]",box).onclick=()=>{let ok=0;items.forEach((it,i)=>{const li=ol.children[i],fs=[...li.querySelectorAll("input")];let good;
+      if(Array.isArray(it.to)){const[a,b]=fs.map((f,j)=>read(f.value,it.to[j]));good=a!=null&&b!=null&&!Number.isNaN(a)&&!Number.isNaN(b)&&a%10**MZ.EXP[it.to[0]]===0&&b<10**MZ.EXP[it.to[0]]&&a+b===it.mm}
+      else{const v=read(fs[0].value,it.to);good=v===it.mm}
+      fs.forEach(f=>{f.classList.toggle("ok",good);f.classList.toggle("no",!good)});if(good)ok++;
+      const tp=li.querySelector(".mix-tip");tp.hidden=good;if(!good)tp.textContent="Tipp: "+it.tip});
+    sc.textContent=`${ok} von ${items.length} richtig`;
+    if(ok===items.length){fb.className="fb ok";fb.textContent="Alles richtig umgerechnet!";guckiDone(!box.dataset.fails,box)}
+    else{box.dataset.fails=1;fb.className="fb no";fb.textContent="Die rot markierten Aufgaben stimmen noch nicht. Lies den Tipp darunter und versuch es noch einmal.";guckiCry()}};
+  box._reset=load;load()})();
+
+// Aufgabe 8: Fehlerdetektiv Längen
 function mzLDet(){const F=["Die 0 vergessen","Nicht in dieselbe Einheit umgerechnet","Falsche Umrechnungszahl","Einheit vergessen","Alles richtig"];
   const M={
     null_(){const m=MZ.ri(2,9),c=MZ.ri(1,9);return{t:`${m} m ${c} cm = ${m},${c} m`,a:F[0],why:`Richtig ist ${m},0${c} m. Die 0 hält den Platz für die Dezimeter frei.`}},

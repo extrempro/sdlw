@@ -4,6 +4,12 @@ Hier stehen alle Änderungen am Entdeckerheft, die neueste Version zuerst.
 Jede Version steht genauso auch auf der Webseite unter „✦ Neu in …“.
 Die Versionsnummern folgen dem Schema MAJOR.MINOR.PATCH: PATCH für Fehlerkorrekturen, MINOR für neue Kapitel, Übungen oder Funktionen, MAJOR für einen grundlegenden Umbau.
 
+## [1.17.0] – 2026-11-28
+
+### Neu
+
+- **Längen, Aufgabe 5 „Vermischte Aufgaben zum Umrechnen“** (`#l8`, zählt für die Kapitel-Party): acht zufällige Umrechnungen mit Eingabe der Zahl, gemischt aus 13 Aufgabentypen (Komma → Einheit, Einheit → Komma, gemischt → Einheit, Einheit → gemischt mit zwei Feldern, km/m/dm/cm/mm). Zwei Aufgaben mit gemischter Schreibweise als Ergebnis sind immer dabei. Punkt statt Komma, Leerzeichen und eine mitgetippte Einheit werden akzeptiert. Falsche Aufgaben werden rot und bekommen einen Tipp. Die folgenden Aufgaben heißen jetzt 6 bis 8.
+
 ## [1.16.1] – 2026-11-27
 
 ### Verbessert
